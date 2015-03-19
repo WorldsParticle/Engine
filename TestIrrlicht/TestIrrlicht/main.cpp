@@ -146,7 +146,7 @@ int main()
 	IGUIEnvironment* guienv = device->getGUIEnvironment();
 	IFileSystem* fs = device->getFileSystem();
 
-	fs->addFileArchive("C:/Users/lefebv_z/Documents/Visual Studio 2013/Projects/TestIrrlicht");//Specifier ici le path vers le dossier où se trouve le dossier media (contenant les assets)
+	fs->addFileArchive("../Assets");
 
 	/*
 	We add a hello world label to the window, using the GUI environment.
@@ -168,7 +168,7 @@ int main()
 	other supported file format. By the way, that cool Quake 2 model
 	called sydney was modelled by Brian Collins.
 	*/
-	IAnimatedMesh* mesh = smgr->getMesh("media/sydney.md2");
+	IAnimatedMesh* mesh = smgr->getMesh("sydney.md2");
 	if (!mesh)
 	{
 		device->drop();
@@ -188,7 +188,7 @@ int main()
 	{
 		node->setMaterialFlag(EMF_LIGHTING, false);
 		node->setMD2Animation(scene::EMAT_STAND);
-		node->setMaterialTexture(0, driver->getTexture("media/sydney.bmp"));
+		node->setMaterialTexture(0, driver->getTexture("sydney.bmp"));
 	}
 
 	/*
