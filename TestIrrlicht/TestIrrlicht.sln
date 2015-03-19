@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30501.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TestIrrlicht", "TestIrrlicht\TestIrrlicht.vcxproj", "{AD4989C7-831E-4B03-A0C1-D31B4068DC15}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		DebugWin64|Win32 = DebugWin64|Win32
+		DebugWin64|x64 = DebugWin64|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.Debug|Win32.ActiveCfg = Debug|Win32
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.Debug|Win32.Build.0 = Debug|Win32
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.Debug|x64.ActiveCfg = Debug|x64
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.Debug|x64.Build.0 = Debug|x64
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.DebugWin64|Win32.ActiveCfg = DebugWin64|Win32
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.DebugWin64|Win32.Build.0 = DebugWin64|Win32
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.DebugWin64|x64.ActiveCfg = DebugWin64|x64
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.DebugWin64|x64.Build.0 = DebugWin64|x64
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.Release|Win32.ActiveCfg = Release|Win32
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.Release|Win32.Build.0 = Release|Win32
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.Release|x64.ActiveCfg = Release|x64
+		{AD4989C7-831E-4B03-A0C1-D31B4068DC15}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
