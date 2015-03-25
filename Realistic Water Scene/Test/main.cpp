@@ -22,7 +22,11 @@ int main()
 
 	SIrrlichtCreationParameters params = SIrrlichtCreationParameters();
 	params.AntiAlias = true;
+#ifdef WIN64
 	params.DriverType = video::EDT_DIRECT3D9;
+#else
+	params.DriverType = video::EDT_OPENGL;
+#endif
 	params.WindowSize = core::dimension2d<u32>(1900, 1000);
 	IrrlichtDevice *device = createDeviceEx(params);
 
