@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _ui->setupUi(this);
 
     makeConnections();
+	newWorld();
 }
 
 MainWindow::~MainWindow()
