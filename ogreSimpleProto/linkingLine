@@ -1,0 +1,1 @@
+g++ -o dist/bin/app CMakeFiles/OgreApp.dir/*.o -O3 -Wall $(pkg-config --libs OGRE OIS OGRE-Terrain) -lboost_system
