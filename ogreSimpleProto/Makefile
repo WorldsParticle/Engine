@@ -175,6 +175,30 @@ BaseApplication.cpp.s:
 	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/BaseApplication.cpp.s
 .PHONY : BaseApplication.cpp.s
 
+GenerateTerrain.o: GenerateTerrain.cpp.o
+.PHONY : GenerateTerrain.o
+
+# target to build an object file
+GenerateTerrain.cpp.o:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/GenerateTerrain.cpp.o
+.PHONY : GenerateTerrain.cpp.o
+
+GenerateTerrain.i: GenerateTerrain.cpp.i
+.PHONY : GenerateTerrain.i
+
+# target to preprocess a source file
+GenerateTerrain.cpp.i:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/GenerateTerrain.cpp.i
+.PHONY : GenerateTerrain.cpp.i
+
+GenerateTerrain.s: GenerateTerrain.cpp.s
+.PHONY : GenerateTerrain.s
+
+# target to generate assembly for a file
+GenerateTerrain.cpp.s:
+	$(MAKE) -f CMakeFiles/OgreApp.dir/build.make CMakeFiles/OgreApp.dir/GenerateTerrain.cpp.s
+.PHONY : GenerateTerrain.cpp.s
+
 TutorialApplication.o: TutorialApplication.cpp.o
 .PHONY : TutorialApplication.o
 
@@ -214,6 +238,9 @@ help:
 	@echo "... BaseApplication.o"
 	@echo "... BaseApplication.i"
 	@echo "... BaseApplication.s"
+	@echo "... GenerateTerrain.o"
+	@echo "... GenerateTerrain.i"
+	@echo "... GenerateTerrain.s"
 	@echo "... TutorialApplication.o"
 	@echo "... TutorialApplication.i"
 	@echo "... TutorialApplication.s"

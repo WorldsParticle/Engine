@@ -97,11 +97,13 @@ endif()
 set(HDRS
 	./BaseApplication.h
 	./TutorialApplication.h
+	./GenerateTerrain.h
 )
  
 set(SRCS
 	./BaseApplication.cpp
 	./TutorialApplication.cpp
+	./GenerateTerrain.cpp
 )
  
 include_directories( ${OIS_INCLUDE_DIRS}

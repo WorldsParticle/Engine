@@ -17,21 +17,12 @@ This source file is part of the
 #ifndef __TutorialApplication_h_
 # define __TutorialApplication_h_
 
-# include <Terrain/OgreTerrain.h>
-# include <Terrain/OgreTerrainGroup.h>
+# include "GenerateTerrain.h"
 # include "BaseApplication.h"
 
 class TutorialApplication : public BaseApplication
 {
     private:
-	void defineTerrain(long x, long y);
-	void initBlendMaps(Ogre::Terrain* terrain);
-	void configureTerrainDefaults(Ogre::Light* light);
-	bool mTerrainsImported;
-	Ogre::TerrainGroup* mTerrainGroup;
-	Ogre::TerrainGlobalOptions* mTerrainGlobals;
-	OgreBites::Label* mInfoLabel;
-
 	virtual bool keyPressed(const OIS::KeyEvent& ke);
 	virtual bool keyReleased(const OIS::KeyEvent& ke);
 	virtual bool mouseMoved(const OIS::MouseEvent& me);
@@ -42,6 +33,7 @@ class TutorialApplication : public BaseApplication
 	Ogre::Real mMove;
 	Ogre::SceneNode* mCamNode;
 	Ogre::Vector3 mDirection;
+	GenerateTerrain _terrain;
     protected:
         virtual void createScene(void);
         //virtual void createCamera();
