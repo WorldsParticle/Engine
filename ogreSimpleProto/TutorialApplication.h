@@ -24,18 +24,28 @@ This source file is part of the
 class TutorialApplication : public BaseApplication
 {
     private:
-	OgreBites::Label* mInfoLabel;
-
 	void defineTerrain(long x, long y);
 	void initBlendMaps(Ogre::Terrain* terrain);
 	void configureTerrainDefaults(Ogre::Light* light);
 	bool mTerrainsImported;
 	Ogre::TerrainGroup* mTerrainGroup;
 	Ogre::TerrainGlobalOptions* mTerrainGlobals;
+	OgreBites::Label* mInfoLabel;
+
+	virtual bool keyPressed(const OIS::KeyEvent& ke);
+	virtual bool keyReleased(const OIS::KeyEvent& ke);
+	virtual bool mouseMoved(const OIS::MouseEvent& me);
+	virtual bool mousePressed(const OIS::MouseEvent& me, OIS::MouseButtonID id);
+	virtual bool mouseReleased(const OIS::MouseEvent& me, OIS::MouseButtonID id);
+
+	Ogre::Real mRotate;
+	Ogre::Real mMove;
+	Ogre::SceneNode* mCamNode;
+	Ogre::Vector3 mDirection;
     protected:
         virtual void createScene(void);
-        virtual void createCamera();
-        virtual void createViewports();
+        //virtual void createCamera();
+        //virtual void createViewports();
 
 	virtual void createFrameListener();
 	virtual void destroyScene();
