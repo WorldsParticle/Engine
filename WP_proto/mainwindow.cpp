@@ -43,7 +43,7 @@ void    MainWindow::newWorld()
     {
         world = _model.createWorldConf(text);
         qDebug() << "toto";
-        _ui->toolBox->setConfiguration(world);
+        _ui->toolWidget->setConfiguration(world);
         qDebug() << "toto";
     }
 }

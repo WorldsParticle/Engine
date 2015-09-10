@@ -1,6 +1,8 @@
 #ifndef IRRLICHTWIDGET_HPP
 #define IRRLICHTWIDGET_HPP
 
+#ifdef USING_IRRLICHT
+
 #include <QWidget>
 #include <irrlicht.h>
 
@@ -34,5 +36,7 @@ private:
 	irr::IrrlichtDevice *device;
 	irr::scene::ICameraSceneNode *camera;
 };
+
+#endif // USING_IRRLICHT
 
 #endif // QIRRLICHTWIDGET_HPP

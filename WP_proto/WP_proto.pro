@@ -4,29 +4,38 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
-
+QT       += core gui opengl
+CONFIG   += c++11
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = WP_proto
 TEMPLATE = app
 
-LIBS += -LD:\SDK\irrlicht-1.8.1\lib\Win64-visualStudio -lIrrlicht
-INCLUDEPATH += D:\SDK\irrlicht-1.8.1\include
+#DEFINES += "USING_IRRLICHT"
+#LIBS += -LD:\SDK\irrlicht-1.8.1\lib\Win64-visualStudio -lIrrlicht  <- local
+#INCLUDEPATH += D:\SDK\irrlicht-1.8.1\include                       <- local
 
 
 SOURCES += main.cpp\
         mainwindow.cpp \
     model.cpp \
-    tabwidget.cpp \
     tools.cpp \
-    irrlichtwidget.cpp
+    irrlichtwidget.cpp \
+    view.cpp \
+    scene.cpp \
+    glwidget.cpp \
+    toolwidget.cpp \
+    fire.cpp
 
 HEADERS  += mainwindow.h \
     model.h \
-    tabwidget.h \
     tools.h \
-    irrlichtwidget.h
+    irrlichtwidget.h \
+    view.h \
+    scene.h \
+    glwidget.h \
+    toolwidget.h \
+    fire.h
 
 FORMS    += mainwindow.ui \
-    tabwidget.ui
+    toolwidget.ui

@@ -1,3 +1,5 @@
+#ifdef USING_IRRLICHT
+
 #include <QTimerEvent>
 #include <QResizeEvent>
 #include "IrrlichtWidget.h"
@@ -138,3 +140,5 @@ void IrrlichtWidget::resizeEvent(QResizeEvent *ev)
 
 	QWidget::resizeEvent(ev);
 }
+
+#endif // USING_IRRLICHT

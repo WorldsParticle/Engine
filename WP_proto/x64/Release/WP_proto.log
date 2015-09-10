@@ -1,5 +1,19 @@
-﻿Build started 25/03/2015 22:55:59.
+﻿Build started 09/09/2015 11:19:02.
+     1>Project "C:\Users\tyson\Desktop\worldsparticle\WP_proto\WP_proto.vcxproj" on node 2 (Build target(s)).
+     1>CustomBuild:
+         Le chemin d'accès spécifié est introuvable.
+         Le chemin d'accès spécifié est introuvable.
+         Le chemin d'accès spécifié est introuvable.
+         Le chemin d'accès spécifié est introuvable.
+         Le chemin d'accès spécifié est introuvable.
+         Moc'ing mainwindow.h...
+         Moc'ing IrrlichtWidget.h...
+         Moc'ing tabwidget.h...
+         Uic'ing mainwindow.ui...
+         Uic'ing tabwidget.ui...
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppCommon.targets(170,5): error MSB6006: "cmd.exe" exited with code 3.
+     1>Done Building Project "C:\Users\tyson\Desktop\worldsparticle\WP_proto\WP_proto.vcxproj" (Build target(s)) -- FAILED.
 
-Build succeeded.
+Build FAILED.
 
-Time Elapsed 00:00:00.01
+Time Elapsed 00:00:01.45
