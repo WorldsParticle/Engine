@@ -2,8 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "toolwidget.h"
-#include "model.h"
+#include "window/toolwidget.h"
+#include "model/model.h"
+#include "window/glwindow.h"
 
 namespace Ui {
 class MainWindow;
@@ -30,6 +31,8 @@ private:
 
     Ui::MainWindow* _ui;
     Model           _model;
+    GLWindow        *_glWindow;
+
 };
 
 #endif // MAINWINDOW_H

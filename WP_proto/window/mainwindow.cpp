@@ -6,10 +6,10 @@
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     _ui(new Ui::MainWindow),
-    _model()
+    _model(),
+    _glWindow(NULL)
 {
     _ui->setupUi(this);
-
     makeConnections();
 	newWorld();
 }
@@ -26,7 +26,6 @@ void    MainWindow::makeConnections()
     connect(_ui->actionExporter, SIGNAL(triggered()), this, SLOT(exportConf()));
     connect(_ui->actionGenerer, SIGNAL(triggered()), this, SLOT(generate()));
     connect(_ui->actionImporter, SIGNAL(triggered()), this, SLOT(importConf()));
-    connect(_ui->actionExplorer, SIGNAL(triggered()), this, SLOT(explore()));
     connect(_ui->actionQuitter, SIGNAL(triggered()), this, SLOT(exit()));
 }
 
@@ -42,9 +41,7 @@ void    MainWindow::newWorld()
     if (ok && !text.isEmpty())
     {
         world = _model.createWorldConf(text);
-        qDebug() << "toto";
         _ui->toolWidget->setConfiguration(world);
-        qDebug() << "toto";
     }
 }
 
@@ -58,7 +55,15 @@ void    MainWindow::generate()
 
 void    MainWindow::explore()
 {
-    // c'est la qu'on balance l'occulus
+    qDebug() << "toto";
+    if (!_glWindow)
+    {
+        _glWindow = new GLWindow();
+        connect(_glWindow, SIGNAL(visibleChanged(bool)), this, SLOT(setHidden(bool)));
+    }
+
+    _glWindow->show();
+    _glWindow->start(&_model);
 }
 
 void    MainWindow::importConf()

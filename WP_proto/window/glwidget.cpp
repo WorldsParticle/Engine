@@ -1,5 +1,5 @@
 #include "glwidget.h"
-#include "fire.h"
+#include "graphic/fire.h"
 
 #define MS_TICK 30
 
@@ -37,6 +37,7 @@ void    GLWidget::paintGL()
     glRotatef(_point.x() / 16.0, 1.0, 0.0, 0.0);
     glRotatef(_point.y() / 16.0, 0.0, 1.0, 0.0);
     glRotatef(_point.z() / 16.0, 0.0, 0.0, 1.0);
+
     draw();
 }
 

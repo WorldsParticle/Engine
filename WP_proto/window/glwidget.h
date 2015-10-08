@@ -3,7 +3,7 @@
 
 #include <QGLWidget>
 #include <QTimer>
-#include "tools.h"
+#include "model/tools.h"
 
 class GLWidget : public QGLWidget
 {

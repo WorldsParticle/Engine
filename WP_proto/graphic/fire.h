@@ -3,7 +3,7 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include "tools.h"
+#include "model/tools.h"
 
 #define APPEAR_SPEED	5
 #define BURN_SPEED	2

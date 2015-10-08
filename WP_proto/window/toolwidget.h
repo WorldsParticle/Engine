@@ -2,7 +2,7 @@
 #define TABWIDGET_H
 
 #include <QTabWidget>
-#include <model.h>
+#include "model/model.h"
 
 namespace Ui {
 class TabWidget;
