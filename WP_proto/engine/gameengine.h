@@ -1,8 +1,13 @@
 #ifndef GAMEENGINE_H
 #define GAMEENGINE_H
 
-#include "model/model.h"
-#include "graphic/myglpainter.h"
+#ifdef _WIN32
+# include "model/model.h"
+# include "graphic/myglpainter.h"
+#else
+# include "../model/model.h"
+# include "../graphic/myglpainter.h"
+#endif
 
 class GameEngine
 {

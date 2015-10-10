@@ -1,6 +1,10 @@
-#include "engine/gameengine.h"
-#include "engine/gameclock.h"
-
+#ifdef _WIN32
+# include "engine/gameengine.h"
+# include "engine/gameclock.h"
+#else
+# include "gameengine.h"
+# include "gameclock.h"
+#endif
 
 GameEngine::GameEngine() :
     _painter()

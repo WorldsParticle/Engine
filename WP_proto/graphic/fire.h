@@ -3,7 +3,11 @@
 
 #include <GL/gl.h>
 #include <GL/glu.h>
-#include "model/tools.h"
+#ifdef _WIN32
+# include "model/tools.h"
+#else
+# include "../model/tools.h"
+#endif
 
 #define APPEAR_SPEED	5
 #define BURN_SPEED	2
