@@ -1,6 +1,7 @@
 #ifndef FIRE_HPP
 #define FIRE_HPP
 
+#include <GL/glew.h>
 #include <GL/gl.h>
 #include <GL/glu.h>
 #ifdef _WIN32

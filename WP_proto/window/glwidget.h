@@ -17,7 +17,7 @@ protected:
     void resizeGL(int width, int height);
 
     void draw();
-    void drawFire(); // temporary, for demo
+    //void drawFire(); // temporary, for demo
 
 signals:
 

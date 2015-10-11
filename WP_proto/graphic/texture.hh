@@ -2,8 +2,10 @@
 # define TEXTURE_H_
 
 #include <string>
-#include <GL/glew.h>
-#include "uniform.hh"
+#include <QOpenGLFunctions>
+#include "qopenglcontext.h"
+//#include <GL/glew.h>
+//#include "uniform.hh"
 #include "IL/il.h"
 
 class Texture {
@@ -25,8 +27,8 @@ class Texture {
 	inline bool isLoaded() const noexcept { return _loaded; }
 	inline void setFilename(const std::string& f_) { _filename = f_; }
 	inline void bind(GLenum textureUnit_) const noexcept {
-	    glActiveTexture(textureUnit_);
-	    glBindTexture(GL_TEXTURE_2D, _textureId);
+	    QOpenGLContext::currentContext()->functions()->glActiveTexture(textureUnit_);
+	    QOpenGLContext::currentContext()->functions()->glBindTexture(GL_TEXTURE_2D, _textureId);
 	}
 };
 

@@ -1,4 +1,6 @@
+#include <iostream>
 #include "texture.hh"
+#include <QOpenGLFunctions>
 
 const char* const Texture::_glErrorToString[7] = {
     "GL_INVALID_ENUM", // 1280
@@ -25,7 +27,7 @@ void Texture::load() noexcept {
 	 _textureId = 0;
     }
     GPUGen();
-    glGenerateMipmap(GL_TEXTURE_2D);
+    QOpenGLContext::currentContext()->functions()->glGenerateMipmap(GL_TEXTURE_2D);
 
     if (_filename.size() == 0) {
 	std::cout << "\e[33;1mno texture file name, using the default one\e[0m" << std::endl;
@@ -40,7 +42,7 @@ void Texture::load() noexcept {
     ilGenImages(1, &_imgId);
     ilBindImage(_imgId);
     ilEnable(IL_ORIGIN_SET);
-    ilOriginFunc(IL_ORIGIN_LOWER_LEFT);	
+    ilOriginFunc(IL_ORIGIN_LOWER_LEFT);
     if (!ilLoadImage(_filename.c_str())) {
 	std::cout << "\e[31;1mfailed to load: " << _filename << "\e[0m" << std::endl;
 	return;

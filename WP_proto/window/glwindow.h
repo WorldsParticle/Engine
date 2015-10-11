@@ -6,11 +6,10 @@
 #include <QOpenGLContext>
 #include <QKeyEvent>
 #include "graphic/myglpainter.h"
-#include "engine/gameengine.h"
 #include "model/model.h"
 #include <QTime>
 
-class GLWindow : public QWindow, protected QOpenGLFunctions
+class GLWindow : public QWindow//, protected QOpenGLFunctions
 {
     Q_OBJECT
     public:
@@ -25,7 +24,6 @@ protected:
 private:
         QOpenGLContext _context;
         QSurfaceFormat _format;
-        GameEngine     _gameEngine;
 };
 
 #endif // GLWINDOW_H

@@ -4,13 +4,13 @@
 #include <QGridLayout>
 #include <QCoreApplication>
 #include "engine/gameclock.h"
+#include "engine/gameengine.h"
 
 GLWindow::GLWindow(QWindow *parent) :
     QWindow(parent),
     _context(this),
-    _format(),
-    _gameEngine()
-{   
+    _format()
+{
     setSurfaceType(OpenGLSurface);
 
     _format.setMajorVersion(4);
@@ -45,6 +45,7 @@ GLWindow::~GLWindow()
 void    GLWindow::start(Model *model)
 {
     GameClock::start();
+    GameEngine     _gameEngine;
 
     while (isVisible())
     {

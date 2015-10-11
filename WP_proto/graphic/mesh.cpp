@@ -6,7 +6,6 @@
 #include <assimp/Importer.hpp>
 #include <assimp/postprocess.h>
 #include <assimp/ProgressHandler.hpp>
-#include <fstream>
 #include "AssimpProgressHandlerOverload.hh"
 
 #include "mesh.hh"
@@ -17,6 +16,7 @@ Mesh::Mesh(Material& m_) : _material(m_), _vertexArray(0) {
 
 void Mesh::set(const GPUBuffer& b_) noexcept {
     _gb = b_;
+    uploadBuffer();
 }
 
 void Mesh::fromFile(const std::string& fname_) {
@@ -42,6 +42,7 @@ void Mesh::fromFile(const std::string& fname_) {
     importer.FreeScene();
 
     _gb.setBuffer();
+    uploadBuffer();
 }
 
 void Mesh::_getAllFaces(const struct aiScene *sc, const struct aiNode* nd) {
@@ -100,10 +101,5 @@ void Mesh::render() const noexcept{
 }
 
 void Mesh::uploadBuffer() noexcept {
-    std::cout << "material in use: " << _material.getShaderProgram() << std::endl;
-    if (!_vertexArray) {
-	glGenVertexArrays(1, &_vertexArray);
-    }
-    glBindVertexArray(_vertexArray);
     _gb.regenVboEbo();
 }

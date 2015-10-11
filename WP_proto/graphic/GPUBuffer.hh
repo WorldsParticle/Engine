@@ -2,8 +2,9 @@
 # define GPUBUFFER_H_
 #include <string>
 #include <vector>
-#include "uniform.hh"
-#include <GL/glew.h>
+#include <QtOpenGL>
+#include "qopenglcontext.h"
+//#include <uniform.hh>
 #include <assimp/Importer.hpp>
 
 class GPUBuffer {

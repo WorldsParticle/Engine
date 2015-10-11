@@ -1,5 +1,5 @@
 #include "glwidget.h"
-#include "graphic/fire.h"
+//#include "graphic/fire.h"
 
 #define MS_TICK 30
 
@@ -9,7 +9,7 @@ GLWidget::GLWidget(QWidget *parent) :
     _point(0, 0, 0),
     _elapsedTime(0)
 {
-    Fire::initialize();
+    //Fire::initialize();
 
     connect(&_timer, SIGNAL(timeout()), this, SLOT(updateAnimation()));
     _timer.start(MS_TICK);
@@ -105,11 +105,11 @@ void    GLWidget::updateAnimation()
 
     update();
 }
-
+/*
 void		GLWidget::drawFire()
 {
   Fire::drawAppear(Vec3D(-1, -2, 0),
            Vec3D(1, -2, 0),
            Vec3D(0, 0, 2),
            _elapsedTime / 1000.);
-}
+}*/
