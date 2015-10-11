@@ -9,6 +9,7 @@
 # include "gameclock.h"
 # include "../graphic/material.hh"
 #endif
+#include <iostream>
 
 GameEngine::GameEngine() :
     _painter()
@@ -19,13 +20,18 @@ void    GameEngine::setModel(Model *model)
 {
     //Initialisation & tt a faire ici
     _model = model;
-    Material mat;
+}
 
-    mat.addShader(QOpenGLShader::Fragment, "./graphic/shaders/phongFrag.glsl");
-    mat.addShader(QOpenGLShader::Vertex, "./graphic/shaders/phongVert.glsl");
-    mat.link();
-    _mesh.emplace_back(mat);
-    _mesh[0].fromFile("../testModels/monkey.dae");
+void GameEngine::addShader() {
+    _mat.addShader(QOpenGLShader::Fragment, "./graphic/shaders/phongFrag.glsl");
+    _mat.addShader(QOpenGLShader::Vertex, "./graphic/shaders/phongVert.glsl");
+    _mat.link();
+
+}
+
+void GameEngine::addMesh(const std::string &fileName) {
+    _mesh.emplace_back(_mat);
+    _mesh.back().fromFile(fileName);
 }
 
 void    GameEngine::update()
@@ -35,8 +41,8 @@ void    GameEngine::update()
 
 void    GameEngine::draw()
 {
+    _painter.draw();
     for (unsigned int i = 0; i < _mesh.size(); i++) {
 	_mesh[i].render();
     }
-    _painter.draw();
 }

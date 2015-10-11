@@ -1,6 +1,8 @@
 #include <iostream>
 #include "material.hh"
 
+//TODO clean proprement le _shaders
+
 const char* const Material::_StexStringArray_[16] = {
     "tex[0]",
     "tex[1]",
@@ -21,32 +23,34 @@ const char* const Material::_StexStringArray_[16] = {
 
 Material::Material() : _uTextureAmount(0), _sProgram(QOpenGLContext::currentContext()) {
     std::cout << "------------> created Material:" << this << std::endl;
-    _uTextureAmount = _sProgram.uniformLocation("textureAmount");
-    _sProgram.setUniformValue(_uTextureAmount, _uTextureAmountValue);
     _uTextureAmountValue = 0;
 }
 
 void Material::addShader(QOpenGLShader::ShaderType type_, const QString& filename_) noexcept {
     _shaders.push_back(new QOpenGLShader(type_));
-    _shaders.back()->compileSourceCode(filename_);
+    _shaders.back()->compileSourceFile(filename_);
 }
 
 void Material::link() noexcept {
-    if (!_sProgram.isLinked()) {
+    if (_sProgram.isLinked()) {
 	std::cout << "previously removed stuff" << std::endl;
+	_sProgram.release();
 	//QOpenGLContext::currentContext()->functions()->glDeleteProgram(_sProgram.programId());
     }
     _sProgram.create();
-    //for (QOpenGLShader& s : _shaders) {
-    //    if (!s.isCompiled()) {
-    //        std::cout << "\033[33m warning: not compiled shader found\033[0m" << std::endl;
-    //    }
-    //    _sProgram.addShader(&s);
-    //}
+    for (QOpenGLShader* s : _shaders) {
+        if (!s->isCompiled()) {
+            std::cout << "\033[33m warning: not compiled shader found\033[0m" << std::endl;
+        }
+        _sProgram.addShader(s);
+    }
     if (!_sProgram.link()) {
-	//std::cout << "\033[0;31mfailed to link error log: " << std::endl << _sProgram.log()<< std::endl << "-------------------\033[0m" << std::endl;
+	std::cout << "\033[0;31mfailed to link error log: " << std::endl;
+	std::cout << _sProgram.log().toStdString() << std::endl << "-------------------\033[0m" << std::endl;
     } else {
 	std::cout << "\033[32msuccessfully linked\033[0m" << std::endl;
+	_uTextureAmount = _sProgram.uniformLocation("textureAmount");
+        _sProgram.setUniformValue(_uTextureAmount, _uTextureAmountValue);
     }
     std::cout << "-----------> created program: " << _sProgram.programId() << std::endl;
 }
@@ -63,7 +67,8 @@ Material& Material::operator=(const Material& m) {
     }
     _textures = m._textures;
     if (!_sProgram.link()) {
-	//std::cout << "\033[0;31mfailed to link error log: " << std::endl << _sProgram.log()<< std::endl << "-------------------\033[0m" << std::endl;
+	std::cout << "\033[0;31mfailed to link error log: " << std::endl;
+	std::cout << _sProgram.log().toStdString() << std::endl << "-------------------\033[0m" << std::endl;
     } else {
 	std::cout << "\033[32msuccessfully linked\033[0m" << std::endl;
     }
@@ -76,7 +81,7 @@ void Material::use() noexcept {
 	return;
     }
     _sProgram.bind();
-    //_sProgram.setUniformValue(_uTextureAmount, _uTextureAmountValue);
+    _sProgram.setUniformValue(_uTextureAmount, _uTextureAmountValue);
     if (_textures.size() != _uTextureAmountValue) {
 	std::cout << "program id: " << _sProgram.programId() << std::endl;
 	std::cout << "\033[31;1m_texture.size() = " << _textures.size() << " != uniform TextureAmount = " << _uTextureAmountValue << "\e[0m" << std::endl;
@@ -92,7 +97,7 @@ void Material::use() noexcept {
 
 decltype(Material::_textures)::const_iterator Material::addTexture(Texture* t_) {
     GLint maxTex = 10;
-    //QOpenGLContext::currentContext()->functions()->glGetIntegerv(GL_MAX_TEXTURE_UNITS, &maxTex);
+    QOpenGLContext::currentContext()->functions()->glGetIntegerv(GL_MAX_TEXTURE_UNITS, &maxTex);
     if ((int)_textures.size() > maxTex) {
 	std::cout << "\e[33myou are exeeding the maximum amout of textures:" << maxTex << "\e[0m" << std::endl;
     }

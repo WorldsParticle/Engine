@@ -27,6 +27,9 @@ void Mesh::fromFile(const std::string& fname_) {
 	fin.close();
     } else {
 	std::cout << "Couldn't open file: " << fname_ << std::endl;
+	if (fin.badbit) {
+	    std::cout << "badbit" << std::endl;
+	}
 	return;
     }
     importer.SetProgressHandler(new AssimpProgressHandlerOverload(" " + fname_));
@@ -94,8 +97,6 @@ Mesh::~Mesh() {
 }
 
 void Mesh::render() const noexcept{
-    std::cout << "render" << &_material << std::endl;
-
     _material.use();
     _gb.draw(GL_TRIANGLES);
 }

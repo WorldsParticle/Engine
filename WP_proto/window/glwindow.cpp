@@ -47,6 +47,8 @@ void    GLWindow::start(Model *model)
     GameClock::start();
     GameEngine     _gameEngine;
 
+    _gameEngine.addShader();
+    _gameEngine.addMesh();
     while (isVisible())
     {
         _gameEngine.update();
