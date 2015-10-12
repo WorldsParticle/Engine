@@ -13,6 +13,11 @@
 # www.mip.informatik.uni-kiel.de/~jw
 # --------------------------------
 
+
+
+
+SET(CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH};${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_modules")
+
 # base dirs:
 SET(DevIL_POSSIBLE_ROOT_PATHS
     ${DevIL_ROOT_DIR} $ENV{DevIL_ROOT_DIR}
@@ -94,23 +99,7 @@ SET(DEVIL_FOUND ${DevIL_FOUND})
 SET(DEVIL_LIBRARIES ${DevIL_LIBRARIES})
 SET(DEVIL_INCLUDE_DIR ${DevIL_INCLUDE_DIR})
 
-if (WIN32) # Check if we are on Windows
-    if (MSVC) # Check if we are using the Visual Studio compiler
-	set_target_properties(FileMenu PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
-    elseif(CMAKE_COMPILER_IS_GNUCXX)
-	# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows")
-	# # Not tested
-    else()
-	message(SEND_ERROR "You are using an
-	unsupported Windows compiler! (Not MSVC or GCC)")
-    endif()
-elseif (UNIX)
-    set(CMAKE_PREFIX_PATH "/usr/lib64/qt5")
-    SET(CMAKE_CXX_FLAGS "-std=c++0x")
-    # Nothing special required
-else ()
-    message(SEND_ERROR "You are on an unsupported platform! (Not Win32 or Unix)")
-ENDIF ()
+
 
 cmake_minimum_required( VERSION 2.8.11 )
 set (QT_USE_QTOPENGL TRUE)
@@ -152,9 +141,32 @@ SET(HEADERS main.h engine/gameclock.h engine/gameengine.h
     graphic/mesh.h graphic/texture.h)
 add_executable(WorldsParticle ${SOURCES} ${uifiles})
 
+
+
+LINK_DIRECTORIES("F:/libs/assimp/lib64/")
+
+if (WIN32) # Check if we are on Windows
+    if (MSVC) # Check if we are using the Visual Studio compiler
+	#set_target_properties(WorldsParticle PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
+    elseif(CMAKE_COMPILER_IS_GNUCXX)
+	# SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows")
+	# # Not tested
+    else()
+	message(SEND_ERROR "You are using an
+	unsupported Windows compiler! (Not MSVC or GCC)")
+    endif()
+elseif (UNIX)
+    set(CMAKE_PREFIX_PATH "/usr/lib64/qt5")
+    SET(CMAKE_CXX_FLAGS "-std=c++0x")
+    # Nothing special required
+else ()
+    message(SEND_ERROR "You are on an unsupported platform! (Not Win32 or Unix)")
+ENDIF ()
+
 #qt5_use_modules(WorldsParticle OpenGL)
 #qt5_use_modules(WorldsParticle Widgets)
 
 target_link_libraries(WorldsParticle ${QT_QTMAIN_LIBRARY} ${QT_LIBRARIES}
     ${OPENGL_LIBRARIES} Qt5::Widgets Qt5::Core Qt5::OpenGL ${ASSIMP_LIBRARIES}
-    ${DevIL_LIBRARY_ILUT} ${DevIL_LIBRARY_ILU} ${DevIL_LIBRARY_IL})# ${GLEW_LIBRARY})
+    ${DevIL_LIBRARY_ILUT} ${DevIL_LIBRARY_ILU} ${DevIL_LIBRARY_IL} "F:/libs/assimp/lib64/assimp.lib")
+	# ${GLEW_LIBRARY})
