@@ -7,7 +7,7 @@
 #include "window/glwindow.h"
 
 namespace Ui {
-class MainWindow;
+    class MainWindow;
 }
 
 class MainWindow : public QMainWindow
@@ -27,7 +27,9 @@ public slots:
     void exit();
 
 private:
-    void    makeConnections(); // connection avec les signaux de l'ui. on peut le faire depuis l'ui design, mais c'est moche
+    // connection avec les signaux de l'ui. on peut le faire depuis
+    // l'ui design, mais c'est moche
+    void    makeConnections();
 
     Ui::MainWindow* _ui;
     Model           _model;
