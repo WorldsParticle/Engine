@@ -1,45 +1,40 @@
-SET(ASSIMP_POSSIBLE_PATH
-     "/usr/local/"
-     "/usr/"
-     "F:/libs/assimp/"
-)
+# Locate Assimp library This module defines
+#
+# ::
+#
+#   ASSIMP_FOUND          - if false, do not try to link to assimp
+#   ASSIMP_LIBRARY        - assimp lib
+#   ASSIMP_INCLUDE_DIR    - where to find assim headers
+#
 
-SET(ASSIMP_POSSIBLE_INCDIR_SUFFIXES
- "includes"
-)
-SET(ASSIMP_POSSIBLE_LIB_SUFFIXES
- "lib32"
- "lib64"
-)
-
-
-
-FIND_PATH(
-    ASSIMP_INCLUDE_DIRS
-    NAMES postprocess.h scene.h version.h config.h cimport.h
-    PATHS ${ASSIMP_POSSIBLE_PATH}
-    PATH_SUFFIXES ${ASSIMP_POSSIBLE_INCDIR_SUFFIXES}
+FIND_PATH(ASSIMP_INCLUDE_DIR
+    NAMES assimp/version.h
+   HINTS
+      ENV ASSIMP_DIR
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
     )
 
-FIND_LIBRARY(
-    ASSIMP_LIBRARIES
+FIND_LIBRARY(ASSIMP_LIBRARY
     NAMES assimp
-    PATHS ${ASSIMP_POSSIBLE_PATH}
-    PATH_SUFFIXES ${ASSIMP_POSSIBLE_LIB_SUFFIXES}
+    HINTS
+      ENV ASSIMP_DIR
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
     )
 
-IF (assimp_INCLUDE_DIRS AND assimp_LIBRARIES)
-    SET(assimp_FOUND TRUE)
-ENDIF (assimp_INCLUDE_DIRS AND assimp_LIBRARIES)
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(Assimp
+    REQUIRED_VARS ASSIMP_LIBRARY ASSIMP_INCLUDE_DIR
+    )
 
-IF (assimp_FOUND)
-    IF (NOT assimp_FIND_QUIETLY)
-        MESSAGE(STATUS "Found asset importer library: ${assimp_LIBRARIES}")
-    ENDIF (NOT assimp_FIND_QUIETLY)
-ELSE (assimp_FOUND)
-    IF (assimp_FIND_REQUIRED)
-        MESSAGE(FATAL_ERROR "Could not find asset importer library")
-    ENDIF (assimp_FIND_REQUIRED)
-ENDIF (assimp_FOUND)
-
-message(${assimp_LIBRARIES})
+MARK_AS_ADVANCED(ASSIMP_LIBRARY ASSIMP_INCLUDE_DIR)
