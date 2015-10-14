@@ -1,4 +1,3 @@
 cmake/*
-!cmake/cmake_modules/FindAssimp.cmake
-!cmake/cmake_modules/FindDevil.cmake
-source/worldsparticle.hpp
+sources/worldparticles.hpp
+doc

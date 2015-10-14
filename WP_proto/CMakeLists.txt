@@ -97,22 +97,22 @@ SET(WORLD_PARTICLES_SOURCES_FILES
 ## PROJECT HEADERS FILES
 
 SET(WORLD_PARTICLES_HEADERS_FILES
-    sources/main.h
-    sources/engine/gameclock.h
-    sources/engine/gameengine.h
-    sources/graphic/myglpainter.h
-    sources/model/model.h
-    sources/model/tools.h
-    sources/window/glwidget.h
-    sources/window/glwindow.h
-    sources/window/irrlichtwidget.h
-    sources/window/mainwindow.h
-    sources/window/toolwidget.h
-    sources/graphic/AssimpProgressHandlerOverload.h
-    sources/graphic/GPUBuffer.h
-    sources/graphic/material.h
-    sources/graphic/mesh.h
-    sources/graphic/texture.h
+    ${CMAKE_SOURCE_DIR}/sources/main.h
+    ${CMAKE_SOURCE_DIR}/sources/engine/gameclock.h
+    ${CMAKE_SOURCE_DIR}/sources/engine/gameengine.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/myglpainter.h
+    ${CMAKE_SOURCE_DIR}/sources/model/model.h
+    ${CMAKE_SOURCE_DIR}/sources/model/tools.h
+    ${CMAKE_SOURCE_DIR}/sources/window/glwidget.h
+    ${CMAKE_SOURCE_DIR}/sources/window/glwindow.h
+    ${CMAKE_SOURCE_DIR}/sources/window/irrlichtwidget.h
+    ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.h
+    ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/AssimpProgressHandlerOverload.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/GPUBuffer.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/material.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/mesh.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/texture.h
     )
 
 ## END PROJECT HEADERS FILES
@@ -172,16 +172,16 @@ FIND_PACKAGE(Doxygen QUIET)
 
 IF (DOXYGEN_FOUND)
 
-#    CONFIGURE_FILE(
-        #${CMAKE_SOURCE_DIR}/Doxyfile.in
-        #${CMAKE_BINARY_DIR}/Doxyfile
-        #@ONLY)
+    CONFIGURE_FILE(
+        ${CMAKE_SOURCE_DIR}/Doxyfile.in
+        ${CMAKE_BINARY_DIR}/Doxyfile
+        @ONLY)
 
-    #ADD_CUSTOM_TARGET(doc
-        #${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
-        #WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/sources"
-        #COMMENT "Generating API documentation with Doxygen" VERBATIM
-        #)
+    ADD_CUSTOM_TARGET(doc
+        ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
+        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/sources"
+        COMMENT "Generating API documentation with Doxygen" VERBATIM
+        )
 
 ENDIF (DOXYGEN_FOUND)
 
