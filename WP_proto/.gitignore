@@ -1,2 +1,3 @@
-!cmake/cmake_modules/
 cmake/*
+!cmake/cmake_modules/FindAssimp.cmake
+!cmake/cmake_modules/FindDevil.cmake
