@@ -1,15 +1,21 @@
+///
+/// \file gameengine.cpp
+/// \brief TODO fill gameengine.cpp brief
+/// \author Martin-Pierrat Louis (mart_p)
+/// \version 1.0.0
+/// \date Oct 18, 2015
+///
+/// TODO fill gameengine.cpp description
+///
+
 #include <vector>
 #include <QOpenGLShader>
-#ifdef _WIN32
-# include "engine/gameengine.h"
-# include "engine/gameclock.h"
-# include "graphic/material.hh"
-#else
-# include "gameengine.h"
-# include "gameclock.h"
-# include "../graphic/material.hh"
-#endif
+#include "gameengine.h"
+#include "gameclock.h"
+#include "material.hh"
 #include <iostream>
+
+#include    "worldparticles.hpp"
 
 GameEngine::GameEngine() :
     _painter()
@@ -23,8 +29,8 @@ void    GameEngine::setModel(Model *model)
 }
 
 void GameEngine::addShader() {
-    _mat.addShader(QOpenGLShader::Fragment, "./graphic/shaders/phongFrag.glsl");
-    _mat.addShader(QOpenGLShader::Vertex, "./graphic/shaders/phongVert.glsl");
+    _mat.addShader(QOpenGLShader::Fragment, RESOURCES_PATH "/shaders/phongFrag.glsl");
+    _mat.addShader(QOpenGLShader::Vertex, RESOURCES_PATH "/shaders/phongVert.glsl");
     _mat.link();
 
 }

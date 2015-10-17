@@ -1,16 +1,22 @@
+///
+/// \file gameengine.h
+/// \brief TODO fill gameengine.h brief
+/// \author Martin-Pierrat Louis (mart_p)
+/// \version 1.0.0
+/// \date Oct 18, 2015
+///
+/// TODO fill gameengine.h description
+///
+
 #ifndef GAMEENGINE_H
 #define GAMEENGINE_H
 
 #include <string>
-#ifdef _WIN32
-# include "model/model.h"
-# include "graphic/myglpainter.h"
-# include "graphic/mesh.hh"
-#else
-# include "../model/model.h"
-# include "../graphic/myglpainter.h"
-# include "../graphic/mesh.hh"
-#endif
+#include "model.h"
+#include "myglpainter.h"
+#include "mesh.hh"
+
+#include    "worldparticles.hpp"
 
 class GameEngine
 {
@@ -19,7 +25,7 @@ public:
 
     void    setModel(Model *model);
     void    addShader();
-    void    addMesh(const std::string & = "./testModels/monkey.dae");
+    void    addMesh(const std::string & = RESOURCES_PATH "/models/monkey.dae");
 
     void    update();
     void    draw();
