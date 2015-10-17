@@ -7,6 +7,7 @@
 ################################################################################
 
 
+
 ## CMAKE INITIALISATION
 
 PROJECT(WORLD_PARTICLES)
@@ -24,8 +25,10 @@ SET(WORLD_PARTICLES_VERSION_MINOR 0)
 SET(WORLD_PARTICLES_VERSION_PATCH 0)
 SET(WORLD_PARTICLES_VERSION_EXTRA 0)
 
-SET(WORLD_PARTICLES_VERSION \"${WORLD_PARTICLES_VERSION_MAJOR}.${WORLD_PARTICLES_VERSION_MINOR}.${WORLD_PARTICLES_VERSION_PATCH}\")
-SET(WORLD_PARTICLES_VERSION_FULL \"${WORLD_PARTICLES_VERSION_MAJOR}.${WORLD_PARTICLES_VERSION_MINOR}.${WORLD_PARTICLES_VERSION_PATCH}.${WORLD_PARTICLES_VERSION_EXTRA}\")
+SET(WORLD_PARTICLES_VERSION ${WORLD_PARTICLES_VERSION_MAJOR}.${WORLD_PARTICLES_VERSION_MINOR}.${WORLD_PARTICLES_VERSION_PATCH})
+SET(WORLD_PARTICLES_VERSION_FULL ${WORLD_PARTICLES_VERSION}.${WORLD_PARTICLES_VERSION_EXTRA})
+
+SET(RESOURCES_PATH "${CMAKE_SOURCE_DIR}/resources")
 
 CONFIGURE_FILE(
     "${CMAKE_SOURCE_DIR}/sources/worldparticles.hpp.in"
@@ -80,7 +83,6 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/model/tools.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/glwidget.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/glwindow.cpp
-    ${CMAKE_SOURCE_DIR}/sources/window/irrlichtwidget.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.cpp
     ${CMAKE_SOURCE_DIR}/sources/graphic/AssimpProgressHandlerOverload.cpp
@@ -105,7 +107,6 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/model/tools.h
     ${CMAKE_SOURCE_DIR}/sources/window/glwidget.h
     ${CMAKE_SOURCE_DIR}/sources/window/glwindow.h
-    ${CMAKE_SOURCE_DIR}/sources/window/irrlichtwidget.h
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.h
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.h
     ${CMAKE_SOURCE_DIR}/sources/graphic/AssimpProgressHandlerOverload.h
