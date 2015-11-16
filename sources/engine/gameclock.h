@@ -6,12 +6,21 @@
 class GameClock
 {
 public:
-    static inline void start() {
+
+    static inline void start()
+	{
         _surplus = 0;
         _clock.start();
     }
 
-    static inline int restart() {
+	///
+	/// \brief Sets this time to the current time and returns the number of milliseconds
+	/// that have elapsed since the last time start() or restart() was called.
+	///
+	/// TODO : faire une abstraction de la clock avec un restart qui renvois directement le time elapsed.
+	/// Cependant je ne peut pas faire les modifications car je ne comprend pas a quoi sert le "surplus".
+	///
+    static inline void restart() {
         _surplus = _clock.restart();
     }
 
@@ -20,8 +29,12 @@ public:
     }
 
 private:
+
     static QTime  _clock;
-    static int    _surplus; // je sais pas comment dire en anglais ^^
+
+	// je sais pas comment dire en anglais ^^
+	// Je comprend pas l'intéret en fait.
+    static int    _surplus;
 };
 
 #endif // GAMECLOCK_H

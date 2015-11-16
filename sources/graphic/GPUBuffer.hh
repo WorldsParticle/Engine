@@ -28,7 +28,7 @@ class GPUBuffer {
 	void regenVboEbo();
 	void GPUFree();
 	void CPUFree();
-	void draw(GLenum drawStyle_)const noexcept;
+	void draw(GLenum drawStyle_) const;
 };
 
 #endif /* !GPUBUFFER_H_ */

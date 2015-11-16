@@ -21,12 +21,12 @@ class Material {
     public:
 	Material();
 	~Material();
-	void addShader(QOpenGLShader::ShaderType, const QString&) noexcept;
-	void link() noexcept;
-	void use() noexcept;
-	void compileAll()noexcept;
-	decltype(_textures)::const_iterator addTexture(Texture*);
-	void excludeTexture(decltype(_textures)::iterator);
+	void addShader(QOpenGLShader::ShaderType, const QString&);
+	void link();
+	void use();
+	void compileAll();
+	std::vector<const Texture*>::const_iterator addTexture(Texture*);
+	void excludeTexture(std::vector<const Texture*>::iterator);
 	inline decltype(_textures)& getTextureList();
 	Material& operator=(const Material&);
 };

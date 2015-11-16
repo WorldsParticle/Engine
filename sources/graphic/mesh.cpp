@@ -14,7 +14,8 @@ Mesh::Mesh(Material& m_) : _material(m_), _vertexArray(0) {
     std::cout << "add mesh " << std::endl;
 }
 
-void Mesh::set(const GPUBuffer& b_) noexcept {
+void Mesh::set(const GPUBuffer& b_)
+{
     _gb = b_;
     uploadBuffer();
 }
@@ -96,11 +97,13 @@ void Mesh::_getAllFaces(const struct aiScene *sc, const struct aiNode* nd) {
 Mesh::~Mesh() {
 }
 
-void Mesh::render() const noexcept{
+void Mesh::render() const
+{
     _material.use();
     _gb.draw(GL_TRIANGLES);
 }
 
-void Mesh::uploadBuffer() noexcept {
+void Mesh::uploadBuffer()
+{
     _gb.regenVboEbo();
 }

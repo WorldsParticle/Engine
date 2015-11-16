@@ -13,11 +13,11 @@ class Mesh {
 	void _getAllFaces(const struct aiScene *sc, const struct aiNode*);
     public:
 	explicit Mesh(Material&);
-	void set(const GPUBuffer&)noexcept;
+	void set(const GPUBuffer&);
 	void fromFile(const std::string&);
 	void setMaterial(Material& m_) { _material = m_; }
-	void render() const noexcept;
-	void uploadBuffer() noexcept;
+	void render() const ;
+	void uploadBuffer();
 	~Mesh();
 };
 

@@ -72,7 +72,7 @@ void GPUBuffer::CPUFree() {
     _elementArray.clear();
 }
 
-void GPUBuffer::draw(GLenum drawStyle_) const noexcept {
+void GPUBuffer::draw(GLenum drawStyle_) const {
     QOpenGLContext::currentContext()->functions()->glEnableVertexAttribArray(VERTEX_LOCATION_); // enable vertex shader parameter value
     QOpenGLContext::currentContext()->functions()->glEnableVertexAttribArray(NORMAL_LOCATION_); // enable normal shader parameter value
     QOpenGLContext::currentContext()->functions()->glEnableVertexAttribArray(UV_LOCATION_);
