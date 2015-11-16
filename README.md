@@ -15,6 +15,8 @@ make
 
 ## Windows
 
+Actuellement la compilation sur windows marche, j'ai réussis a faire le linkage, mais a cause du fait qu'on a utiliser les std::cout je ne sais pas pourquoi le programme ce ferme directement. Sachant qu'il ne marche uniquement si je le fait tourner sur ma carte graphique nvidia.
+
 ### Telechargements des librairies
 
 toujours dans la même architecture (64 ||32), ne pas faire de mix !
