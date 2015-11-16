@@ -1,24 +1,22 @@
 # worldsparticle
+Utilisation d'OpenGL 4+ avec Qt
 
-########
-  Todo
-########
+# Compilation
 
--Ajouter les fichiers précompilés (moc_*.cpp, ui_*.h),
-les fichiers log et 'user' qt/vs dans le .gitignore 
+## Linux
 
-#################
-  Documentation
-#################
+```shell
+cd cmake
+cmake -DCMAKE_BUILD_TYPE=Release ..
+make
+```
 
-# Integration Qt dans visual studio 2013 (community) :
+## Windows
 
--http://www.oragon.net/qt-vsaddin-vs2013/
--Si les '#include <Q*>' ne sont pas reconnu dans l'éditeur
-(mais fonctionnent, si vous avez bien indiqué le chemin d'accès de votre version de Qt),
-il faut scanner la solution (Project->rescan solution).
+TODO : someone on Windows
 
-# Integration Irrlicht dans Qt :
+Le FindAssimp attend que la variable "ASSIMP_DIR" soit set a l'emplacement du dossier Assimp pour qu'il trouve la librairie sur windows. (aka FindLua)
 
--http://labo-gamedev.com/news/9/
+# LIENS
+http://doc.qt.io/qt-5/qtgui-openglwindow-example.html -> optimisations qt pour utiliser QOpenGLContext
 

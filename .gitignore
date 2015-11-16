@@ -26,3 +26,9 @@
 *.exe
 *.out
 *.app
+
+# Worldparticles project
+
+cmake/*
+sources/worldparticles.hpp
+doc
