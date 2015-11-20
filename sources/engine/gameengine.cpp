@@ -29,8 +29,8 @@ void    GameEngine::setModel(Model *model)
 }
 
 void GameEngine::addShader() {
-    _mat.addShader(QOpenGLShader::Fragment, RESOURCES_PATH "/shaders/phongFrag.glsl");
-    _mat.addShader(QOpenGLShader::Vertex, RESOURCES_PATH "/shaders/phongVert.glsl");
+    _mat.addShader(QOpenGLShader::Fragment, RESOURCES_PATH "/shaders/default.frag");
+    _mat.addShader(QOpenGLShader::Vertex, RESOURCES_PATH "/shaders/default.vert");
     _mat.link();
 
 }
