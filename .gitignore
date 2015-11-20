@@ -33,3 +33,4 @@ cmake/*
 !cmake/cmake_modules
 sources/worldparticles.hpp
 doc
+*.user
