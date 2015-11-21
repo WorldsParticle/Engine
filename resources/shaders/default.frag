@@ -1,5 +1,7 @@
 #version 420
 
-void main() {
-  gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);
+layout(location = 1) out vec4 color;
+
+void main(void) {
+  color = vec4(1.0, 1.0, 1.0, 1.0);
 }

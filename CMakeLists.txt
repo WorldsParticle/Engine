@@ -76,8 +76,19 @@ ADD_DEFINITIONS(${QT_DEFINITIONS})
 
 SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/main.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/gameclock.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/gameengine.cpp
+
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameClock/GameClock.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/GameObject.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameView/GameView.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/CubeRenderer/CubeRenderer.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Cube/Cube.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
+
     ${CMAKE_SOURCE_DIR}/sources/graphic/myglpainter.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/model.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/tools.cpp
@@ -86,10 +97,6 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.cpp
     ${CMAKE_SOURCE_DIR}/sources/graphic/AssimpProgressHandlerOverload.cpp
-    ${CMAKE_SOURCE_DIR}/sources/graphic/GPUBuffer.cpp
-    ${CMAKE_SOURCE_DIR}/sources/graphic/material.cpp
-    ${CMAKE_SOURCE_DIR}/sources/graphic/mesh.cpp
-    ${CMAKE_SOURCE_DIR}/sources/graphic/texture.cpp
     )
 
 ## END PROJECT SOURCES FILES
@@ -100,8 +107,20 @@ SET(WORLD_PARTICLES_SOURCES_FILES
 
 SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/main.h
-    ${CMAKE_SOURCE_DIR}/sources/engine/gameclock.h
-    ${CMAKE_SOURCE_DIR}/sources/engine/gameengine.h
+
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameClock/GameClock.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/GameObject.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameView/GameView.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/CubeRenderer/CubeRenderer.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Cube/Cube.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.hpp
+
+
     ${CMAKE_SOURCE_DIR}/sources/graphic/myglpainter.h
     ${CMAKE_SOURCE_DIR}/sources/model/model.h
     ${CMAKE_SOURCE_DIR}/sources/model/tools.h
@@ -110,10 +129,6 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.h
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.h
     ${CMAKE_SOURCE_DIR}/sources/graphic/AssimpProgressHandlerOverload.h
-    ${CMAKE_SOURCE_DIR}/sources/graphic/GPUBuffer.h
-    ${CMAKE_SOURCE_DIR}/sources/graphic/material.h
-    ${CMAKE_SOURCE_DIR}/sources/graphic/mesh.h
-    ${CMAKE_SOURCE_DIR}/sources/graphic/texture.h
     )
 
 ## END PROJECT HEADERS FILES
@@ -128,6 +143,17 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/model
     ${CMAKE_SOURCE_DIR}/sources/window
     ${CMAKE_SOURCE_DIR}/sources/engine
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameClock
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameObject
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameView
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/CubeRenderer/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Camera/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Transform/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Cube/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Material/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
     ${CMAKE_BINARY_DIR}
     )
 
@@ -137,7 +163,9 @@ INCLUDE_DIRECTORIES(
     ${OPENGL_INCLUDE_DIR}
     ${ASSIMP_INCLUDE_DIR}
     ${DevIL_INCLUDE_DIR}
+    "C:/Program Files (x86)/glm/include"
     )
+
 
 ## END PROJECT INCLUDES DIRECTORIES
 

@@ -3,8 +3,12 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include <QCoreApplication>
-#include "engine/gameclock.h"
-#include "engine/gameengine.h"
+#include "GameClock.hpp"
+#include "GameEngine.hpp"
+
+QSurface        *GLWindow::surface = NULL;
+QOpenGLContext      *GLWindow::context = NULL;
+QOpenGLFunctions_4_2_Core *GLWindow::m_funcs = NULL;
 
 GLWindow::GLWindow(QWindow *parent) :
     QWindow(parent),
@@ -23,10 +27,18 @@ GLWindow::GLWindow(QWindow *parent) :
     create();
     _context.create();
 
-    resize(720, 540);
+    GLWindow::context = &_context;
+    GLWindow::surface = this;
+
+    resize(1024, 768);
 
     if(!_context.isValid())
         qCritical()<<"The OpenGL context is invalid!"; //I allways get this message
+
+    _context.makeCurrent(this);
+    m_funcs = (QOpenGLFunctions_4_2_Core *)_context.versionFunctions();
+
+    m_funcs->initializeOpenGLFunctions();
 
     //now another test:
     //the next line prints: "Window format version is: 4.2" which is correct
@@ -47,8 +59,6 @@ void    GLWindow::start(Model *model)
     GameClock::start();
     GameEngine     _gameEngine;
 
-    _gameEngine.addShader();
-    _gameEngine.addMesh();
     while (isVisible())
     {
         _gameEngine.update();
