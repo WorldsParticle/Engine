@@ -3,6 +3,7 @@
 
 #include    <vector>
 #include    <glm/glm.hpp>
+#include    "../GPUBuffer/GPUBuffer.hh"
 
 ///
 /// \brief The Mesh class
@@ -11,7 +12,7 @@
 class   Mesh
 {
 public:
-    Mesh() {}
+    Mesh();
     ~Mesh() {}
 
 public:
@@ -46,7 +47,14 @@ public:
         this->_normals = normals;
     }
 
+	void set(const GPUBuffer&);
+	void fromFile(const std::string&);
+	void render() const ;
+	void uploadBuffer();
 private:
+	void _getAllFaces(const struct aiScene *sc, const struct aiNode*);
+	GPUBuffer _gb;
+	GLuint _vertexArray;
     std::vector<glm::vec3>  _vertices;
     std::vector<glm::vec3>  _uvs;
     std::vector<glm::vec3>  _normals;

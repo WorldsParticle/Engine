@@ -1,4 +1,5 @@
 #include    "CubeRenderer.hpp"
+#include <glm/ext.hpp>
 
 #include    <QOpenGLContext>
 #include <QtOpenGL>
@@ -13,10 +14,10 @@ CubeRenderer::CubeRenderer()
 }
 
 void    CubeRenderer::Draw(const Mesh &mesh,
-                           Material &material,
-                           const glm::mat4 &projection,
-                           const glm::mat4 &view,
-                           const glm::mat4 &model)
+	Material &material,
+	const glm::mat4 &projection,
+	const glm::mat4 &view,
+	const glm::mat4 &model)
 {
     const std::vector<glm::vec3> &vertices = mesh.GetVertices();
     QOpenGLShaderProgram shaderProgram;
@@ -30,14 +31,15 @@ void    CubeRenderer::Draw(const Mesh &mesh,
     GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo);
     GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
 
-    //    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, RESOURCES_PATH "/shaders/default.vert");
-//        shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, RESOURCES_PATH "/shaders/default.frag");
-//        shaderProgram.link();
-    //    shaderProgram.create();
+    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, RESOURCES_PATH "/shaders/default.vert");
+    shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, RESOURCES_PATH "/shaders/default.frag");
+    shaderProgram.link();
+    shaderProgram.create();
 
-//        shaderProgram.bind();
+    shaderProgram.bind();
 
 
+<<<<<<< HEAD
     GLuint VertexShaderID = GLWindow::m_funcs->glCreateShader(GL_VERTEX_SHADER);
     GLuint FragmentShaderID = GLWindow::m_funcs->glCreateShader(GL_FRAGMENT_SHADER);
 
@@ -99,9 +101,50 @@ void    CubeRenderer::Draw(const Mesh &mesh,
     glm::mat4 MVP = projection * view * model;
 
     GLWindow::m_funcs->glUniformMatrix4fv(GLWindow::m_funcs->glGetUniformLocation(ProgramID, "mvp"), 1, GL_FALSE, glm::value_ptr(MVP));
+=======
+    glm::mat4 MVP = projection * view * model;
 
-    GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, 3);
+    int location = shaderProgram.uniformLocation("MVP");
+    std::cout << location << std::endl;
+    shaderProgram.setUniformValue(location, QMatrix4x4(&MVP[0][0]).transposed());
+>>>>>>> origin/master
+
+    GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, 3 * vertices.size());
     GLWindow::m_funcs->glDisableVertexAttribArray(0);
 
 
+<<<<<<< HEAD
+=======
+
+
+    //    static const GLfloat g_vertex_buffer_data[] = {
+    //        -1.0f, -1.0f, 0.0f,
+    //        1.0f, -1.0f, 0.0f,
+    //        0.0f,  1.0f, 0.0f,
+    //     };
+
+
+    //    GLuint vertexbuffer;
+    //    GLWindow::m_funcs->glGenBuffers(1, &vertexbuffer);
+    //     // The following commands will talk about our 'vertexbuffer' buffer
+    //    GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    //     // Give our vertices to OpenGL.
+    //    GLWindow::m_funcs->glBufferData(GL_ARRAY_BUFFER, sizeof(g_vertex_buffer_data), g_vertex_buffer_data, GL_STATIC_DRAW);
+
+    //    GLWindow::m_funcs->glEnableVertexAttribArray(0);
+    //    GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vertexbuffer);
+    //    GLWindow::m_funcs->glVertexAttribPointer(
+    //          0,                  // attribute 0. No particular reason for 0, but must match the layout in the shader.
+    //          3,                  // size
+    //          GL_FLOAT,           // type
+    //         GL_FALSE,           // normalized?
+    //          0,                  // stride
+    //         (void*)0            // array buffer offset
+    //      );
+    //      // Draw the triangle !
+    //    GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
+    //    GLWindow::m_funcs->glDisableVertexAttribArray(0);
+
+
+>>>>>>> origin/master
 }

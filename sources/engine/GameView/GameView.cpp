@@ -6,7 +6,7 @@
 
 GameView::GameView()
 {
-    this->_cameraList.push_back(new Camera(glm::vec3(5.0, 5.0, 5.0)));
+    this->_cameraList.push_back(new Camera(glm::vec3(4.0, 3.0, 3.0)));
     this->_gameobjectList.push_back(new Cube());
 }
 
