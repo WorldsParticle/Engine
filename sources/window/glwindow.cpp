@@ -64,6 +64,7 @@ void    GLWindow::start(Model *model)
     GameEngine     _gameEngine;
 
     _gEngine = &(_gameEngine);
+    resizeWindow();
     while (isVisible())
     {
         _gameEngine.update();
