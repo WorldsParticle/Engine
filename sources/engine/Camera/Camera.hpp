@@ -16,6 +16,7 @@ public:
 public:
     glm::mat4   GetProjection(void) const;
     glm::mat4   GetView(void) const;
+    void    changeRatio(float ratio);
 
 public:
     void    Update();

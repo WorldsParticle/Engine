@@ -63,6 +63,7 @@ void    GLWindow::start(Model *model)
     GameClock::start();
     GameEngine     _gameEngine;
 
+    _gEngine = &(_gameEngine);
     while (isVisible())
     {
         _gameEngine.update();
@@ -79,7 +80,30 @@ void    GLWindow::start(Model *model)
 
 void    GLWindow::keyPressEvent(QKeyEvent *e)
 {
-    /*e->accept();
-    if (e->key() == Qt::Key_A)
-        ;*/
+    e->accept();
+    if (e->key() == Qt::Key_Escape)
+        exit(1);
+    else if (e->key() == Qt::Key_A)
+    {
+        showMaximized();
+        resizeWindow();
+    }
+    else if (e->key() == Qt::Key_Z)
+    {
+        showNormal();
+        resizeWindow();
+    }
+}
+
+void GLWindow::resizeEvent(QResizeEvent* event)
+{
+
+   // GLWindow::resizeEvent(event);
+    resizeWindow();
+}
+
+void GLWindow::resizeWindow()
+{
+    glViewport((width() - (height() * 1.33333f)) / 2, 0, height() * 1.33333f, height());
+   _gEngine->changeRatio(height() * 1.33333f / height());
 }

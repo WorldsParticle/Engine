@@ -8,6 +8,7 @@
 #include "graphic/myglpainter.h"
 #include "model/model.h"
 #include <QTime>
+#include "GameEngine.hpp"
 
 class GLWindow : public QWindow
 {
@@ -25,10 +26,13 @@ public:
 
 protected:
     virtual void    keyPressEvent(QKeyEvent *e);
+    void resizeEvent(QResizeEvent* event);
+    void resizeWindow();
 
 private:
         QOpenGLContext _context;
         QSurfaceFormat _format;
+        GameEngine    *  _gEngine;
 };
 
 #endif // GLWINDOW_H

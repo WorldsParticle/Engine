@@ -30,3 +30,11 @@ void    GameEngine::draw()
         gameview->Draw();
     }
 }
+
+void    GameEngine::changeRatio(float f)
+{
+    for (GameView *gameview : this->_gameviewList)
+    {
+        gameview->changeRatio(f);
+    }
+}

@@ -17,6 +17,7 @@ public:
 public:
     void    Update(void);
     void    Draw(void);
+    void    GameView::changeRatio(float ratio);
 
 private:
     std::list<GameObject *>     _gameobjectList;

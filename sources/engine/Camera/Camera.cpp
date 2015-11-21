@@ -33,6 +33,11 @@ void    Camera::Update(void)
 
 }
 
+void    Camera::changeRatio(float ratio)
+{
+    this->ratio = ratio;
+}
+
 void    Camera::Draw(void)
 {
 //    glClearColor(0.3, 0.1, 0.1, 0.0);

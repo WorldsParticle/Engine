@@ -22,9 +22,11 @@ public:
 
     void    update();
     void    draw();
+    void    changeRatio(float f);
 
 private:
     std::list<GameView *>     _gameviewList;
+
 
 };
 
