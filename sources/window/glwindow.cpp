@@ -46,6 +46,10 @@ GLWindow::GLWindow(QWindow *parent) :
     //the next line prints: "Context format version is: 2.0" Which is ofcourse not correct! WTF?
     qDebug()<<"Context format version is: "<<_context.format().majorVersion()<<"."<<_context.format().minorVersion();
 
+    GLuint VertexArrayID;
+    m_funcs->glGenVertexArrays(1, &VertexArrayID);
+    m_funcs->glBindVertexArray(VertexArrayID);
+
 }
 
 
