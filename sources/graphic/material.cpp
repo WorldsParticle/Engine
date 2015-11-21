@@ -33,10 +33,16 @@ void Material::addShader(QOpenGLShader::ShaderType type_, const QString& filenam
 
 void Material::uploadMVP(Camera const &cam) {
     QMatrix4x4 matrix;
+    QMatrix4x4 model;
 
-    matrix.translate(cam.eye.x(), cam.eye.y(), cam.eye.z());
-    _sProgram.setUniformValue("camera", cam.eye);
-    _sProgram.setUniformValue("model", matrix);
+    model.setToIdentity();
+    model.scale(0.5);
+    model.translate(1.0, 1.0, 0);
+    matrix.lookAt(cam.eye, QVector3D(0,0,0), QVector3D(0,0,1));
+    _sProgram.setUniformValue("camera", matrix); //view
+    _sProgram.setUniformValue("model", model);
+    _sProgram.setUniformValue("proj", cam.projection);
+    //glUniformMatrix4fv(uniTrans, 1, GL_FALSE, glm::value_ptr(trans));
 }
 
 void Material::link()
