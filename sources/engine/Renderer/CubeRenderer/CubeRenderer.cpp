@@ -43,7 +43,7 @@ void    CubeRenderer::Draw(const Mesh &mesh,
     std::cout << location << std::endl;
     shaderProgram.setUniformValue(location, QMatrix4x4(&MVP[0][0]).transposed());
 
-    GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, 3);
+    GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, 3*vertices.size());
     GLWindow::m_funcs->glDisableVertexAttribArray(0);
 
 
