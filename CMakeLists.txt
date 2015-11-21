@@ -88,6 +88,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Cube/Cube.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GPUBuffer/GPUBuffer.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/graphic/myglpainter.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/model.cpp
@@ -120,6 +121,7 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Cube/Cube.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GPUBuffer/GPUBuffer.hh
 
 
     ${CMAKE_SOURCE_DIR}/sources/graphic/myglpainter.h
@@ -156,6 +158,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Cube/
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
+    ${CMAKE_SOURCE_DIR}/sources/engine/GPUBuffer
     ${CMAKE_BINARY_DIR}
     )
 
