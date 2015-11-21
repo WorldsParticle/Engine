@@ -11,7 +11,8 @@ class Camera {
     public:
 	QVector3D   eye;
 	QMatrix4x4  projection;
-	Camera(QVector3D eye);
+	Camera(QVector3D const &e);
+	Camera(float x, float y, float z);
 	Camera();
 	void resize(int w, int h);
 };

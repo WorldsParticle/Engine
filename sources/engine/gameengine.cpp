@@ -18,7 +18,7 @@
 #include    "worldparticles.hpp"
 
 GameEngine::GameEngine() :
-    _painter()
+    _painter(), _cam(0, 0, -5)
 {
 }
 
@@ -48,7 +48,9 @@ void    GameEngine::update()
 void    GameEngine::draw()
 {
     _painter.draw();
+    _mat.uploadMVP(_cam);
     for (unsigned int i = 0; i < _mesh.size(); i++) {
+	std::cout << "render model" << std::endl;
 	_mesh[i].render();
     }
 }

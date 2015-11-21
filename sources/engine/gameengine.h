@@ -15,6 +15,7 @@
 #include "model.h"
 #include "myglpainter.h"
 #include "mesh.hh"
+#include "camera.h"
 
 #include    "worldparticles.hpp"
 
@@ -31,9 +32,10 @@ public:
     void    draw();
 
 private:
+    MyGLPainter		_painter;
+    Camera		_cam;
     Model		*_model; // représente l'ensemble du monde
     Material		_mat;
-    MyGLPainter		_painter;
     std::vector<Mesh>	_mesh;
 };
 

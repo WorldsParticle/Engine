@@ -6,8 +6,8 @@
 #include <QOpenGLContext>
 #include <QOpenGLShaderProgram>
 #include <QOpenGLShader>
-//#include <uniform.hh>
 #include "texture.hh"
+#include "camera.h"
 
 class Material {
     private:
@@ -22,6 +22,7 @@ class Material {
 	Material();
 	~Material();
 	void addShader(QOpenGLShader::ShaderType, const QString&);
+	void uploadMVP(Camera const &cam);
 	void link();
 	void use();
 	void compileAll();

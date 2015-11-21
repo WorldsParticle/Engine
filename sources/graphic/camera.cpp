@@ -1,5 +1,17 @@
 #include "camera.h"
 
+Camera::Camera(QVector3D const &e) : eye(e.x(),e.y(),e.z())
+{
+}
+
+Camera::Camera(float x, float y, float z) : eye(x, y, z)
+{
+}
+
+Camera::Camera() : eye(0,0,-5)
+{
+}
+
 void Camera::resize(int w, int h)
 {
     // Calculate aspect ratio
@@ -14,8 +26,3 @@ void Camera::resize(int w, int h)
     // Set perspective projection
     projection.perspective(fov, aspect, zNear, zFar);
 }
-
-    QMatrix4x4 matrix;
-    matrix.translate(_eye.x(), _eye.y(), _eye.z());
-    // Set modelview-projection matrix
-    program.setUniformValue("mvp_matrix", _projection * matrix);
