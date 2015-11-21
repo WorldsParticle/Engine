@@ -97,6 +97,14 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.cpp
     ${CMAKE_SOURCE_DIR}/sources/graphic/AssimpProgressHandlerOverload.cpp
+<<<<<<< HEAD
+=======
+    ${CMAKE_SOURCE_DIR}/sources/graphic/GPUBuffer.cpp
+    ${CMAKE_SOURCE_DIR}/sources/graphic/material.cpp
+    ${CMAKE_SOURCE_DIR}/sources/graphic/mesh.cpp
+    ${CMAKE_SOURCE_DIR}/sources/graphic/texture.cpp
+    ${CMAKE_SOURCE_DIR}/sources/graphic/camera.cpp
+>>>>>>> origin/master
     )
 
 ## END PROJECT SOURCES FILES
@@ -129,6 +137,14 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.h
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.h
     ${CMAKE_SOURCE_DIR}/sources/graphic/AssimpProgressHandlerOverload.h
+<<<<<<< HEAD
+=======
+    ${CMAKE_SOURCE_DIR}/sources/graphic/GPUBuffer.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/material.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/mesh.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/texture.h
+    ${CMAKE_SOURCE_DIR}/sources/graphic/camera.h
+>>>>>>> origin/master
     )
 
 ## END PROJECT HEADERS FILES
