@@ -5,10 +5,10 @@
 
 Camera::Camera(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &scale) :
     transform(position, rotation, scale),
-    fieldOfView(glm::radians(45.0f)),
+    fieldOfView(60),
     ratio(1024.0 / 768.0),
     zNear(0.1),
-    zFar(100.0)
+    zFar(1000.0)
 {
 }
 
@@ -18,7 +18,7 @@ Camera::~Camera(void)
 
 glm::mat4 Camera::GetProjection(void) const
 {
-    glm::mat4   projection = glm::perspective(fieldOfView, this->ratio, zNear, zFar);
+    glm::mat4   projection = glm::perspective(glm::radians(45.0f), this->ratio, 0.1f, 100.0f);
     return projection;
 }
 
