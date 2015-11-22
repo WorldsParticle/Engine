@@ -27,12 +27,16 @@ public:
 protected:
     virtual void    keyPressEvent(QKeyEvent *e);
     void resizeEvent(QResizeEvent* event);
+    void mousePressEvent(QMouseEvent *event);
+    void keyReleaseEvent(QKeyEvent *e);
+    void mouseMoveEvent(QMouseEvent *event);
     void resizeWindow();
 
 private:
         QOpenGLContext _context;
         QSurfaceFormat _format;
         GameEngine    *  _gEngine;
+        bool            _mouseTracking;
 };
 
 #endif // GLWINDOW_H

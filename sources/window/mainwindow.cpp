@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     _ui->setupUi(this);
     makeConnections();
 	newWorld();
+    setMouseTracking(true);
 }
 
 MainWindow::~MainWindow()

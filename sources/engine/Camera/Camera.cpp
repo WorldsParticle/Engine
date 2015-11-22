@@ -8,7 +8,9 @@ Camera::Camera(const glm::vec3 &position, const glm::vec3 &rotation, const glm::
     fieldOfView(60),
     ratio(1024.0 / 768.0),
     zNear(0.1),
-    zFar(1000.0)
+    zFar(1000.0),
+    acceleration(glm::vec3(0.0, 0.0, 0.0)),
+    speed(16.0)
 {
 }
 
@@ -29,6 +31,11 @@ glm::mat4 Camera::GetView(void) const
 }
 
 void    Camera::Update(void)
+{
+    Move();
+}
+
+void    Camera::Move(void)
 {
 
 }

@@ -21,6 +21,7 @@ public:
 public:
     void    Update();
     void    Draw();
+    void    Move();
 
 private:
     Transform   transform;
@@ -28,6 +29,9 @@ private:
     float       ratio;
     float       zNear;
     float       zFar;
+
+    glm::vec3   acceleration;
+    float       speed;
 
 };
 

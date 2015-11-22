@@ -21,11 +21,15 @@ GLWindow::GLWindow(QWindow *parent) :
     _format.setMinorVersion(2);
     _format.setProfile(QSurfaceFormat::CoreProfile); //whatever this is
 
+    _mouseTracking = false;
+
     this->setFormat(_format);
     _context.setFormat(_format);
 
     create();
     _context.create();
+
+
 
     GLWindow::context = &_context;
     GLWindow::surface = this;
@@ -81,18 +85,45 @@ void    GLWindow::start(Model *model)
 
 void    GLWindow::keyPressEvent(QKeyEvent *e)
 {
+    if (e->isAutoRepeat())
+        return;
+    static bool scr = false; // Miroir, miroir, qui est la plus belle des horreurs dans ce code ?
     e->accept();
+
     if (e->key() == Qt::Key_Escape)
         exit(1);
-    else if (e->key() == Qt::Key_A)
-    {
-        showMaximized();
+    else if (e->key() == Qt::Key_A) {
+        if (scr == false) {
+            showMaximized();
+            scr = true;
+        }
+        else {
+            showNormal();
+            scr = false;
+        }
         resizeWindow();
     }
-    else if (e->key() == Qt::Key_Z)
-    {
-        showNormal();
-        resizeWindow();
+    else if (e->key() == Qt::Key_Z){
+    }
+    else if (e->key() == Qt::Key_Q){
+    }
+    else if (e->key() == Qt::Key_S){
+    }
+    else if (e->key() == Qt::Key_D){
+    }
+}
+
+void    GLWindow::keyReleaseEvent(QKeyEvent *e)
+{
+    if (e->isAutoRepeat())
+        return;
+    if (e->key() == Qt::Key_Z){
+    }
+    if (e->key() == Qt::Key_Q){
+    }
+    if (e->key() == Qt::Key_S){
+    }
+    if (e->key() == Qt::Key_D){
     }
 }
 
@@ -101,6 +132,28 @@ void GLWindow::resizeEvent(QResizeEvent* event)
 
    // GLWindow::resizeEvent(event);
     resizeWindow();
+}
+
+void GLWindow::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton){
+        setCursor(Qt::BlankCursor);
+        QPoint glob = mapToGlobal(QPoint(width()/2,height()/2));
+        QCursor::setPos(glob);
+        _mouseTracking = true;
+    }
+    else if (event->button() == Qt::RightButton){
+    setCursor(Qt::ArrowCursor);
+    _mouseTracking = false;
+    }
+}
+
+void GLWindow::mouseMoveEvent(QMouseEvent *event){
+    if (_mouseTracking)
+    {
+        QPoint glob = mapToGlobal(QPoint(width()/2,height()/2));
+        QCursor::setPos(glob);
+    }
 }
 
 void GLWindow::resizeWindow()
