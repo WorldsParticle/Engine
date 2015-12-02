@@ -85,9 +85,9 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Cube/Cube.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/tools.cpp
@@ -117,10 +117,9 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Cube/Cube.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.hpp
-
+    ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.hpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.h
     ${CMAKE_SOURCE_DIR}/sources/model/tools.h
@@ -152,7 +151,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Cube/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
     ${CMAKE_BINARY_DIR}
