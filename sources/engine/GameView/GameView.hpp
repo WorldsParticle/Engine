@@ -31,9 +31,6 @@ public:
     ///
     void    Draw(void);
 
-    /// TODO : Event handling
-    void    changeRatio(float ratio);
-
 private:
     ///
     /// \brief List of all gameobject present in this gameview.

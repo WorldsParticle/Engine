@@ -26,9 +26,6 @@ public:
     ///
     void    draw();
 
-    /// TODO : Event handling
-    void    changeRatio(float f);
-
 private:
     std::list<GameView *>     _gameviewList;
 };

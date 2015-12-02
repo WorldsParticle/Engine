@@ -1,16 +1,16 @@
 #include    "Camera.hpp"
-#include    "qopenglcontext.h"
-
 #include    <glm/gtc/matrix_transform.hpp>
+
+/// TODO C'est totalement pas cohérent de devoir inclure le GLWindow, GameEngine...
+/// pour faire de l'opengl.
+#include    "glwindow.h"
+#include <iostream>
 
 Camera::Camera(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &scale) :
     transform(position, rotation, scale),
     fieldOfView(60),
-    ratio(1024.0 / 768.0),
     zNear(0.1),
-    zFar(1000.0),
-    acceleration(glm::vec3(0.0, 0.0, 0.0)),
-    speed(16.0)
+    zFar(1000.0)
 {
 }
 
@@ -20,33 +20,21 @@ Camera::~Camera(void)
 
 glm::mat4 Camera::GetProjection(void) const
 {
-    glm::mat4   projection = glm::perspective(glm::radians(45.0f), this->ratio, 0.1f, 100.0f);
-    return projection;
+    return glm::perspective(glm::radians(45.0f), 1024.0f / 768.0f, 0.1f, 100.0f);
 }
 
 glm::mat4 Camera::GetView(void) const
 {
-    glm::mat4   view = glm::lookAt(this->transform.GetPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
-    return view;
+    return glm::lookAt(this->transform.GetPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
 }
 
 void    Camera::Update(void)
 {
-    Move();
-}
-
-void    Camera::Move(void)
-{
-
-}
-
-void    Camera::changeRatio(float ratio)
-{
-    this->ratio = ratio;
 }
 
 void    Camera::Draw(void)
 {
-//    glClearColor(0.3, 0.1, 0.1, 0.0);
-//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    GLWindow::m_funcs->glClearColor(0.3, 0.1, 0.1, 0.0);
+    GLWindow::m_funcs->glViewport(0, 0, 1024, 768);
+    GLWindow::m_funcs->glClear(GL_COLOR_BUFFER_BIT);
 }

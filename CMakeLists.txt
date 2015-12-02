@@ -82,7 +82,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/GameObject.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameView/GameView.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/CubeRenderer/CubeRenderer.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Cube/Cube.cpp
@@ -114,7 +114,7 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/GameObject.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameView/GameView.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/CubeRenderer/CubeRenderer.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Cube/Cube.hpp
@@ -149,7 +149,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/GameObject
     ${CMAKE_SOURCE_DIR}/sources/engine/GameView
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/CubeRenderer/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/
     ${CMAKE_SOURCE_DIR}/sources/engine/Cube/

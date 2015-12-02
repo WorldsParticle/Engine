@@ -2,34 +2,40 @@
 # define    __MATERIAL_HPP__
 
 #include    <glm/glm.hpp>
-#include    <QOpenGLShaderProgram>
 
 class   Material
 {
 public:
-    Material(void) {}
+    ///
+    /// \brief Default constructor
+    ///
+    Material(void);
 
-    ~Material(void) {}
+    ///
+    /// \brief Destructor
+    ///
+    ~Material(void);
 
 public:
 
     ///
-    /// \brief GetColor
-    /// \return
+    /// \brief Getter for the color attribute.
+    /// \return the color.
     ///
     const glm::vec3 &GetColor(void) const
     {
         return this->color;
     }
 
-    QOpenGLShaderProgram    &GetShaderProgram(void)
-    {
-        return this->shaderProgram;
-    }
-
 private:
+    ///
+    /// \brief the color attribute is used to store the color of the material.
+    ///
     glm::vec3   color;
-    QOpenGLShaderProgram    shaderProgram;
+
+    ///
+    /// TODO Abstraction shader.
+    ///
     // program shader
     // Texture
 };

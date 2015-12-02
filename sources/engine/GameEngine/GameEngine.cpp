@@ -26,11 +26,3 @@ void    GameEngine::draw(void)
     }
 }
 
-// TODO : event handling
-void    GameEngine::changeRatio(float f)
-{
-    for (GameView *gameview : this->_gameviewList)
-    {
-        gameview->changeRatio(f);
-    }
-}

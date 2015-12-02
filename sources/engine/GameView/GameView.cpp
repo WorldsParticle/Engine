@@ -44,10 +44,3 @@ void    GameView::Update()
     }
 }
 
-void    GameView::changeRatio(float ratio)
-{
-    for (Camera *camera : this->_cameraList)
-    {
-        camera->changeRatio(ratio);
-    }
-}

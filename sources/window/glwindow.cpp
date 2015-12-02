@@ -158,6 +158,4 @@ void GLWindow::mouseMoveEvent(QMouseEvent *event){
 
 void GLWindow::resizeWindow()
 {
-    glViewport((width() - (height() * 1.33333f)) / 2, 0, height() * 1.33333f, height());
-   _gEngine->changeRatio(height() * 1.33333f / height());
 }

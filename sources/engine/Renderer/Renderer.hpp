@@ -11,16 +11,23 @@
 class       Renderer
 {
 public:
-    Renderer(void) {}
-    virtual ~Renderer(void) {}
+    ///
+    /// \brief Default constructor
+    ///
+    Renderer(void);
+
+    ///
+    /// \brief Destructor
+    ///
+    virtual ~Renderer(void);
 
 public:
     ///
-    /// \brief Draw
-    /// \param material
-    /// \param projection
-    /// \param view
-    /// \param model
+    /// \brief This method is used to draw a mesh with a particular Material and with a specific MVP matrix.
+    /// \param material, the material used to draw the mesh.
+    /// \param projection, the projection matrix used to draw the mesh.
+    /// \param view, the view matrix used to draw the mesh.
+    /// \param model, the view model used to draw the mesh.
     ///
     virtual void    Draw(const Mesh &mesh,
                          Material &material,
