@@ -1,10 +1,11 @@
 #include "glwindow.h"
-#include "qdebug.h"
 #include <QPushButton>
 #include <QGridLayout>
 #include <QCoreApplication>
 #include "GameClock.hpp"
 #include "GameEngine.hpp"
+
+#include <log4cpp/Category.hh>
 
 QSurface        *GLWindow::surface = NULL;
 QOpenGLContext      *GLWindow::context = NULL;
@@ -15,6 +16,7 @@ GLWindow::GLWindow(QWindow *parent) :
     _context(this),
     _format()
 {
+    log4cpp::Category& root = log4cpp::Category::getRoot();
     setSurfaceType(OpenGLSurface);
 
     _format.setMajorVersion(4);
@@ -30,25 +32,24 @@ GLWindow::GLWindow(QWindow *parent) :
     _context.create();
 
 
-
     GLWindow::context = &_context;
     GLWindow::surface = this;
 
     resize(1024, 768);
 
     if(!_context.isValid())
-        qCritical()<<"The OpenGL context is invalid!"; //I allways get this message
+    {
+        root << log4cpp::Priority::ERROR << "OpenGL context invalid !";
+    }
 
     _context.makeCurrent(this);
     m_funcs = (QOpenGLFunctions_4_2_Core *)_context.versionFunctions();
 
     m_funcs->initializeOpenGLFunctions();
 
-    //now another test:
-    //the next line prints: "Window format version is: 4.2" which is correct
-    qDebug()<<"Window format version is: "<<this->format().majorVersion()<<"."<<this->format().minorVersion();
-    //the next line prints: "Context format version is: 2.0" Which is ofcourse not correct! WTF?
-    qDebug()<<"Context format version is: "<<_context.format().majorVersion()<<"."<<_context.format().minorVersion();
+    root << log4cpp::Priority::ERROR
+        << "OpenGL version : "
+        << this->format().majorVersion() << "." << this->format().minorVersion();
 
     GLuint VertexArrayID;
     m_funcs->glGenVertexArrays(1, &VertexArrayID);
