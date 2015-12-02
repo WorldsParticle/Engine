@@ -1,11 +1,20 @@
 #include "Renderer.hpp"
 
-Renderer::Renderer(void)
+
+namespace WorldParticles
 {
+    namespace Engine
+    {
+
+        Renderer::Renderer(void)
+        {
+
+        }
+
+        Renderer::~Renderer(void)
+        {
+
+        }
+
+    }
 }
-
-Renderer::~Renderer(void)
-{
-
-}
-

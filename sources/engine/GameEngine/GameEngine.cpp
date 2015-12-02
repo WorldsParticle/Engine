@@ -1,28 +1,35 @@
 #include "GameEngine.hpp"
 
-GameEngine::GameEngine(void)
+namespace   WorldParticles
 {
-    this->_gameviewList.push_back(new GameView());
-}
-
-GameEngine::~GameEngine(void)
-{
-
-}
-
-void    GameEngine::update(void)
-{
-    for (GameView *gameview : this->_gameviewList)
+    namespace   Engine
     {
-        gameview->Update();
+
+        GameEngine::GameEngine(void)
+        {
+            this->_gameviewList.push_back(new GameView());
+        }
+
+        GameEngine::~GameEngine(void)
+        {
+
+        }
+
+        void    GameEngine::update(void)
+        {
+            for (GameView *gameview : this->_gameviewList)
+            {
+                gameview->Update();
+            }
+        }
+
+        void    GameEngine::draw(void)
+        {
+            for (GameView *gameview : this->_gameviewList)
+            {
+                gameview->Draw();
+            }
+        }
+
     }
 }
-
-void    GameEngine::draw(void)
-{
-    for (GameView *gameview : this->_gameviewList)
-    {
-        gameview->Draw();
-    }
-}
-

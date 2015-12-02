@@ -35,7 +35,7 @@ protected:
 private:
         QOpenGLContext _context;
         QSurfaceFormat _format;
-        GameEngine    *  _gEngine;
+        ::WorldParticles::Engine::GameEngine    *  _gEngine;
         bool            _mouseTracking;
 };
 

@@ -1,11 +1,19 @@
 #include "Material.hpp"
 
-Material::Material(void)
+namespace   WorldParticles
 {
+    namespace   Engine
+    {
 
-}
+        Material::Material(void)
+        {
 
-Material::~Material(void)
-{
+        }
 
+        Material::~Material(void)
+        {
+
+        }
+
+    }
 }

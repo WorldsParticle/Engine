@@ -3,18 +3,27 @@
 
 #include    "Renderer.hpp"
 
-class   BasicRenderer : public Renderer
+namespace   WorldParticles
 {
-public:
-    BasicRenderer(void);
-    ~BasicRenderer(void);
+    namespace   Engine
+    {
+        ///
+        /// \brief This renderer is used to draw a mesh with a material.
+        ///
+        class   BasicRenderer : public Renderer
+        {
+            public:
+                BasicRenderer(void);
+                ~BasicRenderer(void);
 
-public:
-    void    Draw(const Mesh &mesh,
-                 Material &material,
-                 const glm::mat4 &projection,
-                 const glm::mat4 &view,
-                 const glm::mat4 &model);
-};
+            public:
+                void    Draw(const Mesh &mesh,
+                        Material &material,
+                        const glm::mat4 &projection,
+                        const glm::mat4 &view,
+                        const glm::mat4 &model);
+        };
+    }
+}
 
 #endif /* !__BASIC_RENDERER_HPP__ */

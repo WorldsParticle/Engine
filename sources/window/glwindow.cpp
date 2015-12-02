@@ -64,17 +64,15 @@ GLWindow::~GLWindow()
 
 void    GLWindow::start(Model *model)
 {
-    GameClock::start();
-    GameEngine     _gameEngine;
+    ::WorldParticles::Engine::GameEngine     _gameEngine;
 
     _gEngine = &(_gameEngine);
+    ::WorldParticles::Engine::GameClock::start();
     resizeWindow();
     while (isVisible())
     {
         _gameEngine.update();
-        GameClock::restart(); //timeElapsed renverra le temps depuis le dernier start / restart
-                              //si on commente cette ligne, ce sera le temps depuis le start
-
+        ::WorldParticles::Engine::GameClock::restart();
         _context.makeCurrent(this);
         _gameEngine.draw();
         _context.swapBuffers(this);

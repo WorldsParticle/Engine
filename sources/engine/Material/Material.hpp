@@ -3,41 +3,50 @@
 
 #include    <glm/glm.hpp>
 
-class   Material
+namespace   WorldParticles
 {
-public:
-    ///
-    /// \brief Default constructor
-    ///
-    Material(void);
-
-    ///
-    /// \brief Destructor
-    ///
-    ~Material(void);
-
-public:
-
-    ///
-    /// \brief Getter for the color attribute.
-    /// \return the color.
-    ///
-    const glm::vec3 &GetColor(void) const
+    namespace   Engine
     {
-        return this->color;
+        ///
+        /// \brief This class is used to represent a material which a gameobject should be drawed with.
+        ///
+        class   Material
+        {
+            public:
+                ///
+                /// \brief Default constructor
+                ///
+                Material(void);
+
+                ///
+                /// \brief Destructor
+                ///
+                ~Material(void);
+
+            public:
+
+                ///
+                /// \brief Getter for the color attribute.
+                /// \return the color.
+                ///
+                const glm::vec3 &GetColor(void) const
+                {
+                    return this->color;
+                }
+
+            private:
+                ///
+                /// \brief the color attribute is used to store the color of the material.
+                ///
+                glm::vec3   color;
+
+                /// TODO Abstraction shader.
+                // program shader
+
+                /// TODO add texture
+                // Texture
+        };
     }
-
-private:
-    ///
-    /// \brief the color attribute is used to store the color of the material.
-    ///
-    glm::vec3   color;
-
-    ///
-    /// TODO Abstraction shader.
-    ///
-    // program shader
-    // Texture
-};
+}
 
 #endif /* !__MATERIAL_HPP__ */
