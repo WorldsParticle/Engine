@@ -5,10 +5,10 @@
 #include <QOpenGLContext>
 #include <QOpenGLFunctions_4_2_Core>
 #include <QKeyEvent>
-#include "graphic/myglpainter.h"
-#include "model/model.h"
 #include <QTime>
+
 #include "GameEngine.hpp"
+#include "model/model.h"
 
 class GLWindow : public QWindow
 {

@@ -89,14 +89,14 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
 
-    ${CMAKE_SOURCE_DIR}/sources/graphic/myglpainter.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/model.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/tools.cpp
+
+
     ${CMAKE_SOURCE_DIR}/sources/window/glwidget.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/glwindow.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.cpp
-    ${CMAKE_SOURCE_DIR}/sources/graphic/AssimpProgressHandlerOverload.cpp
 
     )
 
@@ -122,14 +122,13 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.hpp
 
 
-    ${CMAKE_SOURCE_DIR}/sources/graphic/myglpainter.h
     ${CMAKE_SOURCE_DIR}/sources/model/model.h
     ${CMAKE_SOURCE_DIR}/sources/model/tools.h
+
     ${CMAKE_SOURCE_DIR}/sources/window/glwidget.h
     ${CMAKE_SOURCE_DIR}/sources/window/glwindow.h
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.h
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.h
-    ${CMAKE_SOURCE_DIR}/sources/graphic/AssimpProgressHandlerOverload.h
 
     )
 
