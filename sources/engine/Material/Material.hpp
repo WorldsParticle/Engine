@@ -7,15 +7,9 @@
 class   Material
 {
 public:
-    Material(void)
-    {
+    Material(void) {}
 
-    }
-
-    ~Material(void)
-    {
-
-    }
+    ~Material(void) {}
 
 public:
 

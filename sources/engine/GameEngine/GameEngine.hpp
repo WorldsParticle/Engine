@@ -1,15 +1,5 @@
-///
-/// \file gameengine.h
-/// \brief TODO fill gameengine.h brief
-/// \author Martin-Pierrat Louis (mart_p)
-/// \version 1.0.0
-/// \date Oct 18, 2015
-///
-/// TODO fill gameengine.h description
-///
-
-#ifndef GAMEENGINE_H
-#define GAMEENGINE_H
+#ifndef __GAMEENGINE_HPP__
+#define __GAMEENGINE_HPP__
 
 #include    "worldparticles.hpp"
 
@@ -18,16 +8,29 @@
 class GameEngine
 {
 public:
-    GameEngine();
+    ///
+    /// \brief Default constructor
+    ///
+    GameEngine(void);
 
+    /// \brief Destructor
+    ~GameEngine(void);
+
+    ///
+    /// \brief This function is use to update the scene.
+    ///
     void    update();
+
+    ///
+    /// \brief This function is used to draw the scene on the screen.
+    ///
     void    draw();
+
+    /// TODO : Event handling
     void    changeRatio(float f);
 
 private:
     std::list<GameView *>     _gameviewList;
-
-
 };
 
-#endif // GAMEENGINE_H
+#endif // __GAMEENGINE_HPP__

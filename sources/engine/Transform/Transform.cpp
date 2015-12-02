@@ -1,12 +1,18 @@
 #include    "Transform.hpp"
 #include    <glm/gtc/matrix_transform.hpp>
 
+
 Transform::Transform(const glm::vec3 &position,
                      const glm::vec3 &rotation,
                      const glm::vec3 &scale) :
     _position(position),
     _rotation(rotation),
     _scale(scale)
+{
+
+}
+
+Transform::~Transform(void)
 {
 
 }

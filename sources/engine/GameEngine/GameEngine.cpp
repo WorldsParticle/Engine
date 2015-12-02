@@ -1,21 +1,11 @@
-///
-/// \file gameengine.cpp
-/// \brief TODO fill gameengine.cpp brief
-/// \author Martin-Pierrat Louis (mart_p)
-/// \version 1.0.0
-/// \date Oct 18, 2015
-///
-/// TODO fill gameengine.cpp description
-///
-
 #include "GameEngine.hpp"
 
-GameEngine::GameEngine()
+GameEngine::GameEngine(void)
 {
     this->_gameviewList.push_back(new GameView());
 }
 
-void    GameEngine::update()
+void    GameEngine::update(void)
 {
     for (GameView *gameview : this->_gameviewList)
     {
@@ -23,7 +13,7 @@ void    GameEngine::update()
     }
 }
 
-void    GameEngine::draw()
+void    GameEngine::draw(void)
 {
     for (GameView *gameview : this->_gameviewList)
     {
@@ -31,6 +21,7 @@ void    GameEngine::draw()
     }
 }
 
+// TODO : event handling
 void    GameEngine::changeRatio(float f)
 {
     for (GameView *gameview : this->_gameviewList)

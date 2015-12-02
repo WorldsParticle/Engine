@@ -10,6 +10,11 @@ GameView::GameView()
     this->_gameobjectList.push_back(new Cube());
 }
 
+GameView::~GameView(void)
+{
+
+}
+
 void    GameView::Draw()
 {
     glm::mat4   projection;

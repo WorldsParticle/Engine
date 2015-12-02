@@ -10,46 +10,84 @@
 ///
 class   Mesh
 {
-public:
-    Mesh() {}
-    ~Mesh() {}
+    public:
+        ///
+        /// \brief Default constructor
+        ///
+        Mesh(const std::vector<glm::vec3> &vertices = std::vector<glm::vec3>(),
+                const std::vector<glm::vec3> &uvs = std::vector<glm::vec3>(),
+                const std::vector<glm::vec3> &normals = std::vector<glm::vec3>());
 
-public:
-    const std::vector<glm::vec3>  &GetVertices(void) const
-    {
-        return this->_vertices;
-    }
+        ///
+        /// \brief Destructor
+        ///
+        ~Mesh(void);
 
-    const std::vector<glm::vec3>  &GetUVs(void) const
-    {
-        return this->_uvs;
-    }
+    public:
+        ///
+        /// \brief Getter for the vertices attribute.
+        ///
+        const std::vector<glm::vec3>  &GetVertices(void) const
+        {
+            return this->_vertices;
+        }
 
-    const std::vector<glm::vec3>  &GetNormals(void) const
-    {
-        return this->_normals;
-    }
+        ///
+        /// \brief Getter for the UVs attribute.
+        ///
+        const std::vector<glm::vec3>  &GetUVs(void) const
+        {
+            return this->_uvs;
+        }
 
-public:
-    void        SetVertices(const std::vector<glm::vec3> &vertices)
-    {
-        this->_vertices = vertices;
-    }
+        ///
+        /// \brief Getter for the normals attribute.
+        ///
+        const std::vector<glm::vec3>  &GetNormals(void) const
+        {
+            return this->_normals;
+        }
 
-    void        SetUVs(const std::vector<glm::vec3> &uvs)
-    {
-        this->_uvs = uvs;
-    }
+    public:
+        ///
+        /// \brief Setter for the vertices attribute.
+        ///
+        void        SetVertices(const std::vector<glm::vec3> &vertices)
+        {
+            this->_vertices = vertices;
+        }
 
-    void        SetNormals(const std::vector<glm::vec3> &normals)
-    {
-        this->_normals = normals;
-    }
+        ///
+        /// \brief Setter for the UVs attribute.
+        ///
+        void        SetUVs(const std::vector<glm::vec3> &uvs)
+        {
+            this->_uvs = uvs;
+        }
 
-private:
-    std::vector<glm::vec3>  _vertices;
-    std::vector<glm::vec3>  _uvs;
-    std::vector<glm::vec3>  _normals;
+        ///
+        /// \brief Setter for the normal attribute.
+        ///
+        void        SetNormals(const std::vector<glm::vec3> &normals)
+        {
+            this->_normals = normals;
+        }
+
+    private:
+        ///
+        /// \brief The vertices attribute is used to store all vertex of the mesh.
+        ///
+        std::vector<glm::vec3>  _vertices;
+
+        ///
+        /// \brief THe uvs attribute is used to store all uvs of the mesh.
+        ///
+        std::vector<glm::vec3>  _uvs;
+
+        ///
+        /// \brief The normals attribute is used to store all normal of the mesh.
+        ///
+        std::vector<glm::vec3>  _normals;
 };
 
 #endif /* !__MESH_HPP__ */
