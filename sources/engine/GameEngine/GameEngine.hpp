@@ -20,24 +20,33 @@ namespace WorldParticles
                 ///
                 GameEngine(void);
 
+                ///
                 /// \brief Destructor
-                ~GameEngine(void);
+                ///
+                virtual     ~GameEngine(void);
 
+            public:
                 ///
                 /// \brief This function is use to update the scene.
                 ///
-                void    update(void);
+                void        update(void);
 
                 ///
                 /// \brief This function is used to draw the scene on the screen.
                 ///
-                void    draw(void);
+                void        draw(void);
 
-            private:
+            public:
+                ///
+                /// \brief This method is used to add a gameview in the gameengine.
+                ///
+                void        AddGameView(const std::shared_ptr<GameView> &gameview);
+
+            protected:
                 ///
                 /// \brief This attribute is used to store each gameview present in the engine.
                 ///
-                std::list<GameView *>     _gameviewList;
+                std::list<std::shared_ptr<GameView>>    _gameviewList;
         };
 
     }

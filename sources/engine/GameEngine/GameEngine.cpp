@@ -7,17 +7,19 @@ namespace   WorldParticles
 
         GameEngine::GameEngine(void)
         {
-            this->_gameviewList.push_back(new GameView());
+            this->AddGameView(std::make_shared<GameView>());
         }
 
         GameEngine::~GameEngine(void)
         {
-
+            // nothing to do
         }
+
+
 
         void    GameEngine::update(void)
         {
-            for (GameView *gameview : this->_gameviewList)
+            for (std::shared_ptr<GameView> &gameview : this->_gameviewList)
             {
                 gameview->Update();
             }
@@ -25,10 +27,19 @@ namespace   WorldParticles
 
         void    GameEngine::draw(void)
         {
-            for (GameView *gameview : this->_gameviewList)
+            for (std::shared_ptr<GameView> &gameview : this->_gameviewList)
             {
                 gameview->Draw();
             }
+        }
+
+
+
+        /// TODO should be tested
+        void    GameEngine::AddGameView(const std::shared_ptr<GameView> &gameview)
+        {
+            this->_gameviewList.push_back(gameview);
+            this->_gameviewList.sort([](const auto &a, const auto &b) {return a->GetLayerNumber() > b->GetLayerNumber();});
         }
 
     }
