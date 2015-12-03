@@ -89,6 +89,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/ResourcesManager.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/tools.cpp
