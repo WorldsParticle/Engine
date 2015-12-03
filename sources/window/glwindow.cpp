@@ -5,7 +5,7 @@
 #include "GameClock.hpp"
 #include "GameEngine.hpp"
 
-#include <log4cpp/Category.hh>
+//#include <log4cpp/Category.hh>
 
 QSurface        *GLWindow::surface = NULL;
 QOpenGLContext      *GLWindow::context = NULL;
@@ -16,7 +16,7 @@ GLWindow::GLWindow(QWindow *parent) :
     _context(this),
     _format()
 {
-    log4cpp::Category& root = log4cpp::Category::getRoot();
+    //log4cpp::Category& root = log4cpp::Category::getRoot();
     setSurfaceType(OpenGLSurface);
 
     _format.setMajorVersion(4);
@@ -39,7 +39,7 @@ GLWindow::GLWindow(QWindow *parent) :
 
     if(!_context.isValid())
     {
-        root << log4cpp::Priority::ERROR << "OpenGL context invalid !";
+        //root << log4cpp::Priority::ERROR << "OpenGL context invalid !";
     }
 
     _context.makeCurrent(this);
@@ -47,9 +47,9 @@ GLWindow::GLWindow(QWindow *parent) :
 
     m_funcs->initializeOpenGLFunctions();
 
-    root << log4cpp::Priority::ERROR
-        << "OpenGL version : "
-        << this->format().majorVersion() << "." << this->format().minorVersion();
+    //root << log4cpp::Priority::ERROR
+    //    << "OpenGL version : "
+    //    << this->format().majorVersion() << "." << this->format().minorVersion();
 
     GLuint VertexArrayID;
     m_funcs->glGenVertexArrays(1, &VertexArrayID);

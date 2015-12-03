@@ -57,7 +57,7 @@ FIND_PACKAGE(Qt5OpenGL REQUIRED)
 FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(Devil REQUIRED)
 FIND_PACKAGE(Assimp REQUIRED)
-FIND_PACKAGE(Log4cpp REQUIRED)
+## FIND_PACKAGE(Log4cpp REQUIRED)
 
 ## END FIND LIBRARY DEPENDENCY
 
@@ -169,9 +169,10 @@ INCLUDE_DIRECTORIES(
     ${OPENGL_INCLUDE_DIR}
     ${ASSIMP_INCLUDE_DIR}
     ${DevIL_INCLUDE_DIR}
-    ${LOG4CPP_INCLUDE_DIR}
-    "C:/Program Files (x86)/glm/include"
+    "C:/Program Files (x86)/glm"
     )
+
+##    ${LOG4CPP_INCLUDE_DIR}
 
 
 ## END PROJECT INCLUDES DIRECTORIES
@@ -193,11 +194,12 @@ TARGET_LINK_LIBRARIES(WorldsParticle
     Qt5::Core
     Qt5::OpenGL
     ${ASSIMP_LIBRARY}
-    ${LOG4CPP_LIBRARY}
     ${DevIL_LIBRARY_ILUT}
     ${DevIL_LIBRARY_ILU}
     ${DevIL_LIBRARY_IL}
     )
+
+##    ${LOG4CPP_LIBRARY}
 
 ## END PROJECT SETTINGS
 
@@ -235,7 +237,8 @@ ENDIF (DOXYGEN_FOUND)
     #endif()
 #elseif (UNIX)
     #set(CMAKE_PREFIX_PATH "/usr/lib64/qt5")
-    SET(CMAKE_CXX_FLAGS "-std=c++0x -W -Wall -Wextra")
+    ## SET(CMAKE_CXX_FLAGS "-std=c++0x -W -Wall -Wextra")
+    SET(CMAKE_CXX_FLAGS "-std=c++0x")
 #else ()
     #message(SEND_ERROR "You are on an unsupported platform! (Not Win32 or Unix)")
 #ENDIF ()

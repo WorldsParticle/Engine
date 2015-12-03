@@ -18,6 +18,9 @@ FIND_PATH(ASSIMP_INCLUDE_DIR
     /opt/local
     /opt/csw
     /opt
+	C:/dev/
+	C:/dev/assimp
+	C:/dev/assimp/include
     )
 
 FIND_LIBRARY(ASSIMP_LIBRARY
@@ -31,6 +34,9 @@ FIND_LIBRARY(ASSIMP_LIBRARY
     /opt/local
     /opt/csw
     /opt
+	C:/dev/
+	C:/dev/assimp
+	C:/dev/assimp/lib64
     )
 
 FIND_PACKAGE_HANDLE_STANDARD_ARGS(Assimp
