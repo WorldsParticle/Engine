@@ -56,6 +56,7 @@ FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(Devil REQUIRED)
 FIND_PACKAGE(Assimp REQUIRED)
 FIND_PACKAGE(Log4cpp REQUIRED)
+FIND_PACKAGE(RapidXml REQUIRED)
 
 ## END FIND LIBRARY DEPENDENCY
 
@@ -90,10 +91,10 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/ResourcesManager.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/tools.cpp
-
 
     ${CMAKE_SOURCE_DIR}/sources/window/glwidget.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/glwindow.cpp
@@ -123,6 +124,8 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/ResourcesManager.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Utilities/Deserializable.hpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.h
     ${CMAKE_SOURCE_DIR}/sources/model/tools.h
@@ -158,6 +161,8 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
     ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Light/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Utilities/
 
     ${CMAKE_BINARY_DIR}
     )
@@ -234,7 +239,7 @@ ENDIF (DOXYGEN_FOUND)
     #endif()
 #elseif (UNIX)
     #set(CMAKE_PREFIX_PATH "/usr/lib64/qt5")
-    SET(CMAKE_CXX_FLAGS "-std=c++0x -W -Wall -Wextra")
+    SET(CMAKE_CXX_FLAGS "-std=c++14 -W -Wall -Wextra")
 #else ()
     #message(SEND_ERROR "You are on an unsupported platform! (Not Win32 or Unix)")
 #ENDIF ()
