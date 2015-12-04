@@ -17,8 +17,8 @@ namespace   WorldParticles
                 ~BasicRenderer(void);
 
             public:
-                void    Draw(const Mesh &mesh,
-                        Material &material,
+                void    Draw(const std::shared_ptr<Mesh> &mesh,
+                        const Material &material,
                         const glm::mat4 &projection,
                         const glm::mat4 &view,
                         const glm::mat4 &model);

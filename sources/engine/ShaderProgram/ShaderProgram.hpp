@@ -1,6 +1,7 @@
 #ifndef     __SHADER_PROGRAM_HPP__
 # define    __SHADER_PROGRAM_HPP__
 
+#include    <glm/glm.hpp>
 #include    <memory>
 
 #include    "Shader.hpp"
@@ -40,69 +41,47 @@ namespace   WorldParticles
             public:
 
                 ///
-                /// \brief This method is used to compile the program shader.
-                /// \return true if the compilation succeed, false otherwise.
+                /// \brief This method is used to link the program shader.
+                /// \return true if the link succeed, false otherwise.
                 ///
-                bool    Compile(void);
+                bool    Link(void);
 
                 ///
-                /// \brief This method is used to bind the program shader to use it in the graphic pipeline.
+                /// \brief This method is used to bind the program shader on the graphic pipeline.
                 ///
-                void    Bind(void);
+                void    Bind(void) const;
+
+                ///
+                /// \brief This method is used to unbind the program shader on the graphic pipeline.
+                ///
+                void    Unbind(void) const;
 
             public:
                 ///
                 /// \brief This method is used to know if the shader program have been already compiled.
                 ///
-                bool    IsCompiled(void)
+                bool    IsLinked(void)
                 {
-                    return this->_isCompiled;
+                    return this->_isLinked;
                 }
 
+            public:
                 ///
-                /// \brief This method is used to know if the shader program already contains a vertex shader.
+                /// \brief This method can be used to set a mat4 uniform.
                 ///
-                bool    HasVertexShader(void)
-                {
-                    return this->_vertexShaderIsPresent;
-                }
-
-                ///
-                /// \brief This method is used to know if the shader program already contains a fragment shader.
-                ///
-                bool    HasFragmentShader(void)
-                {
-                    return this->_fragmentShaderIsPresent;
-                }
-
-                ///
-                /// \brief This method is used to know if the shader program already contains a geometry shader.
-                ///
-                bool    HasGeometryShader(void)
-                {
-                    return this->_geometryShaderIsPresent;
-                }
+                void    SetUniform(const std::string &name, const glm::mat4 &matrix) const;
 
             protected:
                 ///
+                /// \brief This attribute is used to store the program id.
+                ///
+                unsigned int                _programId;
+
+                ///
                 /// \brief This attribute is used to know if the shader program have been compiled.
                 ///
-                bool     _isCompiled;
+                bool                        _isLinked;
 
-                ///
-                /// \brief This attribute is used to know if the shader program already have a vertex shader.
-                ///
-                bool    _vertexShaderIsPresent;
-
-                ///
-                /// \brief This attribute is used to know if the shader program already have a fragment shader.
-                ///
-                bool    _fragmentShaderIsPresent;
-
-                ///
-                /// \brief This attribute is used to know if the shader program already have a geometry shader.
-                ///
-                bool    _geometryShaderIsPresent;
         };
     }
 }

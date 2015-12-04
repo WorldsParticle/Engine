@@ -45,7 +45,7 @@ namespace WorldParticles
             protected:
                 ///
                 /// \brief This attribute is used to store each gameview present in the engine.
-                ///
+                /// TODO : je ne pense pas que le shared_ptr soit réellement utile ici
                 std::list<std::shared_ptr<GameView>>    _gameviewList;
         };
 
