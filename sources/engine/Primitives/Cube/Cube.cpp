@@ -14,57 +14,57 @@ namespace WorldParticles
                 GameObject(position, rotation, scale)
             {
                 this->mesh.SetVertices(std::vector<glm::vec3>{
-                        glm::vec3(-1.0f, -1.0f, 0.0f),
-                        glm::vec3(1.0f, -1.0f, 0.0f),
-                        glm::vec3(0.0f,  1.0f, 0.0f),
+                        glm::vec3(-0.01f, -0.01f, 0.0f),
+                        glm::vec3(0.01f, -0.01f, 0.0f),
+                        glm::vec3(0.0f,  0.01f, 0.0f),
 
-                        glm::vec3(-1.0, -1.0, -1.0),
-                        glm::vec3(-1.0, -1.0, 1.0),
-                        glm::vec3(-1.0, 1.0, 1.0),
+                        glm::vec3(-0.01f, -0.01f, -0.01f),
+                        glm::vec3(-0.01f, -0.01f, 0.01f),
+                        glm::vec3(-0.01f, 0.01f, 0.01f),
 
-                        glm::vec3(-1.0f, -1.0f, 0.0f),
-                        glm::vec3(1.0f, -1.0f, 0.0f),
-                        glm::vec3(0.0f,  1.0f, 0.0f),
+                        glm::vec3(-0.01f, -0.01f, 0.0f),
+                        glm::vec3(0.01f, -0.01f, 0.0f),
+                        glm::vec3(0.0f,  0.01f, 0.0f),
 
-                        glm::vec3(1.0, -1.0, 1.0),
-                        glm::vec3(-1.0, -1.0, -1.0),
-                        glm::vec3(1.0, -1.0, -1.0),
+                        glm::vec3(0.01f, -0.01f, 0.01f),
+                        glm::vec3(-0.01f, -0.01f, -0.01f),
+                        glm::vec3(0.01f, -0.01f, -0.01f),
 
-                        glm::vec3(1.0, 1.0, -1.0),
-                        glm::vec3(1.0, -1.0, -1.0),
-                        glm::vec3(-1.0, -1.0, -1.0),
+                        glm::vec3(0.01f, 0.01f, -0.01f),
+                        glm::vec3(0.01f, -0.01f, -0.01f),
+                        glm::vec3(-0.01f, -0.01f, -0.01f),
 
-                        glm::vec3(-1.0, -1.0, -1.0),
-                        glm::vec3(-1.0, 1.0, 1.0),
-                        glm::vec3(-1.0, 1.0, -1.0),
+                        glm::vec3(-0.01f, -0.01f, -0.01f),
+                        glm::vec3(-0.01f, 0.01f, 0.01f),
+                        glm::vec3(-0.01f, 0.01f, -0.01f),
 
-                        glm::vec3(1.0, -1.0, 1.0),
-                        glm::vec3(-1.0, -1.0, 1.0),
-                        glm::vec3(-1.0, -1.0, -1.0),
+                        glm::vec3(0.01f, -0.01f, 0.01f),
+                        glm::vec3(-0.01f, -0.01f, 0.01f),
+                        glm::vec3(-0.01f, -0.01f, -0.01f),
 
-                        glm::vec3(-1.0, 1.0, 1.0),
-                        glm::vec3(-1.0, -1.0, 1.0),
-                        glm::vec3(1.0, -1.0, 1.0),
+                        glm::vec3(-0.01f, 0.01f, 0.01f),
+                        glm::vec3(-0.01f, -0.01f, 0.01f),
+                        glm::vec3(0.01f, -0.01f, 0.01f),
 
-                        glm::vec3(1.0, 1.0, 1.0),
-                        glm::vec3(1.0, -1.0, -1.0),
-                        glm::vec3(1.0, 1.0, -1.0),
+                        glm::vec3(0.01f, 0.01f, 0.01f),
+                        glm::vec3(0.01f, -0.01f, -0.01f),
+                        glm::vec3(0.01f, 0.01f, -0.01f),
 
-                        glm::vec3(1.0, -1.0, -1.0),
-                        glm::vec3(1.0, 1.0, 1.0),
-                        glm::vec3(1.0, -1.0, 1.0),
+                        glm::vec3(0.01f, -0.01f, -0.01f),
+                        glm::vec3(0.01f, 0.01f, 0.01f),
+                        glm::vec3(0.01f, -0.01f, 0.01f),
 
-                        glm::vec3(1.0, 1.0, 1.0),
-                        glm::vec3(1.0, 1.0, -1.0),
-                        glm::vec3(-1.0, 1.0, -1.0),
+                        glm::vec3(0.01f, 0.01f, 0.01f),
+                        glm::vec3(0.01f, 0.01f, -0.01f),
+                        glm::vec3(-0.01f, 0.01f, -0.01f),
 
-                        glm::vec3(1.0, 1.0, 1.0),
-                        glm::vec3(-1.0, 1.0, -1.0),
-                        glm::vec3(-1.0, 1.0, 1.0),
+                        glm::vec3(0.01f, 0.01f, 0.01f),
+                        glm::vec3(-0.01f, 0.01f, -0.01f),
+                        glm::vec3(-0.01f, 0.01f, 0.01f),
 
-                        glm::vec3(1.0, 1.0, 1.0),
-                        glm::vec3(-1.0, 1.0, 1.0),
-                        glm::vec3(1.0, -1.0, 1.0)
+                        glm::vec3(0.01f, 0.01f, 0.01f),
+                        glm::vec3(-0.01f, 0.01f, 0.01f),
+                        glm::vec3(0.01f, -0.01f, 0.01f)
 
                 });
                 this->renderer = new BasicRenderer();

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Cube.hpp"
+#include "GameClock.hpp"
 
 class Particle : public WorldParticles::Engine::Primitives::Cube
 {
@@ -13,29 +14,29 @@ public:
             const glm::vec3 &rotation = glm::vec3(0.0),
             const glm::vec3 &scale = glm::vec3(1.0))
         : Cube(position, rotation, scale)
-    {}
+    {
+		transform.SetPosition(glm::vec3(rand()%30 / 10.0f, 4.0f, rand()%30 / 10.0f));
+	}
 
 public:
     void Update(void)
     {
-        float elapsedTime = 0.1f;//en secondes
-
-        static_cast<BaseClass *>(this)->Update();
+        float elapsedTime = ::WorldParticles::Engine::GameClock::elapsedTime() / 1000.0f;	//en secondes
 
         _lifetime -= elapsedTime;
 
         glm::vec3 position(transform.GetPosition());
-        transform.SetPosition( position + _force * elapsedTime );
+		transform.SetPosition(position + _force * elapsedTime);
 
         //TODO : gérer la rotation selon l'orientation de la cam
 
         // this->_rotation.y = glm::mod(this->_rotation.y + 0.01f, 360.0f);
 
-        glm::vec3 scale(transform.GetScale());
+        /*glm::vec3 scale(transform.GetScale());
         scale.x += 0.001f;
         scale.y += 0.001f;
         scale.z += 0.001f;
-        transform.SetScale(scale);
+        transform.SetScale(scale);*/
     }
 
    //----------------------------------------

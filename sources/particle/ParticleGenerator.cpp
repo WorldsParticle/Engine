@@ -35,7 +35,9 @@ void    ParticleGenerator::Emit(int numberParticles)
   while (numberParticles > 0 && _maxParticles != _particles.size())
   {
       position.x = (i * delta);
+	  force.x = rand() % 3 / 10.0f;
       force.y = -0.1f;
+	  force.z = rand() % 3 / 10.0f;
 
       newParticle = new Particle(position);
       newParticle->setLifetime(5.0f);

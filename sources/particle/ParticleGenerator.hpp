@@ -4,7 +4,7 @@
 #include <list>
 #include "GameObject.hpp"
 #include "Particle.hpp"
-
+#include <ctime>
 
 
 class ParticleGenerator : public WorldParticles::Engine::GameObject
@@ -16,7 +16,8 @@ public:
         :GameObject(position, rotation, scale), _particle(new Particle())
     {
         std::cout << "ctor : generateur de particules" << std::endl;
-        Emit(3);
+		srand((unsigned int)time(0));
+        Emit(50);
     }
 
     ~ParticleGenerator()
