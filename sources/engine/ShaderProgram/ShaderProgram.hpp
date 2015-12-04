@@ -31,7 +31,6 @@ namespace   WorldParticles
                 ///
                 ShaderProgram   &operator<<(const std::shared_ptr<Shader> &shader);
 
-
             public:
                 ///
                 /// \brief This method is used to push a shader into the program shader.
@@ -104,7 +103,6 @@ namespace   WorldParticles
                 /// \brief This attribute is used to know if the shader program already have a geometry shader.
                 ///
                 bool    _geometryShaderIsPresent;
-
         };
     }
 }
