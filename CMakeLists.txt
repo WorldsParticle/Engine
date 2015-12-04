@@ -101,6 +101,9 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.cpp
 
+    ${CMAKE_SOURCE_DIR}/sources/particle/ParticleGenerator.cpp
+    ${CMAKE_SOURCE_DIR}/sources/particle/Particle.cpp
+
     )
 
 ## END PROJECT SOURCES FILES
@@ -133,6 +136,9 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.h
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.h
 
+    ${CMAKE_SOURCE_DIR}/sources/particle/ParticleGenerator.hpp
+    ${CMAKE_SOURCE_DIR}/sources/particle/Particle.hpp
+
     )
 
 ## END PROJECT HEADERS FILES
@@ -159,6 +165,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
     ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/
+    ${CMAKE_SOURCE_DIR}/sources/particle/
 
     ${CMAKE_BINARY_DIR}
     )
