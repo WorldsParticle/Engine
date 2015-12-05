@@ -89,8 +89,11 @@ void    GLWindow::keyPressEvent(QKeyEvent *e)
     static bool scr = false; // Miroir, miroir, qui est la plus belle des horreurs dans ce code ?
     e->accept();
 
-    if (e->key() == Qt::Key_Escape)
-        exit(1);
+    if (e->key() == Qt::Key_Escape) {
+	//besoin de ca pour close l'audio proprement apparemment
+	_gEngine->closeAudio();
+	exit(1);
+    }
     else if (e->key() == Qt::Key_A) {
         if (scr == false) {
             showMaximized();

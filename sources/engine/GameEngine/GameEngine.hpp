@@ -4,6 +4,7 @@
 #include    "worldparticles.hpp"
 
 #include    "GameView.hpp"
+#include    "SoundManager.hpp"
 
 namespace WorldParticles
 {
@@ -42,11 +43,21 @@ namespace WorldParticles
                 ///
                 void        AddGameView(const std::shared_ptr<GameView> &gameview);
 
+                ///
+                /// \brief This method is used to close the audio libs correcty.
+                ///
+		void	    closeAudio();
+
             protected:
                 ///
                 /// \brief This attribute is used to store each gameview present in the engine.
                 ///
                 std::list<std::shared_ptr<GameView>>    _gameviewList;
+
+                ///
+                /// \brief This attribute is used to store the sound manager.
+                ///
+		SoundManager				_soundManager;
         };
 
     }

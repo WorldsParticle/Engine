@@ -57,6 +57,8 @@ FIND_PACKAGE(Devil REQUIRED)
 FIND_PACKAGE(Assimp REQUIRED)
 FIND_PACKAGE(Log4cpp REQUIRED)
 FIND_PACKAGE(RapidXml REQUIRED)
+FIND_PACKAGE(OpenAL REQUIRED)
+FIND_PACKAGE(Alut REQUIRED)
 
 ## END FIND LIBRARY DEPENDENCY
 
@@ -101,6 +103,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.cpp
 
+    ${CMAKE_SOURCE_DIR}/sources/audio/SoundManager.cpp
     )
 
 ## END PROJECT SOURCES FILES
@@ -135,6 +138,7 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.h
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.h
 
+    ${CMAKE_SOURCE_DIR}/sources/audio/SoundManager.hpp
     )
 
 ## END PROJECT HEADERS FILES
@@ -148,6 +152,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/graphic
     ${CMAKE_SOURCE_DIR}/sources/model
     ${CMAKE_SOURCE_DIR}/sources/window
+    ${CMAKE_SOURCE_DIR}/sources/audio
     ${CMAKE_SOURCE_DIR}/sources/engine
     ${CMAKE_SOURCE_DIR}/sources/engine/GameClock
     ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine
@@ -174,6 +179,8 @@ INCLUDE_DIRECTORIES(
     ${ASSIMP_INCLUDE_DIR}
     ${DevIL_INCLUDE_DIR}
     ${LOG4CPP_INCLUDE_DIR}
+    ${OPENAL_INCLUDE_DIR}
+    ${ALUT_INCLUDE_DIR}
     "C:/Program Files (x86)/glm/include"
     )
 
@@ -201,6 +208,8 @@ TARGET_LINK_LIBRARIES(WorldsParticle
     ${DevIL_LIBRARY_ILUT}
     ${DevIL_LIBRARY_ILU}
     ${DevIL_LIBRARY_IL}
+    ${OPENAL_LIBRARY}
+    ${ALUT_LIBRARY}
     )
 
 ## END PROJECT SETTINGS
