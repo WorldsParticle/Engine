@@ -3,6 +3,7 @@
 
 #include    "GameView.hpp"
 #include    "Cube.hpp"
+#include    "Skybox.hpp"
 
 namespace WorldParticles
 {
@@ -12,6 +13,7 @@ namespace WorldParticles
         GameView::GameView(void)
         {
             this->_cameraList.push_back(new Camera(glm::vec3(5.0, 5.0, 5.0)));
+            this->_gameobjectList.push_back(new Skybox());
             this->_gameobjectList.push_back(new Primitives::Cube());
         }
 

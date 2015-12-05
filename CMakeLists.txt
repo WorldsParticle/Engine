@@ -84,11 +84,13 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/GameView/GameView.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/SkyboxRenderer/SkyboxRenderer.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Skybox/Skybox.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/tools.cpp
@@ -116,12 +118,14 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/GameView/GameView.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/SkyboxRenderer/SkyboxRenderer.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/ResourcesManager.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Skybox/Skybox.hpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.h
     ${CMAKE_SOURCE_DIR}/sources/model/tools.h
@@ -151,12 +155,14 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/GameView
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/SkyboxRenderer/
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
     ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Skybox/
 
     ${CMAKE_BINARY_DIR}
     )
