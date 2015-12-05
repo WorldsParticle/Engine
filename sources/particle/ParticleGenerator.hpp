@@ -12,14 +12,7 @@ class ParticleGenerator : public WorldParticles::Engine::GameObject
 public:
     ParticleGenerator(const glm::vec3 &position = glm::vec3(0.0),
                       const glm::vec3 &rotation = glm::vec3(0.0),
-                      const glm::vec3 &scale = glm::vec3(1.0))
-        :GameObject(position, rotation, scale), _particle(new Particle())
-    {
-        std::cout << "ctor : generateur de particules" << std::endl;
-		srand((unsigned int)time(0));
-        Emit(50);
-    }
-
+                      const glm::vec3 &scale = glm::vec3(1.0));
     ~ParticleGenerator()
     {}
 
@@ -33,12 +26,15 @@ public:
     void    Emit(int numberParticles);
 
 private:
-    Particle *  _particle;//test
-
     //----------------------------------------
     // This attribute is used to save the max particles number that can be draw by this ParticleSystem
     //----------------------------------------
     unsigned int		_maxParticles;
+
+    //----------------------------------------
+    // This attribute is used to save the min particles number that we want to see on the screen
+    //----------------------------------------
+    unsigned int		_minParticles;
 
     //----------------------------------------
     // this attribute is used to contains particles that are used to draw animation.

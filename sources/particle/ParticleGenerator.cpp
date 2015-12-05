@@ -1,26 +1,55 @@
 #include <algorithm>
 #include "ParticleGenerator.hpp"
 
+ParticleGenerator::ParticleGenerator(const glm::vec3 &position,
+                                    const glm::vec3 &rotation,
+                                    const glm::vec3 &scale)
+    : GameObject(position, rotation, scale), _maxParticles(100), _minParticles(20)
+{
+    srand((unsigned int)time(0));
+
+    Emit(rand() % _maxParticles + _minParticles);
+}
+
 void    ParticleGenerator::Update()
 {
-  // std::cout << "particles used : " << this->_particles.size() << std::endl;
-  // std::cout << "particles unused : " << this->_unusedParticles.size() << std::endl;
+    if (_particles.size() < _maxParticles)
+    {
+        Emit(rand() % _maxParticles + _minParticles);
+//        Emit(_maxParticles);
+    }
 
     std::for_each(_particles.begin(), _particles.end(), [](Particle *p){
         p->Update();
     });
+
+    std::list<Particle*>::iterator it = _particles.begin();
+    while (it != _particles.end())
+    {
+        Particle* tmp = *it;
+        if (!tmp->isAlive())
+        {
+            it = _particles.erase(it);
+            delete tmp;
+        }
+        else
+        {
+            it++;
+        }
+    }
 }
 
 
 void ParticleGenerator::Draw(const glm::mat4 &projection, const glm::mat4 &view)
 {
-  if (this->_particles.empty())
+  if (_particles.empty())
     return;
 
   std::for_each(_particles.begin(), _particles.end(), [&](Particle *p){
       p->Draw(projection, view);
   });
 }
+
 
 //----------------------------------------
 // Emit is used to emit particles in the scene manually.
@@ -40,7 +69,7 @@ void    ParticleGenerator::Emit(int numberParticles)
 	  force.z = rand() % 3 / 10.0f;
 
       newParticle = new Particle(position);
-      newParticle->setLifetime(5.0f);
+      newParticle->setLifetime(rand() % 200 / 10.0f);
       newParticle->setForce(force);
 
       _particles.push_back(newParticle);
