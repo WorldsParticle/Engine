@@ -19,9 +19,22 @@ void    ParticleGenerator::Update()
 //        Emit(_maxParticles);
     }
 
-    std::for_each(_particles.begin(), _particles.end(), [](Particle *p){
+    std::for_each(_particles.begin(), _particles.end(), [&](Particle *p){
         p->Update();
     });
+
+//	if(_particles.size() < _maxParticles)
+//		Emit(1);
+//	for (std::list<Particle *>::iterator it = this->_particles.begin(); it != this->_particles.end(); ++it)
+//	{
+//		(*it)->Update();
+//		if ((*it)->isAlive() == false)
+//		{
+//			_unused_particles.push_back(*it);
+//			it = _particles.erase(it);
+//		}
+//	}
+//	_unused_particles.clear();
 
     std::list<Particle*>::iterator it = _particles.begin();
     while (it != _particles.end())
