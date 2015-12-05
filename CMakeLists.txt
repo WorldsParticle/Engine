@@ -138,6 +138,7 @@ SET(WORLD_PARTICLES_HEADERS_FILES
 
     ${CMAKE_SOURCE_DIR}/sources/particle/ParticleGenerator.hpp
     ${CMAKE_SOURCE_DIR}/sources/particle/Particle.hpp
+    ${CMAKE_SOURCE_DIR}/sources/particle/ParticleAttributes.hpp
 
     )
 

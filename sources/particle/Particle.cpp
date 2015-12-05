@@ -2,9 +2,11 @@
 
 Particle::Particle(const glm::vec3 &position,
                     const glm::vec3 &rotation,
-                    const glm::vec3 &scale)
-    : Cube(position, rotation, scale)
+                    const glm::vec3 &scale,
+                    ParticleType type)
+    : Cube(position, rotation, scale), _type(type)
 {
+
     transform.SetPosition(glm::vec3(rand()%30 / 10.0f, 4.0f, rand()%30 / 10.0f));
 }
 

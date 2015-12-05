@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Cube.hpp"
 #include "GameClock.hpp"
+#include "ParticleAttributes.hpp"
 
 class Particle : public WorldParticles::Engine::Primitives::Cube
 {
@@ -11,8 +12,9 @@ class Particle : public WorldParticles::Engine::Primitives::Cube
 
 public:
     Particle(const glm::vec3 &position = glm::vec3(0.0),
-            const glm::vec3 &rotation = glm::vec3(0.0),
-            const glm::vec3 &scale = glm::vec3(1.0));
+                const glm::vec3 &rotation = glm::vec3(0.0),
+                const glm::vec3 &scale = glm::vec3(1.0),
+                ParticleType type = SNOW_PARTICLE);
 
 public:
     void Update(void);
@@ -68,6 +70,12 @@ private:
     // This attribute is used to save the 3D position of the Particle
     //----------------------------------------
     glm::vec3	_force;
+
+    //----------------------------------------
+    // This attribute is used to save the 3D position of the Particle
+    //----------------------------------------
+    enum ParticleType   _type;
+
 };
 
 #endif // PARTICLE_HPP
