@@ -17,7 +17,7 @@ public:
     {
         std::cout << "ctor : generateur de particules" << std::endl;
 		srand((unsigned int)time(0));
-        Emit(50);
+        Emit(10);
     }
 
     ~ParticleGenerator()
@@ -38,12 +38,13 @@ private:
     //----------------------------------------
     // This attribute is used to save the max particles number that can be draw by this ParticleSystem
     //----------------------------------------
-    unsigned int		_maxParticles;
+    unsigned int		_maxParticles = 100;
 
     //----------------------------------------
     // this attribute is used to contains particles that are used to draw animation.
     //----------------------------------------
     std::list<Particle *>	_particles;
+	std::list<Particle *>	_unused_particles;
 };
 
 #endif // PARTICLEGENERATOR_H

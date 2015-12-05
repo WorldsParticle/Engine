@@ -6,9 +6,18 @@ void    ParticleGenerator::Update()
   // std::cout << "particles used : " << this->_particles.size() << std::endl;
   // std::cout << "particles unused : " << this->_unusedParticles.size() << std::endl;
 
-    std::for_each(_particles.begin(), _particles.end(), [](Particle *p){
-        p->Update();
-    });
+	if(_particles.size() < _maxParticles)
+		Emit(1);
+	for (std::list<Particle *>::iterator it = this->_particles.begin(); it != this->_particles.end(); ++it)
+	{
+		(*it)->Update();
+		if ((*it)->isAlive() == false)
+		{
+			_unused_particles.push_back(*it);
+			it = _particles.erase(it);
+		}
+	}
+	_unused_particles.clear();
 }
 
 
@@ -40,7 +49,7 @@ void    ParticleGenerator::Emit(int numberParticles)
 	  force.z = rand() % 3 / 10.0f;
 
       newParticle = new Particle(position);
-      newParticle->setLifetime(5.0f);
+      newParticle->setLifetime(15.0f);
       newParticle->setForce(force);
 
       _particles.push_back(newParticle);
