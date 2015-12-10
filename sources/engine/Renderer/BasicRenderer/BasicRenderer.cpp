@@ -38,10 +38,8 @@ namespace WorldParticles
 
             shaderProgram->Bind();
 
-            shaderProgram->SetUniform("MVP", projection * view * model);
-
-            //shaderProgram->SetUniform("projection", projection);
-            //shaderProgram->SetUniform("modelview", view * model);
+            shaderProgram->SetUniform("projection", projection);
+            shaderProgram->SetUniform("modelview", view * model);
 
             GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, 3 * vertices.size());
             GLWindow::m_funcs->glDisableVertexAttribArray(0);
