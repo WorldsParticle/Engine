@@ -1,12 +1,13 @@
 #ifndef     __GAMEOBJECT_HPP__
 # define    __GAMEOBJECT_HPP__
 
+#include    <glm/glm.hpp>
+#include    <memory>
+
 #include    "worldparticles.hpp"
-
-#include    "glm/glm.hpp"
-
 #include    "Transform.hpp"
 #include    "Renderer.hpp"
+#include    "Material.hpp"
 #include    "Mesh.hpp"
 
 namespace   WorldParticles
@@ -54,7 +55,7 @@ namespace   WorldParticles
                 ///
                 const Transform &GetTransform(void) const
                 {
-                    return this->transform;
+                    return this->_transform;
                 }
 
                 ///
@@ -63,7 +64,7 @@ namespace   WorldParticles
                 ///
                 const Renderer  *GetRenderer(void) const
                 {
-                    return this->renderer;
+                    return this->_renderer;
                 }
 
                 ///
@@ -72,28 +73,30 @@ namespace   WorldParticles
                 ///
                 const Material  &GetMaterial(void) const
                 {
-                    return this->material;
+                    return this->_material;
                 }
 
             protected:
                 ///
                 /// \brief The transform is used to store the position, scale, rotation of the gameobject
                 ///
-                Transform   transform;
+                Transform               _transform;
 
                 ///
                 /// \brief The material is used to store the texture, shader, color... of the gameobject.
-                ///
-                Material    material;
+                /// TODO : should be a pointer
+                Material                _material;
 
+                ///
                 /// \brief The mesh is used to store the UVs, Vertex of the gameobject.
-                Mesh        mesh;
+                ///
+                std::shared_ptr<Mesh>   _mesh;
 
                 ///
                 /// \brief The renderer is the object that will used the material, the mesh
                 /// and the MVP matrix to display the gameobject.
                 ///
-                Renderer    *renderer;
+                Renderer                *_renderer;
         };
     }
 }

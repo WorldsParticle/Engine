@@ -18,14 +18,14 @@ namespace WorldParticles
         {
         }
 
-        void    BasicRenderer::Draw(const Mesh &mesh,
-                Material &material,
+        void    BasicRenderer::Draw(const std::shared_ptr<Mesh> &mesh,
+                const Material &material,
                 const glm::mat4 &projection,
                 const glm::mat4 &view,
                 const glm::mat4 &model)
         {
-            const std::vector<glm::vec3> &vertices = mesh.GetVertices();
-            QOpenGLShaderProgram shaderProgram;
+            const std::shared_ptr<ShaderProgram>    &shaderProgram = material.GetShaderProgram();
+            const std::vector<glm::vec3>            &vertices = mesh->GetVertices();
 
             GLuint vbo;
             GLWindow::m_funcs->glGenBuffers(1, &vbo);
@@ -36,20 +36,15 @@ namespace WorldParticles
             GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo);
             GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
 
-            shaderProgram.addShaderFromSourceFile(QOpenGLShader::Vertex, RESOURCES_PATH "/shaders/default.vert");
-            shaderProgram.addShaderFromSourceFile(QOpenGLShader::Fragment, RESOURCES_PATH "/shaders/default.frag");
-            shaderProgram.link();
-            shaderProgram.create();
+            shaderProgram->Bind();
 
-            shaderProgram.bind();
+            shaderProgram->SetUniform("projection", projection);
+            shaderProgram->SetUniform("modelview", view * model);
 
-            glm::mat4 MVP = projection * view * model;
-
-            int location = shaderProgram.uniformLocation("MVP");
-            shaderProgram.setUniformValue(location, QMatrix4x4(&MVP[0][0]).transposed());
-
-            GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, 3*vertices.size());
+            GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, 3 * vertices.size());
             GLWindow::m_funcs->glDisableVertexAttribArray(0);
+
+            shaderProgram->Unbind();
 
         }
 

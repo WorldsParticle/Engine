@@ -7,6 +7,5 @@ namespace WorldParticles
 
         QTime   GameClock::_clock = QTime();
         int     GameClock::_surplus = 0;
-
     }
 }

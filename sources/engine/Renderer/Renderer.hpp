@@ -1,10 +1,10 @@
 #ifndef     __RENDERER_HPP__
 # define    __RENDERER_HPP__
 
-#include    "worldparticles.hpp"
-
 #include    <glm/glm.hpp>
+#include    <memory>
 
+#include    "worldparticles.hpp"
 #include    "Material.hpp"
 #include    "Mesh.hpp"
 
@@ -36,8 +36,10 @@ namespace WorldParticles
                 /// \param view, the view matrix used to draw the mesh.
                 /// \param model, the view model used to draw the mesh.
                 ///
-                virtual void    Draw(const Mesh &mesh,
-                        Material &material,
+                /// TODO : passer le param a const GameObject *gameobject
+                ///
+                virtual void    Draw(const std::shared_ptr<Mesh> &mesh,
+                        const Material &material,
                         const glm::mat4 &projection,
                         const glm::mat4 &view,
                         const glm::mat4 &model) = 0;
