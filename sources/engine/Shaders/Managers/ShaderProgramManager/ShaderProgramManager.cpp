@@ -29,6 +29,7 @@ namespace   WorldParticles
             if ((it = MappedShaderProgram.find(name)) != MappedShaderProgram.end())
             {
                 const ShaderProgramProperty   &property = it->second;
+                result = std::make_shared<ShaderProgram>();
                 for (const ShaderName &shaderName : property.associatedShaders)
                 {
                     result->AddShader(ShaderManager::Get(shaderName));
