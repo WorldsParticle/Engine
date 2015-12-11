@@ -92,8 +92,11 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/ResourcesManager.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shader/Shader.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderProgram/ShaderProgram.cpp
+
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/ShaderManager.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/ShaderProgramManager.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Shader/Shader.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderProgram/ShaderProgram.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/tools.cpp
@@ -128,8 +131,13 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/ResourcesManager.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Utilities/Deserializable.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shader/Shader.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderProgram/ShaderProgram.hpp
+
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/ShaderManager.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/ShaderProgramManager.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Shader/Shader.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderProgram/ShaderProgram.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderNames.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderProgramNames.hpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.h
     ${CMAKE_SOURCE_DIR}/sources/model/tools.h
@@ -166,8 +174,12 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
     ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shader/
-    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderProgram/
+
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Shader/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderProgram/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/
 
 
     ${CMAKE_BINARY_DIR}

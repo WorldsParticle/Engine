@@ -71,6 +71,8 @@ namespace   WorldParticles
                 ///
                 void    SetUniform(const std::string &name, const glm::mat4 &matrix) const;
 
+                /// TODO add others set uniform
+
             protected:
                 ///
                 /// \brief This attribute is used to store the program id.
