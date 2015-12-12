@@ -14,6 +14,11 @@ namespace WorldParticles
             Cube::Cube(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &scale) :
                 GameObject(position, rotation, scale)
             {
+            }
+
+            bool    Cube::initialise(void)
+            {
+                this->_renderer = new BasicRenderer();
                 this->_mesh = std::make_shared<Mesh>();
                 this->_mesh->SetVertices(std::vector<glm::vec3>{
                         glm::vec3(-1.0f, -1.0f, 0.0f),
@@ -69,8 +74,8 @@ namespace WorldParticles
                         glm::vec3(1.0, -1.0, 1.0)
 
                 });
-                this->_renderer = new BasicRenderer();
                 this->_material.SetShaderProgram(ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM));
+                return true;
             }
 
             void Cube::Draw(const glm::mat4 &projection, const glm::mat4 &view)

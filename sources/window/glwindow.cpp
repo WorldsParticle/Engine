@@ -68,6 +68,7 @@ void    GLWindow::start(Model *model)
     ::WorldParticles::Engine::GameEngine     _gameEngine;
 
     _gEngine = &(_gameEngine);
+    _gameEngine.initialise();
     ::WorldParticles::Engine::GameClock::start();
     resizeWindow();
     while (isVisible())

@@ -13,11 +13,6 @@ namespace WorldParticles
         /// TODO : delete push object
         GameView::GameView(void)
         {
-            std::shared_ptr<Camera> camera_ptr = std::make_shared<Camera>(glm::vec3(5.0, 5.0, 5.0));
-            this->_cameraList.push_back(camera_ptr);
-
-            std::shared_ptr<GameObject> gameobject = std::make_shared<Primitives::Cube>();
-            this->_gameobjectList.push_back(gameobject);
         }
 
         GameView::~GameView(void)
@@ -46,8 +41,21 @@ namespace WorldParticles
         }
 
 
+        bool    GameView::initialise(void)
+        {
+            std::shared_ptr<Camera> camera_ptr = std::make_shared<Camera>(glm::vec3(5.0, 5.0, 5.0));
+            this->_cameraList.push_back(camera_ptr);
+            std::shared_ptr<GameObject> gameobject = std::make_shared<Primitives::Cube>();
+            this->_gameobjectList.push_back(gameobject);
 
-        /// TODO : use for_each
+            std::for_each(this->_cameraList.begin(), this->_cameraList.end(), [](auto &e){
+                e->initialise();
+            });
+            std::for_each(this->_gameobjectList.begin(), this->_gameobjectList.end(), [](auto &e){
+                e->initialise();
+            });
+        }
+
         void    GameView::Update(void)
         {
             std::for_each(this->_cameraList.begin(), this->_cameraList.end(), [](auto &e) {

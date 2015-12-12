@@ -40,6 +40,11 @@ namespace   WorldParticles
 
             public:
                 ///
+                /// \brief This method is used to initialise the camera.
+                ///
+                virtual bool    initialise(void);
+
+                ///
                 /// \brief This method is used to update the camera in the scene.
                 ///
                 virtual void    Update(void);

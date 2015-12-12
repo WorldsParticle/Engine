@@ -49,6 +49,11 @@ namespace WorldParticles
 
             public:
                 ///
+                /// \brief This method is used to initialise the gameview.
+                ///
+                bool    initialise(void);
+
+                ///
                 /// \brief This function is used to update the gameview
                 ///
                 void    Update(void);
@@ -57,8 +62,6 @@ namespace WorldParticles
                 /// \brief This function is used to draw the gameview on the screen.
                 ///
                 void    Draw(void);
-
-                /// TODO : add event processing
 
             public:
                 ///
