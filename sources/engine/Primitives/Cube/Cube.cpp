@@ -70,26 +70,6 @@ namespace WorldParticles
 
                 });
                 this->_renderer = new BasicRenderer();
-
-/*                std::shared_ptr<ShaderProgram> shaderProgram = std::make_shared<ShaderProgram>();*/
-
-                //std::ifstream t2(RESOURCES_PATH "/shaders/default.frag");
-                //std::string str2((std::istreambuf_iterator<char>(t2)), std::istreambuf_iterator<char>());
-
-                //std::shared_ptr<Shader>     vertexShader = std::make_shared<Shader>(Shader::Type::VERTEX_SHADER, str);
-                //vertexShader->Compile();
-
-                //std::shared_ptr<Shader>     fragmentShader = std::make_shared<Shader>(Shader::Type::FRAGMENT_SHADER, str2);
-                //fragmentShader->Compile();
-
-
-                //shaderProgram->AddShader(vertexShader);
-                //shaderProgram->AddShader(fragmentShader);
-
-                //shaderProgram->Link();
-
-                //this->_material.SetShaderProgram(shaderProgram);
-
                 this->_material.SetShaderProgram(ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM));
             }
 
