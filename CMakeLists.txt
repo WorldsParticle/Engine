@@ -90,7 +90,6 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/ResourcesManager.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/ShaderManager.cpp
@@ -128,7 +127,6 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/ResourcesManager.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Utilities/Deserializable.hpp
 
@@ -172,7 +170,6 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
-    ${CMAKE_SOURCE_DIR}/sources/engine/ResourcesManager/
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/
