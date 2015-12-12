@@ -37,6 +37,11 @@ namespace   WorldParticles
 
             public:
                 ///
+                /// \brief This method should be used to initialise a gameobject.
+                ///
+                virtual bool    initialise(void) = 0;
+
+                ///
                 /// \brief This function is used to draw the gameobject on the screen
                 /// \param projection the projection matrix
                 /// \param view the view matrix

@@ -37,6 +37,12 @@ namespace WorldParticles
             return glm::lookAt(this->transform.GetPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
         }
 
+
+        bool    Camera::initialise(void)
+        {
+            // nothing to do ?
+        }
+
         void    Camera::Update(void)
         {
         }

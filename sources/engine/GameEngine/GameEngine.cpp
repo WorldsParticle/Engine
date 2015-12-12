@@ -16,6 +16,16 @@ namespace   WorldParticles
         }
 
 
+        bool    GameEngine::initialise(void)
+        {
+            bool    result = true;
+
+            for (std::shared_ptr<GameView> &gameview : this->_gameviewList)
+            {
+                result = gameview->initialise() && result;
+            }
+            return result;
+        }
 
         void    GameEngine::update(void)
         {

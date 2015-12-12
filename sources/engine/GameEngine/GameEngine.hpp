@@ -27,7 +27,12 @@ namespace WorldParticles
 
             public:
                 ///
-                /// \brief This function is use to update the scene.
+                /// \brief This method is used to initialise the game engine itself.
+                ///
+                bool    initialise(void);
+
+                ///
+                /// \brief This function is used to update the scene.
                 ///
                 void        update(void);
 

@@ -24,6 +24,11 @@ namespace WorldParticles
 
                 public:
                     ///
+                    /// \brief This method is used to initialise the cube.
+                    ///
+                    bool    initialise(void);
+
+                    ///
                     /// \brief This method is used to draw the cube in the screen.
                     ///
                     void    Draw(const glm::mat4 &projection, const glm::mat4 &view);
