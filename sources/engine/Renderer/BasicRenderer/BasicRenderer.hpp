@@ -1,24 +1,33 @@
 #ifndef     __BASIC_RENDERER_HPP__
 # define    __BASIC_RENDERER_HPP__
 
-#include    "Renderer.hpp"
+#include    "IRenderer.hpp"
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
         ///
-        /// \brief This renderer is used to draw a mesh with a material.
+        /// \brief This renderer is used to draw a simple gameobject.
         ///
-        class   BasicRenderer : public Renderer
+        class   BasicRenderer : public IRenderer
         {
             public:
+                ///
+                /// \brief Default constructor
+                ///
                 BasicRenderer(void);
+
+                ///
+                /// \brief Destructor
+                ///
                 ~BasicRenderer(void);
 
             public:
-                void    Draw(const std::shared_ptr<Mesh> &mesh,
-                        const Material &material,
+                ///
+                // TODO description
+                ///
+                void    draw(const GameObject *gameobject,
                         const glm::mat4 &projection,
                         const glm::mat4 &view,
                         const glm::mat4 &model);

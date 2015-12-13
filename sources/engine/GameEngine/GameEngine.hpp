@@ -2,8 +2,7 @@
 #define __GAMEENGINE_HPP__
 
 #include    "worldparticles.hpp"
-
-#include    "GameView.hpp"
+#include    "Scene.hpp"
 
 namespace WorldParticles
 {
@@ -27,31 +26,36 @@ namespace WorldParticles
 
             public:
                 ///
-                /// \brief This method is used to initialise the game engine itself.
+                /// \brief This method is used to initialise the game engine.
                 ///
-                bool    initialise(void);
+                bool        initialise(void);
 
                 ///
-                /// \brief This function is used to update the scene.
+                /// \brief This function is used to update the world.
                 ///
                 void        update(void);
 
                 ///
-                /// \brief This function is used to draw the scene on the screen.
+                /// \brief This function is used to draw the world on the screen.
                 ///
                 void        draw(void);
 
             public:
                 ///
-                /// \brief This method is used to add a gameview in the gameengine.
+                /// \brief This method should be used to load the world from a file.
                 ///
-                void        AddGameView(const std::shared_ptr<GameView> &gameview);
+                bool        load(const std::string &filename);
+
+                ///
+                /// \brief This method is used to add a new scene in the gameengine.
+                ///
+                void        add(Scene *scene);
 
             protected:
                 ///
-                /// \brief This attribute is used to store each gameview present in the engine.
-                /// TODO : je ne pense pas que le shared_ptr soit réellement utile ici
-                std::list<std::shared_ptr<GameView>>    _gameviewList;
+                /// \brief This attribute is used to store all scenes present in the engine.
+                ///
+                std::list<Scene *>      _scenes;
         };
 
     }

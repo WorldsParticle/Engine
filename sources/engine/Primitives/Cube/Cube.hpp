@@ -31,12 +31,12 @@ namespace WorldParticles
                     ///
                     /// \brief This method is used to draw the cube in the screen.
                     ///
-                    void    Draw(const glm::mat4 &projection, const glm::mat4 &view);
+                    void    draw(const glm::mat4 &projection, const glm::mat4 &view);
 
                     ///
                     /// \brief This cube is used to update the cube in the scene.
                     ///
-                    void    Update(void);
+                    void    update(void);
             };
         }
     }

@@ -6,7 +6,7 @@
 
 #include    "worldparticles.hpp"
 #include    "Transform.hpp"
-#include    "Renderer.hpp"
+#include    "IRenderer.hpp"
 #include    "Material.hpp"
 #include    "Mesh.hpp"
 
@@ -46,19 +46,19 @@ namespace   WorldParticles
                 /// \param projection the projection matrix
                 /// \param view the view matrix
                 ///
-                virtual void    Draw(const glm::mat4 &projection, const glm::mat4 &view) = 0;
+                virtual void    draw(const glm::mat4 &projection, const glm::mat4 &view) = 0;
 
                 ///
                 /// \brief This function is used to update the gameobject in the scene.
                 ///
-                virtual void    Update() = 0;
+                virtual void    update() = 0;
 
             public:
                 ///
                 /// \brief Get the transform of the gameobject.
                 /// \return The gameobject transform
                 ///
-                const Transform &GetTransform(void) const
+                const Transform     &GetTransform(void) const
                 {
                     return this->_transform;
                 }
@@ -67,7 +67,7 @@ namespace   WorldParticles
                 /// \brief Get the renderer of the gameobject
                 /// \return The renderer of the gameobject
                 ///
-                const Renderer  *GetRenderer(void) const
+                const IRenderer     *GetRenderer(void) const
                 {
                     return this->_renderer;
                 }
@@ -76,9 +76,17 @@ namespace   WorldParticles
                 /// \brief Get the material of the gameobject
                 /// \return The material of the gameobject
                 ///
-                const Material  &GetMaterial(void) const
+                const Material      *GetMaterial(void) const
                 {
                     return this->_material;
+                }
+
+                ///
+                /// \brief Getter for the Mesh attribute.
+                ///
+                const Mesh          *GetMesh(void) const
+                {
+                    return this->_mesh;
                 }
 
             protected:
@@ -89,19 +97,19 @@ namespace   WorldParticles
 
                 ///
                 /// \brief The material is used to store the texture, shader, color... of the gameobject.
-                /// TODO : should be a pointer
-                Material                _material;
+                ///
+                Material                *_material;
 
                 ///
                 /// \brief The mesh is used to store the UVs, Vertex of the gameobject.
                 ///
-                std::shared_ptr<Mesh>   _mesh;
+                Mesh                    *_mesh;
 
                 ///
                 /// \brief The renderer is the object that will used the material, the mesh
                 /// and the MVP matrix to display the gameobject.
                 ///
-                Renderer                *_renderer;
+                IRenderer               *_renderer;
         };
     }
 }

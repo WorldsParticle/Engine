@@ -82,8 +82,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/GameClock/GameClock.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/GameObject.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameView/GameView.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.cpp
@@ -91,6 +90,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/AssimpImporter.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/ShaderManager.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/ShaderProgramManager.cpp
@@ -119,8 +119,8 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/GameClock/GameClock.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/GameObject.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameView/GameView.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/IRenderer.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.hpp
@@ -129,6 +129,7 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Utilities/Deserializable.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/AssimpImporter.hpp
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/ShaderManager.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/ShaderProgramManager.hpp
@@ -162,7 +163,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/GameClock
     ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine
     ${CMAKE_SOURCE_DIR}/sources/engine/GameObject
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameView
+    ${CMAKE_SOURCE_DIR}/sources/engine/Scene
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer
     ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/
@@ -171,6 +172,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Material/
     ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/
+    ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/

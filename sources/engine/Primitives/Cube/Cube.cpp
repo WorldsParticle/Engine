@@ -19,7 +19,7 @@ namespace WorldParticles
             bool    Cube::initialise(void)
             {
                 this->_renderer = new BasicRenderer();
-                this->_mesh = std::make_shared<Mesh>();
+                this->_mesh = new Mesh();
                 this->_mesh->SetVertices(std::vector<glm::vec3>{
                         glm::vec3(-1.0f, -1.0f, 0.0f),
                         glm::vec3(1.0f, -1.0f, 0.0f),
@@ -74,17 +74,18 @@ namespace WorldParticles
                         glm::vec3(1.0, -1.0, 1.0)
 
                 });
-                this->_material.SetShaderProgram(ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM));
+                this->_material = new Material();
+                this->_material->SetShaderProgram(ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM));
                 return true;
             }
 
-            void Cube::Draw(const glm::mat4 &projection, const glm::mat4 &view)
+            void    Cube::draw(const glm::mat4 &projection, const glm::mat4 &view)
             {
                 glm::mat4   model = this->_transform.GetMatrix();
-                this->_renderer->Draw(this->_mesh, this->_material, projection, view, model);
+                this->_renderer->draw(this, projection, view, model);
             }
 
-            void    Cube::Update(void)
+            void    Cube::update(void)
             {
             }
 

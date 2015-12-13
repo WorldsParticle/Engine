@@ -1,4 +1,7 @@
-#include "GameEngine.hpp"
+#include    "GameEngine.hpp"
+#include    "AssimpImporter.hpp"
+
+#include    "Cube.hpp"
 
 namespace   WorldParticles
 {
@@ -7,12 +10,15 @@ namespace   WorldParticles
 
         GameEngine::GameEngine(void)
         {
-            this->AddGameView(std::make_shared<GameView>());
+            // nothing to do ?
         }
 
         GameEngine::~GameEngine(void)
         {
-            // nothing to do
+            for (Scene *scene : this->_scenes)
+            {
+                delete scene;
+            }
         }
 
 
@@ -20,36 +26,53 @@ namespace   WorldParticles
         {
             bool    result = true;
 
-            for (std::shared_ptr<GameView> &gameview : this->_gameviewList)
+            for (Scene *scene : this->_scenes)
             {
-                result = gameview->initialise() && result;
+                result = scene->initialise() && result;
             }
             return result;
         }
 
         void    GameEngine::update(void)
         {
-            for (std::shared_ptr<GameView> &gameview : this->_gameviewList)
+            for (Scene *scene : this->_scenes)
             {
-                gameview->Update();
+                scene->update();
             }
         }
 
         void    GameEngine::draw(void)
         {
-            for (std::shared_ptr<GameView> &gameview : this->_gameviewList)
+            for (Scene *scene : this->_scenes)
             {
-                gameview->Draw();
+                scene->draw();
             }
         }
 
 
+        bool    GameEngine::load(const std::string &filename)
+        {
+            AssimpImporter  importer;
+
+            Scene   *basic = new Scene();
+            Camera  *cam = new Camera(glm::vec3(5.0));
+            GameObject  *cube = new Primitives::Cube();
+
+            basic->add(cam);
+            basic->add(cube);
+
+            this->_scenes = importer.load(filename);
+            this->_scenes.push_back(basic);
+            return true;
+        }
 
         /// TODO should be tested
-        void    GameEngine::AddGameView(const std::shared_ptr<GameView> &gameview)
+        void    GameEngine::add(Scene *scene)
         {
-            this->_gameviewList.push_back(gameview);
-            this->_gameviewList.sort([](const auto &a, const auto &b) {return a->GetLayerNumber() > b->GetLayerNumber();});
+            this->_scenes.push_back(scene);
+            this->_scenes.sort([](const auto &a, const auto &b) {
+                    return a->GetLayerNumber() > b->GetLayerNumber();
+            });
         }
 
     }

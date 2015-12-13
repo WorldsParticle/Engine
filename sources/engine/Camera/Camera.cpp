@@ -44,11 +44,11 @@ namespace WorldParticles
             return true;
         }
 
-        void    Camera::Update(void)
+        void    Camera::update(void)
         {
         }
 
-        void    Camera::Draw(void)
+        void    Camera::draw(void)
         {
             GLWindow::m_funcs->glClearColor(0.3, 0.1, 0.1, 0.0);
             GLWindow::m_funcs->glViewport(0, 0, 1024, 768);

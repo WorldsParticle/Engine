@@ -68,6 +68,7 @@ void    GLWindow::start(Model *model)
     ::WorldParticles::Engine::GameEngine     _gameEngine;
 
     _gEngine = &(_gameEngine);
+    _gameEngine.load(RESOURCES_PATH "/scenes/default.dae");
     _gameEngine.initialise();
     ::WorldParticles::Engine::GameClock::start();
     resizeWindow();
@@ -75,7 +76,7 @@ void    GLWindow::start(Model *model)
     {
         _gameEngine.update();
         ::WorldParticles::Engine::GameClock::restart();
-        _context.makeCurrent(this);
+//        _context.makeCurrent(this);
         _gameEngine.draw();
         _context.swapBuffers(this);
 
