@@ -41,6 +41,7 @@ namespace WorldParticles
         bool    Camera::initialise(void)
         {
             // nothing to do ?
+            return true;
         }
 
         void    Camera::Update(void)

@@ -54,6 +54,7 @@ namespace WorldParticles
             std::for_each(this->_gameobjectList.begin(), this->_gameobjectList.end(), [](auto &e){
                 e->initialise();
             });
+            return true;
         }
 
         void    GameView::Update(void)
