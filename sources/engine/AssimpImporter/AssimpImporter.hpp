@@ -29,7 +29,26 @@ namespace   WorldParticles
                 ///
                 /// \brief This method is used to load a scene from a filename.
                 ///
-                Scene       *load(const std::string &filename);
+                Scene       *importScene(const std::string &filename);
+
+            private:
+                ///
+                /// \brief This method is internally used to load animation in the scene graph.
+                ///
+                void        importAnimations(const aiScene *assimpScene, Scene *scene);
+
+                ///
+                ///
+                ///
+                void        importCameras(const aiScene *assimpScene, Scene *scene);
+
+                void        importLights(const aiScene *assimpScene, Scene *scene);
+
+                void        importMaterials(const aiScene *assimpScene, Scene *scene);
+
+                void        importMeshes(const aiScene *assimpScene, Scene *scene);
+
+                void        importTextures(const aiScene *assimpScene, Scene *scene);
 
             private:
                 ///

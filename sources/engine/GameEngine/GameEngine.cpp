@@ -64,7 +64,7 @@ namespace   WorldParticles
             basic->add(cam);
             basic->add(cube);
 
-            this->_scenes.push_back(importer.load(filename));
+            this->_scenes.push_back(importer.importScene(filename));
             this->_scenes.push_back(basic);
             return true;
         }
