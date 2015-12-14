@@ -28,6 +28,7 @@ namespace   WorldParticles
 
             for (Scene *scene : this->_scenes)
             {
+                if (scene == nullptr) continue;
                 result = scene->initialise() && result;
             }
             return result;
@@ -37,6 +38,7 @@ namespace   WorldParticles
         {
             for (Scene *scene : this->_scenes)
             {
+                if (scene == nullptr) continue;
                 scene->update();
             }
         }
@@ -45,6 +47,7 @@ namespace   WorldParticles
         {
             for (Scene *scene : this->_scenes)
             {
+                if (scene == nullptr) continue;
                 scene->draw();
             }
         }
@@ -61,7 +64,7 @@ namespace   WorldParticles
             basic->add(cam);
             basic->add(cube);
 
-            this->_scenes = importer.load(filename);
+            this->_scenes.push_back(importer.load(filename));
             this->_scenes.push_back(basic);
             return true;
         }

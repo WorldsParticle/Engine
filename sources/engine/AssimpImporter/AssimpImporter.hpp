@@ -4,6 +4,7 @@
 
 #include    <string>
 #include    <list>
+#include    <assimp/Importer.hpp>
 
 #include    "Scene.hpp"
 
@@ -28,10 +29,13 @@ namespace   WorldParticles
                 ///
                 /// \brief This method is used to load a scene from a filename.
                 ///
-                std::list<Scene *>  load(const std::string &filename);
+                Scene       *load(const std::string &filename);
 
             private:
-
+                ///
+                /// \brief the assimp importer that wil be used to load the file in a new scene.
+                ///
+                Assimp::Importer    _importer;
         };
     }
 }

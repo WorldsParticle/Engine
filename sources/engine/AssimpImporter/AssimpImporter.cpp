@@ -14,10 +14,10 @@ namespace   WorldParticles
 
     }
 
-    std::list<Scene *>
+    Scene *
     AssimpImporter::load(const std::string &filename)
     {
-      return std::list<Scene *>();
+      return nullptr;
     }
 
   }
