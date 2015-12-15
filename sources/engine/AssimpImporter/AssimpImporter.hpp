@@ -5,6 +5,7 @@
 #include    <string>
 #include    <list>
 #include    <assimp/Importer.hpp>
+#include    <assimp/mesh.h>
 
 #include    "Scene.hpp"
 
@@ -49,6 +50,8 @@ namespace   WorldParticles
                 void        importMeshes(const aiScene *assimpScene, Scene *scene);
 
                 void        importTextures(const aiScene *assimpScene, Scene *scene);
+
+                Mesh        *importMesh(const aiMesh *assimpMesh);
 
             private:
                 ///

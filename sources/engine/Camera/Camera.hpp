@@ -31,12 +31,12 @@ namespace   WorldParticles
                 ///
                 /// \brief This method is used to return the projection matrix of the camera.
                 ///
-                glm::mat4       GetProjection(void) const;
+                const glm::mat4       &GetProjection(void) const;
 
                 ///
                 /// \brief This method is used to return the view matrix of the camera.
                 ///
-                glm::mat4       GetView(void) const;
+                const glm::mat4       &GetView(void) const;
 
             public:
                 ///
@@ -75,6 +75,9 @@ namespace   WorldParticles
                 /// \brief This attribute is used to store the maximum view distance.
                 ///
                 float       zFar;
+
+                glm::mat4   projection;
+                glm::mat4   view;
 
         };
 

@@ -19,7 +19,8 @@ namespace WorldParticles
             zNear(0.1),
             zFar(1000.0)
         {
-
+            projection = glm::perspective(glm::radians(45.0f), 1024.0f / 768.0f, 0.1f, 100.0f);
+            view = glm::lookAt(this->transform.GetPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
         }
 
         Camera::~Camera(void)
@@ -27,14 +28,16 @@ namespace WorldParticles
 
         }
 
-        glm::mat4 Camera::GetProjection(void) const
+        const glm::mat4 &
+        Camera::GetProjection(void) const
         {
-            return glm::perspective(glm::radians(45.0f), 1024.0f / 768.0f, 0.1f, 100.0f);
+            return projection;
         }
 
-        glm::mat4 Camera::GetView(void) const
+        const glm::mat4 &
+        Camera::GetView(void) const
         {
-            return glm::lookAt(this->transform.GetPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
+            return view;
         }
 
 

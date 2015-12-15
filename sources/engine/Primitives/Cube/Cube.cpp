@@ -74,6 +74,7 @@ namespace WorldParticles
                         glm::vec3(1.0, -1.0, 1.0)
 
                 });
+                this->_mesh->initialise();
                 this->_material = new Material();
                 this->_material->SetShaderProgram(ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM));
                 return true;
@@ -87,6 +88,11 @@ namespace WorldParticles
 
             void    Cube::update(void)
             {
+                const glm::vec3 &position = this->_transform.GetPosition();
+                if (position.y < 20.0)
+                    this->_transform.SetPosition(position + glm::vec3(0.0, 0.1, 0.0));
+                else
+                    this->_transform.SetPosition(glm::vec3(0.0, -20.0, 0.0));
             }
 
         }

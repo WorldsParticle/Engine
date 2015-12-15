@@ -51,7 +51,7 @@ namespace   WorldParticles
                 ///
                 /// \brief This function is used to update the gameobject in the scene.
                 ///
-                virtual void    update() = 0;
+                virtual void    update(void) = 0;
 
             public:
                 ///
@@ -87,6 +87,39 @@ namespace   WorldParticles
                 const Mesh          *GetMesh(void) const
                 {
                     return this->_mesh;
+                }
+
+            public:
+                ///
+                /// \brief Setter for the transform attribute.
+                ///
+                void                setTransform(const Transform &transform)
+                {
+                     this->_transform = transform;
+                }
+
+                ///
+                /// \brief Setter for the renderer attribute;
+                ///
+                void                setRenderer(IRenderer *renderer)
+                {
+                    this->_renderer = renderer;
+                }
+
+                ///
+                /// \brief Setter for the material attribute.
+                ///
+                void                setMaterial(Material *material)
+                {
+                     this->_material = material;
+                }
+
+                ///
+                /// \brief Setter for the mesh attrbute.
+                ///
+                void                setMesh(Mesh *mesh)
+                {
+                    this->_mesh = mesh;
                 }
 
             protected:

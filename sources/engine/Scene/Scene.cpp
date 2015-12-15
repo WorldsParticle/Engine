@@ -71,8 +71,8 @@ namespace WorldParticles
             for (Camera *camera : this->_cameras)
             {
                 camera->draw();
-                glm::mat4 &&projection = camera->GetProjection();
-                glm::mat4 &&view = camera->GetView();
+                const glm::mat4 &projection = camera->GetProjection();
+                const glm::mat4 &view = camera->GetView();
                 for (GameObject *gameobject : this->_gameobjects)
                 {
                     gameobject->draw(projection, view);

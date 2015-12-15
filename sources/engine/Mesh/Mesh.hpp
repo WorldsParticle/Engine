@@ -28,6 +28,14 @@ namespace WorldParticles
                 ~Mesh(void);
 
             public:
+
+                void    initialise(void);
+
+                void    bind(void) const;
+
+                void    unbind(void) const;
+
+            public:
                 ///
                 /// \brief Getter for the vertices attribute.
                 ///
@@ -92,6 +100,8 @@ namespace WorldParticles
                 /// \brief The normals attribute is used to store all normal of the mesh.
                 ///
                 std::vector<glm::vec3>  _normals;
+
+                unsigned int            vbo;
         };
     }
 }

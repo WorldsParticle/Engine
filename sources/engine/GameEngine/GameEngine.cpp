@@ -58,13 +58,18 @@ namespace   WorldParticles
             AssimpImporter  importer;
 
             Scene   *basic = new Scene();
-            Camera  *cam = new Camera(glm::vec3(5.0));
-            GameObject  *cube = new Primitives::Cube();
+            Camera  *cam = new Camera(glm::vec3(50.0));
+            Camera  *cam2 = new Camera(glm::vec3(500.0));
+
+            basic->add(new Primitives::Cube(glm::vec3(0.0, 0.0, 0.0)));
+            basic->add(new Primitives::Cube(glm::vec3(5.0, 0.0, 0.0)));
+            basic->add(new Primitives::Cube(glm::vec3(-5.0, 0.0, 0.0)));
 
             basic->add(cam);
-            basic->add(cube);
 
-            this->_scenes.push_back(importer.importScene(filename));
+            //Scene   *test = importer.importScene(filename);
+            //*test << cam2;
+            //this->_scenes.push_back(test);
             this->_scenes.push_back(basic);
             return true;
         }
