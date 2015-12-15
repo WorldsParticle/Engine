@@ -29,7 +29,8 @@ namespace   WorldParticles
         void
         Model::update(void)
         {
-
+            const glm::vec3     &rotation = this->_transform.GetRotation();
+            this->_transform.SetRotation(rotation + glm::vec3(0.0, 0.01, 0.0));
         }
 
         void

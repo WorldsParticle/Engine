@@ -60,6 +60,14 @@ namespace WorldParticles
                     return this->_normals;
                 }
 
+                ///
+                /// \brief Getter for the indices attribute.
+                ///
+                const std::vector<unsigned int>     getIndices(void) const
+                {
+                    return this->_indices;
+                }
+
             public:
                 ///
                 /// \brief Setter for the vertices attribute.
@@ -85,6 +93,14 @@ namespace WorldParticles
                     this->_normals = normals;
                 }
 
+                ///
+                /// \brief Setter for the indices attribute.
+                ///
+                void        setIndices(const std::vector<unsigned int> &indices)
+                {
+                    this->_indices = indices;
+                }
+
             private:
                 ///
                 /// \brief The vertices attribute is used to store all vertex of the mesh.
@@ -101,7 +117,14 @@ namespace WorldParticles
                 ///
                 std::vector<glm::vec3>  _normals;
 
+                ///
+                /// \brief The indices attribute is used to store all indices of a mesh.
+                ///
+                std::vector<unsigned int>   _indices;
+
                 unsigned int            vbo;
+                unsigned int            vbo_normals;
+                unsigned int            element_buffer;
         };
     }
 }

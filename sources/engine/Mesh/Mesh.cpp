@@ -33,28 +33,36 @@ namespace   WorldParticles
             GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo);
             GLWindow::m_funcs->glBufferData(GL_ARRAY_BUFFER,
                     _vertices.size() * sizeof(glm::vec3), _vertices.data(), GL_STATIC_DRAW);
-            GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, 0);
-/*            Category &root = Category::getRoot();*/
-            //void *vertices = _vertices.data();
-            //float *test = static_cast<float *>(vertices);
-            //for (unsigned int i = 0 ; i < _vertices.size()* 3 ; ++i)
-            //{
-                //root << Priority::DEBUG << test[i];
-            /*}*/
-        }
+            GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+            GLWindow::m_funcs->glGenBuffers(1, &vbo_normals);
+            GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo_normals);
+            GLWindow::m_funcs->glBufferData(GL_ARRAY_BUFFER,
+                    _normals.size() * sizeof(glm::vec3), _normals.data(), GL_STATIC_DRAW);
+            GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+            GLWindow::m_funcs->glGenBuffers(1, &element_buffer);
+            GLWindow::m_funcs->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
+            GLWindow::m_funcs->glBufferData(GL_ELEMENT_ARRAY_BUFFER,
+                    _indices.size() * sizeof(unsigned int), _indices.data(), GL_STATIC_DRAW);
+       }
 
         void
         Mesh::bind(void) const
         {
             GLWindow::m_funcs->glEnableVertexAttribArray(0);
+            GLWindow::m_funcs->glEnableVertexAttribArray(1);
+
             GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+            GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo_normals);
+            GLWindow::m_funcs->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
         }
 
         void
         Mesh::unbind(void) const
         {
             GLWindow::m_funcs->glDisableVertexAttribArray(0);
+            GLWindow::m_funcs->glDisableVertexAttribArray(1);
         }
 
     }

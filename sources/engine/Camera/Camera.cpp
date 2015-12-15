@@ -19,7 +19,7 @@ namespace WorldParticles
             zNear(0.1),
             zFar(1000.0)
         {
-            projection = glm::perspective(glm::radians(45.0f), 1024.0f / 768.0f, 0.1f, 100.0f);
+            projection = glm::perspective(glm::radians(45.0f), 1024.0f / 768.0f, 0.1f, 1000.0f);
             view = glm::lookAt(this->transform.GetPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
         }
 
