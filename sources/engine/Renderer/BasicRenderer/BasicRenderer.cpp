@@ -30,7 +30,7 @@ namespace WorldParticles
                 if (mesh != nullptr && material != nullptr)
                 {
                     auto        &shaderProgram = material->GetShaderProgram();
-                    auto        &vertices = mesh->GetVertices();
+                    auto        &vertices = mesh->getVertices();
 
                     shaderProgram->Bind();
 

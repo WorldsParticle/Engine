@@ -1,29 +1,79 @@
 #include    "Mesh.hpp"
 #include    "glwindow.h"
 
-#include    <log4cpp/Category.hh>
-
-using namespace     log4cpp;
-
 namespace   WorldParticles
 {
     namespace   Engine
     {
 
-        Mesh::Mesh(const std::vector<glm::vec3> &vertices,
-                const std::vector<glm::vec3> &uvs,
-                const std::vector<glm::vec3> &normals) :
-            _vertices(vertices),
-            _uvs(uvs),
-            _normals(normals)
+        Mesh::Mesh(void)
         {
+            // nothing to do
+        }
 
-
+        /// TODO check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
+        Mesh::Mesh(const aiMesh *am)
+        {
+            if (am == nullptr) throw std::invalid_argument("assimpMesh is null.");
+            this->_name = am->mName.C_Str();
+            if (am->HasPositions()) {
+                this->setVertices(am->mVertices, am->mNumVertices);
+            }
+            if (am->HasNormals()) {
+                this->setNormals(am->mNormals, am->mNumVertices);
+            }
+            if (am->HasFaces()) {
+                this->setIndices(am->mFaces, am->mNumFaces);
+            }
         }
 
         Mesh::~Mesh(void)
         {
 
+        }
+
+
+        void
+        Mesh::setVertices(const aiVector3D *vertices, unsigned int numberElements)
+        {
+            if (vertices == nullptr) throw std::invalid_argument("vertices is null");
+            auto convert = [&](const aiVector3D &v){return glm::vec3(v.x, v.y, v.z);};
+            this->_vertices.clear();
+            this->_vertices.reserve(numberElements);
+            for (unsigned int i = 0 ; i < numberElements ; ++i) {
+                 this->_vertices.push_back(convert(vertices[i]));
+            }
+        }
+
+        void
+        Mesh::setNormals(const aiVector3D *normals, unsigned int numberElements)
+        {
+            if (normals == nullptr) throw std::invalid_argument("normals is null");
+            auto convert = [&](const aiVector3D &v){return glm::vec3(v.x, v.y, v.z);};
+            this->_normals.clear();
+            this->_normals.reserve(numberElements);
+            for (unsigned int i = 0 ; i < numberElements ; ++i) {
+                 this->_normals.push_back(convert(normals[i]));
+            }
+        }
+
+        void
+        Mesh::setIndices(const std::vector<unsigned int> &indices)
+        {
+
+        }
+
+        void
+        Mesh::setIndices(const aiFace *faces, unsigned int numberElements)
+        {
+            if (faces == nullptr) throw std::invalid_argument("faces is null");
+            this->_indices.clear();
+            this->_indices.reserve(numberElements * 3);
+            for (unsigned int i = 0 ; i < numberElements ; ++i) {
+                for (unsigned int j = 0 ; j < faces[i].mNumIndices ; ++j) {
+                     this->_indices.push_back(faces[i].mIndices[j]);
+                }
+            }
         }
 
         void

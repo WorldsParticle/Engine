@@ -31,10 +31,10 @@ namespace   WorldParticles
             int             flags = 0;
 
             root << Priority::INFO << "chargement de la scene depuis le fichier : " << filename;
-            flags |= aiProcess_ValidateDataStructure;
+            //flags |= aiProcess_ValidateDataStructure;
             flags |= aiProcess_Triangulate;
-            flags |= aiProcess_FindInvalidData;
-            flags |= aiProcess_SortByPType;
+            //flags |= aiProcess_FindInvalidData;
+            //flags |= aiProcess_SortByPType;
             flags |= aiProcessPreset_TargetRealtime_Quality;
             if ((assimpScene = this->_importer.ReadFile(filename, flags)) == nullptr)
             {
@@ -171,7 +171,7 @@ namespace   WorldParticles
             root << Priority::INFO << "Nombre de meshes : " << assimpScene->mNumMeshes;
             for (unsigned int i = 0 ; i < assimpScene->mNumMeshes ; ++i)
             {
-                Mesh    *mesh = this->importMesh(assimpScene->mMeshes[i]);
+                Mesh    *mesh = new Mesh(assimpScene->mMeshes[i]);
                 if (mesh != nullptr)
                 {
                     Model *test = new Model();
@@ -207,67 +207,5 @@ namespace   WorldParticles
             }
             root << Priority::INFO << "Importation des textures terminée !";
         }
-
-        /// TODO : surement possible de pouvoir cast les vertices... directement en glm
-        Mesh *
-        AssimpImporter::importMesh(const aiMesh *assimpMesh)
-        {
-            Category  &root = Category::getRoot();
-            Mesh     *mesh = nullptr;
-
-            if (assimpMesh == nullptr)
-            {
-                root << Priority::ERROR << "invalid function argument, a required argument is null.";
-                return nullptr;
-            }
-            if (!(assimpMesh->mPrimitiveTypes & aiPrimitiveType_TRIANGLE))
-            {
-                root << Priority::ERROR << "Primitive non supporté";
-                return nullptr;
-            }
-            root << Priority::INFO << "importation d'un nouveau Mesh...";
-            mesh = new Mesh();
-            if (assimpMesh->HasPositions() == true)
-            {
-                root << Priority::INFO << "le mesh possede " << assimpMesh->mNumVertices << " vertices";
-                std::vector<glm::vec3>  vertices;
-                for (unsigned int i = 0 ; i < assimpMesh->mNumVertices ; ++i)
-                {
-                    aiVector3D  &v = assimpMesh->mVertices[i];
-                    vertices.push_back(glm::vec3(v.x, v.y, v.z));
-                }
-                mesh->SetVertices(vertices);
-            }
-            if (assimpMesh->HasNormals() == true)
-            {
-                root << Priority::INFO << "le mesh possde " << assimpMesh->mNumVertices << " normales";
-                std::vector<glm::vec3>  normals;
-                for (unsigned int i = 0 ; i < assimpMesh->mNumVertices ; ++i)
-                {
-                    aiVector3D &n = assimpMesh->mNormals[i];
-                    normals.push_back(glm::vec3(n.x, n.y, n.z));
-                }
-                mesh->SetNormals(normals);
-            }
-            if (assimpMesh->HasFaces() == true)
-            {
-                root << Priority::INFO << "le mesh possede : " << assimpMesh->mNumFaces << " faces";
-                std::vector<unsigned int>  indices;
-                for (unsigned int i = 0 ; i < assimpMesh->mNumFaces ; ++i)
-                {
-                    if (assimpMesh->mFaces[i].mNumIndices == 3)
-                    {
-                        indices.push_back(assimpMesh->mFaces[i].mIndices[0]);
-                        indices.push_back(assimpMesh->mFaces[i].mIndices[1]);
-                        indices.push_back(assimpMesh->mFaces[i].mIndices[2]);
-                    }
-                }
-                mesh->setIndices(indices);
-            }
-            mesh->initialise();
-            root << Priority::INFO << "Importation d'un nouveau mesh terminée !";
-            return mesh;
-        }
-
     }
 }

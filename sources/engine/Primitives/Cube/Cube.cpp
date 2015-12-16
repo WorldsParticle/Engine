@@ -20,7 +20,7 @@ namespace WorldParticles
             {
                 this->_renderer = new BasicRenderer();
                 this->_mesh = new Mesh();
-                this->_mesh->SetVertices(std::vector<glm::vec3>{
+                this->_mesh->setVertices(std::vector<glm::vec3>{
                         glm::vec3(-1.0f, -1.0f, 0.0f),
                         glm::vec3(1.0f, -1.0f, 0.0f),
                         glm::vec3(0.0f,  1.0f, 0.0f),
