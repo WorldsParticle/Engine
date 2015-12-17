@@ -2,8 +2,11 @@
 # define    __MESH_HPP__
 
 #include    <vector>
+#include    <memory>
 #include    <glm/glm.hpp>
 #include    <assimp/mesh.h>
+
+#include    "BufferObject.hpp"
 
 namespace WorldParticles
 {
@@ -31,114 +34,117 @@ namespace WorldParticles
                 ~Mesh(void);
 
             public:
-
-                /// should be removed
-                void    initialise(void);
-
-                /// should be removed
-                void    bind(void) const;
-
-                /// should be removed
-                void    unbind(void) const;
-
-                /// permet de mettre a jour le vbo.
+                ///
+                /// \brief Permet de mettre a jour l'api graphic des modifications effectué dans le mesh.
+                ///
                 void    update(void);
 
             public:
                 ///
                 /// \brief Getter for the vertices attribute.
                 ///
-                const std::vector<glm::vec3>        &getVertices(void) const
-                {
-                    return this->_vertices;
-                }
+                const std::vector<glm::vec3>        &getPositions(void) const;
 
                 ///
                 /// \brief Getter for the normals attribute.
                 ///
-                const std::vector<glm::vec3>        &getNormals(void) const
-                {
-                    return this->_normals;
-                }
+                const std::vector<glm::vec3>        &getNormals(void) const;
 
                 ///
                 /// \brief Getter for the indices attribute.
                 ///
-                const std::vector<unsigned int>     &getIndices(void) const
-                {
-                    return this->_indices;
-                }
+                const std::vector<unsigned int>     &getIndices(void) const;
+
+                ///
+                /// \brief Getter for the vertex buffer object.
+                ///
+                const std::shared_ptr<BufferObject> &getVertexBufferObject(void) const;
+
+                ///
+                /// \brief Getter for the element buffer object.
+                ///
+                const std::shared_ptr<BufferObject> &getElementBufferObject(void) const;
 
             public:
                 ///
                 /// \brief Setter for the vertices attribute.
                 ///
-                void        setVertices(const std::vector<glm::vec3> &vertices)
-                {
-                    this->_vertices = vertices;
-                }
-
-                ///
-                /// \brief Setter for the vertices attribute.
-                /// \param[in] vertices A aiVector3D array of numberElements size.
-                /// \param[in] numberElements Number of element present in the vertices array.
-                ///
-                void        setVertices(const aiVector3D *vertices, unsigned int numberElements);
+                void    setPositions(const std::vector<glm::vec3> &positions);
 
                 ///
                 /// \brief Setter for the normal attribute.
                 ///
-                void        setNormals(const std::vector<glm::vec3> &normals)
-                {
-                    this->_normals = normals;
-                }
+                void    setNormals(const std::vector<glm::vec3> &normals);
+
+                ///
+                /// \brief Setter for the indices attribute.
+                ///
+                void    setIndices(const std::vector<unsigned int> &indices);
+
+            private:
+                ///
+                /// \brief Setter for the vertices attribute.
+                /// \param[in] positions A aiVector3D array of numberElements size.
+                /// \param[in] numberElements Number of element present in the vertices array.
+                ///
+                void    setPositions(const aiVector3D *positions, unsigned int numberElements);
 
                 ///
                 /// \brief Setter for the mesh normals.
                 /// \param[in] normals A aiVector3D array of numberElement size which contains new normal value.
                 /// \param[in] numberElements Number of element present in the normals array.
                 ///
-                void        setNormals(const aiVector3D *normals, unsigned int numberElements);
-
-                ///
-                /// \brief Setter for the indices attribute.
-                ///
-                void        setIndices(const std::vector<unsigned int> &indices)
-                {
-                    this->_indices = indices;
-                }
+                void    setNormals(const aiVector3D *normals, unsigned int numberElements);
 
                 ///
                 /// \brief Setter for the mesh indices.
                 /// \param[in] faces A aiFace array of numberElements size which contains new indice values.
                 /// \param[in] numberElements Number of element present in the faces array.
                 ///
-                void        setIndices(const aiFace *faces, unsigned int numberElements);
+                void    setIndices(const aiFace *faces, unsigned int numberElements);
 
             private:
                 ///
                 /// \brief The name of the mesh.
                 ///
-                std::string                 _name;
+                /// the name is optional, could be an empty string.
+                ///
+                std::string                     _name;
 
                 ///
                 /// \brief The vertices attribute is used to store all vertex of the mesh.
                 ///
-                std::vector<glm::vec3>      _vertices;
+                std::vector<glm::vec3>          _positions;
 
                 ///
                 /// \brief The normals attribute is used to store all normal of the mesh.
                 ///
-                std::vector<glm::vec3>      _normals;
+                std::vector<glm::vec3>          _normals;
 
                 ///
                 /// \brief The indices attribute is used to store all indices of a mesh.
                 ///
-                std::vector<unsigned int>   _indices;
+                std::vector<unsigned int>       _indices;
 
-                std::shared_ptr<VertexBufferObject>     _bufferObject;
-                std::shared_ptr<ElementBufferObject>    _elementBuffer;
-                // TODO abstraction vbo, faire en sorte de pouvoir opti les bordels [v][n][v][n] au lieu [v][v][n][n]
+                ///
+                /// \brief This boolean is used to know if the mesh should be send to the graphic api or if it's already updated.
+                ///
+                bool                            updated;
+
+                ///
+                /// \brief This boolean is used to know if the mesh is optmized for rendering.
+                ///
+                bool                            optimized;
+
+                ///
+                /// \brief This attribute is used to connect the Mesh to a vertex buffer in the graphic API.
+                ///
+                std::shared_ptr<BufferObject>   vertexBuffer;
+
+                ///
+                /// \brief This attribute is used to connect the Mesh to a element buffer in the graphic API.
+                ///
+                std::shared_ptr<BufferObject>   elementBuffer;
         };
     }
 }

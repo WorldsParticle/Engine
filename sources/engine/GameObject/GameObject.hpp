@@ -58,91 +58,82 @@ namespace   WorldParticles
                 /// \brief Get the transform of the gameobject.
                 /// \return The gameobject transform
                 ///
-                const Transform     &GetTransform(void) const
-                {
-                    return this->_transform;
-                }
+                const Transform                         &getTransform(void) const;
 
                 ///
                 /// \brief Get the renderer of the gameobject
                 /// \return The renderer of the gameobject
                 ///
-                const IRenderer     *GetRenderer(void) const
-                {
-                    return this->_renderer;
-                }
+                const IRenderer                         *getRenderer(void) const;
 
                 ///
                 /// \brief Get the material of the gameobject
                 /// \return The material of the gameobject
                 ///
-                const Material      *GetMaterial(void) const
-                {
-                    return this->_material;
-                }
+                const std::shared_ptr<Material>         &getMaterial(void) const;
 
                 ///
                 /// \brief Getter for the Mesh attribute.
                 ///
-                const Mesh          *GetMesh(void) const
-                {
-                    return this->_mesh;
-                }
+                const std::shared_ptr<Mesh>             &getMesh(void) const;
+
+                ///
+                /// \brief Getter for the shader program used to render this gameobject.
+                ///
+                const std::shared_ptr<ShaderProgram>    &getShaderProgram(void) const;
 
             public:
                 ///
                 /// \brief Setter for the transform attribute.
                 ///
-                void                setTransform(const Transform &transform)
-                {
-                     this->_transform = transform;
-                }
+                void                setTransform(const Transform &transform);
 
                 ///
                 /// \brief Setter for the renderer attribute;
                 ///
-                void                setRenderer(IRenderer *renderer)
-                {
-                    this->_renderer = renderer;
-                }
+                void                setRenderer(IRenderer *renderer);
 
                 ///
                 /// \brief Setter for the material attribute.
                 ///
-                void                setMaterial(Material *material)
-                {
-                     this->_material = material;
-                }
+                void                setMaterial(std::shared_ptr<Material> &material);
 
                 ///
                 /// \brief Setter for the mesh attrbute.
                 ///
-                void                setMesh(Mesh *mesh)
-                {
-                    this->_mesh = mesh;
-                }
+                void                setMesh(std::shared_ptr<Mesh> &mesh);
+
+                ///
+                /// \brief Setter for the shader program used to render the gameobject.
+                ///
+                void                setShaderProgram(std::shared_ptr<ShaderProgram> &shaderprogram);
 
             protected:
                 ///
                 /// \brief The transform is used to store the position, scale, rotation of the gameobject
                 ///
-                Transform               _transform;
+                Transform                       transform;
 
                 ///
                 /// \brief The material is used to store the texture, shader, color... of the gameobject.
                 ///
-                Material                *_material;
+                std::shared_ptr<Material>       material;
 
                 ///
                 /// \brief The mesh is used to store the UVs, Vertex of the gameobject.
                 ///
-                Mesh                    *_mesh;
+                std::shared_ptr<Mesh>           mesh;
+
+                ///
+                /// \brief The shaderprogram used to draw the gameobject.
+                ///
+                std::shared_ptr<ShaderProgram>  shaderprogram;
 
                 ///
                 /// \brief The renderer is the object that will used the material, the mesh
                 /// and the MVP matrix to display the gameobject.
                 ///
-                IRenderer               *_renderer;
+                IRenderer                       *renderer;
         };
     }
 }

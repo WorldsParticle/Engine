@@ -24,31 +24,32 @@ namespace WorldParticles
         {
             if (gameobject != nullptr)
             {
-                const Material  *material = gameobject->GetMaterial();
-                const Mesh      *mesh = gameobject->GetMesh();
+                const auto      &shaderProgram = gameobject->getShaderProgram();
+                const auto      &material = gameobject->getMaterial();
+                const auto      &mesh = gameobject->getMesh();
 
-                if (mesh != nullptr && material != nullptr)
+                if (shaderProgram && mesh && material)
                 {
-                    auto        &shaderProgram = material->GetShaderProgram();
-                    auto        &vertices = mesh->getVertices();
-
-                    shaderProgram->Bind();
-
+                    shaderProgram->bind();
                     shaderProgram->SetUniform("projection", projection);
                     shaderProgram->SetUniform("view", view);
                     shaderProgram->SetUniform("model", model);
-
+                    shaderProgram->setUniform("color", material->color);
                     mesh->bind();
-
-                    GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, vertices.size());
-
+                    if (mesh->hasIndices())
+                    {
+                        GLWindow::m_funcs->glDrawElements(GL_TRIANGLES,
+                                mesh->getIndices().size(), GL_UNSIGNED_INT, 0);
+                    }
+                    else
+                    {
+                        GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0,
+                                mesh->getPositions().size());
+                    }
                     mesh->unbind();
-
-                    shaderProgram->Unbind();
-
+                    shaderProgram->unbind();
                 }
             }
-
         }
 
     }

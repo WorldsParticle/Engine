@@ -12,6 +12,10 @@ namespace   WorldParticles
     namespace   Engine
     {
 
+        ///
+        /// PUBLIC CONSTRUCTOR
+        ///
+
         ShaderProgram::ShaderProgram(void) :
             _programId(GLWindow::m_funcs->glCreateProgram()),
             _isLinked(false)
@@ -23,18 +27,25 @@ namespace   WorldParticles
         }
 
 
+        ///
+        /// PUBLIC OPERATOR
+        ///
 
         ShaderProgram &ShaderProgram::operator<<(const std::shared_ptr<Shader> &shader)
         {
-            this->AddShader(shader);
+            this->add(shader);
             return *this;
         }
 
 
+        ///
+        /// PUBLIC METHOD
+        ///
 
-        void ShaderProgram::AddShader(const std::shared_ptr<Shader> &shader)
+        void
+        ShaderProgram::add(const std::shared_ptr<Shader> &shader)
         {
-            GLWindow::m_funcs->glAttachShader(this->_programId, shader->GetShaderId());
+            GLWindow::m_funcs->glAttachShader(this->_programId, shader->getShaderId());
         }
 
         bool ShaderProgram::Link(void)
@@ -43,7 +54,7 @@ namespace   WorldParticles
 
             GLWindow::m_funcs->glLinkProgram(this->_programId);
             GLWindow::m_funcs->glGetProgramiv(this->_programId, GL_LINK_STATUS, &result);
-            this->_isLinked = result == GL_TRUE;
+            this->linked = result == GL_TRUE;
 
 //#if     __DEBUG__
 
@@ -62,26 +73,96 @@ namespace   WorldParticles
 
 //#endif [> !__DEBUG__ <]
 
-            return this->_isLinked;
+            return this->linked;
         }
 
-        void    ShaderProgram::Bind(void) const
+        void    ShaderProgram::bind(void) const
         {
-            GLWindow::m_funcs->glUseProgram(this->_programId);
+            GLWindow::m_funcs->glUseProgram(this->id);
         }
 
-        void    ShaderProgram::Unbind(void) const
+        void    ShaderProgram::unbind(void) const
         {
             GLWindow::m_funcs->glUseProgram(0);
         }
 
 
-
-        void    ShaderProgram::SetUniform(const std::string &name, const glm::mat4 &matrix) const
+        bool
+        ShaderProgram::isLinked(void) const
         {
-            int matrixUniformLocation = GLWindow::m_funcs->glGetUniformLocation(this->_programId, name.c_str());
-            GLWindow::m_funcs->glUniformMatrix4fv(matrixUniformLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+            return this->linked;
         }
 
+
+
+        void
+        ShaderProgram::setUniform(const std::string &name, float value)
+        {
+            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            GLWindow::m_funcs->glUniform1f(uniLocation, value);
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::vec2 &vec)
+        {
+            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            GLWindow::m_funcs->glUniform2f(uniLocation, vec.x, vec.y);
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::vec3 &vec)
+        {
+            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            GLWindow::m_funcs->glUniform3f(uniLocation, vec.x, vec.y, vec.z);
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::vec4 &vec)
+        {
+            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            GLWindow::m_funcs->glUniform4f(uniLocation, vec.x, vec.y, vec.z, vec.w);
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, int value) const
+        {
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::ivec2 &value) const
+        {
+
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::ivec3 &value) const
+        {
+
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::ivec3 &value) const
+        {
+
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::ivec4 &value) const
+        {
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat4 &matrix) const
+        {
+            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            GLWindow::m_funcs->glUniformMatrix4fv(uniLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::vec3 &vec) const
+        {
+            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            GLWindow::m_funcs->glUniformMatrix4fv(uniLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+        }
     }
 }

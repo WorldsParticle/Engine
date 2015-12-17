@@ -20,7 +20,7 @@ namespace WorldParticles
             {
                 this->_renderer = new BasicRenderer();
                 this->_mesh = new Mesh();
-                this->_mesh->setVertices(std::vector<glm::vec3>{
+                this->_mesh->setPositions(std::vector<glm::vec3>{
                         glm::vec3(-1.0f, -1.0f, 0.0f),
                         glm::vec3(1.0f, -1.0f, 0.0f),
                         glm::vec3(0.0f,  1.0f, 0.0f),
@@ -74,7 +74,7 @@ namespace WorldParticles
                         glm::vec3(1.0, -1.0, 1.0)
 
                 });
-                this->_mesh->initialise();
+                this->_mesh->update();
                 this->_material = new Material();
                 this->_material->SetShaderProgram(ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM));
                 return true;

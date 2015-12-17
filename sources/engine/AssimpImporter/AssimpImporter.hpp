@@ -51,8 +51,6 @@ namespace   WorldParticles
 
                 void        importTextures(const aiScene *assimpScene, Scene *scene);
 
-                Mesh        *importMesh(const aiMesh *assimpMesh);
-
             private:
                 ///
                 /// \brief the assimp importer that wil be used to load the file in a new scene.

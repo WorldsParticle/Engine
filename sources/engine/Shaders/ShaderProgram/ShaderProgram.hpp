@@ -2,6 +2,7 @@
 # define    __SHADER_PROGRAM_HPP__
 
 #include    <glm/glm.hpp>
+#include    <vector>
 #include    <memory>
 
 #include    "Shader.hpp"
@@ -17,12 +18,12 @@ namespace   WorldParticles
         {
             public:
                 ///
-                /// \brief Default constructor
+                /// \brief Default constructor.
                 ///
                 ShaderProgram(void);
 
                 ///
-                /// \brief Destructor
+                /// \brief Destructor.
                 ///
                 ~ShaderProgram(void);
 
@@ -34,9 +35,9 @@ namespace   WorldParticles
 
             public:
                 ///
-                /// \brief This method is used to push a shader into the program shader.
+                /// \brief This method is used to push a shader in the program shader.
                 ///
-                void            AddShader(const std::shared_ptr<Shader> &shader);
+                void    add(const std::shared_ptr<Shader> &shader);
 
             public:
 
@@ -44,45 +45,176 @@ namespace   WorldParticles
                 /// \brief This method is used to link the program shader.
                 /// \return true if the link succeed, false otherwise.
                 ///
-                bool    Link(void);
+                bool    link(void);
 
                 ///
                 /// \brief This method is used to bind the program shader on the graphic pipeline.
                 ///
-                void    Bind(void) const;
+                void    bind(void) const;
 
                 ///
                 /// \brief This method is used to unbind the program shader on the graphic pipeline.
                 ///
-                void    Unbind(void) const;
+                void    unbind(void) const;
 
             public:
                 ///
                 /// \brief This method is used to know if the shader program have been already compiled.
                 ///
-                bool    IsLinked(void)
-                {
-                    return this->_isLinked;
-                }
+                bool    isLinked(void) const;
 
             public:
-                ///
-                /// \brief This method can be used to set a mat4 uniform.
-                ///
-                void    SetUniform(const std::string &name, const glm::mat4 &matrix) const;
 
-                /// TODO add others set uniform
+                ///
+                /// \brief This method should be used to set a float uniform.
+                ///
+                void    setUniform(const std::string &name, float value) const;
+
+                ///
+                /// \brief This method should be used to modify a vec2 uniform.
+                ///
+                void    setUniform(const std::string &name, const glm::vec2 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a vec3 uniform.
+                ///
+                void    setUniform(const std::string &name, const glm::vec3 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a vec4 uniform.
+                ///
+                void    setUniform(const std::string &name, const glm::vec4 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a int uniform.
+                ///
+                void    setUniform(const std::string &name, int value) const;
+
+                ///
+                /// \brief This method should be used to modify a ivec2 uniform.
+                ///
+                void    setUniform(const std::string &name, const glm::ivec2 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a ivec3 uniform.
+                ///
+                void    setUniform(const std::string &name, const glm::ivec3 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a ivec4 uniform.
+                ///
+                void    setUniform(const std::string &name, const glm::ivec4 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a unsigned int uniform.
+                ///
+                void    setUniform(const std::string &name, unsigned int value) const;
+
+                ///
+                /// \brief This method should be used to modify a uvec2 uniform.
+                ///
+                void    setUniform(const std::string &name, const glm::uvec2 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a uvec4 uniform.
+                ///
+                void    setUniform(const std::string &name, const glm::uvec3 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a uvec4 uniform.
+                ///
+                void    setUniform(const std::string &name, const glm::uvec4 &value) const;
+
+                ///
+                /// \brief This method should be used to set a float uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<float> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a vec2 uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<glm::vec2> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a vec3 uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<glm::vec3> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a vec4 uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<glm::vec4> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a int uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<int> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a ivec2 uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<glm::ivec2> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a ivec3 uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<glm::ivec3> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a ivec4 uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<glm::ivec4> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a unsigned int uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<unsigned int> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a uvec2 uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<glm::uvec2> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a uvec3 uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<glm::uvec3> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a uvec4 uniform array.
+                ///
+                void    setUniform(const std::string &name, const std::vector<glm::uvec4> &value) const;
+
+                void    setUniform(const std::string &name, const glm::mat2 &value) const;
+                void    setUniform(const std::string &name, const glm::mat3 &value) const;
+                void    setUniform(const std::string &name, const glm::mat4 &value) const;
+                void    setUniform(const std::string &name, const glm::mat2x3 &value) const;
+                void    setUniform(const std::string &name, const glm::mat3x2 &value) const;
+                void    setUniform(const std::string &name, const glm::mat2x4 &value) const;
+                void    setUniform(const std::string &name, const glm::mat4x2 &value) const;
+                void    setUniform(const std::string &name, const glm::mat3x4 &value) const;
+                void    setUniform(const std::string &name, const glm::mat4x3 &value) const;
+
+                void    setUniform(const std::string &name, const std::vector<glm::mat2> &value) const;
+                void    setUniform(const std::string &name, const std::vector<glm::mat3> &value) const;
+                void    setUniform(const std::string &name, const std::vector<glm::mat4> &value) const;
+                void    setUniform(const std::string &name, const std::vector<glm::mat2x3> &value) const;
+                void    setUniform(const std::string &name, const std::vector<glm::mat3x2> &value) const;
+                void    setUniform(const std::string &name, const std::vector<glm::mat2x4> &value) const;
+                void    setUniform(const std::string &name, const std::vector<glm::mat4x2> &value) const;
+                void    setUniform(const std::string &name, const std::vector<glm::mat3x4> &value) const;
+                void    setUniform(const std::string &name, const std::vector<glm::mat4x3> &value) const;
 
             protected:
                 ///
                 /// \brief This attribute is used to store the program id.
                 ///
-                unsigned int                _programId;
+                unsigned int                id;
 
                 ///
                 /// \brief This attribute is used to know if the shader program have been compiled.
                 ///
-                bool                        _isLinked;
+                bool                        linked;
 
         };
     }

@@ -92,6 +92,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/AssimpImporter.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/Model/Model.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/BufferObject/BufferObject.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/ShaderManager.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/ShaderProgramManager.cpp
@@ -132,6 +133,7 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Utilities/Deserializable.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/AssimpImporter.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/Model/Model.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/BufferObject/BufferObject.hpp
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/ShaderManager.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/ShaderProgramManager.hpp
@@ -176,6 +178,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/
     ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/Model/
+    ${CMAKE_SOURCE_DIR}/sources/engine/BufferObject/
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/
