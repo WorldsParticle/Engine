@@ -35,9 +35,35 @@ namespace WorldParticles
 
             public:
                 ///
-                /// \brief Permet de mettre a jour l'api graphic des modifications effectué dans le mesh.
+                /// \brief This method is used to update the mesh in the graphic card.
                 ///
                 void    update(void);
+
+                ///
+                /// \brief This method is used to bind the mesh in the rendering pipeline.
+                ///
+                void    bind(void);
+
+                ///
+                /// \brief This method is used to unbind the mesh of the rendering pipeline.
+                ///
+                void    unbind(void);
+
+            public:
+                ///
+                /// \brief This method is used to know if the mesh contains positions.
+                ///
+                bool    hasPositions(void) const;
+
+                ///
+                /// \brief This method is used to know if the mesh contains normals.
+                ///
+                bool    hasNormals(void) const;
+
+                ///
+                /// \brief This method is used to know if the mesh contains indices.
+                ///
+                bool    hasIndices(void) const;
 
             public:
                 ///
@@ -54,16 +80,6 @@ namespace WorldParticles
                 /// \brief Getter for the indices attribute.
                 ///
                 const std::vector<unsigned int>     &getIndices(void) const;
-
-                ///
-                /// \brief Getter for the vertex buffer object.
-                ///
-                const std::shared_ptr<BufferObject> &getVertexBufferObject(void) const;
-
-                ///
-                /// \brief Getter for the element buffer object.
-                ///
-                const std::shared_ptr<BufferObject> &getElementBufferObject(void) const;
 
             public:
                 ///
@@ -109,22 +125,22 @@ namespace WorldParticles
                 ///
                 /// the name is optional, could be an empty string.
                 ///
-                std::string                     _name;
+                std::string                     name;
 
                 ///
                 /// \brief The vertices attribute is used to store all vertex of the mesh.
                 ///
-                std::vector<glm::vec3>          _positions;
+                std::vector<glm::vec3>          positions;
 
                 ///
                 /// \brief The normals attribute is used to store all normal of the mesh.
                 ///
-                std::vector<glm::vec3>          _normals;
+                std::vector<glm::vec3>          normals;
 
                 ///
                 /// \brief The indices attribute is used to store all indices of a mesh.
                 ///
-                std::vector<unsigned int>       _indices;
+                std::vector<unsigned int>       indices;
 
                 ///
                 /// \brief This boolean is used to know if the mesh should be send to the graphic api or if it's already updated.

@@ -18,9 +18,9 @@ namespace WorldParticles
 
             bool    Cube::initialise(void)
             {
-                this->_renderer = new BasicRenderer();
-                this->_mesh = new Mesh();
-                this->_mesh->setPositions(std::vector<glm::vec3>{
+                this->renderer = new BasicRenderer();
+                this->mesh = std::make_shared<Mesh>();
+                this->mesh->setPositions(std::vector<glm::vec3>{
                         glm::vec3(-1.0f, -1.0f, 0.0f),
                         glm::vec3(1.0f, -1.0f, 0.0f),
                         glm::vec3(0.0f,  1.0f, 0.0f),
@@ -74,25 +74,19 @@ namespace WorldParticles
                         glm::vec3(1.0, -1.0, 1.0)
 
                 });
-                this->_mesh->update();
-                this->_material = new Material();
-                this->_material->SetShaderProgram(ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM));
+                this->mesh->update();
+                this->material = std::make_shared<Material>();
+                this->shaderprogram = ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM);
                 return true;
             }
 
             void    Cube::draw(const glm::mat4 &projection, const glm::mat4 &view)
             {
-                glm::mat4   model = this->_transform.GetMatrix();
-                this->_renderer->draw(this, projection, view, model);
+                this->renderer->draw(this, projection, view, this->transform.getMatrix());
             }
 
             void    Cube::update(void)
             {
-                const glm::vec3 &position = this->_transform.GetPosition();
-                if (position.y < 20.0)
-                    this->_transform.SetPosition(position + glm::vec3(0.0, 0.1, 0.0));
-                else
-                    this->_transform.SetPosition(glm::vec3(0.0, -20.0, 0.0));
             }
 
         }

@@ -20,24 +20,23 @@ namespace   WorldParticles
         bool
         Model::initialise(void)
         {
-            this->_renderer = new BasicRenderer();
-            this->_material = new Material();
-            this->_material->SetShaderProgram(ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM));
+            this->renderer = new BasicRenderer();
+            this->material = std::make_shared<Material>();
+            this->shaderprogram = ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM);
             return true;
         }
 
         void
         Model::update(void)
         {
-            const glm::vec3     &rotation = this->_transform.GetRotation();
-            this->_transform.SetRotation(rotation + glm::vec3(0.0, 0.01, 0.0));
+            const glm::vec3     &rotation = this->transform.getRotation();
+            this->transform.setRotation(rotation + glm::vec3(0.0, 0.01, 0.0));
         }
 
         void
         Model::draw(const glm::mat4 &projection, const glm::mat4 &view)
         {
-            glm::mat4   model = this->_transform.GetMatrix();
-            this->_renderer->draw(this, projection, view, model);
+            this->renderer->draw(this, projection, view, this->transform.getMatrix());
         }
     }
 }

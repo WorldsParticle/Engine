@@ -32,9 +32,9 @@ namespace   WorldParticles
                 result = std::make_shared<ShaderProgram>();
                 for (const ShaderName &shaderName : property.associatedShaders)
                 {
-                    result->AddShader(ShaderManager::Get(shaderName));
+                    result->add(ShaderManager::Get(shaderName));
                 }
-                result->Link();
+                result->link();
             }
             return result;
         }

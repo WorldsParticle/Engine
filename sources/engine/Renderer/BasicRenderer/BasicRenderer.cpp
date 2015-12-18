@@ -31,10 +31,10 @@ namespace WorldParticles
                 if (shaderProgram && mesh && material)
                 {
                     shaderProgram->bind();
-                    shaderProgram->SetUniform("projection", projection);
-                    shaderProgram->SetUniform("view", view);
-                    shaderProgram->SetUniform("model", model);
-                    shaderProgram->setUniform("color", material->color);
+                    shaderProgram->setUniform("projection", projection);
+                    shaderProgram->setUniform("view", view);
+                    shaderProgram->setUniform("model", model);
+                    shaderProgram->setUniform("color", material->getColor());
                     mesh->bind();
                     if (mesh->hasIndices())
                     {

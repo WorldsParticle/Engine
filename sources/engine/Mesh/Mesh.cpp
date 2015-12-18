@@ -19,7 +19,7 @@ namespace   WorldParticles
         Mesh::Mesh(const aiMesh *am)
         {
             if (am == nullptr) throw std::invalid_argument("assimpMesh is null.");
-            this->_name = am->mName.C_Str();
+            this->name = am->mName.C_Str();
             if (am->HasPositions()) {
                 this->setPositions(am->mVertices, am->mNumVertices);
             }
@@ -46,17 +46,50 @@ namespace   WorldParticles
         {
             if (!this->vertexBuffer)
                 this->vertexBuffer = std::make_shared<BufferObject>();
-            if (!this->elementBuffer && !this->_indices.empty())
+            if (!this->elementBuffer && !this->indices.empty())
                 this->elementBuffer = std::make_shared<BufferObject>();
 
-            std::vector<float> vertices = this->positions;
-            vertices.insert(vertices.end(), this->normals.begin(), this->normals.end());
+            std::vector<float>  vertices;
+/*            std::vector<float> vertices = this->positions;*/
+            //vertices.insert(vertices.end(), this->normals.begin(), this->normals.end());
 
-            this->vertexBuffer->setData(vertices);
-            this->elementBuffer->setData(this->_indices);
+            //this->vertexBuffer->setData(vertices);
+            /*this->elementBuffer->setData(this->indices);*/
             this->updated = true;
         }
 
+        void
+        Mesh::bind(void)
+        {
+            if (this->vertexBuffer) this->vertexBuffer->bind();
+            if (this->elementBuffer) this->elementBuffer->bind();
+        }
+
+        void
+        Mesh::unbind(void)
+        {
+            if (this->vertexBuffer) this->vertexBuffer->unbind();
+            if (this->elementBuffer) this->elementBuffer->unbind();
+        }
+
+
+        bool
+        Mesh::hasPositions(void) const
+        {
+            return !this->positions.empty();
+        }
+
+        bool
+        Mesh::hasNormals(void) const
+        {
+             return !this->normals.empty();
+        }
+
+        bool
+        Mesh::hasIndices(void) const
+        {
+            return !this->indices.empty();
+        }
 
         ///
         /// PUBLIC GETTER
@@ -65,54 +98,41 @@ namespace   WorldParticles
         const std::vector<glm::vec3> &
         Mesh::getPositions(void) const
         {
-            return this->_positions;
+            return this->positions;
         }
 
         const std::vector<glm::vec3> &
         Mesh::getNormals(void) const
         {
-            return this->_normals;
+            return this->normals;
         }
 
         const std::vector<unsigned int> &
         Mesh::getIndices(void) const
         {
-            return this->_indices;
+            return this->indices;
         }
-
-        const std::shared_ptr<BufferObject> &
-        Mesh::getVertexBufferObject(void) const
-        {
-            return this->vertexBuffer;
-        }
-
-        const std::shared_ptr<BufferObject> &
-        Mesh::getElementBufferObject(void) const
-        {
-            return this->elementBuffer;
-        }
-
 
         ///
         /// PUBLIC SETTER
         ///
 
         void
-        Mesh::setPositions(const std::vector<glm::vec3> &newPositions)
+        Mesh::setPositions(const std::vector<glm::vec3> &positions)
         {
-            this->_positions = newPositions;
+            this->positions = positions;
         }
 
         void
-        Mesh::setNormals(const std::vector<glm::vec3> &newNormals)
+        Mesh::setNormals(const std::vector<glm::vec3> &normals)
         {
-            this->_normals = newNormals;
+            this->normals = normals;
         }
 
         void
-        Mesh::setIndices(const std::vector<unsigned int> &newIndices)
+        Mesh::setIndices(const std::vector<unsigned int> &indices)
         {
-            this->_indices = newIndices;
+            this->indices = indices;
         }
 
         ///
@@ -120,34 +140,26 @@ namespace   WorldParticles
         ///
 
         void
-        Mesh::setPositions(const aiVector3D *newPositions,
-                unsigned int numberElements)
+        Mesh::setPositions(const aiVector3D *positions, unsigned int numberElements)
         {
-            if (newPositions == nullptr)
-                throw std::invalid_argument("newPositions is null");
-            auto convert = [&](const aiVector3D &v){
-                return glm::vec3(v.x, v.y, v.z);
-            };
-            this->_positions.clear();
-            this->_positions.reserve(numberElements);
+            if (positions == nullptr) throw std::invalid_argument("positions is null");
+            auto convert = [&](const aiVector3D &v){ return glm::vec3(v.x, v.y, v.z); };
+            this->positions.clear();
+            this->positions.reserve(numberElements);
             for (unsigned int i = 0 ; i < numberElements ; ++i) {
-                 this->_positions.push_back(convert(newPositions[i]));
+                 this->positions.push_back(convert(positions[i]));
             }
         }
 
         void
-        Mesh::setNormals(const aiVector3D *normals,
-                unsigned int numberElements)
+        Mesh::setNormals(const aiVector3D *normals, unsigned int numberElements)
         {
-            if (normals == nullptr)
-                throw std::invalid_argument("normals is null");
-            auto convert = [&](const aiVector3D &v) {
-                return glm::vec3(v.x, v.y, v.z);
-            };
-            this->_normals.clear();
-            this->_normals.reserve(numberElements);
+            if (normals == nullptr) throw std::invalid_argument("normals is null");
+            auto convert = [&](const aiVector3D &v) { return glm::vec3(v.x, v.y, v.z); };
+            this->normals.clear();
+            this->normals.reserve(numberElements);
             for (unsigned int i = 0 ; i < numberElements ; ++i) {
-                 this->_normals.push_back(convert(normals[i]));
+                 this->normals.push_back(convert(normals[i]));
             }
         }
 
@@ -155,14 +167,14 @@ namespace   WorldParticles
         Mesh::setIndices(const aiFace *faces, unsigned int numberElements)
         {
             if (faces == nullptr) throw std::invalid_argument("faces is null");
-            this->_indices.clear();
-            this->_indices.reserve(numberElements * 3);
+            this->indices.clear();
+            this->indices.reserve(numberElements * 3);
             for (unsigned int i = 0 ; i < numberElements ; ++i) {
                 if (faces[i].mNumIndices == 3)
                 {
-                     this->_indices.push_back(faces[i].mIndices[0]);
-                     this->_indices.push_back(faces[i].mIndices[1]);
-                     this->_indices.push_back(faces[i].mIndices[2]);
+                     this->indices.push_back(faces[i].mIndices[0]);
+                     this->indices.push_back(faces[i].mIndices[1]);
+                     this->indices.push_back(faces[i].mIndices[2]);
                 }
             }
         }

@@ -1,11 +1,9 @@
 #include    <glm/gtc/type_ptr.hpp>
+# include   <log4cpp/Category.hh>
 
 #include    "ShaderProgram.hpp"
 #include    "glwindow.h"
 
-//#if     __DEBUG__
-# include   <log4cpp/Category.hh>
-//#endif [> !__DEBUG__<]
 
 namespace   WorldParticles
 {
@@ -17,13 +15,15 @@ namespace   WorldParticles
         ///
 
         ShaderProgram::ShaderProgram(void) :
-            _programId(GLWindow::m_funcs->glCreateProgram()),
-            _isLinked(false)
+            id(GLWindow::m_funcs->glCreateProgram()),
+            linked(false)
         {
+            // nothing to do
         }
 
         ShaderProgram::~ShaderProgram(void)
         {
+            // nothing to do
         }
 
 
@@ -31,7 +31,8 @@ namespace   WorldParticles
         /// PUBLIC OPERATOR
         ///
 
-        ShaderProgram &ShaderProgram::operator<<(const std::shared_ptr<Shader> &shader)
+        ShaderProgram &
+        ShaderProgram::operator<<(const std::shared_ptr<Shader> &shader)
         {
             this->add(shader);
             return *this;
@@ -45,46 +46,44 @@ namespace   WorldParticles
         void
         ShaderProgram::add(const std::shared_ptr<Shader> &shader)
         {
-            GLWindow::m_funcs->glAttachShader(this->_programId, shader->getShaderId());
+            GLWindow::m_funcs->glAttachShader(this->id, shader->getId());
         }
 
-        bool ShaderProgram::Link(void)
+        bool
+        ShaderProgram::link(void)
         {
-            int     result;
+            int     result = GL_FALSE;
 
-            GLWindow::m_funcs->glLinkProgram(this->_programId);
-            GLWindow::m_funcs->glGetProgramiv(this->_programId, GL_LINK_STATUS, &result);
-            this->linked = result == GL_TRUE;
-
-//#if     __DEBUG__
-
-            if (this->_isLinked == false)
+            GLWindow::m_funcs->glLinkProgram(this->id);
+            GLWindow::m_funcs->glGetProgramiv(this->id, GL_LINK_STATUS, &result);
+            this->linked = (result == GL_TRUE);
+            if (this->linked == false)
             {
-                GLWindow::m_funcs->glGetProgramiv(this->_programId, GL_INFO_LOG_LENGTH, &result);
+                GLWindow::m_funcs->glGetProgramiv(this->id, GL_INFO_LOG_LENGTH, &result);
                 if (result > 1)
                 {
                     char *info = new char[result + 1];
-                    GLWindow::m_funcs->glGetProgramInfoLog(this->_programId, result, 0, info);
+                    GLWindow::m_funcs->glGetProgramInfoLog(this->id, result, 0, info);
                     log4cpp::Category &root = log4cpp::Category::getRoot();
                     root << log4cpp::Priority::ERROR << info;
                     delete info;
                 }
             }
-
-//#endif [> !__DEBUG__ <]
-
             return this->linked;
         }
 
-        void    ShaderProgram::bind(void) const
+        void
+        ShaderProgram::bind(void) const
         {
             GLWindow::m_funcs->glUseProgram(this->id);
         }
 
-        void    ShaderProgram::unbind(void) const
+        void
+        ShaderProgram::unbind(void) const
         {
             GLWindow::m_funcs->glUseProgram(0);
         }
+
 
 
         bool
@@ -96,73 +95,340 @@ namespace   WorldParticles
 
 
         void
-        ShaderProgram::setUniform(const std::string &name, float value)
+        ShaderProgram::setUniform(const std::string &name, float value) const
         {
-            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
-            GLWindow::m_funcs->glUniform1f(uniLocation, value);
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform1f(location, value);
         }
 
         void
-        ShaderProgram::setUniform(const std::string &name, const glm::vec2 &vec)
+        ShaderProgram::setUniform(const std::string &name, const glm::vec2 &value) const
         {
-            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
-            GLWindow::m_funcs->glUniform2f(uniLocation, vec.x, vec.y);
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform2f(location, value.x, value.y);
         }
 
         void
-        ShaderProgram::setUniform(const std::string &name, const glm::vec3 &vec)
+        ShaderProgram::setUniform(const std::string &name, const glm::vec3 &value) const
         {
-            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
-            GLWindow::m_funcs->glUniform3f(uniLocation, vec.x, vec.y, vec.z);
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform3f(location, value.x, value.y, value.z);
         }
 
         void
-        ShaderProgram::setUniform(const std::string &name, const glm::vec4 &vec)
+        ShaderProgram::setUniform(const std::string &name, const glm::vec4 &value) const
         {
-            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
-            GLWindow::m_funcs->glUniform4f(uniLocation, vec.x, vec.y, vec.z, vec.w);
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform4f(location, value.x, value.y, value.z, value.w);
         }
 
         void
         ShaderProgram::setUniform(const std::string &name, int value) const
         {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform1i(location, value);
         }
 
         void
         ShaderProgram::setUniform(const std::string &name, const glm::ivec2 &value) const
         {
-
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform2i(location, value.x, value.y);
         }
 
         void
         ShaderProgram::setUniform(const std::string &name, const glm::ivec3 &value) const
         {
-
-        }
-
-        void
-        ShaderProgram::setUniform(const std::string &name, const glm::ivec3 &value) const
-        {
-
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform3i(location, value.x, value.y, value.z);
         }
 
         void
         ShaderProgram::setUniform(const std::string &name, const glm::ivec4 &value) const
         {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform4i(location, value.x, value.y, value.z, value.w);
         }
 
         void
-        ShaderProgram::setUniform(const std::string &name, const glm::mat4 &matrix) const
+        ShaderProgram::setUniform(const std::string &name, unsigned int value) const
         {
-            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
-            GLWindow::m_funcs->glUniformMatrix4fv(uniLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform1ui(location, value);
         }
 
         void
-        ShaderProgram::setUniform(const std::string &name, const glm::vec3 &vec) const
+        ShaderProgram::setUniform(const std::string &name, const glm::uvec2 &value) const
         {
-            int uniLocation = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
-            GLWindow::m_funcs->glUniformMatrix4fv(uniLocation, 1, GL_FALSE, glm::value_ptr(matrix));
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform2ui(location, value.x, value.y);
+       }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::uvec3 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform3ui(location, value.x, value.y, value.z);
+       }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::uvec4 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform4ui(location, value.x, value.y, value.z, value.w);
         }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<float> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform1fv(location, value.size(), value.data());
+       }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::vec2> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform2fv(location, value.size(), reinterpret_cast<const float *>(value.data()));
+       }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::vec3> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform3fv(location, value.size(), reinterpret_cast<const float *>(value.data()));
+       }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::vec4> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform4fv(location, value.size(), reinterpret_cast<const float *>(value.data()));
+       }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<int> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform1iv(location, value.size(), value.data());
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::ivec2> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform2iv(location, value.size(), reinterpret_cast<const int *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::ivec3> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform3iv(location, value.size(), reinterpret_cast<const int *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::ivec4> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform4iv(location, value.size(), reinterpret_cast<const int *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<unsigned int> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform1uiv(location, value.size(), value.data());
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::uvec2> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform2uiv(location, value.size(), reinterpret_cast<const unsigned int *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::uvec3> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform3uiv(location, value.size(), reinterpret_cast<const unsigned int *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::uvec4> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniform4uiv(location, value.size(), reinterpret_cast<const unsigned int *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat2 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix2fv(location, 1, GL_FALSE, glm::value_ptr(value));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat3 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat4 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat2x3 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix2x3fv(location, 1, GL_FALSE, glm::value_ptr(value));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat3x2 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix3x2fv(location, 1, GL_FALSE, glm::value_ptr(value));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat2x4 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix2x4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat4x2 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix4x2fv(location, 1, GL_FALSE, glm::value_ptr(value));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat3x4 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix3x4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const glm::mat4x3 &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix4x3fv(location, 1, GL_FALSE, glm::value_ptr(value));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::mat2> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix2fv(location, value.size(), GL_FALSE, reinterpret_cast<const float *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::mat3> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix3fv(location, value.size(), GL_FALSE, reinterpret_cast<const float *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::mat4> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix4fv(location, value.size(), GL_FALSE, reinterpret_cast<const float *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::mat2x3> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix2x3fv(location, value.size(), GL_FALSE, reinterpret_cast<const float *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::mat3x2> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix3x2fv(location, value.size(), GL_FALSE, reinterpret_cast<const float *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::mat2x4> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix2x4fv(location, value.size(), GL_FALSE, reinterpret_cast<const float *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::mat4x2> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix4x2fv(location, value.size(), GL_FALSE, reinterpret_cast<const float *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::mat3x4> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix3x4fv(location, value.size(), GL_FALSE, reinterpret_cast<const float *>(value.data()));
+        }
+
+        void
+        ShaderProgram::setUniform(const std::string &name, const std::vector<glm::mat4x3> &value) const
+        {
+            int location = GLWindow::m_funcs->glGetUniformLocation(this->id, name.c_str());
+            if (location == -1) throw std::runtime_error("the uniform name " + name + " is invalid.");
+            GLWindow::m_funcs->glUniformMatrix4x3fv(location, value.size(), GL_FALSE, reinterpret_cast<const float *>(value.data()));
+        }
+
     }
 }

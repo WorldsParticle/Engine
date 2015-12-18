@@ -171,8 +171,8 @@ namespace   WorldParticles
             root << Priority::INFO << "Nombre de meshes : " << assimpScene->mNumMeshes;
             for (unsigned int i = 0 ; i < assimpScene->mNumMeshes ; ++i)
             {
-                Mesh    *mesh = new Mesh(assimpScene->mMeshes[i]);
-                if (mesh != nullptr)
+                std::shared_ptr<Mesh> mesh = std::make_shared<Mesh>(assimpScene->mMeshes[i]);
+                if (mesh)
                 {
                     Model *test = new Model();
                     test->setMesh(mesh);

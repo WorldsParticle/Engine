@@ -185,25 +185,101 @@ namespace   WorldParticles
                 ///
                 void    setUniform(const std::string &name, const std::vector<glm::uvec4> &value) const;
 
+                ///
+                /// \brief This method should be used to modify a mat2 uniform.
+                ///
                 void    setUniform(const std::string &name, const glm::mat2 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat3 uniform.
+                ///
                 void    setUniform(const std::string &name, const glm::mat3 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat4 uniform.
+                ///
                 void    setUniform(const std::string &name, const glm::mat4 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat2x3 uniform.
+                ///
                 void    setUniform(const std::string &name, const glm::mat2x3 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat3x2 uniform.
+                ///
                 void    setUniform(const std::string &name, const glm::mat3x2 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat2x4 uniform.
+                ///
                 void    setUniform(const std::string &name, const glm::mat2x4 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat4x2 uniform.
+                ///
                 void    setUniform(const std::string &name, const glm::mat4x2 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat3x4 uniform.
+                ///
                 void    setUniform(const std::string &name, const glm::mat3x4 &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat4x3 uniform.
+                ///
                 void    setUniform(const std::string &name, const glm::mat4x3 &value) const;
 
+                ///
+                /// \brief This method should be used to modify a mat2 uniform array.
+                ///
                 void    setUniform(const std::string &name, const std::vector<glm::mat2> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat3 uniform array.
+                ///
                 void    setUniform(const std::string &name, const std::vector<glm::mat3> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat4 uniform array.
+                ///
                 void    setUniform(const std::string &name, const std::vector<glm::mat4> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat2x3 uniform array.
+                ///
                 void    setUniform(const std::string &name, const std::vector<glm::mat2x3> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat3x2 uniform.
+                ///
                 void    setUniform(const std::string &name, const std::vector<glm::mat3x2> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat4x3 uniform.
+                ///
                 void    setUniform(const std::string &name, const std::vector<glm::mat2x4> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat4x3 uniform.
+                ///
                 void    setUniform(const std::string &name, const std::vector<glm::mat4x2> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat4x3 uniform.
+                ///
                 void    setUniform(const std::string &name, const std::vector<glm::mat3x4> &value) const;
+
+                ///
+                /// \brief This method should be used to modify a mat4x3 uniform.
+                ///
                 void    setUniform(const std::string &name, const std::vector<glm::mat4x3> &value) const;
+
+            private:
+                ///
+                /// \brief This method is used to retrieve a uniform location from the shader program.
+                ///
+                int     getUniformLocation(const std::string &name);
 
             protected:
                 ///
