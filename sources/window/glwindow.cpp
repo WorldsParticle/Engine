@@ -53,6 +53,10 @@ GLWindow::GLWindow(QWindow *parent) :
         << "OpenGL version : "
         << this->format().majorVersion() << "." << this->format().minorVersion();
 
+    GLuint VertexArrayID;
+    m_funcs->glGenVertexArrays(1, &VertexArrayID);
+    m_funcs->glBindVertexArray(VertexArrayID);
+
 }
 
 
@@ -65,8 +69,12 @@ void    GLWindow::start(Model *model)
 {
     ::WorldParticles::Engine::GameEngine     _gameEngine;
 
+    QOpenGLDebugLogger *logger = new QOpenGLDebugLogger(this);
+
+    if (logger->initialize() == false)
+        qDebug() << "impossible d'initialiser le logger";
     _gEngine = &(_gameEngine);
-    _gameEngine.load(RESOURCES_PATH "/models/cube.obj");
+    _gameEngine.load(RESOURCES_PATH "/scenes/cube.obj");
     _gameEngine.initialise();
     ::WorldParticles::Engine::GameClock::start();
     resizeWindow();
@@ -74,8 +82,14 @@ void    GLWindow::start(Model *model)
     {
         _gameEngine.update();
         ::WorldParticles::Engine::GameClock::restart();
+        _context.makeCurrent(this);
         _gameEngine.draw();
         _context.swapBuffers(this);
+        _context.doneCurrent();
+
+        QList<QOpenGLDebugMessage> messages = logger->loggedMessages();
+        foreach (const QOpenGLDebugMessage &message, messages)
+            qDebug() << message;
 
         QCoreApplication::processEvents();
     }
