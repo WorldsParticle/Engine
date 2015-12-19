@@ -1,7 +1,7 @@
 #include    "GameEngine.hpp"
 #include    "AssimpImporter.hpp"
-
 #include    "Cube.hpp"
+#include    "glwindow.h"
 
 namespace   WorldParticles
 {
@@ -45,6 +45,7 @@ namespace   WorldParticles
 
         void    GameEngine::draw(void)
         {
+            GLWindow::m_funcs->glEnable(GL_DEPTH_TEST);
             for (Scene *scene : this->_scenes)
             {
                 if (scene == nullptr) continue;

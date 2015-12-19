@@ -53,9 +53,10 @@ namespace WorldParticles
 
         void    Camera::draw(void)
         {
+            GLWindow::m_funcs->glEnable(GL_DEPTH_TEST);
             GLWindow::m_funcs->glClearColor(0.3, 0.1, 0.1, 0.0);
             GLWindow::m_funcs->glViewport(0, 0, 1024, 768);
-            GLWindow::m_funcs->glClear(GL_COLOR_BUFFER_BIT);
+            GLWindow::m_funcs->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
 
     }

@@ -31,11 +31,12 @@ namespace   WorldParticles
             int             flags = 0;
 
             root << Priority::INFO << "chargement de la scene depuis le fichier : " << filename;
-            //flags |= aiProcess_ValidateDataStructure;
+            flags |= aiProcess_ValidateDataStructure;
             flags |= aiProcess_Triangulate;
-            //flags |= aiProcess_FindInvalidData;
-            //flags |= aiProcess_SortByPType;
+            flags |= aiProcess_FindInvalidData;
+            flags |= aiProcess_SortByPType;
             flags |= aiProcessPreset_TargetRealtime_Quality;
+            flags |= aiProcess_FixInfacingNormals;
             if ((assimpScene = this->_importer.ReadFile(filename, flags)) == nullptr)
             {
                 Category    &root = Category::getRoot();
