@@ -1,6 +1,9 @@
 #include    "Mesh.hpp"
 #include    "glwindow.h"
 
+#include    <log4cpp/Category.hh>
+using namespace log4cpp;
+
 namespace   WorldParticles
 {
     namespace   Engine
@@ -29,6 +32,7 @@ namespace   WorldParticles
             if (am->HasFaces()) {
                 this->setIndices(am->mFaces, am->mNumFaces);
             }
+            this->update();
         }
 
         Mesh::~Mesh(void)
@@ -41,26 +45,40 @@ namespace   WorldParticles
         /// PUBLIC METHOD
         ///
 
+        /// TODO Optimisations
         void
         Mesh::update(void)
         {
-            if (!this->vertexBuffer)
-                this->vertexBuffer = std::make_shared<BufferObject>();
-            if (!this->elementBuffer && !this->indices.empty())
-                this->elementBuffer = std::make_shared<BufferObject>();
-
-            std::vector<float>  vertices;
-/*            std::vector<float> vertices = this->positions;*/
-            //vertices.insert(vertices.end(), this->normals.begin(), this->normals.end());
-
-            //this->vertexBuffer->setData(vertices);
-            /*this->elementBuffer->setData(this->indices);*/
+            if (!this->vertexBuffer) {
+                this->vertexBuffer = std::make_shared<BufferObject>(
+                        BufferObject::Type::ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW
+                );
+            }
+            if (!this->elementBuffer && !this->indices.empty()) {
+                this->elementBuffer = std::make_shared<BufferObject>(
+                        BufferObject::Type::ELEMENT_ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW
+                );
+            }
+            float *data = reinterpret_cast<float *>(this->positions.data());
+            std::vector<float>  vertices(data, data + this->positions.size() * 3);
+            data = reinterpret_cast<float *>(this->normals.data());
+            vertices.insert(vertices.end(), data, data + this->normals.size() * 3);
+            this->vertexBuffer->update(vertices.data(), vertices.size() * sizeof(float));
+            this->vertexBuffer->bind();
+            GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
+            GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6, (void *)3);
+            this->vertexBuffer->unbind();
+            this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
             this->updated = true;
         }
 
         void
         Mesh::bind(void)
         {
+            GLWindow::m_funcs->glEnableVertexAttribArray(0);
+            GLWindow::m_funcs->glEnableVertexAttribArray(1);
             if (this->vertexBuffer) this->vertexBuffer->bind();
             if (this->elementBuffer) this->elementBuffer->bind();
         }
@@ -68,8 +86,10 @@ namespace   WorldParticles
         void
         Mesh::unbind(void)
         {
-            if (this->vertexBuffer) this->vertexBuffer->unbind();
             if (this->elementBuffer) this->elementBuffer->unbind();
+            if (this->vertexBuffer) this->vertexBuffer->unbind();
+            GLWindow::m_funcs->glDisableVertexAttribArray(1);
+            GLWindow::m_funcs->glDisableVertexAttribArray(0);
         }
 
 

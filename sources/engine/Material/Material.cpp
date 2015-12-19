@@ -5,7 +5,12 @@ namespace   WorldParticles
     namespace   Engine
     {
 
-        Material::Material(void)
+        ///
+        /// PUBLIC CONSTRUCTOR
+        ///
+
+        Material::Material(void) :
+            color(glm::vec4(1.0, 1.0, 1.0, 1.0))
         {
             // nothing to do
         }
@@ -23,6 +28,11 @@ namespace   WorldParticles
         {
             return this->color;
         }
+
+
+        ///
+        /// PUBLIC SETTER
+        ///
 
         void
         Material::setColor(const glm::vec4 &color)

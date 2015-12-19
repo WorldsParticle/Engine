@@ -60,17 +60,17 @@ namespace   WorldParticles
                 ///
                 /// \brief Getter for the position attribute.
                 ///
-                const glm::vec3 &getPosition(void) const;
+                const glm::vec3     &getPosition(void) const;
 
                 ///
                 /// \brief Getter for the rotation attribute.
                 ///
-                const glm::vec3 &getRotation(void) const;
+                const glm::vec3     &getRotation(void) const;
 
                 ///
                 /// \brief Getter for the scale attribute
                 ///
-                const glm::vec3 &getScale(void) const;
+                const glm::vec3     &getScale(void) const;
 
             private:
                 ///

@@ -17,16 +17,22 @@ namespace   WorldParticles
                 ///
                 enum    Type
                 {
-                    UNDEFINED,
-                    ELEMENT_ARRAY,
-                    ARRAY
+                    ARRAY_BUFFER,
+                    ELEMENT_ARRAY_BUFFER
+                };
+
+                enum    Usage
+                {
+                    STATIC_DRAW,
+                    DYNAMIC_DRAW,
+                    STREAM_DRAW
                 };
 
             public:
                 ///
                 /// \brief Create an empty buffer object.
                 ///
-                BufferObject(void);
+                BufferObject(const Type &type, const Usage &usage);
 
                 ///
                 /// \brief Destructor.
@@ -44,37 +50,39 @@ namespace   WorldParticles
                 ///
                 void    unbind(void);
 
+                ///
+                /// \brief replace the previous data with the new data in the graphic api.
+                ///
+                /// If the new data is greater than the size of the buffer, the buffer will be reallocated.
+                ///
+                void    update(void *data, unsigned int length);
+
             public:
                 ///
-                /// \brief Setter for the Type attribute of the BufferObject.
+                /// \brief Setter for the type attribute.
                 ///
                 void            setType(const Type &type);
 
                 ///
+                /// \brief Setter for the usage attribute.
                 ///
-                ///
-                void            setData(const std::vector<glm::vec4> &data);
-
-                ///
-                ///
-                ///
-                void            setData(const std::vector<glm::vec3> &data);
-
-                ///
-                ///
-                ///
-                void            setData(const std::vector<glm::vec2> &data);
-
-                ///
-                ///
-                ///
-                void            setData(const std::vector<float> &data);
+                void            setUsage(const Usage &usage);
 
             public:
                 ///
-                /// \brief Getter for the Type attribute of the BufferObject.
+                /// \brief Getter for the type attribute.
                 ///
-                Type            getType(void) const;
+                const Type      &getType(void) const;
+
+                ///
+                /// \brief Getter for the usage attribute.
+                ///
+                const Usage     &getUsage(void) const;
+
+            private:
+
+                unsigned int    convert(const Type &type) const;
+                unsigned int    convert(const Usage &usage) const;
 
             private:
                 ///
@@ -85,12 +93,17 @@ namespace   WorldParticles
                 ///
                 /// \brief This attribute is used to contains the type of the buffer object.
                 ///
-                unsigned int    type;
+                Type            type;
 
                 ///
-                /// \brief This attribute is used to know if the BufferObject is dynamic.
+                /// \brief This attribute is used to know if the buffer object will be updated frequently or not.
                 ///
-                unsigned int    dynamic;
+                Usage           usage;
+
+                ///
+                /// \brief the buffer size.
+                ///
+                unsigned int    size;
         };
     }
 }

@@ -3,6 +3,9 @@
 
 #include    <glm/gtc/type_ptr.hpp>
 #include    <QOpenGLShaderProgram>
+#include    <log4cpp/Category.hh>
+
+using namespace log4cpp;
 
 namespace WorldParticles
 {
@@ -34,7 +37,6 @@ namespace WorldParticles
                     shaderProgram->setUniform("projection", projection);
                     shaderProgram->setUniform("view", view);
                     shaderProgram->setUniform("model", model);
-                    shaderProgram->setUniform("color", material->getColor());
                     mesh->bind();
                     if (mesh->hasIndices())
                     {

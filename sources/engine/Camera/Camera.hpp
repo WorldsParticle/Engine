@@ -31,12 +31,12 @@ namespace   WorldParticles
                 ///
                 /// \brief This method is used to return the projection matrix of the camera.
                 ///
-                const glm::mat4       &GetProjection(void) const;
+                const glm::mat4       &getProjection(void) const;
 
                 ///
                 /// \brief This method is used to return the view matrix of the camera.
                 ///
-                const glm::mat4       &GetView(void) const;
+                const glm::mat4       &getView(void) const;
 
             public:
                 ///

@@ -14,12 +14,12 @@ namespace   WorldParticles
                 const glm::vec3 &scale) :
             transform(position, rotation, scale)
         {
-
+            // nothing to do
         }
 
         GameObject::~GameObject(void)
         {
-
+            // nothing to do
         }
 
         ///

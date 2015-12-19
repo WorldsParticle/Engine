@@ -1,13 +1,18 @@
 #include    "BufferObject.hpp"
 #include    "glwindow.h"
 
+#include    <log4cpp/Category.hh>
+using namespace log4cpp;
+
 namespace   WorldParticles
 {
     namespace   Engine
     {
 
-        BufferObject::BufferObject(void) :
-            dynamic(GL_STATIC_DRAW)
+        BufferObject::BufferObject(const Type &type, const Usage &usage) :
+            type(type),
+            usage(usage),
+            size(0)
         {
             GLWindow::m_funcs->glGenBuffers(1, &this->id);
         }
@@ -22,80 +27,97 @@ namespace   WorldParticles
         void
         BufferObject::bind(void)
         {
-            if (this->type == Type::UNDEFINED) throw std::logic_error("the BufferObject type cannot be UNDEFINED at this state.");
             if (this->id == 0) throw std::runtime_error("The BufferObject id should not be equal to 0 here.");
-            GLWindow::m_funcs->glBindBuffer(this->type, this->id);
+            GLWindow::m_funcs->glBindBuffer(this->convert(this->type), this->id);
         }
 
         void
         BufferObject::unbind(void)
         {
-            if (this->type == Type::UNDEFINED) throw std::logic_error("the BufferObject type cannot be UNDEFINED at this state.");
-            GLWindow::m_funcs->glBindBuffer(this->type, 0);
+            GLWindow::m_funcs->glBindBuffer(this->convert(this->type), 0);
         }
 
-
-
         void
-        BufferObject::setType(const Type &newType)
+        BufferObject::update(void *data, unsigned int length)
         {
-            switch (newType)
+            if (length > this->size)
             {
-                case Type::ELEMENT_ARRAY:
-                    this->type = GL_ELEMENT_ARRAY_BUFFER; break;
-                case Type::ARRAY:
-                    this->type = GL_ARRAY_BUFFER; break;
-                default:
-                    this->type = Type::UNDEFINED;
+                this->bind();
+                GLWindow::m_funcs->glBufferData(this->convert(this->type), length, data, this->convert(this->usage));
+                this->size = length;
+                this->unbind();
+            }
+            else
+            {
+                this->bind();
+                GLWindow::m_funcs->glBufferSubData(this->convert(this->type), 0, length, data);
+                this->unbind();
             }
         }
 
+
+        ///
+        /// PUBLIC SETTER
+        ///
+
         void
-        BufferObject::setData(const std::vector<glm::vec4> &vertices)
+        BufferObject::setType(const Type &type)
         {
-            if (this->type == Type::UNDEFINED) throw std::logic_error("the BufferObject type cannot be UNDEFINED at this state.");
-            GLWindow::m_funcs->glBufferData(this->type, vertices.size(),
-                    vertices.data(), this->dynamic);
+            this->type = type;
         }
 
         void
-        BufferObject::setData(const std::vector<glm::vec3> &vertices)
+        BufferObject::setUsage(const Usage &usage)
         {
-            if (this->type == Type::UNDEFINED) throw std::logic_error("the BufferObject type cannot be UNDEFINED at this state.");
-            GLWindow::m_funcs->glBufferData(this->type, vertices.size(),
-                    vertices.data(), this->dynamic);
+            this->usage = usage;
         }
 
-        void
-        BufferObject::setData(const std::vector<glm::vec2> &vertices)
-        {
-            if (this->type == Type::UNDEFINED) throw std::logic_error("the BufferObject type cannot be UNDEFINED at this state.");
-            GLWindow::m_funcs->glBufferData(this->type, vertices.size(),
-                    vertices.data(), this->dynamic);
-        }
+        ///
+        /// PUBLIC GETTER
+        ///
 
-        void
-        BufferObject::setData(const std::vector<float> &vertices)
-        {
-            if (this->type == Type::UNDEFINED) throw std::logic_error("the BufferObject type cannot be UNDEFINED at this state.");
-            GLWindow::m_funcs->glBufferData(this->type, vertices.size(),
-                    vertices.data(), this->dynamic);
-        }
-
-
-
-        BufferObject::Type
+        const BufferObject::Type &
         BufferObject::getType(void) const
         {
-            switch (this->type)
+            return this->type;
+        }
+
+        const BufferObject::Usage &
+        BufferObject::getUsage(void) const
+        {
+             return this->usage;
+        }
+
+
+        ///
+        /// TODO temporary method
+
+        unsigned int
+        BufferObject::convert(const Type &type) const
+        {
+            switch (type)
             {
-                case GL_ELEMENT_ARRAY_BUFFER:
-                    return Type::ELEMENT_ARRAY;
-                case GL_ARRAY_BUFFER:
-                    return Type::ARRAY;
-                default:
-                    return Type::UNDEFINED;
+                case Type::ARRAY_BUFFER:
+                    return GL_ARRAY_BUFFER;
+                case Type::ELEMENT_ARRAY_BUFFER:
+                    return GL_ELEMENT_ARRAY_BUFFER;
             }
+            return 0;
+        }
+
+        unsigned int
+        BufferObject::convert(const Usage &usage) const
+        {
+            switch (usage)
+            {
+                case Usage::STATIC_DRAW:
+                    return GL_STATIC_DRAW;
+                case Usage::DYNAMIC_DRAW:
+                    return GL_DYNAMIC_DRAW;
+                case Usage::STREAM_DRAW:
+                    return GL_STREAM_DRAW;
+            }
+            return 0;
         }
     }
 }

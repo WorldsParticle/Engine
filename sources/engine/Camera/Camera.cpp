@@ -29,13 +29,13 @@ namespace WorldParticles
         }
 
         const glm::mat4 &
-        Camera::GetProjection(void) const
+        Camera::getProjection(void) const
         {
             return projection;
         }
 
         const glm::mat4 &
-        Camera::GetView(void) const
+        Camera::getView(void) const
         {
             return view;
         }

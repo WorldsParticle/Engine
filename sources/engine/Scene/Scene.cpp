@@ -43,11 +43,11 @@ namespace WorldParticles
 
         bool    Scene::initialise(void)
         {
-            for (Camera *camera : this->_cameras)
+            for (Camera *camera : this->cameras)
             {
                 camera->initialise();
             }
-            for (GameObject *gameobject : this->_gameobjects)
+            for (GameObject *gameobject : this->gameobjects)
             {
                 gameobject->initialise();
             }
@@ -56,11 +56,11 @@ namespace WorldParticles
 
         void    Scene::update(void)
         {
-            for (Camera *camera : this->_cameras)
+            for (Camera *camera : this->cameras)
             {
                  camera->update();
             }
-            for (GameObject *gameobject : this->_gameobjects)
+            for (GameObject *gameobject : this->gameobjects)
             {
                 gameobject->update();
             }
@@ -68,12 +68,12 @@ namespace WorldParticles
 
         void    Scene::draw(void)
         {
-            for (Camera *camera : this->_cameras)
+            for (Camera *camera : this->cameras)
             {
                 camera->draw();
-                const glm::mat4 &projection = camera->GetProjection();
-                const glm::mat4 &view = camera->GetView();
-                for (GameObject *gameobject : this->_gameobjects)
+                const glm::mat4 &projection = camera->getProjection();
+                const glm::mat4 &view = camera->getView();
+                for (GameObject *gameobject : this->gameobjects)
                 {
                     gameobject->draw(projection, view);
                 }
@@ -84,18 +84,31 @@ namespace WorldParticles
 
         void    Scene::add(GameObject *gameobject)
         {
-            this->_gameobjects.push_back(gameobject);
+            this->gameobjects.push_back(gameobject);
         }
 
         /// TODO order by
         void    Scene::add(Camera *camera)
         {
-            this->_cameras.push_back(camera);
+            this->cameras.push_back(camera);
         }
 
         void    Scene::add(Light *light)
         {
-            this->_lights.push_back(light);
+            this->lights.push_back(light);
+        }
+
+
+        int
+        Scene::getLayerNumber(void) const
+        {
+             return this->layerNumber;
+        }
+
+        void
+        Scene::setLayerNumber(int layerNumber)
+        {
+            this->layerNumber = layerNumber;
         }
 
     }

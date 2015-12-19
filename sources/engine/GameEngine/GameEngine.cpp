@@ -69,7 +69,7 @@ namespace   WorldParticles
         {
             this->_scenes.push_back(scene);
             this->_scenes.sort([](const auto &a, const auto &b) {
-                    return a->GetLayerNumber() > b->GetLayerNumber();
+                    return a->getLayerNumber() > b->getLayerNumber();
             });
         }
 

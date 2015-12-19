@@ -83,40 +83,34 @@ namespace WorldParticles
                 ///
                 /// \brief Getter for the layer number attribute.
                 ///
-                int     GetLayerNumber(void) const
-                {
-                    return this->_layerNumber;
-                }
+                int     getLayerNumber(void) const;
 
             public:
                 ///
                 /// \brief Setter for the layer number attribute.
                 ///
-                void    SetLayerNumber(int layerNumber)
-                {
-                     this->_layerNumber = layerNumber;
-                }
+                void    setLayerNumber(int layerNumber);
 
             private:
                 ///
                 /// \brief List of all gameobject present in the scene.
                 ///
-                std::list<GameObject *>     _gameobjects;
+                std::list<GameObject *>     gameobjects;
 
                 ///
                 /// \brief List of all cameras in the scene.
                 ///
-                std::list<Camera *>         _cameras;
+                std::list<Camera *>         cameras;
 
                 ///
                 /// \brief List of all light in the scene.
                 ///
-                std::list<Light *>          _lights;
+                std::list<Light *>          lights;
 
                 ///
                 /// \brief This attribute is used to store the layer number.
                 ///
-                int                         _layerNumber;
+                int                         layerNumber;
         };
 
     }
