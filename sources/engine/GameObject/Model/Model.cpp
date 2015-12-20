@@ -22,7 +22,7 @@ namespace   WorldParticles
         {
             this->renderer = new BasicRenderer();
             this->material = std::make_shared<Material>();
-            this->shaderprogram = ShaderProgramManager::Get(DEFAULT_SHADER_PROGRAM);
+            this->shaderprogram = ShaderProgramManager::Get(TEST_SHADER_PROGRAM);
             return true;
         }
 

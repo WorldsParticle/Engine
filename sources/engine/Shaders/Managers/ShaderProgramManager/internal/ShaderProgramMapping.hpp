@@ -19,7 +19,8 @@ namespace   WorldParticles
         };
 
         const std::map<ShaderProgramName, ShaderProgramProperty>    MappedShaderProgram = {
-            {DEFAULT_SHADER_PROGRAM, {{DEFAULT_VERTEX_SHADER, DEFAULT_FRAGMENT_SHADER}}}
+            {DEFAULT_SHADER_PROGRAM, {{DEFAULT_VERTEX_SHADER, DEFAULT_FRAGMENT_SHADER}}},
+            {TEST_SHADER_PROGRAM, {{TEST_VERTEX_SHADER, TEST_FRAGMENT_SHADER}}}
         };
     }
 }

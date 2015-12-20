@@ -6,6 +6,7 @@ layout(location = 2) in vec2 vUVCoord;
 layout(location = 3) uniform mat4 model;
 layout(location = 4) uniform mat4 camera;
 layout(location = 5) uniform mat4 proj;
+
 out vec3 fNormal;
 out vec3 fVertex;
 out vec2 fUVCoord;

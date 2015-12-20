@@ -19,7 +19,9 @@ namespace   WorldParticles
 
         const std::map<ShaderName, ShaderProperty>    MappedShaders = {
             {DEFAULT_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "default.vert"}},
-            {DEFAULT_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "default.frag"}}
+            {DEFAULT_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "default.frag"}},
+            {TEST_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "light.vert"}},
+            {TEST_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "light.frag"}}
         };
 
     }

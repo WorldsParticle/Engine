@@ -27,7 +27,6 @@ namespace   WorldParticles
                 ~Material(void);
 
             public:
-
                 ///
                 /// \brief Getter for the color attribute.
                 /// \return the color.

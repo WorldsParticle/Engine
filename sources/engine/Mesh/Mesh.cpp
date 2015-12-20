@@ -69,7 +69,14 @@ namespace   WorldParticles
             this->vertexBuffer->update(vertices.data(), vertices.size() * sizeof(float));
             this->vertexBuffer->bind();
             GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
-            GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6, (void *)3);
+            GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void *)(this->positions.size() * 3 * sizeof(float)));
+
+            for (unsigned int i = 0 ; i < vertices.size() ; i += 3)
+            {
+                root << Priority::DEBUG << vertices[i + 0] << " " << vertices[i + 1] << " " << vertices[i + 2];
+            }
+
+            root << Priority::DEBUG << vertices.size();
             this->vertexBuffer->unbind();
             this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
             this->updated = true;
@@ -199,45 +206,6 @@ namespace   WorldParticles
                 }
             }
         }
-
-/*        void*/
-        //Mesh::initialise(void)
-        //{
-            //GLWindow::m_funcs->glGenBuffers(1, &vbo);
-            //GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            //GLWindow::m_funcs->glBufferData(GL_ARRAY_BUFFER,
-                    //_vertices.size() * sizeof(glm::vec3), _vertices.data(), GL_STATIC_DRAW);
-            //GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-            //GLWindow::m_funcs->glGenBuffers(1, &vbo_normals);
-            //GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo_normals);
-            //GLWindow::m_funcs->glBufferData(GL_ARRAY_BUFFER,
-                    //_normals.size() * sizeof(glm::vec3), _normals.data(), GL_STATIC_DRAW);
-            //GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-
-            //GLWindow::m_funcs->glGenBuffers(1, &element_buffer);
-            //GLWindow::m_funcs->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
-            //GLWindow::m_funcs->glBufferData(GL_ELEMENT_ARRAY_BUFFER,
-                    //_indices.size() * sizeof(unsigned int), _indices.data(), GL_STATIC_DRAW);
-       //}
-
-        //void
-        //Mesh::bind(void) const
-        //{
-            //GLWindow::m_funcs->glEnableVertexAttribArray(0);
-            //GLWindow::m_funcs->glEnableVertexAttribArray(1);
-
-            //GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            //GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo_normals);
-            //GLWindow::m_funcs->glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, element_buffer);
-        //}
-
-        //void
-        //Mesh::unbind(void) const
-        //{
-            //GLWindow::m_funcs->glDisableVertexAttribArray(0);
-            //GLWindow::m_funcs->glDisableVertexAttribArray(1);
-        /*}*/
 
     }
 }
