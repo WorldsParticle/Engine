@@ -74,7 +74,7 @@ void    GLWindow::start(Model *model)
     if (logger->initialize() == false)
         qDebug() << "impossible d'initialiser le logger";
     _gEngine = &(_gameEngine);
-    _gameEngine.load(RESOURCES_PATH "/models/cube.obj");
+    _gameEngine.load(RESOURCES_PATH "/models/monkey.dae");
     _gameEngine.initialise();
     ::WorldParticles::Engine::GameClock::start();
     resizeWindow();
