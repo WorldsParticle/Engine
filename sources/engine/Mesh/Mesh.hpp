@@ -2,7 +2,11 @@
 # define    __MESH_HPP__
 
 #include    <vector>
+#include    <memory>
 #include    <glm/glm.hpp>
+#include    <assimp/mesh.h>
+
+#include    "BufferObject.hpp"
 
 namespace WorldParticles
 {
@@ -10,17 +14,19 @@ namespace WorldParticles
     {
         ///
         /// \brief The Mesh class
-        /// Il va falloir le modifier pour rajouter les indices etc... mais la j'ai la flemme de ouf.
         ///
         class   Mesh
         {
             public:
                 ///
-                /// \brief Default constructor
+                /// \brief Create an empty mesh.
                 ///
-                Mesh(const std::vector<glm::vec3> &vertices = std::vector<glm::vec3>(),
-                        const std::vector<glm::vec3> &uvs = std::vector<glm::vec3>(),
-                        const std::vector<glm::vec3> &normals = std::vector<glm::vec3>());
+                Mesh(void);
+
+                ///
+                /// \brief This constructor is used to transform an assimp mesh to a mesh.
+                ///
+                Mesh(const aiMesh *assimpMesh);
 
                 ///
                 /// \brief Destructor
@@ -29,69 +35,132 @@ namespace WorldParticles
 
             public:
                 ///
-                /// \brief Getter for the vertices attribute.
+                /// \brief This method is used to update the mesh in the graphic card.
                 ///
-                const std::vector<glm::vec3>  &GetVertices(void) const
-                {
-                    return this->_vertices;
-                }
+                void    update(void);
 
                 ///
-                /// \brief Getter for the UVs attribute.
+                /// \brief This method is used to bind the mesh in the rendering pipeline.
                 ///
-                const std::vector<glm::vec3>  &GetUVs(void) const
-                {
-                    return this->_uvs;
-                }
+                void    bind(void);
+
+                ///
+                /// \brief This method is used to unbind the mesh of the rendering pipeline.
+                ///
+                void    unbind(void);
+
+            public:
+                ///
+                /// \brief This method is used to know if the mesh contains positions.
+                ///
+                bool    hasPositions(void) const;
+
+                ///
+                /// \brief This method is used to know if the mesh contains normals.
+                ///
+                bool    hasNormals(void) const;
+
+                ///
+                /// \brief This method is used to know if the mesh contains indices.
+                ///
+                bool    hasIndices(void) const;
+
+            public:
+                ///
+                /// \brief Getter for the vertices attribute.
+                ///
+                const std::vector<glm::vec3>        &getPositions(void) const;
 
                 ///
                 /// \brief Getter for the normals attribute.
                 ///
-                const std::vector<glm::vec3>  &GetNormals(void) const
-                {
-                    return this->_normals;
-                }
+                const std::vector<glm::vec3>        &getNormals(void) const;
+
+                ///
+                /// \brief Getter for the indices attribute.
+                ///
+                const std::vector<unsigned int>     &getIndices(void) const;
 
             public:
                 ///
                 /// \brief Setter for the vertices attribute.
                 ///
-                void        SetVertices(const std::vector<glm::vec3> &vertices)
-                {
-                    this->_vertices = vertices;
-                }
-
-                ///
-                /// \brief Setter for the UVs attribute.
-                ///
-                void        SetUVs(const std::vector<glm::vec3> &uvs)
-                {
-                    this->_uvs = uvs;
-                }
+                void    setPositions(const std::vector<glm::vec3> &positions);
 
                 ///
                 /// \brief Setter for the normal attribute.
                 ///
-                void        SetNormals(const std::vector<glm::vec3> &normals)
-                {
-                    this->_normals = normals;
-                }
+                void    setNormals(const std::vector<glm::vec3> &normals);
+
+                ///
+                /// \brief Setter for the indices attribute.
+                ///
+                void    setIndices(const std::vector<unsigned int> &indices);
 
             private:
                 ///
-                /// \brief The vertices attribute is used to store all vertex of the mesh.
+                /// \brief Setter for the vertices attribute.
+                /// \param[in] positions A aiVector3D array of numberElements size.
+                /// \param[in] numberElements Number of element present in the vertices array.
                 ///
-                std::vector<glm::vec3>  _vertices;
+                void    setPositions(const aiVector3D *positions, unsigned int numberElements);
 
                 ///
-                /// \brief THe uvs attribute is used to store all uvs of the mesh.
+                /// \brief Setter for the mesh normals.
+                /// \param[in] normals A aiVector3D array of numberElement size which contains new normal value.
+                /// \param[in] numberElements Number of element present in the normals array.
                 ///
-                std::vector<glm::vec3>  _uvs;
+                void    setNormals(const aiVector3D *normals, unsigned int numberElements);
+
+                ///
+                /// \brief Setter for the mesh indices.
+                /// \param[in] faces A aiFace array of numberElements size which contains new indice values.
+                /// \param[in] numberElements Number of element present in the faces array.
+                ///
+                void    setIndices(const aiFace *faces, unsigned int numberElements);
+
+            private:
+                ///
+                /// \brief The name of the mesh.
+                ///
+                /// the name is optional, could be an empty string.
+                ///
+                std::string                     name;
+
+                ///
+                /// \brief The vertices attribute is used to store all vertex of the mesh.
+                ///
+                std::vector<glm::vec3>          positions;
 
                 ///
                 /// \brief The normals attribute is used to store all normal of the mesh.
                 ///
-                std::vector<glm::vec3>  _normals;
+                std::vector<glm::vec3>          normals;
+
+                ///
+                /// \brief The indices attribute is used to store all indices of a mesh.
+                ///
+                std::vector<unsigned int>       indices;
+
+                ///
+                /// \brief This boolean is used to know if the mesh should be send to the graphic api or if it's already updated.
+                ///
+                bool                            updated;
+
+                ///
+                /// \brief This boolean is used to know if the mesh is optmized for rendering.
+                ///
+                bool                            optimized;
+
+                ///
+                /// \brief This attribute is used to connect the Mesh to a vertex buffer in the graphic API.
+                ///
+                std::shared_ptr<BufferObject>   vertexBuffer;
+
+                ///
+                /// \brief This attribute is used to connect the Mesh to a element buffer in the graphic API.
+                ///
+                std::shared_ptr<BufferObject>   elementBuffer;
         };
     }
 }

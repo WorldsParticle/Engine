@@ -19,7 +19,8 @@ namespace WorldParticles
             zNear(0.1),
             zFar(1000.0)
         {
-
+            projection = glm::perspective(glm::radians(45.0f), 1024.0f / 768.0f, 0.1f, 1000.0f);
+            view = glm::lookAt(this->transform.getPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
         }
 
         Camera::~Camera(void)
@@ -27,14 +28,16 @@ namespace WorldParticles
 
         }
 
-        glm::mat4 Camera::GetProjection(void) const
+        const glm::mat4 &
+        Camera::getProjection(void) const
         {
-            return glm::perspective(glm::radians(45.0f), 1024.0f / 768.0f, 0.1f, 100.0f);
+            return projection;
         }
 
-        glm::mat4 Camera::GetView(void) const
+        const glm::mat4 &
+        Camera::getView(void) const
         {
-            return glm::lookAt(this->transform.GetPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
+            return view;
         }
 
 
@@ -44,15 +47,16 @@ namespace WorldParticles
             return true;
         }
 
-        void    Camera::Update(void)
+        void    Camera::update(void)
         {
         }
 
-        void    Camera::Draw(void)
+        void    Camera::draw(void)
         {
+            GLWindow::m_funcs->glEnable(GL_DEPTH_TEST);
             GLWindow::m_funcs->glClearColor(0.3, 0.1, 0.1, 0.0);
             GLWindow::m_funcs->glViewport(0, 0, 1024, 768);
-            GLWindow::m_funcs->glClear(GL_COLOR_BUFFER_BIT);
+            GLWindow::m_funcs->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         }
 
     }

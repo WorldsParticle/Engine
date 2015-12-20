@@ -1,9 +1,11 @@
 #include    "BasicRenderer.hpp"
-
 #include    "glwindow.h"
 
 #include    <glm/gtc/type_ptr.hpp>
 #include    <QOpenGLShaderProgram>
+#include    <log4cpp/Category.hh>
+
+using namespace log4cpp;
 
 namespace WorldParticles
 {
@@ -18,34 +20,38 @@ namespace WorldParticles
         {
         }
 
-        void    BasicRenderer::Draw(const std::shared_ptr<Mesh> &mesh,
-                const Material &material,
+        void    BasicRenderer::draw(const GameObject *gameobject,
                 const glm::mat4 &projection,
                 const glm::mat4 &view,
                 const glm::mat4 &model)
         {
-            const std::shared_ptr<ShaderProgram>    &shaderProgram = material.GetShaderProgram();
-            const std::vector<glm::vec3>            &vertices = mesh->GetVertices();
+            if (gameobject != nullptr)
+            {
+                const auto      &shaderProgram = gameobject->getShaderProgram();
+                const auto      &material = gameobject->getMaterial();
+                const auto      &mesh = gameobject->getMesh();
 
-            GLuint vbo;
-            GLWindow::m_funcs->glGenBuffers(1, &vbo);
-            GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            GLWindow::m_funcs->glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(glm::vec3), vertices.data(), GL_STATIC_DRAW);
-
-            GLWindow::m_funcs->glEnableVertexAttribArray(0);
-            GLWindow::m_funcs->glBindBuffer(GL_ARRAY_BUFFER, vbo);
-            GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
-
-            shaderProgram->Bind();
-
-            shaderProgram->SetUniform("projection", projection);
-            shaderProgram->SetUniform("modelview", view * model);
-
-            GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0, 3 * vertices.size());
-            GLWindow::m_funcs->glDisableVertexAttribArray(0);
-
-            shaderProgram->Unbind();
-
+                if (shaderProgram && mesh && material)
+                {
+                    shaderProgram->bind();
+                    shaderProgram->setUniform("projection", projection);
+                    shaderProgram->setUniform("view", view);
+                    shaderProgram->setUniform("model", model);
+                    mesh->bind();
+                    if (mesh->hasIndices())
+                    {
+                        GLWindow::m_funcs->glDrawElements(GL_TRIANGLES,
+                                mesh->getIndices().size(), GL_UNSIGNED_INT, 0);
+                    }
+                    else
+                    {
+                        GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0,
+                                mesh->getPositions().size());
+                    }
+                    mesh->unbind();
+                    shaderProgram->unbind();
+                }
+            }
         }
 
     }

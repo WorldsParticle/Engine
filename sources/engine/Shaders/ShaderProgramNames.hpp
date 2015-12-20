@@ -9,7 +9,8 @@ namespace   WorldParticles
 
         enum    ShaderProgramName
         {
-            DEFAULT_SHADER_PROGRAM
+            DEFAULT_SHADER_PROGRAM,
+            TEST_SHADER_PROGRAM
         };
 
     }

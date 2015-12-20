@@ -68,7 +68,7 @@ namespace   WorldParticles
                 /// \brief Getter for the shader id attribute.
                 /// \return the shader id value.
                 ///
-                const unsigned int  &GetShaderId(void) const
+                const unsigned int  &getId(void) const
                 {
                     return this->_shaderId;
                 }

@@ -35,73 +35,69 @@ namespace   WorldParticles
                 ///
                 /// \brief This function is used to generate a matrix from the position, rotation and scale of the transform.
                 ///
-                const glm::mat4 GetMatrix(void) const;
+                const glm::mat4 &getMatrix(void) const;
+
+
+                /// TODO implementation function like "rotate" "translate"...
 
             public:
                 ///
                 /// \brief Setter for the position attribute.
                 ///
-                void            SetPosition(const glm::vec3 &position)
-                {
-                    this->_position = position;
-                }
+                void            setPosition(const glm::vec3 &position);
 
                 ///
                 /// \brief Setter for the rotation attribute
                 ///
-                void            SetRotation(const glm::vec3 &rotation)
-                {
-                    this->_rotation = rotation;
-                }
+                void            setRotation(const glm::vec3 &rotation);
 
                 ///
                 /// \brief Setter for the scale attribute.
                 ///
-                void            SetScale(const glm::vec3 &scale)
-                {
-                    this->_scale = scale;
-                }
+                void            setScale(const glm::vec3 &scale);
 
             public:
                 ///
                 /// \brief Getter for the position attribute.
                 ///
-                const glm::vec3 &GetPosition(void) const
-                {
-                    return this->_position;
-                }
+                const glm::vec3     &getPosition(void) const;
 
                 ///
                 /// \brief Getter for the rotation attribute.
                 ///
-                const glm::vec3 &GetRotation(void) const
-                {
-                    return this->_rotation;
-                }
+                const glm::vec3     &getRotation(void) const;
 
                 ///
                 /// \brief Getter for the scale attribute
                 ///
-                const glm::vec3 &GetScale(void) const
-                {
-                    return this->_scale;
-                }
+                const glm::vec3     &getScale(void) const;
+
+            private:
+                ///
+                /// \brief internally used to update the matrix.
+                ///
+                void    update(void);
 
             protected:
                 ///
                 /// \brief This attribute is used to store a position in 3D space.
                 ///
-                glm::vec3       _position;
+                glm::vec3       position;
 
                 ///
                 /// \brief This attribute is used to store a 3D rotation (X, Y, Z in degree).
                 ///
-                glm::vec3       _rotation;
+                glm::vec3       rotation;
 
                 ///
                 /// \brief This attribute is used to store a scale in X, Y and Z axis.
                 ///
-                glm::vec3       _scale;
+                glm::vec3       scale;
+
+                ///
+                /// \brief This matrix represent the actual state of the transform.
+                ///
+                glm::mat4       matrix;
         };
     }
 }

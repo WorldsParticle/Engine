@@ -6,6 +6,7 @@
 #include "GameEngine.hpp"
 
 #include <log4cpp/Category.hh>
+#include    <QOpenGLDebugLogger>
 
 QSurface        *GLWindow::surface = NULL;
 QOpenGLContext      *GLWindow::context = NULL;
@@ -22,6 +23,7 @@ GLWindow::GLWindow(QWindow *parent) :
     _format.setMajorVersion(4);
     _format.setMinorVersion(2);
     _format.setProfile(QSurfaceFormat::CoreProfile); //whatever this is
+    _format.setOption(QSurfaceFormat::DebugContext);
 
     _mouseTracking = false;
 
@@ -67,7 +69,12 @@ void    GLWindow::start(Model *model)
 {
     ::WorldParticles::Engine::GameEngine     _gameEngine;
 
+    QOpenGLDebugLogger *logger = new QOpenGLDebugLogger(this);
+
+    if (logger->initialize() == false)
+        qDebug() << "impossible d'initialiser le logger";
     _gEngine = &(_gameEngine);
+    _gameEngine.load(RESOURCES_PATH "/models/monkey.dae");
     _gameEngine.initialise();
     ::WorldParticles::Engine::GameClock::start();
     resizeWindow();
@@ -78,6 +85,11 @@ void    GLWindow::start(Model *model)
         _context.makeCurrent(this);
         _gameEngine.draw();
         _context.swapBuffers(this);
+        _context.doneCurrent();
+
+        QList<QOpenGLDebugMessage> messages = logger->loggedMessages();
+        foreach (const QOpenGLDebugMessage &message, messages)
+            qDebug() << message;
 
         QCoreApplication::processEvents();
     }
