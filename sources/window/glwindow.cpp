@@ -53,9 +53,9 @@ GLWindow::GLWindow(QWindow *parent) :
         << "OpenGL version : "
         << this->format().majorVersion() << "." << this->format().minorVersion();
 
-    GLuint VertexArrayID;
-    m_funcs->glGenVertexArrays(1, &VertexArrayID);
-    m_funcs->glBindVertexArray(VertexArrayID);
+/*    GLuint VertexArrayID;*/
+    //m_funcs->glGenVertexArrays(1, &VertexArrayID);
+    /*m_funcs->glBindVertexArray(VertexArrayID);*/
 
 }
 
@@ -74,7 +74,7 @@ void    GLWindow::start(Model *model)
     if (logger->initialize() == false)
         qDebug() << "impossible d'initialiser le logger";
     _gEngine = &(_gameEngine);
-    _gameEngine.load(RESOURCES_PATH "/models/monkey.dae");
+    _gameEngine.load(RESOURCES_PATH "/scenes/Beach.dae");
     _gameEngine.initialise();
     ::WorldParticles::Engine::GameClock::start();
     resizeWindow();

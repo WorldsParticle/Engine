@@ -13,13 +13,15 @@ namespace   WorldParticles
         /// PUBLIC CONSTRUCTORS
         ///
 
-        Mesh::Mesh(void)
+        Mesh::Mesh(void) :
+            arrayObject(std::make_shared<ArrayObject>())
         {
             // nothing to do
         }
 
         /// TODO check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
-        Mesh::Mesh(const aiMesh *am)
+        Mesh::Mesh(const aiMesh *am) :
+            arrayObject(std::make_shared<ArrayObject>())
         {
             if (am == nullptr) throw std::invalid_argument("assimpMesh is null.");
             this->name = am->mName.C_Str();
@@ -62,37 +64,36 @@ namespace   WorldParticles
                         BufferObject::Usage::STATIC_DRAW
                 );
             }
+            this->arrayObject->bind();
             float *data = reinterpret_cast<float *>(this->positions.data());
             std::vector<float>  vertices(data, data + this->positions.size() * 3);
             data = reinterpret_cast<float *>(this->normals.data());
             vertices.insert(vertices.end(), data, data + this->normals.size() * 3);
             this->vertexBuffer->update(vertices.data(), vertices.size() * sizeof(float));
             this->vertexBuffer->bind();
+            GLWindow::m_funcs->glEnableVertexAttribArray(0);
+            GLWindow::m_funcs->glEnableVertexAttribArray(1);
             GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
             GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void *)(this->positions.size() * 3 * sizeof(float)));
             this->vertexBuffer->unbind();
             if (!this->indices.empty()) {
                 this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
+                this->elementBuffer->bind();
             }
+            this->arrayObject->unbind();
             this->updated = true;
         }
 
         void
         Mesh::bind(void)
         {
-            GLWindow::m_funcs->glEnableVertexAttribArray(0);
-            GLWindow::m_funcs->glEnableVertexAttribArray(1);
-            if (this->vertexBuffer) this->vertexBuffer->bind();
-            if (this->elementBuffer) this->elementBuffer->bind();
+            this->arrayObject->bind();
         }
 
         void
         Mesh::unbind(void)
         {
-            if (this->elementBuffer) this->elementBuffer->unbind();
-            if (this->vertexBuffer) this->vertexBuffer->unbind();
-            GLWindow::m_funcs->glDisableVertexAttribArray(1);
-            GLWindow::m_funcs->glDisableVertexAttribArray(0);
+            this->arrayObject->unbind();
         }
 
 
