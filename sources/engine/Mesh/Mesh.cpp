@@ -70,15 +70,10 @@ namespace   WorldParticles
             this->vertexBuffer->bind();
             GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
             GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void *)(this->positions.size() * 3 * sizeof(float)));
-
-            for (unsigned int i = 0 ; i < vertices.size() ; i += 3)
-            {
-                root << Priority::DEBUG << vertices[i + 0] << " " << vertices[i + 1] << " " << vertices[i + 2];
-            }
-
-            root << Priority::DEBUG << vertices.size();
             this->vertexBuffer->unbind();
-            this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
+            if (!this->indices.empty()) {
+                this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
+            }
             this->updated = true;
         }
 
