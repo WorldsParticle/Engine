@@ -1,5 +1,8 @@
 # worldsparticle
+
 Utilisation d'OpenGL 4+ avec Qt
+
+La documentation du projet est disponible ici : https://lefebv-z.github.io/worldsparticle/
 
 Ne pas utiliser decltype & noexcept, problème de compatibilité avec la compilation windows.
 
