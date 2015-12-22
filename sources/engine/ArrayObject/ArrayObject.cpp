@@ -5,6 +5,7 @@ namespace   WorldParticles
 {
     namespace   Engine
     {
+
         ArrayObject::ArrayObject(void)
         {
             GLWindow::m_funcs->glGenVertexArrays(1, &this->id);
@@ -14,6 +15,8 @@ namespace   WorldParticles
         {
             GLWindow::m_funcs->glDeleteVertexArrays(1, &this->id);
         }
+
+
 
         void
         ArrayObject::bind(void) const
