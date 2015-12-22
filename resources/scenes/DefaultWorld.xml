@@ -1,0 +1,81 @@
+<World>
+  <GameView> <!-- Monde "scene principale" -->
+    <Layer>0</Layer>  <!-- Ordre de rendering du gameview avec les autres gameview -->
+    <ViewPort> <!-- La zone d'affichage sur notre écran -->
+      <Width>1.0</Width> <!-- la coefficient de la largeur  -->
+      <Height>1.0</Height> <!-- la coefficient de la hauteur  -->
+      <x>0</x>
+      <y>0</y>
+    </ViewPort>
+    <Cameras>
+      <Camera>
+        <Mode value="Perspective" />
+        <Layer>0</Layer>
+        <ViewPort>
+          <Width>1.0</Width>
+          <Height>1.0</Height>
+          <x>0</x>
+          <y>0</y>
+        </ViewPort>
+        <Transform>
+          <Position x="0.0" y="0.0" z="0.0" />
+          <Rotation x="0.0" y="0.0" z="0.0" />
+          <Scale x="1.0" y="1.0" z="1.0" />
+        </Transform>
+      </Camera>
+    </Cameras>
+    <Lights>
+      <Lumiar>
+        <Type value="Specular" />
+        <Transform>
+          <Position x="0.0" y="0.0" z="0.0" />
+          <Rotation x="0.0" y="0.0" z="0.0" />
+          <Scale x="1.0" y="1.0" z="1.0" />
+        </Transform>
+      </Lumiar>
+    </Lights>
+    <GameObjects>
+        <Terrain>
+            <TerrainType value="Default">
+            <Transform>
+              <Position x="0.0" y="0.0" z="0.0" />
+              <Rotation x="0.0" y="0.0" z="0.0" />
+              <Scale x="1.0" y="1.0" z="1.0" />
+            </Transform>
+        </Terrain>
+        <Cube>
+          <Transform>
+            <Position x="0.0" y="0.0" z="0.0" />
+            <Rotation x="0.0" y="0.0" z="0.0" />
+            <Scale x="1.0" y="1.0" z="1.0" />
+          </Transform>
+        </Cube>
+    </GameObjects>
+  </GameView>
+  <GameView>  <!-- GUI -->
+    <Layer>1</Layer>
+    <ViewPort>
+      <Width>1.0</Width>
+      <Height>1.0</Height>
+      <x>0</x>
+      <y>0</y>
+    </ViewPort>
+    <Cameras>
+      <Camera>
+        <Mode value="Orthographic" />
+        <Layer>0</Layer>
+        <ViewPort>
+          <Width>1.0</Width>
+          <Height>1.0</Height>
+          <x>0</x>
+          <y>0</y>
+        </ViewPort>
+        <Transform>
+          <Position x="0.0" y="0.0" z="0.0" />
+          <Rotation x="0.0" y="0.0" z="0.0" />
+          <Scale x="1.0" y="1.0" z="1.0" />
+        </Transform>
+      </Camera>
+    </Cameras>
+  </GameView>
+</World>

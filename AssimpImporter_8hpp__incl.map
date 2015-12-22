@@ -1,0 +1,14 @@
+<map id="engine/AssimpImporter/AssimpImporter.hpp" name="engine/AssimpImporter/AssimpImporter.hpp">
+<area shape="rect" id="node6" href="$Scene_8hpp.html" title="Scene.hpp" alt="" coords="586,95,670,121"/>
+<area shape="rect" id="node8" href="$GameObject_8hpp.html" title="GameObject.hpp" alt="" coords="531,244,651,271"/>
+<area shape="rect" id="node19" href="$Camera_8hpp.html" title="Camera.hpp" alt="" coords="433,169,527,196"/>
+<area shape="rect" id="node20" href="$Light_8hpp.html" title="Light.hpp" alt="" coords="628,169,703,196"/>
+<area shape="rect" id="node10" href="$worldparticles_8hpp.html" title="wordparticles configuration file " alt="" coords="993,393,1119,420"/>
+<area shape="rect" id="node11" href="$Transform_8hpp.html" title="Transform.hpp" alt="" coords="221,319,328,345"/>
+<area shape="rect" id="node12" href="$IRenderer_8hpp.html" title="IRenderer.hpp" alt="" coords="797,319,901,345"/>
+<area shape="rect" id="node13" href="$Material_8hpp.html" title="Material.hpp" alt="" coords="489,319,583,345"/>
+<area shape="rect" id="node17" href="$Mesh_8hpp.html" title="Mesh.hpp" alt="" coords="607,319,686,345"/>
+<area shape="rect" id="node14" href="$ShaderProgram_8hpp.html" title="ShaderProgram.hpp" alt="" coords="627,393,765,420"/>
+<area shape="rect" id="node16" href="$Shader_8hpp.html" title="Shader.hpp" alt="" coords="652,468,740,495"/>
+<area shape="rect" id="node18" href="$BufferObject_8hpp.html" title="BufferObject.hpp" alt="" coords="432,393,552,420"/>
+</map>

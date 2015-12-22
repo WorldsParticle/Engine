@@ -1,0 +1,5 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classWorldParticles_1_1Engine_1_1GameObject.html" title="This class is used to represent an object in the 3D world. This object must be drawable. " alt="" coords="5,39,160,80"/>
+<area shape="rect" id="node2" href="$classWorldParticles_1_1Engine_1_1Model.html" title="WorldParticles::Engine\l::Model" alt="" coords="208,5,363,47"/>
+<area shape="rect" id="node3" href="$classWorldParticles_1_1Engine_1_1Primitives_1_1Cube.html" title="This class represent the cube primitive. " alt="" coords="208,71,363,112"/>
+</map>

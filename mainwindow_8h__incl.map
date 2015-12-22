@@ -1,0 +1,19 @@
+<map id="window/mainwindow.h" name="window/mainwindow.h">
+<area shape="rect" id="node3" href="$toolwidget_8h.html" title="window/toolwidget.h" alt="" coords="151,80,291,107"/>
+<area shape="rect" id="node5" href="$model_8h.html" title="model/model.h" alt="" coords="221,162,328,189"/>
+<area shape="rect" id="node13" href="$glwindow_8h.html" title="window/glwindow.h" alt="" coords="554,80,689,107"/>
+<area shape="rect" id="node6" href="$tools_8h.html" title="tools.h" alt="" coords="244,244,305,271"/>
+<area shape="rect" id="node19" href="$GameEngine_8hpp.html" title="GameEngine.hpp" alt="" coords="727,162,849,189"/>
+<area shape="rect" id="node20" href="$worldparticles_8hpp.html" title="wordparticles configuration file " alt="" coords="750,543,877,569"/>
+<area shape="rect" id="node21" href="$Scene_8hpp.html" title="Scene.hpp" alt="" coords="853,244,937,271"/>
+<area shape="rect" id="node24" href="$GameObject_8hpp.html" title="GameObject.hpp" alt="" coords="919,393,1039,420"/>
+<area shape="rect" id="node36" href="$Camera_8hpp.html" title="Camera.hpp" alt="" coords="717,319,811,345"/>
+<area shape="rect" id="node37" href="$Light_8hpp.html" title="Light.hpp" alt="" coords="897,319,972,345"/>
+<area shape="rect" id="node26" href="$Transform_8hpp.html" title="Transform.hpp" alt="" coords="536,468,643,495"/>
+<area shape="rect" id="node27" href="$IRenderer_8hpp.html" title="IRenderer.hpp" alt="" coords="837,468,941,495"/>
+<area shape="rect" id="node28" href="$Material_8hpp.html" title="Material.hpp" alt="" coords="1039,468,1132,495"/>
+<area shape="rect" id="node33" href="$Mesh_8hpp.html" title="Mesh.hpp" alt="" coords="1178,468,1257,495"/>
+<area shape="rect" id="node29" href="$ShaderProgram_8hpp.html" title="ShaderProgram.hpp" alt="" coords="1299,543,1437,569"/>
+<area shape="rect" id="node31" href="$Shader_8hpp.html" title="Shader.hpp" alt="" coords="1324,617,1412,644"/>
+<area shape="rect" id="node35" href="$BufferObject_8hpp.html" title="BufferObject.hpp" alt="" coords="1104,543,1224,569"/>
+</map>

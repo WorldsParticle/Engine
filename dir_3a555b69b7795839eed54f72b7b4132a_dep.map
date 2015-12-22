@@ -1,0 +1,17 @@
+<map id="engine/GameObject" name="engine/GameObject">
+<area shape="rect" id="node3" href="dir_c9dbd819322c113e6234637a00e97751.html" title="Transform" alt="" coords="5,159,87,207"/>
+<area shape="rect" id="edge2-headlabel" href="dir_000006_000024.html" title="1" alt="" coords="103,154,111,168"/>
+<area shape="rect" id="node4" href="dir_b41e47541e4ab589c73a15e470a6bf7f.html" title="Material" alt="" coords="111,159,183,207"/>
+<area shape="rect" id="edge3-headlabel" href="dir_000006_000009.html" title="1" alt="" coords="184,144,192,159"/>
+<area shape="rect" id="node5" href="dir_c7f0c751fa7d09d1405d1c0441c3546f.html" title="Mesh" alt="" coords="207,159,279,207"/>
+<area shape="rect" id="edge4-headlabel" href="dir_000006_000010.html" title="1" alt="" coords="245,133,253,147"/>
+<area shape="rect" id="node7" href="dir_37e584d61c1ad01a0f32aaf99da6b41e.html" title="Renderer" alt="" coords="303,159,378,207"/>
+<area shape="rect" id="edge5-headlabel" href="dir_000006_000013.html" title="2" alt="" coords="304,133,312,147"/>
+<area shape="rect" id="node2" href="dir_2dac2ce4ef2c03ba2caf7c67ae287e5d.html" title="Model" alt="" coords="310,63,382,111"/>
+<area shape="rect" id="node6" href="dir_6e4d7cc950507c27f994556db83bd942.html" title="Shaders" alt="" coords="245,255,317,303"/>
+<area shape="rect" id="edge6-headlabel" href="dir_000007_000016.html" title="1" alt="" coords="333,257,341,272"/>
+<area shape="rect" id="edge7-headlabel" href="dir_000007_000013.html" title="1" alt="" coords="347,134,355,148"/>
+<area shape="rect" id="edge1-headlabel" href="dir_000009_000016.html" title="1" alt="" coords="234,230,242,244"/>
+<area shape="rect" id="clust2" href="dir_3a555b69b7795839eed54f72b7b4132a.html" alt="" coords="179,52,393,121"/>
+<area shape="rect" id="clust1" href="dir_996f45160da62e1a3d7f6046fad68f51.html" title="engine" alt="" coords="169,16,403,132"/>
+</map>
