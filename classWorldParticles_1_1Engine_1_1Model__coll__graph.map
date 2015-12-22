@@ -1,5 +1,0 @@
-<map id="WorldParticles::Engine::Model" name="WorldParticles::Engine::Model">
-<area shape="rect" id="node2" href="$classWorldParticles_1_1Engine_1_1GameObject.html" title="This class is used to represent an object in the 3D world. This object must be drawable. " alt="" coords="95,321,249,648"/>
-<area shape="rect" id="node3" href="$classWorldParticles_1_1Engine_1_1Transform.html" title="The Transform class is used to represent an object transformation in space. (like position..." alt="" coords="5,5,160,259"/>
-<area shape="rect" id="node4" href="$classWorldParticles_1_1Engine_1_1IRenderer.html" title="This class is used to store the whole rendering part into a class. This class should be inherited..." alt="" coords="184,86,339,178"/>
-</map>

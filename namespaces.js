@@ -1,5 +1,5 @@
 var namespaces =
 [
-    [ "Ui", "namespaceUi.html", null ],
-    [ "WorldParticles", "namespaceWorldParticles.html", "namespaceWorldParticles" ]
+    [ "Ui", "db/d3c/namespaceUi.html", null ],
+    [ "WorldParticles", "dc/dd8/namespaceWorldParticles.html", "dc/dd8/namespaceWorldParticles" ]
 ];

@@ -1,4 +1,0 @@
-<map id="WorldParticles::Engine::GameObject" name="WorldParticles::Engine::GameObject">
-<area shape="rect" id="node2" href="$classWorldParticles_1_1Engine_1_1Model.html" title="{WorldParticles::Engine\l::Model\n||+ Model()\l+ ~Model()\l+ initialise()\l+ draw()\l+ update()\l}" alt="" coords="5,409,160,560"/>
-<area shape="rect" id="node3" href="$classWorldParticles_1_1Engine_1_1Primitives_1_1Cube.html" title="This class represent the cube primitive. " alt="" coords="184,417,339,553"/>
-</map>
