@@ -53,9 +53,9 @@ GLWindow::GLWindow(QWindow *parent) :
         << "OpenGL version : "
         << this->format().majorVersion() << "." << this->format().minorVersion();
 
-    GLuint VertexArrayID;
-    m_funcs->glGenVertexArrays(1, &VertexArrayID);
-    m_funcs->glBindVertexArray(VertexArrayID);
+/*    GLuint VertexArrayID;*/
+    //m_funcs->glGenVertexArrays(1, &VertexArrayID);
+    /*m_funcs->glBindVertexArray(VertexArrayID);*/
 
 }
 
