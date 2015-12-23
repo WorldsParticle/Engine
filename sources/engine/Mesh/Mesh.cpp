@@ -51,7 +51,6 @@ namespace   WorldParticles
         void
         Mesh::update(void)
         {
-            Category &root = Category::getRoot();
             if (!this->vertexBuffer) {
                 this->vertexBuffer = std::make_shared<BufferObject>(
                         BufferObject::Type::ARRAY_BUFFER,
