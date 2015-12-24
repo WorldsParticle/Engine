@@ -1,7 +1,8 @@
-#ifndef __GAMEENGINE_HPP__
-#define __GAMEENGINE_HPP__
+#ifndef     __GAME_ENGINE_HPP__
+#define     __GAME_ENGINE_HPP__
 
 #include    "worldparticles.hpp"
+
 #include    "Scene.hpp"
 
 namespace WorldParticles
@@ -9,53 +10,72 @@ namespace WorldParticles
     namespace Engine
     {
         ///
-        /// \brief This class is used as a entry point of the worldparticle engine.
+        /// \brief This class is the entry point for the engine.
         ///
         class GameEngine
         {
             public:
                 ///
-                /// \brief Default constructor
+                /// \brief Default constructor.
                 ///
                 GameEngine(void);
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                GameEngine(const GameEngine &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                GameEngine(GameEngine &&other);
+
+                ///
                 /// \brief Destructor
                 ///
-                virtual     ~GameEngine(void);
+                virtual ~GameEngine(void) noexcept;
 
             public:
                 ///
-                /// \brief This method is used to initialise the game engine.
+                /// \brief Copy assignement operator.
                 ///
-                bool        initialise(void);
+                GameEngine  &operator=(const GameEngine &other);
 
+                ///
+                /// \brief Move assignement operator.
+                ///
+                GameEngine  &operator=(GameEngine &&other);
+
+            public:
                 ///
                 /// \brief This function is used to update the world.
                 ///
-                void        update(void);
+                void    update(void);
 
                 ///
                 /// \brief This function is used to draw the world on the screen.
                 ///
-                void        draw(void);
+                void    draw(void);
 
             public:
                 ///
-                /// \brief This method should be used to load the world from a file.
+                /// \brief This method load a 3d scene from a file.
                 ///
-                bool        load(const std::string &filename);
-
+                /// Supported files : http://assimp.sourceforge.net/main_features_formats.html
                 ///
-                /// \brief This method is used to add a new scene in the gameengine.
-                ///
-                void        add(Scene *scene);
+                void    load(const std::string &filename);
 
             protected:
                 ///
                 /// \brief This attribute is used to store all scenes present in the engine.
                 ///
-                std::list<Scene *>      _scenes;
+                std::list<Scene *>      scenes; // TODO GSL NOT NULL && OWNER
+
+            private:
+                ///
+                /// \brief The importer used to import new scene.
+                ///
+                AssimpImporter          importer;
         };
 
     }

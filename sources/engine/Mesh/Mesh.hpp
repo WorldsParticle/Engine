@@ -30,9 +30,30 @@ namespace WorldParticles
                 Mesh(const aiMesh *assimpMesh);
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                Mesh(const Mesh &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Mesh(Mesh &&other);
+
+                ///
                 /// \brief Destructor
                 ///
-                ~Mesh(void);
+                virtual ~Mesh(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                Mesh    &operator=(const Mesh &other);
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                Mesh    &operator=(Mesh &&other);
 
             public:
                 ///

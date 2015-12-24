@@ -11,7 +11,7 @@ namespace   WorldParticles
     namespace   Engine
     {
         ///
-        /// \brief This class is used to represent a material which a gameobject should be drawed with.
+        /// \brief This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered.
         ///
         class   Material
         {
@@ -22,9 +22,35 @@ namespace   WorldParticles
                 Material(void);
 
                 ///
+                /// \brief Construct a material from an assimp material.
+                ///
+                Material(const aiMaterial *assimpMaterial);
+
+                ///
+                /// \brief Copy constructor.
+                ///
+                Material(const Material &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Material(Material &&other);
+
+                ///
                 /// \brief Destructor
                 ///
-                ~Material(void);
+                virtual ~Material(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                Material    &operator=(const Material &other);
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                Material    &operator=(Material &&other);
 
             public:
                 ///

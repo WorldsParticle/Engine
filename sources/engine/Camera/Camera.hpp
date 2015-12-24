@@ -12,20 +12,57 @@ namespace   WorldParticles
         ///
         /// \brief This class is used to represent a basic camera in a 3D world.
         ///
+        /// TODO : should be reworked
+        ///
         class       Camera
         {
             public:
                 ///
                 /// \brief Default constructor
                 ///
-                Camera(const glm::vec3 &position = glm::vec3(0.0),
-                        const glm::vec3 &rotation = glm::vec3(0.0),
-                        const glm::vec3 &scale = glm::vec3(1.0));
+                Camera(void);
+
+                ///
+                /// \brief
+                ///
+                Camera(const aiCamera *assimpCamera);
+
+                ///
+                /// \brief Copy constructor.
+                ///
+                Camera(const Camera &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Camera(Camera &&other);
 
                 ///
                 /// \brief Destructor
                 ///
-                ~Camera(void);
+                virtual ~Camera(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assigment operator.
+                ///
+                Camera  &operator=(const Camera &other);
+
+                ///
+                /// \brief Move assigment operator.
+                ///
+                Camera  &operator=(const Camera &&other);
+
+            public:
+                ///
+                /// \brief This method is used to update the camera in the scene.
+                ///
+                virtual void    update(void);
+
+                ///
+                /// \brief This method is used to launch the draw of this camera.
+                ///
+                virtual void    draw(void);
 
             public:
                 ///
@@ -38,24 +75,7 @@ namespace   WorldParticles
                 ///
                 const glm::mat4       &getView(void) const;
 
-            public:
-                ///
-                /// \brief This method is used to initialise the camera.
-                ///
-                virtual bool    initialise(void);
-
-                ///
-                /// \brief This method is used to update the camera in the scene.
-                ///
-                virtual void    update(void);
-
-                ///
-                /// \brief This method is used to launch the draw of this camera.
-                ///
-                virtual void    draw(void);
-
             protected:
-
                 ///
                 /// \brief The transform attribute is used to store the 3D transformation of the camera
                 ///

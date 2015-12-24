@@ -21,38 +21,42 @@ namespace WorldParticles
         {
             public:
                 ///
-                /// \brief Default constructor
+                /// \brief Default constructor. This constructor create an empty scene.
                 ///
                 Scene(void);
 
                 ///
+                /// \brief Construct a scene from an assimp scene.
+                ///
+                Scene(const aiScene *assimpScene);
+
+                ///
+                /// \brief Copy constructor.
+                ///
+                Scene(const Scene &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Scene(Scene &&other);
+
+                ///
                 /// \brief Destructor
                 ///
-                virtual ~Scene(void);
-
-            public:
-
-                ///
-                /// \brief This operator is used to push a camera in the scene.
-                ///
-                Scene       &operator<<(Camera *camera);
-
-                ///
-                /// \brief This operator is used to push a gameobject in the scene.
-                ///
-                Scene       &operator<<(GameObject *gameobject);
-
-                ///
-                /// \brief This operator is used to push a light in the scene.
-                ///
-                Scene       &operator<<(Light *light);
+                virtual ~Scene(void) noexcept;
 
             public:
                 ///
-                /// \brief This method is used to initialise the scene.
+                /// \brief Copy assignement operator.
                 ///
-                bool        initialise(void);
+                Scene       &operator=(const Scene &other);
 
+                ///
+                /// \brief Move assignement operator.
+                ///
+                Scene       &operator=(Scene &&other);
+
+            public:
                 ///
                 /// \brief This function is used to update the scene.
                 ///
@@ -63,56 +67,62 @@ namespace WorldParticles
                 ///
                 void        draw(void);
 
-            public:
+            private:
                 ///
-                /// \brief Add gameobject in the scene.
+                /// \brief This vector contains all cameras used in the scene.
                 ///
-                void        add(GameObject *gameobject);
+                std::vector<Camera *>       cameras; // TODO GSL OWNER && NOT NULL
 
                 ///
-                /// \brief Add a camera in the scene.
+                /// \brief This vector contains all lights used in the scene.
                 ///
-                void        add(Camera *camera);
+                std::vector<Ligh *>         lights; // TODO GSL OWNER && NOT NULL
 
                 ///
-                /// \brief Add a light in the scene.
+                /// \brief This vector contains all materials that can be used in the scene.
                 ///
-                void        add(Light *light);
+                /// All the materials present are not necessarily used in the scene.
+                /// It's more like a library for loaded materials.
+                ///
+                std::vector<Material *>     materials; // TODO GSL OWNER && NOT NULL
 
-            public:
                 ///
-                /// \brief Getter for the layer number attribute.
+                /// \brief This vector contains all animations that can be used in the scene.
                 ///
-                int     getLayerNumber(void) const;
+                /// All the animation present are not necessarily used in the scene.
+                /// It's more like a library for loaded animations.
+                ///
+                std::vector<Animations *>   animations; // TODO GSL OWNER && NOT NULL
 
-            public:
                 ///
-                /// \brief Setter for the layer number attribute.
+                /// \brief This vector contains all meshes that can be used in the scene.
                 ///
-                void    setLayerNumber(int layerNumber);
+                /// All the mesh present are not necessarily used in the scene.
+                /// It's more like a library for loaded meshes.
+                ///
+                std::vector<Mesh *>         meshes; // TODO GSL OWNER && NOT NULL
+
+                ///
+                /// \brief This vector contains all textures that can be used in the scene.
+                ///
+                /// All the textures present are not necessarily used in the scene.
+                /// It's more like a library for loaded textures.
+                ///
+                std::vector<Textures *>     textures; // TODO GSL OWNER && NOT NULL
 
             private:
                 ///
-                /// \brief List of all gameobject present in the scene.
+                /// \brief The scene graph represent the architecture of the scene.
                 ///
-                std::list<GameObject *>     gameobjects;
+                /// For more informations see SceneGraph.hpp
+                ///
+                SceneGraph                  sceneGraph;
 
                 ///
-                /// \brief List of all cameras in the scene.
                 ///
-                std::list<Camera *>         cameras;
-
                 ///
-                /// \brief List of all light in the scene.
-                ///
-                std::list<Light *>          lights;
-
-                ///
-                /// \brief This attribute is used to store the layer number.
-                ///
-                int                         layerNumber;
+                //RenderGraph                 renderGraph;
         };
-
     }
 }
 

@@ -40,3 +40,5 @@ Le FindAssimp attend que la variable "ASSIMP_DIR" soit set a l'emplacement du do
 
 # LIENS
 http://doc.qt.io/qt-5/qtgui-openglwindow-example.html -> optimisations qt pour utiliser QOpenGLContext
+https://en.wikipedia.org/wiki/Rule_of_three_%28C%2B%2B_programming%29
+
