@@ -1,6 +1,8 @@
 #ifndef     __SCENE_GRAPH_NODE_HPP__
 # define    __SCENE_GRAPH_NODE_HPP__
 
+#include    "Entity.hpp"
+
 namespace   WorldParticles
 {
     namespace   Engine
@@ -9,14 +11,35 @@ namespace   WorldParticles
         {
             public:
                 ///
-                /// \brief Default constructor. Create an empty node.
+                /// \brief Default constructor. Create an empty node with a object entity.
                 ///
                 SceneGraphNode(SceneGraphNode *parent = 0);
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                SceneGraphNode(const SceneGraphNode &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                SceneGraphNode(SceneGraphNode &&other);
+
+                ///
                 /// \brief Destructor.
                 ///
-                ~SceneGraphNode(void);
+                virtual ~SceneGraphNode(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                SceneGraphNode  &operator=(const SceneGraphNode &other);
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                SceneGraphNode  &operator=(SceneGraphNode &&other);
 
             public:
                 ///
@@ -41,9 +64,9 @@ namespace   WorldParticles
                 std::list<SceneGraphNode*>  childrens;
 
                 ///
+                /// \brief The entity related to the node.
                 ///
-                ///
-                std::list<std::shared_ptr<Mesh>>    meshes;
+                Entity                      *entity; // TODO GSL NOT NULL & OWNER
         };
     }
 }

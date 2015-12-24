@@ -22,9 +22,30 @@ namespace   WorldParticles
                 AssimpImporter(void);
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                AssimpImporter(const AssimpImporter &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                AssimpImporter(AssimpImporter &&other);
+
+                ///
                 /// \brief Destructor
                 ///
-                ~AssimpImporter(void);
+                virtual ~AssimpImporter(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                AssimpImporter  &operator=(const AssimpImporter &other);
+
+                ///
+                /// \brief Move assignment importer.
+                ///
+                AssimpImporter  &operator=(AssimpImporter &&other);
 
             public:
                 ///

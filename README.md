@@ -42,3 +42,4 @@ Le FindAssimp attend que la variable "ASSIMP_DIR" soit set a l'emplacement du do
 http://doc.qt.io/qt-5/qtgui-openglwindow-example.html -> optimisations qt pour utiliser QOpenGLContext
 https://en.wikipedia.org/wiki/Rule_of_three_%28C%2B%2B_programming%29
 
+reminder : Note that the FBX SDK is not covered by the GNU General Public License (GPL), and the source code is not publicly available. Some source code does exists for customizing the Maya and 3ds Max FBX plug-ins, though it is packaged in the FBX Extensions SDK, and not in the FBX SDK itself. The latest release and any previous version of the FBX SDK can be obtained on the Autodesk FBX website at http://www.autodesk.com/fbx.The FBX SDK cannot be redistributed or repackaged without written permission from Autodesk. Should you wish to distribute an open-source project which uses the FBX SDK, you must include a link to the Autodesk FBX website so the user may install the required version of the FBX SDK.

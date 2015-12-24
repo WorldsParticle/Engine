@@ -27,9 +27,30 @@ namespace   WorldParticles
                         const glm::vec3 &scale = glm::vec3(1.0));
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                Transform(const Transform &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Transform(Transform &&other);
+
+                ///
                 /// \brief Destructor
                 ///
-                ~Transform(void);
+                virtual ~Transform(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                Transform   &operator=(const Transform &other);
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                Transform   &operator=(Transform &&other);
 
             public:
                 ///

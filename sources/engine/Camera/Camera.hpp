@@ -2,20 +2,37 @@
 # define    __CAMERA_HPP__
 
 #include    <glm/glm.hpp>
-#include    "Transform.hpp"
-#include    "GameObject.hpp"
+
+#include    "Entity.hpp"
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
         ///
-        /// \brief This class is used to represent a basic camera in a 3D world.
+        /// \brief This class is used to store information about a basic camera in a 3D world.
         ///
-        /// TODO : should be reworked
+        /// It is not a concrete implementation for a camera.
         ///
-        class       Camera
+        class       Camera : public Entity
         {
+            public:
+                ///
+                /// \brief This struct is used to store the clipping plane of the camera.
+                ///
+                struct  ClippingPlane
+                {
+                    ///
+                    /// \brief Distance of the near clipping plane from the camera.
+                    ///
+                    float   near;
+
+                    ///
+                    /// \brief Distance of the far clipping plane from the camera.
+                    ///
+                    float   far;
+                };
+
             public:
                 ///
                 /// \brief Default constructor
@@ -23,9 +40,9 @@ namespace   WorldParticles
                 Camera(void);
 
                 ///
-                /// \brief
+                /// \brief Construct a camera from an assimp camera.
                 ///
-                Camera(const aiCamera *assimpCamera);
+                Camera(const aiCamera *assimpCamera); // TODO GSL NOT NULL
 
                 ///
                 /// \brief Copy constructor.
@@ -35,10 +52,10 @@ namespace   WorldParticles
                 ///
                 /// \brief Move constructor.
                 ///
-                Camera(Camera &&other);
+                Camera(Camera &&other) noexcept;
 
                 ///
-                /// \brief Destructor
+                /// \brief Destructor.
                 ///
                 virtual ~Camera(void) noexcept;
 
@@ -51,54 +68,43 @@ namespace   WorldParticles
                 ///
                 /// \brief Move assigment operator.
                 ///
-                Camera  &operator=(const Camera &&other);
-
-            public:
-                ///
-                /// \brief This method is used to update the camera in the scene.
-                ///
-                virtual void    update(void);
-
-                ///
-                /// \brief This method is used to launch the draw of this camera.
-                ///
-                virtual void    draw(void);
-
-            public:
-                ///
-                /// \brief This method is used to return the projection matrix of the camera.
-                ///
-                const glm::mat4       &getProjection(void) const;
-
-                ///
-                /// \brief This method is used to return the view matrix of the camera.
-                ///
-                const glm::mat4       &getView(void) const;
+                Camera  &operator=(const Camera &&other) noexcept;
 
             protected:
                 ///
-                /// \brief The transform attribute is used to store the 3D transformation of the camera
+                /// \brief The name of the camera.
                 ///
-                Transform   transform;
+                std::string         name;
 
                 ///
-                /// \brief This attribute is used to store the camera field of view.
+                /// \brief the clipping plane for the camera.
                 ///
-                float       fieldOfView;
+                ClippingPlane       clippingPlane;
 
                 ///
-                /// \brief This attribute is used to store the minimum view distance.
+                /// \brief Screen aspect ratio.
                 ///
-                float       zNear;
+                float               aspect;
 
                 ///
-                /// \brief This attribute is used to store the maximum view distance.
+                /// \brief The field of view angle for the horizontal axis in radian.
                 ///
-                float       zFar;
+                float               fov;
 
-                glm::mat4   projection;
-                glm::mat4   view;
+                ///
+                ///
+                ///
+                glm::vec3           up;
 
+                ///
+                ///
+                ///
+                glm::vec3           lookat;
+
+                ///
+                ///
+                ///
+                glm::vec3           position;
         };
 
     }

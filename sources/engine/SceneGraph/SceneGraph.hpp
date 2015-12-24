@@ -26,21 +26,36 @@ namespace   WorldParticles
                 SceneGraph(const aiNode *assimp, Scene *parent);
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                SceneGraph(const SceneGraph &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                SceneGraph(SceneGraph &&other);
+
+                ///
                 /// \brief Destructor
                 ///
-                ~SceneGraph(void);
+                virtual ~SceneGraph(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                SceneGraph  &operator=(const SceneGraph &other);
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                SceneGraph  &operator=(SceneGraph &&other);
 
             public:
                 ///
                 /// \brief This method is used to recursively update the node in the scene graph.
                 ///
                 void    update(void);
-
-            public:
-
-                Mesh        *getMesh(unsigned int id);
-
-                Material    *getMaterial(unsigned int id);
 
             private:
                 ///

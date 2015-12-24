@@ -1,4 +1,6 @@
 #include    "ArrayObject.hpp"
+
+/// TODO change for a real opengl context.
 #include    "glwindow.h"
 
 namespace   WorldParticles
@@ -11,9 +13,25 @@ namespace   WorldParticles
             GLWindow::m_funcs->glGenVertexArrays(1, &this->id);
         }
 
+        ArrayObject::ArrayObject(ArrayObject &&other) :
+            id(std::move(other.id))
+        {
+            other.id = 0;
+        }
+
         ArrayObject::~ArrayObject(void)
         {
             GLWindow::m_funcs->glDeleteVertexArrays(1, &this->id);
+        }
+
+
+
+        ArrayObject &
+        ArrayObject::operator=(ArrayObject &&other)
+        {
+            this->id = std::move(id);
+            other.id = 0;
+            return *this;
         }
 
 

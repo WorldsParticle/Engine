@@ -1,7 +1,7 @@
 #ifndef         __LIGHT_HPP__
 # define        __LIGHT_HPP__
 
-#include    "Transform.hpp"
+#include    "Entity.hpp"
 
 namespace WorldParticles
 {
@@ -12,7 +12,7 @@ namespace WorldParticles
         ///
         /// TODO : implement the class.
         ///
-        class Light
+        class Light : public Entity
         {
             public:
                 ///
@@ -38,7 +38,7 @@ namespace WorldParticles
                 ///
                 /// \brief Destructor.
                 ///
-                virtual ~Light(void);
+                virtual ~Light(void) noexcept;
 
             public:
                 ///
@@ -50,12 +50,6 @@ namespace WorldParticles
                 /// \brief Move assigment operator.
                 ///
                 Light   &operator=(Light &&other);
-
-            private:
-                ///
-                /// \brief The transform of the light.
-                ///
-                Transform       transform;
 
         };
     }

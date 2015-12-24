@@ -69,16 +69,6 @@ namespace WorldParticles
 
             private:
                 ///
-                /// \brief This vector contains all cameras used in the scene.
-                ///
-                std::vector<Camera *>       cameras; // TODO GSL OWNER && NOT NULL
-
-                ///
-                /// \brief This vector contains all lights used in the scene.
-                ///
-                std::vector<Ligh *>         lights; // TODO GSL OWNER && NOT NULL
-
-                ///
                 /// \brief This vector contains all materials that can be used in the scene.
                 ///
                 /// All the materials present are not necessarily used in the scene.

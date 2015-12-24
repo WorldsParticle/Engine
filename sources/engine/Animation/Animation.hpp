@@ -2,6 +2,7 @@
 # define    __ANIMATION_HPP__
 
 #include    <assimp/anim.h>
+#include    <string>
 
 namespace   WorldParticles
 {
@@ -18,7 +19,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Construct an animation from an assimp animation.
                 ///
-                Animation(const aiAnimation *assimpAnimation);
+                Animation(const aiAnimation *assimp_animation); // TODO GSL NOT NULL
 
                 ///
                 /// \brief Copy constructor.
@@ -28,7 +29,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move constructor.
                 ///
-                Animation(Animation &&other);
+                Animation(Animation &&other) noexcept;
 
                 ///
                 /// \brief Destructor.
@@ -44,7 +45,13 @@ namespace   WorldParticles
                 ///
                 /// \brief Move assignment operator.
                 ///
-                Animation   &operator=(Animation &&other);
+                Animation   &operator=(Animation &&other) noexcept;
+
+            private:
+                ///
+                /// \brief The name of the animation.
+                ///
+                std::string     name;
         };
     }
 }

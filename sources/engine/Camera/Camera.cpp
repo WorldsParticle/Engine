@@ -11,52 +11,85 @@ namespace WorldParticles
     namespace Engine
     {
 
-        Camera::Camera(const glm::vec3 &position,
-                const glm::vec3 &rotation,
-                const glm::vec3 &scale) :
-            transform(position, rotation, scale),
-            fieldOfView(60),
-            zNear(0.1),
-            zFar(1000.0)
+        Camera::Camera(void) :
+            name(""),
+            clippingPlane{0.0f, 0.0f},
+            aspect(0.0f),
+            fov(0.0f),
+            up(glm::vec3(0.0f)),
+            lookat(glm::vec3(0.0f)),
+            position(glm::vec3(0.0f))
         {
-            projection = glm::perspective(glm::radians(45.0f), 1024.0f / 768.0f, 0.1f, 1000.0f);
-            view = glm::lookAt(this->transform.getPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
+            // nothing to do.
+        }
+
+        Camera::Camera(const aiCamera *assimpCamera) :
+            name(assimpCamera->mName.C_Str()),
+            clippingPlane{assimpCamera->mClipPlaneNear, assimpCamera->mClipPlaneFar},
+            aspect(assimpCamera->mAspect),
+            fov(assimpCamera->mHorizontalFOV * 2.0f),
+        {
+            auto convert = [&](const aiVector3D &v) {return glm::vec3(v.x, v.y, v.z);};
+            this->up = convert(assimpCamera->mUp);
+            this->lookat = convert(assimpCamera->mLookAt);
+            this->position = convert(assimpCamera->mPosition);
+        }
+
+        Camera::Camera(const Camera &other) :
+            name(other.name),
+            clippingPlane(other.clippingPlane),
+            aspect(other.aspect),
+            fov(other.fov),
+            up(other.up),
+            lookat(other.lookat),
+            position(other.position)
+        {
+            // nothing to do.
+        }
+
+        Camera::Camera(Camera &&other) :
+            name(std::move(other.name)),
+            clippingPlane(std::move(other.clippingPlane)),
+            aspect(std::move(other.aspect)),
+            fov(std::move(other.fov)),
+            up(std::move(other.up)),
+            lookat(std::move(other.lookat)),
+            position(std::move(other.position))
+        {
+            // nothing to do.
         }
 
         Camera::~Camera(void)
         {
-
-        }
-
-        const glm::mat4 &
-        Camera::getProjection(void) const
-        {
-            return projection;
-        }
-
-        const glm::mat4 &
-        Camera::getView(void) const
-        {
-            return view;
+            // nothing to do.
         }
 
 
-        bool    Camera::initialise(void)
+
+        Camera &
+        Camera::operator=(const Camera &other)
         {
-            // nothing to do ?
-            return true;
+            this->name = other.name;
+            this->clippingPlane = other.clippingPlane;
+            this->aspect = other.aspect;
+            this->fov = other.fov;
+            this->up = other.up;
+            this->lookat = other.lookat;
+            this->position = other.position;
+            return *this;
         }
 
-        void    Camera::update(void)
+        Camera &
+        Camera::operator=(Camera &&other)
         {
-        }
-
-        void    Camera::draw(void)
-        {
-            GLWindow::m_funcs->glEnable(GL_DEPTH_TEST);
-            GLWindow::m_funcs->glClearColor(0.3, 0.1, 0.1, 0.0);
-            GLWindow::m_funcs->glViewport(0, 0, 1024, 768);
-            GLWindow::m_funcs->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+            this->name = std::move(other.name);
+            this->clippingPlane = std::move(other.clippingPlane);
+            this->aspect = std::move(other.aspect);
+            this->fov = std::move(other.fov);
+            this->up = std::move(other.up);
+            this->lookat = std::move(other.lookat);
+            this->position = std::move(other.position);
+            return *this;
         }
 
     }
