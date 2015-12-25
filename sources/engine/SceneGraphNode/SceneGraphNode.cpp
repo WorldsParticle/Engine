@@ -4,8 +4,13 @@ namespace   WorldParticles
 {
     namespace   Engine
     {
-        SceneGraphNode::SceneGraphNode(SceneGraphNode *parent) :
-            parent(parent)
+        /// TODO add GSL NOT NULL
+        SceneGraphNode::SceneGraphNode(SceneGraphNode *parent, Entity *entity) :
+            name(""),
+            parent(parent),
+            sceneGraph(parent->sceneGraph),
+            scene(parent->scene),
+            entity(entity)
         {
 
         }
@@ -23,6 +28,19 @@ namespace   WorldParticles
                 delete node;
             }
         }
+
+
+
+        void
+        SceneGraphNode::update(void)
+        {
+            this->entity->update();
+            for (SceneGraphNode *node : this->childrens)
+            {
+                 node->update();
+            }
+        }
+
     }
 }
 

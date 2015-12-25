@@ -61,7 +61,17 @@ namespace   WorldParticles
                 ///
                 /// \brief The childrens of the node.
                 ///
-                std::list<SceneGraphNode*>  childrens;
+                std::list<SceneGraphNode*>  childrens; // TODO GSL NOT NULL && OWNER
+
+                ///
+                /// \brief The scene graph that contain this node.
+                ///
+                SceneGraph                  *sceneGraph;
+
+                ///
+                /// \brief The scene that contain the scene graph related to this node.
+                ///
+                Scene                       *scene; // TODO GSL NOT NULL
 
                 ///
                 /// \brief The entity related to the node.

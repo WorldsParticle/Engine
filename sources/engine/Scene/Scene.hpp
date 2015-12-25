@@ -67,7 +67,7 @@ namespace WorldParticles
                 ///
                 void        draw(void);
 
-            private:
+            protected:
                 ///
                 /// \brief This vector contains all materials that can be used in the scene.
                 ///
@@ -82,7 +82,7 @@ namespace WorldParticles
                 /// All the animation present are not necessarily used in the scene.
                 /// It's more like a library for loaded animations.
                 ///
-                std::vector<Animations *>   animations; // TODO GSL OWNER && NOT NULL
+                std::vector<Animation *>    animations; // TODO GSL OWNER && NOT NULL
 
                 ///
                 /// \brief This vector contains all meshes that can be used in the scene.
@@ -98,9 +98,9 @@ namespace WorldParticles
                 /// All the textures present are not necessarily used in the scene.
                 /// It's more like a library for loaded textures.
                 ///
-                std::vector<Textures *>     textures; // TODO GSL OWNER && NOT NULL
+                std::vector<Texture *>      textures; // TODO GSL OWNER && NOT NULL
 
-            private:
+            protected:
                 ///
                 /// \brief The scene graph represent the architecture of the scene.
                 ///

@@ -2,9 +2,7 @@
 # define    __MATERIAL_HPP__
 
 #include    <glm/glm.hpp>
-#include    <memory>
-
-#include    "ShaderProgram.hpp"
+#include    <assimp/material.h>
 
 namespace   WorldParticles
 {
@@ -34,7 +32,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move constructor.
                 ///
-                Material(Material &&other);
+                Material(Material &&other) noexcept;
 
                 ///
                 /// \brief Destructor
@@ -50,7 +48,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move assignment operator.
                 ///
-                Material    &operator=(Material &&other);
+                Material    &operator=(Material &&other) noexcept;
 
             public:
                 ///

@@ -11,7 +11,8 @@ namespace WorldParticles
     namespace Engine
     {
 
-        Camera::Camera(void) :
+        Camera::Camera(SceneGraphNode *node) :
+            Entity(node),
             name(""),
             clippingPlane{0.0f, 0.0f},
             aspect(0.0f),
@@ -23,7 +24,8 @@ namespace WorldParticles
             // nothing to do.
         }
 
-        Camera::Camera(const aiCamera *assimpCamera) :
+        Camera::Camera(const aiCamera *assimpCamera, SceneGraphNode *node) :
+            Entity(node),
             name(assimpCamera->mName.C_Str()),
             clippingPlane{assimpCamera->mClipPlaneNear, assimpCamera->mClipPlaneFar},
             aspect(assimpCamera->mAspect),
@@ -36,6 +38,7 @@ namespace WorldParticles
         }
 
         Camera::Camera(const Camera &other) :
+            Entity(other),
             name(other.name),
             clippingPlane(other.clippingPlane),
             aspect(other.aspect),
@@ -48,6 +51,7 @@ namespace WorldParticles
         }
 
         Camera::Camera(Camera &&other) :
+            Entity(std::move(other)),
             name(std::move(other.name)),
             clippingPlane(std::move(other.clippingPlane)),
             aspect(std::move(other.aspect)),

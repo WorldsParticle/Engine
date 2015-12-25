@@ -37,12 +37,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Default constructor
                 ///
-                Camera(void);
+                Camera(SceneGraphNode *node);
 
                 ///
                 /// \brief Construct a camera from an assimp camera.
                 ///
-                Camera(const aiCamera *assimpCamera); // TODO GSL NOT NULL
+                Camera(const aiCamera *assimpCamera, SceneGraphNode *node); // TODO GSL NOT NULL
 
                 ///
                 /// \brief Copy constructor.
@@ -92,17 +92,20 @@ namespace   WorldParticles
                 float               fov;
 
                 ///
-                ///
+                /// \brief Up vector of the camera coordinate system relative to
+                /// the coordinate space defined by the related node. (Entity::node);
                 ///
                 glm::vec3           up;
 
                 ///
-                ///
+                /// \brief lookat vector of the camera coordinate system relative
+                /// to the coordinate space defined by the related node. (Entity::node)
                 ///
                 glm::vec3           lookat;
 
                 ///
-                ///
+                /// \brief Position of the camera relative to the coordinate space
+                /// defined by the related node. (Entity::node)
                 ///
                 glm::vec3           position;
         };

@@ -11,104 +11,85 @@ namespace WorldParticles
     {
 
         /// TODO : delete push object
-        Scene::Scene(void)
+        Scene::Scene(void) :
+            materials(),
+            animations(),
+            meshes(),
+            textures(),
+            sceneGraph()
         {
+            // nothing to do.
+        }
+
+        Scene::Scene(const Scene &other) :
+            materials(),
+            animations(),
+            meshes(),
+            textures(),
+            sceneGraph(other.sceneGraph)
+        {
+            this->materials.reserve(other.materials.size());
+            for (Material *material : other.materials)
+            {
+                this->materials.push_back(new Material(*material));
+            }
+            this->animations.reserve(other.animations.size());
+            for (Animation *animation : other.animations)
+            {
+                this->animations.push_back(new Animation(*animation));
+            }
+            this->meshes.reserve(other.meshes.size());
+            for (Mesh *mesh : other.meshes)
+            {
+                this->meshes.push_back(new Mesh(*mesh));
+            }
+            this->textures.reserve(other.textures.size());
+            for (Texture *texture : other.textures)
+            {
+                 this->textures.push_back(new Texture(*texture));
+            }
+        }
+
+        Scene::Scene(Scene &&other) :
+            materials(std::move(other.materials)),
+            animations(std::move(other.animations)),
+            meshes(std::move(other.meshes)),
+            textures(std::move(other.textures)),
+            sceneGraph(std::move(other.sceneGraph))
+        {
+
         }
 
         Scene::~Scene(void)
         {
-            // nothing to do
-        }
-
-
-
-        Scene       &Scene::operator<<(Camera *camera)
-        {
-            this->add(camera);
-            return *this;
-        }
-
-        Scene    &Scene::operator<<(GameObject *gameobject)
-        {
-            this->add(gameobject);
-            return *this;
-        }
-
-        Scene    &Scene::operator<<(Light *light)
-        {
-            this->add(light);
-            return *this;
-        }
-
-
-        bool    Scene::initialise(void)
-        {
-            for (Camera *camera : this->cameras)
+            for (Material *material : this->materials)
             {
-                camera->initialise();
+                delete material;
             }
-            for (GameObject *gameobject : this->gameobjects)
+            for (Animation *animation : this->animations)
             {
-                gameobject->initialise();
+                delete animation;
             }
-            return true;
+            for (Mesh *mesh : this->meshes)
+            {
+                delete mesh;
+            }
+            for (Texture *texture : this->textures)
+            {
+                delete texture;
+            }
         }
+
+
 
         void    Scene::update(void)
         {
-            for (Camera *camera : this->cameras)
-            {
-                 camera->update();
-            }
-            for (GameObject *gameobject : this->gameobjects)
-            {
-                gameobject->update();
-            }
+            this->sceneGraph.update();
         }
 
         void    Scene::draw(void)
         {
-            for (Camera *camera : this->cameras)
-            {
-                camera->draw();
-                const glm::mat4 &projection = camera->getProjection();
-                const glm::mat4 &view = camera->getView();
-                for (GameObject *gameobject : this->gameobjects)
-                {
-                    gameobject->draw(projection, view);
-                }
-            }
-        }
-
-
-
-        void    Scene::add(GameObject *gameobject)
-        {
-            this->gameobjects.push_back(gameobject);
-        }
-
-        /// TODO order by
-        void    Scene::add(Camera *camera)
-        {
-            this->cameras.push_back(camera);
-        }
-
-        void    Scene::add(Light *light)
-        {
-            this->lights.push_back(light);
-        }
-
-
-        int
-        Scene::getLayerNumber(void) const
-        {
-             return this->layerNumber;
-        }
-
-        void
-        Scene::setLayerNumber(int layerNumber)
-        {
-            this->layerNumber = layerNumber;
+            //this->renderGraph.draw();
         }
 
     }

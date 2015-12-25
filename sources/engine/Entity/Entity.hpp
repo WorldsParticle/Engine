@@ -1,6 +1,8 @@
 #ifndef     __ENTITY_HPP__
 # define    __ENTITY_HPP__
 
+#include    "SceneGraphNode.hpp"
+
 namespace   WorldParticles
 {
     namespace   Engine
@@ -12,11 +14,33 @@ namespace   WorldParticles
                 /// \brief Default constructor
                 /// \param node the node which the entity is attached.
                 ///
-                Entity(SceneGraphNode *node);
+                Entity(SceneGraphNode *node); // TODO GSL NOT NULL
 
-                // TODO : check for copy / move
+                ///
+                /// \brief Copy constructor.
+                ///
+                Entity(const Entity &other);
 
+                ///
+                /// \brief Move constructor.
+                ///
+                Entity(Entity &&other);
+
+                ///
+                /// \brief Destructor.
+                ///
                 virtual ~Entity(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                Entity  &operator=(const Entity &other);
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                Entity  &operator=(Entity &&other);
 
             public:
                 ///
@@ -24,11 +48,16 @@ namespace   WorldParticles
                 ///
                 void    update(void) = 0;
 
-            private:
+            protected:
                 ///
                 /// \brief The node which the entity is attached.
                 ///
-                SceneGraphNode  *node;
+                SceneGraphNode  *node; // TODO GSL NOT NULL
+
+                ///
+                /// \brief The scene that contains the Entity.
+                ///
+                Scene           *scene;
         };
     }
 }

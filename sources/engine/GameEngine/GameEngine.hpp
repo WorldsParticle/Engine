@@ -28,7 +28,7 @@ namespace WorldParticles
                 ///
                 /// \brief Move constructor.
                 ///
-                GameEngine(GameEngine &&other);
+                GameEngine(GameEngine &&other) noexcept;
 
                 ///
                 /// \brief Destructor
@@ -44,7 +44,7 @@ namespace WorldParticles
                 ///
                 /// \brief Move assignement operator.
                 ///
-                GameEngine  &operator=(GameEngine &&other);
+                GameEngine  &operator=(GameEngine &&other) noexcept;
 
             public:
                 ///
@@ -71,7 +71,6 @@ namespace WorldParticles
                 ///
                 std::list<Scene *>      scenes; // TODO GSL NOT NULL && OWNER
 
-            private:
                 ///
                 /// \brief The importer used to import new scene.
                 ///

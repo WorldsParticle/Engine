@@ -13,16 +13,54 @@ namespace   WorldParticles
         class       Object : public Entity
         {
             public:
-                Object(void);
-                ~Object(void);
+                ///
+                /// \brief Default constructor.
+                /// \param node the node related to the object.
+                ///
+                Object(SceneGraphNode *node); // TODO GSL NOT NULL
+
+                ///
+                /// \brief Construct an object from an assimp node.
+                ///
+                Object(const aiNode *assimpNode, SceneGraphNode *node); // TODO GSL NOT NULL
+
+                ///
+                /// \brief Copy constructor.
+                ///
+                Object(const Object &other);
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Object(Object &&other) noexcept;
+
+                ///
+                /// \brief Destructor.
+                ///
+                virtual ~Object(void) noexcept;
 
             public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                Object  &operator=(const Object &other);
 
+                ///
+                /// \brief Move assigment operator.
+                ///
+                Object  &operator=(Object &&other) noexcept;
+
+            public:
+                ///
+                /// \brief Update the object.
+                ///
                 void    update(void);
 
             protected:
-
-                std::list<Mesh>     meshes;
+                ///
+                /// \brief The meshes associated with the object.
+                ///
+                std::list<Mesh *>     meshes; // TODO GSL NOT NULL
         };
     }
 }

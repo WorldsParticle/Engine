@@ -28,7 +28,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move constructor.
                 ///
-                Texture(Texture &&other);
+                Texture(Texture &&other) noexcept;
 
                 ///
                 /// \brief Destructor.
@@ -44,7 +44,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move assignment operator.
                 ///
-                Texture     &operator=(Texture &&other);
+                Texture     &operator=(Texture &&other) noexcept;
         };
     }
 }

@@ -10,7 +10,23 @@ namespace   WorldParticles
 
         GameEngine::GameEngine(void)
         {
-            // nothing to do ?
+            // nothing to do
+        }
+
+        GameEngine::GameEngine(const GameEngine &other) :
+            importer(other.importer)
+        {
+            for (Scene *scene : other.scenes)
+            {
+                this->scenes.push_back(new Scene(*scene));
+            }
+        }
+
+        GameEngine::GameEngine(GameEngine &&other) :
+            scenes(std::move(other.scenes)),
+            importer(std::move(other.importer))
+        {
+            // nothing to do.
         }
 
         GameEngine::~GameEngine(void)
@@ -19,6 +35,26 @@ namespace   WorldParticles
             {
                 delete scene;
             }
+        }
+
+
+
+        GameEngine &
+        GameEngine::operator=(const GameEngine &other)
+        {
+            for (Scene *scene : other.scenes)
+            {
+                this->scenes.push_back(new Scene(*scene));
+            }
+            return *this;
+        }
+
+        GameEngine &
+        GameEngine::operator=(GameEngine &&other)
+        {
+            this->scenes = std::move(other.scenes);
+            this->importer = std::move(other.importer);
+            return *this;
         }
 
 
