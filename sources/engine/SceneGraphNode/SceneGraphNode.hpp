@@ -11,9 +11,18 @@ namespace   WorldParticles
         {
             public:
                 ///
-                /// \brief Default constructor. Create an empty node with a object entity.
+                /// \brief Default constructor. Create an empty node with a
+                /// object entity.
                 ///
-                SceneGraphNode(SceneGraphNode *parent = 0);
+                SceneGraphNode(SceneGraph *scenegraph,
+                        SceneGraphNode *parent = 0);
+
+                ///
+                /// \brief Construct a SceneGraphNode from an assimp node.
+                ///
+                SceneGraphNode(const aiNode *assimpNode,
+                        const std::map<std::string, Entity *> &entities,
+                        SceneGraph *scenegraph, SceneGraphNode *parent);
 
                 ///
                 /// \brief Copy constructor.
@@ -66,7 +75,7 @@ namespace   WorldParticles
                 ///
                 /// \brief The scene graph that contain this node.
                 ///
-                SceneGraph                  *sceneGraph;
+                SceneGraph                  *scenegraph;
 
                 ///
                 /// \brief The scene that contain the scene graph related to this node.
@@ -76,7 +85,12 @@ namespace   WorldParticles
                 ///
                 /// \brief The entity related to the node.
                 ///
-                Entity                      *entity; // TODO GSL NOT NULL & OWNER
+                Entity                      *entity; // TODO OWNER
+
+                ///
+                /// \brief The transformation affecting the node.
+                ///
+                Transform                   transform;
         };
     }
 }

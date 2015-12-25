@@ -8,13 +8,31 @@ namespace   WorldParticles
             parent(parent),
             rootNode(nullptr)
         {
-
+            // nothing to do.
         }
 
-        SceneGraph(const aiNode *assimpNode, Scene *parent) :
-            parent(parent),
-            rootNode(nullptr)
+        /// TODO GSL NOT NULL
+        SceneGraph::SceneGraph(const aiNode *assimpNode,
+                const std::map<std::string, Entity *> &entities,
+                Scene *scene) :
+            scene(scene),
+            rootNode(new SceneGraphNode(assimpNode, entities, this))
         {
+            // nothing to do.
+        }
+
+        SceneGraph::SceneGraph(const SceneGraph &other) :
+            scene(other.scene),
+            rootNode(new SceneGraphNode(*other.rootNode))
+        {
+            // nothing to do.
+        }
+
+        SceneGraph::SceneGraph(SceneGraph &&other) :
+            scene(other.scene),
+            rootNode(other.rootNode)
+        {
+            other.rootNode = nullptr;
         }
 
         SceneGraph::~SceneGraph(void)
@@ -22,10 +40,34 @@ namespace   WorldParticles
             delete this->rootNode;
         }
 
+
+
+        SceneGraph &
+        SceneGraph::operator=(const SceneGraph &other)
+        {
+            this->scene = other.scene;
+            this->rootNode = new SceneGraphNode(*other.rootNode);
+            return *this;
+        }
+
+        SceneGraph &
+        SceneGraph::operator=(SceneGraph &&other)
+        {
+            this->scene = other.scene;
+            this->rootNode = other.rootNode;
+            other.rootNode = nullptr;
+            return *this;
+        }
+
+
+
         void
         SceneGraph::update(void)
         {
-            // TODO fill function
+            if (this->rootNode != nullptr)
+            {
+                 this->rootNode->update();
+            }
         }
     }
 }

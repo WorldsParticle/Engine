@@ -17,6 +17,13 @@ namespace   WorldParticles
                 TextureLibrary(void);
 
                 ///
+                /// \brief Construct the library from an array of assimp textures.
+                ///
+                /// TODO  GSL array_view
+                ///
+                TextureLibrary(const aiTexture *assimpTextures, unsigned int size);
+
+                ///
                 /// \brief Copy constructor.
                 ///
                 TextureLibrary(const TextureLibrary &other) = default;

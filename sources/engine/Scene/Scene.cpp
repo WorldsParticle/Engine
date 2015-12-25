@@ -12,72 +12,72 @@ namespace WorldParticles
 
         /// TODO : delete push object
         Scene::Scene(void) :
+            sceneGraph(this),
             materials(),
             animations(),
             meshes(),
-            textures(),
-            sceneGraph()
+            textures()
         {
             // nothing to do.
         }
 
-        Scene::Scene(const Scene &other) :
-            materials(),
-            animations(),
-            meshes(),
-            textures(),
-            sceneGraph(other.sceneGraph)
+        Scene::Scene(const aiScene *assimpScene, const std::map<std::string, Entity *> &entities) :
+            sceneGraph(assimpScene->mRootNode, entities, this),
+            materials(assimpScene->mMaterials, assimpScene->mNumMaterials),
+            animations(assimpScene->mAnimations, assimpScene->mNumAnimations),
+            meshes(assimpScene->mMeshes, assimpScene->mNumMeshes),
+            textures(assimpScene->mTextures, assimpScene->mNumTextures)
         {
-            this->materials.reserve(other.materials.size());
-            for (Material *material : other.materials)
-            {
-                this->materials.push_back(new Material(*material));
-            }
-            this->animations.reserve(other.animations.size());
-            for (Animation *animation : other.animations)
-            {
-                this->animations.push_back(new Animation(*animation));
-            }
-            this->meshes.reserve(other.meshes.size());
-            for (Mesh *mesh : other.meshes)
-            {
-                this->meshes.push_back(new Mesh(*mesh));
-            }
-            this->textures.reserve(other.textures.size());
-            for (Texture *texture : other.textures)
-            {
-                 this->textures.push_back(new Texture(*texture));
-            }
+
+        }
+
+        Scene::Scene(const Scene &other) :
+            sceneGraph(other.sceneGraph),
+            materials(other.materials),
+            animations(other.animations),
+            meshes(other.meshes),
+            textures(other.textures)
+        {
+            // nothing to do.
         }
 
         Scene::Scene(Scene &&other) :
+            sceneGraph(std::move(other.sceneGraph)),
             materials(std::move(other.materials)),
             animations(std::move(other.animations)),
             meshes(std::move(other.meshes)),
-            textures(std::move(other.textures)),
-            sceneGraph(std::move(other.sceneGraph))
+            textures(std::move(other.textures))
         {
 
         }
 
         Scene::~Scene(void)
         {
-            for (Material *material : this->materials)
-            {
-                delete material;
-            }
-            for (Animation *animation : this->animations)
-            {
-                delete animation;
-            }
-            for (Mesh *mesh : this->meshes)
-            {
-                delete mesh;
-            }
-            for (Texture *texture : this->textures)
-            {
-                delete texture;
-            }
+            // nothing to do.
+        }
+
+
+
+        Scene &
+        Scene::operator=(const Scene &other)
+        {
+            this->sceneGraph = other.sceneGraph;
+            this->materials = other.materials;
+            this->animations = other.animations;
+            this->meshes = other.meshes;
+            this->textures = other.textures;
+            return *this;
+        }
+
+        Scene &
+        Scene::operator=(Scene &&other)
+        {
+            this->sceneGraph = std::move(other.sceneGraph);
+            this->materials = std::move(other.materials);
+            this->animations = std::move(other.animations);
+            this->meshes = std::move(other.meshes);
+            this->textures = std::move(other.textures);
+            return *this;
         }
 
 

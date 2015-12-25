@@ -19,7 +19,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Construct an animation from an assimp animation.
                 ///
-                Animation(const aiAnimation *assimp_animation); // TODO GSL NOT NULL
+                Animation(const aiAnimation *assimpAnimation); // TODO GSL NOT NULL
 
                 ///
                 /// \brief Copy constructor.

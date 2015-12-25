@@ -17,6 +17,13 @@ namespace   WorldParticles
                 AnimationLibrary(void);
 
                 ///
+                /// \brief Construct the library from an array of assimp animations of size 'size'
+                ///
+                /// TODO GSL array_view
+                ///
+                AnimationLibrary(const aiAnimation *assimpAnimations, unsigned int size);
+
+                ///
                 /// \brief Copy constructor.
                 ///
                 AnimationLibrary(const AnimationLibrary &other) = default;

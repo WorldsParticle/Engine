@@ -70,6 +70,12 @@ namespace   WorldParticles
                 ///
                 Camera  &operator=(const Camera &&other) noexcept;
 
+            public:
+                ///
+                /// \brief Getter for the camera name.
+                ///
+                const std::string   &getName(void) const;
+
             protected:
                 ///
                 /// \brief The name of the camera.

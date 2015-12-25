@@ -46,6 +46,12 @@ namespace   WorldParticles
                 ///
                 PerspectiveCamera   &operator=(PerspectiveCamera &&other);
 
+            public:
+                ///
+                /// \brief this method clone the object.
+                ///
+                PerspectiveCamera   *clone(void) const;
+
             private:
                 ///
                 /// \brief The projection matrix of the perspective camera.

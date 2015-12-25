@@ -11,8 +11,8 @@ namespace   WorldParticles
         }
 
         // TODO GSL NOT NULL
-        Animation::Animation(const aiAnimation *assimp_animation) :
-            name(assimp_animation->mName.C_Str())
+        Animation::Animation(const aiAnimation *assimpAnimation) :
+            name(assimpAnimation->mName.C_Str())
         {
             // TODO
         }

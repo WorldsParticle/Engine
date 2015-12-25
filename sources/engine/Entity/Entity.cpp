@@ -4,7 +4,7 @@ namespace   WorldParticles
 {
     namespace   Engine
     {
-        Entity::Entity(SceneGraphNode *node) : // TODO GSL NOT NULL
+        Entity::Entity(SceneGraphNode *node) :
             node(node),
             scene(this->node->scene)
         {

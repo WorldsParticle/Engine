@@ -53,6 +53,14 @@ namespace   WorldParticles
 
 
 
+        PerspectiveCamera *
+        PerspectiveCamera::clone(void) const
+        {
+            return new PerspectiveCamera(*this);
+        }
+
+
+
         void
         PerspectiveCamera::update(void)
         {

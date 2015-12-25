@@ -17,6 +17,11 @@ namespace   WorldParticles
                 MaterialLibrary(void);
 
                 ///
+                /// \brief Construct a library from an array of assimp materials.
+                ///
+                MaterialLibrary(const aiMaterial *assimpMaterials, unsigned int size);
+
+                ///
                 /// \brief Copy constructor.
                 ///
                 MaterialLibrary(const MaterialLibrary &other) = default;

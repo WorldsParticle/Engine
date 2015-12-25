@@ -26,9 +26,9 @@ namespace WorldParticles
                 Scene(void);
 
                 ///
-                /// \brief Construct a scene from an assimp scene.
                 ///
-                Scene(const aiScene *assimpScene);
+                ///
+                Scene(const aiScene *scene, const std::map<std::string, Entity *> &entities);
 
                 ///
                 /// \brief Copy constructor.
@@ -38,7 +38,7 @@ namespace WorldParticles
                 ///
                 /// \brief Move constructor.
                 ///
-                Scene(Scene &&other);
+                Scene(Scene &&other) noexcept;
 
                 ///
                 /// \brief Destructor
@@ -54,7 +54,7 @@ namespace WorldParticles
                 ///
                 /// \brief Move assignement operator.
                 ///
-                Scene       &operator=(Scene &&other);
+                Scene       &operator=(Scene &&other) noexcept;
 
             public:
                 ///
@@ -69,39 +69,6 @@ namespace WorldParticles
 
             protected:
                 ///
-                /// \brief This vector contains all materials that can be used in the scene.
-                ///
-                /// All the materials present are not necessarily used in the scene.
-                /// It's more like a library for loaded materials.
-                ///
-                std::vector<Material *>     materials; // TODO GSL OWNER && NOT NULL
-
-                ///
-                /// \brief This vector contains all animations that can be used in the scene.
-                ///
-                /// All the animation present are not necessarily used in the scene.
-                /// It's more like a library for loaded animations.
-                ///
-                std::vector<Animation *>    animations; // TODO GSL OWNER && NOT NULL
-
-                ///
-                /// \brief This vector contains all meshes that can be used in the scene.
-                ///
-                /// All the mesh present are not necessarily used in the scene.
-                /// It's more like a library for loaded meshes.
-                ///
-                std::vector<Mesh *>         meshes; // TODO GSL OWNER && NOT NULL
-
-                ///
-                /// \brief This vector contains all textures that can be used in the scene.
-                ///
-                /// All the textures present are not necessarily used in the scene.
-                /// It's more like a library for loaded textures.
-                ///
-                std::vector<Texture *>      textures; // TODO GSL OWNER && NOT NULL
-
-            protected:
-                ///
                 /// \brief The scene graph represent the architecture of the scene.
                 ///
                 /// For more informations see SceneGraph.hpp
@@ -112,6 +79,28 @@ namespace WorldParticles
                 ///
                 ///
                 //RenderGraph                 renderGraph;
+
+            protected:
+                ///
+                /// \brief Library of usable materials.
+                ///
+                MaterialLibrary             materials;
+
+                ///
+                /// \brief Library of usable animation in the scene.
+                ///
+                AnimationLibrary            animations;
+
+                ///
+                /// \brief Library of usable mesh in the scene.
+                ///
+                MeshLibrary                 meshes;
+
+                ///
+                /// \brief Library of usable textures in the scene.
+                ///
+                TextureLibrary              textures;
+
         };
     }
 }

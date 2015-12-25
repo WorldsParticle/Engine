@@ -17,6 +17,13 @@ namespace   WorldParticles
                 MeshLibrary(void);
 
                 ///
+                /// \brief Construct the library from an assimp mesh array.
+                ///
+                /// TODO GSL array_view
+                ///
+                MeshLibrary(const aiMesh *assimpMeshes, unsigned int size);
+
+                ///
                 /// \brief Copy constructor.
                 ///
                 MeshLibrary(const MeshLibrary &other) = default;

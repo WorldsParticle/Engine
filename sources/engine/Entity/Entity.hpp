@@ -44,6 +44,12 @@ namespace   WorldParticles
 
             public:
                 ///
+                /// \brief clone pattern
+                ///
+                Entity  *clone(void) = 0;
+
+            public:
+                ///
                 /// \brief method used to update the entity.
                 ///
                 void    update(void) = 0;

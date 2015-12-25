@@ -51,6 +51,12 @@ namespace WorldParticles
                 ///
                 Light   &operator=(Light &&other);
 
+            public:
+                ///
+                /// \brief This method clone the light.
+                ///
+                Light   *clone(void) const;
+
         };
     }
 }

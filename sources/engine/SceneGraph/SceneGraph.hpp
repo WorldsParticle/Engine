@@ -18,12 +18,14 @@ namespace   WorldParticles
                 ///
                 /// This constructor will generate a empty scene graph.
                 ///
-                SceneGraph(Scene *parent);
+                SceneGraph(Scene *scene);
 
                 ///
                 /// \brief Constructor from an assimp scene graph.
                 ///
-                SceneGraph(const aiNode *assimp, Scene *parent);
+                /// TODO GSL NOT NULL
+                ///
+                SceneGraph(const aiNode *assimpNode, Scene *scene);
 
                 ///
                 /// \brief Copy constructor.
@@ -33,7 +35,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move constructor.
                 ///
-                SceneGraph(SceneGraph &&other);
+                SceneGraph(SceneGraph &&other) noexcept;
 
                 ///
                 /// \brief Destructor
@@ -49,7 +51,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move assignment operator.
                 ///
-                SceneGraph  &operator=(SceneGraph &&other);
+                SceneGraph  &operator=(SceneGraph &&other) noexcept;
 
             public:
                 ///
@@ -61,7 +63,7 @@ namespace   WorldParticles
                 ///
                 /// \brief The Scene represented by the scene graph.
                 ///
-                Scene                   *parent; // TODO GSL NOT NULL
+                Scene                   *scene; // TODO GSL NOT NULL
 
                 ///
                 /// \brief The root node of the graph.
