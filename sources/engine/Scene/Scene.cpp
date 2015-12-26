@@ -1,9 +1,11 @@
-
 #include    <glm/glm.hpp>
 #include    <algorithm>
+#include    <log4cpp/Category.hh>
 
 #include    "Scene.hpp"
-#include    "Cube.hpp"
+#include    "AssimpScene.hpp"
+
+using namespace     log4cpp;
 
 namespace WorldParticles
 {
@@ -12,43 +14,23 @@ namespace WorldParticles
 
         /// TODO : delete push object
         Scene::Scene(void) :
-            sceneGraph(this),
             materials(),
             animations(),
             meshes(),
-            textures()
+            textures(),
+            sceneGraph(this)
         {
             // nothing to do.
         }
 
-        Scene::Scene(const AssimpScene &assimpScene) :
-            sceneGraph(assimpScene, this),
-            materials(assimpScene->getMaterials()),
-            animations(assimpScene->getAnimations()),
-            meshes(assimpScene->getMeshes()),
-            textures(assimpScene->getTextures())
-        {
-
-        }
-
-        Scene::Scene(const Scene &other) :
-            sceneGraph(other.sceneGraph),
-            materials(other.materials),
-            animations(other.animations),
-            meshes(other.meshes),
-            textures(other.textures)
+        Scene::Scene(const AssimpScene &s) :
+            materials(s.getMaterials(), s.getMaterialsNumber()),
+            animations(s.getAnimations(), s.getAnimationsNumber()),
+            meshes(s.getMeshes(), s.getMeshesNumber()),
+            textures(s.getTextures(), s.getTexturesNumber()),
+            sceneGraph(s, this)
         {
             // nothing to do.
-        }
-
-        Scene::Scene(Scene &&other) :
-            sceneGraph(std::move(other.sceneGraph)),
-            materials(std::move(other.materials)),
-            animations(std::move(other.animations)),
-            meshes(std::move(other.meshes)),
-            textures(std::move(other.textures))
-        {
-
         }
 
         Scene::~Scene(void)
@@ -58,38 +40,44 @@ namespace WorldParticles
 
 
 
-        Scene &
-        Scene::operator=(const Scene &other)
-        {
-            this->sceneGraph = other.sceneGraph;
-            this->materials = other.materials;
-            this->animations = other.animations;
-            this->meshes = other.meshes;
-            this->textures = other.textures;
-            return *this;
-        }
-
-        Scene &
-        Scene::operator=(Scene &&other)
-        {
-            this->sceneGraph = std::move(other.sceneGraph);
-            this->materials = std::move(other.materials);
-            this->animations = std::move(other.animations);
-            this->meshes = std::move(other.meshes);
-            this->textures = std::move(other.textures);
-            return *this;
-        }
-
-
-
         void    Scene::update(void)
         {
+            Category    &root = Category::getRoot();
+            root << Priority::DEBUG << "Scene update()";
             this->sceneGraph.update();
         }
 
         void    Scene::draw(void)
         {
+            Category    &root = Category::getRoot();
+            root << Priority::DEBUG << "Scene draw()";
             //this->renderGraph.draw();
+        }
+
+
+
+        Material *
+        Scene::getMaterial(unsigned int id) const
+        {
+            return this->materials.get(id);
+        }
+
+        Animation *
+        Scene::getAnimation(unsigned int id) const
+        {
+            return this->animations.get(id);
+        }
+
+        Mesh *
+        Scene::getMesh(unsigned int id) const
+        {
+            return this->meshes.get(id);
+        }
+
+        Texture *
+        Scene::getTexture(unsigned int id) const
+        {
+            return this->textures.get(id);
         }
 
     }

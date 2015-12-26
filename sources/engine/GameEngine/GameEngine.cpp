@@ -1,4 +1,8 @@
+#include    <log4cpp/Category.hh>
+
 #include    "GameEngine.hpp"
+
+using namespace     log4cpp;
 
 namespace   WorldParticles
 {
@@ -79,7 +83,10 @@ namespace   WorldParticles
         void
         GameEngine::load(const std::string &filename)
         {
+            Category    &root = Category::getRoot();
             // TODO GSL OWNER && NOT NULL
+            //
+            root << Priority::DEBUG << "GameEngine - Load()";
             Scene *test = this->importer.import(filename);
 
             this->scenes.push_back(test);

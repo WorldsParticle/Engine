@@ -1,4 +1,8 @@
+#include    <log4cpp/Category.hh>
+
 #include    "MeshLibrary.hpp"
+
+using namespace     log4cpp;
 
 namespace   WorldParticles
 {
@@ -10,8 +14,11 @@ namespace   WorldParticles
             // nothing to do.
         }
 
-        MeshLibrary::MeshLibrary(const aiMesh *assimpMeshes, unsigned int size)
+        MeshLibrary::MeshLibrary(aiMesh **assimpMeshes, unsigned int size)
         {
+            Category    &root = Category::getRoot();
+
+            root << Priority::DEBUG << "MeshLibrary constructor with size = " << size;
             this->resources.reserve(size);
             for (unsigned int i = 0 ; i < size ; ++i)
             {

@@ -60,6 +60,12 @@ namespace   WorldParticles
                 ///
                 void    update(void);
 
+            public:
+                ///
+                /// \brief Getter for the scene attribute.
+                ///
+                Scene                   *getScene(void) const;
+
             private:
                 ///
                 /// \brief The Scene represented by the scene graph.

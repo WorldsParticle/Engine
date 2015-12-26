@@ -21,7 +21,7 @@ namespace   WorldParticles
                 ///
                 /// TODO  GSL array_view
                 ///
-                TextureLibrary(const aiTexture *assimpTextures, unsigned int size);
+                TextureLibrary(aiTexture **assimpTextures, unsigned int size);
 
                 ///
                 /// \brief Copy constructor.

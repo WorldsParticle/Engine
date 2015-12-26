@@ -77,28 +77,27 @@ ADD_DEFINITIONS(${QT_DEFINITIONS})
 ## PROJECT SOURCES FILES
 
 SET(WORLD_PARTICLES_SOURCES_FILES
-    ${CMAKE_SOURCE_DIR}/sources/main.cpp
 
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameClock/GameClock.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/GameObject.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Animation/Animation.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/AnimationLibrary/AnimationLibrary.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/AssimpImporter.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/Model/Model.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/BufferObject/BufferObject.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/ArrayObject/ArrayObject.cpp
-
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/ShaderManager.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/ShaderProgramManager.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Shader/Shader.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderProgram/ShaderProgram.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/AssimpScene/AssimpScene.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Entity/Entity.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/MaterialLibrary/MaterialLibrary.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/MeshLibrary/MeshLibrary.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Object/Object.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/PerspectiveCamera/PerspectiveCamera.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/SceneGraph.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/SceneGraphNode.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Texture/Texture.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/TextureLibrary/TextureLibrary.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.cpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.cpp
     ${CMAKE_SOURCE_DIR}/sources/model/tools.cpp
@@ -108,6 +107,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.cpp
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.cpp
 
+    ${CMAKE_SOURCE_DIR}/sources/main.cpp
     )
 
 ## END PROJECT SOURCES FILES
@@ -117,32 +117,29 @@ SET(WORLD_PARTICLES_SOURCES_FILES
 ## PROJECT HEADERS FILES
 
 SET(WORLD_PARTICLES_HEADERS_FILES
-    ${CMAKE_SOURCE_DIR}/sources/main.h
 
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameClock/GameClock.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/GameObject.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/IRenderer.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/BasicRenderer.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/Cube.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Utilities/Deserializable.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Animation/Animation.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/AnimationLibrary/AnimationLibrary.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/AssimpImporter.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/Model/Model.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/BufferObject/BufferObject.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/ArrayObject/ArrayObject.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/AssimpScene/AssimpScene.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Entity/Entity.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Library/Library.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Light/Light.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Material/Material.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/MaterialLibrary/MaterialLibrary.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/Mesh.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/MeshLibrary/MeshLibrary.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Object/Object.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/PerspectiveCamera/PerspectiveCamera.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/SceneGraph.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/SceneGraphNode.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Texture/Texture.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/TextureLibrary/TextureLibrary.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.hpp
 
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/ShaderManager.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/ShaderProgramManager.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Shader/Shader.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderProgram/ShaderProgram.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderNames.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderProgramNames.hpp
 
     ${CMAKE_SOURCE_DIR}/sources/model/model.h
     ${CMAKE_SOURCE_DIR}/sources/model/tools.h
@@ -151,6 +148,8 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/window/glwindow.h
     ${CMAKE_SOURCE_DIR}/sources/window/mainwindow.h
     ${CMAKE_SOURCE_DIR}/sources/window/toolwidget.h
+
+    ${CMAKE_SOURCE_DIR}/sources/worldparticles.hpp
 
     )
 
@@ -161,34 +160,32 @@ SET(WORLD_PARTICLES_HEADERS_FILES
 ## PROJECT INCLUDES DIRECTORIES
 
 SET(WORLD_PARTICLES_INCLUDE_DIR
-    ${CMAKE_SOURCE_DIR}/sources
-    ${CMAKE_SOURCE_DIR}/sources/graphic
+
+    ${CMAKE_SOURCE_DIR}/sources/engine/Animation/
+    ${CMAKE_SOURCE_DIR}/sources/engine/AnimationLibrary/
+    ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/
+    ${CMAKE_SOURCE_DIR}/sources/engine/AssimpScene/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Camera/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Entity/
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Library/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Light/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Material/
+    ${CMAKE_SOURCE_DIR}/sources/engine/MaterialLibrary/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
+    ${CMAKE_SOURCE_DIR}/sources/engine/MeshLibrary/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Object/
+    ${CMAKE_SOURCE_DIR}/sources/engine/PerspectiveCamera/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Scene/
+    ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/
+    ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Texture/
+    ${CMAKE_SOURCE_DIR}/sources/engine/TextureLibrary/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Transform/
+
     ${CMAKE_SOURCE_DIR}/sources/model
     ${CMAKE_SOURCE_DIR}/sources/window
-    ${CMAKE_SOURCE_DIR}/sources/engine
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameClock
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameObject
-    ${CMAKE_SOURCE_DIR}/sources/engine/Scene
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer
-    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/BasicRenderer/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Camera/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Transform/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Primitives/Cube/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Material/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Mesh/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Light/
-    ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/
-    ${CMAKE_SOURCE_DIR}/sources/engine/GameObject/Model/
-    ${CMAKE_SOURCE_DIR}/sources/engine/BufferObject/
-    ${CMAKE_SOURCE_DIR}/sources/engine/ArrayObject/
-
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderManager/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Managers/ShaderProgramManager/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/Shader/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/ShaderProgram/
-    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/
-
+    ${CMAKE_SOURCE_DIR}/sources
 
     ${CMAKE_BINARY_DIR}
     )

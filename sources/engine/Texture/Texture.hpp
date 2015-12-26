@@ -23,12 +23,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy constructor.
                 ///
-                Texture(const Texture &other);
+                Texture(const Texture &other) = default;
 
                 ///
                 /// \brief Move constructor.
                 ///
-                Texture(Texture &&other) noexcept;
+                Texture(Texture &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor.
@@ -39,12 +39,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                Texture     &operator=(const Texture &other);
+                Texture     &operator=(const Texture &other) = default;
 
                 ///
                 /// \brief Move assignment operator.
                 ///
-                Texture     &operator=(Texture &&other) noexcept;
+                Texture     &operator=(Texture &&other) noexcept = default;
         };
     }
 }

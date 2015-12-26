@@ -35,17 +35,17 @@ namespace   WorldParticles
                 ///
                 SceneGraphNode(const AssimpScene &assimpScene,
                         const aiNode *assimpNode, SceneGraph *scenegraph,
-                        SceneGraphNode *parent);
+                        SceneGraphNode *parent = 0);
 
                 ///
                 /// \brief Copy constructor.
                 ///
-                SceneGraphNode(const SceneGraphNode &other);
+                SceneGraphNode(const SceneGraphNode &other) = default; // TODO TOTALEMENT FAUX
 
                 ///
                 /// \brief Move constructor.
                 ///
-                SceneGraphNode(SceneGraphNode &&other);
+                SceneGraphNode(SceneGraphNode &&other) noexcept = default; // TODO TOTALEMENT FAUX
 
                 ///
                 /// \brief Destructor.
@@ -56,12 +56,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                SceneGraphNode  &operator=(const SceneGraphNode &other);
+                SceneGraphNode  &operator=(const SceneGraphNode &other) = default; // TODO TOTALEMENT FAUX
 
                 ///
                 /// \brief Move assignment operator.
                 ///
-                SceneGraphNode  &operator=(SceneGraphNode &&other);
+                SceneGraphNode  &operator=(SceneGraphNode &&other) noexcept = default; // TODO TOTALEMENT FAUX
 
             public:
                 ///

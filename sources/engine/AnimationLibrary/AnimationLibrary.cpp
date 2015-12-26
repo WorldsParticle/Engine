@@ -11,7 +11,7 @@ namespace   WorldParticles
             // nothing to do.
         }
 
-        AnimationLibrary::AnimationLibrary(const aiAnimation **assimpAnimations, unsigned int size) :
+        AnimationLibrary::AnimationLibrary(aiAnimation **assimpAnimations, unsigned int size) :
             Library<Animation>()
         {
             this->resources.reserve(size);

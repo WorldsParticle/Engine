@@ -4,13 +4,12 @@
 #include    <assimp/anim.h>
 
 #include    "Library.hpp"
+#include    "Animation.hpp"
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
-
-        class   Animation;
 
         class       AnimationLibrary : public Library<Animation>
         {
@@ -25,7 +24,7 @@ namespace   WorldParticles
                 ///
                 /// TODO GSL array_view
                 ///
-                AnimationLibrary(const aiAnimation **assimpAnimations, unsigned int size);
+                AnimationLibrary(aiAnimation **assimpAnimations, unsigned int size);
 
                 ///
                 /// \brief Copy constructor.

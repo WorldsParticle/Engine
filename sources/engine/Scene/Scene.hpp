@@ -37,12 +37,12 @@ namespace WorldParticles
                 ///
                 /// \brief Copy constructor.
                 ///
-                Scene(const Scene &other);
+                Scene(const Scene &other) = default;
 
                 ///
                 /// \brief Move constructor.
                 ///
-                Scene(Scene &&other) noexcept;
+                Scene(Scene &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor
@@ -53,12 +53,12 @@ namespace WorldParticles
                 ///
                 /// \brief Copy assignement operator.
                 ///
-                Scene       &operator=(const Scene &other);
+                Scene       &operator=(const Scene &other) = default;
 
                 ///
                 /// \brief Move assignement operator.
                 ///
-                Scene       &operator=(Scene &&other) noexcept;
+                Scene       &operator=(Scene &&other) noexcept = default;
 
             public:
                 ///
@@ -71,18 +71,26 @@ namespace WorldParticles
                 ///
                 void        draw(void);
 
-            protected:
+            public:
                 ///
-                /// \brief The scene graph represent the architecture of the scene.
+                /// \brief This method allow to retrieve a material from the animation material.
                 ///
-                /// For more informations see SceneGraph.hpp
-                ///
-                SceneGraph                  sceneGraph;
+                Material    *getMaterial(unsigned int id) const;
 
                 ///
+                /// \brief This method allow to retrieve an animation from the animation library.
                 ///
+                Animation   *getAnimation(unsigned int id) const;
+
                 ///
-                //RenderGraph                 renderGraph;
+                /// \brief This method allow to retrieve a mesh from the mesh library.
+                ///
+                Mesh        *getMesh(unsigned int id) const;
+
+                ///
+                /// \brief This method allow to retrieve a texture from the texture library.
+                ///
+                Texture     *getTexture(unsigned int id) const;
 
             protected:
                 ///
@@ -104,6 +112,19 @@ namespace WorldParticles
                 /// \brief Library of usable textures in the scene.
                 ///
                 TextureLibrary              textures;
+
+            protected:
+                ///
+                /// \brief The scene graph represent the architecture of the scene.
+                ///
+                /// For more informations see SceneGraph.hpp
+                ///
+                SceneGraph                  sceneGraph;
+
+                ///
+                ///
+                ///
+                //RenderGraph                 renderGraph;
 
         };
     }

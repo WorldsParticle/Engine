@@ -7,12 +7,34 @@ namespace WorldParticles
     namespace Engine
     {
 
-        Transform::Transform(const glm::vec3 &position, const glm::vec3 &rotation, const glm::vec3 &scale) :
-            position(position),
-            rotation(rotation),
-            scale(scale)
+        Transform::Transform(void) :
+            matrix(1)
         {
             // nothing to do
+        }
+
+        Transform::Transform(const aiMatrix4x4 &m) :
+            matrix(1)
+        {
+            matrix[0][0] = m.a1;
+            matrix[1][0] = m.a2;
+            matrix[2][0] = m.a3;
+            matrix[3][0] = m.a4;
+
+            matrix[0][1] = m.b1;
+            matrix[1][1] = m.b2;
+            matrix[2][1] = m.b3;
+            matrix[3][1] = m.b4;
+
+            matrix[0][2] = m.c1;
+            matrix[1][2] = m.c2;
+            matrix[2][2] = m.c3;
+            matrix[3][2] = m.c4;
+
+            matrix[0][3] = m.d1;
+            matrix[1][3] = m.d2;
+            matrix[2][3] = m.d3;
+            matrix[3][3] = m.d4;
         }
 
         Transform::~Transform(void)
@@ -20,73 +42,12 @@ namespace WorldParticles
             // nothing to do
         }
 
-        ///
-        /// PUBLIC SETTER
-        ///
 
-        void
-        Transform::setPosition(const glm::vec3 &position)
-        {
-            this->position = position;
-            this->update();
-        }
-
-        void
-        Transform::setRotation(const glm::vec3 &rotation)
-        {
-            this->rotation = rotation;
-            this->update();
-        }
-
-        void
-        Transform::setScale(const glm::vec3 &scale)
-        {
-            this->scale = scale;
-            this->update();
-        }
-
-        ///
-        /// PUBLIC GETTER
-        ///
-
-        const glm::vec3 &
-        Transform::getPosition(void) const
-        {
-             return this->position;
-        }
-
-        const glm::vec3 &
-        Transform::getRotation(void) const
-        {
-            return this->rotation;
-        }
-
-        const glm::vec3 &
-        Transform::getScale(void) const
-        {
-             return this->scale;
-        }
 
         const glm::mat4 &
         Transform::getMatrix(void) const
         {
              return this->matrix;
-        }
-
-        ///
-        /// PRIVATE METHOD
-        ///
-
-        void
-        Transform::update(void)
-        {
-            glm::mat4   result = glm::mat4(1);
-            result = glm::translate(result, this->position);
-            result = glm::rotate(result, this->rotation.x, glm::vec3(1.0, 0.0, 0.0));
-            result = glm::rotate(result, this->rotation.y, glm::vec3(0.0, 1.0, 0.0));
-            result = glm::rotate(result, this->rotation.z, glm::vec3(0.0, 0.0, 1.0));
-            result = glm::scale(result, this->scale);
-            this->matrix = result;
         }
 
     }

@@ -46,7 +46,7 @@ namespace   WorldParticles
                 ///
                 ///
                 ///
-                T           *get(unsigned int id); // TODO GSL NOT NULL
+                T           *get(unsigned int id) const; // TODO GSL NOT NULL
 
             protected:
                 ///

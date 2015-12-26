@@ -27,12 +27,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy constructor.
                 ///
-                Material(const Material &other);
+                Material(const Material &other) = default;
 
                 ///
                 /// \brief Move constructor.
                 ///
-                Material(Material &&other) noexcept;
+                Material(Material &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor
@@ -43,31 +43,31 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                Material    &operator=(const Material &other);
+                Material    &operator=(const Material &other) = default;
 
                 ///
                 /// \brief Move assignment operator.
                 ///
-                Material    &operator=(Material &&other) noexcept;
+                Material    &operator=(Material &&other) noexcept = default;
 
             public:
                 ///
-                /// \brief Getter for the color attribute.
-                /// \return the color.
+                /// \brief Getter for the name attribute.
+                /// \return the name of the material.
                 ///
-                const glm::vec4     &getColor(void) const;
+                const std::string   &getName(void) const;
 
             public:
                 ///
-                /// \brief Setter for the color attribute.
+                /// \brief Setter for the name attribute.
                 ///
-                void                setColor(const glm::vec4 &color);
+                void    setName(const std::string &name);
 
             private:
                 ///
-                /// \brief the color attribute is used to store the color of the material.
+                /// \brief The name of the material.
                 ///
-                glm::vec4                       color;
+                std::string         name;
         };
     }
 }

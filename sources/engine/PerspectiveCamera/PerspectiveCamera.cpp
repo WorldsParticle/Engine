@@ -1,54 +1,38 @@
+#include    <log4cpp/Category.hh>
+#include    <glm/gtc/matrix_transform.hpp>
+
 #include    "PerspectiveCamera.hpp"
+
+using namespace     log4cpp;
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
-        PerspectiveCamera::PerspectiveCamera(void)
+        PerspectiveCamera::PerspectiveCamera(SceneGraphNode *node) :
+            Camera(node),
+            projection(glm::mat4(1)),
+            view(glm::mat4(1))
         {
             this->projection = glm::perspective(this->fov, this->aspect,
                     this->clippingPlane.near, this->clippingPlane.far);
-            this->view = glm::lookat(this->position, this->lookat, this->up);
+            this->view = glm::lookAt(this->position, this->lookat, this->up);
         }
 
-        PerspectiveCamera::PerspectiveCamera(const PerspectiveCamera &other) :
-            projection(other.projection),
-            view(other.view)
+        PerspectiveCamera::PerspectiveCamera(const aiCamera *assimpCamera,
+                SceneGraphNode *node) :
+            Camera(assimpCamera, node),
+            projection(glm::mat4(1)),
+            view(glm::mat4(1))
         {
             this->projection = glm::perspective(this->fov, this->aspect,
                     this->clippingPlane.near, this->clippingPlane.far);
-            this->view = glm::lookat(this->position, this->lookat, this->up);
-            // nothing to do.
-        }
-
-        PerspectiveCamera::PerspectiveCamera(PerspectiveCamera &&other) :
-            projection(std::move(other.projection)),
-            view(std::move(other.view))
-        {
-            // nothing to do.
+            this->view = glm::lookAt(this->position, this->lookat, this->up);
         }
 
         PerspectiveCamera::~PerspectiveCamera(void)
         {
             // nothing to do.
-        }
-
-
-
-        PerspectiveCamera &
-        PerspectiveCamera::operator=(const PerspectiveCamera &other)
-        {
-            this->projection = other.projection;
-            this->view = other.view;
-            return *this;
-        }
-
-        PerspectiveCamera &
-        PerspectiveCamera::operator=(PerspectiveOperator &&other)
-        {
-            this->projection = std::move(other.projection);
-            this->view = std::move(other.view);
-            return *this;
         }
 
 
@@ -59,11 +43,12 @@ namespace   WorldParticles
             return new PerspectiveCamera(*this);
         }
 
-
-
         void
         PerspectiveCamera::update(void)
         {
+            Category    &root = Category::getRoot();
+
+            root << Priority::DEBUG << "PerspectiveCamera - update()";
             // nothing to do.
         }
     }

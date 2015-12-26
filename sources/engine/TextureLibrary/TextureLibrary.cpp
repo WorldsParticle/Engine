@@ -10,7 +10,7 @@ namespace   WorldParticles
             // nothing to do.
         }
 
-        TextureLibrary::TextureLibrary(const aiTexture *assimpTextures, unsigned int size) :
+        TextureLibrary::TextureLibrary(aiTexture **assimpTextures, unsigned int size) :
             Library<Texture>()
         {
             this->resources.reserve(size);

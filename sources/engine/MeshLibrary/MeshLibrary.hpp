@@ -21,7 +21,7 @@ namespace   WorldParticles
                 ///
                 /// TODO GSL array_view
                 ///
-                MeshLibrary(const aiMesh *assimpMeshes, unsigned int size);
+                MeshLibrary(aiMesh **assimpMeshes, unsigned int size);
 
                 ///
                 /// \brief Copy constructor.

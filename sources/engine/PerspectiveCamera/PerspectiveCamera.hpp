@@ -18,17 +18,22 @@ namespace   WorldParticles
                 ///
                 /// \brief Default constructor.
                 ///
-                PerspectiveCamera(void);
+                PerspectiveCamera(SceneGraphNode *node);
+
+                ///
+                /// \brief Construct a perspective camera from an assimp camera.
+                ///
+                PerspectiveCamera(const aiCamera *assimpCamera, SceneGraphNode *node);
 
                 ///
                 /// \brief Copy constructor.
                 ///
-                PerspectiveCamera(const PerspectiveCamera &other);
+                PerspectiveCamera(const PerspectiveCamera &other) = default;
 
                 ///
                 /// \brief Move constructor.
                 ///
-                PerspectiveCamera(PerspectiveCamera &&other);
+                PerspectiveCamera(PerspectiveCamera &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor.
@@ -39,18 +44,23 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                PerspectiveCamera   &operator=(const PerspectiveCamera &other);
+                PerspectiveCamera   &operator=(const PerspectiveCamera &other) = default;
 
                 ///
                 /// \brief Move assignment operator.
                 ///
-                PerspectiveCamera   &operator=(PerspectiveCamera &&other);
+                PerspectiveCamera   &operator=(PerspectiveCamera &&other) noexcept = default;
 
             public:
                 ///
-                /// \brief this method clone the object.
+                /// \brief this method clone the perspective camera.
                 ///
-                PerspectiveCamera   *clone(void) const;
+                virtual PerspectiveCamera   *clone(void) const;
+
+                ///
+                /// \brief This method is used to update the perspective camera.
+                ///
+                virtual void                update(void);
 
             private:
                 ///

@@ -11,7 +11,7 @@ namespace   WorldParticles
             // nothing to do.
         }
 
-        MaterialLibrary::MaterialLibrary(const aiMaterial **assimpMaterials, unsigned int size) :
+        MaterialLibrary::MaterialLibrary(aiMaterial **assimpMaterials, unsigned int size) :
             Library<Material>()
         {
             this->resources.reserve(size);

@@ -6,27 +6,20 @@ namespace   WorldParticles
     {
 
         Material::Material(void) :
-            color(glm::vec4(1.0f))
+            name("Default")
         {
             // nothing to do
         }
 
         Material::Material(const aiMaterial *assimpMaterial) :
-            color(glm::vec4(1.0f))
+            name("Default")
         {
+            aiString assimpName;
+
+            assimpMaterial->Get(AI_MATKEY_NAME, assimpName);
+
+            this->name = assimpName.C_Str();
             // nothing to do atm.
-        }
-
-        Material::Material(const Material &other) :
-            color(other.color)
-        {
-            // nothing to do.
-        }
-
-        Material::Material(Material &&other) noexcept :
-            color(std::move(other.color))
-        {
-            // nothing to do.
         }
 
         Material::~Material(void) noexcept
@@ -36,34 +29,18 @@ namespace   WorldParticles
 
 
 
-        Material &
-        Material::operator=(const Material &other)
+        const std::string &
+        Material::getName(void) const
         {
-            this->color = other.color;
-            return *this;
-        }
-
-        Material &
-        Material::operator=(Material &&other) noexcept
-        {
-            this->color = std::move(other.color);
-            return *this;
-        }
-
-
-
-        const glm::vec4 &
-        Material::getColor(void) const
-        {
-            return this->color;
+            return this->name;
         }
 
 
 
         void
-        Material::setColor(const glm::vec4 &color)
+        Material::setName(const std::string &name)
         {
-            this->color = color;
+            this->name = name;
         }
     }
 }

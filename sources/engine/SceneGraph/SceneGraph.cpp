@@ -1,20 +1,26 @@
+#include    <log4cpp/Category.hh>
+
 #include    "SceneGraph.hpp"
+#include    "SceneGraphNode.hpp"
+#include    "AssimpScene.hpp"
+
+using namespace     log4cpp;
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
-        SceneGraph(Scene *parent) :
-            parent(parent),
+        SceneGraph::SceneGraph(Scene *scene) :
+            scene(scene),
             rootNode(nullptr)
         {
             // nothing to do.
         }
 
         /// TODO GSL NOT NULL
-        SceneGraph::SceneGraph(const AssimpScene &aiScene, Scene *scene) :
+        SceneGraph::SceneGraph(const AssimpScene &s, Scene *scene) :
             scene(scene),
-            rootNode(new SceneGraphNode(aiScene, aiScene->getRootNode(), this))
+            rootNode(new SceneGraphNode(s, s.getRootNode(), this))
         {
             // nothing to do.
         }
@@ -26,7 +32,7 @@ namespace   WorldParticles
             // nothing to do.
         }
 
-        SceneGraph::SceneGraph(SceneGraph &&other) :
+        SceneGraph::SceneGraph(SceneGraph &&other) noexcept :
             scene(other.scene),
             rootNode(other.rootNode)
         {
@@ -49,7 +55,7 @@ namespace   WorldParticles
         }
 
         SceneGraph &
-        SceneGraph::operator=(SceneGraph &&other)
+        SceneGraph::operator=(SceneGraph &&other) noexcept
         {
             this->scene = other.scene;
             this->rootNode = other.rootNode;
@@ -62,10 +68,21 @@ namespace   WorldParticles
         void
         SceneGraph::update(void)
         {
+            Category    &root = Category::getRoot();
+
+            root << Priority::DEBUG << "SceneGraph - update()";
             if (this->rootNode != nullptr)
             {
                  this->rootNode->update();
             }
+        }
+
+
+
+        Scene *
+        SceneGraph::getScene(void) const
+        {
+            return this->scene;
         }
     }
 }

@@ -1,5 +1,8 @@
+#include    <log4cpp/Category.hh>
+
 #include    "Light.hpp"
 
+using namespace     log4cpp;
 
 namespace   WorldParticles
 {
@@ -37,6 +40,9 @@ namespace   WorldParticles
         void
         Light::update(void)
         {
+            Category    &root = Category::getRoot();
+
+            root << Priority::DEBUG << "Light - update()";
             // nothing to do atm.
         }
 

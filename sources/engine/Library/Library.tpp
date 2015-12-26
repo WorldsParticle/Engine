@@ -59,7 +59,7 @@ namespace   WorldParticles
 
         template<typename T>
         T * // TODO GSL ADD NOT NULL
-        Library<T>::get(unsigned int id)
+        Library<T>::get(unsigned int id) const
         {
             return this->resources.at(id);
         }

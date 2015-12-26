@@ -2,7 +2,6 @@
 #include <QPushButton>
 #include <QGridLayout>
 #include <QCoreApplication>
-#include "GameClock.hpp"
 #include "GameEngine.hpp"
 
 #include <log4cpp/Category.hh>
@@ -69,27 +68,21 @@ void    GLWindow::start(Model *model)
 {
     ::WorldParticles::Engine::GameEngine     _gameEngine;
 
-    QOpenGLDebugLogger *logger = new QOpenGLDebugLogger(this);
-
-    if (logger->initialize() == false)
-        qDebug() << "impossible d'initialiser le logger";
     _gEngine = &(_gameEngine);
-    _gameEngine.load(RESOURCES_PATH "/models/monkey.dae");
-    _gameEngine.initialise();
-    ::WorldParticles::Engine::GameClock::start();
+    _gameEngine.load(RESOURCES_PATH "/scenes/altair/altair.dae");
+    _gameEngine.update();
+
+    return;
+    //::WorldParticles::Engine::GameClock::start();
     resizeWindow();
     while (isVisible())
     {
         _gameEngine.update();
-        ::WorldParticles::Engine::GameClock::restart();
+        //::WorldParticles::Engine::GameClock::restart();
         _context.makeCurrent(this);
         _gameEngine.draw();
         _context.swapBuffers(this);
         _context.doneCurrent();
-
-        QList<QOpenGLDebugMessage> messages = logger->loggedMessages();
-        foreach (const QOpenGLDebugMessage &message, messages)
-            qDebug() << message;
 
         QCoreApplication::processEvents();
     }

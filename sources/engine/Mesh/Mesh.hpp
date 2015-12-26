@@ -32,12 +32,12 @@ namespace WorldParticles
                 ///
                 /// \brief Copy constructor.
                 ///
-                Mesh(const Mesh &other);
+                Mesh(const Mesh &other) = default; // TODO TOTALEMENT FAUX
 
                 ///
                 /// \brief Move constructor.
                 ///
-                Mesh(Mesh &&other);
+                Mesh(Mesh &&other) noexcept = default; // TODO TOTALEMENT FAUX
 
                 ///
                 /// \brief Destructor
@@ -48,12 +48,12 @@ namespace WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                Mesh    &operator=(const Mesh &other);
+                Mesh    &operator=(const Mesh &other) = default; // TODO TOTALEMENT FAUX
 
                 ///
                 /// \brief Move assignment operator.
                 ///
-                Mesh    &operator=(Mesh &&other);
+                Mesh    &operator=(Mesh &&other) noexcept = default; // TODO TOTALEMENT FAUX
 
             public:
                 ///

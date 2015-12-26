@@ -40,10 +40,6 @@ namespace   WorldParticles
         }
 
 
-        ///
-        /// PUBLIC METHOD
-        ///
-
         /// TODO Optimisations
         void
         Mesh::update(void)

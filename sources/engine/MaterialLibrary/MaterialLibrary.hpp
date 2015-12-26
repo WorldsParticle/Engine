@@ -4,13 +4,12 @@
 #include    <assimp/material.h>
 
 #include    "Library.hpp"
+#include    "Material.hpp"
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
-        class   Material;
-
         ///
         /// \brief This material library wrap the Library<Material> and provide a constructor from assimp materials.
         ///
@@ -25,7 +24,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Construct a library from an array of assimp materials.
                 ///
-                MaterialLibrary(const aiMaterial **assimpMaterials, unsigned int size);
+                MaterialLibrary(aiMaterial **assimpMaterials, unsigned int size);
 
                 ///
                 /// \brief Copy constructor.

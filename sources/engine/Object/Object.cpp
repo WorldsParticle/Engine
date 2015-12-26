@@ -1,4 +1,9 @@
+#include    <log4cpp/Category.hh>
+
 #include    "Object.hpp"
+#include    "Scene.hpp"
+
+using namespace     log4cpp;
 
 namespace   WorldParticles
 {
@@ -22,18 +27,6 @@ namespace   WorldParticles
 
         }
 
-        Object::Object(const Object &other) :
-            Entity(other)
-        {
-
-        }
-
-        Object::Object(Object &&other) :
-            Entity(std::move(other))
-        {
-
-        }
-
         Object::~Object(void)
         {
 
@@ -41,23 +34,19 @@ namespace   WorldParticles
 
 
 
-        Object &
-        Object::operator=(const Object &other)
+        Object *
+        Object::clone(void) const
         {
-            return *this;
+            return new Object(*this);
         }
-
-        Object &
-        Object::operator=(const Object &&other)
-        {
-
-        }
-
-
 
         void
         Object::update(void)
         {
+
+            Category    &root = Category::getRoot();
+
+            root << Priority::DEBUG << "Object - update()";
             // nothing to do actually.
         }
 

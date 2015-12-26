@@ -29,6 +29,11 @@ namespace   WorldParticles
             // nothing more to do actually.
         }
 
+        Animation::~Animation(void)
+        {
+
+        }
+
 
 
         Animation &

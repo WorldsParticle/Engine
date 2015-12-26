@@ -14,28 +14,10 @@ namespace   WorldParticles
             // nothing to do atm.
         }
 
-        Texture::Texture(Texture &&other)
-        {
-            // nothing to do atm.
-        }
-
         Texture::~Texture(void)
         {
             // nothing to do atm.
         }
 
-
-
-        Texture &
-        Texture::operator=(const Texture &other)
-        {
-            return *this;
-        }
-
-        Texture &
-        Texture::operator=(Texture &&other)
-        {
-             return *this;
-        }
     }
 }
