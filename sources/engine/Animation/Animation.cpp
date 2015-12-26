@@ -23,7 +23,7 @@ namespace   WorldParticles
             // nothing more to do actually.
         }
 
-        Animation::Animation(Animation &&other) :
+        Animation::Animation(Animation &&other) noexcept :
             name(std::move(other.name))
         {
             // nothing more to do actually.
@@ -39,7 +39,7 @@ namespace   WorldParticles
         }
 
         Animation &
-        Animation::operator=(Animation &&other)
+        Animation::operator=(Animation &&other) noexcept
         {
             this->name = std::move(other.name);
             return *this;

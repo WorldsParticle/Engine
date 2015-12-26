@@ -1,7 +1,9 @@
 #ifndef     __CAMERA_HPP__
 # define    __CAMERA_HPP__
 
+#include    <string>
 #include    <glm/glm.hpp>
+#include    <assimp/camera.h>
 
 #include    "Entity.hpp"
 
@@ -9,6 +11,9 @@ namespace   WorldParticles
 {
     namespace   Engine
     {
+
+        class   SceneGraphNode;
+
         ///
         /// \brief This class is used to store information about a basic camera in a 3D world.
         ///
@@ -47,12 +52,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy constructor.
                 ///
-                Camera(const Camera &other);
+                Camera(const Camera &other) = default;
 
                 ///
                 /// \brief Move constructor.
                 ///
-                Camera(Camera &&other) noexcept;
+                Camera(Camera &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor.
@@ -63,12 +68,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assigment operator.
                 ///
-                Camera  &operator=(const Camera &other);
+                Camera  &operator=(const Camera &other) = default;
 
                 ///
                 /// \brief Move assigment operator.
                 ///
-                Camera  &operator=(const Camera &&other) noexcept;
+                Camera  &operator=(Camera &&other) noexcept = default;
 
             public:
                 ///

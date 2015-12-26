@@ -1,12 +1,25 @@
 #ifndef     __SCENE_GRAPH_NODE_HPP__
 # define    __SCENE_GRAPH_NODE_HPP__
 
-#include    "Entity.hpp"
+#include    <string>
+#include    <list>
+#include    <assimp/scene.h>
+
+#include    "Transform.hpp"
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
+
+        class       Entity;
+        class       SceneGraph;
+        class       Scene;
+        class       AssimpScene;
+
+        ///
+        /// \brief A Node of the scene graph.
+        ///
         class       SceneGraphNode
         {
             public:
@@ -20,9 +33,9 @@ namespace   WorldParticles
                 ///
                 /// \brief Construct a SceneGraphNode from an assimp node.
                 ///
-                SceneGraphNode(const aiNode *assimpNode,
-                        const std::map<std::string, Entity *> &entities,
-                        SceneGraph *scenegraph, SceneGraphNode *parent);
+                SceneGraphNode(const AssimpScene &assimpScene,
+                        const aiNode *assimpNode, SceneGraph *scenegraph,
+                        SceneGraphNode *parent);
 
                 ///
                 /// \brief Copy constructor.
@@ -55,6 +68,12 @@ namespace   WorldParticles
                 /// \brief This method is used to update the node and the node children.
                 ///
                 void    update(void);
+
+            public:
+                ///
+                /// \brief Getter for the scene attribute.
+                ///
+                Scene       *getScene(void) const;
 
             private:
                 ///
@@ -94,3 +113,5 @@ namespace   WorldParticles
         };
     }
 }
+
+#endif /* !__SCENE_GRAPH_NODE_HPP__ */

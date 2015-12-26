@@ -1,7 +1,8 @@
-#include    "Mesh.hpp"
-#include    "glwindow.h"
 
 #include    <log4cpp/Category.hh>
+
+#include    "Mesh.hpp"
+
 using namespace log4cpp;
 
 namespace   WorldParticles
@@ -9,19 +10,15 @@ namespace   WorldParticles
     namespace   Engine
     {
 
-        ///
-        /// PUBLIC CONSTRUCTORS
-        ///
-
-        Mesh::Mesh(void) :
-            arrayObject(std::make_shared<ArrayObject>())
+        Mesh::Mesh(void)
+            /*arrayObject(std::make_shared<ArrayObject>())*/
         {
             // nothing to do
         }
 
         /// TODO check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
-        Mesh::Mesh(const aiMesh *am) :
-            arrayObject(std::make_shared<ArrayObject>())
+        Mesh::Mesh(const aiMesh *am)
+            /*arrayObject(std::make_shared<ArrayObject>())*/
         {
             if (am == nullptr) throw std::invalid_argument("assimpMesh is null.");
             this->name = am->mName.C_Str();
@@ -51,49 +48,50 @@ namespace   WorldParticles
         void
         Mesh::update(void)
         {
-            if (!this->vertexBuffer) {
-                this->vertexBuffer = std::make_shared<BufferObject>(
-                        BufferObject::Type::ARRAY_BUFFER,
-                        BufferObject::Usage::STATIC_DRAW
-                );
-            }
-            if (!this->elementBuffer && !this->indices.empty()) {
-                this->elementBuffer = std::make_shared<BufferObject>(
-                        BufferObject::Type::ELEMENT_ARRAY_BUFFER,
-                        BufferObject::Usage::STATIC_DRAW
-                );
-            }
-            this->arrayObject->bind();
-            float *data = reinterpret_cast<float *>(this->positions.data());
-            std::vector<float>  vertices(data, data + this->positions.size() * 3);
-            data = reinterpret_cast<float *>(this->normals.data());
-            vertices.insert(vertices.end(), data, data + this->normals.size() * 3);
-            this->vertexBuffer->update(vertices.data(), vertices.size() * sizeof(float));
-            this->vertexBuffer->bind();
-            GLWindow::m_funcs->glEnableVertexAttribArray(0);
-            GLWindow::m_funcs->glEnableVertexAttribArray(1);
-            GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
-            GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void *)(this->positions.size() * 3 * sizeof(float)));
-            this->vertexBuffer->unbind();
-            if (!this->indices.empty()) {
-                this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
-                this->elementBuffer->bind();
-            }
-            this->arrayObject->unbind();
+/*            if (!this->vertexBuffer) {*/
+                /*this->vertexBuffer = std::make_shared<BufferObject>(*/
+                        /*BufferObject::Type::ARRAY_BUFFER,*/
+                        /*BufferObject::Usage::STATIC_DRAW*/
+                /*);*/
+            /*}*/
+            /*if (!this->elementBuffer && !this->indices.empty()) {*/
+                /*this->elementBuffer = std::make_shared<BufferObject>(*/
+                        /*BufferObject::Type::ELEMENT_ARRAY_BUFFER,*/
+                        /*BufferObject::Usage::STATIC_DRAW*/
+                /*);*/
+            /*}*/
+/*            this->arrayObject->bind();*/
+            /*float *data = reinterpret_cast<float *>(this->positions.data());*/
+            /*std::vector<float>  vertices(data, data + this->positions.size() * 3);*/
+            /*data = reinterpret_cast<float *>(this->normals.data());*/
+            /*vertices.insert(vertices.end(), data, data + this->normals.size() * 3);*/
+            /*this->vertexBuffer->update(vertices.data(), vertices.size() * sizeof(float));*/
+            /*this->vertexBuffer->bind();*/
+            /*GLWindow::m_funcs->glEnableVertexAttribArray(0);*/
+            /*GLWindow::m_funcs->glEnableVertexAttribArray(1);*/
+            /*GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);*/
+            /*GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void *)(this->positions.size() * 3 * sizeof(float)));*/
+            /*this->vertexBuffer->unbind();*/
+            /*if (!this->indices.empty()) {*/
+                /*this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));*/
+                /*this->elementBuffer->bind();*/
+            /*}*/
+            /*this->arrayObject->unbind();*/
             this->updated = true;
         }
 
         void
         Mesh::bind(void)
         {
-            this->arrayObject->bind();
+            /*this->arrayObject->bind();*/
         }
 
         void
         Mesh::unbind(void)
         {
-            this->arrayObject->unbind();
+            /*this->arrayObject->unbind();*/
         }
+
 
 
         bool
@@ -114,9 +112,7 @@ namespace   WorldParticles
             return !this->indices.empty();
         }
 
-        ///
-        /// PUBLIC GETTER
-        ///
+
 
         const std::vector<glm::vec3> &
         Mesh::getPositions(void) const
@@ -136,9 +132,7 @@ namespace   WorldParticles
             return this->indices;
         }
 
-        ///
-        /// PUBLIC SETTER
-        ///
+
 
         void
         Mesh::setPositions(const std::vector<glm::vec3> &positions)
@@ -158,9 +152,7 @@ namespace   WorldParticles
             this->indices = indices;
         }
 
-        ///
-        /// PRIVATE SETTER
-        ///
+
 
         void
         Mesh::setPositions(const aiVector3D *positions, unsigned int numberElements)

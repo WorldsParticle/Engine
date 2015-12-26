@@ -1,12 +1,17 @@
 #ifndef     __ENTITY_HPP__
 # define    __ENTITY_HPP__
 
-#include    "SceneGraphNode.hpp"
-
 namespace   WorldParticles
 {
     namespace   Engine
     {
+
+        class       Scene;
+        class       SceneGraphNode;
+
+        ///
+        /// \brief This class is used to represent something physically or not in the 3D world.
+        ///
         class       Entity
         {
             public:
@@ -46,13 +51,13 @@ namespace   WorldParticles
                 ///
                 /// \brief clone pattern
                 ///
-                Entity  *clone(void) = 0;
+                virtual Entity  *clone(void) const = 0;
 
             public:
                 ///
                 /// \brief method used to update the entity.
                 ///
-                void    update(void) = 0;
+                virtual void    update(void) = 0;
 
             protected:
                 ///

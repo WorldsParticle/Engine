@@ -1,4 +1,5 @@
 #include    "MaterialLibrary.hpp"
+#include    "Material.hpp"
 
 namespace   WorldParticles
 {
@@ -10,7 +11,7 @@ namespace   WorldParticles
             // nothing to do.
         }
 
-        MaterialLibrary::MaterialLibrary(const aiMaterial *assimpMaterials, unsigned int size) :
+        MaterialLibrary::MaterialLibrary(const aiMaterial **assimpMaterials, unsigned int size) :
             Library<Material>()
         {
             this->resources.reserve(size);

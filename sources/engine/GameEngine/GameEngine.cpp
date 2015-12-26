@@ -1,8 +1,5 @@
 #include    "GameEngine.hpp"
 
-#include    "AssimpImporter.hpp"
-#include    "glwindow.h" /// TODO replace the glwindow.h with proper opengl context.
-
 namespace   WorldParticles
 {
     namespace   Engine
@@ -22,7 +19,7 @@ namespace   WorldParticles
             }
         }
 
-        GameEngine::GameEngine(GameEngine &&other) :
+        GameEngine::GameEngine(GameEngine &&other) noexcept :
             scenes(std::move(other.scenes)),
             importer(std::move(other.importer))
         {
@@ -50,7 +47,7 @@ namespace   WorldParticles
         }
 
         GameEngine &
-        GameEngine::operator=(GameEngine &&other)
+        GameEngine::operator=(GameEngine &&other) noexcept
         {
             this->scenes = std::move(other.scenes);
             this->importer = std::move(other.importer);
@@ -85,7 +82,7 @@ namespace   WorldParticles
             // TODO GSL OWNER && NOT NULL
             Scene *test = this->importer.import(filename);
 
-            this->_scenes.push_back(test);
+            this->scenes.push_back(test);
         }
 
     }

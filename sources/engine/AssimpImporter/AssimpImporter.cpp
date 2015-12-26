@@ -3,7 +3,8 @@
 #include    <log4cpp/Category.hh>
 
 #include    "AssimpImporter.hpp"
-#include    "Model.hpp"
+#include    "AssimpScene.hpp"
+#include    "Scene.hpp"
 
 using namespace   log4cpp;
 
@@ -26,30 +27,16 @@ namespace   WorldParticles
 
 
         Scene *
-        AssimpImporter::importScene(const std::string &filename)
+        AssimpImporter::import(const std::string &filename)
         {
-            const aiScene *assimpScene = this->load(filename);
-            std::map<std::string, Entity *> entities;
+            Scene           *scene = nullptr;
+            const aiScene   *loadedScene = this->load(filename);
 
-            for (unsigned int i = 0 ; i < assimpScene->mNumCameras ; ++i)
+            if (loadedScene != nullptr)
             {
-                Camera      *camera = new Camera(assimpScene->mCameras[i]);
-                entities[camera->getName()] = camera;
+                AssimpScene     aiscene(loadedScene);
+                scene = new Scene(aiscene);
             }
-
-            for (unsigned int i = 0 ; i < assimpScene->mNumLights ; ++i)
-            {
-                Light   *light = new Light(assimpScene->mLights);
-                entities[light->getName()] = light;
-            }
-
-            Scene   *scene = new Scene(assimpScene, entities);
-
-            for (auto &entry : entities)
-            {
-                delete entry.second;
-            }
-
             return scene;
         }
 
@@ -70,7 +57,7 @@ namespace   WorldParticles
                 Category    &root = Category::getRoot();
                 root << Priority::ERROR
                     << "Erreur dans le loading du fichier : " << filename;
-                root << Priority::ERROR << this->_importer.GetErrorString();
+                root << Priority::ERROR << this->importer.GetErrorString();
             }
             return result;
         }

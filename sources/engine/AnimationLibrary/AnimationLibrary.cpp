@@ -1,4 +1,5 @@
 #include    "AnimationLibrary.hpp"
+#include    "Animation.hpp"
 
 namespace   WorldParticles
 {
@@ -10,7 +11,7 @@ namespace   WorldParticles
             // nothing to do.
         }
 
-        AnimationLibrary::AnimationLibrary(const aiAnimation *assimpAnimations, unsigned int size) :
+        AnimationLibrary::AnimationLibrary(const aiAnimation **assimpAnimations, unsigned int size) :
             Library<Animation>()
         {
             this->resources.reserve(size);

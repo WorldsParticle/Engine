@@ -31,7 +31,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move constructor.
                 ///
-                MeshLibrary(MeshLibrary &&other) = default noexcept;
+                MeshLibrary(MeshLibrary &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor.
@@ -47,7 +47,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move assignment operator.
                 ///
-                MeshLibrary     &operator=(MeshLibrary &&other) = default noexcept;
+                MeshLibrary     &operator=(MeshLibrary &&other) noexcept = default;
         };
     }
 }

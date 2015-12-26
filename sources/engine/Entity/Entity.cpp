@@ -1,4 +1,5 @@
 #include    "Entity.hpp"
+#include    "SceneGraphNode.hpp"
 
 namespace   WorldParticles
 {
@@ -6,21 +7,21 @@ namespace   WorldParticles
     {
         Entity::Entity(SceneGraphNode *node) :
             node(node),
-            scene(this->node->scene)
+            scene(this->node->getScene())
         {
 
         }
 
         Entity::Entity(const Entity &other) :
             node(other.node),
-            scene(this->node->scene)
+            scene(this->node->getScene())
         {
 
         }
 
         Entity::Entity(Entity &&other) :
-            node(std::mode(other.node)),
-            scene(this->node->scene)
+            node(std::move(other.node)),
+            scene(this->node->getScene())
         {
 
         }
@@ -36,7 +37,7 @@ namespace   WorldParticles
         Entity::operator=(const Entity &other)
         {
             this->node = other.node;
-            this->scene = this->node->scene;
+            this->scene = this->node->getScene();
             return *this;
         }
 
@@ -44,7 +45,7 @@ namespace   WorldParticles
         Entity::operator=(Entity &&other)
         {
             this->node = std::move(other.node);
-            this->scene = this->node->scene;
+            this->scene = this->node->getScene();
             return *this;
         }
 

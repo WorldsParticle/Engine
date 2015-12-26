@@ -1,13 +1,19 @@
 #ifndef     __MATERIAL_LIBRARY_HPP__
 # define    __MATERIAL_LIBRARY_HPP__
 
+#include    <assimp/material.h>
+
 #include    "Library.hpp"
-#include    "Material.hpp"
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
+        class   Material;
+
+        ///
+        /// \brief This material library wrap the Library<Material> and provide a constructor from assimp materials.
+        ///
         class       MaterialLibrary : public Library<Material>
         {
             public:
@@ -19,7 +25,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Construct a library from an array of assimp materials.
                 ///
-                MaterialLibrary(const aiMaterial *assimpMaterials, unsigned int size);
+                MaterialLibrary(const aiMaterial **assimpMaterials, unsigned int size);
 
                 ///
                 /// \brief Copy constructor.

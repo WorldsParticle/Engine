@@ -1,15 +1,16 @@
 #ifndef     __SCENE_GRAPH_HPP__
 # define    __SCENE_GRAPH_HPP__
 
-#include    "Scene.hpp"
-#include    "SceneGraphNode.hpp"
-
 #include    <assimp/scene.h>
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
+        class       Scene;
+        class       SceneGraphNode;
+        class       AssimpScene;
+
         class       SceneGraph
         {
             public:
@@ -25,7 +26,7 @@ namespace   WorldParticles
                 ///
                 /// TODO GSL NOT NULL
                 ///
-                SceneGraph(const aiNode *assimpNode, Scene *scene);
+                SceneGraph(const AssimpScene &assimpScene, Scene *scene);
 
                 ///
                 /// \brief Copy constructor.

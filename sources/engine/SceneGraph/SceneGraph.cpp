@@ -12,11 +12,9 @@ namespace   WorldParticles
         }
 
         /// TODO GSL NOT NULL
-        SceneGraph::SceneGraph(const aiNode *assimpNode,
-                const std::map<std::string, Entity *> &entities,
-                Scene *scene) :
+        SceneGraph::SceneGraph(const AssimpScene &aiScene, Scene *scene) :
             scene(scene),
-            rootNode(new SceneGraphNode(assimpNode, entities, this))
+            rootNode(new SceneGraphNode(aiScene, aiScene->getRootNode(), this))
         {
             // nothing to do.
         }

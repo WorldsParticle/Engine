@@ -1,5 +1,8 @@
-#ifndef         __LIGHT_HPP__
-# define        __LIGHT_HPP__
+#ifndef     __LIGHT_HPP__
+# define    __LIGHT_HPP__
+
+#include    <string>
+#include    <assimp/light.h>
 
 #include    "Entity.hpp"
 
@@ -7,6 +10,7 @@ namespace WorldParticles
 {
     namespace Engine
     {
+
         ///
         /// \brief This class is used to represent a light in the 3d world.
         ///
@@ -18,22 +22,22 @@ namespace WorldParticles
                 ///
                 /// \brief Default constructor.
                 ///
-                Light(void);
+                Light(SceneGraphNode *node);
 
                 ///
                 /// \brief Construct a light from an assimp light.
                 ///
-                Light(const aiLight *assimpLight);
+                Light(const aiLight *assimpLight, SceneGraphNode *node);
 
                 ///
                 /// \brief Copy constructor.
                 ///
-                Light(const Light &other);
+                Light(const Light &other) = default;
 
                 ///
                 /// \brief Move constructor.
                 ///
-                Light(Light &&other);
+                Light(Light &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor.
@@ -44,18 +48,29 @@ namespace WorldParticles
                 ///
                 /// \brief Copy assigment operator.
                 ///
-                Light   &operator=(const Light &other);
+                Light   &operator=(const Light &other) = default;
 
                 ///
                 /// \brief Move assigment operator.
                 ///
-                Light   &operator=(Light &&other);
+                Light   &operator=(Light &&other) noexcept = default;
 
             public:
                 ///
                 /// \brief This method clone the light.
                 ///
-                Light   *clone(void) const;
+                virtual Light   *clone(void) const;
+
+                ///
+                /// \brief This method is used to update the light.
+                ///
+                void            update(void);
+
+            private:
+                ///
+                /// \brief The name of the light.
+                ///
+                std::string         name;
 
         };
     }

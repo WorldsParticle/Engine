@@ -4,6 +4,7 @@
 #include    "worldparticles.hpp"
 
 #include    "Scene.hpp"
+#include    "AssimpImporter.hpp"
 
 namespace WorldParticles
 {

@@ -1,14 +1,18 @@
 #ifndef     __ANIMATION_LIBRARY_HPP__
 # define    __ANIMATION_LIBRARY_HPP__
 
+#include    <assimp/anim.h>
+
 #include    "Library.hpp"
-#include    "Animation.hpp"
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
-        class       AnimationLibrary : Library<Animation>
+
+        class   Animation;
+
+        class       AnimationLibrary : public Library<Animation>
         {
             public:
                 ///
@@ -21,7 +25,7 @@ namespace   WorldParticles
                 ///
                 /// TODO GSL array_view
                 ///
-                AnimationLibrary(const aiAnimation *assimpAnimations, unsigned int size);
+                AnimationLibrary(const aiAnimation **assimpAnimations, unsigned int size);
 
                 ///
                 /// \brief Copy constructor.

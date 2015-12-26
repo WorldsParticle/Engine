@@ -6,8 +6,8 @@
 #include    <glm/glm.hpp>
 #include    <assimp/mesh.h>
 
-#include    "BufferObject.hpp"
-#include    "ArrayObject.hpp"
+//#include    "BufferObject.hpp"
+//#include    "ArrayObject.hpp"
 
 namespace WorldParticles
 {
@@ -177,17 +177,17 @@ namespace WorldParticles
                 ///
                 /// \brief This attribute is used to connect the Mesh to a vertex buffer in the graphic API.
                 ///
-                std::shared_ptr<BufferObject>   vertexBuffer;
+                //std::shared_ptr<BufferObject>   vertexBuffer;
 
                 ///
                 /// \brief This attribute is used to connect the Mesh to a element buffer in the graphic API.
                 ///
-                std::shared_ptr<BufferObject>   elementBuffer;
+                //std::shared_ptr<BufferObject>   elementBuffer;
 
                 ///
                 /// \brief The Array Object is used to describes how the vertex attributes are stored in the bufferObject.
                 ///
-                std::shared_ptr<ArrayObject>    arrayObject;
+                //std::shared_ptr<ArrayObject>    arrayObject;
         };
     }
 }

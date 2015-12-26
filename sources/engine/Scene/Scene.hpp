@@ -4,14 +4,18 @@
 #include    <memory>
 #include    <list>
 
-#include    "GameObject.hpp"
-#include    "Camera.hpp"
-#include    "Light.hpp"
+#include    "SceneGraph.hpp"
+#include    "MaterialLibrary.hpp"
+#include    "AnimationLibrary.hpp"
+#include    "MeshLibrary.hpp"
+#include    "TextureLibrary.hpp"
 
 namespace WorldParticles
 {
     namespace Engine
     {
+        class       AssimpScene;
+
         ///
         /// \brief This class is used to represent a scene, with camera / light & gameobject.
         ///
@@ -28,7 +32,7 @@ namespace WorldParticles
                 ///
                 ///
                 ///
-                Scene(const aiScene *scene, const std::map<std::string, Entity *> &entities);
+                Scene(const AssimpScene &assimpScene);
 
                 ///
                 /// \brief Copy constructor.

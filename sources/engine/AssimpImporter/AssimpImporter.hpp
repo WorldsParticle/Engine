@@ -7,12 +7,16 @@
 #include    <assimp/Importer.hpp>
 #include    <assimp/mesh.h>
 
-#include    "Scene.hpp"
-
 namespace   WorldParticles
 {
     namespace   Engine
     {
+
+        class   Scene;
+
+        ///
+        /// \brief This class is used to import a scene with the assimp library.
+        ///
         class       AssimpImporter
         {
             public:

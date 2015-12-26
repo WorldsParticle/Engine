@@ -21,12 +21,12 @@ namespace WorldParticles
             // nothing to do.
         }
 
-        Scene::Scene(const aiScene *assimpScene, const std::map<std::string, Entity *> &entities) :
-            sceneGraph(assimpScene->mRootNode, entities, this),
-            materials(assimpScene->mMaterials, assimpScene->mNumMaterials),
-            animations(assimpScene->mAnimations, assimpScene->mNumAnimations),
-            meshes(assimpScene->mMeshes, assimpScene->mNumMeshes),
-            textures(assimpScene->mTextures, assimpScene->mNumTextures)
+        Scene::Scene(const AssimpScene &assimpScene) :
+            sceneGraph(assimpScene, this),
+            materials(assimpScene->getMaterials()),
+            animations(assimpScene->getAnimations()),
+            meshes(assimpScene->getMeshes()),
+            textures(assimpScene->getTextures())
         {
 
         }

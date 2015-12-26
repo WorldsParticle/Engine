@@ -17,9 +17,9 @@ namespace   WorldParticles
 
         }
 
-        SceneGraphNode::SceneGraphNode(const aiNode *assimpNode,
-                const std::map<std::string, Entity *> entities,
-                SceneGraph *scenegraph, SceneGraphNode *parent) :
+        SceneGraphNode::SceneGraphNode(const AssimpScene &assimpScene,
+                const aiNode *assimpNode, SceneGraph *scenegraph,
+                SceneGraphNode *parent) :
             name(assimpNode->mName.C_Str()),
             parent(parent),
             childrens(),
@@ -30,13 +30,15 @@ namespace   WorldParticles
         {
             if (!this->name.empty())
             {
-                // If the name is not empty, the node is a Camera or a Light.
-                auto    &it = entities.find(this->name);
-                // we look into the preloaded Camera & Light by the AssimpImporter
-                if (it != entities.end())
+                const aiCamera  *camera = nullptr;
+                const aiLight   *light = nullptr;
+                if ((camera = assimpScene->getCamera(this->name)) != nullptr)
                 {
-                    // if we find something that match, we clone it.
-                    this->entity = it->clone();
+                    this->entity = new PerspectiveCamera(result);
+                }
+                else if ((light = assimpScene->getLight(this->name)) != nullptr)
+                {
+                     this->entity = new Light(light);
                 }
             }
             else if (assimpNode->mNumMeshes > 0)
@@ -48,8 +50,9 @@ namespace   WorldParticles
             // we just need to create the others child.
             for (unsigned int i = 0 ; i < assimpNode->mNumChildren ; ++i)
             {
-                SceneGraphNode  *child = new SceneGraphNode(assimpNode->mChildren[i],
-                        entities, scenegraph, this);
+                const aiNode    *assimpChild = assimpNode->mChildren[i];
+                SceneGraphNode  *child = new SceneGraphNode(assimpScene,
+                        assimpChild, scenegraph, this);
                 this->childrens.push_back(child);
             }
         }
