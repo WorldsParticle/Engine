@@ -92,6 +92,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/MeshLibrary/MeshLibrary.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Object/Object.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/PerspectiveCamera/PerspectiveCamera.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/RenderGraph/RenderGraph.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/SceneGraph.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/SceneGraphNode.cpp
@@ -133,6 +134,7 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/MeshLibrary/MeshLibrary.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Object/Object.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/PerspectiveCamera/PerspectiveCamera.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/RenderGraph/RenderGraph.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/SceneGraph.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/SceneGraphNode.hpp
@@ -176,6 +178,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/MeshLibrary/
     ${CMAKE_SOURCE_DIR}/sources/engine/Object/
     ${CMAKE_SOURCE_DIR}/sources/engine/PerspectiveCamera/
+    ${CMAKE_SOURCE_DIR}/sources/engine/RenderGraph/
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/

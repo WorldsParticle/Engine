@@ -70,11 +70,11 @@ namespace   WorldParticles
         }
 
         void
-        GameEngine::draw(void)
+        GameEngine::render(void)
         {
             for (Scene *scene : this->scenes)
             {
-                scene->draw();
+                scene->render();
             }
         }
 

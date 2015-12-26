@@ -54,9 +54,9 @@ namespace WorldParticles
                 void    update(void);
 
                 ///
-                /// \brief This function is used to draw the world on the screen.
+                /// \brief This function is used to render the world on the screen.
                 ///
-                void    draw(void);
+                void    render(void);
 
             public:
                 ///

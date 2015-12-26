@@ -5,6 +5,7 @@
 #include    <list>
 
 #include    "SceneGraph.hpp"
+#include    "RenderGraph.hpp"
 #include    "MaterialLibrary.hpp"
 #include    "AnimationLibrary.hpp"
 #include    "MeshLibrary.hpp"
@@ -69,7 +70,7 @@ namespace WorldParticles
                 ///
                 /// \brief This function is used to draw the scene on the screen.
                 ///
-                void        draw(void);
+                void        render(void);
 
             public:
                 ///
@@ -119,12 +120,14 @@ namespace WorldParticles
                 ///
                 /// For more informations see SceneGraph.hpp
                 ///
-                SceneGraph                  sceneGraph;
+                SceneGraph                  scenegraph;
 
                 ///
+                /// \brief The render graph is used to render the scene efficiently.
                 ///
+                /// For more informations, see RenderGraph.hpp
                 ///
-                //RenderGraph                 renderGraph;
+                RenderGraph                 rendergraph;
 
         };
     }

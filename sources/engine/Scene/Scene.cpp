@@ -18,7 +18,8 @@ namespace WorldParticles
             animations(),
             meshes(),
             textures(),
-            sceneGraph(this)
+            scenegraph(this),
+            rendergraph(this)
         {
             // nothing to do.
         }
@@ -28,7 +29,8 @@ namespace WorldParticles
             animations(s.getAnimations(), s.getAnimationsNumber()),
             meshes(s.getMeshes(), s.getMeshesNumber()),
             textures(s.getTextures(), s.getTexturesNumber()),
-            sceneGraph(s, this)
+            scenegraph(s, this),
+            rendergraph(this)
         {
             // nothing to do.
         }
@@ -44,14 +46,14 @@ namespace WorldParticles
         {
             Category    &root = Category::getRoot();
             root << Priority::DEBUG << "Scene update()";
-            this->sceneGraph.update();
+            this->scenegraph.update();
         }
 
-        void    Scene::draw(void)
+        void    Scene::render(void)
         {
             Category    &root = Category::getRoot();
-            root << Priority::DEBUG << "Scene draw()";
-            //this->renderGraph.draw();
+            root << Priority::DEBUG << "Scene render()";
+            this->rendergraph.render();
         }
 
 
