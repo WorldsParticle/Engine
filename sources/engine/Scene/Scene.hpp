@@ -4,8 +4,9 @@
 #include    <memory>
 #include    <list>
 
+#include    "Renderer.hpp"
+#include    "SpatialGraph.hpp"
 #include    "SceneGraph.hpp"
-#include    "RenderGraph.hpp"
 #include    "MaterialLibrary.hpp"
 #include    "AnimationLibrary.hpp"
 #include    "MeshLibrary.hpp"
@@ -93,6 +94,19 @@ namespace WorldParticles
                 ///
                 Texture     *getTexture(unsigned int id) const;
 
+            public:
+
+                ///
+                /// \brief Getter for the spatial graph.
+                ///
+                /// TODO check for POO, I am pretty sure that we can let the spatial graph public.
+                /// But need to think more about attribute visibility. (can we let an attribute in public ?)
+                ///
+                /// Do we need to provide an API for use the spatial graph ?
+                /// I think that can be a good idea. To provide not all access to the spatial graph but only for instantiate new items.
+                ///
+                SpatialGraph    &getSpatialGraph(void);
+
             protected:
                 ///
                 /// \brief Library of usable materials.
@@ -116,18 +130,23 @@ namespace WorldParticles
 
             protected:
                 ///
+                /// \brief The renderer is used to render the scene efficiently.
+                ///
+                /// For more informations, see Renderer.hpp
+                ///
+                Renderer                    renderer;
+
+                ///
+                /// \brief The spatial graph is used for the culling process.
+                ///
+                SpatialGraph                spatialgraph;
+
+                ///
                 /// \brief The scene graph represent the architecture of the scene.
                 ///
                 /// For more informations see SceneGraph.hpp
                 ///
                 SceneGraph                  scenegraph;
-
-                ///
-                /// \brief The render graph is used to render the scene efficiently.
-                ///
-                /// For more informations, see RenderGraph.hpp
-                ///
-                RenderGraph                 rendergraph;
 
         };
     }

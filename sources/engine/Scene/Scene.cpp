@@ -18,8 +18,9 @@ namespace WorldParticles
             animations(),
             meshes(),
             textures(),
-            scenegraph(this),
-            rendergraph(this)
+            renderer(this),
+            spatialgraph(&this->renderer, this),
+            scenegraph(&this->spatialgraph, this)
         {
             // nothing to do.
         }
@@ -29,8 +30,9 @@ namespace WorldParticles
             animations(s.getAnimations(), s.getAnimationsNumber()),
             meshes(s.getMeshes(), s.getMeshesNumber()),
             textures(s.getTextures(), s.getTexturesNumber()),
-            scenegraph(s, this),
-            rendergraph(this)
+            renderer(this),
+            spatialgraph(&this->renderer, this),
+            scenegraph(s, &this->spatialgraph, this),
         {
             // nothing to do.
         }
