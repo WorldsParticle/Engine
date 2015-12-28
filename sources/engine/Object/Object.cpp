@@ -12,7 +12,7 @@ namespace   WorldParticles
         Object::Object(SceneGraphNode *node) :
             Entity(node)
         {
-
+            this->scene->add(this);
         }
 
         // TODO GSL NOT NULL
@@ -24,6 +24,8 @@ namespace   WorldParticles
             {
                 this->scene->getMesh(assimpNode->mMeshes[i]);
             }
+
+            this->scene->add(this);
 
         }
 

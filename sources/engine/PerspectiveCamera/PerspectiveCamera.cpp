@@ -2,6 +2,7 @@
 #include    <glm/gtc/matrix_transform.hpp>
 
 #include    "PerspectiveCamera.hpp"
+#include    "Scene.hpp"
 
 using namespace     log4cpp;
 
@@ -17,6 +18,9 @@ namespace   WorldParticles
             this->projection = glm::perspective(this->fov, this->aspect,
                     this->clippingPlane.near, this->clippingPlane.far);
             this->view = glm::lookAt(this->position, this->lookat, this->up);
+
+            this->scene->add(this);
+
         }
 
         PerspectiveCamera::PerspectiveCamera(const aiCamera *assimpCamera,
@@ -28,6 +32,8 @@ namespace   WorldParticles
             this->projection = glm::perspective(this->fov, this->aspect,
                     this->clippingPlane.near, this->clippingPlane.far);
             this->view = glm::lookAt(this->position, this->lookat, this->up);
+
+            this->scene->add(this);
         }
 
         PerspectiveCamera::~PerspectiveCamera(void)

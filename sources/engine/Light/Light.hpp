@@ -66,6 +66,12 @@ namespace WorldParticles
                 ///
                 void            update(void);
 
+            public:
+                ///
+                /// \brief Getter for the light name.
+                ///
+                const std::string   &getName(void) const;
+
             private:
                 ///
                 /// \brief The name of the light.

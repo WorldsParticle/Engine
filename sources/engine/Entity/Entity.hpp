@@ -1,6 +1,8 @@
 #ifndef     __ENTITY_HPP__
 # define    __ENTITY_HPP__
 
+#include    <string>
+
 namespace   WorldParticles
 {
     namespace   Engine
@@ -58,6 +60,12 @@ namespace   WorldParticles
                 /// \brief method used to update the entity.
                 ///
                 virtual void    update(void) = 0;
+
+            public:
+                ///
+                /// \brief Getter for the associated node name.
+                ///
+                virtual const std::string   &getName(void) const;
 
             protected:
                 ///

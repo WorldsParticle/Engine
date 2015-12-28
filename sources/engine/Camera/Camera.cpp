@@ -41,5 +41,13 @@ namespace WorldParticles
             // nothing to do.
         }
 
+
+
+        const std::string &
+        Camera::getName(void) const
+        {
+             return this->name;
+        }
+
     }
 }

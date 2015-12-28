@@ -94,6 +94,18 @@ namespace   WorldParticles
 
 
 
+        const std::string &
+        SceneGraphNode::getName(void) const
+        {
+             return this->name;
+        }
+
+        SceneGraphNode *
+        SceneGraphNode::getParent(void) const
+        {
+            return this->parent;
+        }
+
         Scene *
         SceneGraphNode::getScene(void) const
         {

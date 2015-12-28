@@ -55,18 +55,27 @@ namespace   WorldParticles
         void
         Renderer::add(Object *object)
         {
+            Category &root = Category::getRoot();
+
+            root << Priority::DEBUG << "Renderer - add object()" << object->getName();
             this->objects.push_back(object);
         }
 
         void
         Renderer::add(Camera *camera)
         {
+            Category &root = Category::getRoot();
+
+            root << Priority::DEBUG << "Renderer - add camera()" << camera->getName();
             this->cameras.push_back(camera);
         }
 
         void
         Renderer::add(Light *light)
         {
+            Category &root = Category::getRoot();
+
+            root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
             this->lights.push_back(light);
         }
 
@@ -80,10 +89,12 @@ namespace   WorldParticles
             root << Priority::DEBUG << "Renderer - render()";
             for (Camera *camera : this->cameras)
             {
+                root << Priority::DEBUG << "Renderer - render - camera()";
                 //camera.getProjection();
                 //camera.getView();
                 for (Object *object : this->objects)
                 {
+                    root << Priority::DEBUG << "Renderer - render - object()";
                     //object->getMatrix();
                     //for (GeometryPart *part : object->geometry)
                     {

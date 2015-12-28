@@ -49,5 +49,13 @@ namespace   WorldParticles
             return *this;
         }
 
+
+
+        const std::string &
+        Entity::getName(void) const
+        {
+             return this->node->getName();
+        }
+
     }
 }

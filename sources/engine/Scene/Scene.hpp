@@ -97,15 +97,19 @@ namespace WorldParticles
             public:
 
                 ///
-                /// \brief Getter for the spatial graph.
+                /// \brief Add an object in the spatial graph.
                 ///
-                /// TODO check for POO, I am pretty sure that we can let the spatial graph public.
-                /// But need to think more about attribute visibility. (can we let an attribute in public ?)
+                void        add(Object *object);
+
                 ///
-                /// Do we need to provide an API for use the spatial graph ?
-                /// I think that can be a good idea. To provide not all access to the spatial graph but only for instantiate new items.
+                /// \brief Add a light in the spatial graph.
                 ///
-                SpatialGraph    &getSpatialGraph(void);
+                void        add(Light *light);
+
+                ///
+                /// \brief add a camera in the spatial graph.
+                ///
+                void        add(Camera *camera);
 
             protected:
                 ///

@@ -20,7 +20,7 @@ namespace WorldParticles
             textures(),
             renderer(this),
             spatialgraph(&this->renderer, this),
-            scenegraph(&this->spatialgraph, this)
+            scenegraph(this)
         {
             // nothing to do.
         }
@@ -32,7 +32,7 @@ namespace WorldParticles
             textures(s.getTextures(), s.getTexturesNumber()),
             renderer(this),
             spatialgraph(&this->renderer, this),
-            scenegraph(s, &this->spatialgraph, this),
+            scenegraph(s, this)
         {
             // nothing to do.
         }
@@ -55,7 +55,8 @@ namespace WorldParticles
         {
             Category    &root = Category::getRoot();
             root << Priority::DEBUG << "Scene render()";
-            this->rendergraph.render();
+            this->spatialgraph.cull();
+            this->renderer.render();
         }
 
 
@@ -82,6 +83,26 @@ namespace WorldParticles
         Scene::getTexture(unsigned int id) const
         {
             return this->textures.get(id);
+        }
+
+
+
+        void
+        Scene::add(Object *object)
+        {
+            this->spatialgraph.add(object);
+        }
+
+        void
+        Scene::add(Light *light)
+        {
+            this->spatialgraph.add(light);
+        }
+
+        void
+        Scene::add(Camera *camera)
+        {
+             this->spatialgraph.add(camera);
         }
 
     }

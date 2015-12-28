@@ -71,6 +71,16 @@ namespace   WorldParticles
 
             public:
                 ///
+                /// \brief Getter for the name attribute.
+                ///
+                const std::string   &getName(void) const;
+
+                ///
+                /// \brief Getter for the parent node.
+                ///
+                SceneGraphNode      *getParent(void) const;
+
+                ///
                 /// \brief Getter for the scene attribute.
                 ///
                 Scene       *getScene(void) const;

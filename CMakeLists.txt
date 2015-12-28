@@ -92,10 +92,11 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/MeshLibrary/MeshLibrary.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Object/Object.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/PerspectiveCamera/PerspectiveCamera.cpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/RenderGraph/RenderGraph.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/SceneGraph.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/SceneGraphNode.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/SpatialGraph/SpatialGraph.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Texture/Texture.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/TextureLibrary/TextureLibrary.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.cpp
@@ -134,10 +135,11 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/MeshLibrary/MeshLibrary.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Object/Object.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/PerspectiveCamera/PerspectiveCamera.hpp
-    ${CMAKE_SOURCE_DIR}/sources/engine/RenderGraph/RenderGraph.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/Renderer.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/SceneGraph.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/SceneGraphNode.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/SpatialGraph/SpatialGraph.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Texture/Texture.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/TextureLibrary/TextureLibrary.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/Transform.hpp
@@ -178,10 +180,11 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/MeshLibrary/
     ${CMAKE_SOURCE_DIR}/sources/engine/Object/
     ${CMAKE_SOURCE_DIR}/sources/engine/PerspectiveCamera/
-    ${CMAKE_SOURCE_DIR}/sources/engine/RenderGraph/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Renderer/
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/
+    ${CMAKE_SOURCE_DIR}/sources/engine/SpatialGraph/
     ${CMAKE_SOURCE_DIR}/sources/engine/Texture/
     ${CMAKE_SOURCE_DIR}/sources/engine/TextureLibrary/
     ${CMAKE_SOURCE_DIR}/sources/engine/Transform/
