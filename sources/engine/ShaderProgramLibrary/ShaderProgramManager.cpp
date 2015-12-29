@@ -8,6 +8,16 @@ namespace   WorldParticles
     namespace   Engine
     {
 
+        ShaderProgramLibrary::ShaderProgramLibrary(void)
+        {
+            // TODO initialisation.
+        }
+
+        ShaderProgramLibrary::~ShaderProgramLibrary(void)
+        {
+            // nothing to do atm.
+        }
+
         std::map<ShaderProgramName, std::shared_ptr<ShaderProgram>>     ShaderProgramManager::_shaderPrograms = std::map<ShaderProgramName, std::shared_ptr<ShaderProgram>>();
 
         const std::shared_ptr<ShaderProgram> &

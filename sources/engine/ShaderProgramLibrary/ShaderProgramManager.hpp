@@ -1,12 +1,10 @@
 
-#ifndef     __SHADER_PROGRAM_MANAGER_HPP__
-# define    __SHADER_PROGRAM_MANAGER_HPP__
+#ifndef     __SHADER_PROGRAM_LIBRARY_HPP__
+# define    __SHADER_PROGRAM_LIBRARY_HPP__
 
-#include        <map>
-#include        <memory>
-
-#include        "ShaderProgram.hpp"
-#include        "ShaderProgramNames.hpp"
+#include    "Library.hpp"
+#include    "ShaderProgram.hpp"
+#include    "ShaderProgramNames.hpp"
 
 namespace   WorldParticles
 {
@@ -15,26 +13,39 @@ namespace   WorldParticles
         ///
         /// \brief This class is used to store / create and retrieve every shader program used in the engine.
         ///
-        class       ShaderProgramManager
+        class       ShaderProgramLibrary : public Library<ShaderProgram>
         {
             public:
                 ///
-                /// \brief This method is used to retrieve a shader program from its name.
+                /// \brief Default constructor. This constructor is reponsible for the initialisation of all shader program.
                 ///
-                static const std::shared_ptr<ShaderProgram>     &Get(const ShaderProgramName &name);
+                ShaderProgramLibrary(void);
 
+                ///
+                /// \brief Copy constructor.
+                ///
+                ShaderProgramLibrary(const ShaderProgramLibrary &other) = default;
 
-            private:
                 ///
-                /// \brief This method is used internally to create a new shader program from the shader program name.
+                /// \brief Move constructor.
                 ///
-                static std::shared_ptr<ShaderProgram>   CreateShaderProgram(const ShaderProgramName &name);
+                ShaderProgramLibrary(ShaderProgramLibrary &&other) noexcept = default;
 
-            protected:
                 ///
-                /// \brief This attribute is used to store all shader program.
+                /// \brief Destructor.
                 ///
-                static std::map<ShaderProgramName, std::shared_ptr<ShaderProgram>>  _shaderPrograms;
+                ~ShaderProgramLibrary(void);
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                ShaderProgramLibrary    &operator=(const ShaderProgramLibrary &other) = default;
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                ShaderProgramLibrary    &operator=(ShaderProgramLibrary &&other) noexcept = default;
         };
     }
 }
