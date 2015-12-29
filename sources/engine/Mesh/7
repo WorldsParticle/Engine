@@ -2,7 +2,6 @@
 #include    <log4cpp/Category.hh>
 
 #include    "Mesh.hpp"
-#include    "glwindow.h"
 
 using namespace log4cpp;
 
@@ -42,7 +41,7 @@ namespace   WorldParticles
         }
 
 
-        /// TODO rework, c'est totalmenet dégeulasse.
+        /// TODO Optimisations
         void
         Mesh::update(void)
         {
@@ -57,43 +56,41 @@ namespace   WorldParticles
                 this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
 
             this->arrayObject->bind();
-
             this->vertexBuffer->bind();
+
             GLWindow::m_funcs->glEnableVertexAttribArray(0);
             GLWindow::m_funcs->glEnableVertexAttribArray(1);
             GLWindow::m_funcs->glEnableVertexAttribArray(2);
+
             GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
                 0, (void *)0);
             if (this->hasNormals()) {
                 GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT,
                     GL_FALSE, 0, (void *)(this->positions.size() * sizeof(float)));
             }
+
             if (this->hasUVs()) {
                 GLWindow::m_funcs->glVertexAttribPointer(2, 2, GL_FLOAT,
                     GL_FALSE, 0, (void *)((this->positions.size()
                         + this->normals.size()) * sizeof(float)));
             }
-            if (this->hasIndices())
-                this->elementBuffer->bind();
-
-            this->arrayObject->unbind();
 
             this->vertexBuffer->unbind();
-
-            if (this->hasIndices())
-                this->elementBuffer->unbind();
+            this->elementBuffer->bind();
+            this->arrayObject->unbind();
+            this->elementBuffer->unbind();
         }
 
         void
         Mesh::bind(void)
         {
-            this->arrayObject->bind();
+            /*this->arrayObject->bind();*/
         }
 
         void
         Mesh::unbind(void)
         {
-            this->arrayObject->unbind();
+            /*this->arrayObject->unbind();*/
         }
 
 
@@ -111,12 +108,6 @@ namespace   WorldParticles
         }
 
         bool
-        Mesh::hasUVs(void) const
-        {
-            return !this->uvs.empty();
-        }
-
-        bool
         Mesh::hasIndices(void) const
         {
             return !this->indices.empty();
@@ -124,22 +115,16 @@ namespace   WorldParticles
 
 
 
-        const std::vector<float> &
+        const std::vector<glm::vec3> &
         Mesh::getPositions(void) const
         {
             return this->positions;
         }
 
-        const std::vector<float> &
+        const std::vector<glm::vec3> &
         Mesh::getNormals(void) const
         {
             return this->normals;
-        }
-
-        const std::vector<float> &
-        Mesh::getUVS(void) const
-        {
-            return this->uvs;
         }
 
         const std::vector<unsigned int> &
@@ -151,21 +136,15 @@ namespace   WorldParticles
 
 
         void
-        Mesh::setPositions(const std::vector<float> &positions)
+        Mesh::setPositions(const std::vector<glm::vec3> &positions)
         {
             this->positions = positions;
         }
 
         void
-        Mesh::setNormals(const std::vector<float> &normals)
+        Mesh::setNormals(const std::vector<glm::vec3> &normals)
         {
             this->normals = normals;
-        }
-
-        void
-        Mesh::setUVs(const std::vector<float> &uvs)
-        {
-            this->uvs = uvs;
         }
 
         void
@@ -177,47 +156,33 @@ namespace   WorldParticles
 
 
         void
-        Mesh::setPositions(const aiVector3D *v, unsigned int numberElements)
+        Mesh::setPositions(const aiVector3D *positions, unsigned int numberElements)
         {
+            if (positions == nullptr) throw std::invalid_argument("positions is null");
+            auto convert = [&](const aiVector3D &v){ return glm::vec3(v.x, v.y, v.z); };
             this->positions.clear();
-            this->positions.reserve(numberElements * 3);
-            for (unsigned int i = 0 ; i < numberElements ; ++i)
-            {
-                 this->position.push_back(v[i].x);
-                 this->position.push_back(v[i].y);
-                 this->position.push_back(v[i].z);
+            this->positions.reserve(numberElements);
+            for (unsigned int i = 0 ; i < numberElements ; ++i) {
+                 this->positions.push_back(convert(positions[i]));
             }
         }
 
         void
-        Mesh::setNormals(const aiVector3D *n, unsigned int numberElements)
+        Mesh::setNormals(const aiVector3D *normals, unsigned int numberElements)
         {
+            if (normals == nullptr) throw std::invalid_argument("normals is null");
+            auto convert = [&](const aiVector3D &v) { return glm::vec3(v.x, v.y, v.z); };
             this->normals.clear();
-            this->normals.reserve(numberElements * 3);
-            for (unsigned int i = 0 ; i < numberElements ; ++i)
-            {
-                 this->normals.push_back(n[i].x);
-                 this->normals.push_back(n[i].y);
-                 this->normals.push_back(n[i].z);
-            }
-        }
-
-        void
-        Mesh::setUVs(const aiVector3D *u, unsigned int numberElements)
-        {
-            this->uvs.clear();
-            this->uvs.reserve(numberElements * 3);
-            for (unsigned int i = 0 ; i < numberElements ; ++i)
-            {
-                this->uvs.push_back(u[i].x);
-                this->uvs.push_back(u[i].y);
-                this->uvs.push_back(u[i].z);
+            this->normals.reserve(numberElements);
+            for (unsigned int i = 0 ; i < numberElements ; ++i) {
+                 this->normals.push_back(convert(normals[i]));
             }
         }
 
         void
         Mesh::setIndices(const aiFace *faces, unsigned int numberElements)
         {
+            if (faces == nullptr) throw std::invalid_argument("faces is null");
             this->indices.clear();
             this->indices.reserve(numberElements * 3);
             for (unsigned int i = 0 ; i < numberElements ; ++i) {

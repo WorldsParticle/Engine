@@ -13,7 +13,7 @@ namespace   WorldParticles
             GLWindow::m_funcs->glGenVertexArrays(1, &this->id);
         }
 
-        ArrayObject::ArrayObject(ArrayObject &&other) :
+        ArrayObject::ArrayObject(ArrayObject &&other) noexcept :
             id(std::move(other.id))
         {
             other.id = 0;
@@ -27,7 +27,7 @@ namespace   WorldParticles
 
 
         ArrayObject &
-        ArrayObject::operator=(ArrayObject &&other)
+        ArrayObject::operator=(ArrayObject &&other) noexcept
         {
             this->id = std::move(id);
             other.id = 0;

@@ -17,6 +17,15 @@ namespace   WorldParticles
             GLWindow::m_funcs->glGenBuffers(1, &this->id);
         }
 
+        BufferObject::BufferObject(BufferObject &&other) noexcept :
+            id(std::move(other.id)),
+            type(std::move(other.type)),
+            usage(std::move(other.usage)),
+            size(std::move(other.size))
+        {
+            other.id = 0;
+        }
+
         BufferObject::~BufferObject(void)
         {
             GLWindow::m_funcs->glDeleteBuffers(1, &this->id);
@@ -24,10 +33,19 @@ namespace   WorldParticles
 
 
 
+        BufferObject &
+        BufferObject::operator=(BufferObject &&other) noexcept
+        {
+             this->id = std::move(other.id);
+             other.id = 0;
+             this->type = std::move(other.type);
+             this->usage = std::move(other.usage);
+             this->size = std::move(other.size);
+        }
+
         void
         BufferObject::bind(void)
         {
-            if (this->id == 0) throw std::runtime_error("The BufferObject id should not be equal to 0 here.");
             GLWindow::m_funcs->glBindBuffer(this->convert(this->type), this->id);
         }
 
@@ -56,9 +74,6 @@ namespace   WorldParticles
         }
 
 
-        ///
-        /// PUBLIC SETTER
-        ///
 
         void
         BufferObject::setType(const Type &type)
@@ -72,9 +87,7 @@ namespace   WorldParticles
             this->usage = usage;
         }
 
-        ///
-        /// PUBLIC GETTER
-        ///
+
 
         const BufferObject::Type &
         BufferObject::getType(void) const
@@ -89,9 +102,9 @@ namespace   WorldParticles
         }
 
 
+
         ///
         /// TODO temporary method
-
         unsigned int
         BufferObject::convert(const Type &type) const
         {

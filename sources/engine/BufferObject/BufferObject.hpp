@@ -40,12 +40,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy constructor.
                 ///
-                BufferObject(const BufferObject &other);
+                BufferObject(const BufferObject &other) = delete;
 
                 ///
                 /// \brief Move constructor.
                 ///
-                BufferObject(BufferObject &&other);
+                BufferObject(BufferObject &&other) noexcept;
 
                 ///
                 /// \brief Destructor.
@@ -56,12 +56,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                BufferObject    &operator=(const BufferObject &other);
+                BufferObject    &operator=(const BufferObject &other) = delete;
 
                 ///
                 /// \brief Move assignment operator.
                 ///
-                BufferObject    &operator=(BufferObject &&other);
+                BufferObject    &operator=(BufferObject &&other) noexcept;
 
             public:
                 ///

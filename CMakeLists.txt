@@ -167,10 +167,13 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Animation/
     ${CMAKE_SOURCE_DIR}/sources/engine/AnimationLibrary/
+    ${CMAKE_SOURCE_DIR}/sources/engine/ArrayObject/
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpScene/
+    ${CMAKE_SOURCE_DIR}/sources/engine/BufferObject/
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/
     ${CMAKE_SOURCE_DIR}/sources/engine/Entity/
+    ${CMAKE_SOURCE_DIR}/sources/engine/GameClock/
     ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/
     ${CMAKE_SOURCE_DIR}/sources/engine/Library/
     ${CMAKE_SOURCE_DIR}/sources/engine/Light/
@@ -184,6 +187,7 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/
     ${CMAKE_SOURCE_DIR}/sources/engine/SpatialGraph/
     ${CMAKE_SOURCE_DIR}/sources/engine/Texture/
     ${CMAKE_SOURCE_DIR}/sources/engine/TextureLibrary/
