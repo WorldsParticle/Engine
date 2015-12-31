@@ -10,6 +10,16 @@ namespace   WorldParticles
 
         ShaderProgramLibrary::ShaderProgramLibrary(void)
         {
+
+            for (const auto &it : MappedShaderProgram)
+            {
+                const ShaderProgramProperty &property = it->second;
+                ShaderProgram *result = new ShaderProgram();
+                for (const auto &shadername : property.associatedShaders)
+                {
+                    result->add(this->shaders.get(shadername));
+                }
+            }
             // TODO initialisation.
         }
 

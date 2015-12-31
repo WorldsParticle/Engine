@@ -46,6 +46,13 @@ namespace   WorldParticles
                 /// \brief Move assignment operator.
                 ///
                 ShaderProgramLibrary    &operator=(ShaderProgramLibrary &&other) noexcept = default;
+
+            private:
+                ///
+                /// \brief This attribute is the library used by the shader program library
+                /// to contains every shaders.
+                ///
+                ShaderLibrary           shaders;
         };
     }
 }
