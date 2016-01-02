@@ -83,7 +83,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Getter for the scene attribute.
                 ///
-                Scene       *getScene(void) const;
+                Scene               *getScene(void) const;
+
+                ///
+                /// \brief Getter for the tranformation of the node.
+                ///
+                const Transform     &getTransform(void) const;
 
             private:
                 ///

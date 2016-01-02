@@ -1,6 +1,7 @@
 #ifndef     __MATERIAL_HPP__
 # define    __MATERIAL_HPP__
 
+#include    <memory>
 #include    <glm/glm.hpp>
 #include    <assimp/material.h>
 
@@ -8,6 +9,8 @@ namespace   WorldParticles
 {
     namespace   Engine
     {
+        class   ShaderProgram;
+        class   ShaderProgramLibrary;
         ///
         /// \brief This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered.
         ///
@@ -17,12 +20,13 @@ namespace   WorldParticles
                 ///
                 /// \brief Default constructor
                 ///
-                Material(void);
+                Material(const std::shared_ptr<ShaderProgram> &shaderprogram);
 
                 ///
                 /// \brief Construct a material from an assimp material.
                 ///
-                Material(const aiMaterial *assimpMaterial);
+                Material(const aiMaterial *assimpMaterial,
+                        const std::shared_ptr<ShaderProgram> &shaderprogram);
 
                 ///
                 /// \brief Copy constructor.
@@ -52,10 +56,27 @@ namespace   WorldParticles
 
             public:
                 ///
+                /// \brief Bind the material in the graphic pipeline.
+                ///
+                void        bind(void) const;
+
+                ///
+                /// \brief Unbind the material off the graphic pipeline.
+                ///
+                void        unbind(void) const;
+
+            public:
+                ///
                 /// \brief Getter for the name attribute.
                 /// \return the name of the material.
                 ///
-                const std::string   &getName(void) const;
+                const std::string       &getName(void) const;
+
+                ///
+                /// \brief Getter for the shader program used by the material.
+                /// \return the shader program.
+                ///
+                const std::shared_ptr<ShaderProgram>    &getShaderProgram(void) const;
 
             public:
                 ///
@@ -67,7 +88,12 @@ namespace   WorldParticles
                 ///
                 /// \brief The name of the material.
                 ///
-                std::string         name;
+                std::string                     name;
+
+                ///
+                /// \brief The shaderprogram used with this material.
+                ///
+                std::shared_ptr<ShaderProgram>  shaderprogram;
         };
     }
 }

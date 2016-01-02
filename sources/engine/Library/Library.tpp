@@ -32,10 +32,10 @@ namespace   WorldParticles
         template<typename T>
         Library<T>::~Library(void) noexcept
         {
-            for (T *resource : this->resources)
-            {
-                delete resource;
-            }
+/*            for (T *resource : this->resources)*/
+            /*{*/
+                /*delete resource;*/
+            /*}*/
         }
 
 
@@ -44,7 +44,11 @@ namespace   WorldParticles
         Library<T> &
         Library<T>::operator=(const Library<T> &other)
         {
-
+            this->resources.reserve(other.resources.size());
+            for (T *resource : other.resources) // TODO GSL NOT NULL
+            {
+                this->resources.push_back(new T(*resource));
+            }
         }
 
         template<typename T>
@@ -58,7 +62,7 @@ namespace   WorldParticles
 
 
         template<typename T>
-        T * // TODO GSL ADD NOT NULL
+        T & // TODO GSL ADD NOT NULL
         Library<T>::get(unsigned int id) const
         {
             return this->resources.at(id);

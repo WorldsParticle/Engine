@@ -57,5 +57,11 @@ namespace   WorldParticles
              return this->node->getName();
         }
 
+        const Transform &
+        Entity::getTransform(void) const
+        {
+            return this->node->getTransform();
+        }
+
     }
 }

@@ -52,5 +52,14 @@ namespace   WorldParticles
             // nothing to do actually.
         }
 
+
+        const std::list<Mesh *> &
+        Object::getMeshes(void) const
+        {
+            return this->meshes;
+        }
+
+
+
     }
 }

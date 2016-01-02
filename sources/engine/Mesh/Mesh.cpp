@@ -11,27 +11,35 @@ namespace   WorldParticles
     namespace   Engine
     {
 
-        Mesh::Mesh(void)
-            arrayObject(std::make_unique<ArrayObject>())
+        Mesh::Mesh(Material *material) :
+            vertexBuffer(std::make_shared<BufferObject>(
+                        BufferObject::Type::ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW)),
+            elementBuffer(std::make_shared<BufferObject>(
+                        BufferObject::Type::ELEMENT_ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW)),
+            arrayObject(std::make_shared<ArrayObject>()),
+            material(material)
         {
             // nothing to do
         }
 
         /// TODO check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
-        Mesh::Mesh(const aiMesh *am)
-            arrayObject(std::make_unique<ArrayObject>()),
-            vertexBuffer(std::make_unique<BufferObject>(
-                BufferObject::Type::ARRAY_BUFFER,
-                BufferObject::Usage::STATIC_DRAW)),
-            elementBuffer(std::make_unique<BufferObject>(
-                BufferObject::Type::ELEMENT_ARRAY_BUFFER,
-                BufferObject::Usage::STATIC_DRAW))
+        Mesh::Mesh(const aiMesh *am, Material *material) :
+            vertexBuffer(std::make_shared<BufferObject>(
+                        BufferObject::Type::ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW)),
+            elementBuffer(std::make_shared<BufferObject>(
+                        BufferObject::Type::ELEMENT_ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW)),
+            arrayObject(std::make_shared<ArrayObject>()),
+            material(material)
         {
             this->name = am->mName.C_Str();
             this->setPositions(am->mVertices, am->mNumVertices);
             this->setNormals(am->mNormals, am->mNumVertices);
-            if (am->HasTextureCoord(0))
-                this->setUVs(am->mTextureCoords[0], am->mNumUVComponents[0])
+            if (am->HasTextureCoords(0))
+                this->setUVs(am->mTextureCoords[0], am->mNumUVComponents[0]);
             this->setIndices(am->mFaces, am->mNumFaces);
             this->update();
         }
@@ -85,15 +93,41 @@ namespace   WorldParticles
         }
 
         void
-        Mesh::bind(void)
+        Mesh::bind(void) const
         {
             this->arrayObject->bind();
         }
 
         void
-        Mesh::unbind(void)
+        Mesh::unbind(void) const
         {
             this->arrayObject->unbind();
+        }
+
+        void
+        Mesh::draw(const glm::mat4 &model, const glm::mat4 &view,
+            const glm::mat4 &projection) const
+        {
+            const auto &shaderprogram = this->material->getShaderProgram();
+
+            this->bind();
+            this->material->bind();
+            shaderprogram->setUniform("model", model);
+            shaderprogram->setUniform("view", view);
+            shaderprogram->setUniform("projection", projection);
+            if (this->hasIndices())
+            {
+                GLWindow::m_funcs->glDrawElements(GL_TRIANGLES,
+                    this->indices.size(), GL_UNSIGNED_INT, 0);
+            }
+            else
+            {
+                GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0,
+                    this->positions.size());
+            }
+            shaderprogram->unbind();
+            this->material->unbind();
+            this->unbind();
         }
 
 
@@ -137,7 +171,7 @@ namespace   WorldParticles
         }
 
         const std::vector<float> &
-        Mesh::getUVS(void) const
+        Mesh::getUVs(void) const
         {
             return this->uvs;
         }
@@ -183,9 +217,9 @@ namespace   WorldParticles
             this->positions.reserve(numberElements * 3);
             for (unsigned int i = 0 ; i < numberElements ; ++i)
             {
-                 this->position.push_back(v[i].x);
-                 this->position.push_back(v[i].y);
-                 this->position.push_back(v[i].z);
+                 this->positions.push_back(v[i].x);
+                 this->positions.push_back(v[i].y);
+                 this->positions.push_back(v[i].z);
             }
         }
 

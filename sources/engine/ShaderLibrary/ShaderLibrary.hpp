@@ -1,6 +1,9 @@
 #ifndef     __SHADER_MANAGER_HPP__
 # define    __SHADER_MANAGER_HPP__
 
+#include    <memory>
+
+#include    "Library.hpp"
 #include    "Shader.hpp"
 #include    "ShaderNames.hpp"
 
@@ -11,7 +14,7 @@ namespace   WorldParticles
         ///
         /// \brief This class is used to store / create and retrieve every shader used in the engine.
         ///
-        class       ShaderLibrary : public Library<Shader>
+        class       ShaderLibrary : public Library<std::shared_ptr<Shader>>
         {
             public:
                 ///
@@ -32,7 +35,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Destructor.
                 ///
-                ~Shader(void);
+                virtual ~ShaderLibrary(void);
 
             public:
                 ///

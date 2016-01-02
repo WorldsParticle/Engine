@@ -41,6 +41,7 @@ namespace   WorldParticles
              this->type = std::move(other.type);
              this->usage = std::move(other.usage);
              this->size = std::move(other.size);
+             return *this;
         }
 
         void

@@ -10,10 +10,6 @@ namespace   WorldParticles
     namespace   Engine
     {
 
-        ///
-        /// PUBLIC CONSTRUCTOR
-        ///
-
         ShaderProgram::ShaderProgram(void) :
             id(GLWindow::m_funcs->glCreateProgram()),
             linked(false)
@@ -21,30 +17,40 @@ namespace   WorldParticles
             // nothing to do
         }
 
-        ShaderProgram::~ShaderProgram(void)
+        ShaderProgram(ShaderProgram &&other) :
+            id(std::move(other.id)),
+            linked(std::move(other.linked))
         {
-            // nothing to do
+            other.id = 0;
+        }
+
+        ShaderProgram::~ShaderProgram(void) noexcept
+        {
+            GLWindow::m_funcs->glDeleteProgram(this->id);
         }
 
 
-        ///
-        /// PUBLIC OPERATOR
-        ///
 
         ShaderProgram &
-        ShaderProgram::operator<<(const std::shared_ptr<Shader> &shader)
+        ShaderProgram::operator=(ShaderProgram &&other)
+        {
+            this->id = std::move(other.id);
+            other.id = 0;
+            this->linked = std::move(other.linked);
+            return *this;
+        }
+
+        ShaderProgram &
+        ShaderProgram::operator<<(const Shader *shader)
         {
             this->add(shader);
             return *this;
         }
 
 
-        ///
-        /// PUBLIC METHOD
-        ///
 
         void
-        ShaderProgram::add(const std::shared_ptr<Shader> &shader)
+        ShaderProgram::add(const Shader *shader)
         {
             GLWindow::m_funcs->glAttachShader(this->id, shader->getId());
         }

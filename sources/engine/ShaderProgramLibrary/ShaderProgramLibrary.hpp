@@ -2,9 +2,12 @@
 #ifndef     __SHADER_PROGRAM_LIBRARY_HPP__
 # define    __SHADER_PROGRAM_LIBRARY_HPP__
 
+#include    <memory>
+
 #include    "Library.hpp"
 #include    "ShaderProgram.hpp"
 #include    "ShaderProgramNames.hpp"
+#include    "ShaderLibrary.hpp"
 
 namespace   WorldParticles
 {
@@ -13,7 +16,9 @@ namespace   WorldParticles
         ///
         /// \brief This class is used to store / create and retrieve every shader program used in the engine.
         ///
-        class       ShaderProgramLibrary : public Library<ShaderProgram>
+        /// We must use a shared_ptr because of the non copiability of a ShaderProgram.
+        ///
+        class       ShaderProgramLibrary : public Library<std::shared_ptr<ShaderProgram>>
         {
             public:
                 ///

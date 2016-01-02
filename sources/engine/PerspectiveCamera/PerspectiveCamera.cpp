@@ -57,5 +57,19 @@ namespace   WorldParticles
             root << Priority::DEBUG << "PerspectiveCamera - update()";
             // nothing to do.
         }
+
+
+
+        const glm::mat4 &
+        PerspectiveCamera::getProjection(void) const
+        {
+             return this->projection;
+        }
+
+        const glm::mat4 &
+        PerspectiveCamera::getView(void) const
+        {
+             return this->view;
+        }
     }
 }

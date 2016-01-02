@@ -67,6 +67,12 @@ namespace   WorldParticles
                 ///
                 void    update(void);
 
+            public:
+                ///
+                /// \brief Getter for the mesh list.
+                ///
+                const std::list<Mesh *>     &getMeshes(void) const;
+
             protected:
                 ///
                 /// \brief The meshes associated with the object.

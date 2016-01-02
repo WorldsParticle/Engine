@@ -1,60 +1,93 @@
 #include    "Shader.hpp"
 #include    "glwindow.h"
-
-//#if     __DEBUG__
-# include   <log4cpp/Category.hh>
-//#endif [> !__DEBUG__ <]
+#include    <log4cpp/Category.hh>
 
 namespace   WorldParticles
 {
     namespace Engine
     {
-        Shader::Shader(const Shader::Type &shaderType, const std::string &shaderData) :
-            _shaderId(CreateShaderFromType(shaderType)),
-            _isCompiled(false),
-            _shaderType(shaderType)
+
+        Shader::Shader(const Shader::Type &type, const std::string &shaderData) :
+            id(createShaderFromType(type)),
+            compiled(false),
+            type(type)
         {
             const char *c_str = shaderData.c_str();
-            GLWindow::m_funcs->glShaderSource(this->_shaderId, 1, &c_str, 0);
+            GLWindow::m_funcs->glShaderSource(this->id, 1, &c_str, 0);
+        }
+
+        Shader::Shader(Shader &&other) noexcept :
+            id(std::move(other.id)),
+            compiled(std::move(other.compiled)),
+            type(std::move(other.type))
+        {
+            other.id = 0;
         }
 
         Shader::~Shader(void)
         {
-            GLWindow::m_funcs->glDeleteShader(this->_shaderId);
+            GLWindow::m_funcs->glDeleteShader(this->id);
         }
 
 
 
-        bool Shader::Compile(void)
+        Shader &
+        Shader::operator=(Shader &&other) noexcept
+        {
+            this->id = std::move(other.id);
+            other.id = 0;
+            this->compiled = std::move(other.compiled);
+            this->type = std::move(other.type);
+            return *this;
+        }
+
+
+
+        bool Shader::compile(void)
         {
             int     result;
-            GLWindow::m_funcs->glCompileShader(this->_shaderId);
-            GLWindow::m_funcs->glGetShaderiv(this->_shaderId, GL_COMPILE_STATUS, &result);
-            this->_isCompiled = result == GL_TRUE;
-
-//#if     __DEBUG__
-
-            if (this->_isCompiled == false)
+            GLWindow::m_funcs->glCompileShader(this->id);
+            GLWindow::m_funcs->glGetShaderiv(this->id, GL_COMPILE_STATUS, &result);
+            this->compiled = result == GL_TRUE;
+            if (this->compiled == false)
             {
-                GLWindow::m_funcs->glGetShaderiv(this->_shaderId, GL_INFO_LOG_LENGTH, &result);
+                GLWindow::m_funcs->glGetShaderiv(this->id, GL_INFO_LOG_LENGTH, &result);
                 if (result > 1)
                 {
                     char *info = new char[result + 1];
-                    GLWindow::m_funcs->glGetShaderInfoLog(this->_shaderId, result, 0, info);
+                    GLWindow::m_funcs->glGetShaderInfoLog(this->id, result, 0, info);
                     log4cpp::Category &root = log4cpp::Category::getRoot();
                     root << log4cpp::Priority::ERROR << info;
                     delete info;
                 }
             }
+            return this->compiled;
+        }
 
-//#endif
-            return this->_isCompiled;
+
+
+        const Shader::Type &
+        Shader::getType(void) const
+        {
+             return this->type;
+        }
+
+        unsigned int
+        Shader::getId(void) const
+        {
+            return this->id;
+        }
+
+        bool
+        Shader::isCompiled(void) const
+        {
+             return this->compiled;
         }
 
 
 
         /// TODO : should be unit tested.
-        unsigned int    Shader::CreateShaderFromType(const Shader::Type &type)
+        unsigned int    Shader::createShaderFromType(const Shader::Type &type)
         {
             switch (type)
             {

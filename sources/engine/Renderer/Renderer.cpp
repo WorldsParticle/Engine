@@ -4,6 +4,8 @@
 #include    "Object.hpp"
 #include    "Camera.hpp"
 #include    "Light.hpp"
+#include    "Transform.hpp"
+#include    "Mesh.hpp"
 
 using namespace     log4cpp;
 
@@ -90,17 +92,16 @@ namespace   WorldParticles
             for (Camera *camera : this->cameras)
             {
                 root << Priority::DEBUG << "Renderer - render - camera()";
-                //camera.getProjection();
-                //camera.getView();
+                const glm::mat4 &projection = camera->getProjection();
+                const glm::mat4 &view = camera->getView();
                 for (Object *object : this->objects)
                 {
                     root << Priority::DEBUG << "Renderer - render - object()";
-                    //object->getMatrix();
-                    //for (GeometryPart *part : object->geometry)
+                    const glm::mat4 &model = object->getTransform().getMatrix();
+                    const std::list<Mesh *>     &meshes = object->getMeshes();
+                    for (Mesh *part : meshes)
                     {
-                        //bind(part.material);
-                        //bind(part.buffers);
-                        //glDraw(Triangle);
+                        part->draw(model, view, projection);
                     }
                 }
             }

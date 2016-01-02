@@ -81,6 +81,16 @@ namespace   WorldParticles
                 ///
                 const std::string   &getName(void) const;
 
+                ///
+                /// \brief Getter for the camera projection matrix.
+                ///
+                virtual const glm::mat4     &getProjection(void) const = 0;
+
+                ///
+                /// \brief Getter for the camera view matrix.
+                ///
+                virtual const glm::mat4     &getView(void) const = 0;
+
             protected:
                 ///
                 /// \brief The name of the camera.

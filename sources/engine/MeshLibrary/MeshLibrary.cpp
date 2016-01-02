@@ -1,6 +1,7 @@
 #include    <log4cpp/Category.hh>
 
 #include    "MeshLibrary.hpp"
+#include    "MaterialLibrary.hpp"
 
 using namespace     log4cpp;
 
@@ -14,7 +15,8 @@ namespace   WorldParticles
             // nothing to do.
         }
 
-        MeshLibrary::MeshLibrary(aiMesh **assimpMeshes, unsigned int size)
+        MeshLibrary::MeshLibrary(const MaterialLibrary &materials,
+                aiMesh **assimpMeshes, unsigned int size)
         {
             Category    &root = Category::getRoot();
 
@@ -22,7 +24,9 @@ namespace   WorldParticles
             this->resources.reserve(size);
             for (unsigned int i = 0 ; i < size ; ++i)
             {
-                this->resources.push_back(new Mesh(assimpMeshes[i]));
+                const aiMesh *amesh = assimpMeshes[i];
+                Material *material = materials.get(amesh->mMaterialIndex);
+                this->resources.push_back(new Mesh(amesh, material));
             }
         }
 

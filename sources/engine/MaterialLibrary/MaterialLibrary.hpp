@@ -24,7 +24,8 @@ namespace   WorldParticles
                 ///
                 /// \brief Construct a library from an array of assimp materials.
                 ///
-                MaterialLibrary(aiMaterial **assimpMaterials, unsigned int size);
+                MaterialLibrary(const ShaderProgramLibrary &shaderprograms,
+                        aiMaterial **assimpMaterials, unsigned int size);
 
                 ///
                 /// \brief Copy constructor.

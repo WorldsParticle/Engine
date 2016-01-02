@@ -7,6 +7,7 @@
 #include    "Renderer.hpp"
 #include    "SpatialGraph.hpp"
 #include    "SceneGraph.hpp"
+#include    "ShaderProgramLibrary.hpp"
 #include    "MaterialLibrary.hpp"
 #include    "AnimationLibrary.hpp"
 #include    "MeshLibrary.hpp"
@@ -112,6 +113,11 @@ namespace WorldParticles
                 void        add(Camera *camera);
 
             protected:
+                ///
+                /// \brief Library of usable shader program.
+                ///
+                ShaderProgramLibrary        shaderprograms;
+
                 ///
                 /// \brief Library of usable materials.
                 ///

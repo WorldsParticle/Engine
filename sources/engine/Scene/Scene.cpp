@@ -14,6 +14,7 @@ namespace WorldParticles
 
         /// TODO : delete push object
         Scene::Scene(void) :
+            shaderprograms(),
             materials(),
             animations(),
             meshes(),
@@ -26,9 +27,10 @@ namespace WorldParticles
         }
 
         Scene::Scene(const AssimpScene &s) :
-            materials(s.getMaterials(), s.getMaterialsNumber()),
+            shaderprograms(),
+            materials(shaderprograms, s.getMaterials(), s.getMaterialsNumber()),
             animations(s.getAnimations(), s.getAnimationsNumber()),
-            meshes(s.getMeshes(), s.getMeshesNumber()),
+            meshes(materials, s.getMeshes(), s.getMeshesNumber()),
             textures(s.getTextures(), s.getTexturesNumber()),
             renderer(this),
             spatialgraph(&this->renderer, this),

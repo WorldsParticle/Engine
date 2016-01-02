@@ -8,6 +8,11 @@ namespace   WorldParticles
 {
     namespace   Engine
     {
+        class       MaterialLibrary;
+
+        ///
+        /// \brief This class is used as a container for the mesh used in the scene.
+        ///
         class       MeshLibrary : public Library<Mesh>
         {
             public:
@@ -21,7 +26,8 @@ namespace   WorldParticles
                 ///
                 /// TODO GSL array_view
                 ///
-                MeshLibrary(aiMesh **assimpMeshes, unsigned int size);
+                MeshLibrary(const MaterialLibrary &materials,
+                        aiMesh **assimpMeshes, unsigned int size);
 
                 ///
                 /// \brief Copy constructor.

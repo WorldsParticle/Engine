@@ -13,6 +13,7 @@ namespace WorldParticles
 {
     namespace Engine
     {
+        class Material;
         ///
         /// \brief The Mesh class
         ///
@@ -22,22 +23,22 @@ namespace WorldParticles
                 ///
                 /// \brief Create an empty mesh.
                 ///
-                Mesh(void);
+                Mesh(Material *material);
 
                 ///
                 /// \brief This constructor is used to transform an assimp mesh to a mesh.
                 ///
-                Mesh(const aiMesh *assimpMesh);
+                Mesh(const aiMesh *assimpMesh, Material *material);
 
                 ///
                 /// \brief Copy constructor.
                 ///
-                Mesh(const Mesh &other) = default; // TODO TOTALEMENT FAUX
+                Mesh(const Mesh &other) = default;
 
                 ///
                 /// \brief Move constructor.
                 ///
-                Mesh(Mesh &&other) noexcept = default; // TODO TOTALEMENT FAUX
+                Mesh(Mesh &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor
@@ -48,12 +49,12 @@ namespace WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                Mesh    &operator=(const Mesh &other) = default; // TODO TOTALEMENT FAUX
+                Mesh    &operator=(const Mesh &other) = default;
 
                 ///
                 /// \brief Move assignment operator.
                 ///
-                Mesh    &operator=(Mesh &&other) noexcept = default; // TODO TOTALEMENT FAUX
+                Mesh    &operator=(Mesh &&other) noexcept = default;
 
             public:
                 ///
@@ -64,12 +65,18 @@ namespace WorldParticles
                 ///
                 /// \brief This method is used to bind the mesh in the rendering pipeline.
                 ///
-                void    bind(void);
+                void    bind(void) const;
 
                 ///
                 /// \brief This method is used to unbind the mesh of the rendering pipeline.
                 ///
-                void    unbind(void);
+                void    unbind(void) const;
+
+                ///
+                /// \brief This method is used to draw the mesh on the screen.
+                ///
+                void    draw(const glm::mat4 &model, const glm::mat4 &view,
+                            const glm::mat4 &projection) const;
 
             public:
                 ///
@@ -96,7 +103,7 @@ namespace WorldParticles
                 ///
                 /// \brief Getter for the vertices attribute.
                 ///
-                const std::vector<glm::vec3>        &getPositions(void) const;
+                const std::vector<float>            &getPositions(void) const;
 
                 ///
                 /// \brief Getter for the normals attribute.
@@ -192,17 +199,22 @@ namespace WorldParticles
                 ///
                 /// \brief This attribute is used to connect the Mesh to a vertex buffer in the graphic API.
                 ///
-                std::unique_ptr<BufferObject>   vertexBuffer;
+                std::shared_ptr<BufferObject>   vertexBuffer;
 
                 ///
                 /// \brief This attribute is used to connect the Mesh to a element buffer in the graphic API.
                 ///
-                std::unique_ptr<BufferObject>   elementBuffer;
+                std::shared_ptr<BufferObject>   elementBuffer;
 
                 ///
                 /// \brief The Array Object is used to describes how the vertex attributes are stored in the bufferObject.
                 ///
-                std::unique_ptr<ArrayObject>    arrayObject;
+                std::shared_ptr<ArrayObject>    arrayObject;
+
+                ///
+                /// \brief The material used by the mesh.
+                ///
+                Material                        *material; // TODO GSL not null.
         };
     }
 }

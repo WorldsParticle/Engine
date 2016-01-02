@@ -1,23 +1,26 @@
-#include "Material.hpp"
+#include    "Material.hpp"
+#include    "ShaderProgram.hpp"
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
 
-        Material::Material(void) :
-            name("Default")
+        Material::Material(const std::shared_ptr<ShaderProgram> &shaderprogram) :
+            name("Default"),
+            shaderprogram(shaderprogram)
         {
             // nothing to do
         }
 
-        Material::Material(const aiMaterial *assimpMaterial) :
-            name("Default")
+        Material::Material(const aiMaterial *assimpMaterial,
+                const std::shared_ptr<ShaderProgram> &shaderprogram) :
+            name("Default"),
+            shaderprogram(shaderprogram)
         {
             aiString assimpName;
 
             assimpMaterial->Get(AI_MATKEY_NAME, assimpName);
-
             this->name = assimpName.C_Str();
             // nothing to do atm.
         }
@@ -41,6 +44,26 @@ namespace   WorldParticles
         Material::setName(const std::string &name)
         {
             this->name = name;
+        }
+
+
+
+        const std::shared_ptr<ShaderProgram> &
+        Material::getShaderProgram(void) const
+        {
+             return this->shaderprogram;
+        }
+
+        void
+        Material::bind(void) const
+        {
+            this->shaderprogram->bind();
+        }
+
+        void
+        Material::unbind(void) const
+        {
+             this->shaderprogram->unbind();
         }
     }
 }

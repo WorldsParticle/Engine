@@ -1,6 +1,6 @@
 
-#include    "ShaderManager.hpp"
-#include    "ShaderProgramManager.hpp"
+#include    "ShaderLibrary.hpp"
+#include    "ShaderProgramLibrary.hpp"
 #include    "internal/ShaderProgramMapping.hpp"
 
 namespace   WorldParticles
@@ -13,7 +13,7 @@ namespace   WorldParticles
 
             for (const auto &it : MappedShaderProgram)
             {
-                const ShaderProgramProperty &property = it->second;
+                const ShaderProgramProperty &property = it.second;
                 ShaderProgram *result = new ShaderProgram();
                 for (const auto &shadername : property.associatedShaders)
                 {

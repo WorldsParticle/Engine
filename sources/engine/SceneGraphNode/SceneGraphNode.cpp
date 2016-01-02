@@ -112,6 +112,12 @@ namespace   WorldParticles
              return this->scene;
         }
 
+        const Transform &
+        SceneGraphNode::getTransform(void) const
+        {
+             return this->transform;
+        }
+
     }
 }
 

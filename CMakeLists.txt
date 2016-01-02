@@ -80,8 +80,10 @@ SET(WORLD_PARTICLES_SOURCES_FILES
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Animation/Animation.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AnimationLibrary/AnimationLibrary.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/ArrayObject/ArrayObject.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/AssimpImporter.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpScene/AssimpScene.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/BufferObject/BufferObject.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Entity/Entity.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.cpp
@@ -96,6 +98,10 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/SceneGraph.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/SceneGraphNode.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shader/Shader.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderLibrary/ShaderLibrary.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderProgram/ShaderProgram.cpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderProgramLibrary/ShaderProgramLibrary.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SpatialGraph/SpatialGraph.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Texture/Texture.cpp
     ${CMAKE_SOURCE_DIR}/sources/engine/TextureLibrary/TextureLibrary.cpp
@@ -122,8 +128,10 @@ SET(WORLD_PARTICLES_HEADERS_FILES
 
     ${CMAKE_SOURCE_DIR}/sources/engine/Animation/Animation.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AnimationLibrary/AnimationLibrary.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/ArrayObject/ArrayObject.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpImporter/AssimpImporter.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/AssimpScene/AssimpScene.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/BufferObject/BufferObject.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Camera/Camera.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Entity/Entity.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/GameEngine/GameEngine.hpp
@@ -139,6 +147,10 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/Scene.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/SceneGraph.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/SceneGraphNode.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shader/Shader.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderLibrary/ShaderLibrary.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderProgram/ShaderProgram.hpp
+    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderProgramLibrary/ShaderProgramLibrary.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/SpatialGraph/SpatialGraph.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/Texture/Texture.hpp
     ${CMAKE_SOURCE_DIR}/sources/engine/TextureLibrary/TextureLibrary.hpp
@@ -187,6 +199,10 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/engine/Scene/
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraph/
     ${CMAKE_SOURCE_DIR}/sources/engine/SceneGraphNode/
+    ${CMAKE_SOURCE_DIR}/sources/engine/Shader/
+    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderLibrary/
+    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderProgram/
+    ${CMAKE_SOURCE_DIR}/sources/engine/ShaderProgramLibrary/
     ${CMAKE_SOURCE_DIR}/sources/engine/Shaders/
     ${CMAKE_SOURCE_DIR}/sources/engine/SpatialGraph/
     ${CMAKE_SOURCE_DIR}/sources/engine/Texture/

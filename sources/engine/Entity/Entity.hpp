@@ -10,6 +10,7 @@ namespace   WorldParticles
 
         class       Scene;
         class       SceneGraphNode;
+        class       Transform;
 
         ///
         /// \brief This class is used to represent something physically or not in the 3D world.
@@ -66,6 +67,11 @@ namespace   WorldParticles
                 /// \brief Getter for the associated node name.
                 ///
                 virtual const std::string   &getName(void) const;
+
+                ///
+                /// \brief Getter for the transformation matrix of the associated node.
+                ///
+                const Transform             &getTransform(void) const;
 
             protected:
                 ///

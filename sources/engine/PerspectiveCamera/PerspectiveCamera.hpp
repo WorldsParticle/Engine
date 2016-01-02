@@ -62,6 +62,17 @@ namespace   WorldParticles
                 ///
                 virtual void                update(void);
 
+            public:
+                ///
+                /// \brief Getter for the camera projection matrix.
+                ///
+                const glm::mat4     &getProjection(void) const;
+
+                ///
+                /// \brief Getter for the camera view matrix.
+                ///
+                const glm::mat4     &getView(void) const;
+
             private:
                 ///
                 /// \brief The projection matrix of the perspective camera.
