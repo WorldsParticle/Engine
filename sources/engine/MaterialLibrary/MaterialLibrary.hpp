@@ -13,7 +13,7 @@ namespace   WorldParticles
         ///
         /// \brief This material library wrap the Library<Material> and provide a constructor from assimp materials.
         ///
-        class       MaterialLibrary : public Library<Material>
+        class       MaterialLibrary : public Library<Material *>
         {
             public:
                 ///
@@ -30,7 +30,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy constructor.
                 ///
-                MaterialLibrary(const MaterialLibrary &other) = default;
+                MaterialLibrary(const MaterialLibrary &other);
 
                 ///
                 /// \brief Move constructor.
@@ -46,7 +46,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                MaterialLibrary     &operator=(const MaterialLibrary &other) = default;
+                MaterialLibrary     &operator=(const MaterialLibrary &other);
 
                 ///
                 /// \brief Move assignment operator.

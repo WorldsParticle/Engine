@@ -53,13 +53,13 @@ namespace   WorldParticles
                 ///
                 /// \brief This operator is used to push a shader into the program shader.
                 ///
-                ShaderProgram   &operator<<(const Shader *shader);
+                ShaderProgram   &operator<<(const std::shared_ptr<Shader> &shader);
 
             public:
                 ///
                 /// \brief This method is used to push a shader in the program shader.
                 ///
-                void    add(const Shader *shader);
+                void    add(const std::shared_ptr<Shader> &shader);
 
             public:
 

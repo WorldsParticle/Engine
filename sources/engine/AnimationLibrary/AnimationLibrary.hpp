@@ -11,7 +11,7 @@ namespace   WorldParticles
     namespace   Engine
     {
 
-        class       AnimationLibrary : public Library<Animation>
+        class       AnimationLibrary : public Library<Animation *>
         {
             public:
                 ///
@@ -29,7 +29,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy constructor.
                 ///
-                AnimationLibrary(const AnimationLibrary &other) = default;
+                AnimationLibrary(const AnimationLibrary &other);
 
                 ///
                 /// \brief Move constructor
@@ -45,12 +45,12 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                AnimationLibrary    &operator=(const AnimationLibrary &other) = default;
+                virtual AnimationLibrary    &operator=(const AnimationLibrary &other);
 
                 ///
                 /// \brief Move assignment operator.
                 ///
-                AnimationLibrary    &operator=(AnimationLibrary &&other) noexcept = default;
+                virtual AnimationLibrary    &operator=(AnimationLibrary &&other) noexcept = default;
 
         };
     }

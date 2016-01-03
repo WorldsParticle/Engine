@@ -46,13 +46,13 @@ namespace   WorldParticles
                 ///
                 /// \brief Getter for a resource.
                 ///
-                T           &get(unsigned int id) const; // TODO GSL NOT NULL
+                const T     &get(unsigned int id) const;
 
             protected:
                 ///
                 /// \brief Resources container.
                 ///
-                std::vector<T>      resources; // TODO GSL NOT NULL && OWNER
+                std::vector<T>      resources;
         };
     }
 }

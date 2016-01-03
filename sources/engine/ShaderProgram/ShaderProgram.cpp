@@ -17,7 +17,7 @@ namespace   WorldParticles
             // nothing to do
         }
 
-        ShaderProgram(ShaderProgram &&other) :
+        ShaderProgram::ShaderProgram(ShaderProgram &&other) noexcept :
             id(std::move(other.id)),
             linked(std::move(other.linked))
         {
@@ -32,7 +32,7 @@ namespace   WorldParticles
 
 
         ShaderProgram &
-        ShaderProgram::operator=(ShaderProgram &&other)
+        ShaderProgram::operator=(ShaderProgram &&other) noexcept
         {
             this->id = std::move(other.id);
             other.id = 0;
@@ -41,7 +41,7 @@ namespace   WorldParticles
         }
 
         ShaderProgram &
-        ShaderProgram::operator<<(const Shader *shader)
+        ShaderProgram::operator<<(const std::shared_ptr<Shader> &shader)
         {
             this->add(shader);
             return *this;
@@ -50,7 +50,7 @@ namespace   WorldParticles
 
 
         void
-        ShaderProgram::add(const Shader *shader)
+        ShaderProgram::add(const std::shared_ptr<Shader> &shader)
         {
             GLWindow::m_funcs->glAttachShader(this->id, shader->getId());
         }

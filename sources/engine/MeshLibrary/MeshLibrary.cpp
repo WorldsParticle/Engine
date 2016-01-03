@@ -10,13 +10,14 @@ namespace   WorldParticles
     namespace   Engine
     {
         MeshLibrary::MeshLibrary(void) :
-            Library<Mesh>()
+            Library<Mesh *>()
         {
             // nothing to do.
         }
 
         MeshLibrary::MeshLibrary(const MaterialLibrary &materials,
-                aiMesh **assimpMeshes, unsigned int size)
+                aiMesh **assimpMeshes, unsigned int size) :
+            Library<Mesh *>()
         {
             Category    &root = Category::getRoot();
 
@@ -30,9 +31,35 @@ namespace   WorldParticles
             }
         }
 
+        MeshLibrary::MeshLibrary(const MeshLibrary &other) :
+            Library<Mesh *>()
+        {
+            this->resources.reserve(other.resources.size());
+            for (Mesh *resource : other.resources)
+            {
+                 this->resources.push_back(new Mesh(*resource));
+            }
+        }
+
         MeshLibrary::~MeshLibrary(void)
         {
-            // nothing to do.
+            for (Mesh *resource : this->resources)
+            {
+                delete resource;
+            }
+        }
+
+
+
+        MeshLibrary &
+        MeshLibrary::operator=(const MeshLibrary &other)
+        {
+             this->resources.reserve(other.resources.size());
+             for (Mesh *resource : other.resources)
+             {
+                 this->resources.push_back(new Mesh(*resource));
+             }
+             return *this;
         }
     }
 }

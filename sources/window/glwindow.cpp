@@ -70,11 +70,6 @@ void    GLWindow::start(Model *model)
 
     _gEngine = &(_gameEngine);
     _gameEngine.load(RESOURCES_PATH "/scenes/altair/altair.dae");
-    _gameEngine.update();
-    _gameEngine.render();
-
-    return;
-
     //::WorldParticles::Engine::GameClock::start();
     resizeWindow();
     while (isVisible())

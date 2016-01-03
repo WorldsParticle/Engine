@@ -8,7 +8,7 @@ namespace   WorldParticles
 {
     namespace   Engine
     {
-        class       TextureLibrary : public Library<Texture>
+        class       TextureLibrary : public Library<Texture *>
         {
             public:
                 ///
@@ -26,7 +26,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy constructor.
                 ///
-                TextureLibrary(const TextureLibrary &other) = default;
+                TextureLibrary(const TextureLibrary &other);
 
                 ///
                 /// \brief Move constructor.
@@ -42,7 +42,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                TextureLibrary  &operator=(const TextureLibrary &other) = default;
+                TextureLibrary  &operator=(const TextureLibrary &other);
 
                 ///
                 /// \brief Move assignment operator.
