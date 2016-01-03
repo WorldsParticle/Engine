@@ -43,15 +43,36 @@ namespace   WorldParticles
                 Shader(const Type &shaderType, const std::string &data);
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                Shader(const Shader &other) = delete;
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Shader(Shader &&other) noexcept;
+
+                ///
                 /// \brief Destructor
                 ///
                 ~Shader(void);
 
             public:
                 ///
+                /// \brief Copy assignment operator.
+                ///
+                Shader      &operator=(const Shader &other) = delete;
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                Shader      &operator=(Shader &&other) noexcept;
+
+            public:
+                ///
                 /// \brief This method is used to compile the shader.
                 ///
-                bool                Compile(void);
+                bool    compile(void);
 
             public:
 
@@ -59,51 +80,42 @@ namespace   WorldParticles
                 /// \brief This method is used to get the type of the shader.
                 /// \return the shader type.
                 ///
-                const Type          &GetShaderType(void) const
-                {
-                    return this->_shaderType;
-                }
+                const Type          &getType(void) const;
 
                 ///
                 /// \brief Getter for the shader id attribute.
                 /// \return the shader id value.
                 ///
-                const unsigned int  &getId(void) const
-                {
-                    return this->_shaderId;
-                }
+                unsigned int        getId(void) const;
 
             public:
                 ///
                 /// \brief This method is used to know if the shader have already been compiled.
                 /// \return true if yes, false otherwise.
                 ///
-                bool            IsCompiled(void) const
-                {
-                     return this->_isCompiled;
-                }
+                bool    isCompiled(void) const;
 
             private:
                 ///
                 /// \brief This method is privately used to generate a shader with the graphic API with the good type.
                 ///
-                unsigned int    CreateShaderFromType(const Type &type);
+                unsigned int    createShaderFromType(const Type &type);
 
             protected:
                 ///
                 /// \brief This attribute is used as opengl shader id.
                 ///
-                unsigned int    _shaderId;
+                unsigned int    id;
 
                 ///
                 /// \brief This attribute is used to know if the shader have already been compiled.
                 ///
-                bool            _isCompiled;
+                bool            compiled;
 
                 ///
                 /// \brief This attribute contain the type of the shader.
                 ///
-                const Type      _shaderType;
+                Type            type;
         };
     }
 }

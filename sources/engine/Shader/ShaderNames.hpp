@@ -8,10 +8,10 @@ namespace   WorldParticles
     {
         enum        ShaderName
         {
-            DEFAULT_VERTEX_SHADER,
-            DEFAULT_FRAGMENT_SHADER,
-            TEST_VERTEX_SHADER,
-            TEST_FRAGMENT_SHADER
+            DEFAULT_VERTEX_SHADER = 0,
+            DEFAULT_FRAGMENT_SHADER = 1,
+            TEST_VERTEX_SHADER = 2,
+            TEST_FRAGMENT_SHADER = 3
 
         };
     }

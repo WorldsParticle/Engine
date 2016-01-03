@@ -4,7 +4,10 @@
 #include    <memory>
 #include    <list>
 
+#include    "Renderer.hpp"
+#include    "SpatialGraph.hpp"
 #include    "SceneGraph.hpp"
+#include    "ShaderProgramLibrary.hpp"
 #include    "MaterialLibrary.hpp"
 #include    "AnimationLibrary.hpp"
 #include    "MeshLibrary.hpp"
@@ -69,7 +72,7 @@ namespace WorldParticles
                 ///
                 /// \brief This function is used to draw the scene on the screen.
                 ///
-                void        draw(void);
+                void        render(void);
 
             public:
                 ///
@@ -92,7 +95,29 @@ namespace WorldParticles
                 ///
                 Texture     *getTexture(unsigned int id) const;
 
+            public:
+
+                ///
+                /// \brief Add an object in the spatial graph.
+                ///
+                void        add(Object *object);
+
+                ///
+                /// \brief Add a light in the spatial graph.
+                ///
+                void        add(Light *light);
+
+                ///
+                /// \brief add a camera in the spatial graph.
+                ///
+                void        add(Camera *camera);
+
             protected:
+                ///
+                /// \brief Library of usable shader program.
+                ///
+                ShaderProgramLibrary        shaderprograms;
+
                 ///
                 /// \brief Library of usable materials.
                 ///
@@ -115,16 +140,23 @@ namespace WorldParticles
 
             protected:
                 ///
+                /// \brief The renderer is used to render the scene efficiently.
+                ///
+                /// For more informations, see Renderer.hpp
+                ///
+                Renderer                    renderer;
+
+                ///
+                /// \brief The spatial graph is used for the culling process.
+                ///
+                SpatialGraph                spatialgraph;
+
+                ///
                 /// \brief The scene graph represent the architecture of the scene.
                 ///
                 /// For more informations see SceneGraph.hpp
                 ///
-                SceneGraph                  sceneGraph;
-
-                ///
-                ///
-                ///
-                //RenderGraph                 renderGraph;
+                SceneGraph                  scenegraph;
 
         };
     }

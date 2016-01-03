@@ -61,6 +61,12 @@ namespace   WorldParticles
 
                 /// TODO implementation function like "rotate" "translate"...
 
+            public:
+                ///
+                /// \brief This method rotate the transform.
+                ///
+                void    rotate(const glm::vec3 &rotation);
+
             protected:
                 ///
                 /// \brief This matrix represent the actual state of the transform.

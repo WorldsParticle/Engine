@@ -14,21 +14,27 @@ namespace WorldParticles
 
         /// TODO : delete push object
         Scene::Scene(void) :
+            shaderprograms(),
             materials(),
             animations(),
             meshes(),
             textures(),
-            sceneGraph(this)
+            renderer(this),
+            spatialgraph(&this->renderer, this),
+            scenegraph(this)
         {
             // nothing to do.
         }
 
         Scene::Scene(const AssimpScene &s) :
-            materials(s.getMaterials(), s.getMaterialsNumber()),
+            shaderprograms(),
+            materials(shaderprograms, s.getMaterials(), s.getMaterialsNumber()),
             animations(s.getAnimations(), s.getAnimationsNumber()),
-            meshes(s.getMeshes(), s.getMeshesNumber()),
+            meshes(materials, s.getMeshes(), s.getMeshesNumber()),
             textures(s.getTextures(), s.getTexturesNumber()),
-            sceneGraph(s, this)
+            renderer(this),
+            spatialgraph(&this->renderer, this),
+            scenegraph(s, this)
         {
             // nothing to do.
         }
@@ -42,16 +48,13 @@ namespace WorldParticles
 
         void    Scene::update(void)
         {
-            Category    &root = Category::getRoot();
-            root << Priority::DEBUG << "Scene update()";
-            this->sceneGraph.update();
+            this->scenegraph.update();
         }
 
-        void    Scene::draw(void)
+        void    Scene::render(void)
         {
-            Category    &root = Category::getRoot();
-            root << Priority::DEBUG << "Scene draw()";
-            //this->renderGraph.draw();
+            this->spatialgraph.cull();
+            this->renderer.render();
         }
 
 
@@ -78,6 +81,26 @@ namespace WorldParticles
         Scene::getTexture(unsigned int id) const
         {
             return this->textures.get(id);
+        }
+
+
+
+        void
+        Scene::add(Object *object)
+        {
+            this->spatialgraph.add(object);
+        }
+
+        void
+        Scene::add(Light *light)
+        {
+            this->spatialgraph.add(light);
+        }
+
+        void
+        Scene::add(Camera *camera)
+        {
+             this->spatialgraph.add(camera);
         }
 
     }

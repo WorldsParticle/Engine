@@ -1,6 +1,8 @@
 #ifndef     __ENTITY_HPP__
 # define    __ENTITY_HPP__
 
+#include    <string>
+
 namespace   WorldParticles
 {
     namespace   Engine
@@ -8,6 +10,7 @@ namespace   WorldParticles
 
         class       Scene;
         class       SceneGraphNode;
+        class       Transform;
 
         ///
         /// \brief This class is used to represent something physically or not in the 3D world.
@@ -58,6 +61,17 @@ namespace   WorldParticles
                 /// \brief method used to update the entity.
                 ///
                 virtual void    update(void) = 0;
+
+            public:
+                ///
+                /// \brief Getter for the associated node name.
+                ///
+                virtual const std::string   &getName(void) const;
+
+                ///
+                /// \brief Getter for the transformation matrix of the associated node.
+                ///
+                const Transform             &getTransform(void) const;
 
             protected:
                 ///

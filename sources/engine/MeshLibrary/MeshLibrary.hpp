@@ -8,7 +8,12 @@ namespace   WorldParticles
 {
     namespace   Engine
     {
-        class       MeshLibrary : public Library<Mesh>
+        class       MaterialLibrary;
+
+        ///
+        /// \brief This class is used as a container for the mesh used in the scene.
+        ///
+        class       MeshLibrary : public Library<Mesh *>
         {
             public:
                 ///
@@ -21,12 +26,13 @@ namespace   WorldParticles
                 ///
                 /// TODO GSL array_view
                 ///
-                MeshLibrary(aiMesh **assimpMeshes, unsigned int size);
+                MeshLibrary(const MaterialLibrary &materials,
+                        aiMesh **assimpMeshes, unsigned int size);
 
                 ///
                 /// \brief Copy constructor.
                 ///
-                MeshLibrary(const MeshLibrary &other) = default;
+                MeshLibrary(const MeshLibrary &other);
 
                 ///
                 /// \brief Move constructor.
@@ -42,7 +48,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                MeshLibrary     &operator=(const MeshLibrary &other) = default;
+                MeshLibrary     &operator=(const MeshLibrary &other);
 
                 ///
                 /// \brief Move assignment operator.

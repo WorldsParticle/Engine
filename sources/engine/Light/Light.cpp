@@ -1,6 +1,7 @@
 #include    <log4cpp/Category.hh>
 
 #include    "Light.hpp"
+#include    "Scene.hpp"
 
 using namespace     log4cpp;
 
@@ -12,7 +13,7 @@ namespace   WorldParticles
             Entity(node),
             name("")
         {
-            // nothing to do atm.
+            this->scene->add(this);
         }
 
         /// TODO GSL NOT NULL
@@ -20,7 +21,7 @@ namespace   WorldParticles
             Entity(node),
             name(assimpLight->mName.C_Str())
         {
-            // nothing to do atm.
+            this->scene->add(this);
         }
 
         Light::~Light(void) noexcept
@@ -40,10 +41,15 @@ namespace   WorldParticles
         void
         Light::update(void)
         {
-            Category    &root = Category::getRoot();
-
-            root << Priority::DEBUG << "Light - update()";
             // nothing to do atm.
+        }
+
+
+
+        const std::string &
+        Light::getName(void) const
+        {
+             return this->name;
         }
 
     }

@@ -64,7 +64,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Getter for the scene attribute.
                 ///
-                Scene                   *getScene(void) const;
+                Scene   *getScene(void) const;
 
             private:
                 ///

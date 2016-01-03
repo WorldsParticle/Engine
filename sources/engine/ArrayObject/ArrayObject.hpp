@@ -27,7 +27,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move constructor.
                 ///
-                ArrayObject(ArrayObject &&other);
+                ArrayObject(ArrayObject &&other) noexcept;
 
                 ///
                 /// \brief Destructor.
@@ -46,7 +46,7 @@ namespace   WorldParticles
                 ///
                 /// \brief Move assignment operator.
                 ///
-                ArrayObject     &operator=(ArrayObject &&other);
+                ArrayObject     &operator=(ArrayObject &&other) noexcept;
 
             public:
                 ///

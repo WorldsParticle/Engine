@@ -23,11 +23,33 @@ namespace   WorldParticles
                 ShaderProgram(void);
 
                 ///
+                /// \brief Deleted copy constructor.
+                ///
+                /// We can't copy the opengl state of a shader program.
+                ///
+                ShaderProgram(const ShaderProgram &other) = delete;
+
+                ///
+                /// \brief Move constructor.
+                ///
+                ShaderProgram(ShaderProgram &&other) noexcept;
+
+                ///
                 /// \brief Destructor.
                 ///
-                ~ShaderProgram(void);
+                virtual ~ShaderProgram(void) noexcept;
 
             public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                ShaderProgram   &operator=(const ShaderProgram &other) = delete;
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                ShaderProgram   &operator=(ShaderProgram &&other) noexcept;
+
                 ///
                 /// \brief This operator is used to push a shader into the program shader.
                 ///

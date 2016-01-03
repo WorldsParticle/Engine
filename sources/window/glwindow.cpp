@@ -70,9 +70,6 @@ void    GLWindow::start(Model *model)
 
     _gEngine = &(_gameEngine);
     _gameEngine.load(RESOURCES_PATH "/scenes/altair/altair.dae");
-    _gameEngine.update();
-
-    return;
     //::WorldParticles::Engine::GameClock::start();
     resizeWindow();
     while (isVisible())
@@ -80,7 +77,7 @@ void    GLWindow::start(Model *model)
         _gameEngine.update();
         //::WorldParticles::Engine::GameClock::restart();
         _context.makeCurrent(this);
-        _gameEngine.draw();
+        _gameEngine.render();
         _context.swapBuffers(this);
         _context.doneCurrent();
 
