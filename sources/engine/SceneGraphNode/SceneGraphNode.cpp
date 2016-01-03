@@ -79,9 +79,9 @@ namespace   WorldParticles
         void
         SceneGraphNode::update(void)
         {
-            Category &root = Category::getRoot();
+            //Category &root = Category::getRoot();
 
-            root << Priority::DEBUG << "SceneGraphNode update";
+            //root << Priority::DEBUG << "SceneGraphNode update";
             if (this->entity != nullptr)
             {
                 this->entity->update();

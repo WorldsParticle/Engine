@@ -1,5 +1,6 @@
 #include    <log4cpp/Category.hh>
 
+#include    "glwindow.h"
 #include    "Renderer.hpp"
 #include    "Object.hpp"
 #include    "Camera.hpp"
@@ -57,27 +58,27 @@ namespace   WorldParticles
         void
         Renderer::add(Object *object)
         {
-            Category &root = Category::getRoot();
+            //Category &root = Category::getRoot();
 
-            root << Priority::DEBUG << "Renderer - add object()" << object->getName();
+            //root << Priority::DEBUG << "Renderer - add object()" << object->getName();
             this->objects.push_back(object);
         }
 
         void
         Renderer::add(Camera *camera)
         {
-            Category &root = Category::getRoot();
+            //Category &root = Category::getRoot();
 
-            root << Priority::DEBUG << "Renderer - add camera()" << camera->getName();
+            //root << Priority::DEBUG << "Renderer - add camera()" << camera->getName();
             this->cameras.push_back(camera);
         }
 
         void
         Renderer::add(Light *light)
         {
-            Category &root = Category::getRoot();
+            //Category &root = Category::getRoot();
 
-            root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
+            //root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
             this->lights.push_back(light);
         }
 
@@ -88,19 +89,21 @@ namespace   WorldParticles
         {
             Category    &root = Category::getRoot();
 
-            root << Priority::DEBUG << "Renderer - render()";
+            //root << Priority::DEBUG << "Renderer - render()";
             for (Camera *camera : this->cameras)
             {
-                root << Priority::DEBUG << "Renderer - render - camera()";
+                //root << Priority::DEBUG << "Renderer - render - camera()";
                 const glm::mat4 &projection = camera->getProjection();
                 const glm::mat4 &view = camera->getView();
+                GLWindow::m_funcs->glViewport(0, 0, 1024, 768);
                 for (Object *object : this->objects)
                 {
-                    root << Priority::DEBUG << "Renderer - render - object()";
+                    root << Priority::DEBUG << "Draw => " << object->getName();
                     const glm::mat4 &model = object->getTransform().getMatrix();
                     const std::list<Mesh *>     &meshes = object->getMeshes();
                     for (Mesh *part : meshes)
                     {
+                        //root << Priority::DEBUG << "Renderer - mesh - draw()";
                         part->draw(model, view, projection);
                     }
                 }

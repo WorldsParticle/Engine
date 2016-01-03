@@ -19,7 +19,7 @@ namespace   WorldParticles
             this->resources.reserve(size);
             for (unsigned int i = 0 ; i < size ; ++i)
             {
-                const auto &shaderprogram = shaderprograms.get(DEFAULT_SHADER_PROGRAM);
+                const auto &shaderprogram = shaderprograms.get(TEST_SHADER_PROGRAM);
                 this->resources.push_back(new Material(assimpMaterials[i], shaderprogram));
             }
         }

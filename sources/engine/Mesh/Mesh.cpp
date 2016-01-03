@@ -125,7 +125,6 @@ namespace   WorldParticles
                 GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0,
                     this->positions.size());
             }
-            shaderprogram->unbind();
             this->material->unbind();
             this->unbind();
         }
