@@ -7,12 +7,16 @@
 #include    <assimp/Importer.hpp>
 #include    <assimp/mesh.h>
 
-#include    "Scene.hpp"
-
 namespace   WorldParticles
 {
     namespace   Engine
     {
+
+        class   Scene;
+
+        ///
+        /// \brief This class is used to import a scene with the assimp library.
+        ///
         class       AssimpImporter
         {
             public:
@@ -22,40 +26,48 @@ namespace   WorldParticles
                 AssimpImporter(void);
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                AssimpImporter(const AssimpImporter &other) = default;
+
+                ///
+                /// \brief Move constructor.
+                ///
+                AssimpImporter(AssimpImporter &&other) noexcept = default;
+
+                ///
                 /// \brief Destructor
                 ///
-                ~AssimpImporter(void);
+                virtual ~AssimpImporter(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                AssimpImporter  &operator=(const AssimpImporter &other) = default;
+
+                ///
+                /// \brief Move assignment importer.
+                ///
+                AssimpImporter  &operator=(AssimpImporter &&other) noexcept = default;
 
             public:
                 ///
                 /// \brief This method is used to load a scene from a filename.
                 ///
-                Scene       *importScene(const std::string &filename);
+                Scene   *import(const std::string &filename);
 
             private:
                 ///
-                /// \brief This method is internally used to load animation in the scene graph.
+                /// \brief This method use the ReadFile method with appropriate assimp flags.
                 ///
-                void        importAnimations(const aiScene *assimpScene, Scene *scene);
-
-                ///
-                ///
-                ///
-                void        importCameras(const aiScene *assimpScene, Scene *scene);
-
-                void        importLights(const aiScene *assimpScene, Scene *scene);
-
-                void        importMaterials(const aiScene *assimpScene, Scene *scene);
-
-                void        importMeshes(const aiScene *assimpScene, Scene *scene);
-
-                void        importTextures(const aiScene *assimpScene, Scene *scene);
+                const aiScene   *load(const std::string &filename);
 
             private:
                 ///
                 /// \brief the assimp importer that wil be used to load the file in a new scene.
                 ///
-                Assimp::Importer    _importer;
+                Assimp::Importer    importer;
         };
     }
 }

@@ -9,6 +9,9 @@ namespace   WorldParticles
 {
     namespace   Engine
     {
+        ///
+        /// \brief This class is used to abstract a OpenGL Vertex Buffer Object.
+        ///
         class       BufferObject
         {
             public:
@@ -35,9 +38,30 @@ namespace   WorldParticles
                 BufferObject(const Type &type, const Usage &usage);
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                BufferObject(const BufferObject &other) = delete;
+
+                ///
+                /// \brief Move constructor.
+                ///
+                BufferObject(BufferObject &&other) noexcept;
+
+                ///
                 /// \brief Destructor.
                 ///
-                ~BufferObject(void);
+                virtual ~BufferObject(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                BufferObject    &operator=(const BufferObject &other) = delete;
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                BufferObject    &operator=(BufferObject &&other) noexcept;
 
             public:
                 ///

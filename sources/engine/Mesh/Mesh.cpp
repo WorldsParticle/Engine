@@ -1,7 +1,9 @@
+
+#include    <log4cpp/Category.hh>
+
 #include    "Mesh.hpp"
 #include    "glwindow.h"
 
-#include    <log4cpp/Category.hh>
 using namespace log4cpp;
 
 namespace   WorldParticles
@@ -9,31 +11,36 @@ namespace   WorldParticles
     namespace   Engine
     {
 
-        ///
-        /// PUBLIC CONSTRUCTORS
-        ///
-
-        Mesh::Mesh(void) :
-            arrayObject(std::make_shared<ArrayObject>())
+        Mesh::Mesh(Material *material) :
+            vertexBuffer(std::make_shared<BufferObject>(
+                        BufferObject::Type::ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW)),
+            elementBuffer(std::make_shared<BufferObject>(
+                        BufferObject::Type::ELEMENT_ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW)),
+            arrayObject(std::make_shared<ArrayObject>()),
+            material(material)
         {
             // nothing to do
         }
 
         /// TODO check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
-        Mesh::Mesh(const aiMesh *am) :
-            arrayObject(std::make_shared<ArrayObject>())
+        Mesh::Mesh(const aiMesh *am, Material *material) :
+            vertexBuffer(std::make_shared<BufferObject>(
+                        BufferObject::Type::ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW)),
+            elementBuffer(std::make_shared<BufferObject>(
+                        BufferObject::Type::ELEMENT_ARRAY_BUFFER,
+                        BufferObject::Usage::STATIC_DRAW)),
+            arrayObject(std::make_shared<ArrayObject>()),
+            material(material)
         {
-            if (am == nullptr) throw std::invalid_argument("assimpMesh is null.");
             this->name = am->mName.C_Str();
-            if (am->HasPositions()) {
-                this->setPositions(am->mVertices, am->mNumVertices);
-            }
-            if (am->HasNormals()) {
-                this->setNormals(am->mNormals, am->mNumVertices);
-            }
-            if (am->HasFaces()) {
-                this->setIndices(am->mFaces, am->mNumFaces);
-            }
+            this->setPositions(am->mVertices, am->mNumVertices);
+            this->setNormals(am->mNormals, am->mNumVertices);
+            if (am->HasTextureCoords(0))
+                this->setUVs(am->mTextureCoords[0], am->mNumUVComponents[0]);
+            this->setIndices(am->mFaces, am->mNumFaces);
             this->update();
         }
 
@@ -43,57 +50,85 @@ namespace   WorldParticles
         }
 
 
-        ///
-        /// PUBLIC METHOD
-        ///
-
-        /// TODO Optimisations
+        /// TODO rework, c'est totalmenet dégeulasse.
         void
         Mesh::update(void)
         {
-            if (!this->vertexBuffer) {
-                this->vertexBuffer = std::make_shared<BufferObject>(
-                        BufferObject::Type::ARRAY_BUFFER,
-                        BufferObject::Usage::STATIC_DRAW
-                );
-            }
-            if (!this->elementBuffer && !this->indices.empty()) {
-                this->elementBuffer = std::make_shared<BufferObject>(
-                        BufferObject::Type::ELEMENT_ARRAY_BUFFER,
-                        BufferObject::Usage::STATIC_DRAW
-                );
-            }
-            this->arrayObject->bind();
-            float *data = reinterpret_cast<float *>(this->positions.data());
-            std::vector<float>  vertices(data, data + this->positions.size() * 3);
-            data = reinterpret_cast<float *>(this->normals.data());
-            vertices.insert(vertices.end(), data, data + this->normals.size() * 3);
+
+            std::vector<float>  vertices = this->positions;
+            if (this->hasNormals())
+                vertices.insert(vertices.end(), this->normals.begin(), this->normals.end());
+            if (this->hasUVs())
+                vertices.insert(vertices.end(), this->uvs.begin(), this->uvs.end());
             this->vertexBuffer->update(vertices.data(), vertices.size() * sizeof(float));
+            if (this->hasIndices())
+                this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
+
+            this->arrayObject->bind();
+
             this->vertexBuffer->bind();
             GLWindow::m_funcs->glEnableVertexAttribArray(0);
             GLWindow::m_funcs->glEnableVertexAttribArray(1);
-            GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void *)0);
-            GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, (void *)(this->positions.size() * 3 * sizeof(float)));
-            this->vertexBuffer->unbind();
-            if (!this->indices.empty()) {
-                this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
-                this->elementBuffer->bind();
+            GLWindow::m_funcs->glEnableVertexAttribArray(2);
+            GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+                0, (void *)0);
+            if (this->hasNormals()) {
+                GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT,
+                    GL_FALSE, 0, (void *)(this->positions.size() * sizeof(float)));
             }
+            if (this->hasUVs()) {
+                GLWindow::m_funcs->glVertexAttribPointer(2, 2, GL_FLOAT,
+                    GL_FALSE, 0, (void *)((this->positions.size()
+                        + this->normals.size()) * sizeof(float)));
+            }
+            if (this->hasIndices())
+                this->elementBuffer->bind();
+
             this->arrayObject->unbind();
-            this->updated = true;
+
+            this->vertexBuffer->unbind();
+
+            if (this->hasIndices())
+                this->elementBuffer->unbind();
         }
 
         void
-        Mesh::bind(void)
+        Mesh::bind(void) const
         {
             this->arrayObject->bind();
         }
 
         void
-        Mesh::unbind(void)
+        Mesh::unbind(void) const
         {
             this->arrayObject->unbind();
         }
+
+        void
+        Mesh::draw(const glm::mat4 &model, const glm::mat4 &view,
+            const glm::mat4 &projection) const
+        {
+            const auto &shaderprogram = this->material->getShaderProgram();
+
+            this->bind();
+            this->material->bind();
+            shaderprogram->setUniform("model", model);
+            shaderprogram->setUniform("view", view);
+            shaderprogram->setUniform("projection", projection);
+            if (this->hasIndices())
+            {
+                GLWindow::m_funcs->glDrawElements(GL_TRIANGLES,
+                    this->indices.size(), GL_UNSIGNED_INT, 0);
+            }
+            else
+            {
+                GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0,
+                    this->positions.size());
+            }
+            this->material->unbind();
+            this->unbind();
+        }
+
 
 
         bool
@@ -109,25 +144,35 @@ namespace   WorldParticles
         }
 
         bool
+        Mesh::hasUVs(void) const
+        {
+            return !this->uvs.empty();
+        }
+
+        bool
         Mesh::hasIndices(void) const
         {
             return !this->indices.empty();
         }
 
-        ///
-        /// PUBLIC GETTER
-        ///
 
-        const std::vector<glm::vec3> &
+
+        const std::vector<float> &
         Mesh::getPositions(void) const
         {
             return this->positions;
         }
 
-        const std::vector<glm::vec3> &
+        const std::vector<float> &
         Mesh::getNormals(void) const
         {
             return this->normals;
+        }
+
+        const std::vector<float> &
+        Mesh::getUVs(void) const
+        {
+            return this->uvs;
         }
 
         const std::vector<unsigned int> &
@@ -136,20 +181,24 @@ namespace   WorldParticles
             return this->indices;
         }
 
-        ///
-        /// PUBLIC SETTER
-        ///
+
 
         void
-        Mesh::setPositions(const std::vector<glm::vec3> &positions)
+        Mesh::setPositions(const std::vector<float> &positions)
         {
             this->positions = positions;
         }
 
         void
-        Mesh::setNormals(const std::vector<glm::vec3> &normals)
+        Mesh::setNormals(const std::vector<float> &normals)
         {
             this->normals = normals;
+        }
+
+        void
+        Mesh::setUVs(const std::vector<float> &uvs)
+        {
+            this->uvs = uvs;
         }
 
         void
@@ -158,38 +207,50 @@ namespace   WorldParticles
             this->indices = indices;
         }
 
-        ///
-        /// PRIVATE SETTER
-        ///
+
 
         void
-        Mesh::setPositions(const aiVector3D *positions, unsigned int numberElements)
+        Mesh::setPositions(const aiVector3D *v, unsigned int numberElements)
         {
-            if (positions == nullptr) throw std::invalid_argument("positions is null");
-            auto convert = [&](const aiVector3D &v){ return glm::vec3(v.x, v.y, v.z); };
             this->positions.clear();
-            this->positions.reserve(numberElements);
-            for (unsigned int i = 0 ; i < numberElements ; ++i) {
-                 this->positions.push_back(convert(positions[i]));
+            this->positions.reserve(numberElements * 3);
+            for (unsigned int i = 0 ; i < numberElements ; ++i)
+            {
+                 this->positions.push_back(v[i].x);
+                 this->positions.push_back(v[i].y);
+                 this->positions.push_back(v[i].z);
             }
         }
 
         void
-        Mesh::setNormals(const aiVector3D *normals, unsigned int numberElements)
+        Mesh::setNormals(const aiVector3D *n, unsigned int numberElements)
         {
-            if (normals == nullptr) throw std::invalid_argument("normals is null");
-            auto convert = [&](const aiVector3D &v) { return glm::vec3(v.x, v.y, v.z); };
             this->normals.clear();
-            this->normals.reserve(numberElements);
-            for (unsigned int i = 0 ; i < numberElements ; ++i) {
-                 this->normals.push_back(convert(normals[i]));
+            this->normals.reserve(numberElements * 3);
+            for (unsigned int i = 0 ; i < numberElements ; ++i)
+            {
+                 this->normals.push_back(n[i].x);
+                 this->normals.push_back(n[i].y);
+                 this->normals.push_back(n[i].z);
+            }
+        }
+
+        void
+        Mesh::setUVs(const aiVector3D *u, unsigned int numberElements)
+        {
+            this->uvs.clear();
+            this->uvs.reserve(numberElements * 3);
+            for (unsigned int i = 0 ; i < numberElements ; ++i)
+            {
+                this->uvs.push_back(u[i].x);
+                this->uvs.push_back(u[i].y);
+                this->uvs.push_back(u[i].z);
             }
         }
 
         void
         Mesh::setIndices(const aiFace *faces, unsigned int numberElements)
         {
-            if (faces == nullptr) throw std::invalid_argument("faces is null");
             this->indices.clear();
             this->indices.reserve(numberElements * 3);
             for (unsigned int i = 0 ; i < numberElements ; ++i) {

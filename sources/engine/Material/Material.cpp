@@ -1,43 +1,69 @@
-#include "Material.hpp"
+#include    "Material.hpp"
+#include    "ShaderProgram.hpp"
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
 
-        ///
-        /// PUBLIC CONSTRUCTOR
-        ///
-
-        Material::Material(void) :
-            color(glm::vec4(1.0, 1.0, 1.0, 1.0))
+        Material::Material(const std::shared_ptr<ShaderProgram> &shaderprogram) :
+            name("Default"),
+            shaderprogram(shaderprogram)
         {
             // nothing to do
         }
 
-        Material::~Material(void)
+        Material::Material(const aiMaterial *assimpMaterial,
+                const std::shared_ptr<ShaderProgram> &shaderprogram) :
+            name("Default"),
+            shaderprogram(shaderprogram)
         {
-            // nothind to do
+            aiString assimpName;
+
+            assimpMaterial->Get(AI_MATKEY_NAME, assimpName);
+            this->name = assimpName.C_Str();
+            // nothing to do atm.
         }
 
-        ///
-        /// PUBLIC GETTER
-        ///
-        const glm::vec4 &
-        Material::getColor(void) const
+        Material::~Material(void) noexcept
         {
-            return this->color;
+            // nothind to do.
         }
 
 
-        ///
-        /// PUBLIC SETTER
-        ///
+
+        const std::string &
+        Material::getName(void) const
+        {
+            return this->name;
+        }
+
+
 
         void
-        Material::setColor(const glm::vec4 &color)
+        Material::setName(const std::string &name)
         {
-            this->color = color;
+            this->name = name;
+        }
+
+
+
+        const std::shared_ptr<ShaderProgram> &
+        Material::getShaderProgram(void) const
+        {
+             return this->shaderprogram;
+        }
+
+        void
+        Material::bind(void) const
+        {
+            this->shaderprogram->bind();
+        }
+
+        void
+        Material::unbind(void) const
+        {
+             this->shaderprogram->unbind();
         }
     }
 }

@@ -1,62 +1,52 @@
-#include    "Camera.hpp"
-
 #include    <glm/gtc/matrix_transform.hpp>
 
-/// TODO C'est totalement pas cohérent de devoir inclure le GLWindow pour faire
-/// de l'opengl.
-#include    "glwindow.h"
+#include    "Camera.hpp"
 
 namespace WorldParticles
 {
     namespace Engine
     {
 
-        Camera::Camera(const glm::vec3 &position,
-                const glm::vec3 &rotation,
-                const glm::vec3 &scale) :
-            transform(position, rotation, scale),
-            fieldOfView(60),
-            zNear(0.1),
-            zFar(1000.0)
+        Camera::Camera(SceneGraphNode *node) :
+            Entity(node),
+            name(""),
+            clippingPlane{0.0f, 0.0f},
+            aspect(0.0f),
+            fov(0.0f),
+            up(glm::vec3(0.0f)),
+            lookat(glm::vec3(0.0f)),
+            position(glm::vec3(0.0f))
         {
-            projection = glm::perspective(glm::radians(45.0f), 1024.0f / 768.0f, 0.1f, 1000.0f);
-            view = glm::lookAt(this->transform.getPosition(), glm::vec3(0.0), glm::vec3(0.0, 1.0, 0.0));
+            // nothing to do.
+        }
+
+        Camera::Camera(const aiCamera *assimpCamera, SceneGraphNode *node) :
+            Entity(node),
+            name(assimpCamera->mName.C_Str()),
+            clippingPlane{assimpCamera->mClipPlaneNear, assimpCamera->mClipPlaneFar},
+            aspect(assimpCamera->mAspect),
+            fov(assimpCamera->mHorizontalFOV * 2.0f),
+            up(glm::vec3(0.0f)),
+            lookat(glm::vec3(0.0f)),
+            position(glm::vec3(0.0f))
+        {
+            auto convert = [&](const aiVector3D &v) {return glm::vec3(v.x, v.y, v.z);};
+            this->up = convert(assimpCamera->mUp);
+            this->lookat = convert(assimpCamera->mLookAt);
+            this->position = convert(assimpCamera->mPosition);
         }
 
         Camera::~Camera(void)
         {
-
-        }
-
-        const glm::mat4 &
-        Camera::getProjection(void) const
-        {
-            return projection;
-        }
-
-        const glm::mat4 &
-        Camera::getView(void) const
-        {
-            return view;
+            // nothing to do.
         }
 
 
-        bool    Camera::initialise(void)
-        {
-            // nothing to do ?
-            return true;
-        }
 
-        void    Camera::update(void)
+        const std::string &
+        Camera::getName(void) const
         {
-        }
-
-        void    Camera::draw(void)
-        {
-            GLWindow::m_funcs->glEnable(GL_DEPTH_TEST);
-            GLWindow::m_funcs->glClearColor(0.3, 0.1, 0.1, 0.0);
-            GLWindow::m_funcs->glViewport(0, 0, 1024, 768);
-            GLWindow::m_funcs->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+             return this->name;
         }
 
     }

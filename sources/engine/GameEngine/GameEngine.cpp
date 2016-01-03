@@ -1,7 +1,8 @@
+#include    <log4cpp/Category.hh>
+
 #include    "GameEngine.hpp"
-#include    "AssimpImporter.hpp"
-#include    "Cube.hpp"
-#include    "glwindow.h"
+
+using namespace     log4cpp;
 
 namespace   WorldParticles
 {
@@ -10,68 +11,85 @@ namespace   WorldParticles
 
         GameEngine::GameEngine(void)
         {
-            // nothing to do ?
+            // nothing to do
+        }
+
+        GameEngine::GameEngine(const GameEngine &other) :
+            importer(other.importer)
+        {
+            for (Scene *scene : other.scenes)
+            {
+                this->scenes.push_back(new Scene(*scene));
+            }
+        }
+
+        GameEngine::GameEngine(GameEngine &&other) noexcept :
+            scenes(std::move(other.scenes)),
+            importer(std::move(other.importer))
+        {
+            // nothing to do.
         }
 
         GameEngine::~GameEngine(void)
         {
-            for (Scene *scene : this->_scenes)
+            for (Scene *scene : this->scenes)
             {
                 delete scene;
             }
         }
 
 
-        bool    GameEngine::initialise(void)
-        {
-            bool    result = true;
 
-            for (Scene *scene : this->_scenes)
+        GameEngine &
+        GameEngine::operator=(const GameEngine &other)
+        {
+            for (Scene *scene : other.scenes)
             {
-                if (scene == nullptr) continue;
-                result = scene->initialise() && result;
+                this->scenes.push_back(new Scene(*scene));
             }
-            return result;
+            return *this;
         }
 
-        void    GameEngine::update(void)
+        GameEngine &
+        GameEngine::operator=(GameEngine &&other) noexcept
         {
-            for (Scene *scene : this->_scenes)
+            this->scenes = std::move(other.scenes);
+            this->importer = std::move(other.importer);
+            return *this;
+        }
+
+
+
+        void
+        GameEngine::update(void)
+        {
+            for (Scene *scene : this->scenes)
             {
-                if (scene == nullptr) continue;
                 scene->update();
             }
         }
 
-        void    GameEngine::draw(void)
+        void
+        GameEngine::render(void)
         {
-            GLWindow::m_funcs->glEnable(GL_DEPTH_TEST);
-            for (Scene *scene : this->_scenes)
+            for (Scene *scene : this->scenes)
             {
-                if (scene == nullptr) continue;
-                scene->draw();
+                scene->render();
             }
         }
 
 
-        bool    GameEngine::load(const std::string &filename)
-        {
-            AssimpImporter  importer;
-            Camera          *cam = new Camera(glm::vec3(5.0));
 
-            Scene   *test = importer.importScene(filename);
-            *test << cam;
-            this->_scenes.push_back(test);
-            return true;
-        }
-
-        /// TODO should be tested
-        void    GameEngine::add(Scene *scene)
+        void
+        GameEngine::load(const std::string &filename)
         {
-            this->_scenes.push_back(scene);
-            this->_scenes.sort([](const auto &a, const auto &b) {
-                    return a->getLayerNumber() > b->getLayerNumber();
-            });
+            Category    &root = Category::getRoot();
+            // TODO GSL OWNER && NOT NULL
+            //
+            root << Priority::DEBUG << "GameEngine - Load()";
+            Scene *test = this->importer.import(filename);
+
+            this->scenes.push_back(test);
         }
 
     }

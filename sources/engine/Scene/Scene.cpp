@@ -1,9 +1,11 @@
-
 #include    <glm/glm.hpp>
 #include    <algorithm>
+#include    <log4cpp/Category.hh>
 
 #include    "Scene.hpp"
-#include    "Cube.hpp"
+#include    "AssimpScene.hpp"
+
+using namespace     log4cpp;
 
 namespace WorldParticles
 {
@@ -11,104 +13,94 @@ namespace WorldParticles
     {
 
         /// TODO : delete push object
-        Scene::Scene(void)
+        Scene::Scene(void) :
+            shaderprograms(),
+            materials(),
+            animations(),
+            meshes(),
+            textures(),
+            renderer(this),
+            spatialgraph(&this->renderer, this),
+            scenegraph(this)
         {
+            // nothing to do.
+        }
+
+        Scene::Scene(const AssimpScene &s) :
+            shaderprograms(),
+            materials(shaderprograms, s.getMaterials(), s.getMaterialsNumber()),
+            animations(s.getAnimations(), s.getAnimationsNumber()),
+            meshes(materials, s.getMeshes(), s.getMeshesNumber()),
+            textures(s.getTextures(), s.getTexturesNumber()),
+            renderer(this),
+            spatialgraph(&this->renderer, this),
+            scenegraph(s, this)
+        {
+            // nothing to do.
         }
 
         Scene::~Scene(void)
         {
-            // nothing to do
+            // nothing to do.
         }
 
 
-
-        Scene       &Scene::operator<<(Camera *camera)
-        {
-            this->add(camera);
-            return *this;
-        }
-
-        Scene    &Scene::operator<<(GameObject *gameobject)
-        {
-            this->add(gameobject);
-            return *this;
-        }
-
-        Scene    &Scene::operator<<(Light *light)
-        {
-            this->add(light);
-            return *this;
-        }
-
-
-        bool    Scene::initialise(void)
-        {
-            for (Camera *camera : this->cameras)
-            {
-                camera->initialise();
-            }
-            for (GameObject *gameobject : this->gameobjects)
-            {
-                gameobject->initialise();
-            }
-            return true;
-        }
 
         void    Scene::update(void)
         {
-            for (Camera *camera : this->cameras)
-            {
-                 camera->update();
-            }
-            for (GameObject *gameobject : this->gameobjects)
-            {
-                gameobject->update();
-            }
+            this->scenegraph.update();
         }
 
-        void    Scene::draw(void)
+        void    Scene::render(void)
         {
-            for (Camera *camera : this->cameras)
-            {
-                camera->draw();
-                const glm::mat4 &projection = camera->getProjection();
-                const glm::mat4 &view = camera->getView();
-                for (GameObject *gameobject : this->gameobjects)
-                {
-                    gameobject->draw(projection, view);
-                }
-            }
+            this->spatialgraph.cull();
+            this->renderer.render();
         }
 
 
 
-        void    Scene::add(GameObject *gameobject)
+        Material *
+        Scene::getMaterial(unsigned int id) const
         {
-            this->gameobjects.push_back(gameobject);
+            return this->materials.get(id);
         }
 
-        /// TODO order by
-        void    Scene::add(Camera *camera)
+        Animation *
+        Scene::getAnimation(unsigned int id) const
         {
-            this->cameras.push_back(camera);
+            return this->animations.get(id);
         }
 
-        void    Scene::add(Light *light)
+        Mesh *
+        Scene::getMesh(unsigned int id) const
         {
-            this->lights.push_back(light);
+            return this->meshes.get(id);
+        }
+
+        Texture *
+        Scene::getTexture(unsigned int id) const
+        {
+            return this->textures.get(id);
         }
 
 
-        int
-        Scene::getLayerNumber(void) const
+
+        void
+        Scene::add(Object *object)
         {
-             return this->layerNumber;
+            this->spatialgraph.add(object);
         }
 
         void
-        Scene::setLayerNumber(int layerNumber)
+        Scene::add(Light *light)
         {
-            this->layerNumber = layerNumber;
+            this->spatialgraph.add(light);
+        }
+
+        void
+        Scene::add(Camera *camera)
+        {
+             this->spatialgraph.add(camera);
         }
 
     }

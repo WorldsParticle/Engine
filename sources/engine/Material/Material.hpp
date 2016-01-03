@@ -1,17 +1,18 @@
 #ifndef     __MATERIAL_HPP__
 # define    __MATERIAL_HPP__
 
-#include    <glm/glm.hpp>
 #include    <memory>
-
-#include    "ShaderProgram.hpp"
+#include    <glm/glm.hpp>
+#include    <assimp/material.h>
 
 namespace   WorldParticles
 {
     namespace   Engine
     {
+        class   ShaderProgram;
+        class   ShaderProgramLibrary;
         ///
-        /// \brief This class is used to represent a material which a gameobject should be drawed with.
+        /// \brief This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered.
         ///
         class   Material
         {
@@ -19,31 +20,80 @@ namespace   WorldParticles
                 ///
                 /// \brief Default constructor
                 ///
-                Material(void);
+                Material(const std::shared_ptr<ShaderProgram> &shaderprogram);
+
+                ///
+                /// \brief Construct a material from an assimp material.
+                ///
+                Material(const aiMaterial *assimpMaterial,
+                        const std::shared_ptr<ShaderProgram> &shaderprogram);
+
+                ///
+                /// \brief Copy constructor.
+                ///
+                Material(const Material &other) = default;
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Material(Material &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor
                 ///
-                ~Material(void);
+                virtual ~Material(void) noexcept;
 
             public:
                 ///
-                /// \brief Getter for the color attribute.
-                /// \return the color.
+                /// \brief Copy assignment operator.
                 ///
-                const glm::vec4     &getColor(void) const;
+                Material    &operator=(const Material &other) = default;
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                Material    &operator=(Material &&other) noexcept = default;
 
             public:
                 ///
-                /// \brief Setter for the color attribute.
+                /// \brief Bind the material in the graphic pipeline.
                 ///
-                void                setColor(const glm::vec4 &color);
+                void        bind(void) const;
+
+                ///
+                /// \brief Unbind the material off the graphic pipeline.
+                ///
+                void        unbind(void) const;
+
+            public:
+                ///
+                /// \brief Getter for the name attribute.
+                /// \return the name of the material.
+                ///
+                const std::string       &getName(void) const;
+
+                ///
+                /// \brief Getter for the shader program used by the material.
+                /// \return the shader program.
+                ///
+                const std::shared_ptr<ShaderProgram>    &getShaderProgram(void) const;
+
+            public:
+                ///
+                /// \brief Setter for the name attribute.
+                ///
+                void    setName(const std::string &name);
 
             private:
                 ///
-                /// \brief the color attribute is used to store the color of the material.
+                /// \brief The name of the material.
                 ///
-                glm::vec4                       color;
+                std::string                     name;
+
+                ///
+                /// \brief The shaderprogram used with this material.
+                ///
+                std::shared_ptr<ShaderProgram>  shaderprogram;
         };
     }
 }

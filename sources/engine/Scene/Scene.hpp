@@ -4,14 +4,21 @@
 #include    <memory>
 #include    <list>
 
-#include    "GameObject.hpp"
-#include    "Camera.hpp"
-#include    "Light.hpp"
+#include    "Renderer.hpp"
+#include    "SpatialGraph.hpp"
+#include    "SceneGraph.hpp"
+#include    "ShaderProgramLibrary.hpp"
+#include    "MaterialLibrary.hpp"
+#include    "AnimationLibrary.hpp"
+#include    "MeshLibrary.hpp"
+#include    "TextureLibrary.hpp"
 
 namespace WorldParticles
 {
     namespace Engine
     {
+        class       AssimpScene;
+
         ///
         /// \brief This class is used to represent a scene, with camera / light & gameobject.
         ///
@@ -21,38 +28,42 @@ namespace WorldParticles
         {
             public:
                 ///
-                /// \brief Default constructor
+                /// \brief Default constructor. This constructor create an empty scene.
                 ///
                 Scene(void);
 
                 ///
+                ///
+                ///
+                Scene(const AssimpScene &assimpScene);
+
+                ///
+                /// \brief Copy constructor.
+                ///
+                Scene(const Scene &other) = default;
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Scene(Scene &&other) noexcept = default;
+
+                ///
                 /// \brief Destructor
                 ///
-                virtual ~Scene(void);
-
-            public:
-
-                ///
-                /// \brief This operator is used to push a camera in the scene.
-                ///
-                Scene       &operator<<(Camera *camera);
-
-                ///
-                /// \brief This operator is used to push a gameobject in the scene.
-                ///
-                Scene       &operator<<(GameObject *gameobject);
-
-                ///
-                /// \brief This operator is used to push a light in the scene.
-                ///
-                Scene       &operator<<(Light *light);
+                virtual ~Scene(void) noexcept;
 
             public:
                 ///
-                /// \brief This method is used to initialise the scene.
+                /// \brief Copy assignement operator.
                 ///
-                bool        initialise(void);
+                Scene       &operator=(const Scene &other) = default;
 
+                ///
+                /// \brief Move assignement operator.
+                ///
+                Scene       &operator=(Scene &&other) noexcept = default;
+
+            public:
                 ///
                 /// \brief This function is used to update the scene.
                 ///
@@ -61,58 +72,93 @@ namespace WorldParticles
                 ///
                 /// \brief This function is used to draw the scene on the screen.
                 ///
-                void        draw(void);
+                void        render(void);
 
             public:
                 ///
-                /// \brief Add gameobject in the scene.
+                /// \brief This method allow to retrieve a material from the animation material.
                 ///
-                void        add(GameObject *gameobject);
+                Material    *getMaterial(unsigned int id) const;
 
                 ///
-                /// \brief Add a camera in the scene.
+                /// \brief This method allow to retrieve an animation from the animation library.
                 ///
-                void        add(Camera *camera);
+                Animation   *getAnimation(unsigned int id) const;
 
                 ///
-                /// \brief Add a light in the scene.
+                /// \brief This method allow to retrieve a mesh from the mesh library.
+                ///
+                Mesh        *getMesh(unsigned int id) const;
+
+                ///
+                /// \brief This method allow to retrieve a texture from the texture library.
+                ///
+                Texture     *getTexture(unsigned int id) const;
+
+            public:
+
+                ///
+                /// \brief Add an object in the spatial graph.
+                ///
+                void        add(Object *object);
+
+                ///
+                /// \brief Add a light in the spatial graph.
                 ///
                 void        add(Light *light);
 
-            public:
                 ///
-                /// \brief Getter for the layer number attribute.
+                /// \brief add a camera in the spatial graph.
                 ///
-                int     getLayerNumber(void) const;
+                void        add(Camera *camera);
 
-            public:
+            protected:
                 ///
-                /// \brief Setter for the layer number attribute.
+                /// \brief Library of usable shader program.
                 ///
-                void    setLayerNumber(int layerNumber);
-
-            private:
-                ///
-                /// \brief List of all gameobject present in the scene.
-                ///
-                std::list<GameObject *>     gameobjects;
+                ShaderProgramLibrary        shaderprograms;
 
                 ///
-                /// \brief List of all cameras in the scene.
+                /// \brief Library of usable materials.
                 ///
-                std::list<Camera *>         cameras;
+                MaterialLibrary             materials;
 
                 ///
-                /// \brief List of all light in the scene.
+                /// \brief Library of usable animation in the scene.
                 ///
-                std::list<Light *>          lights;
+                AnimationLibrary            animations;
 
                 ///
-                /// \brief This attribute is used to store the layer number.
+                /// \brief Library of usable mesh in the scene.
                 ///
-                int                         layerNumber;
+                MeshLibrary                 meshes;
+
+                ///
+                /// \brief Library of usable textures in the scene.
+                ///
+                TextureLibrary              textures;
+
+            protected:
+                ///
+                /// \brief The renderer is used to render the scene efficiently.
+                ///
+                /// For more informations, see Renderer.hpp
+                ///
+                Renderer                    renderer;
+
+                ///
+                /// \brief The spatial graph is used for the culling process.
+                ///
+                SpatialGraph                spatialgraph;
+
+                ///
+                /// \brief The scene graph represent the architecture of the scene.
+                ///
+                /// For more informations see SceneGraph.hpp
+                ///
+                SceneGraph                  scenegraph;
+
         };
-
     }
 }
 

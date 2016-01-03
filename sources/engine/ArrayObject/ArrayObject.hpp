@@ -17,9 +17,36 @@ namespace   WorldParticles
                 ArrayObject(void);
 
                 ///
+                /// \brief Copy constructor.
+                ///
+                /// The copy constructor is deleted because of the impossibilty
+                /// to copy the OpenGL state of the VAO.
+                ///
+                ArrayObject(const ArrayObject &other) = delete;
+
+                ///
+                /// \brief Move constructor.
+                ///
+                ArrayObject(ArrayObject &&other) noexcept;
+
+                ///
                 /// \brief Destructor.
                 ///
-                ~ArrayObject(void);
+                virtual ~ArrayObject(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                /// The copy assignment operator is deleted because of the
+                /// impossibilty to copy the OpenGL state of the VAO.
+                ///
+                ArrayObject     &operator=(const ArrayObject &other) = delete;
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                ArrayObject     &operator=(ArrayObject &&other) noexcept;
 
             public:
                 ///

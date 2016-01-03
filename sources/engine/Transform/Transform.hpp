@@ -2,7 +2,8 @@
 # define    __TRANSFORM_HPP__
 
 #include    <glm/glm.hpp>
-
+#include    <assimp/vector3.h>
+#include    <assimp/matrix4x4.h>
 
 namespace   WorldParticles
 {
@@ -18,82 +19,55 @@ namespace   WorldParticles
             public:
                 ///
                 /// \brief Default constructor
-                /// \param position, a glm::vec3 that represent a position in 3D space.
-                /// \param rotation, a glm::vec3 that represent a 3D rotation
-                /// \param scale, a glm::vec3 that represent a scale in X, Y and Z axis.
                 ///
-                Transform(const glm::vec3 &position = glm::vec3(0.0),
-                        const glm::vec3 &rotation = glm::vec3(0.0),
-                        const glm::vec3 &scale = glm::vec3(1.0));
+                Transform(void);
+
+                ///
+                /// \brief Construct a transform from an assimp matrix4x4.
+                ///
+                Transform(const aiMatrix4x4 &assimpTransformation);
+
+                ///
+                /// \brief Copy constructor.
+                ///
+                Transform(const Transform &other) = default;
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Transform(Transform &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor
                 ///
-                ~Transform(void);
+                virtual ~Transform(void) noexcept;
 
             public:
                 ///
-                /// \brief This function is used to generate a matrix from the position, rotation and scale of the transform.
+                /// \brief Copy assignment operator.
+                ///
+                Transform   &operator=(const Transform &other) = default;
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                Transform   &operator=(Transform &&other) noexcept = default;
+
+            public:
+                ///
+                /// \brief Get the matrix of the transform.
                 ///
                 const glm::mat4 &getMatrix(void) const;
-
 
                 /// TODO implementation function like "rotate" "translate"...
 
             public:
                 ///
-                /// \brief Setter for the position attribute.
+                /// \brief This method rotate the transform.
                 ///
-                void            setPosition(const glm::vec3 &position);
-
-                ///
-                /// \brief Setter for the rotation attribute
-                ///
-                void            setRotation(const glm::vec3 &rotation);
-
-                ///
-                /// \brief Setter for the scale attribute.
-                ///
-                void            setScale(const glm::vec3 &scale);
-
-            public:
-                ///
-                /// \brief Getter for the position attribute.
-                ///
-                const glm::vec3     &getPosition(void) const;
-
-                ///
-                /// \brief Getter for the rotation attribute.
-                ///
-                const glm::vec3     &getRotation(void) const;
-
-                ///
-                /// \brief Getter for the scale attribute
-                ///
-                const glm::vec3     &getScale(void) const;
-
-            private:
-                ///
-                /// \brief internally used to update the matrix.
-                ///
-                void    update(void);
+                void    rotate(const glm::vec3 &rotation);
 
             protected:
-                ///
-                /// \brief This attribute is used to store a position in 3D space.
-                ///
-                glm::vec3       position;
-
-                ///
-                /// \brief This attribute is used to store a 3D rotation (X, Y, Z in degree).
-                ///
-                glm::vec3       rotation;
-
-                ///
-                /// \brief This attribute is used to store a scale in X, Y and Z axis.
-                ///
-                glm::vec3       scale;
-
                 ///
                 /// \brief This matrix represent the actual state of the transform.
                 ///

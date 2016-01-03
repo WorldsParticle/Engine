@@ -13,6 +13,7 @@ namespace WorldParticles
 {
     namespace Engine
     {
+        class Material;
         ///
         /// \brief The Mesh class
         ///
@@ -22,17 +23,38 @@ namespace WorldParticles
                 ///
                 /// \brief Create an empty mesh.
                 ///
-                Mesh(void);
+                Mesh(Material *material);
 
                 ///
                 /// \brief This constructor is used to transform an assimp mesh to a mesh.
                 ///
-                Mesh(const aiMesh *assimpMesh);
+                Mesh(const aiMesh *assimpMesh, Material *material);
+
+                ///
+                /// \brief Copy constructor.
+                ///
+                Mesh(const Mesh &other) = default;
+
+                ///
+                /// \brief Move constructor.
+                ///
+                Mesh(Mesh &&other) noexcept = default;
 
                 ///
                 /// \brief Destructor
                 ///
-                ~Mesh(void);
+                virtual ~Mesh(void) noexcept;
+
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                Mesh    &operator=(const Mesh &other) = default;
+
+                ///
+                /// \brief Move assignment operator.
+                ///
+                Mesh    &operator=(Mesh &&other) noexcept = default;
 
             public:
                 ///
@@ -43,12 +65,18 @@ namespace WorldParticles
                 ///
                 /// \brief This method is used to bind the mesh in the rendering pipeline.
                 ///
-                void    bind(void);
+                void    bind(void) const;
 
                 ///
                 /// \brief This method is used to unbind the mesh of the rendering pipeline.
                 ///
-                void    unbind(void);
+                void    unbind(void) const;
+
+                ///
+                /// \brief This method is used to draw the mesh on the screen.
+                ///
+                void    draw(const glm::mat4 &model, const glm::mat4 &view,
+                            const glm::mat4 &projection) const;
 
             public:
                 ///
@@ -62,6 +90,11 @@ namespace WorldParticles
                 bool    hasNormals(void) const;
 
                 ///
+                /// \brief This method is used to know if the mesh contains uvs.
+                ///
+                bool    hasUVs(void) const;
+
+                ///
                 /// \brief This method is used to know if the mesh contains indices.
                 ///
                 bool    hasIndices(void) const;
@@ -70,12 +103,17 @@ namespace WorldParticles
                 ///
                 /// \brief Getter for the vertices attribute.
                 ///
-                const std::vector<glm::vec3>        &getPositions(void) const;
+                const std::vector<float>            &getPositions(void) const;
 
                 ///
                 /// \brief Getter for the normals attribute.
                 ///
-                const std::vector<glm::vec3>        &getNormals(void) const;
+                const std::vector<float>            &getNormals(void) const;
+
+                ///
+                /// \brief Getter for the uvs attribute.
+                ///
+                const std::vector<float>            &getUVs(void) const;
 
                 ///
                 /// \brief Getter for the indices attribute.
@@ -86,12 +124,17 @@ namespace WorldParticles
                 ///
                 /// \brief Setter for the vertices attribute.
                 ///
-                void    setPositions(const std::vector<glm::vec3> &positions);
+                void    setPositions(const std::vector<float> &positions);
 
                 ///
                 /// \brief Setter for the normal attribute.
                 ///
-                void    setNormals(const std::vector<glm::vec3> &normals);
+                void    setNormals(const std::vector<float> &normals);
+
+                ///
+                /// \brief Setter for the uvs attribute.
+                ///
+                void    setUVs(const std::vector<float> &uvs);
 
                 ///
                 /// \brief Setter for the indices attribute.
@@ -120,6 +163,11 @@ namespace WorldParticles
                 ///
                 void    setIndices(const aiFace *faces, unsigned int numberElements);
 
+                ///
+                /// \brief Setter for the UVs channel.
+                ///
+                void    setUVs(const aiVector3D *uvs, unsigned int numberElements);
+
             private:
                 ///
                 /// \brief The name of the mesh.
@@ -131,27 +179,22 @@ namespace WorldParticles
                 ///
                 /// \brief The vertices attribute is used to store all vertex of the mesh.
                 ///
-                std::vector<glm::vec3>          positions;
+                std::vector<float>              positions;
 
                 ///
                 /// \brief The normals attribute is used to store all normal of the mesh.
                 ///
-                std::vector<glm::vec3>          normals;
+                std::vector<float>              normals;
+
+                ///
+                /// \brief The uvs attribute is used to store one chanel of uvs.
+                ///
+                std::vector<float>              uvs;
 
                 ///
                 /// \brief The indices attribute is used to store all indices of a mesh.
                 ///
                 std::vector<unsigned int>       indices;
-
-                ///
-                /// \brief This boolean is used to know if the mesh should be send to the graphic api or if it's already updated.
-                ///
-                bool                            updated;
-
-                ///
-                /// \brief This boolean is used to know if the mesh is optmized for rendering.
-                ///
-                bool                            optimized;
 
                 ///
                 /// \brief This attribute is used to connect the Mesh to a vertex buffer in the graphic API.
@@ -167,6 +210,11 @@ namespace WorldParticles
                 /// \brief The Array Object is used to describes how the vertex attributes are stored in the bufferObject.
                 ///
                 std::shared_ptr<ArrayObject>    arrayObject;
+
+                ///
+                /// \brief The material used by the mesh.
+                ///
+                Material                        *material; // TODO GSL not null.
         };
     }
 }
