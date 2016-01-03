@@ -41,9 +41,6 @@ namespace   WorldParticles
         void
         Light::update(void)
         {
-            Category    &root = Category::getRoot();
-
-            root << Priority::DEBUG << "Light - update()";
             // nothing to do atm.
         }
 

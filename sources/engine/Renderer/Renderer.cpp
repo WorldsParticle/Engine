@@ -89,16 +89,23 @@ namespace   WorldParticles
         {
             Category    &root = Category::getRoot();
 
+            GLWindow::m_funcs->glEnable(GL_DEPTH_TEST);
             //root << Priority::DEBUG << "Renderer - render()";
             for (Camera *camera : this->cameras)
             {
                 //root << Priority::DEBUG << "Renderer - render - camera()";
                 const glm::mat4 &projection = camera->getProjection();
                 const glm::mat4 &view = camera->getView();
+
+
+                GLWindow::m_funcs->glClearColor(156.0f / 255.0f , 0, 76.0f / 255.0f, 1.0);
+                GLWindow::m_funcs->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
                 GLWindow::m_funcs->glViewport(0, 0, 1024, 768);
+
+
                 for (Object *object : this->objects)
                 {
-                    root << Priority::DEBUG << "Draw => " << object->getName();
+                    //root << Priority::DEBUG << "Draw => " << object->getName();
                     const glm::mat4 &model = object->getTransform().getMatrix();
                     const std::list<Mesh *>     &meshes = object->getMeshes();
                     for (Mesh *part : meshes)

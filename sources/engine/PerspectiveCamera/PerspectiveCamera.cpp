@@ -42,9 +42,9 @@ namespace   WorldParticles
             root << Priority::DEBUG << "Camera aspect " << this->aspect;
             root << Priority::DEBUG << "Camera near " << this->clippingPlane.near;
             root << Priority::DEBUG << "Camera far " << this->clippingPlane.far;
-            root << Priority::DEBUG << "Camera position " << realPosition.x << realPosition.y << realPosition.z;
-            root << Priority::DEBUG << "Camera lookat " << this->lookat.x << this->lookat.y << this->lookat.z;
-            root << Priority::DEBUG << "Camera up " << this->up.x << this->up.y << this->up.z;
+            root << Priority::DEBUG << "Camera position " << realPosition.x << " " << realPosition.y << " " << realPosition.z;
+            root << Priority::DEBUG << "Camera lookat " << this->lookat.x << " " << this->lookat.y << " " << this->lookat.z;
+            root << Priority::DEBUG << "Camera up " << this->up.x << " " << this->up.y << " " << this->up.z;
 
             this->projection = glm::perspective(this->fov, this->aspect,
                     this->clippingPlane.near, this->clippingPlane.far);
@@ -69,9 +69,6 @@ namespace   WorldParticles
         void
         PerspectiveCamera::update(void)
         {
-            Category    &root = Category::getRoot();
-
-            root << Priority::DEBUG << "PerspectiveCamera - update()";
             // nothing to do.
         }
 

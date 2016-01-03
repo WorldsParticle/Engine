@@ -38,6 +38,8 @@ namespace   WorldParticles
             entity(nullptr),
             transform(assimpNode->mTransformation)
         {
+            Category &root = Category::getRoot();
+            root << Priority::DEBUG << "SceneGraphNode : " << this->name;
             if (!this->name.empty())
             {
                 const aiCamera  *camera = nullptr;
@@ -82,6 +84,8 @@ namespace   WorldParticles
             //Category &root = Category::getRoot();
 
             //root << Priority::DEBUG << "SceneGraphNode update";
+            //
+
             if (this->entity != nullptr)
             {
                 this->entity->update();

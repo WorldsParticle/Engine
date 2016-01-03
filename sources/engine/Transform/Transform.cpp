@@ -1,6 +1,9 @@
-#include    "Transform.hpp"
+#include    <log4cpp/Category.hh>
 #include    <glm/gtc/matrix_transform.hpp>
 
+#include    "Transform.hpp"
+
+using namespace     log4cpp;
 
 namespace WorldParticles
 {
@@ -35,6 +38,12 @@ namespace WorldParticles
             matrix[1][3] = m.d2;
             matrix[2][3] = m.d3;
             matrix[3][3] = m.d4;
+            Category &root = Category::getRoot();
+
+            root << Priority::DEBUG << "[" << matrix[0][0] << "][" << matrix[1][0] << "][" << matrix[2][0] << "][" << matrix[3][0] << "]";
+            root << Priority::DEBUG << "[" << matrix[0][1] << "][" << matrix[1][1] << "][" << matrix[2][1] << "][" << matrix[3][1] << "]";
+            root << Priority::DEBUG << "[" << matrix[0][2] << "][" << matrix[1][2] << "][" << matrix[2][2] << "][" << matrix[3][2] << "]";
+            root << Priority::DEBUG << "[" << matrix[0][3] << "][" << matrix[1][3] << "][" << matrix[2][3] << "][" << matrix[3][3] << "";
         }
 
         Transform::~Transform(void)
@@ -48,6 +57,14 @@ namespace WorldParticles
         Transform::getMatrix(void) const
         {
              return this->matrix;
+        }
+
+        void
+        Transform::rotate(const glm::vec3 &rotation)
+        {
+             this->matrix = glm::rotate(this->matrix, rotation.x, glm::vec3(1.0, 0.0, 0.0));
+             this->matrix = glm::rotate(this->matrix, rotation.y, glm::vec3(0.0, 1.0, 0.0));
+             this->matrix = glm::rotate(this->matrix, rotation.z, glm::vec3(0.0, 0.0, 1.0));
         }
 
     }

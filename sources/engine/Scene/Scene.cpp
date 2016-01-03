@@ -48,15 +48,11 @@ namespace WorldParticles
 
         void    Scene::update(void)
         {
-            Category    &root = Category::getRoot();
-            root << Priority::DEBUG << "Scene update()";
             this->scenegraph.update();
         }
 
         void    Scene::render(void)
         {
-            Category    &root = Category::getRoot();
-            root << Priority::DEBUG << "Scene render()";
             this->spatialgraph.cull();
             this->renderer.render();
         }
