@@ -1,4 +1,4 @@
-#include "glwidget.h"
+#include "glwidget.hpp"
 //#include "graphic/fire.h"
 
 #define MS_TICK 30

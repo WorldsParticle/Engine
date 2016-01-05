@@ -1,5 +1,5 @@
-#ifndef TOOLS_H
-#define TOOLS_H
+#ifndef     __TOOLS_HPP__
+#define     __TOOLS_HPP__
 
 #include <QString>
 #include <QVector3D>
@@ -23,4 +23,4 @@ struct Point3D // useless pour le moment, il faudra federer les vec3D sous une s
     float z;
 };
 
-#endif // TOOLS_H
+#endif /* !__TOOLS_HPP__ */

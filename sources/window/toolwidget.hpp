@@ -1,8 +1,8 @@
-#ifndef TABWIDGET_H
-#define TABWIDGET_H
+#ifndef     __TABWIDGET_HPP__
+#define     __TABWIDGET_HPP__
 
 #include <QTabWidget>
-#include "model/model.h"
+#include "model.hpp"
 
 namespace Ui {
 class TabWidget;
@@ -36,4 +36,4 @@ private:
     Model::WorldConf*           _conf;
 };
 
-#endif // TABWIDGET_H
+#endif /* !__TABWIDGET_HPP__ */

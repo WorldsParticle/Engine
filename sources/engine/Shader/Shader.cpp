@@ -1,5 +1,5 @@
 #include    "Shader.hpp"
-#include    "glwindow.h"
+#include    "glwindow.hpp"
 #include    <log4cpp/Category.hh>
 
 namespace   WorldParticles

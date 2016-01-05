@@ -1,4 +1,4 @@
-#include "model.h"
+#include "model.hpp"
 
 Model::Model() :
     _WorldConfs()

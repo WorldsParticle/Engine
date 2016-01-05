@@ -2,7 +2,7 @@
 # include   <log4cpp/Category.hh>
 
 #include    "ShaderProgram.hpp"
-#include    "glwindow.h"
+#include    "glwindow.hpp"
 
 
 namespace   WorldParticles

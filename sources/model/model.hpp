@@ -1,7 +1,7 @@
-#ifndef MODEL_H
-#define MODEL_H
+#ifndef __MODEL_HPP__
+#define __MODEL_HPP__
 
-#include "tools.h"
+#include "tools.hpp"
 
 // TODO
 // - Changer dans le code certain nom de variable (conf, mod, ..)
@@ -61,4 +61,4 @@ private:
     Map<String, WorldConf*> _WorldConfs;
 };
 
-#endif // MODEL_H
+#endif /* !__MODEL_HPP__ */

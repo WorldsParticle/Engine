@@ -1,6 +1,6 @@
 #include    <log4cpp/Category.hh>
 
-#include    "glwindow.h"
+#include    "glwindow.hpp"
 #include    "Renderer.hpp"
 #include    "Object.hpp"
 #include    "Camera.hpp"

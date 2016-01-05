@@ -1,5 +1,5 @@
 #include <qdebug.h>
-#include "toolwidget.h"
+#include "toolwidget.hpp"
 #include "ui_toolwidget.h"
 
 ToolWidget::ToolWidget(QWidget *parent) :
