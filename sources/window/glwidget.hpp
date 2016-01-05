@@ -1,9 +1,9 @@
-#ifndef GLWIDGET_H
-#define GLWIDGET_H
+#ifndef     __GLWIDGET_HPP__
+#define     __GLWIDGET_HPP__
 
 #include <QGLWidget>
 #include <QTimer>
-#include "model/tools.h"
+#include "tools.hpp"
 
 class GLWidget : public QGLWidget
 {
@@ -31,4 +31,4 @@ private:
     float _elapsedTime; // have to merge _timer and this (QElapsedTimer)
 };
 
-#endif // GLWIDGET_H
+#endif /* !__GL_WIDGDET_HPP__ */

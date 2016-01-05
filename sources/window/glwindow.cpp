@@ -1,4 +1,4 @@
-#include "glwindow.h"
+#include "glwindow.hpp"
 #include <QPushButton>
 #include <QGridLayout>
 #include <QCoreApplication>

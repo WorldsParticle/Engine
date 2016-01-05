@@ -2,7 +2,7 @@
 #include    <log4cpp/Category.hh>
 
 #include    "Mesh.hpp"
-#include    "glwindow.h"
+#include    "glwindow.hpp"
 
 using namespace log4cpp;
 

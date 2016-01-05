@@ -1,5 +1,5 @@
-#ifndef GLWINDOW_H
-#define GLWINDOW_H
+#ifndef     __GL_WINDOW_HPP__
+#define     __GL_WINDOW_HPP__
 
 #include <QWindow>
 #include <QOpenGLContext>
@@ -8,7 +8,7 @@
 #include <QTime>
 
 #include "GameEngine.hpp"
-#include "model/model.h"
+#include "model.hpp"
 
 class GLWindow : public QWindow
 {
@@ -39,4 +39,4 @@ private:
         bool            _mouseTracking;
 };
 
-#endif // GLWINDOW_H
+#endif /* !__GL_WINDOW_HPP__ */

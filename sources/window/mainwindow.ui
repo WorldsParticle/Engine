@@ -144,13 +144,13 @@
   <customwidget>
    <class>GLWidget</class>
    <extends>QWidget</extends>
-   <header>window/glwidget.h</header>
+   <header>glwidget.hpp</header>
    <container>1</container>
   </customwidget>
   <customwidget>
    <class>ToolWidget</class>
    <extends>QWidget</extends>
-   <header>window/toolwidget.h</header>
+   <header>toolwidget.hpp</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -9,7 +9,7 @@
 ///
 
 #include    "worldparticles.hpp"
-#include    "mainwindow.h"
+#include    "mainwindow.hpp"
 
 #include    <QApplication>
 #include    <log4cpp/PropertyConfigurator.hh>

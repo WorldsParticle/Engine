@@ -1,10 +1,10 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#ifndef     __MAINWINDOW_HPP__
+#define     __MAINWINDOW_HPP__
 
 #include <QMainWindow>
-#include "window/toolwidget.h"
-#include "model/model.h"
-#include "window/glwindow.h"
+#include "toolwidget.hpp"
+#include "model.hpp"
+#include "glwindow.hpp"
 
 namespace Ui {
     class MainWindow;
@@ -37,4 +37,4 @@ private:
 
 };
 
-#endif // MAINWINDOW_H
+#endif /* !__MAINWINDOW_HPP__ */

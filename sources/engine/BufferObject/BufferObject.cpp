@@ -1,5 +1,5 @@
 #include    "BufferObject.hpp"
-#include    "glwindow.h"
+#include    "glwindow.hpp"
 
 #include    <log4cpp/Category.hh>
 using namespace log4cpp;

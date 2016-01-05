@@ -1,7 +1,7 @@
 #include    "ArrayObject.hpp"
 
 /// TODO change for a real opengl context.
-#include    "glwindow.h"
+#include    "glwindow.hpp"
 
 namespace   WorldParticles
 {
