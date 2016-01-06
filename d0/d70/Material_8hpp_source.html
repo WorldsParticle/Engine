@@ -47,7 +47,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="../../files.html"><span>Files</span></a></li>
@@ -112,42 +111,67 @@ $(document).ready(function(){initNavTree('d0/d70/Material_8hpp_source.html','../
 <a href="../../d0/d70/Material_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef     __MATERIAL_HPP__</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"># define    __MATERIAL_HPP__</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include    &lt;glm/glm.hpp&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include    &lt;memory&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include    &quot;<a class="code" href="../../dc/ddb/ShaderProgram_8hpp.html">ShaderProgram.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace   </span><a class="code" href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">namespace   </span>Engine</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">   16</a></span>&#160;        <span class="keyword">class   </span><a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#afdda13e4b2ef681f61aa92828593546e">Material</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ae73ec47c9cb364a0d38623b6bf5a626e">~Material</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <span class="keyword">const</span> glm::vec4     &amp;<a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ad5a5db2be23934029a8e67f70291547c">getColor</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include    &lt;memory&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include    &lt;glm/glm.hpp&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include    &lt;assimp/material.h&gt;</span></div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="keyword">namespace   </span><a class="code" href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;{</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    <span class="keyword">namespace   </span>Engine</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    {</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        <span class="keyword">class   </span>ShaderProgram;</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;        <span class="keyword">class   </span>ShaderProgramLibrary;</div>
+<div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">   17</a></span>&#160;        <span class="keyword">class   </span><a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;        {</div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;                <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#adddd1a03b52542ebd44b62a2b96bc193">Material</a>(<span class="keyword">const</span> std::shared_ptr&lt;ShaderProgram&gt; &amp;shaderprogram);</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;                <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#adddd1a03b52542ebd44b62a2b96bc193">Material</a>(<span class="keyword">const</span> aiMaterial *assimpMaterial,</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;                        <span class="keyword">const</span> std::shared_ptr&lt;ShaderProgram&gt; &amp;shaderprogram);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;                <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#adddd1a03b52542ebd44b62a2b96bc193">Material</a>(<span class="keyword">const</span> <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;other) = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <span class="keywordtype">void</span>                <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a253197ce3054760f4b342b742408125e">setColor</a>(<span class="keyword">const</span> glm::vec4 &amp;color);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;            <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                glm::vec4                       color;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        };</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    }</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;}</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !__MATERIAL_HPP__ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_a253197ce3054760f4b342b742408125e"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a253197ce3054760f4b342b742408125e">WorldParticles::Engine::Material::setColor</a></div><div class="ttdeci">void setColor(const glm::vec4 &amp;color)</div><div class="ttdoc">Setter for the color attribute. </div><div class="ttdef"><b>Definition:</b> Material.cpp:38</div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_ad5a5db2be23934029a8e67f70291547c"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ad5a5db2be23934029a8e67f70291547c">WorldParticles::Engine::Material::getColor</a></div><div class="ttdeci">const glm::vec4 &amp; getColor(void) const </div><div class="ttdoc">Getter for the color attribute. </div><div class="ttdef"><b>Definition:</b> Material.cpp:27</div></div>
-<div class="ttc" id="ShaderProgram_8hpp_html"><div class="ttname"><a href="../../dc/ddb/ShaderProgram_8hpp.html">ShaderProgram.hpp</a></div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">WorldParticles::Engine::Material</a></div><div class="ttdoc">This class is used to represent a material which a gameobject should be drawed with. </div><div class="ttdef"><b>Definition:</b> Material.hpp:16</div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_ae73ec47c9cb364a0d38623b6bf5a626e"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ae73ec47c9cb364a0d38623b6bf5a626e">WorldParticles::Engine::Material::~Material</a></div><div class="ttdeci">~Material(void)</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> Material.cpp:18</div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_afdda13e4b2ef681f61aa92828593546e"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#afdda13e4b2ef681f61aa92828593546e">WorldParticles::Engine::Material::Material</a></div><div class="ttdeci">Material(void)</div><div class="ttdoc">Default constructor. </div><div class="ttdef"><b>Definition:</b> Material.cpp:12</div></div>
-<div class="ttc" id="namespaceWorldParticles_html"><div class="ttname"><a href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div><div class="ttdef"><b>Definition:</b> AssimpImporter.cpp:10</div></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#adddd1a03b52542ebd44b62a2b96bc193">Material</a>(<a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&amp;other) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#abf96844fa091222cf9b9a3a27661a316">~Material</a>(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a>    &amp;<a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a9c555b5f061185efe93424d27f4fb35f">operator=</a>(<span class="keyword">const</span> <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;other) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;                <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a>    &amp;<a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a9c555b5f061185efe93424d27f4fb35f">operator=</a>(<a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&amp;other) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;                <span class="keywordtype">void</span>        <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a82817b0f2d0a008e6c1c707a50b6f0c2">bind</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;                <span class="keywordtype">void</span>        <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ade4527f31ad9ee66fe01af55ed1c78d5">unbind</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keyword">const</span> std::string       &amp;<a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#af02f8a756d2e6b03a4c7af752542961a">getName</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                <span class="keyword">const</span> std::shared_ptr&lt;ShaderProgram&gt;    &amp;<a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a106c732d7615c2c51b0feb1b0ff67d89">getShaderProgram</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;                <span class="keywordtype">void</span>    <a class="code" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a81ee388a6666595072512c125ce2456e">setName</a>(<span class="keyword">const</span> std::string &amp;name);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;            <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;                std::string                     name;</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;                std::shared_ptr&lt;ShaderProgram&gt;  shaderprogram;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;        };</div>
+<div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;    }</div>
+<div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;}</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno">  101</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !__MATERIAL_HPP__ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_adddd1a03b52542ebd44b62a2b96bc193"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#adddd1a03b52542ebd44b62a2b96bc193">WorldParticles::Engine::Material::Material</a></div><div class="ttdeci">Material(const std::shared_ptr&lt; ShaderProgram &gt; &amp;shaderprogram)</div><div class="ttdoc">Default constructor. </div><div class="ttdef"><b>Definition:</b> Material.cpp:9</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_abf96844fa091222cf9b9a3a27661a316"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#abf96844fa091222cf9b9a3a27661a316">WorldParticles::Engine::Material::~Material</a></div><div class="ttdeci">virtual ~Material(void) noexcept</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> Material.cpp:28</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_af02f8a756d2e6b03a4c7af752542961a"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#af02f8a756d2e6b03a4c7af752542961a">WorldParticles::Engine::Material::getName</a></div><div class="ttdeci">const std::string &amp; getName(void) const </div><div class="ttdoc">Getter for the name attribute. </div><div class="ttdef"><b>Definition:</b> Material.cpp:36</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">WorldParticles::Engine::Material</a></div><div class="ttdoc">This class is used to represent a material which, applied to a mesh, determine how the mesh should be...</div><div class="ttdef"><b>Definition:</b> Material.hpp:17</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_a9c555b5f061185efe93424d27f4fb35f"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a9c555b5f061185efe93424d27f4fb35f">WorldParticles::Engine::Material::operator=</a></div><div class="ttdeci">Material &amp; operator=(const Material &amp;other)=default</div><div class="ttdoc">Copy assignment operator. </div></div>
+<div class="ttc" id="namespaceWorldParticles_html"><div class="ttname"><a href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div><div class="ttdoc">TODO change for a real opengl context. </div><div class="ttdef"><b>Definition:</b> Animation.cpp:3</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_a82817b0f2d0a008e6c1c707a50b6f0c2"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a82817b0f2d0a008e6c1c707a50b6f0c2">WorldParticles::Engine::Material::bind</a></div><div class="ttdeci">void bind(void) const </div><div class="ttdoc">Bind the material in the graphic pipeline. </div><div class="ttdef"><b>Definition:</b> Material.cpp:58</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_ade4527f31ad9ee66fe01af55ed1c78d5"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ade4527f31ad9ee66fe01af55ed1c78d5">WorldParticles::Engine::Material::unbind</a></div><div class="ttdeci">void unbind(void) const </div><div class="ttdoc">Unbind the material off the graphic pipeline. </div><div class="ttdef"><b>Definition:</b> Material.cpp:64</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_a106c732d7615c2c51b0feb1b0ff67d89"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a106c732d7615c2c51b0feb1b0ff67d89">WorldParticles::Engine::Material::getShaderProgram</a></div><div class="ttdeci">const std::shared_ptr&lt; ShaderProgram &gt; &amp; getShaderProgram(void) const </div><div class="ttdoc">Getter for the shader program used by the material. </div><div class="ttdef"><b>Definition:</b> Material.cpp:52</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Material_html_a81ee388a6666595072512c125ce2456e"><div class="ttname"><a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a81ee388a6666595072512c125ce2456e">WorldParticles::Engine::Material::setName</a></div><div class="ttdeci">void setName(const std::string &amp;name)</div><div class="ttdoc">Setter for the name attribute. </div><div class="ttdef"><b>Definition:</b> Material.cpp:44</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

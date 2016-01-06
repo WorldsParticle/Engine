@@ -47,7 +47,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="../../files.html"><span>Files</span></a></li>
@@ -109,30 +108,65 @@ $(document).ready(function(){initNavTree('d5/dd5/Light_8hpp_source.html','../../
 <div class="title">Light.hpp</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="../../d5/dd5/Light_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef         __LIGHT_HPP__</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"># define        __LIGHT_HPP__</span></div>
+<a href="../../d5/dd5/Light_8hpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef     __LIGHT_HPP__</span></div>
+<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor"># define    __LIGHT_HPP__</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">namespace </span><a class="code" href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    <span class="keyword">namespace </span>Engine</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    {</div>
-<div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">   11</a></span>&#160;        <span class="keyword">class </span><a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">Light</a></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;        {</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;                <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a3f72ab47db1e04fa16f277f9f399ed04">Light</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a245b97aed8c4d20e225c248bfb2749bf">~Light</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;        };</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    }</div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;}</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !__LIGHT_HPP__ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">WorldParticles::Engine::Light</a></div><div class="ttdoc">Todo : nothing done in there. </div><div class="ttdef"><b>Definition:</b> Light.hpp:11</div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html_a245b97aed8c4d20e225c248bfb2749bf"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a245b97aed8c4d20e225c248bfb2749bf">WorldParticles::Engine::Light::~Light</a></div><div class="ttdeci">virtual ~Light(void)</div><div class="ttdef"><b>Definition:</b> Light.cpp:12</div></div>
-<div class="ttc" id="namespaceWorldParticles_html"><div class="ttname"><a href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div><div class="ttdef"><b>Definition:</b> AssimpImporter.cpp:10</div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html_a3f72ab47db1e04fa16f277f9f399ed04"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a3f72ab47db1e04fa16f277f9f399ed04">WorldParticles::Engine::Light::Light</a></div><div class="ttdeci">Light(void)</div><div class="ttdef"><b>Definition:</b> Light.cpp:7</div></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include    &lt;string&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include    &lt;assimp/light.h&gt;</span></div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include    &quot;<a class="code" href="../../de/da6/Entity_8hpp.html">Entity.hpp</a>&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">namespace </span><a class="code" href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;{</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;    <span class="keyword">namespace </span>Engine</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    {</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">   19</a></span>&#160;        <span class="keyword">class </span><a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">Light</a> : <span class="keyword">public</span> <a class="code" href="../../de/dd2/classWorldParticles_1_1Engine_1_1Entity.html">Entity</a></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;        {</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#abea63e1cbf93580aa27711baf98c3358">Light</a>(<a class="code" href="../../df/d5d/classWorldParticles_1_1Engine_1_1SceneGraphNode.html">SceneGraphNode</a> *<a class="code" href="../../de/dd2/classWorldParticles_1_1Engine_1_1Entity.html#a32fcf66dabcdd291f742763dae5a06fd">node</a>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;                <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#abea63e1cbf93580aa27711baf98c3358">Light</a>(<span class="keyword">const</span> aiLight *assimpLight, <a class="code" href="../../df/d5d/classWorldParticles_1_1Engine_1_1SceneGraphNode.html">SceneGraphNode</a> *node);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#abea63e1cbf93580aa27711baf98c3358">Light</a>(<span class="keyword">const</span> <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">Light</a> &amp;other) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;                <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#abea63e1cbf93580aa27711baf98c3358">Light</a>(<a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">Light</a> &amp;&amp;other) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#ada9a812b1bdff84e6a612b9b99a36fd6">~Light</a>(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;                <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">Light</a>   &amp;<a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a8e3ea5f4cd4d021f15ff7cfe5c4cf88c">operator=</a>(<span class="keyword">const</span> <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">Light</a> &amp;other) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;                <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">Light</a>   &amp;<a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a8e3ea5f4cd4d021f15ff7cfe5c4cf88c">operator=</a>(<a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">Light</a> &amp;&amp;other) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">Light</a>   *<a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#ac577efaa341bfe14c1dce767790e81fe">clone</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;                <span class="keywordtype">void</span>            <a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a8ccf37eb36df4bf1b643bca0780c5953">update</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;                <span class="keyword">const</span> std::string   &amp;<a class="code" href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#ae57afdb3dc776baf1288b59f932039fa">getName</a>(<span class="keywordtype">void</span>) <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;                std::string         name;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        };</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    }</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;}</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !__LIGHT_HPP__ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html">WorldParticles::Engine::Light</a></div><div class="ttdoc">This class is used to represent a light in the 3d world. </div><div class="ttdef"><b>Definition:</b> Light.hpp:19</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html_ae57afdb3dc776baf1288b59f932039fa"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#ae57afdb3dc776baf1288b59f932039fa">WorldParticles::Engine::Light::getName</a></div><div class="ttdeci">const std::string &amp; getName(void) const </div><div class="ttdoc">Getter for the light name. </div><div class="ttdef"><b>Definition:</b> Light.cpp:50</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Entity_html"><div class="ttname"><a href="../../de/dd2/classWorldParticles_1_1Engine_1_1Entity.html">WorldParticles::Engine::Entity</a></div><div class="ttdoc">This class is used to represent something physically or not in the 3D world. </div><div class="ttdef"><b>Definition:</b> Entity.hpp:18</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html_abea63e1cbf93580aa27711baf98c3358"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#abea63e1cbf93580aa27711baf98c3358">WorldParticles::Engine::Light::Light</a></div><div class="ttdeci">Light(SceneGraphNode *node)</div><div class="ttdoc">Default constructor. </div><div class="ttdef"><b>Definition:</b> Light.cpp:12</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html_ac577efaa341bfe14c1dce767790e81fe"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#ac577efaa341bfe14c1dce767790e81fe">WorldParticles::Engine::Light::clone</a></div><div class="ttdeci">virtual Light * clone(void) const </div><div class="ttdoc">This method clone the light. </div><div class="ttdef"><b>Definition:</b> Light.cpp:36</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html_a8e3ea5f4cd4d021f15ff7cfe5c4cf88c"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a8e3ea5f4cd4d021f15ff7cfe5c4cf88c">WorldParticles::Engine::Light::operator=</a></div><div class="ttdeci">Light &amp; operator=(const Light &amp;other)=default</div><div class="ttdoc">Copy assigment operator. </div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html_ada9a812b1bdff84e6a612b9b99a36fd6"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#ada9a812b1bdff84e6a612b9b99a36fd6">WorldParticles::Engine::Light::~Light</a></div><div class="ttdeci">virtual ~Light(void) noexcept</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> Light.cpp:27</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Light_html_a8ccf37eb36df4bf1b643bca0780c5953"><div class="ttname"><a href="../../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a8ccf37eb36df4bf1b643bca0780c5953">WorldParticles::Engine::Light::update</a></div><div class="ttdeci">void update(void)</div><div class="ttdoc">This method is used to update the light. </div><div class="ttdef"><b>Definition:</b> Light.cpp:42</div></div>
+<div class="ttc" id="namespaceWorldParticles_html"><div class="ttname"><a href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div><div class="ttdoc">TODO change for a real opengl context. </div><div class="ttdef"><b>Definition:</b> Animation.cpp:3</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Entity_html_a32fcf66dabcdd291f742763dae5a06fd"><div class="ttname"><a href="../../de/dd2/classWorldParticles_1_1Engine_1_1Entity.html#a32fcf66dabcdd291f742763dae5a06fd">WorldParticles::Engine::Entity::node</a></div><div class="ttdeci">SceneGraphNode * node</div><div class="ttdoc">The node which the entity is attached. </div><div class="ttdef"><b>Definition:</b> Entity.hpp:80</div></div>
+<div class="ttc" id="Entity_8hpp_html"><div class="ttname"><a href="../../de/da6/Entity_8hpp.html">Entity.hpp</a></div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1SceneGraphNode_html"><div class="ttname"><a href="../../df/d5d/classWorldParticles_1_1Engine_1_1SceneGraphNode.html">WorldParticles::Engine::SceneGraphNode</a></div><div class="ttdoc">A Node of the scene graph. </div><div class="ttdef"><b>Definition:</b> SceneGraphNode.hpp:23</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

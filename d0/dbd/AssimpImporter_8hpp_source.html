@@ -47,7 +47,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="../../annotated.html"><span>Classes</span></a></li>
       <li class="current"><a href="../../files.html"><span>Files</span></a></li>
@@ -118,49 +117,49 @@ $(document).ready(function(){initNavTree('d0/dbd/AssimpImporter_8hpp_source.html
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include    &lt;assimp/Importer.hpp&gt;</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include    &lt;assimp/mesh.h&gt;</span></div>
 <div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include    &quot;<a class="code" href="../../db/de8/Scene_8hpp.html">Scene.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="keyword">namespace   </span><a class="code" href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;{</div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;    <span class="keyword">namespace   </span>Engine</div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    {</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">   16</a></span>&#160;        <span class="keyword">class       </span><a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">AssimpImporter</a></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;        {</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;                <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#aedb028fee8391a767e88b55fdcb1366a">AssimpImporter</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#a1774f07b280dd5827c5e9b9d06f77c95">~AssimpImporter</a>(<span class="keywordtype">void</span>);</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;            <span class="keyword">public</span>:</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;                <a class="code" href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">Scene</a>       *<a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#abdfe7827771ccc4c314a636e0ef314be">importScene</a>(<span class="keyword">const</span> std::string &amp;filename);</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;            <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;                <span class="keywordtype">void</span>        importAnimations(<span class="keyword">const</span> aiScene *assimpScene, <a class="code" href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">Scene</a> *scene);</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;                <span class="keywordtype">void</span>        importCameras(<span class="keyword">const</span> aiScene *assimpScene, <a class="code" href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">Scene</a> *scene);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;                <span class="keywordtype">void</span>        importLights(<span class="keyword">const</span> aiScene *assimpScene, <a class="code" href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">Scene</a> *scene);</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;                <span class="keywordtype">void</span>        importMaterials(<span class="keyword">const</span> aiScene *assimpScene, <a class="code" href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">Scene</a> *scene);</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;                <span class="keywordtype">void</span>        importMeshes(<span class="keyword">const</span> aiScene *assimpScene, <a class="code" href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">Scene</a> *scene);</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <span class="keywordtype">void</span>        importTextures(<span class="keyword">const</span> aiScene *assimpScene, <a class="code" href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">Scene</a> *scene);</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="keyword">namespace   </span><a class="code" href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;{</div>
+<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;    <span class="keyword">namespace   </span>Engine</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;    {</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;        <span class="keyword">class   </span><a class="code" href="../../de/d71/tools_8hpp.html#a49d7d77c29dc0b0fad392ebaae1a4161">Scene</a>;</div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;</div>
+<div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">   20</a></span>&#160;        <span class="keyword">class       </span><a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">AssimpImporter</a></div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;        {</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;                <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#aedb028fee8391a767e88b55fdcb1366a">AssimpImporter</a>(<span class="keywordtype">void</span>);</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;                <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#aedb028fee8391a767e88b55fdcb1366a">AssimpImporter</a>(<span class="keyword">const</span> <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">AssimpImporter</a> &amp;other) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;                <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#aedb028fee8391a767e88b55fdcb1366a">AssimpImporter</a>(<a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">AssimpImporter</a> &amp;&amp;other) noexcept = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;                <span class="keyword">virtual</span> <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#ace1257ea06e4067eaaf3f189a44c3c94">~AssimpImporter</a>(<span class="keywordtype">void</span>) noexcept;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;                <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">AssimpImporter</a>  &amp;<a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#a130a31966f2ccbcbc8fa9180864e61dc">operator=</a>(<span class="keyword">const</span> <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">AssimpImporter</a> &amp;other) = <span class="keywordflow">default</span>;</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;                <a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">AssimpImporter</a>  &amp;<a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#a130a31966f2ccbcbc8fa9180864e61dc">operator=</a>(<a class="code" href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">AssimpImporter</a> &amp;&amp;other) noexcept = <span class="keywordflow">default</span>;</div>
 <div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keyword">private</span>:</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                Assimp::Importer    _importer;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        };</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    }</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;}</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !__ASSIMP_IMPORTER_HPP__ */</span><span class="preprocessor"></span></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1AssimpImporter_html_abdfe7827771ccc4c314a636e0ef314be"><div class="ttname"><a href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#abdfe7827771ccc4c314a636e0ef314be">WorldParticles::Engine::AssimpImporter::importScene</a></div><div class="ttdeci">Scene * importScene(const std::string &amp;filename)</div><div class="ttdoc">This method is used to load a scene from a filename. </div><div class="ttdef"><b>Definition:</b> AssimpImporter.cpp:26</div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1AssimpImporter_html_aedb028fee8391a767e88b55fdcb1366a"><div class="ttname"><a href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#aedb028fee8391a767e88b55fdcb1366a">WorldParticles::Engine::AssimpImporter::AssimpImporter</a></div><div class="ttdeci">AssimpImporter(void)</div><div class="ttdoc">Default constructor. </div><div class="ttdef"><b>Definition:</b> AssimpImporter.cpp:15</div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1Scene_html"><div class="ttname"><a href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">WorldParticles::Engine::Scene</a></div><div class="ttdoc">This class is used to represent a scene, with camera / light & gameobject. </div><div class="ttdef"><b>Definition:</b> Scene.hpp:20</div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1AssimpImporter_html"><div class="ttname"><a href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">WorldParticles::Engine::AssimpImporter</a></div><div class="ttdef"><b>Definition:</b> AssimpImporter.hpp:16</div></div>
-<div class="ttc" id="namespaceWorldParticles_html"><div class="ttname"><a href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div><div class="ttdef"><b>Definition:</b> AssimpImporter.cpp:10</div></div>
-<div class="ttc" id="Scene_8hpp_html"><div class="ttname"><a href="../../db/de8/Scene_8hpp.html">Scene.hpp</a></div></div>
-<div class="ttc" id="classWorldParticles_1_1Engine_1_1AssimpImporter_html_a1774f07b280dd5827c5e9b9d06f77c95"><div class="ttname"><a href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#a1774f07b280dd5827c5e9b9d06f77c95">WorldParticles::Engine::AssimpImporter::~AssimpImporter</a></div><div class="ttdeci">~AssimpImporter(void)</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> AssimpImporter.cpp:20</div></div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            <span class="keyword">public</span>:</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;                <a class="code" href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">Scene</a>   *<span class="keyword">import</span>(<span class="keyword">const</span> std::string &amp;filename);</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;                <span class="keyword">const</span> aiScene   *load(<span class="keyword">const</span> std::string &amp;filename);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;            <span class="keyword">private</span>:</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;                Assimp::Importer    importer;</div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;        };</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    }</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;}</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;<span class="preprocessor">#endif </span><span class="comment">/* !__ASSIMP_IMPORTER_HPP__ */</span><span class="preprocessor"></span></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1AssimpImporter_html_ace1257ea06e4067eaaf3f189a44c3c94"><div class="ttname"><a href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#ace1257ea06e4067eaaf3f189a44c3c94">WorldParticles::Engine::AssimpImporter::~AssimpImporter</a></div><div class="ttdeci">virtual ~AssimpImporter(void) noexcept</div><div class="ttdoc">Destructor. </div><div class="ttdef"><b>Definition:</b> AssimpImporter.cpp:22</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1AssimpImporter_html_aedb028fee8391a767e88b55fdcb1366a"><div class="ttname"><a href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#aedb028fee8391a767e88b55fdcb1366a">WorldParticles::Engine::AssimpImporter::AssimpImporter</a></div><div class="ttdeci">AssimpImporter(void)</div><div class="ttdoc">Default constructor. </div><div class="ttdef"><b>Definition:</b> AssimpImporter.cpp:16</div></div>
+<div class="ttc" id="tools_8hpp_html_a49d7d77c29dc0b0fad392ebaae1a4161"><div class="ttname"><a href="../../de/d71/tools_8hpp.html#a49d7d77c29dc0b0fad392ebaae1a4161">Scene</a></div><div class="ttdeci">QGraphicsScene Scene</div><div class="ttdef"><b>Definition:</b> tools.hpp:11</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1Scene_html"><div class="ttname"><a href="../../d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html">WorldParticles::Engine::Scene</a></div><div class="ttdoc">This class is used to represent a scene, with camera / light & gameobject. </div><div class="ttdef"><b>Definition:</b> Scene.hpp:27</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1AssimpImporter_html"><div class="ttname"><a href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html">WorldParticles::Engine::AssimpImporter</a></div><div class="ttdoc">This class is used to import a scene with the assimp library. </div><div class="ttdef"><b>Definition:</b> AssimpImporter.hpp:20</div></div>
+<div class="ttc" id="namespaceWorldParticles_html"><div class="ttname"><a href="../../dc/dd8/namespaceWorldParticles.html">WorldParticles</a></div><div class="ttdoc">TODO change for a real opengl context. </div><div class="ttdef"><b>Definition:</b> Animation.cpp:3</div></div>
+<div class="ttc" id="classWorldParticles_1_1Engine_1_1AssimpImporter_html_a130a31966f2ccbcbc8fa9180864e61dc"><div class="ttname"><a href="../../d6/d4a/classWorldParticles_1_1Engine_1_1AssimpImporter.html#a130a31966f2ccbcbc8fa9180864e61dc">WorldParticles::Engine::AssimpImporter::operator=</a></div><div class="ttdeci">AssimpImporter &amp; operator=(const AssimpImporter &amp;other)=default</div><div class="ttdoc">Copy assignment operator. </div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

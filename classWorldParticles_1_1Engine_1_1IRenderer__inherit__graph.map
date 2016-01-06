@@ -1,0 +1,4 @@
+<map id="WorldParticles::Engine::IRenderer" name="WorldParticles::Engine::IRenderer">
+<area shape="rect" id="node2" href="$classWorldParticles_1_1Engine_1_1BasicRenderer.html" title="This renderer is used to draw a simple gameobject. " alt="" coords="5,145,160,267"/>
+<area shape="rect" id="node3" href="$classWorldParticles_1_1Engine_1_1ModelRenderer.html" title="{WorldParticles::Engine\l::ModelRenderer\n||+ ModelRenderer()\l+ ~ModelRenderer()\l+ draw()\l}" alt="" coords="184,145,339,267"/>
+</map>

@@ -1,10 +1,6 @@
 var searchData=
 [
-  ['m_5ffuncs',['m_funcs',['../d8/da9/classGLWindow.html#a19c31f6c93bb0abc8332868c182dbc32',1,'GLWindow']]],
-  ['mappedshaderprogram',['MappedShaderProgram',['../df/d8b/namespaceWorldParticles_1_1Engine.html#a088815be0500c8a18685b78aa321c1b9',1,'WorldParticles::Engine']]],
-  ['mappedshaders',['MappedShaders',['../df/d8b/namespaceWorldParticles_1_1Engine.html#aa8ffd5fffb36364aad2e5962bfea5b08',1,'WorldParticles::Engine']]],
-  ['material',['material',['../dc/dc5/classWorldParticles_1_1Engine_1_1GameObject.html#a0ddc2c9e0690f6b11a5b79045ffa447c',1,'WorldParticles::Engine::GameObject']]],
-  ['matrix',['matrix',['../de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a25a70ea74637f5652c1bb7b7178e9c38',1,'WorldParticles::Engine::Transform']]],
-  ['mesh',['mesh',['../dc/dc5/classWorldParticles_1_1Engine_1_1GameObject.html#ab2cef9a5190428f54bce457458c7d95b',1,'WorldParticles::Engine::GameObject']]],
-  ['mods',['mods',['../d8/d1e/structModel_1_1WorldConf.html#a079f7c1b8f6a2c737cbf3f7d97c12807',1,'Model::WorldConf']]]
+  ['name',['name',['../d3/de4/classWorldParticles_1_1Engine_1_1Camera.html#a6c2c9baa71c51c2efb6fb1780b584ed0',1,'WorldParticles::Engine::Camera::name()'],['../d0/d2b/structModel_1_1Mod.html#a1fc5a307fc764b4cb2b155c007441391',1,'Model::Mod::name()'],['../d8/d1e/structModel_1_1WorldConf.html#a19fe2a0bb9d61acdbdc81f5d05404d05',1,'Model::WorldConf::name()']]],
+  ['near',['near',['../dc/d47/structWorldParticles_1_1Engine_1_1Camera_1_1ClippingPlane.html#a6ba94e839563866ebe175279693c1337',1,'WorldParticles::Engine::Camera::ClippingPlane']]],
+  ['node',['node',['../de/dd2/classWorldParticles_1_1Engine_1_1Entity.html#a32fcf66dabcdd291f742763dae5a06fd',1,'WorldParticles::Engine::Entity']]]
 ];

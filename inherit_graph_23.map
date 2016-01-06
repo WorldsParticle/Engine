@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$d2/dbb/structWorldParticles_1_1Engine_1_1ShaderProgramProperty.html" title="WorldParticles::Engine\l::ShaderProgramProperty" alt="" coords="5,5,175,47"/>
+<area shape="rect" id="node1" href="$d6/da4/classWorldParticles_1_1Engine_1_1Library.html" title="WorldParticles::Engine\l::Library\&lt; Animation * \&gt;" alt="" coords="5,5,165,47"/>
+<area shape="rect" id="node2" href="$d3/d4e/classWorldParticles_1_1Engine_1_1AnimationLibrary.html" title="WorldParticles::Engine\l::AnimationLibrary" alt="" coords="213,5,368,47"/>
 </map>

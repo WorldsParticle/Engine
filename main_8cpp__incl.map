@@ -1,0 +1,20 @@
+<map id="main.cpp" name="main.cpp">
+<area shape="rect" id="node2" href="$worldparticles_8hpp.html" title="wordparticles configuration file " alt="" coords="5,617,132,644"/>
+<area shape="rect" id="node3" href="$mainwindow_8h.html" title="mainwindow.h" alt="" coords="388,80,493,107"/>
+<area shape="rect" id="node5" href="$toolwidget_8h.html" title="window/toolwidget.h" alt="" coords="371,155,511,181"/>
+<area shape="rect" id="node7" href="$model_8h.html" title="model/model.h" alt="" coords="279,237,386,263"/>
+<area shape="rect" id="node15" href="$glwindow_8h.html" title="window/glwindow.h" alt="" coords="535,155,669,181"/>
+<area shape="rect" id="node8" href="$tools_8h.html" title="tools.h" alt="" coords="814,319,875,345"/>
+<area shape="rect" id="node21" href="$GameEngine_8hpp.html" title="GameEngine.hpp" alt="" coords="133,237,255,263"/>
+<area shape="rect" id="node22" href="$Scene_8hpp.html" title="Scene.hpp" alt="" coords="299,319,383,345"/>
+<area shape="rect" id="node25" href="$GameObject_8hpp.html" title="GameObject.hpp" alt="" coords="323,468,443,495"/>
+<area shape="rect" id="node37" href="$Camera_8hpp.html" title="Camera.hpp" alt="" coords="337,393,430,420"/>
+<area shape="rect" id="node38" href="$Light_8hpp.html" title="Light.hpp" alt="" coords="517,393,591,420"/>
+<area shape="rect" id="node27" href="$Transform_8hpp.html" title="Transform.hpp" alt="" coords="693,543,799,569"/>
+<area shape="rect" id="node28" href="$IRenderer_8hpp.html" title="IRenderer.hpp" alt="" coords="270,543,374,569"/>
+<area shape="rect" id="node29" href="$Material_8hpp.html" title="Material.hpp" alt="" coords="421,543,514,569"/>
+<area shape="rect" id="node33" href="$Mesh_8hpp.html" title="Mesh.hpp" alt="" coords="839,543,917,569"/>
+<area shape="rect" id="node30" href="$ShaderProgram_8hpp.html" title="ShaderProgram.hpp" alt="" coords="411,617,548,644"/>
+<area shape="rect" id="node31" href="$Shader_8hpp.html" title="Shader.hpp" alt="" coords="435,692,523,719"/>
+<area shape="rect" id="node36" href="$BufferObject_8hpp.html" title="BufferObject.hpp" alt="" coords="826,617,946,644"/>
+</map>

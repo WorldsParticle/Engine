@@ -47,7 +47,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
@@ -115,57 +114,163 @@ $(document).ready(function(){initNavTree('dc/d25/classWorldParticles_1_1Engine_1
 </div><!--header-->
 <div class="contents">
 
-<p>This class is used to represent a material which a gameobject should be drawed with.  
+<p>This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered.  
  <a href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="../../d0/d70/Material_8hpp_source.html">Material.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for WorldParticles::Engine::Material:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../d2/db7/classWorldParticles_1_1Engine_1_1Material__coll__graph.svg" width="166" height="147"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../d2/db7/classWorldParticles_1_1Engine_1_1Material__coll__graph.svg" width="166" height="264"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:afdda13e4b2ef681f61aa92828593546e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#afdda13e4b2ef681f61aa92828593546e">Material</a> (void)</td></tr>
-<tr class="memdesc:afdda13e4b2ef681f61aa92828593546e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="#afdda13e4b2ef681f61aa92828593546e">More...</a><br /></td></tr>
-<tr class="separator:afdda13e4b2ef681f61aa92828593546e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae73ec47c9cb364a0d38623b6bf5a626e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ae73ec47c9cb364a0d38623b6bf5a626e">~Material</a> (void)</td></tr>
-<tr class="memdesc:ae73ec47c9cb364a0d38623b6bf5a626e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#ae73ec47c9cb364a0d38623b6bf5a626e">More...</a><br /></td></tr>
-<tr class="separator:ae73ec47c9cb364a0d38623b6bf5a626e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad5a5db2be23934029a8e67f70291547c"><td class="memItemLeft" align="right" valign="top">const glm::vec4 &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ad5a5db2be23934029a8e67f70291547c">getColor</a> (void) const </td></tr>
-<tr class="memdesc:ad5a5db2be23934029a8e67f70291547c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the color attribute.  <a href="#ad5a5db2be23934029a8e67f70291547c">More...</a><br /></td></tr>
-<tr class="separator:ad5a5db2be23934029a8e67f70291547c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a253197ce3054760f4b342b742408125e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a253197ce3054760f4b342b742408125e">setColor</a> (const glm::vec4 &amp;color)</td></tr>
-<tr class="memdesc:a253197ce3054760f4b342b742408125e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for the color attribute.  <a href="#a253197ce3054760f4b342b742408125e">More...</a><br /></td></tr>
-<tr class="separator:a253197ce3054760f4b342b742408125e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adddd1a03b52542ebd44b62a2b96bc193"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#adddd1a03b52542ebd44b62a2b96bc193">Material</a> (const std::shared_ptr&lt; <a class="el" href="../../de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html">ShaderProgram</a> &gt; &amp;shaderprogram)</td></tr>
+<tr class="memdesc:adddd1a03b52542ebd44b62a2b96bc193"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor.  <a href="#adddd1a03b52542ebd44b62a2b96bc193">More...</a><br /></td></tr>
+<tr class="separator:adddd1a03b52542ebd44b62a2b96bc193"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae4dbeec891f019ee31d55a7201f54247"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ae4dbeec891f019ee31d55a7201f54247">Material</a> (const aiMaterial *assimpMaterial, const std::shared_ptr&lt; <a class="el" href="../../de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html">ShaderProgram</a> &gt; &amp;shaderprogram)</td></tr>
+<tr class="memdesc:ae4dbeec891f019ee31d55a7201f54247"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a material from an assimp material.  <a href="#ae4dbeec891f019ee31d55a7201f54247">More...</a><br /></td></tr>
+<tr class="separator:ae4dbeec891f019ee31d55a7201f54247"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60a869ba83c91d1db52aec54ccaaedf4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a60a869ba83c91d1db52aec54ccaaedf4">Material</a> (const <a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;other)=default</td></tr>
+<tr class="memdesc:a60a869ba83c91d1db52aec54ccaaedf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="#a60a869ba83c91d1db52aec54ccaaedf4">More...</a><br /></td></tr>
+<tr class="separator:a60a869ba83c91d1db52aec54ccaaedf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a534d0fa4b1a74a9e81d70af8273e35c6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a534d0fa4b1a74a9e81d70af8273e35c6">Material</a> (<a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="memdesc:a534d0fa4b1a74a9e81d70af8273e35c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <a href="#a534d0fa4b1a74a9e81d70af8273e35c6">More...</a><br /></td></tr>
+<tr class="separator:a534d0fa4b1a74a9e81d70af8273e35c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abf96844fa091222cf9b9a3a27661a316"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#abf96844fa091222cf9b9a3a27661a316">~Material</a> (void) noexcept</td></tr>
+<tr class="memdesc:abf96844fa091222cf9b9a3a27661a316"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#abf96844fa091222cf9b9a3a27661a316">More...</a><br /></td></tr>
+<tr class="separator:abf96844fa091222cf9b9a3a27661a316"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9c555b5f061185efe93424d27f4fb35f"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a9c555b5f061185efe93424d27f4fb35f">operator=</a> (const <a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;other)=default</td></tr>
+<tr class="memdesc:a9c555b5f061185efe93424d27f4fb35f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment operator.  <a href="#a9c555b5f061185efe93424d27f4fb35f">More...</a><br /></td></tr>
+<tr class="separator:a9c555b5f061185efe93424d27f4fb35f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad794792e78b2ace274c06d663ed7c41b"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ad794792e78b2ace274c06d663ed7c41b">operator=</a> (<a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&amp;other) noexcept=default</td></tr>
+<tr class="memdesc:ad794792e78b2ace274c06d663ed7c41b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment operator.  <a href="#ad794792e78b2ace274c06d663ed7c41b">More...</a><br /></td></tr>
+<tr class="separator:ad794792e78b2ace274c06d663ed7c41b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82817b0f2d0a008e6c1c707a50b6f0c2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a82817b0f2d0a008e6c1c707a50b6f0c2">bind</a> (void) const </td></tr>
+<tr class="memdesc:a82817b0f2d0a008e6c1c707a50b6f0c2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bind the material in the graphic pipeline.  <a href="#a82817b0f2d0a008e6c1c707a50b6f0c2">More...</a><br /></td></tr>
+<tr class="separator:a82817b0f2d0a008e6c1c707a50b6f0c2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ade4527f31ad9ee66fe01af55ed1c78d5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#ade4527f31ad9ee66fe01af55ed1c78d5">unbind</a> (void) const </td></tr>
+<tr class="memdesc:ade4527f31ad9ee66fe01af55ed1c78d5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Unbind the material off the graphic pipeline.  <a href="#ade4527f31ad9ee66fe01af55ed1c78d5">More...</a><br /></td></tr>
+<tr class="separator:ade4527f31ad9ee66fe01af55ed1c78d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af02f8a756d2e6b03a4c7af752542961a"><td class="memItemLeft" align="right" valign="top">const std::string &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#af02f8a756d2e6b03a4c7af752542961a">getName</a> (void) const </td></tr>
+<tr class="memdesc:af02f8a756d2e6b03a4c7af752542961a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the name attribute.  <a href="#af02f8a756d2e6b03a4c7af752542961a">More...</a><br /></td></tr>
+<tr class="separator:af02f8a756d2e6b03a4c7af752542961a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a106c732d7615c2c51b0feb1b0ff67d89"><td class="memItemLeft" align="right" valign="top">const std::shared_ptr&lt; <a class="el" href="../../de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html">ShaderProgram</a> &gt; &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a106c732d7615c2c51b0feb1b0ff67d89">getShaderProgram</a> (void) const </td></tr>
+<tr class="memdesc:a106c732d7615c2c51b0feb1b0ff67d89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the shader program used by the material.  <a href="#a106c732d7615c2c51b0feb1b0ff67d89">More...</a><br /></td></tr>
+<tr class="separator:a106c732d7615c2c51b0feb1b0ff67d89"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a81ee388a6666595072512c125ce2456e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html#a81ee388a6666595072512c125ce2456e">setName</a> (const std::string &amp;name)</td></tr>
+<tr class="memdesc:a81ee388a6666595072512c125ce2456e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Setter for the name attribute.  <a href="#a81ee388a6666595072512c125ce2456e">More...</a><br /></td></tr>
+<tr class="separator:a81ee388a6666595072512c125ce2456e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class is used to represent a material which a gameobject should be drawed with. </p>
+<div class="textblock"><p>This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="afdda13e4b2ef681f61aa92828593546e"></a>
+<a class="anchor" id="adddd1a03b52542ebd44b62a2b96bc193"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">WorldParticles::Engine::Material::Material </td>
           <td>(</td>
-          <td class="paramtype">void&#160;</td>
-          <td class="paramname"></td><td>)</td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="../../de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html">ShaderProgram</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>shaderprogram</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p>Default constructor. </p>
-<p>PUBLIC CONSTRUCTOR </p>
 
 </div>
 </div>
-<a class="anchor" id="ae73ec47c9cb364a0d38623b6bf5a626e"></a>
+<a class="anchor" id="ae4dbeec891f019ee31d55a7201f54247"></a>
 <div class="memitem">
 <div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">WorldParticles::Engine::Material::Material </td>
+          <td>(</td>
+          <td class="paramtype">const aiMaterial *&#160;</td>
+          <td class="paramname"><em>assimpMaterial</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">const std::shared_ptr&lt; <a class="el" href="../../de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html">ShaderProgram</a> &gt; &amp;&#160;</td>
+          <td class="paramname"><em>shaderprogram</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Construct a material from an assimp material. </p>
+
+</div>
+</div>
+<a class="anchor" id="a60a869ba83c91d1db52aec54ccaaedf4"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WorldParticles::Engine::Material::Material </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor. </p>
+
+</div>
+</div>
+<a class="anchor" id="a534d0fa4b1a74a9e81d70af8273e35c6"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WorldParticles::Engine::Material::Material </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move constructor. </p>
+
+</div>
+</div>
+<a class="anchor" id="abf96844fa091222cf9b9a3a27661a316"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">WorldParticles::Engine::Material::~Material </td>
@@ -175,6 +280,11 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Destructor. </p>
@@ -182,12 +292,12 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a class="anchor" id="ad5a5db2be23934029a8e67f70291547c"></a>
+<a class="anchor" id="a82817b0f2d0a008e6c1c707a50b6f0c2"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">const glm::vec4 &amp; WorldParticles::Engine::Material::getColor </td>
+          <td class="memname">void WorldParticles::Engine::Material::bind </td>
           <td>(</td>
           <td class="paramtype">void&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -196,28 +306,133 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Getter for the color attribute. </p>
-<dl class="section return"><dt>Returns</dt><dd>the color.</dd></dl>
-<p>PUBLIC GETTER </p>
+<p>Bind the material in the graphic pipeline. </p>
 
 </div>
 </div>
-<a class="anchor" id="a253197ce3054760f4b342b742408125e"></a>
+<a class="anchor" id="af02f8a756d2e6b03a4c7af752542961a"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void WorldParticles::Engine::Material::setColor </td>
+          <td class="memname">const std::string &amp; WorldParticles::Engine::Material::getName </td>
           <td>(</td>
-          <td class="paramtype">const glm::vec4 &amp;&#160;</td>
-          <td class="paramname"><em>color</em></td><td>)</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Getter for the name attribute. </p>
+<dl class="section return"><dt>Returns</dt><dd>the name of the material. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a106c732d7615c2c51b0feb1b0ff67d89"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const std::shared_ptr&lt; <a class="el" href="../../de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html">ShaderProgram</a> &gt; &amp; WorldParticles::Engine::Material::getShaderProgram </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Getter for the shader program used by the material. </p>
+<dl class="section return"><dt>Returns</dt><dd>the shader program. </dd></dl>
+
+</div>
+</div>
+<a class="anchor" id="a9c555b5f061185efe93424d27f4fb35f"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a>&amp; WorldParticles::Engine::Material::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy assignment operator. </p>
+
+</div>
+</div>
+<a class="anchor" id="ad794792e78b2ace274c06d663ed7c41b"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a>&amp; WorldParticles::Engine::Material::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dc/d25/classWorldParticles_1_1Engine_1_1Material.html">Material</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">default</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move assignment operator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a81ee388a6666595072512c125ce2456e"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WorldParticles::Engine::Material::setName </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Setter for the color attribute. </p>
-<p>PUBLIC SETTER </p>
+<p>Setter for the name attribute. </p>
+
+</div>
+</div>
+<a class="anchor" id="ade4527f31ad9ee66fe01af55ed1c78d5"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void WorldParticles::Engine::Material::unbind </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Unbind the material off the graphic pipeline. </p>
 
 </div>
 </div>

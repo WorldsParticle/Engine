@@ -9,12 +9,16 @@ var classWorldParticles_1_1Engine_1_1Shader =
       [ "COMPUTE_SHADER", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#a4573b89f28b531f1c0697118895444d8a8641e22f292c304eca85be1bb15df875", null ]
     ] ],
     [ "Shader", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#a3fcdcfb515c2ba2fcce67362c46bad0a", null ],
+    [ "Shader", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#ad831788de9fe49ccff4eae34388c3e5b", null ],
+    [ "Shader", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#abeafafa2926cae3efbda8d53e8000225", null ],
     [ "~Shader", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#ad033372adf728c6bda40d70ce1b69299", null ],
-    [ "Compile", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#af7fab5f5d68a89ce6625a6b65a7d0ff9", null ],
-    [ "getId", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#a99d138b6d78825333e2beb1204b73be7", null ],
-    [ "GetShaderType", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#a2fcf4ff0c7df681b6b4ff9202bd6c740", null ],
-    [ "IsCompiled", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#ac7f5bead03686b2fb140e2dd78d40412", null ],
-    [ "_isCompiled", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#abcfb9cf834fc8bb4ad3f8529581de809", null ],
-    [ "_shaderId", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#a9f1a0e70768b82982632292fb220037c", null ],
-    [ "_shaderType", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#a15f0f76a65f41d080cb03b2c15ac9258", null ]
+    [ "compile", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#a205c4c3bbb3778b66d6b572f4bdc7fa0", null ],
+    [ "getId", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#a7aa6966cd1fdd180725101fd5b99a79d", null ],
+    [ "getType", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#afd158f542cdc2c35e3e4c006dd9a2037", null ],
+    [ "isCompiled", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#addff7e8401fb834a2396ea75baf726dc", null ],
+    [ "operator=", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#ad6807209933e5e1e626f3a0cbdc49ed5", null ],
+    [ "operator=", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#a02004d5941aa76d0e08deb4a87cc3676", null ],
+    [ "compiled", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#adf32fc2e8258ed64b217ec608c8e6d2a", null ],
+    [ "id", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#ab8e7d97a7d6e44e19f9a7965a3666f88", null ],
+    [ "type", "dc/d2e/classWorldParticles_1_1Engine_1_1Shader.html#aa29c9c1e9c482f918dc4a8a0ac116ba3", null ]
 ];

@@ -1,14 +1,25 @@
 <map id="engine/GameEngine/GameEngine.hpp" name="engine/GameEngine/GameEngine.hpp">
-<area shape="rect" id="node2" href="$de/df7/worldparticles_8hpp.html" title="wordparticles configuration file " alt="" coords="94,379,221,405"/>
-<area shape="rect" id="node3" href="$db/de8/Scene_8hpp.html" title="Scene.hpp" alt="" coords="273,80,357,107"/>
-<area shape="rect" id="node6" href="$d4/db5/GameObject_8hpp.html" title="GameObject.hpp" alt="" coords="457,229,577,256"/>
-<area shape="rect" id="node18" href="$d6/d80/Camera_8hpp.html" title="Camera.hpp" alt="" coords="780,155,873,181"/>
-<area shape="rect" id="node19" href="$d5/dd5/Light_8hpp.html" title="Light.hpp" alt="" coords="381,155,456,181"/>
-<area shape="rect" id="node8" href="$da/d83/Transform_8hpp.html" title="Transform.hpp" alt="" coords="1084,304,1191,331"/>
-<area shape="rect" id="node9" href="$d1/dca/IRenderer_8hpp.html" title="IRenderer.hpp" alt="" coords="320,304,424,331"/>
-<area shape="rect" id="node10" href="$d0/d70/Material_8hpp.html" title="Material.hpp" alt="" coords="471,304,564,331"/>
-<area shape="rect" id="node15" href="$d1/d62/Mesh_8hpp.html" title="Mesh.hpp" alt="" coords="710,304,789,331"/>
-<area shape="rect" id="node11" href="$dc/ddb/ShaderProgram_8hpp.html" title="ShaderProgram.hpp" alt="" coords="449,379,586,405"/>
-<area shape="rect" id="node13" href="$d4/d6e/Shader_8hpp.html" title="Shader.hpp" alt="" coords="473,453,561,480"/>
-<area shape="rect" id="node17" href="$da/d04/BufferObject_8hpp.html" title="BufferObject.hpp" alt="" coords="763,379,883,405"/>
+<area shape="rect" id="node2" href="$de/df7/worldparticles_8hpp.html" title="wordparticles configuration file " alt="" coords="967,80,1093,107"/>
+<area shape="rect" id="node3" href="$db/de8/Scene_8hpp.html" title="Scene.hpp" alt="" coords="1117,80,1201,107"/>
+<area shape="rect" id="node35" href="$d0/dbd/AssimpImporter_8hpp.html" title="AssimpImporter.hpp" alt="" coords="1563,155,1702,181"/>
+<area shape="rect" id="node6" href="$dd/db8/Renderer_8hpp.html" title="Renderer.hpp" alt="" coords="1296,155,1396,181"/>
+<area shape="rect" id="node7" href="$de/dbe/SpatialGraph_8hpp.html" title="SpatialGraph.hpp" alt="" coords="1098,155,1221,181"/>
+<area shape="rect" id="node8" href="$d8/d58/SceneGraph_8hpp.html" title="SceneGraph.hpp" alt="" coords="1420,155,1539,181"/>
+<area shape="rect" id="node10" href="$d1/d93/ShaderProgramLibrary_8hpp.html" title="ShaderProgramLibrary.hpp" alt="" coords="342,155,518,181"/>
+<area shape="rect" id="node21" href="$d2/d26/MaterialLibrary_8hpp.html" title="MaterialLibrary.hpp" alt="" coords="645,155,777,181"/>
+<area shape="rect" id="node24" href="$d1/da3/AnimationLibrary_8hpp.html" title="AnimationLibrary.hpp" alt="" coords="1727,229,1871,256"/>
+<area shape="rect" id="node27" href="$dd/de2/MeshLibrary_8hpp.html" title="MeshLibrary.hpp" alt="" coords="801,155,920,181"/>
+<area shape="rect" id="node32" href="$dc/d23/TextureLibrary_8hpp.html" title="TextureLibrary.hpp" alt="" coords="943,155,1074,181"/>
+<area shape="rect" id="node11" href="$df/d67/Library_8hpp.html" title="Library.hpp" alt="" coords="1233,304,1320,331"/>
+<area shape="rect" id="node14" href="$dc/ddb/ShaderProgram_8hpp.html" title="ShaderProgram.hpp" alt="" coords="27,229,164,256"/>
+<area shape="rect" id="node18" href="$d9/db7/ShaderProgramNames_8hpp.html" title="ShaderProgramNames.hpp" alt="" coords="239,229,418,256"/>
+<area shape="rect" id="node19" href="$d2/db1/ShaderLibrary_8hpp.html" title="ShaderLibrary.hpp" alt="" coords="560,229,687,256"/>
+<area shape="rect" id="node16" href="$d4/d6e/Shader_8hpp.html" title="Shader.hpp" alt="" coords="297,304,385,331"/>
+<area shape="rect" id="node20" href="$d2/dba/ShaderNames_8hpp.html" title="ShaderNames.hpp" alt="" coords="558,304,689,331"/>
+<area shape="rect" id="node23" href="$d0/d70/Material_8hpp.html" title="Material.hpp" alt="" coords="442,229,535,256"/>
+<area shape="rect" id="node26" href="$d0/d36/Animation_8hpp.html" title="Animation.hpp" alt="" coords="1656,304,1761,331"/>
+<area shape="rect" id="node28" href="$d1/d62/Mesh_8hpp.html" title="Mesh.hpp" alt="" coords="821,229,900,256"/>
+<area shape="rect" id="node30" href="$da/d04/BufferObject_8hpp.html" title="BufferObject.hpp" alt="" coords="763,304,883,331"/>
+<area shape="rect" id="node31" href="$df/d20/ArrayObject_8hpp.html" title="ArrayObject.hpp" alt="" coords="959,304,1075,331"/>
+<area shape="rect" id="node33" href="$d0/ddc/Texture_8hpp.html" title="Texture.hpp" alt="" coords="1135,229,1226,256"/>
 </map>

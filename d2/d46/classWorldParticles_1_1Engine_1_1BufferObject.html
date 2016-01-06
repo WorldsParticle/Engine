@@ -47,7 +47,6 @@ var searchBox = new SearchBox("searchBox", "../../search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li><a href="../../index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="../../pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="../../namespaces.html"><span>Namespaces</span></a></li>
       <li class="current"><a href="../../annotated.html"><span>Classes</span></a></li>
       <li><a href="../../files.html"><span>Files</span></a></li>
@@ -116,11 +115,14 @@ $(document).ready(function(){initNavTree('d2/d46/classWorldParticles_1_1Engine_1
 </div><!--header-->
 <div class="contents">
 
+<p>This class is used to abstract a OpenGL Vertex Buffer <a class="el" href="../../d8/def/classWorldParticles_1_1Engine_1_1Object.html" title="This class is used to represent a physical entity. ">Object</a>.  
+ <a href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#details">More...</a></p>
+
 <p><code>#include &lt;<a class="el" href="../../da/d04/BufferObject_8hpp_source.html">BufferObject.hpp</a>&gt;</code></p>
 <div class="dynheader">
 Collaboration diagram for WorldParticles::Engine::BufferObject:</div>
 <div class="dyncontent">
-<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d96/classWorldParticles_1_1Engine_1_1BufferObject__coll__graph.svg" width="166" height="220"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
+<div class="center"><iframe scrolling="no" frameborder="0" src="../../dc/d96/classWorldParticles_1_1Engine_1_1BufferObject__coll__graph.svg" width="166" height="279"><p><b>This browser is not able to show SVG: try Firefox, Chrome, Safari, or Opera instead.</b></p></iframe>
 </div>
 </div>
 <table class="memberdecls">
@@ -142,9 +144,21 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a67fb99eca2ce3b57ca3e89b3b78ce937"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#a67fb99eca2ce3b57ca3e89b3b78ce937">BufferObject</a> (const <a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#afd0aaa50f62ece07d9698af5205f37f6">Type</a> &amp;type, const <a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#aaecd3e1a459de09f447d99a5c98a9f31">Usage</a> &amp;usage)</td></tr>
 <tr class="memdesc:a67fb99eca2ce3b57ca3e89b3b78ce937"><td class="mdescLeft">&#160;</td><td class="mdescRight">Create an empty buffer object.  <a href="#a67fb99eca2ce3b57ca3e89b3b78ce937">More...</a><br /></td></tr>
 <tr class="separator:a67fb99eca2ce3b57ca3e89b3b78ce937"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a586a3d84623518fe1da40903a85c7f15"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#a586a3d84623518fe1da40903a85c7f15">~BufferObject</a> (void)</td></tr>
-<tr class="memdesc:a586a3d84623518fe1da40903a85c7f15"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#a586a3d84623518fe1da40903a85c7f15">More...</a><br /></td></tr>
-<tr class="separator:a586a3d84623518fe1da40903a85c7f15"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3344172fefbd92a618562f4bc987aba8"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#a3344172fefbd92a618562f4bc987aba8">BufferObject</a> (const <a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;other)=delete</td></tr>
+<tr class="memdesc:a3344172fefbd92a618562f4bc987aba8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor.  <a href="#a3344172fefbd92a618562f4bc987aba8">More...</a><br /></td></tr>
+<tr class="separator:a3344172fefbd92a618562f4bc987aba8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab07dd2efcb884c963d2a1dd6cfa27253"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#ab07dd2efcb884c963d2a1dd6cfa27253">BufferObject</a> (<a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:ab07dd2efcb884c963d2a1dd6cfa27253"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move constructor.  <a href="#ab07dd2efcb884c963d2a1dd6cfa27253">More...</a><br /></td></tr>
+<tr class="separator:ab07dd2efcb884c963d2a1dd6cfa27253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8b7111349104a01fa4beccce8e581462"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#a8b7111349104a01fa4beccce8e581462">~BufferObject</a> (void) noexcept</td></tr>
+<tr class="memdesc:a8b7111349104a01fa4beccce8e581462"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor.  <a href="#a8b7111349104a01fa4beccce8e581462">More...</a><br /></td></tr>
+<tr class="separator:a8b7111349104a01fa4beccce8e581462"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4673b4af908f75c26d3381b90ced5f9"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#af4673b4af908f75c26d3381b90ced5f9">operator=</a> (const <a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;other)=delete</td></tr>
+<tr class="memdesc:af4673b4af908f75c26d3381b90ced5f9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy assignment operator.  <a href="#af4673b4af908f75c26d3381b90ced5f9">More...</a><br /></td></tr>
+<tr class="separator:af4673b4af908f75c26d3381b90ced5f9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a596ce3b701398b8abf7fda53fc09e683"><td class="memItemLeft" align="right" valign="top"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#a596ce3b701398b8abf7fda53fc09e683">operator=</a> (<a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;&amp;other) noexcept</td></tr>
+<tr class="memdesc:a596ce3b701398b8abf7fda53fc09e683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move assignment operator.  <a href="#a596ce3b701398b8abf7fda53fc09e683">More...</a><br /></td></tr>
+<tr class="separator:a596ce3b701398b8abf7fda53fc09e683"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4ec02ec668376d0418f2880d1d4e2005"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html#a4ec02ec668376d0418f2880d1d4e2005">bind</a> (void)</td></tr>
 <tr class="memdesc:a4ec02ec668376d0418f2880d1d4e2005"><td class="mdescLeft">&#160;</td><td class="mdescRight">This method is used to bind the buffer object to the graphic API.  <a href="#a4ec02ec668376d0418f2880d1d4e2005">More...</a><br /></td></tr>
 <tr class="separator:a4ec02ec668376d0418f2880d1d4e2005"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,7 +181,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:a13095824f28ace256c827f772febeb5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Getter for the usage attribute.  <a href="#a13095824f28ace256c827f772febeb5d">More...</a><br /></td></tr>
 <tr class="separator:a13095824f28ace256c827f772febeb5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Enumeration Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>This class is used to abstract a OpenGL Vertex Buffer <a class="el" href="../../d8/def/classWorldParticles_1_1Engine_1_1Object.html" title="This class is used to represent a physical entity. ">Object</a>. </p>
+</div><h2 class="groupheader">Member Enumeration Documentation</h2>
 <a class="anchor" id="afd0aaa50f62ece07d9698af5205f37f6"></a>
 <div class="memitem">
 <div class="memproto">
@@ -237,9 +253,64 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a class="anchor" id="a586a3d84623518fe1da40903a85c7f15"></a>
+<a class="anchor" id="a3344172fefbd92a618562f4bc987aba8"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WorldParticles::Engine::BufferObject::BufferObject </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy constructor. </p>
+
+</div>
+</div>
+<a class="anchor" id="ab07dd2efcb884c963d2a1dd6cfa27253"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">WorldParticles::Engine::BufferObject::BufferObject </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move constructor. </p>
+
+</div>
+</div>
+<a class="anchor" id="a8b7111349104a01fa4beccce8e581462"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">WorldParticles::Engine::BufferObject::~BufferObject </td>
@@ -249,6 +320,11 @@ Public Member Functions</h2></td></tr>
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Destructor. </p>
@@ -289,7 +365,6 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Getter for the type attribute. </p>
-<p>PUBLIC GETTER </p>
 
 </div>
 </div>
@@ -311,6 +386,58 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="af4673b4af908f75c26d3381b90ced5f9"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a>&amp; WorldParticles::Engine::BufferObject::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">delete</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Copy assignment operator. </p>
+
+</div>
+</div>
+<a class="anchor" id="a596ce3b701398b8abf7fda53fc09e683"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp; WorldParticles::Engine::BufferObject::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html">BufferObject</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>other</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move assignment operator. </p>
+
+</div>
+</div>
 <a class="anchor" id="aedb4a67ee8b17caff1139f180d77e851"></a>
 <div class="memitem">
 <div class="memproto">
@@ -326,7 +453,6 @@ Public Member Functions</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Setter for the type attribute. </p>
-<p>PUBLIC SETTER </p>
 
 </div>
 </div>

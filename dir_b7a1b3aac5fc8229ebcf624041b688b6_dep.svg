@@ -23,46 +23,46 @@
 </a>
 </g>
 </g>
-<!-- dir_3a555b69b7795839eed54f72b7b4132a -->
-<g id="node2" class="node"><title>dir_3a555b69b7795839eed54f72b7b4132a</title>
-<g id="a_node2"><a xlink:href="dir_3a555b69b7795839eed54f72b7b4132a.html" target="_top" xlink:title="GameObject">
-<polygon fill="none" stroke="red" points="94.5,-36 23.5,-36 23.5,-0 94.5,-0 94.5,-36"/>
-<text text-anchor="middle" x="59" y="-15.5" font-family="Helvetica,sans-Serif" font-size="10.00">GameObject</text>
-</a>
-</g>
-</g>
-<!-- dir_b7a1b3aac5fc8229ebcf624041b688b6&#45;&gt;dir_3a555b69b7795839eed54f72b7b4132a -->
-<g id="edge2" class="edge"><title>dir_b7a1b3aac5fc8229ebcf624041b688b6&#45;&gt;dir_3a555b69b7795839eed54f72b7b4132a</title>
-<path fill="none" stroke="black" d="M55.7517,-143.888C53.9542,-133.542 51.9053,-120.063 51,-108 49.8026,-92.0449 49.8026,-87.9551 51,-72 51.6366,-63.5179 52.8384,-54.3361 54.1208,-46.0356"/>
-<polygon fill="black" stroke="black" points="57.5836,-46.5472 55.7517,-36.1119 50.6763,-45.412 57.5836,-46.5472"/>
-<g id="a_edge2&#45;headlabel"><a xlink:href="dir_000001_000006.html" target="_top" xlink:title="1">
-<text text-anchor="middle" x="59.8024" y="-48.0546" font-family="Helvetica,sans-Serif" font-size="10.00">1</text>
-</a>
-</g>
-</g>
 <!-- dir_ba775a609e100e11fec950409e9afc1d -->
-<g id="node3" class="node"><title>dir_ba775a609e100e11fec950409e9afc1d</title>
-<g id="a_node3"><a xlink:href="dir_ba775a609e100e11fec950409e9afc1d.html" target="_top" xlink:title="Scene">
-<polygon fill="none" stroke="black" points="114,-108 60,-108 60,-72 114,-72 114,-108"/>
-<text text-anchor="middle" x="87" y="-87.5" font-family="Helvetica,sans-Serif" font-size="10.00">Scene</text>
+<g id="node2" class="node"><title>dir_ba775a609e100e11fec950409e9afc1d</title>
+<g id="a_node2"><a xlink:href="dir_ba775a609e100e11fec950409e9afc1d.html" target="_top" xlink:title="Scene">
+<polygon fill="none" stroke="black" points="59,-108 5,-108 5,-72 59,-72 59,-108"/>
+<text text-anchor="middle" x="32" y="-87.5" font-family="Helvetica,sans-Serif" font-size="10.00">Scene</text>
 </a>
 </g>
 </g>
 <!-- dir_b7a1b3aac5fc8229ebcf624041b688b6&#45;&gt;dir_ba775a609e100e11fec950409e9afc1d -->
-<g id="edge3" class="edge"><title>dir_b7a1b3aac5fc8229ebcf624041b688b6&#45;&gt;dir_ba775a609e100e11fec950409e9afc1d</title>
-<path fill="none" stroke="black" d="M65.9214,-143.697C69.0747,-135.813 72.8783,-126.304 76.3814,-117.546"/>
-<polygon fill="black" stroke="black" points="79.694,-118.689 80.1583,-108.104 73.1946,-116.089 79.694,-118.689"/>
-<g id="a_edge3&#45;headlabel"><a xlink:href="dir_000001_000015.html" target="_top" xlink:title="1">
-<text text-anchor="middle" x="80.9952" y="-120.581" font-family="Helvetica,sans-Serif" font-size="10.00">1</text>
+<g id="edge2" class="edge"><title>dir_b7a1b3aac5fc8229ebcf624041b688b6&#45;&gt;dir_ba775a609e100e11fec950409e9afc1d</title>
+<path fill="none" stroke="black" d="M52.3258,-143.697C49.2851,-135.813 45.6173,-126.304 42.2393,-117.546"/>
+<polygon fill="black" stroke="black" points="45.4617,-116.175 38.5974,-108.104 38.9307,-118.694 45.4617,-116.175"/>
+<g id="a_edge2&#45;headlabel"><a xlink:href="dir_000004_000020.html" target="_top" xlink:title="1">
+<text text-anchor="middle" x="49.4043" y="-116.007" font-family="Helvetica,sans-Serif" font-size="10.00">1</text>
 </a>
 </g>
 </g>
-<!-- dir_ba775a609e100e11fec950409e9afc1d&#45;&gt;dir_3a555b69b7795839eed54f72b7b4132a -->
-<g id="edge1" class="edge"><title>dir_ba775a609e100e11fec950409e9afc1d&#45;&gt;dir_3a555b69b7795839eed54f72b7b4132a</title>
-<path fill="none" stroke="black" d="M80.0786,-71.6966C76.9253,-63.8132 73.1217,-54.3042 69.6186,-45.5464"/>
-<polygon fill="black" stroke="black" points="72.8054,-44.0892 65.8417,-36.1043 66.306,-46.689 72.8054,-44.0892"/>
-<g id="a_edge1&#45;headlabel"><a xlink:href="dir_000015_000006.html" target="_top" xlink:title="1">
-<text text-anchor="middle" x="76.7765" y="-43.8723" font-family="Helvetica,sans-Serif" font-size="10.00">1</text>
+<!-- dir_b0e652ac9949ee2dc3907b5e9895ade1 -->
+<g id="node3" class="node"><title>dir_b0e652ac9949ee2dc3907b5e9895ade1</title>
+<g id="a_node3"><a xlink:href="dir_b0e652ac9949ee2dc3907b5e9895ade1.html" target="_top" xlink:title="AssimpScene">
+<polygon fill="none" stroke="black" points="97.5,-36 20.5,-36 20.5,-0 97.5,-0 97.5,-36"/>
+<text text-anchor="middle" x="59" y="-15.5" font-family="Helvetica,sans-Serif" font-size="10.00">AssimpScene</text>
+</a>
+</g>
+</g>
+<!-- dir_b7a1b3aac5fc8229ebcf624041b688b6&#45;&gt;dir_b0e652ac9949ee2dc3907b5e9895ade1 -->
+<g id="edge3" class="edge"><title>dir_b7a1b3aac5fc8229ebcf624041b688b6&#45;&gt;dir_b0e652ac9949ee2dc3907b5e9895ade1</title>
+<path fill="none" stroke="black" d="M62.6538,-143.908C64.6758,-133.569 66.9808,-120.09 68,-108 69.3441,-92.0566 69.3441,-87.9434 68,-72 67.2834,-63.4991 65.9311,-54.3119 64.4884,-46.0122"/>
+<polygon fill="black" stroke="black" points="67.9142,-45.2892 62.6538,-36.0925 61.0309,-46.5623 67.9142,-45.2892"/>
+<g id="a_edge3&#45;headlabel"><a xlink:href="dir_000004_000005.html" target="_top" xlink:title="1">
+<text text-anchor="middle" x="71.3597" y="-45.8075" font-family="Helvetica,sans-Serif" font-size="10.00">1</text>
+</a>
+</g>
+</g>
+<!-- dir_ba775a609e100e11fec950409e9afc1d&#45;&gt;dir_b0e652ac9949ee2dc3907b5e9895ade1 -->
+<g id="edge1" class="edge"><title>dir_ba775a609e100e11fec950409e9afc1d&#45;&gt;dir_b0e652ac9949ee2dc3907b5e9895ade1</title>
+<path fill="none" stroke="black" d="M38.6742,-71.6966C41.7149,-63.8132 45.3827,-54.3042 48.7607,-45.5464"/>
+<polygon fill="black" stroke="black" points="52.0693,-46.6939 52.4026,-36.1043 45.5383,-44.1748 52.0693,-46.6939"/>
+<g id="a_edge1&#45;headlabel"><a xlink:href="dir_000020_000005.html" target="_top" xlink:title="1">
+<text text-anchor="middle" x="53.4248" y="-48.5695" font-family="Helvetica,sans-Serif" font-size="10.00">1</text>
 </a>
 </g>
 </g>

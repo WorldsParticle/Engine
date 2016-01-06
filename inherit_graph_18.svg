@@ -10,10 +10,10 @@
 <title>Graphical Class Hierarchy</title>
 <!-- Node1 -->
 <g id="node1" class="node"><title>Node1</title>
-<g id="a_node1"><a xlink:href="d2/d8d/classWorldParticles_1_1Engine_1_1Scene.html" target="_top" xlink:title="This class is used to represent a scene, with camera / light &amp; gameobject. ">
+<g id="a_node1"><a xlink:href="d2/d46/classWorldParticles_1_1Engine_1_1BufferObject.html" target="_top" xlink:title="This class is used to abstract a OpenGL Vertex Buffer Object. ">
 <polygon fill="none" stroke="black" points="-7.10543e-15,-0.5 -7.10543e-15,-30.5 116,-30.5 116,-0.5 -7.10543e-15,-0.5"/>
 <text text-anchor="start" x="8" y="-18.5" font-family="Helvetica,sans-Serif" font-size="10.00">WorldParticles::Engine</text>
-<text text-anchor="middle" x="58" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::Scene</text>
+<text text-anchor="middle" x="58" y="-7.5" font-family="Helvetica,sans-Serif" font-size="10.00">::BufferObject</text>
 </a>
 </g>
 </g>

@@ -1,3 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$d0/d27/structWorldParticles_1_1Engine_1_1ShaderProperty.html" title="WorldParticles::Engine\l::ShaderProperty" alt="" coords="5,5,160,47"/>
+<area shape="rect" id="node1" href="$d6/da4/classWorldParticles_1_1Engine_1_1Library.html" title="WorldParticles::Engine\l::Library\&lt; Material * \&gt;" alt="" coords="5,5,160,47"/>
+<area shape="rect" id="node2" href="$d3/d10/classWorldParticles_1_1Engine_1_1MaterialLibrary.html" title="This material library wrap the Library&lt;Material&gt; and provide a constructor from assimp materials..." alt="" coords="208,5,363,47"/>
 </map>

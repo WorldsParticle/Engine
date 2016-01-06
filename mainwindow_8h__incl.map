@@ -1,0 +1,19 @@
+<map id="window/mainwindow.h" name="window/mainwindow.h">
+<area shape="rect" id="node3" href="$toolwidget_8h.html" title="window/toolwidget.h" alt="" coords="138,80,278,107"/>
+<area shape="rect" id="node5" href="$model_8h.html" title="model/model.h" alt="" coords="208,162,315,189"/>
+<area shape="rect" id="node13" href="$glwindow_8h.html" title="window/glwindow.h" alt="" coords="519,80,654,107"/>
+<area shape="rect" id="node6" href="$tools_8h.html" title="tools.h" alt="" coords="231,244,292,271"/>
+<area shape="rect" id="node19" href="$GameEngine_8hpp.html" title="GameEngine.hpp" alt="" coords="967,162,1089,189"/>
+<area shape="rect" id="node20" href="$worldparticles_8hpp.html" title="wordparticles configuration file " alt="" coords="581,543,707,569"/>
+<area shape="rect" id="node21" href="$Scene_8hpp.html" title="Scene.hpp" alt="" coords="1013,244,1097,271"/>
+<area shape="rect" id="node24" href="$GameObject_8hpp.html" title="GameObject.hpp" alt="" coords="995,393,1115,420"/>
+<area shape="rect" id="node36" href="$Camera_8hpp.html" title="Camera.hpp" alt="" coords="1064,319,1157,345"/>
+<area shape="rect" id="node37" href="$Light_8hpp.html" title="Light.hpp" alt="" coords="1244,319,1319,345"/>
+<area shape="rect" id="node26" href="$Transform_8hpp.html" title="Transform.hpp" alt="" coords="1268,468,1375,495"/>
+<area shape="rect" id="node27" href="$IRenderer_8hpp.html" title="IRenderer.hpp" alt="" coords="857,468,961,495"/>
+<area shape="rect" id="node28" href="$Material_8hpp.html" title="Material.hpp" alt="" coords="1008,468,1101,495"/>
+<area shape="rect" id="node32" href="$Mesh_8hpp.html" title="Mesh.hpp" alt="" coords="1407,468,1486,495"/>
+<area shape="rect" id="node29" href="$ShaderProgram_8hpp.html" title="ShaderProgram.hpp" alt="" coords="986,543,1123,569"/>
+<area shape="rect" id="node30" href="$Shader_8hpp.html" title="Shader.hpp" alt="" coords="1011,617,1099,644"/>
+<area shape="rect" id="node35" href="$BufferObject_8hpp.html" title="BufferObject.hpp" alt="" coords="1401,543,1521,569"/>
+</map>

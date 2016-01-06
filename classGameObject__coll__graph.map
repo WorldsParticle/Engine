@@ -1,0 +1,6 @@
+<map id="GameObject" name="GameObject">
+<area shape="rect" id="node2" href="$classRenderer.html" title="{Renderer\n||+ Renderer()\l+ ~Renderer()\l+ Draw()\l}" alt="" coords="5,64,108,171"/>
+<area shape="rect" id="node3" href="$classMaterial.html" title="{Material\n||+ Material()\l+ ~Material()\l+ GetColor()\l}" alt="" coords="133,64,229,171"/>
+<area shape="rect" id="node4" href="$classTransform.html" title="The Transform class is used to represent an object transformation in space. (like position..." alt="" coords="253,5,365,229"/>
+<area shape="rect" id="node5" href="$classMesh.html" title="The Mesh class Il va falloir le modifier pour rajouter les indices etc... mais la j&#39;ai la flemme de o..." alt="" coords="389,27,501,207"/>
+</map>

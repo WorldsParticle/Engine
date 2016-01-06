@@ -1,7 +1,6 @@
 var NAVTREE =
 [
   [ "WORLD_PARTICLES", "index.html", [
-    [ "README", "d9/d6a/md_engine_Shaders_README.html", null ],
     [ "Namespaces", null, [
       [ "Namespace List", "namespaces.html", "namespaces" ],
       [ "Namespace Members", "namespacemembers.html", [
@@ -17,7 +16,7 @@ var NAVTREE =
       [ "Class Hierarchy", "hierarchy.html", "hierarchy" ],
       [ "Class Members", "functions.html", [
         [ "All", "functions.html", "functions_dup" ],
-        [ "Functions", "functions_func.html", null ],
+        [ "Functions", "functions_func.html", "functions_func" ],
         [ "Variables", "functions_vars.html", null ],
         [ "Enumerations", "functions_enum.html", null ],
         [ "Enumerator", "functions_eval.html", null ]
@@ -38,8 +37,9 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"db/dac/classWorldParticles_1_1Engine_1_1Primitives_1_1Cube.html#a3a2be3856fdaf3dfbd7da2e8b8d611c2",
-"functions_w.html"
+"d6/d18/classModel.html#a7f6abddabf0f9f015888177f2b0804c4",
+"de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a1fedd2fa67ff1d0d8346c24e3a1b384e",
+"functions_i.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';

@@ -1,16 +1,13 @@
 var classWorldParticles_1_1Engine_1_1Transform =
 [
-    [ "Transform", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#aa69ed019acf49fe550ad3f363a97a4bc", null ],
-    [ "~Transform", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a0b8b9295913cb168023b43abc3870476", null ],
+    [ "Transform", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a7a80ac8918fd4763665d057e0445ff89", null ],
+    [ "Transform", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a937ba52dc2490cd305d98440f332dc16", null ],
+    [ "Transform", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a11a4c9134b39a9c3cfcc435ef3b2f344", null ],
+    [ "Transform", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#adb36cce33b0bbb8b4e98769e9217ad3b", null ],
+    [ "~Transform", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#aab7f2ced48bf83ff2ac98345bfe9b08d", null ],
     [ "getMatrix", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#ad21c727c9805c93098a04cef6166380d", null ],
-    [ "getPosition", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#abfe0789c2f0be98511e3b53a8d42897b", null ],
-    [ "getRotation", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a878934602623089d5c17c2d1f827e019", null ],
-    [ "getScale", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a94de940f6a812204d0a5bf43a847909f", null ],
-    [ "setPosition", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a30134474d869724f72d1b8ec4aa6e472", null ],
-    [ "setRotation", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#ac113b907e63ebc2b05ba258ce1d98c0d", null ],
-    [ "setScale", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#ae620e8187203191e748dcbd532087c90", null ],
-    [ "matrix", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a25a70ea74637f5652c1bb7b7178e9c38", null ],
-    [ "position", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a09520ca890248f0bc655324023f24a24", null ],
-    [ "rotation", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#af346cdb28a00e1add3a6f373e23037a2", null ],
-    [ "scale", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a3c5e2b0ec8a9ce1c907a61b69fa10728", null ]
+    [ "operator=", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a3742e7fc37628b4a26904913f0e658bb", null ],
+    [ "operator=", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a38f9dd6cb4fc6c2b206d01d88505ba43", null ],
+    [ "rotate", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#ac6bcb917d8ffac0647e3adc0e45948b1", null ],
+    [ "matrix", "de/d34/classWorldParticles_1_1Engine_1_1Transform.html#a25a70ea74637f5652c1bb7b7178e9c38", null ]
 ];

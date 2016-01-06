@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['light',['Light',['../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a3f72ab47db1e04fa16f277f9f399ed04',1,'WorldParticles::Engine::Light']]],
+  ['library',['Library',['../d6/da4/classWorldParticles_1_1Engine_1_1Library.html#a6457c520b13ee0693dd67aa58f0a9ca5',1,'WorldParticles::Engine::Library::Library(void)'],['../d6/da4/classWorldParticles_1_1Engine_1_1Library.html#a15d3f5b2a98cfa807877b7f9425173e3',1,'WorldParticles::Engine::Library::Library(const Library &amp;other)'],['../d6/da4/classWorldParticles_1_1Engine_1_1Library.html#a73e3f06bffc1a92cb047ad0e6aefeb32',1,'WorldParticles::Engine::Library::Library(Library &amp;&amp;other) noexcept']]],
+  ['light',['Light',['../d6/def/classWorldParticles_1_1Engine_1_1Light.html#abea63e1cbf93580aa27711baf98c3358',1,'WorldParticles::Engine::Light::Light(SceneGraphNode *node)'],['../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a710fd6f7b8b25b0b1b53a1e6bd4174fa',1,'WorldParticles::Engine::Light::Light(const aiLight *assimpLight, SceneGraphNode *node)'],['../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a88694c663c692491ab84833d4ad26491',1,'WorldParticles::Engine::Light::Light(const Light &amp;other)=default'],['../d6/def/classWorldParticles_1_1Engine_1_1Light.html#a04927ca971aa99a7b8f1e9b9a8a41f5d',1,'WorldParticles::Engine::Light::Light(Light &amp;&amp;other) noexcept=default']]],
   ['link',['link',['../de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a9a85bc403dc8e69f9dac4a29c34b8b4a',1,'WorldParticles::Engine::ShaderProgram']]],
-  ['load',['load',['../d3/d31/classWorldParticles_1_1Engine_1_1GameEngine.html#a1c53f4d118740739a073813aa6088340',1,'WorldParticles::Engine::GameEngine']]]
+  ['load',['load',['../d3/d31/classWorldParticles_1_1Engine_1_1GameEngine.html#ab22d5afcfe0010f1e79273d2a9c4d6c1',1,'WorldParticles::Engine::GameEngine']]]
 ];

@@ -1,12 +1,16 @@
 var classWorldParticles_1_1Engine_1_1ShaderProgram =
 [
     [ "ShaderProgram", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a0ce8b62ed49b09500e45bcdca17b5ef4", null ],
-    [ "~ShaderProgram", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a024599f3ee8f5280616e27274ea9edba", null ],
+    [ "ShaderProgram", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a4895032518048e13e461828ef1628fea", null ],
+    [ "ShaderProgram", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#acdd7e8a57e1f4c9602541d2cd9206c4b", null ],
+    [ "~ShaderProgram", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a3ae4bcfa038c6d01702085548867b171", null ],
     [ "add", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a85992c3ecea8409d0aca67b04c325a75", null ],
     [ "bind", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#aba038c502976eaf43667908059f02028", null ],
     [ "isLinked", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a36946c295c40201fa27f10bbce717e47", null ],
     [ "link", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a9a85bc403dc8e69f9dac4a29c34b8b4a", null ],
     [ "operator<<", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a791fa204b1ce58f3360b39a915109b22", null ],
+    [ "operator=", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a7aeea0fb748777b4a92403e88ef09967", null ],
+    [ "operator=", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#a49361dbdc18d245612f993d780a7fb8f", null ],
     [ "setUniform", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#ad90df132a5d0ac741197327948d1c9f3", null ],
     [ "setUniform", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#ac4168fba6c2b415f9969f375e37355e3", null ],
     [ "setUniform", "de/d56/classWorldParticles_1_1Engine_1_1ShaderProgram.html#aaea23ae9082dd13b5d599a596126b828", null ],
