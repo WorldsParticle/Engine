@@ -103,6 +103,8 @@ SET(WORLD_PARTICLES_SOURCES_FILES
 
     ${CMAKE_SOURCE_DIR}/sources/particle/ParticleGenerator.cpp
     ${CMAKE_SOURCE_DIR}/sources/particle/Particle.cpp
+    ${CMAKE_SOURCE_DIR}/sources/particle/SnowParticle.cpp
+    ${CMAKE_SOURCE_DIR}/sources/particle/RainParticle.cpp
 
     )
 
@@ -138,6 +140,8 @@ SET(WORLD_PARTICLES_HEADERS_FILES
 
     ${CMAKE_SOURCE_DIR}/sources/particle/ParticleGenerator.hpp
     ${CMAKE_SOURCE_DIR}/sources/particle/Particle.hpp
+    ${CMAKE_SOURCE_DIR}/sources/particle/SnowParticle.hpp
+    ${CMAKE_SOURCE_DIR}/sources/particle/RainParticle.hpp
     ${CMAKE_SOURCE_DIR}/sources/particle/ParticleAttributes.hpp
 
     )

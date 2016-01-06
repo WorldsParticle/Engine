@@ -12,7 +12,8 @@ class ParticleGenerator : public WorldParticles::Engine::GameObject
 public:
     ParticleGenerator(const glm::vec3 &position = glm::vec3(0.0),
                       const glm::vec3 &rotation = glm::vec3(0.0),
-                      const glm::vec3 &scale = glm::vec3(1.0));
+                      const glm::vec3 &scale = glm::vec3(1.0),
+                      ParticleType type = RAIN_PARTICLE);
     ~ParticleGenerator()
     {}
 
@@ -26,6 +27,11 @@ public:
     void    Emit(int numberParticles);
 
 private:
+    //----------------------------------------
+    // This attribute is used to save the type of the generated particles
+    //----------------------------------------
+    ParticleType		_type;
+
     //----------------------------------------
     // This attribute is used to save the max particles number that can be draw by this ParticleSystem
     //----------------------------------------

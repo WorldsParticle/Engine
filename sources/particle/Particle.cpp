@@ -19,8 +19,6 @@ void Particle::Update(void)
     glm::vec3 position(transform.GetPosition());
     transform.SetPosition(position + _force * elapsedTime);
 
-    //TODO : gérer la rotation selon l'orientation de la cam
-
     // this->_rotation.y = glm::mod(this->_rotation.y + 0.01f, 360.0f);
 
     /*glm::vec3 scale(transform.GetScale());

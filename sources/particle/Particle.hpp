@@ -47,7 +47,7 @@ public:
    //----------------------------------------
    //
    //----------------------------------------
-   void	setLifetime(float newLifetime)
+   void	setLifetime(const float &newLifetime)
    {
      this->_lifetime = newLifetime;
    }
@@ -58,6 +58,10 @@ public:
    void	setForce(const glm::vec3 &newForce)
    {
      this->_force = newForce;
+   }
+
+   ParticleAttributes const& getAttributes() {
+       return _attr;
    }
 
 private:
@@ -76,6 +80,8 @@ private:
     //----------------------------------------
     enum ParticleType   _type;
 
+protected:
+    ParticleAttributes  _attr;
 };
 
 #endif // PARTICLE_HPP
