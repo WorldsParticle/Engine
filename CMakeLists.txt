@@ -1,10 +1,14 @@
-################################################################################
+#
 # \file CMakeLists.txt
+#
 # \brief CMakeLists used to generate worldparticles program.
+#
 # \author Martin-Pierrat Louis (mart_p)
+#
 # \version 1.0.0
+#
 # \date October 13, 2015
-################################################################################
+#
 
 
 
