@@ -1,12 +1,5 @@
-///
-/// \file main.cpp
-/// \brief TODO
-/// \author Martin-Pierrat Louis (mart_p)
-/// \version 1.0.0
-/// \date October 13, 2015
-///
-/// TODO
-///
+
+
 
 #include    "worldparticles.hpp"
 #include    "mainwindow.hpp"
