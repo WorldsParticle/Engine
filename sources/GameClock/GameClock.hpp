@@ -1,3 +1,13 @@
+///
+/// \file GameClock.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:29:50
+///
+/// \version 1.0.1
+///
+
 #ifndef GAMECLOCK_H
 #define GAMECLOCK_H
 

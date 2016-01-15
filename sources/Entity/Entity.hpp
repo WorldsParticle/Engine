@@ -1,3 +1,13 @@
+///
+/// \file Entity.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:29:38
+///
+/// \version 1.0.1
+///
+
 #ifndef     __ENTITY_HPP__
 # define    __ENTITY_HPP__
 

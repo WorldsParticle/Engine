@@ -1,3 +1,13 @@
+///
+/// \file SceneGraph.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:33:07
+///
+/// \version 1.0.1
+///
+
 #ifndef     __SCENE_GRAPH_HPP__
 # define    __SCENE_GRAPH_HPP__
 

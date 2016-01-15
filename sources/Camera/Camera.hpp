@@ -1,3 +1,13 @@
+///
+/// \file Camera.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:29:29
+///
+/// \version 1.0.1
+///
+
 #ifndef     __CAMERA_HPP__
 # define    __CAMERA_HPP__
 

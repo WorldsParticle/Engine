@@ -1,5 +1,14 @@
+///
+/// \file Shader.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:33:30
+///
+/// \version 1.0.2
+///
+
 #include    "Shader.hpp"
-#include    "glwindow.hpp"
 #include    <log4cpp/Category.hh>
 
 namespace   WorldParticles

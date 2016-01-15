@@ -1,10 +1,19 @@
+///
+/// \file ShaderLibrary.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:33:57
+///
+/// \version 1.0.3
+///
 
 #include    <string>
 #include    <fstream>
 #include    <streambuf>
 #include    <log4cpp/Category.hh>
 
-#include    "worldparticles.hpp"
+#include    "configuration.hpp"
 #include    "ShaderLibrary.hpp"
 #include    "internal/ShaderMapping.hpp"
 

@@ -1,3 +1,13 @@
+///
+/// \file Animation.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:24:21
+///
+/// \version 1.0.0
+///
+
 #ifndef     __ANIMATION_HPP__
 # define    __ANIMATION_HPP__
 

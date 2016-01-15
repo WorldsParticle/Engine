@@ -1,3 +1,13 @@
+///
+/// \file AssimpScene.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:28:46
+///
+/// \version 1.0.1
+///
+
 #ifndef     __ASSIMP_SCENE_HPP__
 # define    __ASSIMP_SCENE_HPP_
 

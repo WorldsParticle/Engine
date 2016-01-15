@@ -1,3 +1,13 @@
+///
+/// \file Entity.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:29:42
+///
+/// \version 1.0.1
+///
+
 #include    "Entity.hpp"
 #include    "SceneGraphNode.hpp"
 

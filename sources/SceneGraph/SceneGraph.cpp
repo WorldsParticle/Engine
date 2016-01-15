@@ -1,3 +1,13 @@
+///
+/// \file SceneGraph.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:33:03
+///
+/// \version 1.0.2
+///
+
 #include    <log4cpp/Category.hh>
 
 #include    "SceneGraph.hpp"

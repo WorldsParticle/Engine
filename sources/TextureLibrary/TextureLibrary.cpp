@@ -1,3 +1,13 @@
+///
+/// \file TextureLibrary.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:35:17
+///
+/// \version 1.0.1
+///
+
 #include    "TextureLibrary.hpp"
 
 namespace   WorldParticles

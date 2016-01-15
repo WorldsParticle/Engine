@@ -1,3 +1,13 @@
+///
+/// \file SpatialGraph.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:34:52
+///
+/// \version 1.0.1
+///
+
 #ifndef     __SPATIAL_GRAPH_HPP__
 # define    __SPATIAL_GRAPH_HPP__
 

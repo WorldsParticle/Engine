@@ -1,5 +1,15 @@
+///
+/// \file PerspectiveCamera.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:32:17
+///
+/// \version 1.0.2
+///
+
 #include    <log4cpp/Category.hh>
-#define GLM_SWIZZLE
+#define     GLM_SWIZZLE
 #define     GLM_SWIZZLE_XYZW
 #include    <glm/glm.hpp>
 #include    <glm/gtc/matrix_transform.hpp>

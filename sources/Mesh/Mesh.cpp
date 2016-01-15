@@ -1,8 +1,16 @@
+///
+/// \file Mesh.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:31:31
+///
+/// \version 1.0.1
+///
 
 #include    <log4cpp/Category.hh>
 
 #include    "Mesh.hpp"
-#include    "glwindow.hpp"
 
 using namespace log4cpp;
 

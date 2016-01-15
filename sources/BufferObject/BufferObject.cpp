@@ -1,7 +1,17 @@
-#include    "BufferObject.hpp"
-#include    "glwindow.hpp"
+///
+/// \file BufferObject.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:29:17
+///
+/// \version 1.0.4
+///
 
 #include    <log4cpp/Category.hh>
+
+#include    "BufferObject.hpp"
+
 using namespace log4cpp;
 
 namespace   WorldParticles

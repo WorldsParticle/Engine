@@ -1,7 +1,14 @@
-#include    "ArrayObject.hpp"
+///
+/// \file ArrayObject.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:28:18
+///
+/// \version 1.0.4
+///
 
-/// TODO change for a real opengl context.
-#include    "glwindow.hpp"
+#include    "ArrayObject.hpp"
 
 namespace   WorldParticles
 {

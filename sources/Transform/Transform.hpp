@@ -1,3 +1,13 @@
+///
+/// \file Transform.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:35:26
+///
+/// \version 1.0.1
+///
+
 #ifndef     __TRANSFORM_HPP__
 # define    __TRANSFORM_HPP__
 

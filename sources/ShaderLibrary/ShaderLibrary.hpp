@@ -1,3 +1,13 @@
+///
+/// \file ShaderLibrary.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:33:43
+///
+/// \version 1.0.1
+///
+
 #ifndef     __SHADER_MANAGER_HPP__
 # define    __SHADER_MANAGER_HPP__
 

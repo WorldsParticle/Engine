@@ -1,3 +1,13 @@
+///
+/// \file Scene.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:32:49
+///
+/// \version 1.0.1
+///
+
 #ifndef     __SCENE_HPP__
 # define    __SCENE_HPP__
 

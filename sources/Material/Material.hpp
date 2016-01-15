@@ -1,3 +1,13 @@
+///
+/// \file Material.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:31:00
+///
+/// \version 1.0.1
+///
+
 #ifndef     __MATERIAL_HPP__
 # define    __MATERIAL_HPP__
 

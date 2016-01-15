@@ -1,3 +1,12 @@
+///
+/// \file BufferObject.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:29:03
+///
+/// \version 1.0.1
+///
 
 #ifndef     __BUFFER_OBJECT_HPP__
 # define    __BUFFER_OBJECT_HPP__

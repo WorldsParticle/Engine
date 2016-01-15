@@ -1,3 +1,13 @@
+///
+/// \file AssimpScene.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:28:58
+///
+/// \version 1.0.1
+///
+
 #include    "AssimpScene.hpp"
 
 namespace   WorldParticles

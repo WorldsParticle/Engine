@@ -1,3 +1,13 @@
+///
+/// \file MaterialLibrary.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:31:14
+///
+/// \version 1.0.1
+///
+
 #include    "MaterialLibrary.hpp"
 #include    "Material.hpp"
 #include    "ShaderProgramLibrary.hpp"

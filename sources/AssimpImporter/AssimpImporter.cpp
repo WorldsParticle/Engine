@@ -1,3 +1,13 @@
+///
+/// \file AssimpImporter.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:28:35
+///
+/// \version 1.0.1
+///
+
 #include    <assimp/postprocess.h>
 #include    <assimp/scene.h>
 #include    <log4cpp/Category.hh>

@@ -1,3 +1,13 @@
+///
+/// \file ArrayObject.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:28:15
+///
+/// \version 1.0.1
+///
+
 #ifndef     __ARRAY_OBJECT_HPP__
 # define    __ARRAY_OBJECT_HPP__
 

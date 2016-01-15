@@ -1,9 +1,17 @@
+///
+/// \file ShaderProgram.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:34:15
+///
+/// \version 1.0.3
+///
+
 #include    <glm/gtc/type_ptr.hpp>
 # include   <log4cpp/Category.hh>
 
 #include    "ShaderProgram.hpp"
-#include    "glwindow.hpp"
-
 
 namespace   WorldParticles
 {

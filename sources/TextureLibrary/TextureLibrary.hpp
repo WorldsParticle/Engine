@@ -1,3 +1,13 @@
+///
+/// \file TextureLibrary.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:35:21
+///
+/// \version 1.0.1
+///
+
 #ifndef     __TEXTURE_LIBRARY_HPP__
 # define    __TEXTURE_LIBRARY_HPP__
 

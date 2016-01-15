@@ -1,6 +1,15 @@
+///
+/// \file Renderer.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:32:40
+///
+/// \version 1.0.2
+///
+
 #include    <log4cpp/Category.hh>
 
-#include    "glwindow.hpp"
 #include    "Renderer.hpp"
 #include    "Object.hpp"
 #include    "Camera.hpp"

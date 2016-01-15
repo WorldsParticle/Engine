@@ -1,3 +1,12 @@
+///
+/// \file AssimpImporter.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:28:29
+///
+/// \version 1.0.1
+///
 
 #ifndef     __ASSIMP_IMPORTER_HPP__
 # define    __ASSIMP_IMPORTER_HPP__

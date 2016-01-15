@@ -1,3 +1,13 @@
+///
+/// \file Mesh.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:31:23
+///
+/// \version 1.0.2
+///
+
 #ifndef     __MESH_HPP__
 # define    __MESH_HPP__
 

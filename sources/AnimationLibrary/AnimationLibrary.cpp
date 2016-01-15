@@ -1,3 +1,13 @@
+///
+/// \file AnimationLibrary.cpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:28:08
+///
+/// \version 1.0.1
+///
+
 #include    "AnimationLibrary.hpp"
 #include    "Animation.hpp"
 

@@ -1,3 +1,13 @@
+///
+/// \file Renderer.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:32:32
+///
+/// \version 1.0.1
+///
+
 #ifndef     __RENDERER_HPP__
 # define    __RENDERER_HPP__
 

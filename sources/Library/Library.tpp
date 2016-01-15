@@ -1,3 +1,13 @@
+///
+/// \file Library.tpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:30:09
+///
+/// \version 1.0.0
+///
+
 #include    "Library.hpp"
 
 namespace   WorldParticles

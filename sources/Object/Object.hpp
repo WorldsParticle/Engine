@@ -1,3 +1,13 @@
+///
+/// \file Object.hpp
+///
+/// \author Martin-Pierrat Louis (mart_p)
+///
+/// \date Fri, 15 Jan 2016 13:31:55
+///
+/// \version 1.0.2
+///
+
 #ifndef     __OBJECT_HPP__
 # define    __OBJECT_HPP__
 
