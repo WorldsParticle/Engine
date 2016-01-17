@@ -3,11 +3,12 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:58:06
+/// \date Sun, 17 Jan 2016 08:33:36
 ///
-/// \version 1.0.17
+/// \version 1.0.20
 ///
 
+#include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
 
 #include    "Engine/Core.hpp"
@@ -19,6 +20,13 @@ namespace   Engine
 
     Core::Core(void)
     {
+
+        GLenum err = glewInit();
+        if (GLEW_OK != err)
+        {
+            std::cerr << "Glew Init failure" << std::endl;
+        }
+
         // nothing to do
     }
 
