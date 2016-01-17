@@ -14,7 +14,7 @@
 
 ## CMAKE INITIALISATION
 
-PROJECT(Engine)
+PROJECT(engine)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/cmake_modules")
 
@@ -196,9 +196,32 @@ INCLUDE_DIRECTORIES(
 
 ## PROJECT SETTINGS
 
-ADD_LIBRARY(WorldsParticle ${WORLD_PARTICLES_SOURCES_FILES})
+IF (CMAKE_BUILD_TYPE MATCHES "debug")
 
-TARGET_LINK_LIBRARIES(WorldsParticle
+    SET(CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG} -D__DEBUG__)
+    SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/debug/)
+
+ELSE ()
+
+    SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/release)
+
+ENDIF ()
+
+## END PROJECT SETTINGS
+
+
+
+## BINARY SETTINGS
+
+ADD_LIBRARY(${CMAKE_PROJECT_NAME} SHARED ${WORLD_PARTICLES_SOURCES_FILES})
+
+## END BINARY SETTINGS
+
+
+
+## LIBRARY SETTINGS
+
+TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME}
     ${OPENGL_LIBRARIES}
     ${GLEW_LIBRARIES}
     ${ASSIMP_LIBRARY}
@@ -208,7 +231,29 @@ TARGET_LINK_LIBRARIES(WorldsParticle
     ${DevIL_LIBRARY_IL}
     )
 
-## END PROJECT SETTINGS
+## END LIBRARY SETTINGS
+
+
+
+## COMPILATION SETTINGS
+
+#if (WIN32)
+    #if (MSVC)
+    #elseif(CMAKE_COMPILER_IS_GNUCXX)
+    ## SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows")
+    ## # Not tested
+    #else()
+    #message(SEND_ERROR "You are using an
+    #unsupported Windows compiler! (Not MSVC or GCC)")
+    #endif()
+#elseif (UNIX)
+    #set(CMAKE_PREFIX_PATH "/usr/lib64/qt5")
+    SET(CMAKE_CXX_FLAGS "-std=c++14 -W -Wall -Wextra")
+#else ()
+    #message(SEND_ERROR "You are on an unsupported platform! (Not Win32 or Unix)")
+#ENDIF ()
+
+## END COMPILATION SETTINGS
 
 
 
@@ -232,21 +277,3 @@ IF (DOXYGEN_FOUND)
 ENDIF (DOXYGEN_FOUND)
 
 ## END DOXYGEN CONFIGURATION
-
-#if (WIN32)
-    #if (MSVC)
-    #elseif(CMAKE_COMPILER_IS_GNUCXX)
-    ## SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows")
-    ## # Not tested
-    #else()
-    #message(SEND_ERROR "You are using an
-    #unsupported Windows compiler! (Not MSVC or GCC)")
-    #endif()
-#elseif (UNIX)
-    #set(CMAKE_PREFIX_PATH "/usr/lib64/qt5")
-    SET(CMAKE_CXX_FLAGS "-std=c++14 -W -Wall -Wextra")
-#else ()
-    #message(SEND_ERROR "You are on an unsupported platform! (Not Win32 or Unix)")
-#ENDIF ()
-
-
