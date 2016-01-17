@@ -1,16 +1,16 @@
 ///
-/// \file GameEngine.cpp
+/// \file Engine.cpp
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Fri, 15 Jan 2016 13:29:59
+/// \date Sat, 16 Jan 2016 19:57:28
 ///
-/// \version 1.0.1
+/// \version 1.0.4
 ///
 
 #include    <log4cpp/Category.hh>
 
-#include    "GameEngine.hpp"
+#include    "Engine.hpp"
 
 using namespace     log4cpp;
 
@@ -19,12 +19,12 @@ namespace   WorldParticles
     namespace   Engine
     {
 
-        GameEngine::GameEngine(void)
+        Engine::Engine(void)
         {
             // nothing to do
         }
 
-        GameEngine::GameEngine(const GameEngine &other) :
+        Engine::Engine(const Engine &other) :
             importer(other.importer)
         {
             for (Scene *scene : other.scenes)
@@ -33,14 +33,14 @@ namespace   WorldParticles
             }
         }
 
-        GameEngine::GameEngine(GameEngine &&other) noexcept :
+        Engine::Engine(Engine &&other) noexcept :
             scenes(std::move(other.scenes)),
             importer(std::move(other.importer))
         {
             // nothing to do.
         }
 
-        GameEngine::~GameEngine(void)
+        Engine::~Engine(void)
         {
             for (Scene *scene : this->scenes)
             {
@@ -50,8 +50,8 @@ namespace   WorldParticles
 
 
 
-        GameEngine &
-        GameEngine::operator=(const GameEngine &other)
+        Engine &
+        Engine::operator=(const Engine &other)
         {
             for (Scene *scene : other.scenes)
             {
@@ -60,8 +60,8 @@ namespace   WorldParticles
             return *this;
         }
 
-        GameEngine &
-        GameEngine::operator=(GameEngine &&other) noexcept
+        Engine &
+        Engine::operator=(Engine &&other) noexcept
         {
             this->scenes = std::move(other.scenes);
             this->importer = std::move(other.importer);
@@ -71,7 +71,7 @@ namespace   WorldParticles
 
 
         void
-        GameEngine::update(void)
+        Engine::update(void)
         {
             for (Scene *scene : this->scenes)
             {
@@ -80,7 +80,7 @@ namespace   WorldParticles
         }
 
         void
-        GameEngine::render(void)
+        Engine::render(void)
         {
             for (Scene *scene : this->scenes)
             {
@@ -91,12 +91,12 @@ namespace   WorldParticles
 
 
         void
-        GameEngine::load(const std::string &filename)
+        Engine::load(const std::string &filename)
         {
             Category    &root = Category::getRoot();
             // TODO GSL OWNER && NOT NULL
             //
-            root << Priority::DEBUG << "GameEngine - Load()";
+            root << Priority::DEBUG << "Engine - Load()";
             Scene *test = this->importer.import(filename);
 
             this->scenes.push_back(test);

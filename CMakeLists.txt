@@ -71,6 +71,7 @@ FIND_PACKAGE(RapidXml REQUIRED)
 ## PROJECT SOURCES FILES
 
 SET(WORLD_PARTICLES_SOURCES_FILES
+
     ${CMAKE_SOURCE_DIR}/sources/Animation/Animation.cpp
     ${CMAKE_SOURCE_DIR}/sources/AnimationLibrary/AnimationLibrary.cpp
     ${CMAKE_SOURCE_DIR}/sources/ArrayObject/ArrayObject.cpp
@@ -78,8 +79,9 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/AssimpScene/AssimpScene.cpp
     ${CMAKE_SOURCE_DIR}/sources/BufferObject/BufferObject.cpp
     ${CMAKE_SOURCE_DIR}/sources/Camera/Camera.cpp
+    ${CMAKE_SOURCE_DIR}/sources/Clock/Clock.cpp
     ${CMAKE_SOURCE_DIR}/sources/Entity/Entity.cpp
-    ${CMAKE_SOURCE_DIR}/sources/GameEngine/GameEngine.cpp
+    ${CMAKE_SOURCE_DIR}/sources/Engine/Engine.cpp
     ${CMAKE_SOURCE_DIR}/sources/Light/Light.cpp
     ${CMAKE_SOURCE_DIR}/sources/Material/Material.cpp
     ${CMAKE_SOURCE_DIR}/sources/MaterialLibrary/MaterialLibrary.cpp
@@ -99,6 +101,7 @@ SET(WORLD_PARTICLES_SOURCES_FILES
     ${CMAKE_SOURCE_DIR}/sources/Texture/Texture.cpp
     ${CMAKE_SOURCE_DIR}/sources/TextureLibrary/TextureLibrary.cpp
     ${CMAKE_SOURCE_DIR}/sources/Transform/Transform.cpp
+
     )
 
 ## END PROJECT SOURCES FILES
@@ -116,8 +119,9 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/AssimpScene/AssimpScene.hpp
     ${CMAKE_SOURCE_DIR}/sources/BufferObject/BufferObject.hpp
     ${CMAKE_SOURCE_DIR}/sources/Camera/Camera.hpp
+    ${CMAKE_SOURCE_DIR}/sources/Clock/Clock.hpp
     ${CMAKE_SOURCE_DIR}/sources/Entity/Entity.hpp
-    ${CMAKE_SOURCE_DIR}/sources/GameEngine/GameEngine.hpp
+    ${CMAKE_SOURCE_DIR}/sources/Engine/Engine.hpp
     ${CMAKE_SOURCE_DIR}/sources/Library/Library.hpp
     ${CMAKE_SOURCE_DIR}/sources/Light/Light.hpp
     ${CMAKE_SOURCE_DIR}/sources/Material/Material.hpp
@@ -138,6 +142,7 @@ SET(WORLD_PARTICLES_HEADERS_FILES
     ${CMAKE_SOURCE_DIR}/sources/Texture/Texture.hpp
     ${CMAKE_SOURCE_DIR}/sources/TextureLibrary/TextureLibrary.hpp
     ${CMAKE_SOURCE_DIR}/sources/Transform/Transform.hpp
+
     )
 
 ## END PROJECT HEADERS FILES
@@ -155,8 +160,8 @@ SET(WORLD_PARTICLES_INCLUDE_DIR
     ${CMAKE_SOURCE_DIR}/sources/BufferObject/
     ${CMAKE_SOURCE_DIR}/sources/Camera/
     ${CMAKE_SOURCE_DIR}/sources/Entity/
-    ${CMAKE_SOURCE_DIR}/sources/GameClock/
-    ${CMAKE_SOURCE_DIR}/sources/GameEngine/
+    ${CMAKE_SOURCE_DIR}/sources/Clock/
+    ${CMAKE_SOURCE_DIR}/sources/Engine/
     ${CMAKE_SOURCE_DIR}/sources/Library/
     ${CMAKE_SOURCE_DIR}/sources/Light/
     ${CMAKE_SOURCE_DIR}/sources/Material/

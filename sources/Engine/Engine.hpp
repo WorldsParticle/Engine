@@ -1,15 +1,15 @@
 ///
-/// \file GameEngine.hpp
+/// \file Engine.hpp
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 17:52:26
+/// \date Sat, 16 Jan 2016 19:56:41
 ///
-/// \version 1.0.2
+/// \version 1.0.7
 ///
 
-#ifndef     __GAME_ENGINE_HPP__
-#define     __GAME_ENGINE_HPP__
+#ifndef     __ENGINE_HPP__
+#define     __ENGINE_HPP__
 
 #include    "Scene.hpp"
 #include    "AssimpImporter.hpp"
@@ -21,39 +21,39 @@ namespace WorldParticles
         ///
         /// \brief This class is the entry point for the engine.
         ///
-        class GameEngine
+        class Engine
         {
             public:
                 ///
                 /// \brief Default constructor.
                 ///
-                GameEngine(void);
+                Engine(void);
 
                 ///
                 /// \brief Copy constructor.
                 ///
-                GameEngine(const GameEngine &other);
+                Engine(const Engine &other);
 
                 ///
                 /// \brief Move constructor.
                 ///
-                GameEngine(GameEngine &&other) noexcept;
+                Engine(Engine &&other) noexcept;
 
                 ///
                 /// \brief Destructor
                 ///
-                virtual ~GameEngine(void) noexcept;
+                virtual ~Engine(void) noexcept;
 
             public:
                 ///
                 /// \brief Copy assignement operator.
                 ///
-                GameEngine  &operator=(const GameEngine &other);
+                Engine  &operator=(const Engine &other);
 
                 ///
                 /// \brief Move assignement operator.
                 ///
-                GameEngine  &operator=(GameEngine &&other) noexcept;
+                Engine  &operator=(Engine &&other) noexcept;
 
             public:
                 ///
