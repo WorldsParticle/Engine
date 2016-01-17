@@ -1,20 +1,19 @@
 #
 # \file CMakeLists.txt
 #
-# \brief CMakeLists used to generate worldparticles program.
-#
 # \author Martin-Pierrat Louis (mart_p)
+#
+# \date Sat, 16 Jan 2016 20:31:02
 #
 # \version 1.0.0
 #
-# \date October 13, 2015
+# CMakeList used to generate the Engine library.
 #
-
 
 
 ## CMAKE INITIALISATION
 
-PROJECT(engine)
+PROJECT(Engine)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
 SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/cmake_modules")
 
@@ -24,13 +23,13 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/cmake_modu
 
 ## PROJECT VERSION
 
-SET(ENGINE_VERSION_MAJOR 2)
-SET(ENGINE_VERSION_MINOR 1)
-SET(ENGINE_VERSION_PATCH 0)
-SET(ENGINE_VERSION_EXTRA 0)
+SET(PROJECT_VERSION_MAJOR 2)
+SET(PROJECT_VERSION_MINOR 1)
+SET(PROJECT_VERSION_PATCH 0)
+SET(PROJECT_VERSION_EXTRA 0)
 
-SET(ENGINE_VERSION ${ENGINE_VERSION_MAJOR}.${ENGINE_VERSION_MINOR}.${ENGINE_VERSION_PATCH})
-SET(ENGINE_VERSION_FULL ${ENGINE_VERSION}.${ENGINE_VERSION_EXTRA})
+SET(PROJECT_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
+SET(PROJECT_VERSION_FULL ${PROJECT_VERSION}.${PROJECT_VERSION_EXTRA})
 
 SET(RESOURCES_PATH "${CMAKE_SOURCE_DIR}/resources")
 
@@ -70,7 +69,9 @@ FIND_PACKAGE(RapidXml REQUIRED)
 
 ## PROJECT SOURCES FILES
 
-SET(WORLD_PARTICLES_SOURCES_FILES
+SET(PROJECT_SOURCES_DIR ${CMAKE_SOURCE_DIR}/sources/)
+
+SET(PROJECT_SOURCES_FILES
 
     ${CMAKE_SOURCE_DIR}/sources/Animation/Animation.cpp
     ${CMAKE_SOURCE_DIR}/sources/AnimationLibrary/AnimationLibrary.cpp
@@ -108,86 +109,12 @@ SET(WORLD_PARTICLES_SOURCES_FILES
 
 
 
-## PROJECT HEADERS FILES
-
-SET(WORLD_PARTICLES_HEADERS_FILES
-
-    ${CMAKE_SOURCE_DIR}/sources/Animation/Animation.hpp
-    ${CMAKE_SOURCE_DIR}/sources/AnimationLibrary/AnimationLibrary.hpp
-    ${CMAKE_SOURCE_DIR}/sources/ArrayObject/ArrayObject.hpp
-    ${CMAKE_SOURCE_DIR}/sources/AssimpImporter/AssimpImporter.hpp
-    ${CMAKE_SOURCE_DIR}/sources/AssimpScene/AssimpScene.hpp
-    ${CMAKE_SOURCE_DIR}/sources/BufferObject/BufferObject.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Camera/Camera.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Clock/Clock.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Entity/Entity.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Engine/Engine.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Library/Library.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Light/Light.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Material/Material.hpp
-    ${CMAKE_SOURCE_DIR}/sources/MaterialLibrary/MaterialLibrary.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Mesh/Mesh.hpp
-    ${CMAKE_SOURCE_DIR}/sources/MeshLibrary/MeshLibrary.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Object/Object.hpp
-    ${CMAKE_SOURCE_DIR}/sources/PerspectiveCamera/PerspectiveCamera.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Renderer/Renderer.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Scene/Scene.hpp
-    ${CMAKE_SOURCE_DIR}/sources/SceneGraph/SceneGraph.hpp
-    ${CMAKE_SOURCE_DIR}/sources/SceneGraphNode/SceneGraphNode.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Shader/Shader.hpp
-    ${CMAKE_SOURCE_DIR}/sources/ShaderLibrary/ShaderLibrary.hpp
-    ${CMAKE_SOURCE_DIR}/sources/ShaderProgram/ShaderProgram.hpp
-    ${CMAKE_SOURCE_DIR}/sources/ShaderProgramLibrary/ShaderProgramLibrary.hpp
-    ${CMAKE_SOURCE_DIR}/sources/SpatialGraph/SpatialGraph.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Texture/Texture.hpp
-    ${CMAKE_SOURCE_DIR}/sources/TextureLibrary/TextureLibrary.hpp
-    ${CMAKE_SOURCE_DIR}/sources/Transform/Transform.hpp
-
-    )
-
-## END PROJECT HEADERS FILES
-
-
-
 ## PROJECT INCLUDES DIRECTORIES
 
-SET(WORLD_PARTICLES_INCLUDE_DIR
-    ${CMAKE_SOURCE_DIR}/sources/Animation/
-    ${CMAKE_SOURCE_DIR}/sources/AnimationLibrary/
-    ${CMAKE_SOURCE_DIR}/sources/ArrayObject/
-    ${CMAKE_SOURCE_DIR}/sources/AssimpImporter/
-    ${CMAKE_SOURCE_DIR}/sources/AssimpScene/
-    ${CMAKE_SOURCE_DIR}/sources/BufferObject/
-    ${CMAKE_SOURCE_DIR}/sources/Camera/
-    ${CMAKE_SOURCE_DIR}/sources/Entity/
-    ${CMAKE_SOURCE_DIR}/sources/Clock/
-    ${CMAKE_SOURCE_DIR}/sources/Engine/
-    ${CMAKE_SOURCE_DIR}/sources/Library/
-    ${CMAKE_SOURCE_DIR}/sources/Light/
-    ${CMAKE_SOURCE_DIR}/sources/Material/
-    ${CMAKE_SOURCE_DIR}/sources/MaterialLibrary/
-    ${CMAKE_SOURCE_DIR}/sources/Mesh/
-    ${CMAKE_SOURCE_DIR}/sources/MeshLibrary/
-    ${CMAKE_SOURCE_DIR}/sources/Object/
-    ${CMAKE_SOURCE_DIR}/sources/PerspectiveCamera/
-    ${CMAKE_SOURCE_DIR}/sources/Renderer/
-    ${CMAKE_SOURCE_DIR}/sources/Scene/
-    ${CMAKE_SOURCE_DIR}/sources/SceneGraph/
-    ${CMAKE_SOURCE_DIR}/sources/SceneGraphNode/
-    ${CMAKE_SOURCE_DIR}/sources/Shader/
-    ${CMAKE_SOURCE_DIR}/sources/ShaderLibrary/
-    ${CMAKE_SOURCE_DIR}/sources/ShaderProgram/
-    ${CMAKE_SOURCE_DIR}/sources/ShaderProgramLibrary/
-    ${CMAKE_SOURCE_DIR}/sources/Shaders/
-    ${CMAKE_SOURCE_DIR}/sources/SpatialGraph/
-    ${CMAKE_SOURCE_DIR}/sources/Texture/
-    ${CMAKE_SOURCE_DIR}/sources/TextureLibrary/
-    ${CMAKE_SOURCE_DIR}/sources/Transform/
-    ${CMAKE_SOURCE_DIR}/sources/
-    )
+SET(PROJECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include/)
 
 INCLUDE_DIRECTORIES(
-    ${WORLD_PARTICLES_INCLUDE_DIR}
+    ${PROJECT_INCLUDE_DIR}
     ${OPENGL_INCLUDE_DIR}
     ${GLEW_INCLUDE_DIRS}
     ${ASSIMP_INCLUDE_DIR}
@@ -196,6 +123,53 @@ INCLUDE_DIRECTORIES(
     )
 
 ## END PROJECT INCLUDES DIRECTORIES
+
+
+
+## PROJECT HEADERS FILES
+
+SET(PROJECT_TEMPLATE_FILES
+    ${PROJECT_INCLUDE_DIR}/Library.tpp
+    )
+
+SET(PROJECT_HEADERS_FILES
+
+    ${PROJECT_INCLUDE_DIR}/Animation.hpp
+    ${PROJECT_INCLUDE_DIR}/AnimationLibrary.hpp
+    ${PROJECT_INCLUDE_DIR}/ArrayObject.hpp
+    ${PROJECT_INCLUDE_DIR}/AssimpImporter.hpp
+    ${PROJECT_INCLUDE_DIR}/AssimpScene.hpp
+    ${PROJECT_INCLUDE_DIR}/BufferObject.hpp
+    ${PROJECT_INCLUDE_DIR}/Camera.hpp
+    ${PROJECT_INCLUDE_DIR}/Clock.hpp
+    ${PROJECT_INCLUDE_DIR}/Entity.hpp
+    ${PROJECT_INCLUDE_DIR}/Engine.hpp
+    ${PROJECT_INCLUDE_DIR}/Library.hpp
+    ${PROJECT_INCLUDE_DIR}/Light.hpp
+    ${PROJECT_INCLUDE_DIR}/Material.hpp
+    ${PROJECT_INCLUDE_DIR}/MaterialLibrary.hpp
+    ${PROJECT_INCLUDE_DIR}/Mesh.hpp
+    ${PROJECT_INCLUDE_DIR}/MeshLibrary.hpp
+    ${PROJECT_INCLUDE_DIR}/Object.hpp
+    ${PROJECT_INCLUDE_DIR}/PerspectiveCamera.hpp
+    ${PROJECT_INCLUDE_DIR}/Renderer.hpp
+    ${PROJECT_INCLUDE_DIR}/Scene.hpp
+    ${PROJECT_INCLUDE_DIR}/SceneGraph.hpp
+    ${PROJECT_INCLUDE_DIR}/SceneGraphNode.hpp
+    ${PROJECT_INCLUDE_DIR}/Shader.hpp
+    ${PROJECT_INCLUDE_DIR}/ShaderLibrary.hpp
+    ${PROJECT_INCLUDE_DIR}/ShaderProgram.hpp
+    ${PROJECT_INCLUDE_DIR}/ShaderProgramLibrary.hpp
+    ${PROJECT_INCLUDE_DIR}/SpatialGraph.hpp
+    ${PROJECT_INCLUDE_DIR}/Texture.hpp
+    ${PROJECT_INCLUDE_DIR}/TextureLibrary.hpp
+    ${PROJECT_INCLUDE_DIR}/Transform.hpp
+
+    ${PROJECT_TEMPLATE_FILES}
+
+    )
+
+## END PROJECT HEADERS FILES
 
 
 
@@ -213,30 +187,6 @@ ELSE ()
 ENDIF ()
 
 ## END PROJECT SETTINGS
-
-
-
-## BINARY SETTINGS
-
-ADD_LIBRARY(${CMAKE_PROJECT_NAME} SHARED ${WORLD_PARTICLES_SOURCES_FILES})
-
-## END BINARY SETTINGS
-
-
-
-## LIBRARY SETTINGS
-
-TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME}
-    ${OPENGL_LIBRARIES}
-    ${GLEW_LIBRARIES}
-    ${ASSIMP_LIBRARY}
-    ${LOG4CPP_LIBRARY}
-    ${DevIL_LIBRARY_ILUT}
-    ${DevIL_LIBRARY_ILU}
-    ${DevIL_LIBRARY_IL}
-    )
-
-## END LIBRARY SETTINGS
 
 
 
@@ -259,6 +209,45 @@ TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME}
 #ENDIF ()
 
 ## END COMPILATION SETTINGS
+
+
+
+## BINARY SETTINGS
+
+ADD_LIBRARY(${CMAKE_PROJECT_NAME} SHARED ${PROJECT_SOURCES_FILES})
+
+## END BINARY SETTINGS
+
+
+
+## LIBRARY SETTINGS
+
+TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME}
+    ${OPENGL_LIBRARIES}
+    ${GLEW_LIBRARIES}
+    ${ASSIMP_LIBRARY}
+    ${LOG4CPP_LIBRARY}
+    ${DevIL_LIBRARY_ILUT}
+    ${DevIL_LIBRARY_ILU}
+    ${DevIL_LIBRARY_IL}
+    )
+
+## END LIBRARY SETTINGS
+
+
+
+## INSTALLATION SETTINGS
+
+INSTALL(TARGETS ${CMAKE_PROJECT_NAME}
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib)
+
+INSTALL(FILES ${PROJECT_HEADERS_FILES}
+    DESTINATION include/${CMAKE_PROJECT_NAME}
+    )
+
+## END INSTALLATION SETTINGS
 
 
 

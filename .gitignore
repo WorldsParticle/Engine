@@ -34,3 +34,4 @@ sources/configuration.hpp
 sources/version.hpp
 doc
 *.user
+build/
