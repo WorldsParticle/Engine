@@ -3,14 +3,17 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 08:33:36
+/// \date Sun, 17 Jan 2016 14:25:12
 ///
-/// \version 1.0.20
+/// \version 1.0.34
 ///
 
 #include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
+#include    <log4cpp/PropertyConfigurator.hh>
 
+#include    "Engine/Version.hpp"
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core.hpp"
 
 using namespace     log4cpp;
@@ -20,6 +23,12 @@ namespace   Engine
 
     Core::Core(void)
     {
+
+
+        PropertyConfigurator::configure(RESOURCES_PATH "/log4cpp.conf");
+        Category& root = Category::getRoot();
+        root << Priority::INFO << "Lancement engine :";
+        root << Priority::INFO << "\t version : " PROJECT_VERSION_FULL;
 
         GLenum err = glewInit();
         if (GLEW_OK != err)
