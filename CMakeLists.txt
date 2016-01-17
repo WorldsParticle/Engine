@@ -34,13 +34,13 @@ SET(PROJECT_VERSION_FULL ${PROJECT_VERSION}.${PROJECT_VERSION_EXTRA})
 SET(RESOURCES_PATH "${CMAKE_SOURCE_DIR}/resources")
 
 CONFIGURE_FILE(
-    "${CMAKE_SOURCE_DIR}/sources/version.hpp.in"
-    "${CMAKE_SOURCE_DIR}/sources/version.hpp"
+    "${CMAKE_SOURCE_DIR}/sources/Engine/Version.hpp.in"
+    "${CMAKE_SOURCE_DIR}/sources/Engine/Version.hpp"
     )
 
 CONFIGURE_FILE(
-    "${CMAKE_SOURCE_DIR}/sources/configuration.hpp.in"
-    "${CMAKE_SOURCE_DIR}/sources/configuration.hpp"
+    "${CMAKE_SOURCE_DIR}/sources/Engine/Configuration.hpp.in"
+    "${CMAKE_SOURCE_DIR}/sources/Engine/Configuration.hpp"
     )
 
 ## END PROJECT VERSION
@@ -69,40 +69,47 @@ FIND_PACKAGE(RapidXml REQUIRED)
 
 ## PROJECT SOURCES FILES
 
-SET(PROJECT_SOURCES_DIR ${CMAKE_SOURCE_DIR}/sources/)
+SET(ENGINE_SOURCES_DIR ${CMAKE_SOURCE_DIR}/sources/Engine/)
+SET(CORE_ENGINE_SOURCES_DIR ${ENGINE_SOURCES_DIR}/Core/)
+
+SET(ENGINE_SOURCES_FILES
+    ${ENGINE_SOURCES_DIR}/Core.cpp
+    )
+
+SET(CORE_ENGINE_SOURCES_FILES
+    ${CORE_ENGINE_SOURCES_DIR}/Animation.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/AnimationLibrary.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/ArrayObject.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/AssimpImporter.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/AssimpScene.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/BufferObject.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Camera.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Clock.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Entity.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Light.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Material.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/MaterialLibrary.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Mesh.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/MeshLibrary.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Object.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/PerspectiveCamera.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Renderer.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Scene.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/SceneGraph.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/SceneGraphNode.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Shader.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderLibrary.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgram.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgramLibrary.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/SpatialGraph.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Texture.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/TextureLibrary.cpp
+    ${CORE_ENGINE_SOURCES_DIR}/Transform.cpp
+    )
 
 SET(PROJECT_SOURCES_FILES
-
-    ${CMAKE_SOURCE_DIR}/sources/Animation/Animation.cpp
-    ${CMAKE_SOURCE_DIR}/sources/AnimationLibrary/AnimationLibrary.cpp
-    ${CMAKE_SOURCE_DIR}/sources/ArrayObject/ArrayObject.cpp
-    ${CMAKE_SOURCE_DIR}/sources/AssimpImporter/AssimpImporter.cpp
-    ${CMAKE_SOURCE_DIR}/sources/AssimpScene/AssimpScene.cpp
-    ${CMAKE_SOURCE_DIR}/sources/BufferObject/BufferObject.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Camera/Camera.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Clock/Clock.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Entity/Entity.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Engine/Engine.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Light/Light.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Material/Material.cpp
-    ${CMAKE_SOURCE_DIR}/sources/MaterialLibrary/MaterialLibrary.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Mesh/Mesh.cpp
-    ${CMAKE_SOURCE_DIR}/sources/MeshLibrary/MeshLibrary.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Object/Object.cpp
-    ${CMAKE_SOURCE_DIR}/sources/PerspectiveCamera/PerspectiveCamera.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Renderer/Renderer.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Scene/Scene.cpp
-    ${CMAKE_SOURCE_DIR}/sources/SceneGraph/SceneGraph.cpp
-    ${CMAKE_SOURCE_DIR}/sources/SceneGraphNode/SceneGraphNode.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Shader/Shader.cpp
-    ${CMAKE_SOURCE_DIR}/sources/ShaderLibrary/ShaderLibrary.cpp
-    ${CMAKE_SOURCE_DIR}/sources/ShaderProgram/ShaderProgram.cpp
-    ${CMAKE_SOURCE_DIR}/sources/ShaderProgramLibrary/ShaderProgramLibrary.cpp
-    ${CMAKE_SOURCE_DIR}/sources/SpatialGraph/SpatialGraph.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Texture/Texture.cpp
-    ${CMAKE_SOURCE_DIR}/sources/TextureLibrary/TextureLibrary.cpp
-    ${CMAKE_SOURCE_DIR}/sources/Transform/Transform.cpp
-
+    ${ENGINE_SOURCES_FILES}
+    ${CORE_ENGINE_SOURCES_FILES}
     )
 
 ## END PROJECT SOURCES FILES
@@ -111,7 +118,7 @@ SET(PROJECT_SOURCES_FILES
 
 ## PROJECT INCLUDES DIRECTORIES
 
-SET(PROJECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include/)
+SET(PROJECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/sources/)
 
 INCLUDE_DIRECTORIES(
     ${PROJECT_INCLUDE_DIR}
@@ -128,45 +135,50 @@ INCLUDE_DIRECTORIES(
 
 ## PROJECT HEADERS FILES
 
-SET(PROJECT_TEMPLATE_FILES
-    ${PROJECT_INCLUDE_DIR}/Library.tpp
+SET(CORE_ENGINE_SOURCES_DIR ${ENGINE_SOURCES_DIR}/Core/)
+
+SET(CORE_ENGINE_HEADERS_FILES
+    ${CORE_ENGINE_SOURCES_DIR}/Animation.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/AnimationLibrary.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/ArrayObject.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/AssimpImporter.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/AssimpScene.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/BufferObject.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Camera.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Clock.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Entity.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Library.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Library.tpp
+    ${CORE_ENGINE_SOURCES_DIR}/Light.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Material.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/MaterialLibrary.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Mesh.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/MeshLibrary.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Object.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/PerspectiveCamera.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Renderer.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Scene.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/SceneGraph.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/SceneGraphNode.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Shader.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderLibrary.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgram.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgramLibrary.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/SpatialGraph.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Texture.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/TextureLibrary.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/Transform.hpp
+    )
+
+SET(ENGINE_HEADERS_FILES
+    ${ENGINE_SOURCES_DIR}/Configuration.hpp
+    ${ENGINE_SOURCES_DIR}/Version.hpp
+    ${ENGINE_SOURCES_DIR}/Core.hpp
     )
 
 SET(PROJECT_HEADERS_FILES
-
-    ${PROJECT_INCLUDE_DIR}/Animation.hpp
-    ${PROJECT_INCLUDE_DIR}/AnimationLibrary.hpp
-    ${PROJECT_INCLUDE_DIR}/ArrayObject.hpp
-    ${PROJECT_INCLUDE_DIR}/AssimpImporter.hpp
-    ${PROJECT_INCLUDE_DIR}/AssimpScene.hpp
-    ${PROJECT_INCLUDE_DIR}/BufferObject.hpp
-    ${PROJECT_INCLUDE_DIR}/Camera.hpp
-    ${PROJECT_INCLUDE_DIR}/Clock.hpp
-    ${PROJECT_INCLUDE_DIR}/Entity.hpp
-    ${PROJECT_INCLUDE_DIR}/Engine.hpp
-    ${PROJECT_INCLUDE_DIR}/Library.hpp
-    ${PROJECT_INCLUDE_DIR}/Light.hpp
-    ${PROJECT_INCLUDE_DIR}/Material.hpp
-    ${PROJECT_INCLUDE_DIR}/MaterialLibrary.hpp
-    ${PROJECT_INCLUDE_DIR}/Mesh.hpp
-    ${PROJECT_INCLUDE_DIR}/MeshLibrary.hpp
-    ${PROJECT_INCLUDE_DIR}/Object.hpp
-    ${PROJECT_INCLUDE_DIR}/PerspectiveCamera.hpp
-    ${PROJECT_INCLUDE_DIR}/Renderer.hpp
-    ${PROJECT_INCLUDE_DIR}/Scene.hpp
-    ${PROJECT_INCLUDE_DIR}/SceneGraph.hpp
-    ${PROJECT_INCLUDE_DIR}/SceneGraphNode.hpp
-    ${PROJECT_INCLUDE_DIR}/Shader.hpp
-    ${PROJECT_INCLUDE_DIR}/ShaderLibrary.hpp
-    ${PROJECT_INCLUDE_DIR}/ShaderProgram.hpp
-    ${PROJECT_INCLUDE_DIR}/ShaderProgramLibrary.hpp
-    ${PROJECT_INCLUDE_DIR}/SpatialGraph.hpp
-    ${PROJECT_INCLUDE_DIR}/Texture.hpp
-    ${PROJECT_INCLUDE_DIR}/TextureLibrary.hpp
-    ${PROJECT_INCLUDE_DIR}/Transform.hpp
-
-    ${PROJECT_TEMPLATE_FILES}
-
+    ${ENGINE_HEADERS_FILES}
+    ${CORE_ENGINE_HEADERS_FILES}
     )
 
 ## END PROJECT HEADERS FILES
@@ -243,9 +255,14 @@ INSTALL(TARGETS ${CMAKE_PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib)
 
-INSTALL(FILES ${PROJECT_HEADERS_FILES}
-    DESTINATION include/${CMAKE_PROJECT_NAME}
+INSTALL(FILES ${ENGINE_HEADERS_FILES}
+    DESTINATION include/Engine/
     )
+
+INSTALL(FILES ${CORE_ENGINE_HEADERS_FILES}
+    DESTINATION include/Engine/Core/
+    )
+
 
 ## END INSTALLATION SETTINGS
 

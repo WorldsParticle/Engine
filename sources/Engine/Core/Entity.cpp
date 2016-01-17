@@ -3,13 +3,13 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:52:41
+/// \date Sun, 17 Jan 2016 07:33:36
 ///
-/// \version 1.0.3
+/// \version 1.0.6
 ///
 
-#include    <Engine/Entity.hpp>
-#include    <Engine/SceneGraphNode.hpp>
+#include    "Engine/Core/Entity.hpp"
+#include    "Engine/Core/SceneGraphNode.hpp"
 
 namespace   Engine
 {

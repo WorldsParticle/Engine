@@ -3,15 +3,15 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:56:56
+/// \date Sun, 17 Jan 2016 07:52:39
 ///
-/// \version 1.0.5
+/// \version 1.0.7
 ///
 
 #ifndef     __ENGINE_PERSPECTIVE_CAMERA_HPP__
 # define    __ENGINE_PERSPECTIVE_CAMERA_HPP__
 
-#include    <Engine/Camera.hpp>
+#include    "Engine/Core/Camera.hpp"
 
 namespace   Engine
 {

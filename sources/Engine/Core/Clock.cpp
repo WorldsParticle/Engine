@@ -3,12 +3,12 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:52:16
+/// \date Sun, 17 Jan 2016 07:33:26
 ///
-/// \version 1.0.9
+/// \version 1.0.11
 ///
 
-#include <Engine/Clock.hpp>
+#include    "Engine/Core/Clock.hpp"
 
 namespace Engine
 {

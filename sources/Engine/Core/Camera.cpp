@@ -3,14 +3,14 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:51:44
+/// \date Sun, 17 Jan 2016 07:33:15
 ///
-/// \version 1.0.4
+/// \version 1.0.6
 ///
 
 #include    <glm/gtc/matrix_transform.hpp>
 
-#include    <Engine/Camera.hpp>
+#include    "Engine/Core/Camera.hpp"
 
 namespace Engine
 {

@@ -3,15 +3,15 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:01:12
+/// \date Sun, 17 Jan 2016 07:49:54
 ///
-/// \version 2.0.7
+/// \version 2.0.9
 ///
 
 #include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/Shader.hpp>
+#include    "Engine/Core/Shader.hpp"
 
 using namespace     log4cpp;
 

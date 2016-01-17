@@ -3,16 +3,16 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:56:03
+/// \date Sun, 17 Jan 2016 07:38:12
 ///
-/// \version 1.0.5
+/// \version 1.0.8
 ///
 
 #ifndef     __ENGINE_MESH_LIBRARY_HPP__
 # define    __ENGINE_MESH_LIBRARY_HPP__
 
-#include    <Engine/Library.hpp>
-#include    <Engine/Mesh.hpp>
+#include    "Engine/Core/Library.hpp"
+#include    "Engine/Core/Mesh.hpp"
 
 namespace   Engine
 {

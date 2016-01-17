@@ -3,15 +3,15 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:49:09
+/// \date Sun, 17 Jan 2016 07:32:40
 ///
-/// \version 1.0.9
+/// \version 1.0.11
 ///
 
 #include    <GL/glew.h>
 #include    <utility>
 
-#include    <Engine/ArrayObject.hpp>
+#include    "Engine/Core/ArrayObject.hpp"
 
 namespace   Engine
 {

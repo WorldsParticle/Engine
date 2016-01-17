@@ -3,12 +3,12 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:50:36
+/// \date Sun, 17 Jan 2016 07:33:01
 ///
-/// \version 1.0.4
+/// \version 1.0.6
 ///
 
-#include    <Engine/AssimpScene.hpp>
+#include    "Engine/Core/AssimpScene.hpp"
 
 namespace   Engine
 {

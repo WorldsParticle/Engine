@@ -3,16 +3,16 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:00:13
+/// \date Sun, 17 Jan 2016 07:49:24
 ///
-/// \version 1.0.4
+/// \version 1.0.6
 ///
 
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/SceneGraph.hpp>
-#include    <Engine/SceneGraphNode.hpp>
-#include    <Engine/AssimpScene.hpp>
+#include    "Engine/Core/SceneGraph.hpp"
+#include    "Engine/Core/SceneGraphNode.hpp"
+#include    "Engine/Core/AssimpScene.hpp"
 
 using namespace     log4cpp;
 

@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:53:59
+/// \date Sun, 17 Jan 2016 07:34:12
 ///
-/// \version 1.0.7
+/// \version 1.0.10
 ///
 
 #ifndef     __ENGINE_LIGHT_HPP__
@@ -13,7 +13,8 @@
 
 #include    <string>
 #include    <assimp/light.h>
-#include    <Engine/Entity.hpp>
+
+#include    "Engine/Core/Entity.hpp"
 
 namespace Engine
 {

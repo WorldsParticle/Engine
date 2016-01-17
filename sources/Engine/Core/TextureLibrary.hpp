@@ -3,16 +3,16 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:04:41
+/// \date Sun, 17 Jan 2016 07:51:18
 ///
-/// \version 1.0.6
+/// \version 1.0.8
 ///
 
 #ifndef     __ENGINE_TEXTURE_LIBRARY_HPP__
 # define    __ENGINE_TEXTURE_LIBRARY_HPP__
 
-#include    <Engine/Library.hpp>
-#include    <Engine/Texture.hpp>
+#include    "Engine/Core/Library.hpp"
+#include    "Engine/Core/Texture.hpp"
 
 namespace   Engine
 {

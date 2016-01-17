@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:03:05
+/// \date Sun, 17 Jan 2016 07:50:26
 ///
-/// \version 1.0.5
+/// \version 1.0.7
 ///
 
 #ifndef     __ENGINE_SHADER_PROGRAM_HPP__
@@ -15,7 +15,7 @@
 #include    <vector>
 #include    <memory>
 
-#include    <Engine/Shader.hpp>
+#include    "Engine/Core/Shader.hpp"
 
 namespace   Engine
 {

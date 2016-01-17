@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:02:03
+/// \date Sun, 17 Jan 2016 07:50:15
 ///
-/// \version 1.0.5
+/// \version 1.0.7
 ///
 
 #ifndef     __ENGINE_SHADER_MANAGER_HPP__
@@ -13,9 +13,9 @@
 
 #include    <memory>
 
-#include    <Engine/Library.hpp>
-#include    <Engine/Shader.hpp>
-#include    <Engine/ShaderNames.hpp>
+#include    "Engine/Core/Library.hpp"
+#include    "Engine/Core/Shader.hpp"
+#include    "Engine/Core/ShaderNames.hpp"
 
 namespace   Engine
 {

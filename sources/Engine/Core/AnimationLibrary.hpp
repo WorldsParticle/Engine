@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 22:35:25
+/// \date Sun, 17 Jan 2016 07:32:36
 ///
-/// \version 1.0.7
+/// \version 1.0.8
 ///
 
 #ifndef     __ENGINE_ANIMATION_LIBRARY_HPP__
@@ -13,8 +13,8 @@
 
 #include    <assimp/anim.h>
 
-#include    "Engine/Library.hpp"
-#include    "Engine/Animation.hpp"
+#include    "Engine/Core/Library.hpp"
+#include    "Engine/Core/Animation.hpp"
 
 namespace   Engine
 {

@@ -3,13 +3,13 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 22:35:03
+/// \date Sun, 17 Jan 2016 07:32:30
 ///
-/// \version 1.0.5
+/// \version 1.0.6
 ///
 
-#include    "Engine/AnimationLibrary.hpp"
-#include    "Engine/Animation.hpp"
+#include    "Engine/Core/AnimationLibrary.hpp"
+#include    "Engine/Core/Animation.hpp"
 
 namespace   Engine
 {

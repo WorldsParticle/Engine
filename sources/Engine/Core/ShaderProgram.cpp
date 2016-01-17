@@ -3,16 +3,16 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:02:36
+/// \date Sun, 17 Jan 2016 07:50:22
 ///
-/// \version 1.0.8
+/// \version 1.0.10
 ///
 
 #include    <GL/glew.h>
 #include    <glm/gtc/type_ptr.hpp>
 # include   <log4cpp/Category.hh>
 
-#include    <Engine/ShaderProgram.hpp>
+#include    "Engine/Core/ShaderProgram.hpp"
 
 namespace   Engine
 {

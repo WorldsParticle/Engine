@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:56:29
+/// \date Sun, 17 Jan 2016 07:38:34
 ///
-/// \version 1.0.6
+/// \version 1.0.8
 ///
 
 #ifndef     __ENGINE_OBJECT_HPP__
@@ -14,7 +14,7 @@
 #include    <list>
 #include    <assimp/scene.h>
 
-#include    <Engine/Entity.hpp>
+#include    "Engine/Core/Entity.hpp"
 
 namespace   Engine
 {

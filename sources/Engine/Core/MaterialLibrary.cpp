@@ -3,14 +3,14 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:54:39
+/// \date Sun, 17 Jan 2016 07:34:33
 ///
-/// \version 1.0.3
+/// \version 1.0.7
 ///
 
-#include    <Engine/MaterialLibrary.hpp>
-#include    <Engine/Material.hpp>
-#include    <Engine/ShaderProgramLibrary.hpp>
+#include    "Engine/Core/MaterialLibrary.hpp"
+#include    "Engine/Core/Material.hpp"
+#include    "Engine/Core/ShaderProgramLibrary.hpp"
 
 namespace   Engine
 {

@@ -3,17 +3,17 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:55:16
+/// \date Sun, 17 Jan 2016 07:34:49
 ///
-/// \version 1.0.8
+/// \version 1.0.12
 ///
 
 #include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/Mesh.hpp>
-#include    <Engine/Material.hpp>
-#include    <Engine/ShaderProgram.hpp>
+#include    "Engine/Core/Mesh.hpp"
+#include    "Engine/Core/Material.hpp"
+#include    "Engine/Core/ShaderProgram.hpp"
 
 using namespace log4cpp;
 

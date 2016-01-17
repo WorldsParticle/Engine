@@ -3,16 +3,16 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:03:15
+/// \date Sun, 17 Jan 2016 07:50:35
 ///
-/// \version 1.0.3
+/// \version 1.0.5
 ///
 
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/ShaderLibrary.hpp>
-#include    <Engine/ShaderProgramLibrary.hpp>
-#include    <Engine/internal/ShaderProgramMapping.hpp>
+#include    "Engine/Core/ShaderLibrary.hpp"
+#include    "Engine/Core/ShaderProgramLibrary.hpp"
+#include    "Engine/Core/internal/ShaderProgramMapping.hpp"
 
 using namespace     log4cpp;
 

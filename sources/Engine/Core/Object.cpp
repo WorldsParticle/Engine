@@ -3,15 +3,15 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:56:16
+/// \date Sun, 17 Jan 2016 07:38:28
 ///
-/// \version 1.0.3
+/// \version 1.0.5
 ///
 
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/Object.hpp>
-#include    <Engine/Scene.hpp>
+#include    "Engine/Core/Object.hpp"
+#include    "Engine/Core/Scene.hpp"
 
 using namespace     log4cpp;
 

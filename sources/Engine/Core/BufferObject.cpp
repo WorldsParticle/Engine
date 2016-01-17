@@ -3,15 +3,15 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:51:13
+/// \date Sun, 17 Jan 2016 07:33:08
 ///
-/// \version 1.0.14
+/// \version 1.0.16
 ///
 
 #include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/BufferObject.hpp>
+#include    "Engine/Core/BufferObject.hpp"
 
 using namespace log4cpp;
 

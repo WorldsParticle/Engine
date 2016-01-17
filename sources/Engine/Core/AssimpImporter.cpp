@@ -3,18 +3,18 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:49:53
+/// \date Sun, 17 Jan 2016 07:32:53
 ///
-/// \version 1.0.5
+/// \version 1.0.9
 ///
 
 #include    <assimp/postprocess.h>
 #include    <assimp/scene.h>
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/AssimpImporter.hpp>
-#include    <Engine/AssimpScene.hpp>
-#include    <Engine/Scene.hpp>
+#include    "Engine/Core/AssimpImporter.hpp"
+#include    "Engine/Core/AssimpScene.hpp"
+#include    "Engine/Core/Scene.hpp"
 
 using namespace   log4cpp;
 

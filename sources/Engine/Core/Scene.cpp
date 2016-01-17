@@ -3,17 +3,17 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:59:42
+/// \date Sun, 17 Jan 2016 07:48:59
 ///
-/// \version 1.0.4
+/// \version 1.0.6
 ///
 
 #include    <glm/glm.hpp>
 #include    <algorithm>
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/Scene.hpp>
-#include    <Engine/AssimpScene.hpp>
+#include    "Engine/Core/Scene.hpp"
+#include    "Engine/Core/AssimpScene.hpp"
 
 using namespace     log4cpp;
 

@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:52:02
+/// \date Sun, 17 Jan 2016 07:33:21
 ///
-/// \version 1.0.6
+/// \version 1.0.9
 ///
 
 #ifndef     __ENGINE_CAMERA_HPP__
@@ -14,7 +14,8 @@
 #include    <string>
 #include    <glm/glm.hpp>
 #include    <assimp/camera.h>
-#include    <Engine/Entity.hpp>
+
+#include    "Engine/Core/Entity.hpp"
 
 namespace   Engine
 {

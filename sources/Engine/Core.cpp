@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 22:31:41
+/// \date Sun, 17 Jan 2016 07:58:06
 ///
-/// \version 1.0.14
+/// \version 1.0.17
 ///
 
 #include    <log4cpp/Category.hh>
@@ -91,10 +91,7 @@ namespace   Engine
     void
     Core::load(const std::string &filename)
     {
-        Category    &root = Category::getRoot();
         // TODO GSL OWNER && NOT NULL
-        //
-        root << Priority::DEBUG << "Core - Load()";
         Scene *test = this->importer.import(filename);
 
         this->scenes.push_back(test);

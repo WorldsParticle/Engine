@@ -3,12 +3,12 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:04:28
+/// \date Sun, 17 Jan 2016 07:51:12
 ///
-/// \version 1.0.3
+/// \version 1.0.5
 ///
 
-#include    <Engine/TextureLibrary.hpp>
+#include    "Engine/Core/TextureLibrary.hpp"
 
 namespace   Engine
 {

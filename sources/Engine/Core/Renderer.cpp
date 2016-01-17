@@ -3,20 +3,20 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:57:12
+/// \date Sun, 17 Jan 2016 07:55:19
 ///
-/// \version 1.0.9
+/// \version 1.0.14
 ///
 
 #include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/Renderer.hpp>
-#include    <Engine/Object.hpp>
-#include    <Engine/Camera.hpp>
-#include    <Engine/Light.hpp>
-#include    <Engine/Transform.hpp>
-#include    <Engine/Mesh.hpp>
+#include    "Engine/Core/Renderer.hpp"
+#include    "Engine/Core/Object.hpp"
+#include    "Engine/Core/Camera.hpp"
+#include    "Engine/Core/Light.hpp"
+#include    "Engine/Core/Transform.hpp"
+#include    "Engine/Core/Mesh.hpp"
 
 using namespace     log4cpp;
 
@@ -95,13 +95,9 @@ namespace   Engine
     void
     Renderer::render(void)
     {
-        Category    &root = Category::getRoot();
-
         glEnable(GL_DEPTH_TEST);
-        //root << Priority::DEBUG << "Renderer - render()";
         for (Camera *camera : this->cameras)
         {
-            //root << Priority::DEBUG << "Renderer - render - camera()";
             const glm::mat4 &projection = camera->getProjection();
             const glm::mat4 &view = camera->getView();
 
@@ -111,12 +107,10 @@ namespace   Engine
 
             for (Object *object : this->objects)
             {
-                //root << Priority::DEBUG << "Draw => " << object->getName();
                 const glm::mat4 &model = object->getTransform().getMatrix();
                 const std::list<Mesh *>     &meshes = object->getMeshes();
                 for (Mesh *part : meshes)
                 {
-                    //root << Priority::DEBUG << "Renderer - mesh - draw()";
                     part->draw(model, view, projection);
                 }
             }

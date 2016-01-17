@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:56:43
+/// \date Sun, 17 Jan 2016 07:52:44
 ///
-/// \version 1.0.5
+/// \version 1.0.8
 ///
 
 #include    <log4cpp/Category.hh>
@@ -14,9 +14,9 @@
 #include    <glm/glm.hpp>
 #include    <glm/gtc/matrix_transform.hpp>
 
-#include    <Engine/Transform.hpp>
-#include    <Engine/PerspectiveCamera.hpp>
-#include    <Engine/Scene.hpp>
+#include    "Engine/Core/Transform.hpp"
+#include    "Engine/Core/PerspectiveCamera.hpp"
+#include    "Engine/Core/Scene.hpp"
 
 using namespace     log4cpp;
 

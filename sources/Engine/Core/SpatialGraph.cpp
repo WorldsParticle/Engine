@@ -3,18 +3,18 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:03:45
+/// \date Sun, 17 Jan 2016 07:50:57
 ///
-/// \version 1.0.3
+/// \version 1.0.5
 ///
 
 #include    <log4cpp/Category.hh>
 
-#include    <Engine/SpatialGraph.hpp>
-#include    <Engine/Renderer.hpp>
-#include    <Engine/Camera.hpp>
-#include    <Engine/Object.hpp>
-#include    <Engine/Light.hpp>
+#include    "Engine/Core/SpatialGraph.hpp"
+#include    "Engine/Core/Renderer.hpp"
+#include    "Engine/Core/Camera.hpp"
+#include    "Engine/Core/Object.hpp"
+#include    "Engine/Core/Light.hpp"
 
 using namespace     log4cpp;
 

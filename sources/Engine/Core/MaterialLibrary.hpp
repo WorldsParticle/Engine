@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:54:52
+/// \date Sun, 17 Jan 2016 07:34:40
 ///
-/// \version 1.0.5
+/// \version 1.0.8
 ///
 
 #ifndef     __ENGINE_MATERIAL_LIBRARY_HPP__
@@ -13,8 +13,8 @@
 
 #include    <assimp/material.h>
 
-#include    <Engine/Library.hpp>
-#include    <Engine/Material.hpp>
+#include    "Engine/Core/Library.hpp"
+#include    "Engine/Core/Material.hpp"
 
 namespace   Engine
 {

@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 06:55:40
+/// \date Sun, 17 Jan 2016 07:37:57
 ///
-/// \version 1.0.6
+/// \version 1.0.8
 ///
 
 #ifndef     __ENGINE_MESH_HPP__
@@ -16,8 +16,8 @@
 #include    <glm/glm.hpp>
 #include    <assimp/mesh.h>
 
-#include    <Engine/BufferObject.hpp>
-#include    <Engine/ArrayObject.hpp>
+#include    "Engine/Core/BufferObject.hpp"
+#include    "Engine/Core/ArrayObject.hpp"
 
 namespace Engine
 {

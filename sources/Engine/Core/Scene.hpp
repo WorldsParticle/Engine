@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:00:00
+/// \date Sun, 17 Jan 2016 07:49:15
 ///
-/// \version 1.0.6
+/// \version 1.0.8
 ///
 
 #ifndef     __ENGINE_SCENE_HPP__
@@ -14,14 +14,14 @@
 #include    <memory>
 #include    <list>
 
-#include    <Engine/Renderer.hpp>
-#include    <Engine/SpatialGraph.hpp>
-#include    <Engine/SceneGraph.hpp>
-#include    <Engine/ShaderProgramLibrary.hpp>
-#include    <Engine/MaterialLibrary.hpp>
-#include    <Engine/AnimationLibrary.hpp>
-#include    <Engine/MeshLibrary.hpp>
-#include    <Engine/TextureLibrary.hpp>
+#include    "Engine/Core/Renderer.hpp"
+#include    "Engine/Core/SpatialGraph.hpp"
+#include    "Engine/Core/SceneGraph.hpp"
+#include    "Engine/Core/ShaderProgramLibrary.hpp"
+#include    "Engine/Core/MaterialLibrary.hpp"
+#include    "Engine/Core/AnimationLibrary.hpp"
+#include    "Engine/Core/MeshLibrary.hpp"
+#include    "Engine/Core/TextureLibrary.hpp"
 
 namespace Engine
 {
