@@ -30,6 +30,7 @@
 
 cmake/*
 !cmake/cmake_modules
-sources/worldparticles.hpp
+sources/configuration.hpp
+sources/version.hpp
 doc
 *.user
