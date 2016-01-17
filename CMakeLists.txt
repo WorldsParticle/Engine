@@ -162,8 +162,12 @@ SET(CORE_ENGINE_HEADERS_FILES
     ${CORE_ENGINE_SOURCES_DIR}/SceneGraphNode.hpp
     ${CORE_ENGINE_SOURCES_DIR}/Shader.hpp
     ${CORE_ENGINE_SOURCES_DIR}/ShaderLibrary.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderMapping.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderNames.hpp
     ${CORE_ENGINE_SOURCES_DIR}/ShaderProgram.hpp
     ${CORE_ENGINE_SOURCES_DIR}/ShaderProgramLibrary.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgramMapping.hpp
+    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgramNames.hpp
     ${CORE_ENGINE_SOURCES_DIR}/SpatialGraph.hpp
     ${CORE_ENGINE_SOURCES_DIR}/Texture.hpp
     ${CORE_ENGINE_SOURCES_DIR}/TextureLibrary.hpp

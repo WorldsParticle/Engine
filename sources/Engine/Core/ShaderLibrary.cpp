@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sun, 17 Jan 2016 07:50:05
+/// \date Sun, 17 Jan 2016 08:13:03
 ///
-/// \version 1.0.12
+/// \version 1.0.14
 ///
 
 #include    <string>
@@ -15,7 +15,7 @@
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/ShaderLibrary.hpp"
-#include    "Engine/Core/internal/ShaderMapping.hpp"
+#include    "Engine/Core/ShaderMapping.hpp"
 
 using namespace     log4cpp;
 
