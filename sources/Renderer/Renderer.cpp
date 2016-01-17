@@ -3,11 +3,12 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Fri, 15 Jan 2016 13:32:40
+/// \date Sat, 16 Jan 2016 17:55:39
 ///
-/// \version 1.0.2
+/// \version 1.0.6
 ///
 
+#include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
 
 #include    "Renderer.hpp"
@@ -98,7 +99,7 @@ namespace   WorldParticles
         {
             Category    &root = Category::getRoot();
 
-            GLWindow::m_funcs->glEnable(GL_DEPTH_TEST);
+            glEnable(GL_DEPTH_TEST);
             //root << Priority::DEBUG << "Renderer - render()";
             for (Camera *camera : this->cameras)
             {
@@ -106,11 +107,9 @@ namespace   WorldParticles
                 const glm::mat4 &projection = camera->getProjection();
                 const glm::mat4 &view = camera->getView();
 
-
-                GLWindow::m_funcs->glClearColor(156.0f / 255.0f , 0, 76.0f / 255.0f, 1.0);
-                GLWindow::m_funcs->glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-                GLWindow::m_funcs->glViewport(0, 0, 1024, 768);
-
+                glClearColor(156.0f / 255.0f , 0, 76.0f / 255.0f, 1.0);
+                glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+                glViewport(0, 0, 1024, 768);
 
                 for (Object *object : this->objects)
                 {

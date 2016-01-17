@@ -3,11 +3,12 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Fri, 15 Jan 2016 13:29:17
+/// \date Sat, 16 Jan 2016 17:51:29
 ///
-/// \version 1.0.4
+/// \version 1.0.11
 ///
 
+#include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
 
 #include    "BufferObject.hpp"
@@ -24,7 +25,7 @@ namespace   WorldParticles
             usage(usage),
             size(0)
         {
-            GLWindow::m_funcs->glGenBuffers(1, &this->id);
+            glGenBuffers(1, &this->id);
         }
 
         BufferObject::BufferObject(BufferObject &&other) noexcept :
@@ -38,7 +39,7 @@ namespace   WorldParticles
 
         BufferObject::~BufferObject(void)
         {
-            GLWindow::m_funcs->glDeleteBuffers(1, &this->id);
+            glDeleteBuffers(1, &this->id);
         }
 
 
@@ -57,13 +58,13 @@ namespace   WorldParticles
         void
         BufferObject::bind(void)
         {
-            GLWindow::m_funcs->glBindBuffer(this->convert(this->type), this->id);
+            glBindBuffer(this->convert(this->type), this->id);
         }
 
         void
         BufferObject::unbind(void)
         {
-            GLWindow::m_funcs->glBindBuffer(this->convert(this->type), 0);
+            glBindBuffer(this->convert(this->type), 0);
         }
 
         void
@@ -72,14 +73,14 @@ namespace   WorldParticles
             if (length > this->size)
             {
                 this->bind();
-                GLWindow::m_funcs->glBufferData(this->convert(this->type), length, data, this->convert(this->usage));
+                glBufferData(this->convert(this->type), length, data, this->convert(this->usage));
                 this->size = length;
                 this->unbind();
             }
             else
             {
                 this->bind();
-                GLWindow::m_funcs->glBufferSubData(this->convert(this->type), 0, length, data);
+                glBufferSubData(this->convert(this->type), 0, length, data);
                 this->unbind();
             }
         }

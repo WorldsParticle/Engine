@@ -3,14 +3,17 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Fri, 15 Jan 2016 13:31:31
+/// \date Sat, 16 Jan 2016 17:54:37
 ///
-/// \version 1.0.1
+/// \version 1.0.6
 ///
 
+#include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
 
 #include    "Mesh.hpp"
+#include    "Material.hpp"
+#include    "ShaderProgram.hpp"
 
 using namespace log4cpp;
 
@@ -75,17 +78,17 @@ namespace   WorldParticles
             this->arrayObject->bind();
 
             this->vertexBuffer->bind();
-            GLWindow::m_funcs->glEnableVertexAttribArray(0);
-            GLWindow::m_funcs->glEnableVertexAttribArray(1);
-            GLWindow::m_funcs->glEnableVertexAttribArray(2);
-            GLWindow::m_funcs->glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
+            glEnableVertexAttribArray(0);
+            glEnableVertexAttribArray(1);
+            glEnableVertexAttribArray(2);
+            glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
                 0, (void *)0);
             if (this->hasNormals()) {
-                GLWindow::m_funcs->glVertexAttribPointer(1, 3, GL_FLOAT,
+                glVertexAttribPointer(1, 3, GL_FLOAT,
                     GL_FALSE, 0, (void *)(this->positions.size() * sizeof(float)));
             }
             if (this->hasUVs()) {
-                GLWindow::m_funcs->glVertexAttribPointer(2, 2, GL_FLOAT,
+                glVertexAttribPointer(2, 2, GL_FLOAT,
                     GL_FALSE, 0, (void *)((this->positions.size()
                         + this->normals.size()) * sizeof(float)));
             }
@@ -125,13 +128,11 @@ namespace   WorldParticles
             shaderprogram->setUniform("projection", projection);
             if (this->hasIndices())
             {
-                GLWindow::m_funcs->glDrawElements(GL_TRIANGLES,
-                    this->indices.size(), GL_UNSIGNED_INT, 0);
+                glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
             }
             else
             {
-                GLWindow::m_funcs->glDrawArrays(GL_TRIANGLES, 0,
-                    this->positions.size());
+                glDrawArrays(GL_TRIANGLES, 0, this->positions.size());
             }
             this->material->unbind();
             this->unbind();
