@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 21:01:55
+/// \date Sun, 17 Jan 2016 07:00:57
 ///
-/// \version 1.0.5
+/// \version 1.0.6
 ///
 
 #ifndef     __ENGINE_SCENE_GRAPH_NODE_HPP__
@@ -17,126 +17,123 @@
 
 #include    <Engine/Transform.hpp>
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+
+    class       Entity;
+    class       SceneGraph;
+    class       Scene;
+    class       AssimpScene;
+
+    ///
+    /// \brief A Node of the scene graph.
+    ///
+    class       SceneGraphNode
     {
+        public:
+            ///
+            /// \brief Default constructor. Create an empty node with a
+            /// object entity.
+            ///
+            SceneGraphNode(SceneGraph *scenegraph,
+                    SceneGraphNode *parent = 0);
 
-        class       Entity;
-        class       SceneGraph;
-        class       Scene;
-        class       AssimpScene;
+            ///
+            /// \brief Construct a SceneGraphNode from an assimp node.
+            ///
+            SceneGraphNode(const AssimpScene &assimpScene,
+                    const aiNode *assimpNode, SceneGraph *scenegraph,
+                    SceneGraphNode *parent = 0);
 
-        ///
-        /// \brief A Node of the scene graph.
-        ///
-        class       SceneGraphNode
-        {
-            public:
-                ///
-                /// \brief Default constructor. Create an empty node with a
-                /// object entity.
-                ///
-                SceneGraphNode(SceneGraph *scenegraph,
-                        SceneGraphNode *parent = 0);
+            ///
+            /// \brief Copy constructor.
+            ///
+            SceneGraphNode(const SceneGraphNode &other) = default; // TODO TOTALEMENT FAUX
 
-                ///
-                /// \brief Construct a SceneGraphNode from an assimp node.
-                ///
-                SceneGraphNode(const AssimpScene &assimpScene,
-                        const aiNode *assimpNode, SceneGraph *scenegraph,
-                        SceneGraphNode *parent = 0);
+            ///
+            /// \brief Move constructor.
+            ///
+            SceneGraphNode(SceneGraphNode &&other) noexcept = default; // TODO TOTALEMENT FAUX
 
-                ///
-                /// \brief Copy constructor.
-                ///
-                SceneGraphNode(const SceneGraphNode &other) = default; // TODO TOTALEMENT FAUX
+            ///
+            /// \brief Destructor.
+            ///
+            virtual ~SceneGraphNode(void) noexcept;
 
-                ///
-                /// \brief Move constructor.
-                ///
-                SceneGraphNode(SceneGraphNode &&other) noexcept = default; // TODO TOTALEMENT FAUX
+        public:
+            ///
+            /// \brief Copy assignment operator.
+            ///
+            SceneGraphNode  &operator=(const SceneGraphNode &other) = default; // TODO TOTALEMENT FAUX
 
-                ///
-                /// \brief Destructor.
-                ///
-                virtual ~SceneGraphNode(void) noexcept;
+            ///
+            /// \brief Move assignment operator.
+            ///
+            SceneGraphNode  &operator=(SceneGraphNode &&other) noexcept = default; // TODO TOTALEMENT FAUX
 
-            public:
-                ///
-                /// \brief Copy assignment operator.
-                ///
-                SceneGraphNode  &operator=(const SceneGraphNode &other) = default; // TODO TOTALEMENT FAUX
+        public:
+            ///
+            /// \brief This method is used to update the node and the node children.
+            ///
+            void    update(void);
 
-                ///
-                /// \brief Move assignment operator.
-                ///
-                SceneGraphNode  &operator=(SceneGraphNode &&other) noexcept = default; // TODO TOTALEMENT FAUX
+        public:
+            ///
+            /// \brief Getter for the name attribute.
+            ///
+            const std::string   &getName(void) const;
 
-            public:
-                ///
-                /// \brief This method is used to update the node and the node children.
-                ///
-                void    update(void);
+            ///
+            /// \brief Getter for the parent node.
+            ///
+            SceneGraphNode      *getParent(void) const;
 
-            public:
-                ///
-                /// \brief Getter for the name attribute.
-                ///
-                const std::string   &getName(void) const;
+            ///
+            /// \brief Getter for the scene attribute.
+            ///
+            Scene               *getScene(void) const;
 
-                ///
-                /// \brief Getter for the parent node.
-                ///
-                SceneGraphNode      *getParent(void) const;
+            ///
+            /// \brief Getter for the tranformation of the node.
+            ///
+            const Transform     &getTransform(void) const;
 
-                ///
-                /// \brief Getter for the scene attribute.
-                ///
-                Scene               *getScene(void) const;
+        private:
+            ///
+            /// \brief Optional name for the node. Can be empty.
+            ///
+            std::string                 name;
 
-                ///
-                /// \brief Getter for the tranformation of the node.
-                ///
-                const Transform     &getTransform(void) const;
+            ///
+            /// \brief The node parent, can be null if this node is a root node.
+            ///
+            SceneGraphNode              *parent;
 
-            private:
-                ///
-                /// \brief Optional name for the node. Can be empty.
-                ///
-                std::string                 name;
+            ///
+            /// \brief The childrens of the node.
+            ///
+            std::list<SceneGraphNode*>  childrens; // TODO GSL NOT NULL && OWNER
 
-                ///
-                /// \brief The node parent, can be null if this node is a root node.
-                ///
-                SceneGraphNode              *parent;
+            ///
+            /// \brief The scene graph that contain this node.
+            ///
+            SceneGraph                  *scenegraph;
 
-                ///
-                /// \brief The childrens of the node.
-                ///
-                std::list<SceneGraphNode*>  childrens; // TODO GSL NOT NULL && OWNER
+            ///
+            /// \brief The scene that contain the scene graph related to this node.
+            ///
+            Scene                       *scene; // TODO GSL NOT NULL
 
-                ///
-                /// \brief The scene graph that contain this node.
-                ///
-                SceneGraph                  *scenegraph;
+            ///
+            /// \brief The entity related to the node.
+            ///
+            Entity                      *entity; // TODO OWNER
 
-                ///
-                /// \brief The scene that contain the scene graph related to this node.
-                ///
-                Scene                       *scene; // TODO GSL NOT NULL
-
-                ///
-                /// \brief The entity related to the node.
-                ///
-                Entity                      *entity; // TODO OWNER
-
-                ///
-                /// \brief The transformation affecting the node.
-                ///
-                Transform                   transform;
-        };
-    }
+            ///
+            /// \brief The transformation affecting the node.
+            ///
+            Transform                   transform;
+    };
 }
 
 #endif /* !__ENGINE_SCENE_GRAPH_NODE_HPP__ */

@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 20:37:12
+/// \date Sun, 17 Jan 2016 06:53:45
 ///
-/// \version 1.0.3
+/// \version 1.0.4
 ///
 
 #include    <log4cpp/Category.hh>
@@ -15,52 +15,49 @@
 
 using namespace     log4cpp;
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+    Light::Light(SceneGraphNode *node) :
+        Entity(node),
+        name("")
     {
-        Light::Light(SceneGraphNode *node) :
-            Entity(node),
-            name("")
-        {
-            this->scene->add(this);
-        }
-
-        /// TODO GSL NOT NULL
-        Light::Light(const aiLight *assimpLight, SceneGraphNode *node) :
-            Entity(node),
-            name(assimpLight->mName.C_Str())
-        {
-            this->scene->add(this);
-        }
-
-        Light::~Light(void) noexcept
-        {
-            // nothing to do atm.
-        }
-
-
-
-
-        Light *
-        Light::clone(void) const
-        {
-             return new Light(*this);
-        }
-
-        void
-        Light::update(void)
-        {
-            // nothing to do atm.
-        }
-
-
-
-        const std::string &
-        Light::getName(void) const
-        {
-             return this->name;
-        }
-
+        this->scene->add(this);
     }
+
+    /// TODO GSL NOT NULL
+    Light::Light(const aiLight *assimpLight, SceneGraphNode *node) :
+        Entity(node),
+        name(assimpLight->mName.C_Str())
+    {
+        this->scene->add(this);
+    }
+
+    Light::~Light(void) noexcept
+    {
+        // nothing to do atm.
+    }
+
+
+
+
+    Light *
+    Light::clone(void) const
+    {
+         return new Light(*this);
+    }
+
+    void
+    Light::update(void)
+    {
+        // nothing to do atm.
+    }
+
+
+
+    const std::string &
+    Light::getName(void) const
+    {
+         return this->name;
+    }
+
 }

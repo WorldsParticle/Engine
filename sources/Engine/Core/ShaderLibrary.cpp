@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 20:54:16
+/// \date Sun, 17 Jan 2016 07:01:53
 ///
-/// \version 1.0.9
+/// \version 1.0.10
 ///
 
 #include    <string>
@@ -19,32 +19,29 @@
 
 using namespace     log4cpp;
 
-namespace WorldParticles
+namespace Engine
 {
-    namespace Engine
+
+    ShaderLibrary::ShaderLibrary(void)
     {
-
-        ShaderLibrary::ShaderLibrary(void)
+        Category &root = Category::getRoot();
+        for (const auto &it : MappedShaders)
         {
-            Category &root = Category::getRoot();
-            for (const auto &it : MappedShaders)
-            {
-                const ShaderProperty &property = it.second;
-                root << Priority::DEBUG << "Création du shader : " << property.filename;
-                std::ifstream stream(RESOURCES_PATH "/shaders/" + property.filename);
-                std::string data((std::istreambuf_iterator<char>(stream)),
-                        std::istreambuf_iterator<char>());
-                root << Priority::DEBUG << "Valeur : " << data;
-                std::shared_ptr<Shader> shader = std::make_shared<Shader>(property.shaderType, data);
-                shader->compile();
-                this->resources.push_back(shader);
-            }
+            const ShaderProperty &property = it.second;
+            root << Priority::DEBUG << "Création du shader : " << property.filename;
+            std::ifstream stream(RESOURCES_PATH "/shaders/" + property.filename);
+            std::string data((std::istreambuf_iterator<char>(stream)),
+                    std::istreambuf_iterator<char>());
+            root << Priority::DEBUG << "Valeur : " << data;
+            std::shared_ptr<Shader> shader = std::make_shared<Shader>(property.shaderType, data);
+            shader->compile();
+            this->resources.push_back(shader);
         }
-
-        ShaderLibrary::~ShaderLibrary(void)
-        {
-            // nothing to do atm.
-        }
-
     }
+
+    ShaderLibrary::~ShaderLibrary(void)
+    {
+        // nothing to do atm.
+    }
+
 }

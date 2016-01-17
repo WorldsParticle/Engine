@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 21:05:46
+/// \date Sun, 17 Jan 2016 06:52:02
 ///
-/// \version 1.0.5
+/// \version 1.0.6
 ///
 
 #ifndef     __ENGINE_CAMERA_HPP__
@@ -16,131 +16,127 @@
 #include    <assimp/camera.h>
 #include    <Engine/Entity.hpp>
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+
+    class   SceneGraphNode;
+
+    ///
+    /// \brief This class is used to store information about a basic camera in a 3D world.
+    ///
+    /// It is not a concrete implementation for a camera.
+    ///
+    class       Camera : public Entity
     {
-
-        class   SceneGraphNode;
-
-        ///
-        /// \brief This class is used to store information about a basic camera in a 3D world.
-        ///
-        /// It is not a concrete implementation for a camera.
-        ///
-        class       Camera : public Entity
-        {
-            public:
+        public:
+            ///
+            /// \brief This struct is used to store the clipping plane of the camera.
+            ///
+            struct  ClippingPlane
+            {
                 ///
-                /// \brief This struct is used to store the clipping plane of the camera.
+                /// \brief Distance of the near clipping plane from the camera.
                 ///
-                struct  ClippingPlane
-                {
-                    ///
-                    /// \brief Distance of the near clipping plane from the camera.
-                    ///
-                    float   near;
-
-                    ///
-                    /// \brief Distance of the far clipping plane from the camera.
-                    ///
-                    float   far;
-                };
-
-            public:
-                ///
-                /// \brief Default constructor
-                ///
-                Camera(SceneGraphNode *node);
+                float   near;
 
                 ///
-                /// \brief Construct a camera from an assimp camera.
+                /// \brief Distance of the far clipping plane from the camera.
                 ///
-                Camera(const aiCamera *assimpCamera, SceneGraphNode *node); // TODO GSL NOT NULL
+                float   far;
+            };
 
-                ///
-                /// \brief Copy constructor.
-                ///
-                Camera(const Camera &other) = default;
+        public:
+            ///
+            /// \brief Default constructor
+            ///
+            Camera(SceneGraphNode *node);
 
-                ///
-                /// \brief Move constructor.
-                ///
-                Camera(Camera &&other) noexcept = default;
+            ///
+            /// \brief Construct a camera from an assimp camera.
+            ///
+            Camera(const aiCamera *assimpCamera, SceneGraphNode *node); // TODO GSL NOT NULL
 
-                ///
-                /// \brief Destructor.
-                ///
-                virtual ~Camera(void) noexcept;
+            ///
+            /// \brief Copy constructor.
+            ///
+            Camera(const Camera &other) = default;
 
-            public:
-                ///
-                /// \brief Copy assigment operator.
-                ///
-                Camera  &operator=(const Camera &other) = default;
+            ///
+            /// \brief Move constructor.
+            ///
+            Camera(Camera &&other) noexcept = default;
 
-                ///
-                /// \brief Move assigment operator.
-                ///
-                Camera  &operator=(Camera &&other) noexcept = default;
+            ///
+            /// \brief Destructor.
+            ///
+            virtual ~Camera(void) noexcept;
 
-            public:
-                ///
-                /// \brief Getter for the camera name.
-                ///
-                const std::string   &getName(void) const;
+        public:
+            ///
+            /// \brief Copy assigment operator.
+            ///
+            Camera  &operator=(const Camera &other) = default;
 
-                ///
-                /// \brief Getter for the camera projection matrix.
-                ///
-                virtual const glm::mat4     &getProjection(void) const = 0;
+            ///
+            /// \brief Move assigment operator.
+            ///
+            Camera  &operator=(Camera &&other) noexcept = default;
 
-                ///
-                /// \brief Getter for the camera view matrix.
-                ///
-                virtual const glm::mat4     &getView(void) const = 0;
+        public:
+            ///
+            /// \brief Getter for the camera name.
+            ///
+            const std::string   &getName(void) const;
 
-            protected:
-                ///
-                /// \brief The name of the camera.
-                ///
-                std::string         name;
+            ///
+            /// \brief Getter for the camera projection matrix.
+            ///
+            virtual const glm::mat4     &getProjection(void) const = 0;
 
-                ///
-                /// \brief the clipping plane for the camera.
-                ///
-                ClippingPlane       clippingPlane;
+            ///
+            /// \brief Getter for the camera view matrix.
+            ///
+            virtual const glm::mat4     &getView(void) const = 0;
 
-                ///
-                /// \brief Screen aspect ratio.
-                ///
-                float               aspect;
+        protected:
+            ///
+            /// \brief The name of the camera.
+            ///
+            std::string         name;
 
-                ///
-                /// \brief The field of view angle for the horizontal axis in radian.
-                ///
-                float               fov;
+            ///
+            /// \brief the clipping plane for the camera.
+            ///
+            ClippingPlane       clippingPlane;
 
-                ///
-                /// \brief Up vector of the camera coordinate system relative to
-                /// the coordinate space defined by the related node. (Entity::node);
-                ///
-                glm::vec3           up;
+            ///
+            /// \brief Screen aspect ratio.
+            ///
+            float               aspect;
 
-                ///
-                /// \brief lookat vector of the camera coordinate system relative
-                /// to the coordinate space defined by the related node. (Entity::node)
-                ///
-                glm::vec3           lookat;
+            ///
+            /// \brief The field of view angle for the horizontal axis in radian.
+            ///
+            float               fov;
 
-                ///
-                /// \brief Position of the camera relative to the coordinate space
-                /// defined by the related node. (Entity::node)
-                ///
-                glm::vec3           position;
-        };
+            ///
+            /// \brief Up vector of the camera coordinate system relative to
+            /// the coordinate space defined by the related node. (Entity::node);
+            ///
+            glm::vec3           up;
 
-    }
+            ///
+            /// \brief lookat vector of the camera coordinate system relative
+            /// to the coordinate space defined by the related node. (Entity::node)
+            ///
+            glm::vec3           lookat;
+
+            ///
+            /// \brief Position of the camera relative to the coordinate space
+            /// defined by the related node. (Entity::node)
+            ///
+            glm::vec3           position;
+    };
 }
 
 #endif /* !__ENGINE_CAMERA_HPP__ */

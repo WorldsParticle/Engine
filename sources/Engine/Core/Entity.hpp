@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 21:05:14
+/// \date Sun, 17 Jan 2016 06:52:56
 ///
-/// \version 1.0.3
+/// \version 1.0.4
 ///
 
 #ifndef     __ENGINE_ENTITY_HPP__
@@ -13,88 +13,85 @@
 
 #include    <string>
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+
+    class       Scene;
+    class       SceneGraphNode;
+    class       Transform;
+
+    ///
+    /// \brief This class is used to represent something physically or not in the 3D world.
+    ///
+    class       Entity
     {
+        public:
+            ///
+            /// \brief Default constructor
+            /// \param node the node which the entity is attached.
+            ///
+            Entity(SceneGraphNode *node); // TODO GSL NOT NULL
 
-        class       Scene;
-        class       SceneGraphNode;
-        class       Transform;
+            ///
+            /// \brief Copy constructor.
+            ///
+            Entity(const Entity &other);
 
-        ///
-        /// \brief This class is used to represent something physically or not in the 3D world.
-        ///
-        class       Entity
-        {
-            public:
-                ///
-                /// \brief Default constructor
-                /// \param node the node which the entity is attached.
-                ///
-                Entity(SceneGraphNode *node); // TODO GSL NOT NULL
+            ///
+            /// \brief Move constructor.
+            ///
+            Entity(Entity &&other);
 
-                ///
-                /// \brief Copy constructor.
-                ///
-                Entity(const Entity &other);
+            ///
+            /// \brief Destructor.
+            ///
+            virtual ~Entity(void) noexcept;
 
-                ///
-                /// \brief Move constructor.
-                ///
-                Entity(Entity &&other);
+        public:
+            ///
+            /// \brief Copy assignment operator.
+            ///
+            Entity  &operator=(const Entity &other);
 
-                ///
-                /// \brief Destructor.
-                ///
-                virtual ~Entity(void) noexcept;
+            ///
+            /// \brief Move assignment operator.
+            ///
+            Entity  &operator=(Entity &&other);
 
-            public:
-                ///
-                /// \brief Copy assignment operator.
-                ///
-                Entity  &operator=(const Entity &other);
+        public:
+            ///
+            /// \brief clone pattern
+            ///
+            virtual Entity  *clone(void) const = 0;
 
-                ///
-                /// \brief Move assignment operator.
-                ///
-                Entity  &operator=(Entity &&other);
+        public:
+            ///
+            /// \brief method used to update the entity.
+            ///
+            virtual void    update(void) = 0;
 
-            public:
-                ///
-                /// \brief clone pattern
-                ///
-                virtual Entity  *clone(void) const = 0;
+        public:
+            ///
+            /// \brief Getter for the associated node name.
+            ///
+            virtual const std::string   &getName(void) const;
 
-            public:
-                ///
-                /// \brief method used to update the entity.
-                ///
-                virtual void    update(void) = 0;
+            ///
+            /// \brief Getter for the transformation matrix of the associated node.
+            ///
+            const Transform             &getTransform(void) const;
 
-            public:
-                ///
-                /// \brief Getter for the associated node name.
-                ///
-                virtual const std::string   &getName(void) const;
+        protected:
+            ///
+            /// \brief The node which the entity is attached.
+            ///
+            SceneGraphNode  *node; // TODO GSL NOT NULL
 
-                ///
-                /// \brief Getter for the transformation matrix of the associated node.
-                ///
-                const Transform             &getTransform(void) const;
-
-            protected:
-                ///
-                /// \brief The node which the entity is attached.
-                ///
-                SceneGraphNode  *node; // TODO GSL NOT NULL
-
-                ///
-                /// \brief The scene that contains the Entity.
-                ///
-                Scene           *scene;
-        };
-    }
+            ///
+            /// \brief The scene that contains the Entity.
+            ///
+            Scene           *scene;
+    };
 }
 
 #endif /* !__ENGINE_ENTITY_HPP__ */

@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 21:03:23
+/// \date Sun, 17 Jan 2016 06:56:29
 ///
-/// \version 1.0.5
+/// \version 1.0.6
 ///
 
 #ifndef     __ENGINE_OBJECT_HPP__
@@ -16,80 +16,77 @@
 
 #include    <Engine/Entity.hpp>
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+
+    class   Mesh;
+
+    ///
+    /// \brief This class is used to represent a physical entity.
+    ///
+    class       Object : public Entity
     {
+        public:
+            ///
+            /// \brief Default constructor.
+            /// \param node the node related to the object.
+            ///
+            Object(SceneGraphNode *node); // TODO GSL NOT NULL
 
-        class   Mesh;
+            ///
+            /// \brief Construct an object from an assimp node.
+            ///
+            Object(const aiNode *assimpNode, SceneGraphNode *node); // TODO GSL NOT NULL
 
-        ///
-        /// \brief This class is used to represent a physical entity.
-        ///
-        class       Object : public Entity
-        {
-            public:
-                ///
-                /// \brief Default constructor.
-                /// \param node the node related to the object.
-                ///
-                Object(SceneGraphNode *node); // TODO GSL NOT NULL
+            ///
+            /// \brief Copy constructor.
+            ///
+            Object(const Object &other) = default;
 
-                ///
-                /// \brief Construct an object from an assimp node.
-                ///
-                Object(const aiNode *assimpNode, SceneGraphNode *node); // TODO GSL NOT NULL
+            ///
+            /// \brief Move constructor.
+            ///
+            Object(Object &&other) noexcept = default;
 
-                ///
-                /// \brief Copy constructor.
-                ///
-                Object(const Object &other) = default;
+            ///
+            /// \brief Destructor.
+            ///
+            virtual ~Object(void) noexcept;
 
-                ///
-                /// \brief Move constructor.
-                ///
-                Object(Object &&other) noexcept = default;
+        public:
+            ///
+            /// \brief Copy assignment operator.
+            ///
+            Object  &operator=(const Object &other) = default;
 
-                ///
-                /// \brief Destructor.
-                ///
-                virtual ~Object(void) noexcept;
+            ///
+            /// \brief Move assigment operator.
+            ///
+            Object  &operator=(Object &&other) noexcept = default;
 
-            public:
-                ///
-                /// \brief Copy assignment operator.
-                ///
-                Object  &operator=(const Object &other) = default;
+        public:
+            ///
+            /// \brief This method is used to clone the object.
+            ///
+            Object  *clone(void) const;
 
-                ///
-                /// \brief Move assigment operator.
-                ///
-                Object  &operator=(Object &&other) noexcept = default;
+            ///
+            /// \brief Update the object.
+            ///
+            void    update(void);
 
-            public:
-                ///
-                /// \brief This method is used to clone the object.
-                ///
-                Object  *clone(void) const;
+        public:
+            ///
+            /// \brief Getter for the mesh list.
+            ///
+            const std::list<Mesh *>     &getMeshes(void) const;
 
-                ///
-                /// \brief Update the object.
-                ///
-                void    update(void);
-
-            public:
-                ///
-                /// \brief Getter for the mesh list.
-                ///
-                const std::list<Mesh *>     &getMeshes(void) const;
-
-            protected:
-                ///
-                /// \brief The meshes associated with the object.
-                ///
-                std::list<Mesh *>     meshes; // TODO GSL NOT NULL
-        };
-    }
+        protected:
+            ///
+            /// \brief The meshes associated with the object.
+            ///
+            std::list<Mesh *>     meshes; // TODO GSL NOT NULL
+    };
 }
 
 #endif /* !__ENGINE_OBJECT_HPP__ */

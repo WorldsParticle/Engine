@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 21:05:00
+/// \date Sun, 17 Jan 2016 06:53:12
 ///
-/// \version 1.0.3
+/// \version 1.0.5
 ///
 
 #ifndef     __ENGINE_LIBRARY_HPP__
@@ -13,58 +13,55 @@
 
 #include    <vector>
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+    template<typename T>
+    class       Library
     {
-        template<typename T>
-        class       Library
-        {
-            public:
-                ///
-                /// \brief Default constructor.
-                ///
-                Library(void);
+        public:
+            ///
+            /// \brief Default constructor.
+            ///
+            Library(void);
 
-                ///
-                /// \brief Copy constructor.
-                ///
-                Library(const Library &other);
+            ///
+            /// \brief Copy constructor.
+            ///
+            Library(const Library &other);
 
-                ///
-                /// \brief Move constructor.
-                ///
-                Library(Library &&other) noexcept;
+            ///
+            /// \brief Move constructor.
+            ///
+            Library(Library &&other) noexcept;
 
-                ///
-                /// \brief Destructor.
-                ///
-                virtual ~Library(void) noexcept;
+            ///
+            /// \brief Destructor.
+            ///
+            virtual ~Library(void) noexcept;
 
-            public:
-                ///
-                /// \brief Copy assignment operator.
-                ///
-                Library     &operator=(const Library &other);
+        public:
+            ///
+            /// \brief Copy assignment operator.
+            ///
+            Library     &operator=(const Library &other);
 
-                ///
-                /// \brief Move assignment operator.
-                ///
-                Library     &operator=(Library &&other) noexcept;
+            ///
+            /// \brief Move assignment operator.
+            ///
+            Library     &operator=(Library &&other) noexcept;
 
-            public:
-                ///
-                /// \brief Getter for a resource.
-                ///
-                const T     &get(unsigned int id) const;
+        public:
+            ///
+            /// \brief Getter for a resource.
+            ///
+            const T     &get(unsigned int id) const;
 
-            protected:
-                ///
-                /// \brief Resources container.
-                ///
-                std::vector<T>      resources;
-        };
-    }
+        protected:
+            ///
+            /// \brief Resources container.
+            ///
+            std::vector<T>      resources;
+    };
 }
 
 #include    "Library.tpp"

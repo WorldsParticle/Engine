@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 21:02:06
+/// \date Sun, 17 Jan 2016 07:00:26
 ///
-/// \version 1.0.3
+/// \version 1.0.4
 ///
 
 #ifndef     __ENGINE_SCENE_GRAPH_HPP__
@@ -13,82 +13,79 @@
 
 #include    <assimp/scene.h>
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+    class       Scene;
+    class       SceneGraphNode;
+    class       AssimpScene;
+
+    class       SceneGraph
     {
-        class       Scene;
-        class       SceneGraphNode;
-        class       AssimpScene;
+        public:
+            ///
+            /// \brief Default constructor for the scene graph.
+            ///
+            /// This constructor will generate a empty scene graph.
+            ///
+            SceneGraph(Scene *scene);
 
-        class       SceneGraph
-        {
-            public:
-                ///
-                /// \brief Default constructor for the scene graph.
-                ///
-                /// This constructor will generate a empty scene graph.
-                ///
-                SceneGraph(Scene *scene);
+            ///
+            /// \brief Constructor from an assimp scene graph.
+            ///
+            /// TODO GSL NOT NULL
+            ///
+            SceneGraph(const AssimpScene &assimpScene, Scene *scene);
 
-                ///
-                /// \brief Constructor from an assimp scene graph.
-                ///
-                /// TODO GSL NOT NULL
-                ///
-                SceneGraph(const AssimpScene &assimpScene, Scene *scene);
+            ///
+            /// \brief Copy constructor.
+            ///
+            SceneGraph(const SceneGraph &other);
 
-                ///
-                /// \brief Copy constructor.
-                ///
-                SceneGraph(const SceneGraph &other);
+            ///
+            /// \brief Move constructor.
+            ///
+            SceneGraph(SceneGraph &&other) noexcept;
 
-                ///
-                /// \brief Move constructor.
-                ///
-                SceneGraph(SceneGraph &&other) noexcept;
+            ///
+            /// \brief Destructor
+            ///
+            virtual ~SceneGraph(void) noexcept;
 
-                ///
-                /// \brief Destructor
-                ///
-                virtual ~SceneGraph(void) noexcept;
+        public:
+            ///
+            /// \brief Copy assignment operator.
+            ///
+            SceneGraph  &operator=(const SceneGraph &other);
 
-            public:
-                ///
-                /// \brief Copy assignment operator.
-                ///
-                SceneGraph  &operator=(const SceneGraph &other);
+            ///
+            /// \brief Move assignment operator.
+            ///
+            SceneGraph  &operator=(SceneGraph &&other) noexcept;
 
-                ///
-                /// \brief Move assignment operator.
-                ///
-                SceneGraph  &operator=(SceneGraph &&other) noexcept;
+        public:
+            ///
+            /// \brief This method is used to recursively update the node in the scene graph.
+            ///
+            void    update(void);
 
-            public:
-                ///
-                /// \brief This method is used to recursively update the node in the scene graph.
-                ///
-                void    update(void);
+        public:
+            ///
+            /// \brief Getter for the scene attribute.
+            ///
+            Scene   *getScene(void) const;
 
-            public:
-                ///
-                /// \brief Getter for the scene attribute.
-                ///
-                Scene   *getScene(void) const;
+        private:
+            ///
+            /// \brief The Scene represented by the scene graph.
+            ///
+            Scene                   *scene; // TODO GSL NOT NULL
 
-            private:
-                ///
-                /// \brief The Scene represented by the scene graph.
-                ///
-                Scene                   *scene; // TODO GSL NOT NULL
+            ///
+            /// \brief The root node of the graph.
+            ///
+            SceneGraphNode          *rootNode; // TODO GSL OWNER
 
-                ///
-                /// \brief The root node of the graph.
-                ///
-                SceneGraphNode          *rootNode; // TODO GSL OWNER
-
-        };
-    }
+    };
 }
 
 #endif /* !__ENGINE_SCENE_GRAPH_HPP__ */

@@ -3,17 +3,14 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 20:47:06
+/// \date Sun, 17 Jan 2016 06:52:16
 ///
-/// \version 1.0.8
+/// \version 1.0.9
 ///
 
 #include <Engine/Clock.hpp>
 
-namespace WorldParticles
+namespace Engine
 {
-    namespace Engine
-    {
 
-    }
 }

@@ -3,29 +3,25 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 19:58:54
+/// \date Sun, 17 Jan 2016 06:52:28
 ///
-/// \version 1.0.9
+/// \version 1.0.10
 ///
 
 #ifndef     __ENGINE_CLOCK_HPP__
 #define     __ENGINE_CLOCK_HPP__
 
-namespace WorldParticles
+namespace Engine
 {
-    namespace Engine
+    ///
+    /// \brief This class is used to represent the clock between frame and the world clock.
+    ///
+    /// This class should be entirely reworked.
+    ///
+    class   Clock
     {
-        ///
-        /// \brief This class is used to represent the clock between frame and the world clock.
-        ///
-        /// This class should be entirely reworked.
-        ///
-        class   Clock
-        {
-            public:
-        };
-
-    }
+        public:
+    };
 }
 
 #endif // GAMECLOCK_H

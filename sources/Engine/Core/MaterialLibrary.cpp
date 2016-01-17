@@ -3,65 +3,62 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 20:48:08
+/// \date Sun, 17 Jan 2016 06:54:39
 ///
-/// \version 1.0.2
+/// \version 1.0.3
 ///
 
 #include    <Engine/MaterialLibrary.hpp>
 #include    <Engine/Material.hpp>
 #include    <Engine/ShaderProgramLibrary.hpp>
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+    MaterialLibrary::MaterialLibrary(void) :
+        Library<Material *>()
     {
-        MaterialLibrary::MaterialLibrary(void) :
-            Library<Material *>()
-        {
-            // nothing to do.
-        }
+        // nothing to do.
+    }
 
-        MaterialLibrary::MaterialLibrary(const ShaderProgramLibrary &shaderprograms,
-                aiMaterial **assimpMaterials, unsigned int size) :
-            Library<Material *>()
+    MaterialLibrary::MaterialLibrary(const ShaderProgramLibrary &shaderprograms,
+            aiMaterial **assimpMaterials, unsigned int size) :
+        Library<Material *>()
+    {
+        this->resources.reserve(size);
+        for (unsigned int i = 0 ; i < size ; ++i)
         {
-            this->resources.reserve(size);
-            for (unsigned int i = 0 ; i < size ; ++i)
-            {
-                const auto &shaderprogram = shaderprograms.get(TEST_SHADER_PROGRAM);
-                this->resources.push_back(new Material(assimpMaterials[i], shaderprogram));
-            }
+            const auto &shaderprogram = shaderprograms.get(TEST_SHADER_PROGRAM);
+            this->resources.push_back(new Material(assimpMaterials[i], shaderprogram));
         }
+    }
 
-        MaterialLibrary::MaterialLibrary(const MaterialLibrary &other) :
-            Library<Material *>()
+    MaterialLibrary::MaterialLibrary(const MaterialLibrary &other) :
+        Library<Material *>()
+    {
+        this->resources.reserve(other.resources.size());
+        for (Material *resource : other.resources)
         {
-            this->resources.reserve(other.resources.size());
-            for (Material *resource : other.resources)
-            {
-                this->resources.push_back(new Material(*resource));
-            }
+            this->resources.push_back(new Material(*resource));
         }
+    }
 
-        MaterialLibrary::~MaterialLibrary(void)
+    MaterialLibrary::~MaterialLibrary(void)
+    {
+        for (Material *resource : this->resources)
         {
-            for (Material *resource : this->resources)
-            {
-                delete resource;
-            }
+            delete resource;
         }
+    }
 
 
-        MaterialLibrary &
-        MaterialLibrary::operator=(const MaterialLibrary &other)
-        {
-             this->resources.reserve(other.resources.size());
-             for (Material *resource : other.resources)
-             {
-                 this->resources.push_back(new Material(*resource));
-             }
-             return *this;
-        }
+    MaterialLibrary &
+    MaterialLibrary::operator=(const MaterialLibrary &other)
+    {
+         this->resources.reserve(other.resources.size());
+         for (Material *resource : other.resources)
+         {
+             this->resources.push_back(new Material(*resource));
+         }
+         return *this;
     }
 }

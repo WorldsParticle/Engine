@@ -3,9 +3,9 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 20:49:23
+/// \date Sun, 17 Jan 2016 06:56:16
 ///
-/// \version 1.0.2
+/// \version 1.0.3
 ///
 
 #include    <log4cpp/Category.hh>
@@ -15,63 +15,58 @@
 
 using namespace     log4cpp;
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+    Object::Object(SceneGraphNode *node) :
+        Entity(node)
     {
-        Object::Object(SceneGraphNode *node) :
-            Entity(node)
+        this->scene->add(this);
+    }
+
+    // TODO GSL NOT NULL
+    Object::Object(const aiNode *assimpNode, SceneGraphNode *node) :
+        Entity(node)
+    {
+        Category &root = Category::getRoot();
+        root << Priority::DEBUG << "Création object";
+        for (unsigned int i = 0 ; i < assimpNode->mNumMeshes ; ++i)
         {
-            this->scene->add(this);
+            root << Priority::DEBUG << "Add mesh";
+            auto *mesh = this->scene->getMesh(assimpNode->mMeshes[i]);
+            this->meshes.push_back(mesh);
         }
 
-        // TODO GSL NOT NULL
-        Object::Object(const aiNode *assimpNode, SceneGraphNode *node) :
-            Entity(node)
-        {
-            Category &root = Category::getRoot();
-            root << Priority::DEBUG << "Création object";
-            for (unsigned int i = 0 ; i < assimpNode->mNumMeshes ; ++i)
-            {
-                root << Priority::DEBUG << "Add mesh";
-                auto *mesh = this->scene->getMesh(assimpNode->mMeshes[i]);
-                this->meshes.push_back(mesh);
-            }
-
-            this->scene->add(this);
-
-        }
-
-        Object::~Object(void)
-        {
-
-        }
-
-
-
-        Object *
-        Object::clone(void) const
-        {
-            return new Object(*this);
-        }
-
-        void
-        Object::update(void)
-        {
-            //Category    &root = Category::getRoot();
-
-            //root << Priority::DEBUG << "Object - update()";
-            // nothing to do actually.
-        }
-
-
-        const std::list<Mesh *> &
-        Object::getMeshes(void) const
-        {
-            return this->meshes;
-        }
-
-
+        this->scene->add(this);
 
     }
+
+    Object::~Object(void)
+    {
+
+    }
+
+
+
+    Object *
+    Object::clone(void) const
+    {
+        return new Object(*this);
+    }
+
+    void
+    Object::update(void)
+    {
+        //Category    &root = Category::getRoot();
+
+        //root << Priority::DEBUG << "Object - update()";
+        // nothing to do actually.
+    }
+
+
+    const std::list<Mesh *> &
+    Object::getMeshes(void) const
+    {
+        return this->meshes;
+    }
+
 }

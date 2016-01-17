@@ -3,31 +3,28 @@
 ///
 /// \author Martin-Pierrat Louis (mart_p)
 ///
-/// \date Sat, 16 Jan 2016 20:55:39
+/// \date Sun, 17 Jan 2016 07:04:08
 ///
-/// \version 1.0.2
+/// \version 1.0.3
 ///
 
 #include    <Engine/Texture.hpp>
 
-namespace   WorldParticles
+namespace   Engine
 {
-    namespace   Engine
+    Texture::Texture(void)
     {
-        Texture::Texture(void)
-        {
-            // nothing to do atm.
-        }
-
-        Texture::Texture(const aiTexture *assimpTexture)
-        {
-            // nothing to do atm.
-        }
-
-        Texture::~Texture(void)
-        {
-            // nothing to do atm.
-        }
-
+        // nothing to do atm.
     }
+
+    Texture::Texture(const aiTexture *assimpTexture)
+    {
+        // nothing to do atm.
+    }
+
+    Texture::~Texture(void)
+    {
+        // nothing to do atm.
+    }
+
 }
