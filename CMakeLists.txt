@@ -1,21 +1,27 @@
-#
-# \file CMakeLists.txt
-#
-# \author Martin-Pierrat Louis (mart_p)
-#
-# \date Sat, 16 Jan 2016 20:31:02
-#
-# \version 1.0.0
-#
-# CMakeList used to generate the Engine library.
-#
+##
+## This program is free software; you can redistribute it and/or modify
+## it under the terms of the GNU General Public License as published by
+## the Free Software Foundation; either version 3 of the License, or
+## any later version.
+##
+## This program is distributed in the hope that it will be useful,
+## but WITHOUT ANY WARRANTY; without even the implied warranty of
+## MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+## GNU General Public License for more details.
+##
+## You should have received a copy of the GNU General Public License along
+## with this program; If not, see <http://www.gnu.org/licenses/>.
+##
+## Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
+##
+
 
 
 ## CMAKE INITIALISATION
 
 PROJECT(Engine)
 CMAKE_MINIMUM_REQUIRED(VERSION 2.8.12)
-SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/cmake_modules")
+SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/)
 
 ## END CMAKE INITIALISATION
 
@@ -24,26 +30,33 @@ SET(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/cmake_modu
 ## PROJECT VERSION
 
 SET(PROJECT_VERSION_MAJOR 2)
-SET(PROJECT_VERSION_MINOR 1)
-SET(PROJECT_VERSION_PATCH 0)
+SET(PROJECT_VERSION_MINOR 2)
+SET(PROJECT_VERSION_PATCH 1)
 SET(PROJECT_VERSION_EXTRA 0)
 
 SET(PROJECT_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
 SET(PROJECT_VERSION_FULL ${PROJECT_VERSION}.${PROJECT_VERSION_EXTRA})
 
-SET(RESOURCES_PATH "${CMAKE_SOURCE_DIR}/resources")
-
-CONFIGURE_FILE(
-    "${CMAKE_SOURCE_DIR}/sources/Engine/Version.hpp.in"
-    "${CMAKE_SOURCE_DIR}/sources/Engine/Version.hpp"
-    )
-
-CONFIGURE_FILE(
-    "${CMAKE_SOURCE_DIR}/sources/Engine/Configuration.hpp.in"
-    "${CMAKE_SOURCE_DIR}/sources/Engine/Configuration.hpp"
-    )
-
 ## END PROJECT VERSION
+
+## PROJECT CONFIGURATION
+
+SET(PROJECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/include/)
+SET(PROJECT_SOURCE_DIR ${CMAKE_SOURCE_DIR}/source/)
+
+SET(RESOURCES_PATH ${CMAKE_SOURCE_DIR}/resources)
+
+CONFIGURE_FILE(
+    ${PROJECT_INCLUDE_DIR}/Engine/Version.hpp.in
+    ${PROJECT_INCLUDE_DIR}/Engine/Version.hpp
+    )
+
+CONFIGURE_FILE(
+    ${PROJECT_INCLUDE_DIR}/Engine/Configuration.hpp.in
+    ${PROJECT_INCLUDE_DIR}/Engine/Configuration.hpp
+    )
+
+## END PROJECT CONFIGURATION
 
 
 
@@ -59,57 +72,19 @@ ENABLE_LANGUAGE(CXX)
 
 FIND_PACKAGE(OpenGL REQUIRED)
 FIND_PACKAGE(GLEW REQUIRED)
-FIND_PACKAGE(Devil REQUIRED)
+#FIND_PACKAGE(Devil REQUIRED)
 FIND_PACKAGE(Assimp REQUIRED)
 FIND_PACKAGE(Log4cpp REQUIRED)
-FIND_PACKAGE(RapidXml REQUIRED)
+#FIND_PACKAGE(RapidXml REQUIRED)
+FIND_PACKAGE(Threads REQUIRED)
 
 ## END FIND LIBRARY DEPENDENCY
 
 
 ## PROJECT SOURCES FILES
 
-SET(ENGINE_SOURCES_DIR ${CMAKE_SOURCE_DIR}/sources/Engine/)
-SET(CORE_ENGINE_SOURCES_DIR ${ENGINE_SOURCES_DIR}/Core/)
-
-SET(ENGINE_SOURCES_FILES
-    ${ENGINE_SOURCES_DIR}/Core.cpp
-    )
-
-SET(CORE_ENGINE_SOURCES_FILES
-    ${CORE_ENGINE_SOURCES_DIR}/Animation.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/AnimationLibrary.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/ArrayObject.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/AssimpImporter.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/AssimpScene.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/BufferObject.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Camera.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Clock.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Entity.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Light.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Material.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/MaterialLibrary.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Mesh.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/MeshLibrary.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Object.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/PerspectiveCamera.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Renderer.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Scene.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/SceneGraph.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/SceneGraphNode.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Shader.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderLibrary.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgram.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgramLibrary.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/SpatialGraph.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Texture.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/TextureLibrary.cpp
-    ${CORE_ENGINE_SOURCES_DIR}/Transform.cpp
-    )
-
-SET(PROJECT_SOURCES_FILES
-    ${ENGINE_SOURCES_FILES}
-    ${CORE_ENGINE_SOURCES_FILES}
+FILE(GLOB_RECURSE PROJECT_SOURCE_FILES
+    ${PROJECT_SOURCE_DIR}/*.cpp
     )
 
 ## END PROJECT SOURCES FILES
@@ -118,54 +93,8 @@ SET(PROJECT_SOURCES_FILES
 
 ## PROJECT HEADERS FILES
 
-SET(CORE_ENGINE_SOURCES_DIR ${ENGINE_SOURCES_DIR}/Core/)
-
-SET(CORE_ENGINE_HEADERS_FILES
-    ${CORE_ENGINE_SOURCES_DIR}/Animation.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/AnimationLibrary.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/ArrayObject.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/AssimpImporter.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/AssimpScene.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/BufferObject.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Camera.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Clock.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Entity.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Library.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Library.tpp
-    ${CORE_ENGINE_SOURCES_DIR}/Light.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Material.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/MaterialLibrary.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Mesh.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/MeshLibrary.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Object.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/PerspectiveCamera.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Renderer.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Scene.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/SceneGraph.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/SceneGraphNode.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Shader.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderLibrary.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderMapping.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderNames.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgram.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgramLibrary.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgramMapping.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/ShaderProgramNames.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/SpatialGraph.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Texture.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/TextureLibrary.hpp
-    ${CORE_ENGINE_SOURCES_DIR}/Transform.hpp
-    )
-
-SET(ENGINE_HEADERS_FILES
-    ${ENGINE_SOURCES_DIR}/Configuration.hpp
-    ${ENGINE_SOURCES_DIR}/Version.hpp
-    ${ENGINE_SOURCES_DIR}/Core.hpp
-    )
-
-SET(PROJECT_HEADERS_FILES
-    ${ENGINE_HEADERS_FILES}
-    ${CORE_ENGINE_HEADERS_FILES}
+SET(GLOB_RECURSE PROJECT_INCLUDE_FILES
+    ${PROJECT_INCLUDE_DIR}/*.hpp
     )
 
 ## END PROJECT HEADERS FILES
@@ -174,14 +103,12 @@ SET(PROJECT_HEADERS_FILES
 
 ## PROJECT INCLUDES DIRECTORIES
 
-SET(PROJECT_INCLUDE_DIR ${CMAKE_SOURCE_DIR}/sources/)
-
 INCLUDE_DIRECTORIES(
     ${PROJECT_INCLUDE_DIR}
     ${OPENGL_INCLUDE_DIR}
     ${GLEW_INCLUDE_DIRS}
     ${ASSIMP_INCLUDE_DIR}
-    ${DevIL_INCLUDE_DIR}
+    #${DevIL_INCLUDE_DIR}
     ${LOG4CPP_INCLUDE_DIR}
     )
 
@@ -193,12 +120,13 @@ INCLUDE_DIRECTORIES(
 
 IF (CMAKE_BUILD_TYPE MATCHES "debug")
 
-    SET(CMAKE_CXX_FLAGS_DEBUG ${CMAKE_CXX_FLAGS_DEBUG} -D__DEBUG__)
-    SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/debug/)
+    ADD_DEFINITIONS(-D__DEBUG__)
+    ADD_DEFINITIONS(-g3)
 
 ELSE ()
 
-    SET(LIBRARY_OUTPUT_PATH ${CMAKE_SOURCE_DIR}/build/release)
+    ADD_DEFINITIONS(-D__RELEASE__)
+    ADD_DEFINITIONS(-O2)
 
 ENDIF ()
 
@@ -207,6 +135,12 @@ ENDIF ()
 
 
 ## COMPILATION SETTINGS
+
+IF (CMAKE_COMPILER_IS_GNUCXX)
+
+    ADD_DEFINITIONS(-Wall -Wextra -std=c++14)
+
+ENDIF()
 
 #if (WIN32)
     #if (MSVC)
@@ -219,7 +153,7 @@ ENDIF ()
     #endif()
 #elseif (UNIX)
     #set(CMAKE_PREFIX_PATH "/usr/lib64/qt5")
-    SET(CMAKE_CXX_FLAGS "-std=c++14 -W -Wall -Wextra")
+    #SET(CMAKE_CXX_FLAGS "-std=c++14 -W -Wall -Wextra")
 #else ()
     #message(SEND_ERROR "You are on an unsupported platform! (Not Win32 or Unix)")
 #ENDIF ()
@@ -230,7 +164,7 @@ ENDIF ()
 
 ## BINARY SETTINGS
 
-ADD_LIBRARY(${CMAKE_PROJECT_NAME} SHARED ${PROJECT_SOURCES_FILES})
+ADD_LIBRARY(${CMAKE_PROJECT_NAME} SHARED ${PROJECT_SOURCE_FILES})
 
 ## END BINARY SETTINGS
 
@@ -243,9 +177,9 @@ TARGET_LINK_LIBRARIES(${CMAKE_PROJECT_NAME}
     ${GLEW_LIBRARIES}
     ${ASSIMP_LIBRARY}
     ${LOG4CPP_LIBRARY}
-    ${DevIL_LIBRARY_ILUT}
-    ${DevIL_LIBRARY_ILU}
-    ${DevIL_LIBRARY_IL}
+#    ${DevIL_LIBRARY_ILUT}
+    #${DevIL_LIBRARY_ILU}
+    #${DevIL_LIBRARY_IL}
     )
 
 ## END LIBRARY SETTINGS
@@ -259,16 +193,57 @@ INSTALL(TARGETS ${CMAKE_PROJECT_NAME}
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib)
 
-INSTALL(FILES ${ENGINE_HEADERS_FILES}
-    DESTINATION include/Engine/
+INSTALL(DIRECTORY ${PROJECT_INCLUDE_DIR}
+    DESTINATION include
+    FILES_MATCHING PATTERN "*.hpp"
     )
-
-INSTALL(FILES ${CORE_ENGINE_HEADERS_FILES}
-    DESTINATION include/Engine/Core/
-    )
-
 
 ## END INSTALLATION SETTINGS
+
+
+## TEST CONFIGURATION
+
+INCLUDE(ExternalProject)
+
+EXTERNALPROJECT_ADD(googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    CMAKE_ARGS -DBUILD_GTEST=ON
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}
+    INSTALL_COMMAND ""
+    )
+
+EXTERNALPROJECT_GET_PROPERTY(googletest source_dir)
+SET(GTEST_INCLUDE_DIRS ${source_dir}/googletest/include)
+
+EXTERNALPROJECT_GET_PROPERTY(googletest binary_dir)
+SET(GTEST_LIBS_DIR ${binary_dir}/googlemock/gtest)
+
+INCLUDE_DIRECTORIES(${GTEST_INCLUDE_DIRS})
+
+FUNCTION(CXX_TEST name sources)
+
+    ADD_EXECUTABLE(${name} ${sources})
+    ADD_DEPENDENCIES(${name} googletest)
+    TARGET_LINK_LIBRARIES(${name}
+        ${GTEST_LIBS_DIR}/libgtest.a
+        ${GTEST_LIBS_DIR}/libgtest_main.a
+    )
+    TARGET_LINK_LIBRARIES(${name} ${CMAKE_THREAD_LIBS_INIT})
+    ADD_TEST(${name} ${name})
+
+ENDFUNCTION()
+
+## END TEST CONFIGURATION
+
+
+
+## TESTS
+
+ENABLE_TESTING()
+
+CXX_TEST(test1 test/test1.cpp)
+
+## END TESTS
 
 
 
@@ -285,10 +260,11 @@ IF (DOXYGEN_FOUND)
 
     ADD_CUSTOM_TARGET(doc
         ${DOXYGEN_EXECUTABLE} ${CMAKE_BINARY_DIR}/Doxyfile
-        WORKING_DIRECTORY "${CMAKE_SOURCE_DIR}/sources"
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}/sources
         COMMENT "Generating API documentation with Doxygen" VERBATIM
         )
 
 ENDIF (DOXYGEN_FOUND)
 
 ## END DOXYGEN CONFIGURATION
+

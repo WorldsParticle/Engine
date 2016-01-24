@@ -28,10 +28,7 @@
 
 # Worldparticles project
 
-cmake/*
-!cmake/cmake_modules
-sources/configuration.hpp
-sources/version.hpp
+include/Engine/Configuration.hpp
+include/Engine/version.hpp
 doc
-*.user
 build/
