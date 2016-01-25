@@ -24,6 +24,10 @@
 
 #include    "Engine/Core/Entity.hpp"
 
+// Windows compilation, windows...
+#undef	near
+#undef	far
+
 namespace   Engine
 {
 

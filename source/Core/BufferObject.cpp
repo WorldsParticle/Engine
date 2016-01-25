@@ -72,6 +72,7 @@ namespace   Engine
         glBindBuffer(this->convert(this->type), 0);
     }
 
+	// TODO : passage en std::size_t => mart_p == boulet.
     void
     BufferObject::update(void *data, unsigned int length)
     {
