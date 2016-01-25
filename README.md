@@ -27,4 +27,34 @@ make
 
 TODO mart_p
 
+### Release
+
+Compilation 64 && Release sur windows.
+
+#### Installation GLEW
+
+
+#### Installation Log4cpp
+
+
+#### Installation Assimp
+
+
+#### Installation GLM
+
+### Debug
+
+Compilation 64 && Debug sur windows
+
+#### Installation GLEW
+
+
+#### Installation Log4cpp
+
+
+#### Installation Assimp
+
+
+#### Installation GLM
+
 
