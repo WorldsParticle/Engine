@@ -231,6 +231,7 @@ FUNCTION(CXX_TEST name sources)
     TARGET_LINK_LIBRARIES(${name}
         ${GTEST_LIBS_DIR}/libgtest.a
         ${GTEST_LIBS_DIR}/libgtest_main.a
+        ${CMAKE_PROJECT_NAME}
     )
     TARGET_LINK_LIBRARIES(${name} ${CMAKE_THREAD_LIBS_INIT})
     ADD_TEST(${name} ${name})
@@ -246,6 +247,7 @@ ENDFUNCTION()
 ENABLE_TESTING()
 
 CXX_TEST(test1 test/test1.cpp)
+CXX_TEST(test_core test/test_core.cpp)
 
 ## END TESTS
 
