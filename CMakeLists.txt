@@ -134,39 +134,125 @@ ENDIF ()
 
 
 
-## COMPILATION SETTINGS
-
-IF (CMAKE_COMPILER_IS_GNUCXX)
-
-    ADD_DEFINITIONS(-Wall -Wextra -std=c++14)
-
-ENDIF()
-
-#if (WIN32)
-    #if (MSVC)
-    #elseif(CMAKE_COMPILER_IS_GNUCXX)
-    ## SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -mwindows")
-    ## # Not tested
-    #else()
-    #message(SEND_ERROR "You are using an
-    #unsupported Windows compiler! (Not MSVC or GCC)")
-    #endif()
-#elseif (UNIX)
-    #set(CMAKE_PREFIX_PATH "/usr/lib64/qt5")
-    #SET(CMAKE_CXX_FLAGS "-std=c++14 -W -Wall -Wextra")
-#else ()
-    #message(SEND_ERROR "You are on an unsupported platform! (Not Win32 or Unix)")
-#ENDIF ()
-
-## END COMPILATION SETTINGS
-
-
-
 ## BINARY SETTINGS
 
 ADD_LIBRARY(${CMAKE_PROJECT_NAME} SHARED ${PROJECT_SOURCE_FILES})
 
 ## END BINARY SETTINGS
+
+
+
+## COMPILATION SETTINGS
+
+IF (CMAKE_COMPILER_IS_GNUCXX)
+
+
+    # Warn when a class seems unusable because all the constructors or
+    # destructors in that class are private, and it has neither friends nor
+    # public static member functions. Also warn if there are no non-private
+    # methods, and there's at least one private member function that isn't a
+    # constructor or destructor.
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wctor-dtor-privacy)
+
+    # Warn when a noexcept-expression evaluates to false because of a call to a
+    # function that does not have a non-throwing exception specification
+    # (i.e. throw() or noexcept) but is known by the compiler to never throw
+    # an exception.
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wnoexcept)
+
+    # Warn when a class has virtual functions and an accessible non-virtual
+    # destructor itself or in an accessible polymorphic base class, in which
+    # case it is possible but unsafe to delete an instance of a derived class
+    # through a pointer to the class itself or base class. This warning is
+    # automatically enabled if -Weffc++ is specified.
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wnon-virtual-dtor)
+
+    # Warn about violations of the following style guidelines from Scott Meyers' Effective C++ series of books:
+    #
+    #   - Define a copy constructor and an assignment operator for classes with
+    # dynamically-allocated memory.
+    #   - Prefer initialization to assignment in constructors.
+    #   - Have operator= return a reference to *this.
+    #   - Don't try to return a reference when you must return an object.
+    #   - Distinguish between prefix and postfix forms of increment and decrement operators.
+    #   - Never overload &&, ||, or ,.
+    #
+    # This option also enables -Wnon-virtual-dtor, which is also one of the
+    # effective C++ recommendations. However, the check is extended to warn
+    # about the lack of virtual destructor in accessible non-polymorphic bases
+    # classes too.
+    #
+    # When selecting this option, be aware that the standard library headers do
+    # not obey all of these guidelines; use ‘grep -v’ to filter out those
+    # warnings.
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Weffc++)
+
+    # Warn about the use of an uncasted NULL as sentinel. When compiling only
+    # with GCC this is a valid sentinel, as NULL is defined to __null. Although
+    # it is a null pointer constant rather than a null pointer, it is guaranteed
+    # to be of the same size as a pointer. But this use is not portable across
+    # different compilers.
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wstrict-null-sentinel)
+
+    # Warn if an old-style (C-style) cast to a non-void type is used within a
+    # C++ program. The new-style casts (dynamic_cast, static_cast,
+    # reinterpret_cast, and const_cast) are less vulnerable to unintended
+    # effects and much easier to search for.
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wold-style-cast)
+
+    # Warn when a function declaration hides virtual functions from a base
+    # class. For example, in:
+    #
+    # struct A {
+    #       virtual void f();
+    # };
+    #
+    # struct B: public A {
+    #       void f(int);
+    # };
+    #
+    # the A class version of f is hidden in B, and code like:
+    #
+    #   B* b;
+    #   b->f();
+    #
+    # fails to compile.
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Woverloaded-virtual)
+
+    # Disable the diagnostic for converting a bound pointer to member function
+    # to a plain pointer.
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wno-pmf-conversions)
+
+    # Warn when overload resolution chooses a promotion from unsigned or
+    # enumerated type to a signed type, over a conversion to an unsigned type
+    # of the same size.
+    #
+    # Previous versions of G++ tried to preserve unsignedness, but the standard
+    # mandates the current behavior.
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsign-promo)
+
+    # Warn when a class is defined with multiple direct base classes.
+    # Some coding rules disallow multiple inheritance, and this may be used to
+    # enforce that rule.
+    # The warning is inactive inside a system header file, such as the STL, so
+    # one can still use the STL.
+    # One may also define classes that indirectly use multiple inheritance.
+    #TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wmultiple-inheritance)
+
+    # Warn when a class is defined with a virtual direct base classe.
+    # Some coding rules disallow multiple inheritance, and this may be used to
+    # enforce that rule. The warning is inactive inside a system header file,
+    # such as the STL, so one can still use the STL.
+    # One may also define classes that indirectly use virtual inheritance.
+    #TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wvirtual-inheritance)
+
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wall)
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wextra)
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -std=c++14)
+
+ENDIF()
+
+## END COMPILATION SETTINGS
 
 
 
@@ -251,6 +337,7 @@ FUNCTION(CXX_TEST name sources)
         ${CMAKE_PROJECT_NAME}
     )
     TARGET_LINK_LIBRARIES(${name} ${CMAKE_THREAD_LIBS_INIT})
+    TARGET_COMPILE_OPTIONS(${name} PRIVATE -std=c++14)
     ADD_TEST(${name} ${name})
 
 ENDFUNCTION()
