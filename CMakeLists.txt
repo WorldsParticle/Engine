@@ -229,8 +229,8 @@ FUNCTION(CXX_TEST name sources)
     ADD_EXECUTABLE(${name} ${sources})
     ADD_DEPENDENCIES(${name} googletest)
     TARGET_LINK_LIBRARIES(${name}
-        ${GTEST_LIBS_DIR}/libgtest.a
-        ${GTEST_LIBS_DIR}/libgtest_main.a
+        ${GTEST_LIBS_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${CMAKE_STATIC_LIBRARY_SUFFIX}
+        ${GTEST_LIBS_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${CMAKE_STATIC_LIBRARY_SUFFIX}
         ${CMAKE_PROJECT_NAME}
     )
     TARGET_LINK_LIBRARIES(${name} ${CMAKE_THREAD_LIBS_INIT})
