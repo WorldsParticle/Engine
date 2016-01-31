@@ -42,7 +42,7 @@ namespace Engine
             root << Priority::DEBUG << "Valeur : " << data;
             std::shared_ptr<Shader> shader = std::make_shared<Shader>(property.shaderType, data);
             shader->compile();
-            this->resources.push_back(shader);
+            this->m_resources.push_back(shader);
         }
     }
 

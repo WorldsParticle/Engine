@@ -75,7 +75,7 @@ namespace   Engine
 
 	// TODO : passage en std::size_t => mart_p == boulet.
     void
-    BufferObject::update(void *data, unsigned int length)
+    BufferObject::update(void *data, std::size_t length)
     {
         if (length > this->m_size)
         {
@@ -122,8 +122,7 @@ namespace   Engine
 
 
 
-    ///
-    /// TODO temporary method
+#warning temporary method
     unsigned int
     BufferObject::convert(const Type &type) const
     {
@@ -133,6 +132,8 @@ namespace   Engine
                 return GL_ARRAY_BUFFER;
             case Type::ELEMENT_ARRAY_BUFFER:
                 return GL_ELEMENT_ARRAY_BUFFER;
+            default:
+                throw std::runtime_error("type value unrecognized.");
         }
         return 0;
     }
@@ -148,6 +149,8 @@ namespace   Engine
                 return GL_DYNAMIC_DRAW;
             case Usage::STREAM_DRAW:
                 return GL_STREAM_DRAW;
+            default:
+                throw std::runtime_error("Usage value unrecognized.");
         }
         return 0;
     }

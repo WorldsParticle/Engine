@@ -25,26 +25,26 @@ using namespace     log4cpp;
 namespace   Engine
 {
     Object::Object(SceneGraphNode *node) :
-        Entity(node)
+        Entity(node),
+        m_meshes()
     {
-        this->scene->add(this);
+        this->m_scene->add(this);
     }
 
     // TODO GSL NOT NULL
     Object::Object(const aiNode *assimpNode, SceneGraphNode *node) :
-        Entity(node)
+        Entity(node),
+        m_meshes()
     {
         Category &root = Category::getRoot();
         root << Priority::DEBUG << "Création object";
         for (unsigned int i = 0 ; i < assimpNode->mNumMeshes ; ++i)
         {
             root << Priority::DEBUG << "Add mesh";
-            auto *mesh = this->scene->getMesh(assimpNode->mMeshes[i]);
-            this->meshes.push_back(mesh);
+            auto *mesh = this->m_scene->getMesh(assimpNode->mMeshes[i]);
+            this->m_meshes.push_back(mesh);
         }
-
-        this->scene->add(this);
-
+        this->m_scene->add(this);
     }
 
     Object::~Object(void)
@@ -73,7 +73,7 @@ namespace   Engine
     const std::list<Mesh *> &
     Object::getMeshes(void) const
     {
-        return this->meshes;
+        return this->m_meshes;
     }
 
 }

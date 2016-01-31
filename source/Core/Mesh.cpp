@@ -28,30 +28,40 @@ namespace   Engine
 {
 
     Mesh::Mesh(Material *material) :
-        vertexBuffer(std::make_shared<BufferObject>(
+        m_name(""),
+        m_positions(),
+        m_normals(),
+        m_uvs(),
+        m_indices(),
+        m_vertexBuffer(std::make_shared<BufferObject>(
                     BufferObject::Type::ARRAY_BUFFER,
                     BufferObject::Usage::STATIC_DRAW)),
-        elementBuffer(std::make_shared<BufferObject>(
+        m_elementBuffer(std::make_shared<BufferObject>(
                     BufferObject::Type::ELEMENT_ARRAY_BUFFER,
                     BufferObject::Usage::STATIC_DRAW)),
-        arrayObject(std::make_shared<ArrayObject>()),
-        material(material)
+        m_arrayObject(std::make_shared<ArrayObject>()),
+        m_material(material)
     {
         // nothing to do
     }
 
-    /// TODO check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
+#warning check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
     Mesh::Mesh(const aiMesh *am, Material *material) :
-        vertexBuffer(std::make_shared<BufferObject>(
+        m_name(""),
+        m_positions(),
+        m_normals(),
+        m_uvs(),
+        m_indices(),
+        m_vertexBuffer(std::make_shared<BufferObject>(
                     BufferObject::Type::ARRAY_BUFFER,
                     BufferObject::Usage::STATIC_DRAW)),
-        elementBuffer(std::make_shared<BufferObject>(
+        m_elementBuffer(std::make_shared<BufferObject>(
                     BufferObject::Type::ELEMENT_ARRAY_BUFFER,
                     BufferObject::Usage::STATIC_DRAW)),
-        arrayObject(std::make_shared<ArrayObject>()),
-        material(material)
+        m_arrayObject(std::make_shared<ArrayObject>()),
+        m_material(material)
     {
-        this->name = am->mName.C_Str();
+        this->m_name = am->mName.C_Str();
         this->setPositions(am->mVertices, am->mNumVertices);
         this->setNormals(am->mNormals, am->mNumVertices);
         if (am->HasTextureCoords(0))
@@ -66,80 +76,83 @@ namespace   Engine
     }
 
 
-    /// TODO rework, c'est totalmenet dégeulasse.
+#warning rework, c est totalement dégeulasse.
     void
     Mesh::update(void)
     {
 
-        std::vector<float>  vertices = this->positions;
+        std::vector<float>  vertices = this->m_positions;
         if (this->hasNormals())
-            vertices.insert(vertices.end(), this->normals.begin(), this->normals.end());
+            vertices.insert(vertices.end(), this->m_normals.begin(), this->m_normals.end());
         if (this->hasUVs())
-            vertices.insert(vertices.end(), this->uvs.begin(), this->uvs.end());
-        this->vertexBuffer->update(vertices.data(), vertices.size() * sizeof(float));
+            vertices.insert(vertices.end(), this->m_uvs.begin(), this->m_uvs.end());
+        this->m_vertexBuffer->update(vertices.data(), vertices.size() * sizeof(float));
         if (this->hasIndices())
-            this->elementBuffer->update(this->indices.data(), this->indices.size() * sizeof(int));
+            this->m_elementBuffer->update(this->m_indices.data(), this->m_indices.size() * sizeof(int));
 
-        this->arrayObject->bind();
+        this->m_arrayObject->bind();
 
-        this->vertexBuffer->bind();
+        this->m_vertexBuffer->bind();
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);
         glEnableVertexAttribArray(2);
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE,
-            0, (void *)0);
-        if (this->hasNormals()) {
-            glVertexAttribPointer(1, 3, GL_FLOAT,
-                GL_FALSE, 0, (void *)(this->positions.size() * sizeof(float)));
+
+        std::size_t pointer_offset = 0;
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void *>(pointer_offset));
+        pointer_offset += this->m_positions.size() * sizeof(float);
+        if (this->hasNormals())
+        {
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void *>(pointer_offset));
+            pointer_offset += this->m_normals.size() * sizeof(float);
         }
-        if (this->hasUVs()) {
-            glVertexAttribPointer(2, 2, GL_FLOAT,
-                GL_FALSE, 0, (void *)((this->positions.size()
-                    + this->normals.size()) * sizeof(float)));
+        if (this->hasUVs())
+        {
+            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, static_cast<void *>(pointer_offset));
+            pointer_offset += this.m_uvs.size() * sizeof(float);
         }
         if (this->hasIndices())
-            this->elementBuffer->bind();
+            this->m_elementBuffer->bind();
 
-        this->arrayObject->unbind();
+        this->m_arrayObject->unbind();
 
-        this->vertexBuffer->unbind();
+        this->m_vertexBuffer->unbind();
 
         if (this->hasIndices())
-            this->elementBuffer->unbind();
+            this->m_elementBuffer->unbind();
     }
 
     void
     Mesh::bind(void) const
     {
-        this->arrayObject->bind();
+        this->m_arrayObject->bind();
     }
 
     void
     Mesh::unbind(void) const
     {
-        this->arrayObject->unbind();
+        this->m_arrayObject->unbind();
     }
 
     void
     Mesh::draw(const glm::mat4 &model, const glm::mat4 &view,
         const glm::mat4 &projection) const
     {
-        const auto &shaderprogram = this->material->getShaderProgram();
+        const auto &shaderprogram = this->m_material->getShaderProgram();
 
         this->bind();
-        this->material->bind();
+        this->m_material->bind();
         shaderprogram->setUniform("model", model);
         shaderprogram->setUniform("view", view);
         shaderprogram->setUniform("projection", projection);
         if (this->hasIndices())
         {
-            glDrawElements(GL_TRIANGLES, this->indices.size(), GL_UNSIGNED_INT, 0);
+            glDrawElements(GL_TRIANGLES, this->m_indices.size(), GL_UNSIGNED_INT, 0);
         }
         else
         {
-            glDrawArrays(GL_TRIANGLES, 0, this->positions.size());
+            glDrawArrays(GL_TRIANGLES, 0, this->m_positions.size());
         }
-        this->material->unbind();
+        this->m_material->unbind();
         this->unbind();
     }
 
@@ -148,25 +161,25 @@ namespace   Engine
     bool
     Mesh::hasPositions(void) const
     {
-        return !this->positions.empty();
+        return !this->m_positions.empty();
     }
 
     bool
     Mesh::hasNormals(void) const
     {
-         return !this->normals.empty();
+         return !this->m_normals.empty();
     }
 
     bool
     Mesh::hasUVs(void) const
     {
-        return !this->uvs.empty();
+        return !this->m_uvs.empty();
     }
 
     bool
     Mesh::hasIndices(void) const
     {
-        return !this->indices.empty();
+        return !this->m_indices.empty();
     }
 
 
@@ -174,25 +187,25 @@ namespace   Engine
     const std::vector<float> &
     Mesh::getPositions(void) const
     {
-        return this->positions;
+        return this->m_positions;
     }
 
     const std::vector<float> &
     Mesh::getNormals(void) const
     {
-        return this->normals;
+        return this->m_normals;
     }
 
     const std::vector<float> &
     Mesh::getUVs(void) const
     {
-        return this->uvs;
+        return this->m_uvs;
     }
 
     const std::vector<unsigned int> &
     Mesh::getIndices(void) const
     {
-        return this->indices;
+        return this->m_indices;
     }
 
 
@@ -200,25 +213,25 @@ namespace   Engine
     void
     Mesh::setPositions(const std::vector<float> &positions)
     {
-        this->positions = positions;
+        this->m_positions = positions;
     }
 
     void
     Mesh::setNormals(const std::vector<float> &normals)
     {
-        this->normals = normals;
+        this->m_normals = normals;
     }
 
     void
     Mesh::setUVs(const std::vector<float> &uvs)
     {
-        this->uvs = uvs;
+        this->m_uvs = uvs;
     }
 
     void
     Mesh::setIndices(const std::vector<unsigned int> &indices)
     {
-        this->indices = indices;
+        this->m_indices = indices;
     }
 
 
@@ -226,56 +239,58 @@ namespace   Engine
     void
     Mesh::setPositions(const aiVector3D *v, unsigned int numberElements)
     {
-        this->positions.clear();
-        this->positions.reserve(numberElements * 3);
+        this->m_positions.clear();
+        this->m_positions.reserve(numberElements * 3);
         for (unsigned int i = 0 ; i < numberElements ; ++i)
         {
-             this->positions.push_back(v[i].x);
-             this->positions.push_back(v[i].y);
-             this->positions.push_back(v[i].z);
+             this->m_positions.push_back(v[i].x);
+             this->m_positions.push_back(v[i].y);
+             this->m_positions.push_back(v[i].z);
         }
     }
 
     void
     Mesh::setNormals(const aiVector3D *n, unsigned int numberElements)
     {
-        this->normals.clear();
-        this->normals.reserve(numberElements * 3);
+        this->m_normals.clear();
+        this->m_normals.reserve(numberElements * 3);
         for (unsigned int i = 0 ; i < numberElements ; ++i)
         {
-             this->normals.push_back(n[i].x);
-             this->normals.push_back(n[i].y);
-             this->normals.push_back(n[i].z);
+             this->m_normals.push_back(n[i].x);
+             this->m_normals.push_back(n[i].y);
+             this->m_normals.push_back(n[i].z);
         }
     }
 
     void
     Mesh::setUVs(const aiVector3D *u, unsigned int numberElements)
     {
-        this->uvs.clear();
-        this->uvs.reserve(numberElements * 3);
+        this->m_uvs.clear();
+        this->m_uvs.reserve(numberElements * 3);
         for (unsigned int i = 0 ; i < numberElements ; ++i)
         {
-            this->uvs.push_back(u[i].x);
-            this->uvs.push_back(u[i].y);
-            this->uvs.push_back(u[i].z);
+            this->m_uvs.push_back(u[i].x);
+            this->m_uvs.push_back(u[i].y);
+            this->m_uvs.push_back(u[i].z);
         }
     }
 
     void
     Mesh::setIndices(const aiFace *faces, unsigned int numberElements)
     {
-        this->indices.clear();
-        this->indices.reserve(numberElements * 3);
+        this->m_indices.clear();
+        this->m_indices.reserve(numberElements * 3);
         for (unsigned int i = 0 ; i < numberElements ; ++i) {
             if (faces[i].mNumIndices == 3)
             {
-                 this->indices.push_back(faces[i].mIndices[0]);
-                 this->indices.push_back(faces[i].mIndices[1]);
-                 this->indices.push_back(faces[i].mIndices[2]);
+                 this->m_indices.push_back(faces[i].mIndices[0]);
+                 this->m_indices.push_back(faces[i].mIndices[1]);
+                 this->m_indices.push_back(faces[i].mIndices[2]);
             }
         }
     }
+
+#error test
 
 }
 

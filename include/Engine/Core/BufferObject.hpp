@@ -93,7 +93,7 @@ namespace   Engine
             ///
             /// If the new data is greater than the size of the buffer, the buffer will be reallocated.
             ///
-            void    update(void *data, unsigned int length);
+            void    update(void *data, std::size_t length);
 
         public:
             ///
@@ -141,7 +141,7 @@ namespace   Engine
             ///
             /// \brief the buffer size.
             ///
-            unsigned int    m_size;
+            std::size_t     m_size;
     };
 }
 

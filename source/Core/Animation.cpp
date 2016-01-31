@@ -20,26 +20,26 @@
 namespace   Engine
 {
     Animation::Animation(void) :
-        name("")
+        m_name("")
     {
         // nothing more to do actually.
     }
 
     // TODO GSL NOT NULL
     Animation::Animation(const aiAnimation *assimpAnimation) :
-        name(assimpAnimation->mName.C_Str())
+        m_name(assimpAnimation->mName.C_Str())
     {
         // TODO
     }
 
     Animation::Animation(const Animation &other) :
-        name(other.name)
+        m_name(other.m_name)
     {
         // nothing more to do actually.
     }
 
     Animation::Animation(Animation &&other) noexcept :
-        name(std::move(other.name))
+        m_name(std::move(other.m_name))
     {
         // nothing more to do actually.
     }
@@ -54,14 +54,14 @@ namespace   Engine
     Animation &
     Animation::operator=(const Animation &other)
     {
-        this->name = other.name;
+        this->m_name = other.m_name;
         return *this;
     }
 
     Animation &
     Animation::operator=(Animation &&other) noexcept
     {
-        this->name = std::move(other.name);
+        this->m_name = std::move(other.m_name);
         return *this;
     }
 
