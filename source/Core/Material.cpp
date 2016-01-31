@@ -22,22 +22,21 @@ namespace   Engine
 {
 
     Material::Material(const std::shared_ptr<ShaderProgram> &shaderprogram) :
-        name("Default"),
-        shaderprogram(shaderprogram)
+        m_name("Default"),
+        m_shaderprogram(shaderprogram)
     {
         // nothing to do
     }
 
     Material::Material(const aiMaterial *assimpMaterial,
             const std::shared_ptr<ShaderProgram> &shaderprogram) :
-        name("Default"),
-        shaderprogram(shaderprogram)
+        m_name("Default"),
+        m_shaderprogram(shaderprogram)
     {
         aiString assimpName;
 
         assimpMaterial->Get(AI_MATKEY_NAME, assimpName);
-        this->name = assimpName.C_Str();
-        // nothing to do atm.
+        this->m_name = assimpName.C_Str();
     }
 
     Material::~Material(void) noexcept
@@ -50,7 +49,7 @@ namespace   Engine
     const std::string &
     Material::getName(void) const
     {
-        return this->name;
+        return this->m_name;
     }
 
 
@@ -58,7 +57,7 @@ namespace   Engine
     void
     Material::setName(const std::string &name)
     {
-        this->name = name;
+        this->m_name = name;
     }
 
 
@@ -66,18 +65,18 @@ namespace   Engine
     const std::shared_ptr<ShaderProgram> &
     Material::getShaderProgram(void) const
     {
-         return this->shaderprogram;
+         return this->m_shaderprogram;
     }
 
     void
     Material::bind(void) const
     {
-        this->shaderprogram->bind();
+        this->m_shaderprogram->bind();
     }
 
     void
     Material::unbind(void) const
     {
-         this->shaderprogram->unbind();
+         this->m_shaderprogram->unbind();
     }
 }

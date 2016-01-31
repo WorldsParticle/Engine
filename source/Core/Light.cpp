@@ -19,24 +19,25 @@
 
 #include    "Engine/Core/Light.hpp"
 #include    "Engine/Core/Scene.hpp"
+#include    "Engine/Core/SceneGraphNode.hpp"
 
 using namespace     log4cpp;
 
 namespace   Engine
 {
     Light::Light(SceneGraphNode *node) :
-        Entity(node),
-        name("")
+        Entity(node)
     {
-        this->scene->add(this);
+        this->m_node->setName("");
+        this->m_scene->add(this);
     }
 
     /// TODO GSL NOT NULL
     Light::Light(const aiLight *assimpLight, SceneGraphNode *node) :
-        Entity(node),
-        name(assimpLight->mName.C_Str())
+        Entity(node)
     {
-        this->scene->add(this);
+        this->m_node->setName(assimpLight->mName.C_Str());
+        this->m_scene->add(this);
     }
 
     Light::~Light(void) noexcept
@@ -57,14 +58,6 @@ namespace   Engine
     Light::update(void)
     {
         // nothing to do atm.
-    }
-
-
-
-    const std::string &
-    Light::getName(void) const
-    {
-         return this->name;
     }
 
 }

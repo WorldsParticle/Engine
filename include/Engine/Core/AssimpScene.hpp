@@ -108,57 +108,57 @@ namespace   Engine
             ///
             /// \brief map of imported assimp cameras.
             ///
-            std::map<std::string, const aiCamera *>     cameras;
+            std::map<std::string, const aiCamera *> m_cameras;
 
             ///
             /// \brief Map of imported assimp lights.
             ///
-            std::map<std::string, const aiLight *>      lights;
+            std::map<std::string, const aiLight *>  m_lights;
 
             ///
             /// \brief all materials contains in the aiScene.
             ///
-            aiMaterial      **materials;
+            aiMaterial  **m_materials;
 
             ///
             /// \brief all animations contains in the aiScene.
             ///
-            aiAnimation     **animations;
+            aiAnimation     **m_animations;
 
             ///
             /// \brief all meshes contains in the aiScene.
             ///
-            aiMesh          **meshes;
+            aiMesh  **m_meshes;
 
             ///
             /// \brief all textures contains in the aiScene.
             ///
-            aiTexture       **textures;
+            aiTexture   **m_textures;
 
             ///
             /// \brief The root node of the scene.
             ///
-            const aiNode        *rootNode;
+            const aiNode    *m_rootNode;
 
             ///
             /// \brief Number of materials in the materials array.
             ///
-            unsigned int        materialsNumber;
+            unsigned int    m_materialsNumber;
 
             ///
             /// \brief Number of animations in the animations array.
             ///
-            unsigned int        animationsNumber;
+            unsigned int    m_animationsNumber;
 
             ///
             /// \brief Number of meshes in the meshes array.
             ///
-            unsigned int        meshesNumber;
+            unsigned int    m_meshesNumber;
 
             ///
             /// \brief Number of textures in the textures array.
             ///
-            unsigned int        texturesNumber;
+            unsigned int    m_texturesNumber;
 
     };
 }

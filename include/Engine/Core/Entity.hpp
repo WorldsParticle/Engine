@@ -92,12 +92,12 @@ namespace   Engine
             ///
             /// \brief The node which the entity is attached.
             ///
-            SceneGraphNode  *node; // TODO GSL NOT NULL
+            SceneGraphNode  *m_node; // TODO GSL NOT NULL
 
             ///
             /// \brief The scene that contains the Entity.
             ///
-            Scene           *scene;
+            Scene           *m_scene;
     };
 }
 

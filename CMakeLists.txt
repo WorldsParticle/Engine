@@ -60,6 +60,60 @@ CONFIGURE_FILE(
 
 
 
+## TEST CONFIGURATION
+
+INCLUDE(ExternalProject)
+
+IF ( MSVC )
+
+    SET(EXTERNAL_PROJECT_CMAKE_ARGS
+        -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG:PATH=.
+        -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE:PATH=.
+        -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=PATH.
+        -DBUILD_GTEST=ON
+    )
+
+ELSE ()
+
+    SET(EXTERNAL_PROJECT_CMAKE_ARGS
+        -DBUILD_GTEST=ON
+    )
+
+ENDIF()
+
+EXTERNALPROJECT_ADD(googletest
+    GIT_REPOSITORY https://github.com/google/googletest.git
+    CMAKE_ARGS ${EXTERNAL_PROJECT_CMAKE_ARGS}
+    PREFIX ${CMAKE_CURRENT_BINARY_DIR}
+    INSTALL_COMMAND ""
+    )
+
+EXTERNALPROJECT_GET_PROPERTY(googletest source_dir)
+SET(GTEST_INCLUDE_DIRS ${source_dir}/googletest/include)
+
+EXTERNALPROJECT_GET_PROPERTY(googletest BINARY_DIR)
+SET(GTEST_LIBS_DIR ${BINARY_DIR}/googlemock/gtest/)
+
+FUNCTION(CXX_TEST name sources)
+
+    ADD_EXECUTABLE(${name} ${sources})
+    ADD_DEPENDENCIES(${name} googletest)
+    TARGET_LINK_LIBRARIES(${name}
+        ${GTEST_LIBS_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${CMAKE_STATIC_LIBRARY_SUFFIX}
+        ${GTEST_LIBS_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${CMAKE_STATIC_LIBRARY_SUFFIX}
+        ${CMAKE_PROJECT_NAME}
+    )
+    TARGET_LINK_LIBRARIES(${name} ${CMAKE_THREAD_LIBS_INIT})
+    TARGET_COMPILE_OPTIONS(${name} PRIVATE -std=c++14)
+    TARGET_INCLUDE_DIRECTORIES(${name} PRIVATE ${GTEST_INCLUDE_DIRS})
+    ADD_TEST(${name} ${name})
+
+ENDFUNCTION()
+
+## END TEST CONFIGURATION
+
+
+
 ## PROJECT LANGUAGE
 
 ENABLE_LANGUAGE(CXX)
@@ -283,9 +337,9 @@ IF (CMAKE_COMPILER_IS_GNUCXX)
     # default at -O and higher.
     #
     # Higher optimization levels improve the accuracy of the analysis.
-    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsuggest-attribute=pure)
-    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsuggest-attribute=const)
-    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsuggest-attribute=noreturn)
+    #TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsuggest-attribute=pure)
+    #TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsuggest-attribute=const)
+    #TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsuggest-attribute=noreturn)
 
     # Warn about types with virtual methods where code quality would be improved
     # if the type were declared with the C++11 final specifier, or, if possible,
@@ -540,60 +594,6 @@ INSTALL(DIRECTORY ${PROJECT_INCLUDE_DIR}
     )
 
 ## END INSTALLATION SETTINGS
-
-
-## TEST CONFIGURATION
-
-INCLUDE(ExternalProject)
-
-IF ( MSVC )
-
-    SET(EXTERNAL_PROJECT_CMAKE_ARGS
-        -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_DEBUG:PATH=.
-        -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY_RELEASE:PATH=.
-        -DCMAKE_ARCHIVE_OUTPUT_DIRECTORY=PATH.
-        -DBUILD_GTEST=ON
-    )
-
-ELSE ()
-
-    SET(EXTERNAL_PROJECT_CMAKE_ARGS
-        -DBUILD_GTEST=ON
-    )
-
-ENDIF()
-
-EXTERNALPROJECT_ADD(googletest
-    GIT_REPOSITORY https://github.com/google/googletest.git
-    CMAKE_ARGS ${EXTERNAL_PROJECT_CMAKE_ARGS}
-    PREFIX ${CMAKE_CURRENT_BINARY_DIR}
-    INSTALL_COMMAND ""
-    )
-
-EXTERNALPROJECT_GET_PROPERTY(googletest source_dir)
-SET(GTEST_INCLUDE_DIRS ${source_dir}/googletest/include)
-
-EXTERNALPROJECT_GET_PROPERTY(googletest BINARY_DIR)
-SET(GTEST_LIBS_DIR ${BINARY_DIR}/googlemock/gtest/)
-
-INCLUDE_DIRECTORIES(${GTEST_INCLUDE_DIRS})
-
-FUNCTION(CXX_TEST name sources)
-
-    ADD_EXECUTABLE(${name} ${sources})
-    ADD_DEPENDENCIES(${name} googletest)
-    TARGET_LINK_LIBRARIES(${name}
-        ${GTEST_LIBS_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest${CMAKE_STATIC_LIBRARY_SUFFIX}
-        ${GTEST_LIBS_DIR}/${CMAKE_FIND_LIBRARY_PREFIXES}gtest_main${CMAKE_STATIC_LIBRARY_SUFFIX}
-        ${CMAKE_PROJECT_NAME}
-    )
-    TARGET_LINK_LIBRARIES(${name} ${CMAKE_THREAD_LIBS_INIT})
-    TARGET_COMPILE_OPTIONS(${name} PRIVATE -std=c++14)
-    ADD_TEST(${name} ${name})
-
-ENDFUNCTION()
-
-## END TEST CONFIGURATION
 
 
 

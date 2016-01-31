@@ -23,20 +23,21 @@
 namespace   Engine
 {
 
-    ArrayObject::ArrayObject(void)
+    ArrayObject::ArrayObject(void) :
+        m_id(0)
     {
-        glGenVertexArrays(1, &this->id);
+        glGenVertexArrays(1, &this->m_id);
     }
 
     ArrayObject::ArrayObject(ArrayObject &&other) noexcept :
-        id(std::move(other.id))
+        m_id(std::move(other.m_id))
     {
-        other.id = 0;
+        other.m_id = 0;
     }
 
     ArrayObject::~ArrayObject(void)
     {
-        glDeleteVertexArrays(1, &this->id);
+        glDeleteVertexArrays(1, &this->m_id);
     }
 
 
@@ -44,8 +45,8 @@ namespace   Engine
     ArrayObject &
     ArrayObject::operator=(ArrayObject &&other) noexcept
     {
-        this->id = std::move(id);
-        other.id = 0;
+        this->m_id = std::move(other.m_id);
+        other.m_id = 0;
         return *this;
     }
 
@@ -54,7 +55,7 @@ namespace   Engine
     void
     ArrayObject::bind(void) const
     {
-        glBindVertexArray(this->id);
+        glBindVertexArray(this->m_id);
     }
 
     void

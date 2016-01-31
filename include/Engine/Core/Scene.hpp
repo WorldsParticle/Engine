@@ -131,27 +131,27 @@ namespace Engine
             ///
             /// \brief Library of usable shader program.
             ///
-            ShaderProgramLibrary        shaderprograms;
+            ShaderProgramLibrary        m_shaderprograms;
 
             ///
             /// \brief Library of usable materials.
             ///
-            MaterialLibrary             materials;
+            MaterialLibrary             m_materials;
 
             ///
             /// \brief Library of usable animation in the scene.
             ///
-            AnimationLibrary            animations;
+            AnimationLibrary            m_animations;
 
             ///
             /// \brief Library of usable mesh in the scene.
             ///
-            MeshLibrary                 meshes;
+            MeshLibrary                 m_meshes;
 
             ///
             /// \brief Library of usable textures in the scene.
             ///
-            TextureLibrary              textures;
+            TextureLibrary              m_textures;
 
         protected:
             ///
@@ -159,19 +159,19 @@ namespace Engine
             ///
             /// For more informations, see Renderer.hpp
             ///
-            Renderer                    renderer;
+            Renderer                    m_renderer;
 
             ///
             /// \brief The spatial graph is used for the culling process.
             ///
-            SpatialGraph                spatialgraph;
+            SpatialGraph                m_spatialgraph;
 
             ///
             /// \brief The scene graph represent the architecture of the scene.
             ///
             /// For more informations see SceneGraph.hpp
             ///
-            SceneGraph                  scenegraph;
+            SceneGraph                  m_scenegraph;
 
     };
 }

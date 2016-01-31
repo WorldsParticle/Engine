@@ -23,7 +23,7 @@
 
 namespace   Engine
 {
-    class       Animation
+    class       Animation final
     {
         public:
             ///
@@ -66,7 +66,7 @@ namespace   Engine
             ///
             /// \brief The name of the animation.
             ///
-            std::string     name;
+            std::string     m_name;
     };
 }
 

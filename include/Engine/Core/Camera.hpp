@@ -25,8 +25,8 @@
 #include    "Engine/Core/Entity.hpp"
 
 // Windows compilation, windows...
-#undef	near
-#undef	far
+#undef  near
+#undef  far
 
 namespace   Engine
 {
@@ -96,11 +96,6 @@ namespace   Engine
 
         public:
             ///
-            /// \brief Getter for the camera name.
-            ///
-            const std::string   &getName(void) const;
-
-            ///
             /// \brief Getter for the camera projection matrix.
             ///
             virtual const glm::mat4     &getProjection(void) const = 0;
@@ -112,42 +107,37 @@ namespace   Engine
 
         protected:
             ///
-            /// \brief The name of the camera.
-            ///
-            std::string         name;
-
-            ///
             /// \brief the clipping plane for the camera.
             ///
-            ClippingPlane       clippingPlane;
+            ClippingPlane   m_clippingPlane;
 
             ///
             /// \brief Screen aspect ratio.
             ///
-            float               aspect;
+            float   m_aspect;
 
             ///
             /// \brief The field of view angle for the horizontal axis in radian.
             ///
-            float               fov;
+            float   m_fov;
 
             ///
             /// \brief Up vector of the camera coordinate system relative to
             /// the coordinate space defined by the related node. (Entity::node);
             ///
-            glm::vec3           up;
+            glm::vec3   m_up;
 
             ///
             /// \brief lookat vector of the camera coordinate system relative
             /// to the coordinate space defined by the related node. (Entity::node)
             ///
-            glm::vec3           lookat;
+            glm::vec3   m_lookat;
 
             ///
             /// \brief Position of the camera relative to the coordinate space
             /// defined by the related node. (Entity::node)
             ///
-            glm::vec3           position;
+            glm::vec3   m_position;
     };
 }
 

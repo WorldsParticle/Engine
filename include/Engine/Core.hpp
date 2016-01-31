@@ -83,12 +83,12 @@ namespace Engine
             ///
             /// \brief This attribute is used to store all scenes present in the engine.
             ///
-            std::list<Scene *>      scenes; // TODO GSL NOT NULL && OWNER
+            std::list<Scene *>      m_scenes; // TODO GSL NOT NULL && OWNER
 
             ///
             /// \brief The importer used to import new scene.
             ///
-            AssimpImporter          importer;
+            AssimpImporter          m_importer;
     };
 }
 

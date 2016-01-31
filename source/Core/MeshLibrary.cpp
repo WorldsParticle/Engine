@@ -37,28 +37,28 @@ namespace   Engine
         Category    &root = Category::getRoot();
 
         root << Priority::DEBUG << "MeshLibrary constructor with size = " << size;
-        this->resources.reserve(size);
+        this->m_resources.reserve(size);
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const aiMesh *amesh = assimpMeshes[i];
             Material *material = materials.get(amesh->mMaterialIndex);
-            this->resources.push_back(new Mesh(amesh, material));
+            this->m_resources.push_back(new Mesh(amesh, material));
         }
     }
 
     MeshLibrary::MeshLibrary(const MeshLibrary &other) :
         Library<Mesh *>()
     {
-        this->resources.reserve(other.resources.size());
-        for (Mesh *resource : other.resources)
+        this->m_resources.reserve(other.m_resources.size());
+        for (Mesh *resource : other.m_resources)
         {
-             this->resources.push_back(new Mesh(*resource));
+             this->m_resources.push_back(new Mesh(*resource));
         }
     }
 
     MeshLibrary::~MeshLibrary(void)
     {
-        for (Mesh *resource : this->resources)
+        for (Mesh *resource : this->m_resources)
         {
             delete resource;
         }
@@ -69,10 +69,10 @@ namespace   Engine
     MeshLibrary &
     MeshLibrary::operator=(const MeshLibrary &other)
     {
-         this->resources.reserve(other.resources.size());
-         for (Mesh *resource : other.resources)
+         this->m_resources.reserve(other.m_resources.size());
+         for (Mesh *resource : other.m_resources)
          {
-             this->resources.push_back(new Mesh(*resource));
+             this->m_resources.push_back(new Mesh(*resource));
          }
          return *this;
     }

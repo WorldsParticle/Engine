@@ -137,5 +137,13 @@ namespace   Engine
          return this->transform;
     }
 
+
+
+    void
+    SceneGraphNode::setName(const std::string &name)
+    {
+         this->name = name;
+    }
+
 }
 

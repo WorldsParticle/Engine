@@ -29,7 +29,7 @@ namespace   Engine
     ///
     /// \brief This class is used to abstract a program shader.
     ///
-    class       ShaderProgram
+    class       ShaderProgram final
     {
         public:
             ///
@@ -322,12 +322,12 @@ namespace   Engine
             ///
             /// \brief This attribute is used to store the program id.
             ///
-            unsigned int                id;
+            unsigned int    m_id;
 
             ///
             /// \brief This attribute is used to know if the shader program have been compiled.
             ///
-            bool                        linked;
+            bool    m_linked;
 
     };
 }

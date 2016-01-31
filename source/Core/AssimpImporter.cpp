@@ -29,7 +29,7 @@ namespace   Engine
 {
 
     AssimpImporter::AssimpImporter(void) :
-        importer()
+        m_importer()
     {
         // nothing to do.
     }
@@ -67,12 +67,12 @@ namespace   Engine
         flags |= aiProcess_SortByPType;
         flags |= aiProcessPreset_TargetRealtime_Quality;
         flags |= aiProcess_FixInfacingNormals;
-        if ((result = this->importer.ReadFile(filename, flags)) == nullptr)
+        if ((result = this->m_importer.ReadFile(filename, flags)) == nullptr)
         {
             Category    &root = Category::getRoot();
             root << Priority::ERROR
                 << "Erreur dans le loading du fichier : " << filename;
-            root << Priority::ERROR << this->importer.GetErrorString();
+            root << Priority::ERROR << this->m_importer.GetErrorString();
         }
         return result;
     }

@@ -120,17 +120,17 @@ namespace   Engine
             ///
             /// \brief This attribute is used as opengl shader id.
             ///
-            unsigned int    id;
+            unsigned int    m_id;
 
             ///
             /// \brief This attribute is used to know if the shader have already been compiled.
             ///
-            bool            compiled;
+            bool    m_compiled;
 
             ///
             /// \brief This attribute contain the type of the shader.
             ///
-            Type            type;
+            Type    m_type;
     };
 }
 

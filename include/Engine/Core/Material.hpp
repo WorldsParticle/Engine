@@ -103,12 +103,12 @@ namespace   Engine
             ///
             /// \brief The name of the material.
             ///
-            std::string                     name;
+            std::string     m_name;
 
             ///
             /// \brief The shaderprogram used with this material.
             ///
-            std::shared_ptr<ShaderProgram>  shaderprogram;
+            std::shared_ptr<ShaderProgram>  m_shaderprogram;
     };
 }
 

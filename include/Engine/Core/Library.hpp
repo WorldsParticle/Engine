@@ -67,26 +67,26 @@ namespace   Engine
             ///
             /// \brief Resources container.
             ///
-            std::vector<T>      resources;
+            std::vector<T>  m_resources;
     };
 
     template<typename T>
     Library<T>::Library(void) :
-        resources()
+        m_resources()
     {
         // nothing to do.
     }
 
     template<typename T>
     Library<T>::Library(const Library<T> &other) :
-        resources(other.resources)
+        m_resources(other.m_resources)
     {
         // nothing to do.
     }
 
     template<typename T>
     Library<T>::Library(Library<T> &&other) noexcept :
-        resources(std::move(other.resources))
+        m_resources(std::move(other.m_resources))
     {
         // nothing to do.
     }
@@ -103,7 +103,7 @@ namespace   Engine
     Library<T> &
     Library<T>::operator=(const Library<T> &other)
     {
-        this->resources = other.resources;
+        this->m_resources = other.m_resources;
         return *this;
     }
 
@@ -111,7 +111,7 @@ namespace   Engine
     Library<T> &
     Library<T>::operator=(Library<T> &&other) noexcept
     {
-        this->resources = std::move(other.resources);
+        this->m_resources = std::move(other.m_resources);
         return *this;
     }
 
@@ -121,7 +121,7 @@ namespace   Engine
     const T &
     Library<T>::get(unsigned int id) const
     {
-        return this->resources.at(id);
+        return this->m_resources.at(id);
     }
 
 

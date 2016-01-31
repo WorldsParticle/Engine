@@ -27,7 +27,7 @@ namespace   Engine
 {
 
     ShaderProgramLibrary::ShaderProgramLibrary(void) :
-        shaders()
+        m_shaders()
     {
         Category &root = Category::getRoot();
         root << Priority::DEBUG << "Initialisation des shaderprograms.";
@@ -38,10 +38,10 @@ namespace   Engine
             auto result = std::make_shared<ShaderProgram>();
             for (const auto &shadername : property.associatedShaders)
             {
-                result->add(this->shaders.get(shadername));
+                result->add(this->m_shaders.get(shadername));
             }
             result->link();
-            this->resources.push_back(result);
+            this->m_resources.push_back(result);
         }
         // TODO initialisation.
     }

@@ -30,26 +30,26 @@ namespace   Engine
             unsigned int size) :
         Library<Animation *>()
     {
-        this->resources.reserve(size);
+        this->m_resources.reserve(size);
         for (unsigned int i = 0 ; i < size ; ++i)
         {
-            this->resources.push_back(new Animation(assimpAnimations[i]));
+            this->m_resources.push_back(new Animation(assimpAnimations[i]));
         }
     }
 
     AnimationLibrary::AnimationLibrary(const AnimationLibrary &other) :
         Library<Animation *>()
     {
-        this->resources.reserve(other.resources.size());
-        for (Animation *resource : other.resources)
+        this->m_resources.reserve(other.m_resources.size());
+        for (Animation *resource : other.m_resources)
         {
-            this->resources.push_back(new Animation(*resource));
+            this->m_resources.push_back(new Animation(*resource));
         }
     }
 
     AnimationLibrary::~AnimationLibrary(void)
     {
-        for (Animation *resource : this->resources)
+        for (Animation *resource : this->m_resources)
         {
             delete resource;
         }
@@ -60,10 +60,10 @@ namespace   Engine
     AnimationLibrary &
     AnimationLibrary::operator=(const AnimationLibrary &other)
     {
-        this->resources.reserve(other.resources.size());
-        for (Animation *resource : other.resources)
+        this->m_resources.reserve(other.m_resources.size());
+        for (Animation *resource : other.m_resources)
         {
-            this->resources.push_back(new Animation(*resource));
+            this->m_resources.push_back(new Animation(*resource));
         }
         return *this;
     }

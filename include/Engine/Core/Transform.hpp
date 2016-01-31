@@ -86,7 +86,7 @@ namespace   Engine
             ///
             /// \brief This matrix represent the actual state of the transform.
             ///
-            glm::mat4       matrix;
+            glm::mat4       m_matrix;
     };
 }
 

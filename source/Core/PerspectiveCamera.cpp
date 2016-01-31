@@ -31,41 +31,41 @@ namespace   Engine
 {
     PerspectiveCamera::PerspectiveCamera(SceneGraphNode *node) :
         Camera(node),
-        projection(glm::mat4(1)),
-        view(glm::mat4(1))
+        m_projection(glm::mat4(1)),
+        m_view(glm::mat4(1))
     {
-        this->projection = glm::perspective(this->fov, this->aspect,
-                this->clippingPlane.near, this->clippingPlane.far);
-        this->view = glm::lookAt(this->position, this->lookat, this->up);
+        this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
+                this->m_clippingPlane.near, this->m_clippingPlane.far);
+        this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
 
-        this->scene->add(this);
+        this->m_scene->add(this);
 
     }
 
     PerspectiveCamera::PerspectiveCamera(const aiCamera *assimpCamera,
             SceneGraphNode *node) :
         Camera(assimpCamera, node),
-        projection(glm::mat4(1)),
-        view(glm::mat4(1))
+        m_projection(glm::mat4(1)),
+        m_view(glm::mat4(1))
     {
         Category    &root = Category::getRoot();
 
         const Transform &transform = this->getTransform();
-        glm::vec4 realPosition = transform.getMatrix() * glm::vec4(this->position, 1.0);
+        glm::vec4 realPosition = transform.getMatrix() * glm::vec4(this->m_position, 1.0);
 
-        root << Priority::DEBUG << "Camera fov " << this->fov;
-        root << Priority::DEBUG << "Camera aspect " << this->aspect;
-        root << Priority::DEBUG << "Camera near " << this->clippingPlane.near;
-        root << Priority::DEBUG << "Camera far " << this->clippingPlane.far;
+        root << Priority::DEBUG << "Camera fov " << this->m_fov;
+        root << Priority::DEBUG << "Camera aspect " << this->m_aspect;
+        root << Priority::DEBUG << "Camera near " << this->m_clippingPlane.near;
+        root << Priority::DEBUG << "Camera far " << this->m_clippingPlane.far;
         root << Priority::DEBUG << "Camera position " << realPosition.x << " " << realPosition.y << " " << realPosition.z;
-        root << Priority::DEBUG << "Camera lookat " << this->lookat.x << " " << this->lookat.y << " " << this->lookat.z;
-        root << Priority::DEBUG << "Camera up " << this->up.x << " " << this->up.y << " " << this->up.z;
+        root << Priority::DEBUG << "Camera lookat " << this->m_lookat.x << " " << this->m_lookat.y << " " << this->m_lookat.z;
+        root << Priority::DEBUG << "Camera up " << this->m_up.x << " " << this->m_up.y << " " << this->m_up.z;
 
-        this->projection = glm::perspective(this->fov, this->aspect,
-                this->clippingPlane.near, this->clippingPlane.far);
-        this->view = glm::lookAt(realPosition.xyz(), this->lookat, this->up);
+        this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
+                this->m_clippingPlane.near, this->m_clippingPlane.far);
+        this->m_view = glm::lookAt(realPosition.xyz(), this->m_lookat, this->m_up);
 
-        this->scene->add(this);
+        this->m_scene->add(this);
     }
 
     PerspectiveCamera::~PerspectiveCamera(void)
@@ -92,12 +92,12 @@ namespace   Engine
     const glm::mat4 &
     PerspectiveCamera::getProjection(void) const
     {
-         return this->projection;
+         return this->m_projection;
     }
 
     const glm::mat4 &
     PerspectiveCamera::getView(void) const
     {
-         return this->view;
+         return this->m_view;
     }
 }

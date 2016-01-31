@@ -30,19 +30,28 @@ using namespace     log4cpp;
 namespace   Engine
 {
     Renderer::Renderer(Scene *scene) :
-        scene(scene)
+        m_scene(scene),
+        m_objects(),
+        m_cameras(),
+        m_lights()
     {
 
     }
 
     Renderer::Renderer(const Renderer &other) :
-        scene(other.scene)
+        m_scene(other.m_scene),
+        m_objects(),
+        m_cameras(),
+        m_lights()
     {
 
     }
 
     Renderer::Renderer(Renderer &&other) noexcept :
-        scene(std::move(other.scene))
+        m_scene(std::move(other.m_scene)),
+        m_objects(),
+        m_cameras(),
+        m_lights()
     {
 
     }
@@ -57,14 +66,14 @@ namespace   Engine
     Renderer &
     Renderer::operator=(const Renderer &other)
     {
-        this->scene = other.scene;
+        this->m_scene = other.m_scene;
         return *this;
     }
 
     Renderer &
     Renderer::operator=(Renderer &&other) noexcept
     {
-        this->scene = std::move(other.scene);
+        this->m_scene = std::move(other.m_scene);
         return *this;
     }
 
@@ -76,7 +85,7 @@ namespace   Engine
         //Category &root = Category::getRoot();
 
         //root << Priority::DEBUG << "Renderer - add object()" << object->getName();
-        this->objects.push_back(object);
+        this->m_objects.push_back(object);
     }
 
     void
@@ -85,7 +94,7 @@ namespace   Engine
         //Category &root = Category::getRoot();
 
         //root << Priority::DEBUG << "Renderer - add camera()" << camera->getName();
-        this->cameras.push_back(camera);
+        this->m_cameras.push_back(camera);
     }
 
     void
@@ -94,7 +103,7 @@ namespace   Engine
         //Category &root = Category::getRoot();
 
         //root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
-        this->lights.push_back(light);
+        this->m_lights.push_back(light);
     }
 
 
@@ -103,7 +112,7 @@ namespace   Engine
     Renderer::render(void)
     {
         glEnable(GL_DEPTH_TEST);
-        for (Camera *camera : this->cameras)
+        for (Camera *camera : this->m_cameras)
         {
             const glm::mat4 &projection = camera->getProjection();
             const glm::mat4 &view = camera->getView();
@@ -112,7 +121,7 @@ namespace   Engine
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             glViewport(0, 0, 1024, 768);
 
-            for (Object *object : this->objects)
+            for (Object *object : this->m_objects)
             {
                 const glm::mat4 &model = object->getTransform().getMatrix();
                 const std::list<Mesh *>     &meshes = object->getMeshes();
@@ -122,8 +131,8 @@ namespace   Engine
                 }
             }
         }
-        this->cameras.clear();
-        this->objects.clear();
-        this->lights.clear();
+        this->m_cameras.clear();
+        this->m_objects.clear();
+        this->m_lights.clear();
     }
 }

@@ -78,7 +78,7 @@ namespace   Engine
             ///
             /// \brief The id of the vertex array object.
             ///
-            unsigned int    id;
+            unsigned int    m_id;
     };
 }
 

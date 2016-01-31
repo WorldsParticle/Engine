@@ -21,27 +21,27 @@ namespace   Engine
 {
     /// TODO GSL NOT NULL
     AssimpScene::AssimpScene(const aiScene *scene) :
-        cameras(),
-        lights(),
-        materials(scene->mMaterials),
-        animations(scene->mAnimations),
-        meshes(scene->mMeshes),
-        textures(scene->mTextures),
-        rootNode(scene->mRootNode),
-        materialsNumber(scene->mNumMaterials),
-        animationsNumber(scene->mNumAnimations),
-        meshesNumber(scene->mNumMeshes),
-        texturesNumber(scene->mNumTextures)
+        m_cameras(),
+        m_lights(),
+        m_materials(scene->mMaterials),
+        m_animations(scene->mAnimations),
+        m_meshes(scene->mMeshes),
+        m_textures(scene->mTextures),
+        m_rootNode(scene->mRootNode),
+        m_materialsNumber(scene->mNumMaterials),
+        m_animationsNumber(scene->mNumAnimations),
+        m_meshesNumber(scene->mNumMeshes),
+        m_texturesNumber(scene->mNumTextures)
     {
         for (unsigned int i = 0 ; i < scene->mNumCameras ; ++i)
         {
             std::string     name = scene->mCameras[i]->mName.C_Str();
-            this->cameras[name] = scene->mCameras[i];
+            this->m_cameras[name] = scene->mCameras[i];
         }
         for (unsigned int i = 0; i < scene->mNumLights ; ++i)
         {
             std::string     name = scene->mLights[i]->mName.C_Str();
-            this->lights[name] = scene->mLights[i];
+            this->m_lights[name] = scene->mLights[i];
         }
     }
 
@@ -55,9 +55,9 @@ namespace   Engine
     const aiLight *
     AssimpScene::getLight(const std::string &name) const
     {
-        auto it = this->lights.find(name);
+        auto it = this->m_lights.find(name);
 
-        if (it != this->lights.end())
+        if (it != this->m_lights.end())
             return it->second;
         return nullptr;
     }
@@ -65,9 +65,9 @@ namespace   Engine
     const aiCamera *
     AssimpScene::getCamera(const std::string &name) const
     {
-        auto it = this->cameras.find(name);
+        auto it = this->m_cameras.find(name);
 
-        if (it != this->cameras.end())
+        if (it != this->m_cameras.end())
             return it->second;
         return nullptr;
     }
@@ -75,31 +75,31 @@ namespace   Engine
     aiMaterial **
     AssimpScene::getMaterials(void) const
     {
-        return this->materials;
+        return this->m_materials;
     }
 
     aiAnimation **
     AssimpScene::getAnimations(void) const
     {
-        return this->animations;
+        return this->m_animations;
     }
 
     aiMesh **
     AssimpScene::getMeshes(void) const
     {
-         return this->meshes;
+         return this->m_meshes;
     }
 
     aiTexture **
     AssimpScene::getTextures(void) const
     {
-        return this->textures;
+        return this->m_textures;
     }
 
     const aiNode *
     AssimpScene::getRootNode(void) const
     {
-         return this->rootNode;
+         return this->m_rootNode;
     }
 
 
@@ -107,24 +107,24 @@ namespace   Engine
     unsigned int
     AssimpScene::getMaterialsNumber(void) const
     {
-        return this->materialsNumber;
+        return this->m_materialsNumber;
     }
 
     unsigned int
     AssimpScene::getAnimationsNumber(void) const
     {
-         return this->animationsNumber;
+         return this->m_animationsNumber;
     }
 
     unsigned int
     AssimpScene::getMeshesNumber(void) const
     {
-         return this->meshesNumber;
+         return this->m_meshesNumber;
     }
 
     unsigned int
     AssimpScene::getTexturesNumber(void) const
     {
-         return this->texturesNumber;
+         return this->m_texturesNumber;
     }
 }
