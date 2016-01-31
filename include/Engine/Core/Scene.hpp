@@ -39,7 +39,7 @@ namespace Engine
     ///
     /// The scene could be used to draw a GUI in the screen, with a good gameobject separation.
     ///
-    class       Scene
+    class       Scene final
     {
         public:
             ///

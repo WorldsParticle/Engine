@@ -28,9 +28,10 @@ using namespace     log4cpp;
 namespace   Engine
 {
 
-    Core::Core(void)
+    Core::Core(void) :
+        scenes(),
+        importer()
     {
-
 
         PropertyConfigurator::configure(RESOURCES_PATH "/log4cpp.conf");
         Category& root = Category::getRoot();
@@ -47,6 +48,7 @@ namespace   Engine
     }
 
     Core::Core(const Core &other) :
+        scenes(),
         importer(other.importer)
     {
         for (Scene *scene : other.scenes)
