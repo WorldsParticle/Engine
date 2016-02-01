@@ -26,7 +26,7 @@ namespace   Engine
     ///
     /// \brief This class is used to abstract a OpenGL Vertex Buffer Object.
     ///
-    class       BufferObject
+    class       BufferObject final
     {
         public:
             ///

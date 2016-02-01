@@ -26,7 +26,7 @@ namespace   Engine
     class       SceneGraphNode;
     class       AssimpScene;
 
-    class       SceneGraph
+    class       SceneGraph final
     {
         public:
             ///

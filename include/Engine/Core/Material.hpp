@@ -29,7 +29,7 @@ namespace   Engine
     ///
     /// \brief This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered.
     ///
-    class   Material
+    class   Material final
     {
         public:
             ///

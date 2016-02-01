@@ -35,7 +35,7 @@ namespace   Engine
     ///
     /// \brief A Node of the scene graph.
     ///
-    class       SceneGraphNode
+    class       SceneGraphNode final
     {
         public:
             ///

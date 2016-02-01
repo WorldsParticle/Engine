@@ -23,7 +23,7 @@ namespace   Engine
     ///
     /// \brief This class is an abstraction of the Vertex Array Object of the OpenGL API.
     ///
-    class       ArrayObject
+    class       ArrayObject final
     {
         public:
             ///
