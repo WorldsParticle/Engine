@@ -15,19 +15,31 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include "Engine/Event/Handler.hpp"
+#include    <stdexcept>
+
+#include    "Engine/Event/Handler.hpp"
 
 namespace   Engine
 {
 
     EventHandler * EventHandler::self;
 
-    void EventHandler::init()
+    EventHandler::EventHandler() :
+        _mouseClickEvents(),
+        _mouseMoveEvents(),
+        _keyEvents()
+    {
+
+    }
+
+    void
+    EventHandler::init()
     {
         EventHandler::self = new EventHandler();
     }
 
-    Event & EventHandler::getEvent(int eventType)
+    Event &
+    EventHandler::getEvent(int eventType)
     {
         if (eventType == Event::MouseClick)
         {
@@ -50,10 +62,12 @@ namespace   Engine
             self->_keyEvents.front().consume();
             return (self->_keyEvents.front());
         }
+        throw std::invalid_argument("evenType value unrecognized.");
     }
 
 
-    int EventHandler::getEventCount(int eventType)
+    std::size_t
+    EventHandler::getEventCount(int eventType)
     {
         if (eventType == Event::MouseClick)
         {
@@ -76,17 +90,20 @@ namespace   Engine
         return (0);
     }
 
-    void EventHandler::pushKeyEvent(int key, int action)
+    void
+    EventHandler::pushKeyEvent(int key, int action)
     {
         self->_keyEvents.emplace_back(key, action);
     }
 
-    void EventHandler::pushMouseClickEvent(int key, int x, int y)
+    void
+    EventHandler::pushMouseClickEvent(int key, int x, int y)
     {
         self->_mouseClickEvents.emplace_back(key, x, y);
     }
 
-    void EventHandler::pushMouseMoveEvent(int x, int y)
+    void
+    EventHandler::pushMouseMoveEvent(int x, int y)
     {
         self->_mouseMoveEvents.emplace_back(x, y);
     }

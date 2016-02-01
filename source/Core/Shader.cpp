@@ -26,25 +26,25 @@ namespace Engine
 {
 
     Shader::Shader(const Shader::Type &type, const std::string &shaderData) :
-        id(createShaderFromType(type)),
-        compiled(false),
-        type(type)
+        m_id(createShaderFromType(type)),
+        m_compiled(false),
+        m_type(type)
     {
         const char *c_str = shaderData.c_str();
-        glShaderSource(this->id, 1, &c_str, 0);
+        glShaderSource(this->m_id, 1, &c_str, nullptr);
     }
 
     Shader::Shader(Shader &&other) noexcept :
-        id(std::move(other.id)),
-        compiled(std::move(other.compiled)),
-        type(std::move(other.type))
+        m_id(std::move(other.m_id)),
+        m_compiled(std::move(other.m_compiled)),
+        m_type(std::move(other.m_type))
     {
-        other.id = 0;
+        other.m_id = 0;
     }
 
     Shader::~Shader(void)
     {
-        glDeleteShader(this->id);
+        glDeleteShader(this->m_id);
     }
 
 
@@ -52,10 +52,10 @@ namespace Engine
     Shader &
     Shader::operator=(Shader &&other) noexcept
     {
-        this->id = std::move(other.id);
-        other.id = 0;
-        this->compiled = std::move(other.compiled);
-        this->type = std::move(other.type);
+        this->m_id = std::move(other.m_id);
+        other.m_id = 0;
+        this->m_compiled = std::move(other.m_compiled);
+        this->m_type = std::move(other.m_type);
         return *this;
     }
 
@@ -65,22 +65,22 @@ namespace Engine
     {
         int     result;
 
-        glCompileShader(this->id);
-        glGetShaderiv(this->id, GL_COMPILE_STATUS, &result);
-        this->compiled = result == GL_TRUE;
-        if (this->compiled == false)
+        glCompileShader(this->m_id);
+        glGetShaderiv(this->m_id, GL_COMPILE_STATUS, &result);
+        this->m_compiled = result == GL_TRUE;
+        if (this->m_compiled == false)
         {
-            glGetShaderiv(this->id, GL_INFO_LOG_LENGTH, &result);
+            glGetShaderiv(this->m_id, GL_INFO_LOG_LENGTH, &result);
             if (result > 1)
             {
                 char *info = new char[result + 1];
-                glGetShaderInfoLog(this->id, result, 0, info);
+                glGetShaderInfoLog(this->m_id, result, nullptr, info);
                 Category &root = Category::getRoot();
                 root << Priority::ERROR << info;
                 delete info;
             }
         }
-        return this->compiled;
+        return this->m_compiled;
     }
 
 
@@ -88,19 +88,19 @@ namespace Engine
     const Shader::Type &
     Shader::getType(void) const
     {
-         return this->type;
+         return this->m_type;
     }
 
     unsigned int
     Shader::getId(void) const
     {
-        return this->id;
+        return this->m_id;
     }
 
     bool
     Shader::isCompiled(void) const
     {
-         return this->compiled;
+         return this->m_compiled;
     }
 
 

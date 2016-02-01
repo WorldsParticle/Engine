@@ -97,18 +97,18 @@ namespace   Engine
         glEnableVertexAttribArray(1);
         glEnableVertexAttribArray(2);
 
-        std::size_t pointer_offset = 0;
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void *>(pointer_offset));
+        std::uintptr_t pointer_offset = 0;
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void *>(pointer_offset));
         pointer_offset += this->m_positions.size() * sizeof(float);
         if (this->hasNormals())
         {
-            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, static_cast<void *>(pointer_offset));
+            glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void *>(pointer_offset));
             pointer_offset += this->m_normals.size() * sizeof(float);
         }
         if (this->hasUVs())
         {
-            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, static_cast<void *>(pointer_offset));
-            pointer_offset += this.m_uvs.size() * sizeof(float);
+            glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void *>(pointer_offset));
+            pointer_offset += this->m_uvs.size() * sizeof(float);
         }
         if (this->hasIndices())
             this->m_elementBuffer->bind();
@@ -146,11 +146,12 @@ namespace   Engine
         shaderprogram->setUniform("projection", projection);
         if (this->hasIndices())
         {
-            glDrawElements(GL_TRIANGLES, this->m_indices.size(), GL_UNSIGNED_INT, 0);
+            std::uintptr_t  pointer_offset = 0;
+            glDrawElements(GL_TRIANGLES, static_cast<int>(this->m_indices.size()), GL_UNSIGNED_INT, reinterpret_cast<void *>(pointer_offset));
         }
         else
         {
-            glDrawArrays(GL_TRIANGLES, 0, this->m_positions.size());
+            glDrawArrays(GL_TRIANGLES, 0, static_cast<int>(this->m_positions.size()));
         }
         this->m_material->unbind();
         this->unbind();
@@ -289,8 +290,6 @@ namespace   Engine
             }
         }
     }
-
-#error test
 
 }
 
