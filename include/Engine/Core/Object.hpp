@@ -75,12 +75,12 @@ namespace   Engine
             ///
             /// \brief This method is used to clone the object.
             ///
-            Object  *clone(void) const;
+            Object  *clone(void) const override;
 
             ///
             /// \brief Update the object.
             ///
-            void    update(void);
+            void    update(void) override;
 
         public:
             ///
@@ -92,7 +92,7 @@ namespace   Engine
             ///
             /// \brief The meshes associated with the object.
             ///
-            std::list<Mesh *>     meshes; // TODO GSL NOT NULL
+            std::list<Mesh *>     m_meshes; // TODO GSL NOT NULL
     };
 }
 

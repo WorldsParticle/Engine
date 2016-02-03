@@ -28,20 +28,20 @@ namespace   Engine
     TextureLibrary::TextureLibrary(aiTexture **assimpTextures, unsigned int size) :
         Library<Texture *>()
     {
-        this->resources.reserve(size);
+        this->m_resources.reserve(size);
         for (unsigned int i = 0 ; i < size ; ++i)
         {
-            this->resources.push_back(new Texture(assimpTextures[i]));
+            this->m_resources.push_back(new Texture(assimpTextures[i]));
         }
     }
 
     TextureLibrary::TextureLibrary(const TextureLibrary &other) :
         Library<Texture *>()
     {
-        this->resources.reserve(other.resources.size());
-        for (Texture *resource : other.resources)
+        this->m_resources.reserve(other.m_resources.size());
+        for (Texture *resource : other.m_resources)
         {
-            this->resources.push_back(new Texture(*resource));
+            this->m_resources.push_back(new Texture(*resource));
         }
     }
 
@@ -55,10 +55,10 @@ namespace   Engine
     TextureLibrary &
     TextureLibrary::operator=(const TextureLibrary &other)
     {
-         this->resources.reserve(other.resources.size());
-         for (Texture *resource : other.resources)
+         this->m_resources.reserve(other.m_resources.size());
+         for (Texture *resource : other.m_resources)
          {
-             this->resources.push_back(new Texture(*resource));
+             this->m_resources.push_back(new Texture(*resource));
          }
          return *this;
     }

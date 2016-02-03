@@ -26,13 +26,14 @@
 #include    "Engine/Core/BufferObject.hpp"
 #include    "Engine/Core/ArrayObject.hpp"
 
-namespace Engine
+namespace   Engine
 {
-    class Material;
+    class       Material;
+
     ///
     /// \brief The Mesh class
     ///
-    class   Mesh
+    class       Mesh final
     {
         public:
             ///
@@ -189,47 +190,47 @@ namespace Engine
             ///
             /// the name is optional, could be an empty string.
             ///
-            std::string                     name;
+            std::string     m_name;
 
             ///
             /// \brief The vertices attribute is used to store all vertex of the mesh.
             ///
-            std::vector<float>              positions;
+            std::vector<float>  m_positions;
 
             ///
             /// \brief The normals attribute is used to store all normal of the mesh.
             ///
-            std::vector<float>              normals;
+            std::vector<float>  m_normals;
 
             ///
             /// \brief The uvs attribute is used to store one chanel of uvs.
             ///
-            std::vector<float>              uvs;
+            std::vector<float>  m_uvs;
 
             ///
             /// \brief The indices attribute is used to store all indices of a mesh.
             ///
-            std::vector<unsigned int>       indices;
+            std::vector<unsigned int>   m_indices;
 
             ///
             /// \brief This attribute is used to connect the Mesh to a vertex buffer in the graphic API.
             ///
-            std::shared_ptr<BufferObject>   vertexBuffer;
+            std::shared_ptr<BufferObject>   m_vertexBuffer;
 
             ///
             /// \brief This attribute is used to connect the Mesh to a element buffer in the graphic API.
             ///
-            std::shared_ptr<BufferObject>   elementBuffer;
+            std::shared_ptr<BufferObject>   m_elementBuffer;
 
             ///
             /// \brief The Array Object is used to describes how the vertex attributes are stored in the bufferObject.
             ///
-            std::shared_ptr<ArrayObject>    arrayObject;
+            std::shared_ptr<ArrayObject>    m_arrayObject;
 
             ///
             /// \brief The material used by the mesh.
             ///
-            Material                        *material; // TODO GSL not null.
+            Material    *m_material; // TODO GSL not null.
     };
 }
 

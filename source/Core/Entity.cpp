@@ -21,22 +21,22 @@
 namespace   Engine
 {
     Entity::Entity(SceneGraphNode *node) :
-        node(node),
-        scene(this->node->getScene())
+        m_node(node),
+        m_scene(this->m_node->getScene())
     {
 
     }
 
     Entity::Entity(const Entity &other) :
-        node(other.node),
-        scene(this->node->getScene())
+        m_node(other.m_node),
+        m_scene(this->m_node->getScene())
     {
 
     }
 
     Entity::Entity(Entity &&other) :
-        node(std::move(other.node)),
-        scene(this->node->getScene())
+        m_node(std::move(other.m_node)),
+        m_scene(this->m_node->getScene())
     {
 
     }
@@ -51,16 +51,16 @@ namespace   Engine
     Entity &
     Entity::operator=(const Entity &other)
     {
-        this->node = other.node;
-        this->scene = this->node->getScene();
+        this->m_node = other.m_node;
+        this->m_scene = this->m_node->getScene();
         return *this;
     }
 
     Entity &
     Entity::operator=(Entity &&other)
     {
-        this->node = std::move(other.node);
-        this->scene = this->node->getScene();
+        this->m_node = std::move(other.m_node);
+        this->m_scene = this->m_node->getScene();
         return *this;
     }
 
@@ -69,12 +69,12 @@ namespace   Engine
     const std::string &
     Entity::getName(void) const
     {
-         return this->node->getName();
+         return this->m_node->getName();
     }
 
     const Transform &
     Entity::getTransform(void) const
     {
-        return this->node->getTransform();
+        return this->m_node->getTransform();
     }
 }

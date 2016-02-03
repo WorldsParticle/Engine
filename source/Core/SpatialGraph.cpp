@@ -1,4 +1,3 @@
-//
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation; either version 3 of the License, or
@@ -27,9 +26,12 @@ using namespace     log4cpp;
 
 namespace   Engine
 {
-    SpatialGraph::SpatialGraph(Renderer *renderer, Scene *scene) :
-        scene(scene),
-        renderer(renderer)
+    SpatialGraph::SpatialGraph(Renderer &renderer, Scene *scene) :
+        m_scene(scene),
+        m_renderer(renderer),
+        m_cameras(),
+        m_objects(),
+        m_lights()
     {
 
     }
@@ -44,19 +46,19 @@ namespace   Engine
     void
     SpatialGraph::add(Object *object)
     {
-        this->objects.push_back(object);
+        this->m_objects.push_back(object);
     }
 
     void
     SpatialGraph::add(Light *light)
     {
-        this->lights.push_back(light);
+        this->m_lights.push_back(light);
     }
 
     void
     SpatialGraph::add(Camera *camera)
     {
-        this->cameras.push_back(camera);
+        this->m_cameras.push_back(camera);
     }
 
 
@@ -64,18 +66,19 @@ namespace   Engine
     void
     SpatialGraph::cull(void)
     {
-        for (Camera *camera : this->cameras)
+        for (Camera *camera : this->m_cameras)
         {
-            this->renderer->add(camera);
+            this->m_renderer.add(camera);
         }
-        for (Object *object : this->objects)
+        for (Object *object : this->m_objects)
         {
-            this->renderer->add(object);
+            this->m_renderer.add(object);
         }
-        for (Light *light : this->lights)
+        for (Light *light : this->m_lights)
         {
-             this->renderer->add(light);
+            this->m_renderer.add(light);
         }
     }
 
 }
+

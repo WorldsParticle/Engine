@@ -26,6 +26,7 @@ namespace   Engine
     class   Camera;
     class   Object;
     class   Light;
+
     ///
     /// \brief The render graph is used to render efficiently 3D data.
     ///
@@ -93,28 +94,28 @@ namespace   Engine
             ///
             /// \brief The scene in which the Renderer act.
             ///
-            Scene           *scene;
+            Scene   *m_scene;
 
             ///
             /// \brief The list of object needed to be rendered with the render method.
             ///
             /// TODO container type
             ///
-            std::list<Object *>     objects;
+            std::list<Object *>     m_objects;
 
             ///
             /// \brief The list of cameras needed to be rendered with the render method.
             ///
             /// TODO container type
             ///
-            std::list<Camera *>     cameras;
+            std::list<Camera *>     m_cameras;
 
             ///
             /// \brief The list of lights needed to be rendered with the light method.
             ///
             /// TODO container type
             ///
-            std::list<Light *>      lights;
+            std::list<Light *>      m_lights;
 
     };
 }

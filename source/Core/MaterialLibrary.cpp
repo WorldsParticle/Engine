@@ -31,27 +31,27 @@ namespace   Engine
             aiMaterial **assimpMaterials, unsigned int size) :
         Library<Material *>()
     {
-        this->resources.reserve(size);
+        this->m_resources.reserve(size);
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const auto &shaderprogram = shaderprograms.get(TEST_SHADER_PROGRAM);
-            this->resources.push_back(new Material(assimpMaterials[i], shaderprogram));
+            this->m_resources.push_back(new Material(assimpMaterials[i], shaderprogram));
         }
     }
 
     MaterialLibrary::MaterialLibrary(const MaterialLibrary &other) :
         Library<Material *>()
     {
-        this->resources.reserve(other.resources.size());
-        for (Material *resource : other.resources)
+        this->m_resources.reserve(other.m_resources.size());
+        for (Material *resource : other.m_resources)
         {
-            this->resources.push_back(new Material(*resource));
+            this->m_resources.push_back(new Material(*resource));
         }
     }
 
     MaterialLibrary::~MaterialLibrary(void)
     {
-        for (Material *resource : this->resources)
+        for (Material *resource : this->m_resources)
         {
             delete resource;
         }
@@ -61,10 +61,10 @@ namespace   Engine
     MaterialLibrary &
     MaterialLibrary::operator=(const MaterialLibrary &other)
     {
-         this->resources.reserve(other.resources.size());
-         for (Material *resource : other.resources)
+         this->m_resources.reserve(other.m_resources.size());
+         for (Material *resource : other.m_resources)
          {
-             this->resources.push_back(new Material(*resource));
+             this->m_resources.push_back(new Material(*resource));
          }
          return *this;
     }

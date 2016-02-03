@@ -29,7 +29,7 @@ namespace   Engine
     ///
     /// \brief This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered.
     ///
-    class   Material
+    class   Material final
     {
         public:
             ///
@@ -103,12 +103,12 @@ namespace   Engine
             ///
             /// \brief The name of the material.
             ///
-            std::string                     name;
+            std::string     m_name;
 
             ///
             /// \brief The shaderprogram used with this material.
             ///
-            std::shared_ptr<ShaderProgram>  shaderprogram;
+            std::shared_ptr<ShaderProgram>  m_shaderprogram;
     };
 }
 

@@ -71,7 +71,7 @@ namespace   Engine
             /// \brief This attribute is the library used by the shader program library
             /// to contains every shaders.
             ///
-            ShaderLibrary           shaders;
+            ShaderLibrary           m_shaders;
     };
 }
 

@@ -26,37 +26,37 @@ using namespace     log4cpp;
 namespace   Engine
 {
     SceneGraph::SceneGraph(Scene *scene) :
-        scene(scene),
-        rootNode(nullptr)
+        m_scene(scene),
+        m_rootNode(nullptr)
     {
         // nothing to do.
     }
 
     /// TODO GSL NOT NULL
     SceneGraph::SceneGraph(const AssimpScene &s, Scene *scene) :
-        scene(scene),
-        rootNode(new SceneGraphNode(s, s.getRootNode(), this))
+        m_scene(scene),
+        m_rootNode(new SceneGraphNode(s, s.getRootNode(), this))
     {
         // nothing to do.
     }
 
     SceneGraph::SceneGraph(const SceneGraph &other) :
-        scene(other.scene),
-        rootNode(new SceneGraphNode(*other.rootNode))
+        m_scene(other.m_scene),
+        m_rootNode(new SceneGraphNode(*other.m_rootNode))
     {
         // nothing to do.
     }
 
     SceneGraph::SceneGraph(SceneGraph &&other) noexcept :
-        scene(other.scene),
-        rootNode(other.rootNode)
+        m_scene(other.m_scene),
+        m_rootNode(other.m_rootNode)
     {
-        other.rootNode = nullptr;
+        other.m_rootNode = nullptr;
     }
 
     SceneGraph::~SceneGraph(void)
     {
-        delete this->rootNode;
+        delete this->m_rootNode;
     }
 
 
@@ -64,17 +64,17 @@ namespace   Engine
     SceneGraph &
     SceneGraph::operator=(const SceneGraph &other)
     {
-        this->scene = other.scene;
-        this->rootNode = new SceneGraphNode(*other.rootNode);
+        this->m_scene = other.m_scene;
+        this->m_rootNode = new SceneGraphNode(*other.m_rootNode);
         return *this;
     }
 
     SceneGraph &
     SceneGraph::operator=(SceneGraph &&other) noexcept
     {
-        this->scene = other.scene;
-        this->rootNode = other.rootNode;
-        other.rootNode = nullptr;
+        this->m_scene = other.m_scene;
+        this->m_rootNode = other.m_rootNode;
+        other.m_rootNode = nullptr;
         return *this;
     }
 
@@ -83,9 +83,9 @@ namespace   Engine
     void
     SceneGraph::update(void)
     {
-        if (this->rootNode != nullptr)
+        if (this->m_rootNode != nullptr)
         {
-             this->rootNode->update();
+             this->m_rootNode->update();
         }
     }
 
@@ -94,6 +94,6 @@ namespace   Engine
     Scene *
     SceneGraph::getScene(void) const
     {
-        return this->scene;
+        return this->m_scene;
     }
 }

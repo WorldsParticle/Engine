@@ -31,13 +31,13 @@ namespace   Engine
     /// TODO add GSL NOT NULL
     SceneGraphNode::SceneGraphNode(SceneGraph *scenegraph,
             SceneGraphNode *parent) :
-        name(""),
-        parent(parent),
-        childrens(),
-        scenegraph(scenegraph),
-        scene(scenegraph->getScene()),
-        entity(nullptr),
-        transform()
+        m_name(""),
+        m_parent(parent),
+        m_childrens(),
+        m_scenegraph(scenegraph),
+        m_scene(scenegraph->getScene()),
+        m_entity(nullptr),
+        m_transform()
     {
 
     }
@@ -45,47 +45,47 @@ namespace   Engine
     SceneGraphNode::SceneGraphNode(const AssimpScene &assimpScene,
             const aiNode *assimpNode, SceneGraph *scenegraph,
             SceneGraphNode *parent) :
-        name(assimpNode->mName.C_Str()),
-        parent(parent),
-        childrens(),
-        scenegraph(scenegraph),
-        scene(scenegraph->getScene()),
-        entity(nullptr),
-        transform(assimpNode->mTransformation)
+        m_name(assimpNode->mName.C_Str()),
+        m_parent(parent),
+        m_childrens(),
+        m_scenegraph(scenegraph),
+        m_scene(scenegraph->getScene()),
+        m_entity(nullptr),
+        m_transform(assimpNode->mTransformation)
     {
         Category &root = Category::getRoot();
-        root << Priority::DEBUG << "SceneGraphNode : " << this->name;
-        if (!this->name.empty())
+        root << Priority::DEBUG << "SceneGraphNode : " << this->m_name;
+        if (!this->m_name.empty())
         {
             const aiCamera  *camera = nullptr;
             const aiLight   *light = nullptr;
-            if ((camera = assimpScene.getCamera(this->name)) != nullptr)
+            if ((camera = assimpScene.getCamera(this->m_name)) != nullptr)
             {
-                this->entity = new PerspectiveCamera(camera, this);
+                this->m_entity = new PerspectiveCamera(camera, this);
             }
-            else if ((light = assimpScene.getLight(this->name)) != nullptr)
+            else if ((light = assimpScene.getLight(this->m_name)) != nullptr)
             {
-                 this->entity = new Light(light, this);
+                 this->m_entity = new Light(light, this);
             }
         }
         if (assimpNode->mNumMeshes > 0)
         {
             // if the name is empty and the meshes related to the node > 0
             // the node is an object.
-            this->entity = new Object(assimpNode, this);
+            this->m_entity = new Object(assimpNode, this);
         }
         // we just need to create the others child.
         for (unsigned int i = 0 ; i < assimpNode->mNumChildren ; ++i)
         {
             SceneGraphNode  *child = new SceneGraphNode(assimpScene,
                     assimpNode->mChildren[i], scenegraph, this);
-            this->childrens.push_back(child);
+            this->m_childrens.push_back(child);
         }
     }
 
     SceneGraphNode::~SceneGraphNode(void)
     {
-        for (SceneGraphNode *node : this->childrens)
+        for (SceneGraphNode *node : this->m_childrens)
         {
             delete node;
         }
@@ -101,11 +101,11 @@ namespace   Engine
         //root << Priority::DEBUG << "SceneGraphNode update";
         //
 
-        if (this->entity != nullptr)
+        if (this->m_entity != nullptr)
         {
-            this->entity->update();
+            this->m_entity->update();
         }
-        for (SceneGraphNode *node : this->childrens)
+        for (SceneGraphNode *node : this->m_childrens)
         {
              node->update();
         }
@@ -116,25 +116,33 @@ namespace   Engine
     const std::string &
     SceneGraphNode::getName(void) const
     {
-         return this->name;
+         return this->m_name;
     }
 
     SceneGraphNode *
     SceneGraphNode::getParent(void) const
     {
-        return this->parent;
+        return this->m_parent;
     }
 
     Scene *
     SceneGraphNode::getScene(void) const
     {
-         return this->scene;
+         return this->m_scene;
     }
 
     const Transform &
     SceneGraphNode::getTransform(void) const
     {
-         return this->transform;
+         return this->m_transform;
+    }
+
+
+
+    void
+    SceneGraphNode::setName(const std::string &name)
+    {
+         this->m_name = name;
     }
 
 }

@@ -35,7 +35,7 @@ namespace   Engine
     ///
     /// \brief A Node of the scene graph.
     ///
-    class       SceneGraphNode
+    class       SceneGraphNode final
     {
         public:
             ///
@@ -43,14 +43,14 @@ namespace   Engine
             /// object entity.
             ///
             SceneGraphNode(SceneGraph *scenegraph,
-                    SceneGraphNode *parent = 0);
+                    SceneGraphNode *parent = nullptr);
 
             ///
             /// \brief Construct a SceneGraphNode from an assimp node.
             ///
             SceneGraphNode(const AssimpScene &assimpScene,
                     const aiNode *assimpNode, SceneGraph *scenegraph,
-                    SceneGraphNode *parent = 0);
+                    SceneGraphNode *parent = nullptr);
 
             ///
             /// \brief Copy constructor.
@@ -105,41 +105,47 @@ namespace   Engine
             ///
             const Transform     &getTransform(void) const;
 
+        public:
+            ///
+            /// \brief Setter for the name attribute.
+            ///
+            void    setName(const std::string &name);
+
         private:
             ///
             /// \brief Optional name for the node. Can be empty.
             ///
-            std::string                 name;
+            std::string     m_name;
 
             ///
             /// \brief The node parent, can be null if this node is a root node.
             ///
-            SceneGraphNode              *parent;
+            SceneGraphNode  *m_parent;
 
             ///
             /// \brief The childrens of the node.
             ///
-            std::list<SceneGraphNode*>  childrens; // TODO GSL NOT NULL && OWNER
+            std::list<SceneGraphNode*>  m_childrens; // TODO GSL NOT NULL && OWNER
 
             ///
             /// \brief The scene graph that contain this node.
             ///
-            SceneGraph                  *scenegraph;
+            SceneGraph  *m_scenegraph;
 
             ///
             /// \brief The scene that contain the scene graph related to this node.
             ///
-            Scene                       *scene; // TODO GSL NOT NULL
+            Scene   *m_scene; // TODO GSL NOT NULL
 
             ///
             /// \brief The entity related to the node.
             ///
-            Entity                      *entity; // TODO OWNER
+            Entity  *m_entity; // TODO OWNER
 
             ///
             /// \brief The transformation affecting the node.
             ///
-            Transform                   transform;
+            Transform   m_transform;
     };
 }
 

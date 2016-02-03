@@ -74,24 +74,12 @@ namespace Engine
             ///
             /// \brief This method clone the light.
             ///
-            virtual Light   *clone(void) const;
+            virtual Light   *clone(void) const override;
 
             ///
             /// \brief This method is used to update the light.
             ///
-            void            update(void);
-
-        public:
-            ///
-            /// \brief Getter for the light name.
-            ///
-            const std::string   &getName(void) const;
-
-        private:
-            ///
-            /// \brief The name of the light.
-            ///
-            std::string         name;
+            void            update(void) override;
 
     };
 }

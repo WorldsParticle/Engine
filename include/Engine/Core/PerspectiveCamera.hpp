@@ -70,34 +70,34 @@ namespace   Engine
             ///
             /// \brief this method clone the perspective camera.
             ///
-            virtual PerspectiveCamera   *clone(void) const;
+            virtual PerspectiveCamera   *clone(void) const override;
 
             ///
             /// \brief This method is used to update the perspective camera.
             ///
-            virtual void                update(void);
+            virtual void                update(void) override;
 
         public:
             ///
             /// \brief Getter for the camera projection matrix.
             ///
-            const glm::mat4     &getProjection(void) const;
+            const glm::mat4     &getProjection(void) const override;
 
             ///
             /// \brief Getter for the camera view matrix.
             ///
-            const glm::mat4     &getView(void) const;
+            const glm::mat4     &getView(void) const override;
 
         private:
             ///
             /// \brief The projection matrix of the perspective camera.
             ///
-            glm::mat4       projection;
+            glm::mat4       m_projection;
 
             ///
             /// \brief The view matrix of the perspective camera.
             ///
-            glm::mat4       view;
+            glm::mat4       m_view;
     };
 }
 

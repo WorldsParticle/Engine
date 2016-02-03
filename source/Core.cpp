@@ -28,9 +28,10 @@ using namespace     log4cpp;
 namespace   Engine
 {
 
-    Core::Core(void)
+    Core::Core(void) :
+        m_scenes(),
+        m_importer()
     {
-
 
         PropertyConfigurator::configure(RESOURCES_PATH "/log4cpp.conf");
         Category& root = Category::getRoot();
@@ -47,24 +48,25 @@ namespace   Engine
     }
 
     Core::Core(const Core &other) :
-        importer(other.importer)
+        m_scenes(),
+        m_importer(other.m_importer)
     {
-        for (Scene *scene : other.scenes)
+        for (Scene *scene : other.m_scenes)
         {
-            this->scenes.push_back(new Scene(*scene));
+            this->m_scenes.push_back(new Scene(*scene));
         }
     }
 
     Core::Core(Core &&other) noexcept :
-        scenes(std::move(other.scenes)),
-        importer(std::move(other.importer))
+        m_scenes(std::move(other.m_scenes)),
+        m_importer(std::move(other.m_importer))
     {
         // nothing to do.
     }
 
     Core::~Core(void)
     {
-        for (Scene *scene : this->scenes)
+        for (Scene *scene : this->m_scenes)
         {
             delete scene;
         }
@@ -75,9 +77,9 @@ namespace   Engine
     Core &
     Core::operator=(const Core &other)
     {
-        for (Scene *scene : other.scenes)
+        for (Scene *scene : other.m_scenes)
         {
-            this->scenes.push_back(new Scene(*scene));
+            this->m_scenes.push_back(new Scene(*scene));
         }
         return *this;
     }
@@ -85,8 +87,8 @@ namespace   Engine
     Core &
     Core::operator=(Core &&other) noexcept
     {
-        this->scenes = std::move(other.scenes);
-        this->importer = std::move(other.importer);
+        this->m_scenes = std::move(other.m_scenes);
+        this->m_importer = std::move(other.m_importer);
         return *this;
     }
 
@@ -95,7 +97,7 @@ namespace   Engine
     void
     Core::update(void)
     {
-        for (Scene *scene : this->scenes)
+        for (Scene *scene : this->m_scenes)
         {
             scene->update();
         }
@@ -104,7 +106,7 @@ namespace   Engine
     void
     Core::render(void)
     {
-        for (Scene *scene : this->scenes)
+        for (Scene *scene : this->m_scenes)
         {
             scene->render();
         }
@@ -116,9 +118,9 @@ namespace   Engine
     Core::load(const std::string &filename)
     {
         // TODO GSL OWNER && NOT NULL
-        Scene *test = this->importer.import(filename);
+        Scene *test = this->m_importer.import(filename);
 
-        this->scenes.push_back(test);
+        this->m_scenes.push_back(test);
     }
 
 }

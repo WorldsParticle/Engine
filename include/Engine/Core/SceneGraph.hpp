@@ -26,7 +26,7 @@ namespace   Engine
     class       SceneGraphNode;
     class       AssimpScene;
 
-    class       SceneGraph
+    class       SceneGraph final
     {
         public:
             ///
@@ -85,12 +85,12 @@ namespace   Engine
             ///
             /// \brief The Scene represented by the scene graph.
             ///
-            Scene                   *scene; // TODO GSL NOT NULL
+            Scene   *m_scene; // TODO GSL NOT NULL
 
             ///
             /// \brief The root node of the graph.
             ///
-            SceneGraphNode          *rootNode; // TODO GSL OWNER
+            SceneGraphNode  *m_rootNode; // TODO GSL OWNER
 
     };
 }

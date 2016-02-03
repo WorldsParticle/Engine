@@ -18,37 +18,37 @@
 #include    <glm/gtc/matrix_transform.hpp>
 
 #include    "Engine/Core/Camera.hpp"
+#include    "Engine/Core/SceneGraphNode.hpp"
 
 namespace Engine
 {
 
     Camera::Camera(SceneGraphNode *node) :
         Entity(node),
-        name(""),
-        clippingPlane{0.0f, 0.0f},
-        aspect(0.0f),
-        fov(0.0f),
-        up(glm::vec3(0.0f)),
-        lookat(glm::vec3(0.0f)),
-        position(glm::vec3(0.0f))
+        m_clippingPlane{0.0f, 0.0f},
+        m_aspect(0.0f),
+        m_fov(0.0f),
+        m_up(glm::vec3(0.0f)),
+        m_lookat(glm::vec3(0.0f)),
+        m_position(glm::vec3(0.0f))
     {
         // nothing to do.
     }
 
     Camera::Camera(const aiCamera *assimpCamera, SceneGraphNode *node) :
         Entity(node),
-        name(assimpCamera->mName.C_Str()),
-        clippingPlane{assimpCamera->mClipPlaneNear, assimpCamera->mClipPlaneFar},
-        aspect(assimpCamera->mAspect),
-        fov(assimpCamera->mHorizontalFOV * 2.0f),
-        up(glm::vec3(0.0f)),
-        lookat(glm::vec3(0.0f)),
-        position(glm::vec3(0.0f))
+        m_clippingPlane{assimpCamera->mClipPlaneNear, assimpCamera->mClipPlaneFar},
+        m_aspect(assimpCamera->mAspect),
+        m_fov(assimpCamera->mHorizontalFOV * 2.0f),
+        m_up(glm::vec3(0.0f)),
+        m_lookat(glm::vec3(0.0f)),
+        m_position(glm::vec3(0.0f))
     {
+        this->m_node->setName(assimpCamera->mName.C_Str());
         auto convert = [&](const aiVector3D &v) {return glm::vec3(v.x, v.y, v.z);};
-        this->up = convert(assimpCamera->mUp);
-        this->lookat = convert(assimpCamera->mLookAt);
-        this->position = convert(assimpCamera->mPosition);
+        this->m_up = convert(assimpCamera->mUp);
+        this->m_lookat = convert(assimpCamera->mLookAt);
+        this->m_position = convert(assimpCamera->mPosition);
     }
 
     Camera::~Camera(void)
@@ -56,11 +56,4 @@ namespace Engine
         // nothing to do.
     }
 
-
-
-    const std::string &
-    Camera::getName(void) const
-    {
-         return this->name;
-    }
 }

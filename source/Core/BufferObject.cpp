@@ -26,25 +26,26 @@ namespace   Engine
 {
 
     BufferObject::BufferObject(const Type &type, const Usage &usage) :
-        type(type),
-        usage(usage),
-        size(0)
+        m_id(0),
+        m_type(type),
+        m_usage(usage),
+        m_size(0)
     {
-        glGenBuffers(1, &this->id);
+        glGenBuffers(1, &this->m_id);
     }
 
     BufferObject::BufferObject(BufferObject &&other) noexcept :
-        id(std::move(other.id)),
-        type(std::move(other.type)),
-        usage(std::move(other.usage)),
-        size(std::move(other.size))
+        m_id(std::move(other.m_id)),
+        m_type(std::move(other.m_type)),
+        m_usage(std::move(other.m_usage)),
+        m_size(std::move(other.m_size))
     {
-        other.id = 0;
+        other.m_id = 0;
     }
 
     BufferObject::~BufferObject(void)
     {
-        glDeleteBuffers(1, &this->id);
+        glDeleteBuffers(1, &this->m_id);
     }
 
 
@@ -52,41 +53,41 @@ namespace   Engine
     BufferObject &
     BufferObject::operator=(BufferObject &&other) noexcept
     {
-         this->id = std::move(other.id);
-         other.id = 0;
-         this->type = std::move(other.type);
-         this->usage = std::move(other.usage);
-         this->size = std::move(other.size);
+         this->m_id = std::move(other.m_id);
+         other.m_id = 0;
+         this->m_type = std::move(other.m_type);
+         this->m_usage = std::move(other.m_usage);
+         this->m_size = std::move(other.m_size);
          return *this;
     }
 
     void
     BufferObject::bind(void)
     {
-        glBindBuffer(this->convert(this->type), this->id);
+        glBindBuffer(this->convert(this->m_type), this->m_id);
     }
 
     void
     BufferObject::unbind(void)
     {
-        glBindBuffer(this->convert(this->type), 0);
+        glBindBuffer(this->convert(this->m_type), 0);
     }
 
 	// TODO : passage en std::size_t => mart_p == boulet.
     void
-    BufferObject::update(void *data, unsigned int length)
+    BufferObject::update(void *data, std::size_t length)
     {
-        if (length > this->size)
+        if (length > this->m_size)
         {
             this->bind();
-            glBufferData(this->convert(this->type), length, data, this->convert(this->usage));
-            this->size = length;
+            glBufferData(this->convert(this->m_type), length, data, this->convert(this->m_usage));
+            this->m_size = length;
             this->unbind();
         }
         else
         {
             this->bind();
-            glBufferSubData(this->convert(this->type), 0, length, data);
+            glBufferSubData(this->convert(this->m_type), 0, length, data);
             this->unbind();
         }
     }
@@ -96,13 +97,13 @@ namespace   Engine
     void
     BufferObject::setType(const Type &type)
     {
-        this->type = type;
+        this->m_type = type;
     }
 
     void
     BufferObject::setUsage(const Usage &usage)
     {
-        this->usage = usage;
+        this->m_usage = usage;
     }
 
 
@@ -110,19 +111,18 @@ namespace   Engine
     const BufferObject::Type &
     BufferObject::getType(void) const
     {
-        return this->type;
+        return this->m_type;
     }
 
     const BufferObject::Usage &
     BufferObject::getUsage(void) const
     {
-         return this->usage;
+         return this->m_usage;
     }
 
 
 
-    ///
-    /// TODO temporary method
+#warning temporary method
     unsigned int
     BufferObject::convert(const Type &type) const
     {
@@ -132,6 +132,8 @@ namespace   Engine
                 return GL_ARRAY_BUFFER;
             case Type::ELEMENT_ARRAY_BUFFER:
                 return GL_ELEMENT_ARRAY_BUFFER;
+            default:
+                throw std::runtime_error("type value unrecognized.");
         }
         return 0;
     }
@@ -147,6 +149,8 @@ namespace   Engine
                 return GL_DYNAMIC_DRAW;
             case Usage::STREAM_DRAW:
                 return GL_STREAM_DRAW;
+            default:
+                throw std::runtime_error("Usage value unrecognized.");
         }
         return 0;
     }

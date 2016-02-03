@@ -32,12 +32,15 @@ namespace   Engine
 
             static void init();
             static Event & getEvent(int eventType);
-            static int getEventCount(int eventType);
+            static std::size_t getEventCount(int eventType);
             static void pushKeyEvent(int key, int action);
             static void pushMouseMoveEvent(int x, int y);
             static void pushMouseClickEvent(int key, int x, int y);
 
         private :
+
+            EventHandler();
+
             static EventHandler * self;
 
             std::deque<MouseClickEvent> _mouseClickEvents;

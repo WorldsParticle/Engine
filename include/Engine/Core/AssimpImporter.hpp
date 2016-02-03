@@ -81,7 +81,7 @@ namespace   Engine
             ///
             /// \brief the assimp importer that wil be used to load the file in a new scene.
             ///
-            Assimp::Importer    importer;
+            Assimp::Importer    m_importer;
     };
 }
 

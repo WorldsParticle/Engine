@@ -1,4 +1,4 @@
-//
+
 // This program is free software; you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
 // the Free Software Foundation; either version 3 of the License, or
@@ -22,6 +22,7 @@
 
 namespace   Engine
 {
+
     class   Renderer;
     class   Scene;
     class   Camera;
@@ -39,7 +40,7 @@ namespace   Engine
             ///
             /// \brief Default constructor.
             ///
-            SpatialGraph(Renderer *renderer, Scene *scene);
+            SpatialGraph(Renderer &renderer, Scene *scene);
 
             ///
             /// \brief Copy constructor.
@@ -97,28 +98,28 @@ namespace   Engine
             ///
             /// \brief The scene which the spatial graph act.
             ///
-            Scene                   *scene;
+            Scene                   *m_scene;
 
             ///
             /// \brief The renderer used to display non hidden objects.
             ///
-            Renderer                *renderer;
+            Renderer                &m_renderer;
 
         protected:
             ///
             /// \brief The cameras present in the scene.
             ///
-            std::list<Camera *>     cameras;
+            std::list<Camera *>     m_cameras;
 
             ///
             /// \brief The objects present in the scene.
             ///
-            std::list<Object *>     objects;
+            std::list<Object *>     m_objects;
 
             ///
             /// \brief The lights existing in the scene.
             ///
-            std::list<Light *>      lights;
+            std::list<Light *>      m_lights;
     };
 }
 

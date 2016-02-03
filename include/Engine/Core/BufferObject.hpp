@@ -26,7 +26,7 @@ namespace   Engine
     ///
     /// \brief This class is used to abstract a OpenGL Vertex Buffer Object.
     ///
-    class       BufferObject
+    class       BufferObject final
     {
         public:
             ///
@@ -93,7 +93,7 @@ namespace   Engine
             ///
             /// If the new data is greater than the size of the buffer, the buffer will be reallocated.
             ///
-            void    update(void *data, unsigned int length);
+            void    update(void *data, std::size_t length);
 
         public:
             ///
@@ -126,22 +126,22 @@ namespace   Engine
             ///
             /// \brief This attribute is used to contains the graphic id of the buffer object.
             ///
-            unsigned int    id;
+            unsigned int    m_id;
 
             ///
             /// \brief This attribute is used to contains the type of the buffer object.
             ///
-            Type            type;
+            Type            m_type;
 
             ///
             /// \brief This attribute is used to know if the buffer object will be updated frequently or not.
             ///
-            Usage           usage;
+            Usage           m_usage;
 
             ///
             /// \brief the buffer size.
             ///
-            unsigned int    size;
+            std::size_t     m_size;
     };
 }
 
