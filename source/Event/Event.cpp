@@ -19,18 +19,56 @@
 
 namespace   Engine
 {
-    Event::Event() : _consumed(false)
+    Event::Event() :
+        m_consumed(false)
     {
 
     }
 
-    bool Event::isConsumed() const
+    Event::Event(const Event &other) :
+        m_consumed(other.m_consumed)
     {
-        return (_consumed);
+
     }
 
-    void Event::consume()
+    Event::Event(Event &&other) :
+        m_consumed(std::move(other.m_consumed))
     {
-        _consumed = true;
+
+    }
+
+    Event::~Event(void)
+    {
+        // nothing to do.
+    }
+
+
+
+    Event &
+    Event::operator=(const Event &other)
+    {
+        this->m_consumed = other.m_consumed;
+        return *this;
+    }
+
+    Event &
+    Event::operator=(Event &&other)
+    {
+         this->m_consumed = std::move(other.m_consumed);
+         return *this;
+    }
+
+
+
+    bool
+    Event::is_consumed() const
+    {
+        return this->m_consumed;
+    }
+
+    void
+    Event::consume(void)
+    {
+        this->m_consumed = true;
     }
 }
