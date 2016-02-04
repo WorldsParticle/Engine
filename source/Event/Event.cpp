@@ -40,9 +40,9 @@ namespace   Engine
         Event::Event(Event &&other) noexcept :
             m_consumed(std::move(other.m_consumed)),
             m_type(std::move(other.m_type))
-            {
+        {
 
-            }
+        }
 
         Event::~Event(void) noexcept
         {
@@ -52,41 +52,41 @@ namespace   Engine
 
 
         Event &
-            Event::operator=(const Event &other)
-            {
-                this->m_consumed = other.m_consumed;
-                this->m_type = other.m_type;
-                return *this;
-            }
+        Event::operator=(const Event &other)
+        {
+            this->m_consumed = other.m_consumed;
+            this->m_type = other.m_type;
+            return *this;
+        }
 
         Event &
-            Event::operator=(Event &&other) noexcept
-            {
-                this->m_consumed = std::move(other.m_consumed);
-                this->m_type = std::move(other.m_type);
-                return *this;
-            }
+        Event::operator=(Event &&other) noexcept
+        {
+            this->m_consumed = std::move(other.m_consumed);
+            this->m_type = std::move(other.m_type);
+            return *this;
+        }
 
 
 
         bool
-            Event::is_consumed() const
-            {
-                return this->m_consumed;
-            }
+        Event::is_consumed() const
+        {
+            return this->m_consumed;
+        }
 
         void
-            Event::consume(void)
-            {
-                this->m_consumed = true;
-            }
+        Event::consume(void)
+        {
+            this->m_consumed = true;
+        }
 
 
 
         const Type &
-            Event::get_type(void) const
-            {
-                return this->m_type;
-            }
+        Event::get_type(void) const
+        {
+            return this->m_type;
+        }
     }
 }

@@ -30,7 +30,6 @@ namespace Engine
     }
 
     class   Scene;
-
     ///
     /// \brief This class is the entry point for the engine library.
     ///
