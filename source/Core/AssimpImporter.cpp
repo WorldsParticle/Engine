@@ -58,9 +58,11 @@ namespace   Engine
     const aiScene *
     AssimpImporter::load(const std::string &filename)
     {
+        Category        &root = Category::getRoot();
         const aiScene   *result = nullptr;
         int             flags = 0;
 
+        root << Priority::DEBUG << "Loading : " << filename;
         flags |= aiProcess_ValidateDataStructure;
         flags |= aiProcess_Triangulate;
         flags |= aiProcess_FindInvalidData;
