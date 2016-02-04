@@ -20,6 +20,7 @@
 #include    "Engine/Core/SceneGraph.hpp"
 #include    "Engine/Core/SceneGraphNode.hpp"
 #include    "Engine/Core/AssimpScene.hpp"
+#include    "Engine/Core/PerspectiveCamera.hpp"
 
 using namespace     log4cpp;
 
@@ -37,6 +38,13 @@ namespace   Engine
         m_scene(scene),
         m_rootNode(new SceneGraphNode(s, s.getRootNode(), this))
     {
+#warning temporary
+        SceneGraphNode  *node = new SceneGraphNode(this);
+        node->setName("DefaultCamera");
+        Entity *camera = new PerspectiveCamera(node);
+        node->setEntity(camera);
+        this->m_rootNode->addChildren(node);
+
         // nothing to do.
     }
 
