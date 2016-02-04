@@ -145,5 +145,24 @@ namespace   Engine
          this->m_name = name;
     }
 
+    void
+    SceneGraphNode::setParent(SceneGraphNode *parent)
+    {
+        this->m_parent = parent;
+    }
+
+    void
+    SceneGraphNode::setEntity(Entity *entity)
+    {
+         this->m_entity = entity;
+    }
+
+    void
+    SceneGraphNode::addChildren(SceneGraphNode *child)
+    {
+        child->m_parent = this;
+        this->m_childrens.push_back(child);
+    }
+
 }
 
