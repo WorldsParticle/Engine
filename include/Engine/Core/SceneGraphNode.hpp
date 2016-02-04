@@ -111,6 +111,26 @@ namespace   Engine
             ///
             void    setName(const std::string &name);
 
+            ///
+            /// \brief Change the previous parent of the node by the one provided.
+            ///
+            void    setParent(SceneGraphNode *parent);
+
+            ///
+            /// \brief Change the previous entity of the node by the one provided.
+            ///
+            void    setEntity(Entity *entity);
+
+#warning Temporary function
+            ///
+            /// \brief Add a children in this node.
+            ///
+            /// This method automaticaly change the parent of the node provided.
+            ///
+            /// TODO GSL NOT NULL && OWNER
+            ///
+            void    addChildren(SceneGraphNode *child);
+
         private:
             ///
             /// \brief Optional name for the node. Can be empty.

@@ -32,3 +32,6 @@ include/Engine/Configuration.hpp
 include/Engine/version.hpp
 doc
 build/
+
+# OFF files
+*.off
