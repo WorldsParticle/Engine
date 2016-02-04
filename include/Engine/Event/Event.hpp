@@ -15,31 +15,66 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __EVENT_HPP__
-#define     __EVENT_HPP__
+#ifndef     __ENGINE_EVENT_EVENT_HPP__
+#define     __ENGINE_EVENT_EVENT_HPP__
 
 namespace   Engine
 {
 
-    class Event
+    ///
+    /// \brief This class is an abstract base class for an event.
+    ///
+    class   Event
     {
-
         public :
-            Event();
+            ///
+            /// \brief Default Constructor.
+            ///
+            Event(void);
 
-            enum
-            {
-                MouseClick,
-                MouseMove,
-                Key
-            };
+            ///
+            /// \brief Copy constructor.
+            ///
+            Event(const Event &other);
 
-            bool isConsumed() const;
-            void consume();
+            ///
+            /// \brief Move constructor.
+            ///
+            Event(Event &&other) noexcept;
+
+            ///
+            /// \brief Destructor.
+            ///
+            virtual ~Event(void) noexcept;
+
+        public:
+            ///
+            /// \brief Copy assignment operator.
+            ///
+            Event   &operator=(const Event &other);
+
+            ///
+            /// \brief Move assignment operator.
+            ///
+            Event   &operator=(Event &&other) noexcept;
+
+        public:
+            ///
+            /// \brief This method is used to know if the event have been used.
+            ///
+            bool    is_consumed(void) const;
+
+            ///
+            /// \brief This method consume the event.
+            ///
+            void    consume(void);
 
         private :
-            bool    _consumed;
+            ///
+            /// \brief This attribute contains the state of the event. consumed or not consumed.
+            ///
+            bool    m_consumed;
     };
 }
 
-#endif // __EVENT_HPP__
+#endif // __ENGINE_EVENT_EVENT_HPP__

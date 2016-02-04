@@ -32,6 +32,7 @@
 
 namespace Engine
 {
+    class       Event;
     class       AssimpScene;
 
     ///
@@ -88,6 +89,11 @@ namespace Engine
             /// \brief This function is used to draw the scene on the screen.
             ///
             void        render(void);
+
+            ///
+            /// \brief This function is used to push a new event in the scene.
+            ///
+            void        push_event(Event &event);
 
         public:
             ///
