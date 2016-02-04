@@ -47,7 +47,6 @@ namespace   Engine
             node->setEntity(camera);
             this->m_rootNode->addChildren(node);
         }
-        // nothing to do.
     }
 
     SceneGraph::SceneGraph(const SceneGraph &other) :
