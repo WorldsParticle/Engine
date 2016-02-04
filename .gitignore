@@ -32,3 +32,5 @@ include/Engine/Configuration.hpp
 include/Engine/version.hpp
 doc
 build/
+
+*.off
