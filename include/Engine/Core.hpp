@@ -18,11 +18,14 @@
 #ifndef     __ENGINE_CORE_HPP__
 #define     __ENGINE_CORE_HPP__
 
-#include    "Engine/Core/Scene.hpp"
 #include    "Engine/Core/AssimpImporter.hpp"
 
 namespace Engine
 {
+
+    class   Scene;
+    class   Event;
+
     ///
     /// \brief This class is the entry point for the engine library.
     ///
@@ -70,6 +73,11 @@ namespace Engine
             /// \brief This function is used to render the world on the screen.
             ///
             void    render(void);
+
+            ///
+            /// \brief This function is used to produce an event on the engine.
+            ///
+            void    push_event(Event &event);
 
         public:
             ///

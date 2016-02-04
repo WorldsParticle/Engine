@@ -61,15 +61,23 @@ namespace Engine
 
 
 
-    void    Scene::update(void)
+    void
+    Scene::update(void)
     {
         this->m_scenegraph.update();
     }
 
-    void    Scene::render(void)
+    void
+    Scene::render(void)
     {
         this->m_spatialgraph.cull();
         this->m_renderer.render();
+    }
+
+    void
+    Scene::push_event(Event &event)
+    {
+
     }
 
 
