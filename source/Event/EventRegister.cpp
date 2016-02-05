@@ -15,27 +15,36 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __MOUSE_KEY_EVENT_HPP__
-#define     __MOUSE_KEY_EVENT_HPP__
-
-#include "Event.hpp"
+#include    "Engine/Event/EventRegister.hpp"
+#include    "Engine/Event/Event.hpp"
 
 namespace   Engine
 {
-
-    class MouseClickEvent : public Event
+    EventRegister::EventRegister(void) :
+        m_temporary()
     {
-        public :
-            MouseClickEvent(int key, int x, int y);
 
-            int getKey();
-            int getX();
-            int getY();
-        private :
-            int _key;
-            int _x;
-            int _y;
-    };
+    }
+
+    EventRegister::~EventRegister(void)
+    {
+
+    }
+
+    void
+    EventRegister::push_event(const Event &event)
+    {
+        const Event::Type   event_type = event.get_type();
+        for (std::function<void(const Event &event)> &callback : this->m_temporary[event_type])
+        {
+            callback(event);
+        }
+    }
+
+    void
+    EventRegister::register_callback(const Event::Type &event_type,
+            const std::function<void(const Event &)> &callback)
+    {
+        this->m_temporary[event_type].push_back(callback);
+    }
 }
-
-#endif // __MOUSE_KEY_EVENT_HPP__

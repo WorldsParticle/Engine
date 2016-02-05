@@ -36,7 +36,8 @@ namespace Engine
         m_textures(),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
-        m_scenegraph(this)
+        m_scenegraph(this),
+        m_event_register()
     {
         // nothing to do.
     }
@@ -49,7 +50,8 @@ namespace Engine
         m_textures(s.getTextures(), s.getTexturesNumber()),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
-        m_scenegraph(s, this)
+        m_scenegraph(s, this),
+        m_event_register()
     {
         // nothing to do.
     }
@@ -77,7 +79,7 @@ namespace Engine
     void
     Scene::push_event(Event &event)
     {
-
+        this->m_event_register.push_event(event);
     }
 
 
@@ -124,6 +126,15 @@ namespace Engine
     Scene::add(Camera *camera)
     {
         this->m_spatialgraph.add(camera);
+    }
+
+
+
+    void
+    Scene::register_callback(const Event::Type &event_type,
+            const std::function<void(const Event &)> &callback)
+    {
+         this->m_event_register.register_callback(event_type, callback);
     }
 
 }

@@ -26,12 +26,26 @@ namespace   Engine
     ///
     class   Event
     {
+
         public:
             ///
-            /// \brief Default Constructor.
+            /// \brief existing event type
             ///
-            Event(void);
+            enum    Type
+            {
+                KEY_PRESSED,
+                KEY_RELEASED,
+                MOUSE_BUTTON_PRESSED,
+                MOUSE_BUTTON_RELEASED
+            };
 
+        protected:
+            ///
+            /// \brief Default Constructor can be only constructed from child class.
+            ///
+            Event(const Event::Type &event_type);
+
+        public:
             ///
             /// \brief Copy constructor.
             ///
@@ -69,11 +83,22 @@ namespace   Engine
             ///
             void    consume(void);
 
+        public:
+            ///
+            /// \brief get the type of the event.
+            ///
+            Type    get_type(void) const;
+
         private:
             ///
             /// \brief This attribute contains the state of the event. consumed or not consumed.
             ///
             bool    m_consumed;
+
+            ///
+            /// \brief The type of the event.
+            ///
+            Type    m_type;
     };
 }
 

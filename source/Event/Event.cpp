@@ -21,20 +21,23 @@
 
 namespace   Engine
 {
-    Event::Event() :
-        m_consumed(false)
+    Event::Event(const Event::Type &event_type) :
+        m_consumed(false),
+        m_type(event_type)
     {
 
     }
 
     Event::Event(const Event &other) :
-        m_consumed(other.m_consumed)
+        m_consumed(other.m_consumed),
+        m_type(other.m_type)
     {
 
     }
 
     Event::Event(Event &&other) noexcept :
-        m_consumed(std::move(other.m_consumed))
+        m_consumed(std::move(other.m_consumed)),
+        m_type(std::move(other.m_type))
     {
 
     }
@@ -50,6 +53,7 @@ namespace   Engine
     Event::operator=(const Event &other)
     {
         this->m_consumed = other.m_consumed;
+        this->m_type = other.m_type;
         return *this;
     }
 
@@ -57,6 +61,7 @@ namespace   Engine
     Event::operator=(Event &&other) noexcept
     {
          this->m_consumed = std::move(other.m_consumed);
+         this->m_type = std::move(other.m_type);
          return *this;
     }
 

@@ -20,7 +20,10 @@
 namespace   Engine
 {
 
-    KeyEvent::KeyEvent(int key, int action) : _key(key), _action(action)
+    KeyEvent::KeyEvent(int key, int action) :
+        Event(Event::Type::KEY_PRESSED)
+        _key(key),
+        _action(action)
     {
 
     }

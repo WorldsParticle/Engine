@@ -30,6 +30,8 @@
 #include    "Engine/Core/MeshLibrary.hpp"
 #include    "Engine/Core/TextureLibrary.hpp"
 
+#include    "Engine/Event/EventRegister.hpp"
+
 namespace Engine
 {
     class       Event;
@@ -133,6 +135,16 @@ namespace Engine
             ///
             void        add(Camera *camera);
 
+        public:
+
+            ///
+            /// \brief Temporary function to register a callback to an event.
+            ///
+            /// TODO : something a little bit better
+            ///
+            void        register_callback(const Event::Type &event_type,
+                    const std::function<void(const Event &)> &callback);
+
         protected:
             ///
             /// \brief Library of usable shader program.
@@ -178,6 +190,13 @@ namespace Engine
             /// For more informations see SceneGraph.hpp
             ///
             SceneGraph                  m_scenegraph;
+
+        protected:
+
+            ///
+            /// \brief temporary, but something similar to what I want do.
+            ///
+            EventRegister               m_event_register;
 
     };
 }

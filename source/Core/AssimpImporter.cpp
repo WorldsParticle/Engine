@@ -71,7 +71,6 @@ namespace   Engine
         flags |= aiProcess_FixInfacingNormals;
         if ((result = this->m_importer.ReadFile(filename, flags)) == nullptr)
         {
-            Category    &root = Category::getRoot();
             root << Priority::ERROR
                 << "Erreur dans le loading du fichier : " << filename;
             root << Priority::ERROR << this->m_importer.GetErrorString();
