@@ -26,7 +26,7 @@ namespace   Engine
     ///
     class   Event
     {
-        public :
+        public:
             ///
             /// \brief Default Constructor.
             ///
@@ -69,7 +69,7 @@ namespace   Engine
             ///
             void    consume(void);
 
-        private :
+        private:
             ///
             /// \brief This attribute contains the state of the event. consumed or not consumed.
             ///

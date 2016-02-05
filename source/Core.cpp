@@ -23,6 +23,7 @@
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core.hpp"
 #include    "Engine/Event/Event.hpp"
+#include    "Engine/Core/Scene.hpp"
 
 using namespace     log4cpp;
 

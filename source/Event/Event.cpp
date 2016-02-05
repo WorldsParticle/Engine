@@ -15,6 +15,8 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include <utility>
+
 #include "Engine/Event/Event.hpp"
 
 namespace   Engine
@@ -31,13 +33,13 @@ namespace   Engine
 
     }
 
-    Event::Event(Event &&other) :
+    Event::Event(Event &&other) noexcept :
         m_consumed(std::move(other.m_consumed))
     {
 
     }
 
-    Event::~Event(void)
+    Event::~Event(void) noexcept
     {
         // nothing to do.
     }
@@ -52,7 +54,7 @@ namespace   Engine
     }
 
     Event &
-    Event::operator=(Event &&other)
+    Event::operator=(Event &&other) noexcept
     {
          this->m_consumed = std::move(other.m_consumed);
          return *this;
