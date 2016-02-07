@@ -29,6 +29,7 @@ namespace Engine
 
     /// TODO : delete push object
     Scene::Scene(void) :
+        m_event_register(),
         m_shaderprograms(),
         m_materials(),
         m_animations(),
@@ -37,12 +38,12 @@ namespace Engine
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
         m_scenegraph(this),
-        m_event_register()
     {
         // nothing to do.
     }
 
     Scene::Scene(const AssimpScene &s) :
+        m_event_register(),
         m_shaderprograms(),
         m_materials(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber()),
         m_animations(s.getAnimations(), s.getAnimationsNumber()),
@@ -50,8 +51,7 @@ namespace Engine
         m_textures(s.getTextures(), s.getTexturesNumber()),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
-        m_scenegraph(s, this),
-        m_event_register()
+        m_scenegraph(s, this)
     {
         // nothing to do.
     }

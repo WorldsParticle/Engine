@@ -15,16 +15,19 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_EVENT_MOUSE_BUTTON_PRESSED_HPP__
-#define     __ENGINE_EVENT_MOUSE_BUTTON_PRESSED_HPP__
+#ifndef     __ENGINE_EVENT_MOUSEBUTTONPRESSED_HPP__
+# define    __ENGINE_EVENT_MOUSEBUTTONPRESSED_HPP__
 
-#include "Event.hpp"
+#include    <glm/glm.hpp>
+
+#include    "Engine/Event/Event.hpp"
+#include    "Engine/Input/Mouse/Button.hpp"
 
 namespace   Engine
 {
 
     ///
-    /// \brief Mouse Click.
+    /// \brief Mouse Button pressed event class.
     ///
     class   MouseButtonPressed : public Event
     {
@@ -32,7 +35,7 @@ namespace   Engine
             ///
             /// \brief Default constructor.
             ///
-            MouseButtonPressed(int key, int x, int y);
+            MouseButtonPressed(const Mouse::Button &code, const glm::vec2 &position);
 
             ///
             /// \brief Destructor.
@@ -43,23 +46,23 @@ namespace   Engine
             ///
             /// \brief Get the mouse button key code.
             ///
-            int     getKey();
+            const Mouse::Button     &get_button(void) const;
 
             ///
             /// \brief Get the position of the mouse when the event happened.
             ///
-            const glm::vec2     &get_position(void) const;
+            const glm::vec2         &get_position(void) const;
 
         private:
             ///
             /// \brief The pressed button code of the mouse.
             ///
-            int         m_key;
+            Mouse::Button   m_code;
 
             ///
             /// \brief The position of the mouse when the button has been pressed.
             ///
-            glm::vec2   m_position;
+            glm::vec2       m_position;
     };
 }
 

@@ -18,46 +18,36 @@
 #ifndef     __ENGINE_EVENT_KEYPRESSED_HPP__
 #define     __ENGINE_EVENT_KEYPRESSED_HPP__
 
-#include    "Event.hpp"
+#include    "Engine/Event/Event.hpp"
+#include    "Engine/Input/Keyboard/Key.hpp"
 
 namespace   Engine
 {
     ///
-    /// \brief The KeyEvent class, containing key event.
+    /// \brief The KeyPressed event class, containing a key pressed event.
     ///
-    class KeyPressed final : public Event
+    class       KeyPressed final : public Event
     {
-        public:
-
-            enum Key
-            {
-                Z,
-                Q,
-                S,
-                D,
-                ESC
-            };
-
         public:
             ///
             /// \brief Default constructor.
             ///
-            KeyEvent(Key value, int action);
+            KeyPressed(const Keyboard::Key &code);
 
             ///
             /// \brief Copy constructor.
             ///
-            KeyEvent(const KeyEvent &other);
+            KeyPressed(const KeyPressed &other);
 
             ///
             /// \brief Move constructor.
             ///
-            KeyEvent(KeyEvent &&other) noexcept;
+            KeyPressed(KeyPressed &&other) noexcept;
 
             ///
             /// \brief Destructor.
             ///
-            virtual ~KeyEvent(void) noexcept;
+            virtual ~KeyPressed(void) noexcept;
 
         public:
             ///
@@ -71,15 +61,17 @@ namespace   Engine
             void    operator=(KeyPressed &&other);
 
         public:
-            int getKey();
-            int getAction();
+            ///
+            /// \brief Get the key value of the keypressed event.
+            ///
+            const Keyboard::Key     &get_key(void) const;
 
         private:
             ///
             /// \brief The key code of the key pressed.
             ///
-            Key     m_key;
+            Keyboard::Key     m_code;
     };
 }
 
-#endif // __KEY_EVENT_HPP__
+#endif // !__KEY_EVENT_HPP__

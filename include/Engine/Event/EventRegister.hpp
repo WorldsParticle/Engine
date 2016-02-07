@@ -42,8 +42,17 @@ namespace   Engine
 
         public:
 
+            ///
+            /// \brief Push an event in the event register, this function will
+            /// spread the event in the registered callback.
+            ///
             void    push_event(const Event &event);
 
+            ///
+            /// \brief Register a callback to a particular event type.
+            ///
+            /// TODO add predicate.
+            ///
             void    register_callback(const Event::Type &event_type,
                     const std::function<void(const Event &)> &callback);
 

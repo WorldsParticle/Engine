@@ -36,7 +36,8 @@ namespace   Engine
                 KEY_PRESSED,
                 KEY_RELEASED,
                 MOUSE_BUTTON_PRESSED,
-                MOUSE_BUTTON_RELEASED
+                MOUSE_BUTTON_RELEASED,
+                MOUSE_MOVE
             };
 
         protected:
@@ -87,7 +88,7 @@ namespace   Engine
             ///
             /// \brief get the type of the event.
             ///
-            Type    get_type(void) const;
+            const Type  &get_type(void) const;
 
         private:
             ///

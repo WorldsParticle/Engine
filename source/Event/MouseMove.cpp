@@ -15,31 +15,28 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include "Engine/Event/MouseClickEvent.hpp"
+#include "Engine/Event/MouseMove.hpp"
 
 namespace   Engine
 {
 
-    MouseClickEvent::MouseClickEvent(int key, int x, int y) :
-        _key(key),
-        _x(x),
-        _y(y)
+    MouseMove::MouseMove(const glm::vec2 &position) :
+        Event(Event::Type::MOUSE_MOVE),
+        m_position(position)
     {
 
     }
 
-    int MouseClickEvent::getKey()
+    MouseMove::~MouseMove(void) noexcept
     {
-        return _key;
+
     }
 
-    int MouseClickEvent::getX()
-    {
-        return _x;
-    }
 
-    int MouseClickEvent::getY()
+
+    const glm::vec2 &
+    MouseMove::get_position(void) const
     {
-        return _y;
+         return this->m_position;
     }
 }

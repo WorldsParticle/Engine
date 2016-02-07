@@ -146,6 +146,13 @@ namespace Engine
                     const std::function<void(const Event &)> &callback);
 
         protected:
+
+            ///
+            /// \brief temporary, but something similar to what I want do.
+            ///
+            EventRegister               m_event_register;
+
+        protected:
             ///
             /// \brief Library of usable shader program.
             ///
@@ -190,13 +197,6 @@ namespace Engine
             /// For more informations see SceneGraph.hpp
             ///
             SceneGraph                  m_scenegraph;
-
-        protected:
-
-            ///
-            /// \brief temporary, but something similar to what I want do.
-            ///
-            EventRegister               m_event_register;
 
     };
 }

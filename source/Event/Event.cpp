@@ -78,4 +78,12 @@ namespace   Engine
     {
         this->m_consumed = true;
     }
+
+
+
+    const Event::Type &
+    Event::get_type(void) const
+    {
+         return this->m_type;
+    }
 }

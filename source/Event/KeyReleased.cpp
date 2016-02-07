@@ -15,26 +15,27 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include "Engine/Event/KeyEvent.hpp"
+#include    "Engine/Event/KeyReleased.hpp"
 
 namespace   Engine
 {
-
-    KeyEvent::KeyEvent(int key, int action) :
-        Event(Event::Type::KEY_PRESSED)
-        _key(key),
-        _action(action)
+    KeyReleased::KeyReleased(const Keyboard::Key &code) :
+        Event(Event::Type::KEY_RELEASED),
+        m_code(code)
     {
 
     }
 
-    int KeyEvent::getKey()
+    KeyReleased::~KeyReleased(void)
     {
-        return _key;
+
     }
 
-    int KeyEvent::getAction()
+
+
+    const Keyboard::Key &
+    KeyReleased::get_key(void) const
     {
-        return _action;
+         return this->m_code;
     }
 }

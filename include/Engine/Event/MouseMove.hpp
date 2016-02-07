@@ -18,22 +18,37 @@
 #ifndef     __MOUSE_MOVE_EVENT_HPP__
 #define     __MOUSE_MOVE_EVENT_HPP__
 
-#include "Event.hpp"
+#include    <glm/glm.hpp>
+
+#include    "Engine/Event/Event.hpp"
 
 namespace   Engine
 {
 
-    class MouseMoveEvent : public Event
+    class MouseMove : public Event
     {
-        public :
-            MouseMoveEvent(int x, int y);
+        public:
+            ///
+            /// \brief Default constructor.
+            ///
+            MouseMove(const glm::vec2 &position);
 
-            int getX() const;
-            int getY() const;
+            ///
+            /// \brief Destructor.
+            ///
+            virtual ~MouseMove(void) noexcept;
 
-        private :
-            int _x;
-            int _y;
+        public:
+            ///
+            /// \brief Get the mouse position.
+            ///
+            const glm::vec2     &get_position(void) const;
+
+        private:
+            ///
+            /// \brief The mouse position.
+            ///
+            glm::vec2           m_position;
     };
 }
 
