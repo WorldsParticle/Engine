@@ -32,7 +32,7 @@ namespace   Engine
                 ///
                 /// \brief Default constructor.
                 ///
-                Resize(const glm::vec2 &size);
+                Resize(const glm::ivec2 &size);
 
                 ///
                 /// \brief Destructor.
@@ -43,13 +43,13 @@ namespace   Engine
                 ///
                 /// \brief Get the size of the event.
                 ///
-                const glm::vec2     &size(void) const;
+                const glm::ivec2    &size(void) const;
 
             protected:
                 ///
                 /// \brief The new size of the resize event.
                 ///
-                glm::vec2   m_size;
+                glm::ivec2   m_size;
         };
     }
 }

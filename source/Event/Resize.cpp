@@ -21,7 +21,7 @@ namespace   Engine
 {
     namespace   Event
     {
-        Resize::Resize(const glm::vec2 &size) :
+        Resize::Resize(const glm::ivec2 &size) :
             Event(Type::RESIZE),
             m_size(size)
         {
@@ -35,7 +35,7 @@ namespace   Engine
 
 
 
-        const glm::vec2 &
+        const glm::ivec2 &
         Resize::size(void) const
         {
              return this->m_size;

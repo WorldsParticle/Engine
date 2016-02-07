@@ -114,7 +114,10 @@ namespace   Engine
 
         if (resize_event != nullptr)
         {
-            this->m_aspect = resize_event->size().x / resize_event->size().y;
+            float   width = static_cast<float>(resize_event->size().x);
+            float   height = static_cast<float>(resize_event->size().y);
+            this->m_size = resize_event->size();
+            this->m_aspect = width / height;
             this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
                     this->m_clippingPlane.near, this->m_clippingPlane.far);
         }

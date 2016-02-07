@@ -105,6 +105,13 @@ namespace   Engine
             ///
             virtual const glm::mat4     &getView(void) const = 0;
 
+        public:
+
+            ///
+            /// \brief return the size TEMPORARY
+            ///
+            const glm::ivec2            &size(void) const;
+
         protected:
             ///
             /// \brief the clipping plane for the camera.
@@ -138,6 +145,11 @@ namespace   Engine
             /// defined by the related node. (Entity::node)
             ///
             glm::vec3   m_position;
+
+            ///
+            /// \brief The size used for the glviewport.
+            ///
+            glm::ivec2  m_size;
     };
 }
 

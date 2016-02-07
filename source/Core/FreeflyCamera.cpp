@@ -87,8 +87,6 @@ namespace   Engine
     {
         glm::vec3   dir = this->m_position - this->m_lookat;
         this->m_position -= dir * this->m_speed;
-        //this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
-                //this->m_clippingPlane.near, this->m_clippingPlane.far);
         this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
     }
 
@@ -101,7 +99,7 @@ namespace   Engine
     }
 
 /*    void*/
-    //FreeflyCamera::on_q_pressed(const KeyPressed &event)
+    //FreeflyCamera::on_q_pressed(const Event::KeyPressed &event)
     //{
         //glm::vec3   dir = this->m_position - this->m_lookAt;
 
