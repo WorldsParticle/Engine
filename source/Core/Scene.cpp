@@ -37,7 +37,7 @@ namespace Engine
         m_textures(),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
-        m_scenegraph(this),
+        m_scenegraph(this)
     {
         // nothing to do.
     }
