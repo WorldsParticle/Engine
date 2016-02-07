@@ -65,19 +65,18 @@ namespace   Engine
 
         if (key_pressed_event != nullptr)
         {
-            root << Priority::DEBUG << "it's a KeyPressed event.";
             switch (key_pressed_event->get_key())
             {
                 case Keyboard::Key::Z:
                     this->on_z_pressed(*key_pressed_event); break;
                 case Keyboard::Key::Q:
-                    root << Priority::DEBUG << "it's a Q"; break;
+                    this->on_q_pressed(*key_pressed_event); break;
                 case Keyboard::Key::S:
                     this->on_s_pressed(*key_pressed_event); break;
                 case Keyboard::Key::D:
-                    root << Priority::DEBUG << "it's a D"; break;
+                    this->on_d_pressed(*key_pressed_event); break;
                 default:
-                    root << Priority::DEBUG << "something else."; break;
+                    break;
             }
         }
     }
@@ -98,11 +97,24 @@ namespace   Engine
         this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
     }
 
-/*    void*/
-    //FreeflyCamera::on_q_pressed(const Event::KeyPressed &event)
-    //{
-        //glm::vec3   dir = this->m_position - this->m_lookAt;
+    void
+    FreeflyCamera::on_q_pressed(const Event::KeyPressed &event)
+    {
+        glm::vec3   dir = this->m_position - this->m_lookat;
+        glm::vec3   t(-dir.y, dir.x, dir.z);
+        this->m_position -= t * this->m_speed;
+        this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
+    }
 
-    //}
+    void
+    FreeflyCamera::on_d_pressed(const Event::KeyPressed &event)
+    {
+        glm::vec3   dir = this->m_position - this->m_lookat;
+        glm::vec3   t(-dir.y, dir.x, dir.z);
+        this->m_position += t * this->m_speed;
+        this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
+    }
+
+
 
 }

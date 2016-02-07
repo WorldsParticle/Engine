@@ -117,7 +117,7 @@ namespace   Engine
             const glm::mat4 &projection = camera->getProjection();
             const glm::mat4 &view = camera->getView();
 
-            glClearColor(156.0f / 255.0f , 0, 76.0f / 255.0f, 1.0);
+            glClearColor(155.0f / 255.0f , 155.0f / 255.0f, 155.0f / 255.0f, 1.0);
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
             const glm::ivec2 &size = camera->size();
             glViewport(0, 0, size.x, size.y);
