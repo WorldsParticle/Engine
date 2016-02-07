@@ -24,6 +24,8 @@
 #include    "Engine/Core/Transform.hpp"
 #include    "Engine/Core/PerspectiveCamera.hpp"
 #include    "Engine/Core/Scene.hpp"
+#include    "Engine/Core/SceneGraphNode.hpp"
+#include    "Engine/Event/Resize.hpp"
 
 using namespace     log4cpp;
 
@@ -37,6 +39,9 @@ namespace   Engine
         this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
                 this->m_clippingPlane.near, this->m_clippingPlane.far);
         this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
+
+        node->getScene()->register_callback(Event::Type::RESIZE,
+                std::bind(&PerspectiveCamera::on_resize_event, this, std::placeholders::_1));
 
         this->m_scene->add(this);
 
@@ -99,5 +104,19 @@ namespace   Engine
     PerspectiveCamera::getView(void) const
     {
          return this->m_view;
+    }
+
+
+    void
+    PerspectiveCamera::on_resize_event(const Event::Event &event)
+    {
+        const Event::Resize     *resize_event = dynamic_cast<const Event::Resize *>(&event);
+
+        if (resize_event != nullptr)
+        {
+            this->m_aspect = resize_event->size().x / resize_event->size().y;
+            this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
+                    this->m_clippingPlane.near, this->m_clippingPlane.far);
+        }
     }
 }

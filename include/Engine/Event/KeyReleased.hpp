@@ -23,56 +23,59 @@
 
 namespace   Engine
 {
-    ///
-    /// \brief The KeyReleased event class, containing a key released event.
-    ///
-    class   KeyReleased : public Event
+    namespace   Event
     {
-        public:
-            ///
-            /// \brief Default constructor.
-            ///
-            KeyReleased(const Keyboard::Key &code);
+        ///
+        /// \brief The KeyReleased event class, containing a key released event.
+        ///
+        class   KeyReleased : public Event
+        {
+            public:
+                ///
+                /// \brief Default constructor.
+                ///
+                KeyReleased(const Keyboard::Key &code);
 
-            ///
-            /// \brief Copy constructor.
-            ///
-            KeyReleased(const KeyReleased &other);
+                ///
+                /// \brief Copy constructor.
+                ///
+                KeyReleased(const KeyReleased &other);
 
-            ///
-            /// \brief Move constructor.
-            ///
-            KeyReleased(KeyReleased &&other) noexcept;
+                ///
+                /// \brief Move constructor.
+                ///
+                KeyReleased(KeyReleased &&other) noexcept;
 
-            ///
-            /// \brief Destructor.
-            ///
-            virtual ~KeyReleased(void) noexcept;
+                ///
+                /// \brief Destructor.
+                ///
+                virtual ~KeyReleased(void) noexcept;
 
-        public:
-            ///
-            /// \brief Copy assignment operator.
-            ///
-            void    operator=(const KeyReleased &other);
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                void    operator=(const KeyReleased &other);
 
-            ///
-            /// \brief Move assignment operator.
-            ///
-            void    operator=(KeyReleased &&other) noexcept;
+                ///
+                /// \brief Move assignment operator.
+                ///
+                void    operator=(KeyReleased &&other) noexcept;
 
-        public:
-            ///
-            /// \brief Get the key value of the keyreleased event.
-            ///
-            const Keyboard::Key     &get_key(void) const;
+            public:
+                ///
+                /// \brief Get the key value of the keyreleased event.
+                ///
+                const Keyboard::Key     &get_key(void) const;
 
-        private:
-            ///
-            /// \brief The key code of the key released.
-            ///
-            Keyboard::Key   m_code;
+            private:
+                ///
+                /// \brief The key code of the key released.
+                ///
+                Keyboard::Key   m_code;
 
-    };
+        };
+    }
 }
 
 #endif // !__ENGINE_EVENT_KEYRELEASED_HPP__

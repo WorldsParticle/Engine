@@ -77,7 +77,7 @@ namespace Engine
     }
 
     void
-    Scene::push_event(Event &event)
+    Scene::push_event(const Event::Event &event)
     {
         this->m_event_register.push_event(event);
     }
@@ -132,7 +132,7 @@ namespace Engine
 
     void
     Scene::register_callback(const Event::Type &event_type,
-            const std::function<void(const Event &)> &callback)
+            const std::function<void(const Event::Event &)> &callback)
     {
          this->m_event_register.register_callback(event_type, callback);
     }

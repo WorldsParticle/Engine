@@ -20,24 +20,28 @@
 namespace   Engine
 {
 
-    KeyPressed::KeyPressed(const Keyboard::Key &code) :
-        Event(Event::Type::KEY_PRESSED),
-        m_code(code)
+    namespace   Event
     {
 
+        KeyPressed::KeyPressed(const Keyboard::Key &code) :
+            Event(Type::KEY_PRESSED),
+            m_code(code)
+        {
+
+        }
+
+        KeyPressed::~KeyPressed(void)
+        {
+
+        }
+
+
+
+        const Keyboard::Key &
+            KeyPressed::get_key(void) const
+            {
+                return this->m_code;
+            }
+
     }
-
-    KeyPressed::~KeyPressed(void)
-    {
-
-    }
-
-
-
-    const Keyboard::Key &
-    KeyPressed::get_key(void) const
-    {
-        return this->m_code;
-    }
-
 }

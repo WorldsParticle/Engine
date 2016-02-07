@@ -23,7 +23,12 @@
 namespace   Engine
 {
 
-    class    Event;
+    namespace   Event
+    {
+        class       Event;
+        class       KeyPressed;
+    }
+    class   KeyPressed;
 
     ///
     /// \brief A basic implementation of a freefly camera.
@@ -42,7 +47,21 @@ namespace   Engine
             ~FreeflyCamera(void);
 
         public:
-            void    test_input(const Event &event);
+            ///
+            /// \brief Callback call when a key is pressed.
+            ///
+            void    on_key_pressed(const Event::Event &event);
+
+            void    on_z_pressed(const Event::KeyPressed &event);
+            void    on_q_pressed(const Event::KeyPressed &event);
+            void    on_s_pressed(const Event::KeyPressed &event);
+            void    on_d_pressed(const Event::KeyPressed &event);
+
+        protected:
+            ///
+            /// \brief the speed of the camera.
+            ///
+            float       m_speed;
     };
 }
 

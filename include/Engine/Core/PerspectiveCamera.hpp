@@ -22,6 +22,11 @@
 
 namespace   Engine
 {
+    namespace   Event
+    {
+        class       Event;
+    }
+
     ///
     /// \brief This class defined a perspective camera. This class implement the abstract class Camera.
     ///
@@ -89,6 +94,12 @@ namespace   Engine
             const glm::mat4     &getView(void) const override;
 
         private:
+            ///
+            /// \brief Callback used when a resize event happen.
+            ///
+            void                on_resize_event(const Event::Event &event);
+
+        protected:
             ///
             /// \brief The projection matrix of the perspective camera.
             ///

@@ -15,30 +15,26 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include    "Engine/Event/KeyReleased.hpp"
+#ifndef     __ENGINE_EVENT_TYPES_HPP__
+# define    __ENGINE_EVENT_TYPES_HPP__
 
 namespace   Engine
 {
     namespace   Event
     {
-        KeyReleased::KeyReleased(const Keyboard::Key &code) :
-            Event(Type::KEY_RELEASED),
-            m_code(code)
+        ///
+        /// \brief existing event type
+        ///
+        enum    Type
         {
-
-        }
-
-        KeyReleased::~KeyReleased(void)
-        {
-
-        }
-
-
-
-        const Keyboard::Key &
-            KeyReleased::get_key(void) const
-            {
-                return this->m_code;
-            }
+            KEY_PRESSED, // \brief TODO
+            KEY_RELEASED,
+            MOUSE_BUTTON_PRESSED,
+            MOUSE_BUTTON_RELEASED,
+            MOUSE_MOVE,
+            RESIZE
+        };
     }
 }
+
+#endif // !__ENGINE_EVENT_TYPES_HPP__

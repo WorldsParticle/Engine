@@ -23,55 +23,58 @@
 
 namespace   Engine
 {
-    ///
-    /// \brief The KeyPressed event class, containing a key pressed event.
-    ///
-    class       KeyPressed final : public Event
+    namespace   Event
     {
-        public:
-            ///
-            /// \brief Default constructor.
-            ///
-            KeyPressed(const Keyboard::Key &code);
+        ///
+        /// \brief The KeyPressed event class, containing a key pressed event.
+        ///
+        class       KeyPressed final : public Event
+        {
+            public:
+                ///
+                /// \brief Default constructor.
+                ///
+                KeyPressed(const Keyboard::Key &code);
 
-            ///
-            /// \brief Copy constructor.
-            ///
-            KeyPressed(const KeyPressed &other);
+                ///
+                /// \brief Copy constructor.
+                ///
+                KeyPressed(const KeyPressed &other);
 
-            ///
-            /// \brief Move constructor.
-            ///
-            KeyPressed(KeyPressed &&other) noexcept;
+                ///
+                /// \brief Move constructor.
+                ///
+                KeyPressed(KeyPressed &&other) noexcept;
 
-            ///
-            /// \brief Destructor.
-            ///
-            virtual ~KeyPressed(void) noexcept;
+                ///
+                /// \brief Destructor.
+                ///
+                virtual ~KeyPressed(void) noexcept;
 
-        public:
-            ///
-            /// \brief Copy assignment operator.
-            ///
-            void    operator=(const KeyPressed &other);
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                void    operator=(const KeyPressed &other);
 
-            ///
-            /// \brief Move assignment operator.
-            ///
-            void    operator=(KeyPressed &&other);
+                ///
+                /// \brief Move assignment operator.
+                ///
+                void    operator=(KeyPressed &&other);
 
-        public:
-            ///
-            /// \brief Get the key value of the keypressed event.
-            ///
-            const Keyboard::Key     &get_key(void) const;
+            public:
+                ///
+                /// \brief Get the key value of the keypressed event.
+                ///
+                const Keyboard::Key     &get_key(void) const;
 
-        private:
-            ///
-            /// \brief The key code of the key pressed.
-            ///
-            Keyboard::Key     m_code;
-    };
+            private:
+                ///
+                /// \brief The key code of the key pressed.
+                ///
+                Keyboard::Key     m_code;
+        };
+    }
 }
 
 #endif // !__KEY_EVENT_HPP__

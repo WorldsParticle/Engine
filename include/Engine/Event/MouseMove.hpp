@@ -24,32 +24,34 @@
 
 namespace   Engine
 {
-
-    class MouseMove : public Event
+    namespace   Event
     {
-        public:
-            ///
-            /// \brief Default constructor.
-            ///
-            MouseMove(const glm::vec2 &position);
+        class MouseMove : public Event
+        {
+            public:
+                ///
+                /// \brief Default constructor.
+                ///
+                MouseMove(const glm::vec2 &position);
 
-            ///
-            /// \brief Destructor.
-            ///
-            virtual ~MouseMove(void) noexcept;
+                ///
+                /// \brief Destructor.
+                ///
+                virtual ~MouseMove(void) noexcept;
 
-        public:
-            ///
-            /// \brief Get the mouse position.
-            ///
-            const glm::vec2     &get_position(void) const;
+            public:
+                ///
+                /// \brief Get the mouse position.
+                ///
+                const glm::vec2     &get_position(void) const;
 
-        private:
-            ///
-            /// \brief The mouse position.
-            ///
-            glm::vec2           m_position;
-    };
+            private:
+                ///
+                /// \brief The mouse position.
+                ///
+                glm::vec2           m_position;
+        };
+    }
 }
 
 #endif // __MOUSE_MOVE_EVENT_HPP__

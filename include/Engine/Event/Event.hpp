@@ -18,89 +18,80 @@
 #ifndef     __ENGINE_EVENT_EVENT_HPP__
 #define     __ENGINE_EVENT_EVENT_HPP__
 
+#include    "Engine/Event/Types.hpp"
+
 namespace   Engine
 {
-
-    ///
-    /// \brief This class is an abstract base class for an event.
-    ///
-    class   Event
+    namespace    Event
     {
+        ///
+        /// \brief This class is an abstract base class for an event.
+        ///
+        class   Event
+        {
 
-        public:
-            ///
-            /// \brief existing event type
-            ///
-            enum    Type
-            {
-                KEY_PRESSED,
-                KEY_RELEASED,
-                MOUSE_BUTTON_PRESSED,
-                MOUSE_BUTTON_RELEASED,
-                MOUSE_MOVE
-            };
+            protected:
+                ///
+                /// \brief Default Constructor can be only constructed from child class.
+                ///
+                Event(const Type &event_type);
 
-        protected:
-            ///
-            /// \brief Default Constructor can be only constructed from child class.
-            ///
-            Event(const Event::Type &event_type);
+            public:
+                ///
+                /// \brief Copy constructor.
+                ///
+                Event(const Event &other);
 
-        public:
-            ///
-            /// \brief Copy constructor.
-            ///
-            Event(const Event &other);
+                ///
+                /// \brief Move constructor.
+                ///
+                Event(Event &&other) noexcept;
 
-            ///
-            /// \brief Move constructor.
-            ///
-            Event(Event &&other) noexcept;
+                ///
+                /// \brief Destructor.
+                ///
+                virtual ~Event(void) noexcept;
 
-            ///
-            /// \brief Destructor.
-            ///
-            virtual ~Event(void) noexcept;
+            public:
+                ///
+                /// \brief Copy assignment operator.
+                ///
+                Event   &operator=(const Event &other);
 
-        public:
-            ///
-            /// \brief Copy assignment operator.
-            ///
-            Event   &operator=(const Event &other);
+                ///
+                /// \brief Move assignment operator.
+                ///
+                Event   &operator=(Event &&other) noexcept;
 
-            ///
-            /// \brief Move assignment operator.
-            ///
-            Event   &operator=(Event &&other) noexcept;
+            public:
+                ///
+                /// \brief This method is used to know if the event have been used.
+                ///
+                bool    is_consumed(void) const;
 
-        public:
-            ///
-            /// \brief This method is used to know if the event have been used.
-            ///
-            bool    is_consumed(void) const;
+                ///
+                /// \brief This method consume the event.
+                ///
+                void    consume(void);
 
-            ///
-            /// \brief This method consume the event.
-            ///
-            void    consume(void);
+            public:
+                ///
+                /// \brief get the type of the event.
+                ///
+                const Type  &get_type(void) const;
 
-        public:
-            ///
-            /// \brief get the type of the event.
-            ///
-            const Type  &get_type(void) const;
+            private:
+                ///
+                /// \brief This attribute contains the state of the event. consumed or not consumed.
+                ///
+                bool    m_consumed;
 
-        private:
-            ///
-            /// \brief This attribute contains the state of the event. consumed or not consumed.
-            ///
-            bool    m_consumed;
-
-            ///
-            /// \brief The type of the event.
-            ///
-            Type    m_type;
-    };
+                ///
+                /// \brief The type of the event.
+                ///
+                Type    m_type;
+        };
+    }
 }
 
 #endif // __ENGINE_EVENT_EVENT_HPP__

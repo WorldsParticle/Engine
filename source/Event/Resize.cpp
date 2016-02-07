@@ -15,30 +15,30 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include    "Engine/Event/KeyReleased.hpp"
+#include    "Engine/Event/Resize.hpp"
 
 namespace   Engine
 {
     namespace   Event
     {
-        KeyReleased::KeyReleased(const Keyboard::Key &code) :
-            Event(Type::KEY_RELEASED),
-            m_code(code)
+        Resize::Resize(const glm::vec2 &size) :
+            Event(Type::RESIZE),
+            m_size(size)
         {
 
         }
 
-        KeyReleased::~KeyReleased(void)
+        Resize::~Resize(void)
         {
 
         }
 
 
 
-        const Keyboard::Key &
-            KeyReleased::get_key(void) const
-            {
-                return this->m_code;
-            }
+        const glm::vec2 &
+        Resize::size(void) const
+        {
+             return this->m_size;
+        }
     }
 }

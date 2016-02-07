@@ -19,24 +19,26 @@
 
 namespace   Engine
 {
-
-    MouseMove::MouseMove(const glm::vec2 &position) :
-        Event(Event::Type::MOUSE_MOVE),
-        m_position(position)
+    namespace   Event
     {
+        MouseMove::MouseMove(const glm::vec2 &position) :
+            Event(Type::MOUSE_MOVE),
+            m_position(position)
+        {
 
-    }
+        }
 
-    MouseMove::~MouseMove(void) noexcept
-    {
+        MouseMove::~MouseMove(void) noexcept
+        {
 
-    }
+        }
 
 
 
-    const glm::vec2 &
-    MouseMove::get_position(void) const
-    {
-         return this->m_position;
+        const glm::vec2 &
+        MouseMove::get_position(void) const
+        {
+            return this->m_position;
+        }
     }
 }

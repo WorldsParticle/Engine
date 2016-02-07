@@ -15,57 +15,43 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_EVENT_MOUSEBUTTONPRESSED_HPP__
-# define    __ENGINE_EVENT_MOUSEBUTTONPRESSED_HPP__
+#ifndef     __ENGINE_EVENT_RESIZE_HPP__
+# define    __ENGINE_EVENT_RESIZE_HPP__
 
 #include    <glm/glm.hpp>
 
 #include    "Engine/Event/Event.hpp"
-#include    "Engine/Input/Mouse/Button.hpp"
 
 namespace   Engine
 {
     namespace   Event
     {
-        ///
-        /// \brief Mouse Button pressed event class.
-        ///
-        class   MouseButtonPressed : public Event
+        class       Resize : public Event
         {
             public:
                 ///
                 /// \brief Default constructor.
                 ///
-                MouseButtonPressed(const Mouse::Button &code, const glm::vec2 &position);
+                Resize(const glm::vec2 &size);
 
                 ///
                 /// \brief Destructor.
                 ///
-                ~MouseButtonPressed(void) noexcept;
+                ~Resize(void);
 
             public:
                 ///
-                /// \brief Get the mouse button key code.
+                /// \brief Get the size of the event.
                 ///
-                const Mouse::Button     &get_button(void) const;
+                const glm::vec2     &size(void) const;
 
+            protected:
                 ///
-                /// \brief Get the position of the mouse when the event happened.
+                /// \brief The new size of the resize event.
                 ///
-                const glm::vec2         &get_position(void) const;
-
-            private:
-                ///
-                /// \brief The pressed button code of the mouse.
-                ///
-                Mouse::Button   m_code;
-
-                ///
-                /// \brief The position of the mouse when the button has been pressed.
-                ///
-                glm::vec2       m_position;
+                glm::vec2   m_size;
         };
     }
 }
 
-#endif // __ENGINE_EVENT_MOUSE_BUTTON_PRESSED_HPP__
+#endif // !__ENGINE_EVENT_RESIZE_HPP__

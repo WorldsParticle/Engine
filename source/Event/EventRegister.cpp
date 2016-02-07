@@ -20,31 +20,34 @@
 
 namespace   Engine
 {
-    EventRegister::EventRegister(void) :
-        m_temporary()
+    namespace   Event
     {
-
-    }
-
-    EventRegister::~EventRegister(void)
-    {
-
-    }
-
-    void
-    EventRegister::push_event(const Event &event)
-    {
-        const Event::Type   event_type = event.get_type();
-        for (std::function<void(const Event &event)> &callback : this->m_temporary[event_type])
+        EventRegister::EventRegister(void) :
+            m_temporary()
         {
-            callback(event);
-        }
-    }
 
-    void
-    EventRegister::register_callback(const Event::Type &event_type,
-            const std::function<void(const Event &)> &callback)
-    {
-        this->m_temporary[event_type].push_back(callback);
+        }
+
+        EventRegister::~EventRegister(void)
+        {
+
+        }
+
+        void
+        EventRegister::push_event(const Event &event)
+        {
+            const Type   event_type = event.get_type();
+            for (std::function<void(const Event &event)> &callback : this->m_temporary[event_type])
+            {
+                callback(event);
+            }
+        }
+
+        void
+        EventRegister::register_callback(const Type &event_type,
+                const std::function<void(const Event &)> &callback)
+        {
+            this->m_temporary[event_type].push_back(callback);
+        }
     }
 }

@@ -23,45 +23,48 @@
 #include    <functional>
 
 #include    "Engine/Event/Event.hpp"
+#include    "Engine/Event/Types.hpp"
 
 namespace   Engine
 {
-
-    class       EventRegister
+    namespace   Event
     {
-        public:
-            ///
-            /// \brief Default constructor.
-            ///
-            EventRegister(void);
+        class       EventRegister
+        {
+            public:
+                ///
+                /// \brief Default constructor.
+                ///
+                EventRegister(void);
 
-            ///
-            /// \brief Destructor.
-            ///
-            ~EventRegister(void);
+                ///
+                /// \brief Destructor.
+                ///
+                ~EventRegister(void);
 
-        public:
+            public:
 
-            ///
-            /// \brief Push an event in the event register, this function will
-            /// spread the event in the registered callback.
-            ///
-            void    push_event(const Event &event);
+                ///
+                /// \brief Push an event in the event register, this function will
+                /// spread the event in the registered callback.
+                ///
+                void    push_event(const Event &event);
 
-            ///
-            /// \brief Register a callback to a particular event type.
-            ///
-            /// TODO add predicate.
-            ///
-            void    register_callback(const Event::Type &event_type,
-                    const std::function<void(const Event &)> &callback);
+                ///
+                /// \brief Register a callback to a particular event type.
+                ///
+                /// TODO add predicate.
+                ///
+                void    register_callback(const Type &event_type,
+                        const std::function<void(const Event &)> &callback);
 
-        protected:
-            ///
-            /// \brief Temporary container.
-            ///
-            std::map<const Event::Type, std::list<std::function<void(const Event &)>>>  m_temporary;
-    };
+            protected:
+                ///
+                /// \brief Temporary container.
+                ///
+                std::map<const Type, std::list<std::function<void(const Event &)>>>  m_temporary;
+        };
+    }
 }
 
 #endif /* !__EVENT_REGISTER_HPP__ */

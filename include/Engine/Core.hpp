@@ -23,8 +23,12 @@
 namespace Engine
 {
 
+    namespace   Event
+    {
+        class       Event;
+    }
+
     class   Scene;
-    class   Event;
 
     ///
     /// \brief This class is the entry point for the engine library.
@@ -77,7 +81,7 @@ namespace Engine
             ///
             /// \brief This function is used to produce an event on the engine.
             ///
-            void    push_event(Event &event);
+            void    push_event(const Event::Event &event);
 
         public:
             ///

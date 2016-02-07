@@ -19,33 +19,36 @@
 
 namespace   Engine
 {
-
-    MouseButtonPressed::MouseButtonPressed(const Mouse::Button &code,
-            const glm::vec2 &position) :
-        Event(Event::Type::MOUSE_BUTTON_PRESSED),
-        m_code(code),
-        m_position(position)
+    namespace   Event
     {
 
+        MouseButtonPressed::MouseButtonPressed(const Mouse::Button &code,
+                const glm::vec2 &position) :
+            Event(Type::MOUSE_BUTTON_PRESSED),
+            m_code(code),
+            m_position(position)
+        {
+
+        }
+
+        MouseButtonPressed::~MouseButtonPressed(void) noexcept
+        {
+
+        }
+
+
+
+        const Mouse::Button &
+            MouseButtonPressed::get_button(void) const
+            {
+                return this->m_code;
+            }
+
+        const glm::vec2 &
+            MouseButtonPressed::get_position(void) const
+            {
+                return this->m_position;
+            }
+
     }
-
-    MouseButtonPressed::~MouseButtonPressed(void) noexcept
-    {
-
-    }
-
-
-
-    const Mouse::Button &
-    MouseButtonPressed::get_button(void) const
-    {
-         return this->m_code;
-    }
-
-    const glm::vec2 &
-    MouseButtonPressed::get_position(void) const
-    {
-        return this->m_position;
-    }
-
 }

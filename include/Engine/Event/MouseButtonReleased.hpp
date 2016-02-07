@@ -25,41 +25,44 @@
 
 namespace   Engine
 {
-    class       MouseButtonReleased : public Event
+    namespace   Event
     {
-        public:
-            ///
-            /// \brief Default constructor.
-            ///
-            MouseButtonReleased(const Mouse::Button &code, const glm::vec2 &position);
+        class       MouseButtonReleased : public Event
+        {
+            public:
+                ///
+                /// \brief Default constructor.
+                ///
+                MouseButtonReleased(const Mouse::Button &code, const glm::vec2 &position);
 
-            ///
-            /// \brief Destructor.
-            ///
-            ~MouseButtonReleased(void);
+                ///
+                /// \brief Destructor.
+                ///
+                ~MouseButtonReleased(void);
 
-        public:
-            ///
-            /// \brief Get the button code of the event.
-            ///
-            const Mouse::Button     &get_button(void) const;
+            public:
+                ///
+                /// \brief Get the button code of the event.
+                ///
+                const Mouse::Button     &get_button(void) const;
 
-            ///
-            /// \brief Get the position of the mouse.
-            ///
-            const glm::vec2         &get_position(void) const;
+                ///
+                /// \brief Get the position of the mouse.
+                ///
+                const glm::vec2         &get_position(void) const;
 
-        private:
-            ///
-            /// \brief The button code of the mouse.
-            ///
-            Mouse::Button       m_code;
+            private:
+                ///
+                /// \brief The button code of the mouse.
+                ///
+                Mouse::Button       m_code;
 
-            ///
-            /// \brief The position of the mouse when the event was launch.
-            ///
-            glm::vec2           m_position;
-    };
+                ///
+                /// \brief The position of the mouse when the event was launch.
+                ///
+                glm::vec2           m_position;
+        };
+    }
 }
 
 #endif // !__ENGINE_EVENT_MOUSEBUTTONRELEASED_HPP__

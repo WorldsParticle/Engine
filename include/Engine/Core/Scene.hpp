@@ -34,7 +34,10 @@
 
 namespace Engine
 {
-    class       Event;
+    namespace   Event
+    {
+        class       Event;
+    }
     class       AssimpScene;
 
     ///
@@ -95,7 +98,7 @@ namespace Engine
             ///
             /// \brief This function is used to push a new event in the scene.
             ///
-            void        push_event(Event &event);
+            void        push_event(const Event::Event &event);
 
         public:
             ///
@@ -143,14 +146,14 @@ namespace Engine
             /// TODO : something a little bit better
             ///
             void        register_callback(const Event::Type &event_type,
-                    const std::function<void(const Event &)> &callback);
+                    const std::function<void(const Event::Event &)> &callback);
 
         protected:
 
             ///
             /// \brief temporary, but something similar to what I want do.
             ///
-            EventRegister               m_event_register;
+            Event::EventRegister    m_event_register;
 
         protected:
             ///

@@ -115,7 +115,7 @@ namespace   Engine
     }
 
     void
-    Core::push_event(Event &event)
+    Core::push_event(const Event::Event &event)
     {
         for (Scene *scene : this->m_scenes)
         {

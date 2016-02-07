@@ -15,13 +15,19 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include    <glm/glm.hpp>
+#include    <glm/gtc/matrix_transform.hpp>
 #include    <log4cpp/Category.hh>
 #include    <functional>
 
 #include    "Engine/Core/Scene.hpp"
 #include    "Engine/Core/SceneGraphNode.hpp"
 #include    "Engine/Core/FreeflyCamera.hpp"
+
 #include    "Engine/Event/Event.hpp"
+#include    "Engine/Event/KeyPressed.hpp"
+
+#include    "Engine/Input/Keyboard/Key.hpp"
 
 using namespace     log4cpp;
 
@@ -29,13 +35,14 @@ namespace   Engine
 {
 
     FreeflyCamera::FreeflyCamera(SceneGraphNode *node) :
-        PerspectiveCamera(node)
+        PerspectiveCamera(node),
+        m_speed(0.1f)
     {
 /*        this->m_projection = glm::perspective(this->m_fov, this->m_aspect,*/
                 //this->m_clippingPlane.near, this->m_clippingPlane.far);
         //this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
-        std::function<void(const Event &)> callback =
-            std::bind(&FreeflyCamera::test_input, this, std::placeholders::_1);
+        std::function<void(const Event::Event &)> callback =
+            std::bind(&FreeflyCamera::on_key_pressed, this, std::placeholders::_1);
 
         node->getScene()->register_callback(Event::Type::KEY_PRESSED,
                 callback);
@@ -49,11 +56,55 @@ namespace   Engine
 
 
     void
-    FreeflyCamera::test_input(const Event &event)
+    FreeflyCamera::on_key_pressed(const Event::Event &event)
     {
         Category    &root = Category::getRoot();
 
-        root << Priority::DEBUG << "EVENT IN THE FREEFLY CAMERA";
+        const Event::KeyPressed *key_pressed_event =
+            dynamic_cast<const Event::KeyPressed *>(&event);
+
+        if (key_pressed_event != nullptr)
+        {
+            root << Priority::DEBUG << "it's a KeyPressed event.";
+            switch (key_pressed_event->get_key())
+            {
+                case Keyboard::Key::Z:
+                    this->on_z_pressed(*key_pressed_event); break;
+                case Keyboard::Key::Q:
+                    root << Priority::DEBUG << "it's a Q"; break;
+                case Keyboard::Key::S:
+                    this->on_s_pressed(*key_pressed_event); break;
+                case Keyboard::Key::D:
+                    root << Priority::DEBUG << "it's a D"; break;
+                default:
+                    root << Priority::DEBUG << "something else."; break;
+            }
+        }
     }
+
+    void
+    FreeflyCamera::on_z_pressed(const Event::KeyPressed &event)
+    {
+        glm::vec3   dir = this->m_position - this->m_lookat;
+        this->m_position -= dir * this->m_speed;
+        //this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
+                //this->m_clippingPlane.near, this->m_clippingPlane.far);
+        this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
+    }
+
+    void
+    FreeflyCamera::on_s_pressed(const Event::KeyPressed &event)
+    {
+        glm::vec3   dir = this->m_position - this->m_lookat;
+        this->m_position += dir * this->m_speed;
+        this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
+    }
+
+/*    void*/
+    //FreeflyCamera::on_q_pressed(const KeyPressed &event)
+    //{
+        //glm::vec3   dir = this->m_position - this->m_lookAt;
+
+    //}
 
 }
