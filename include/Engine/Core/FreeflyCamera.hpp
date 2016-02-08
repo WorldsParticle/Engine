@@ -51,17 +51,33 @@ namespace   Engine
             /// \brief Callback call when a key is pressed.
             ///
             void    on_key_pressed(const Event::Event &event);
+            void    on_mouse_move(const Event::Event &event);
 
-            void    on_z_pressed(const Event::KeyPressed &event);
-            void    on_q_pressed(const Event::KeyPressed &event);
-            void    on_s_pressed(const Event::KeyPressed &event);
-            void    on_d_pressed(const Event::KeyPressed &event);
+            void    forward(float distance);
+            void    backward(float distance);
+            void    left(float distance);
+            void    right(float distance);
+
+            void    yaw(float degree);
+            void    pitch(float degree);
+            void    roll(float degree);
+
+            void    update_matrix(void);
 
         protected:
+
+            ///
+            /// \brief The right axis of the camera.
+            ///
+            glm::vec3   m_right;
+
+            glm::vec3   m_look;
+
             ///
             /// \brief the speed of the camera.
             ///
             float       m_speed;
+            float       m_mouse_sensibility;
     };
 }
 

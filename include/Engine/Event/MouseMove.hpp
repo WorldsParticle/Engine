@@ -21,6 +21,7 @@
 #include    <glm/glm.hpp>
 
 #include    "Engine/Event/Event.hpp"
+#include    "Engine/Input/Mouse/Button.hpp"
 
 namespace   Engine
 {
@@ -32,7 +33,7 @@ namespace   Engine
                 ///
                 /// \brief Default constructor.
                 ///
-                MouseMove(const glm::vec2 &position);
+                MouseMove(const Mouse::Button &code, const glm::vec2 &position);
 
                 ///
                 /// \brief Destructor.
@@ -45,11 +46,21 @@ namespace   Engine
                 ///
                 const glm::vec2     &get_position(void) const;
 
+                ///
+                /// \brief Get the button.
+                ///
+                const Mouse::Button &get_button(void) const;
+
             private:
                 ///
                 /// \brief The mouse position.
                 ///
                 glm::vec2           m_position;
+
+                ///
+                /// \brief The button pressed if existing.
+                ///
+                Mouse::Button       m_code;
         };
     }
 }

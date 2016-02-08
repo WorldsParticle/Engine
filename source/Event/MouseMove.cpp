@@ -21,9 +21,10 @@ namespace   Engine
 {
     namespace   Event
     {
-        MouseMove::MouseMove(const glm::vec2 &position) :
+        MouseMove::MouseMove(const Mouse::Button &code, const glm::vec2 &position) :
             Event(Type::MOUSE_MOVE),
-            m_position(position)
+            m_position(position),
+            m_code(code)
         {
 
         }
@@ -34,6 +35,11 @@ namespace   Engine
         }
 
 
+        const Mouse::Button &
+        MouseMove::get_button(void) const
+        {
+            return this->m_code;
+        }
 
         const glm::vec2 &
         MouseMove::get_position(void) const
