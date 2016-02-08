@@ -104,6 +104,11 @@ namespace   Engine
             ///
             const aiNode        *getRootNode(void) const;
 
+			inline std::size_t	getCameraNumber(void) const
+			{
+				return this->m_cameras.size();
+			}
+
         private:
             ///
             /// \brief map of imported assimp cameras.

@@ -121,7 +121,7 @@ namespace   Engine
             ///
             void    setEntity(Entity *entity);
 
-#warning Temporary function
+//#warning Temporary function
             ///
             /// \brief Add a children in this node.
             ///
