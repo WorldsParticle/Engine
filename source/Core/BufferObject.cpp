@@ -122,7 +122,7 @@ namespace   Engine
 
 
 
-#warning temporary method
+//#warning temporary method
     unsigned int
     BufferObject::convert(const Type &type) const
     {

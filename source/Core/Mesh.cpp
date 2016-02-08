@@ -45,7 +45,7 @@ namespace   Engine
         // nothing to do
     }
 
-#warning check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
+//#warning check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
     Mesh::Mesh(const aiMesh *am, Material *material) :
         m_name(""),
         m_positions(),
@@ -76,7 +76,7 @@ namespace   Engine
     }
 
 
-#warning rework, c est totalement dégeulasse.
+//#warning rework, c est totalement dégeulasse.
     void
     Mesh::update(void)
     {
