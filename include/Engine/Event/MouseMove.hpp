@@ -20,6 +20,7 @@
 
 #include    <glm/glm.hpp>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Event/Event.hpp"
 #include    "Engine/Input/Mouse/Button.hpp"
 
@@ -27,7 +28,7 @@ namespace   Engine
 {
     namespace   Event
     {
-        class MouseMove : public Event
+        class ENGINE_EXPORTS MouseMove : public Event
         {
             public:
                 ///

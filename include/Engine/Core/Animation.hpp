@@ -21,9 +21,11 @@
 #include    <assimp/anim.h>
 #include    <string>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
-    class       Animation final
+    class ENGINE_EXPORTS Animation final
     {
         public:
             ///

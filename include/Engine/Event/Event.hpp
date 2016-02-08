@@ -18,6 +18,7 @@
 #ifndef     __ENGINE_EVENT_EVENT_HPP__
 #define     __ENGINE_EVENT_EVENT_HPP__
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Event/Types.hpp"
 
 namespace   Engine
@@ -27,7 +28,7 @@ namespace   Engine
         ///
         /// \brief This class is an abstract base class for an event.
         ///
-        class   Event
+        class ENGINE_EXPORTS Event
         {
 
             protected:

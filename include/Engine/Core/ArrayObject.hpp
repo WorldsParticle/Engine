@@ -18,12 +18,14 @@
 #ifndef     __ENGINE_ARRAY_OBJECT_HPP__
 # define    __ENGINE_ARRAY_OBJECT_HPP__
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
     ///
     /// \brief This class is an abstraction of the Vertex Array Object of the OpenGL API.
     ///
-    class       ArrayObject final
+    class ENGINE_EXPORTS ArrayObject final
     {
         public:
             ///

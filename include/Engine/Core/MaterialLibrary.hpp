@@ -20,6 +20,7 @@
 
 #include    <assimp/material.h>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Library.hpp"
 #include    "Engine/Core/Material.hpp"
 
@@ -28,7 +29,7 @@ namespace   Engine
     ///
     /// \brief This material library wrap the Library<Material> and provide a constructor from assimp materials.
     ///
-    class       MaterialLibrary : public Library<Material *>
+    class ENGINE_EXPORTS MaterialLibrary : public Library<Material *>
     {
         public:
             ///

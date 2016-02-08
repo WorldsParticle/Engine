@@ -18,6 +18,7 @@
 #ifndef         __ENGINE_EVENT_KEYRELEASED_HPP__
 # define        __ENGINE_EVENT_KEYRELEASED_HPP__
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Event/Event.hpp"
 #include    "Engine/Input/Keyboard/Key.hpp"
 
@@ -28,7 +29,7 @@ namespace   Engine
         ///
         /// \brief The KeyReleased event class, containing a key released event.
         ///
-        class   KeyReleased : public Event
+        class ENGINE_EXPORTS KeyReleased : public Event
         {
             public:
                 ///

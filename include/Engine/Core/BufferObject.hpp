@@ -21,12 +21,14 @@
 #include    <vector>
 #include    <glm/glm.hpp>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
     ///
     /// \brief This class is used to abstract a OpenGL Vertex Buffer Object.
     ///
-    class       BufferObject final
+    class ENGINE_EXPORTS BufferObject final
     {
         public:
             ///

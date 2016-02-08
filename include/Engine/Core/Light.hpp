@@ -21,6 +21,7 @@
 #include    <string>
 #include    <assimp/light.h>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Entity.hpp"
 
 namespace Engine
@@ -31,7 +32,7 @@ namespace Engine
     ///
     /// TODO : implement the class.
     ///
-    class Light : public Entity
+    class ENGINE_EXPORTS Light : public Entity
     {
         public:
             ///

@@ -22,6 +22,7 @@
 #include    <vector>
 #include    <memory>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Shader.hpp"
 
 namespace   Engine
@@ -29,7 +30,7 @@ namespace   Engine
     ///
     /// \brief This class is used to abstract a program shader.
     ///
-    class       ShaderProgram final
+    class ENGINE_EXPORTS ShaderProgram final
     {
         public:
             ///

@@ -21,6 +21,7 @@
 #include    <list>
 #include    <assimp/scene.h>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Entity.hpp"
 
 namespace   Engine
@@ -31,7 +32,7 @@ namespace   Engine
     ///
     /// \brief This class is used to represent a physical entity.
     ///
-    class       Object : public Entity
+    class ENGINE_EXPORTS Object : public Entity
     {
         public:
             ///

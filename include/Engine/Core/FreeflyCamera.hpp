@@ -18,6 +18,7 @@
 #ifndef     __ENGINE_CORE_FREEFLYCAMERA_HPP__
 # define    __ENGINE_CORE_FREEFLYCAMERA_HPP__
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/PerspectiveCamera.hpp"
 
 namespace   Engine
@@ -33,7 +34,7 @@ namespace   Engine
     ///
     /// \brief A basic implementation of a freefly camera.
     ///
-    class       FreeflyCamera : public PerspectiveCamera
+    class ENGINE_EXPORTS FreeflyCamera : public PerspectiveCamera
     {
         public:
             ///

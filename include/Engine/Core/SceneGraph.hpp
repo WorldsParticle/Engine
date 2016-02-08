@@ -20,13 +20,15 @@
 
 #include    <assimp/scene.h>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
     class       Scene;
     class       SceneGraphNode;
     class       AssimpScene;
 
-    class       SceneGraph final
+    class ENGINE_EXPORTS SceneGraph final
     {
         public:
             ///

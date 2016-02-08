@@ -18,6 +18,7 @@
 #ifndef     __ENGINE_PERSPECTIVE_CAMERA_HPP__
 # define    __ENGINE_PERSPECTIVE_CAMERA_HPP__
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Camera.hpp"
 
 namespace   Engine
@@ -32,7 +33,7 @@ namespace   Engine
     ///
     /// TODO Je pense que c'est pas nécessaire de faire deux classes pour une perspective & une orthographique.
     ///
-    class       PerspectiveCamera : public Camera
+    class ENGINE_EXPORTS PerspectiveCamera : public Camera
     {
         public:
             ///
