@@ -47,7 +47,7 @@ namespace   Engine
             ///
             /// \brief Move constructor.
             ///
-            //AssimpImporter(AssimpImporter &&other) noexcept = default;
+            AssimpImporter(AssimpImporter &&other) noexcept = default;
 
             ///
             /// \brief Destructor
