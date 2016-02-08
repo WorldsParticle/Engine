@@ -22,6 +22,8 @@
 #include    "Engine/Version.hpp"
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core.hpp"
+#include    "Engine/Event/Event.hpp"
+#include    "Engine/Core/Scene.hpp"
 
 using namespace     log4cpp;
 
@@ -109,6 +111,19 @@ namespace   Engine
         for (Scene *scene : this->m_scenes)
         {
             scene->render();
+        }
+    }
+
+    void
+    Core::push_event(const Event::Event &event)
+    {
+        for (Scene *scene : this->m_scenes)
+        {
+            scene->push_event(event);
+            if (event.is_consumed())
+            {
+                break;
+            }
         }
     }
 

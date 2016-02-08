@@ -15,23 +15,38 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include "Engine/Event/KeyEvent.hpp"
+#include    "Engine/Event/MouseButtonReleased.hpp"
 
 namespace   Engine
 {
-
-    KeyEvent::KeyEvent(int key, int action) : _key(key), _action(action)
+    namespace   Event
     {
+        MouseButtonReleased::MouseButtonReleased(const Mouse::Button &code,
+                const glm::vec2 &position) :
+            Event(Type::MOUSE_BUTTON_RELEASED),
+            m_code(code),
+            m_position(position)
+        {
 
-    }
+        }
 
-    int KeyEvent::getKey()
-    {
-        return _key;
-    }
+        MouseButtonReleased::~MouseButtonReleased(void) noexcept
+        {
+            // nothing to do.
+        }
 
-    int KeyEvent::getAction()
-    {
-        return _action;
+
+
+        const Mouse::Button &
+            MouseButtonReleased::get_button(void) const
+            {
+                return this->m_code;
+            }
+
+        const glm::vec2 &
+            MouseButtonReleased::get_position(void) const
+            {
+                return this->m_position;
+            }
     }
 }

@@ -29,6 +29,7 @@ namespace Engine
 
     /// TODO : delete push object
     Scene::Scene(void) :
+        m_event_register(),
         m_shaderprograms(),
         m_materials(),
         m_animations(),
@@ -42,6 +43,7 @@ namespace Engine
     }
 
     Scene::Scene(const AssimpScene &s) :
+        m_event_register(),
         m_shaderprograms(),
         m_materials(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber()),
         m_animations(s.getAnimations(), s.getAnimationsNumber()),
@@ -61,15 +63,23 @@ namespace Engine
 
 
 
-    void    Scene::update(void)
+    void
+    Scene::update(void)
     {
         this->m_scenegraph.update();
     }
 
-    void    Scene::render(void)
+    void
+    Scene::render(void)
     {
         this->m_spatialgraph.cull();
         this->m_renderer.render();
+    }
+
+    void
+    Scene::push_event(const Event::Event &event)
+    {
+        this->m_event_register.push_event(event);
     }
 
 
@@ -116,6 +126,15 @@ namespace Engine
     Scene::add(Camera *camera)
     {
         this->m_spatialgraph.add(camera);
+    }
+
+
+
+    void
+    Scene::register_callback(const Event::Type &event_type,
+            const std::function<void(const Event::Event &)> &callback)
+    {
+         this->m_event_register.register_callback(event_type, callback);
     }
 
 }

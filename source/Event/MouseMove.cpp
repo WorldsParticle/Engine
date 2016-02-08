@@ -15,26 +15,36 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __MOUSE_MOVE_EVENT_HPP__
-#define     __MOUSE_MOVE_EVENT_HPP__
-
-#include "Event.hpp"
+#include "Engine/Event/MouseMove.hpp"
 
 namespace   Engine
 {
-
-    class MouseMoveEvent : public Event
+    namespace   Event
     {
-        public :
-            MouseMoveEvent(int x, int y);
+        MouseMove::MouseMove(const Mouse::Button &code, const glm::vec2 &position) :
+            Event(Type::MOUSE_MOVE),
+            m_position(position),
+            m_code(code)
+        {
 
-            int getX() const;
-            int getY() const;
+        }
 
-        private :
-            int _x;
-            int _y;
-    };
+        MouseMove::~MouseMove(void) noexcept
+        {
+
+        }
+
+
+        const Mouse::Button &
+        MouseMove::get_button(void) const
+        {
+            return this->m_code;
+        }
+
+        const glm::vec2 &
+        MouseMove::get_position(void) const
+        {
+            return this->m_position;
+        }
+    }
 }
-
-#endif // __MOUSE_MOVE_EVENT_HPP__

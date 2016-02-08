@@ -30,8 +30,14 @@
 #include    "Engine/Core/MeshLibrary.hpp"
 #include    "Engine/Core/TextureLibrary.hpp"
 
+#include    "Engine/Event/EventRegister.hpp"
+
 namespace Engine
 {
+    namespace   Event
+    {
+        class       Event;
+    }
     class       AssimpScene;
 
     ///
@@ -89,6 +95,11 @@ namespace Engine
             ///
             void        render(void);
 
+            ///
+            /// \brief This function is used to push a new event in the scene.
+            ///
+            void        push_event(const Event::Event &event);
+
         public:
             ///
             /// \brief This method allow to retrieve a material from the animation material.
@@ -126,6 +137,23 @@ namespace Engine
             /// \brief add a camera in the spatial graph.
             ///
             void        add(Camera *camera);
+
+        public:
+
+            ///
+            /// \brief Temporary function to register a callback to an event.
+            ///
+            /// TODO : something a little bit better
+            ///
+            void        register_callback(const Event::Type &event_type,
+                    const std::function<void(const Event::Event &)> &callback);
+
+        protected:
+
+            ///
+            /// \brief temporary, but something similar to what I want do.
+            ///
+            Event::EventRegister    m_event_register;
 
         protected:
             ///

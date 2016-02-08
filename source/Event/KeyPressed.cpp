@@ -15,31 +15,33 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include "Engine/Event/MouseClickEvent.hpp"
+#include "Engine/Event/KeyPressed.hpp"
 
 namespace   Engine
 {
 
-    MouseClickEvent::MouseClickEvent(int key, int x, int y) :
-        _key(key),
-        _x(x),
-        _y(y)
+    namespace   Event
     {
 
-    }
+        KeyPressed::KeyPressed(const Keyboard::Key &code) :
+            Event(Type::KEY_PRESSED),
+            m_code(code)
+        {
 
-    int MouseClickEvent::getKey()
-    {
-        return _key;
-    }
+        }
 
-    int MouseClickEvent::getX()
-    {
-        return _x;
-    }
+        KeyPressed::~KeyPressed(void)
+        {
 
-    int MouseClickEvent::getY()
-    {
-        return _y;
+        }
+
+
+
+        const Keyboard::Key &
+            KeyPressed::get_key(void) const
+            {
+                return this->m_code;
+            }
+
     }
 }
