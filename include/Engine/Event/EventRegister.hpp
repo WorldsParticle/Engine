@@ -22,6 +22,7 @@
 #include    <list>
 #include    <functional>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Event/Event.hpp"
 #include    "Engine/Event/Types.hpp"
 
@@ -29,7 +30,7 @@ namespace   Engine
 {
     namespace   Event
     {
-        class       EventRegister
+        class ENGINE_EXPORTS EventRegister
         {
             public:
                 ///

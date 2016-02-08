@@ -21,6 +21,7 @@
 #include    <memory>
 #include    <list>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Renderer.hpp"
 #include    "Engine/Core/SpatialGraph.hpp"
 #include    "Engine/Core/SceneGraph.hpp"
@@ -45,7 +46,7 @@ namespace Engine
     ///
     /// The scene could be used to draw a GUI in the screen, with a good gameobject separation.
     ///
-    class       Scene final
+    class ENGINE_EXPORTS Scene final
     {
         public:
             ///

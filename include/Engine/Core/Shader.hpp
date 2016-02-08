@@ -20,12 +20,14 @@
 
 #include    <string>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
     ///
     /// \brief This class is used to abstract a shader
     ///
-    class Shader
+    class ENGINE_EXPORTS Shader
     {
 
         public:

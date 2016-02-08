@@ -18,6 +18,7 @@
 #ifndef     __ENGINE_MESH_LIBRARY_HPP__
 # define    __ENGINE_MESH_LIBRARY_HPP__
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Library.hpp"
 #include    "Engine/Core/Mesh.hpp"
 
@@ -28,7 +29,7 @@ namespace   Engine
     ///
     /// \brief This class is used as a container for the mesh used in the scene.
     ///
-    class       MeshLibrary : public Library<Mesh *>
+    class ENGINE_EXPORTS MeshLibrary : public Library<Mesh *>
     {
         public:
             ///

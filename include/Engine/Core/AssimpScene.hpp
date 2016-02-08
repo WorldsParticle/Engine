@@ -21,9 +21,11 @@
 #include    <assimp/scene.h>
 #include    <map>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
-    class       AssimpScene
+    class ENGINE_EXPORTS AssimpScene
     {
         public:
             ///

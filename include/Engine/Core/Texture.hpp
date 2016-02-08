@@ -20,9 +20,14 @@
 
 #include    <assimp/texture.h>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
-    class       Texture
+    ///
+    /// \brief TODO
+    ///
+    class ENGINE_EXPORTS Texture
     {
         public:
             ///

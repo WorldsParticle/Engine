@@ -20,13 +20,14 @@
 
 #include    <glm/glm.hpp>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Event/Event.hpp"
 
 namespace   Engine
 {
     namespace   Event
     {
-        class       Resize : public Event
+        class ENGINE_EXPORTS Resize : public Event
         {
             public:
                 ///

@@ -34,7 +34,7 @@ namespace Engine
     ///
     /// \brief This class is the entry point for the engine library.
     ///
-    class ENGINE_EXPORT Core
+    class ENGINE_EXPORTS Core
     {
         public:
             ///

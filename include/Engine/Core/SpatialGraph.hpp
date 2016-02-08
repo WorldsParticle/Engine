@@ -20,6 +20,8 @@
 
 #include    <list>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
 
@@ -34,7 +36,7 @@ namespace   Engine
     ///
     /// Actually, this class doesn't implement any occlusion culling, everything is rendered.
     ///
-    class       SpatialGraph
+    class ENGINE_EXPORTS SpatialGraph
     {
         public:
             ///

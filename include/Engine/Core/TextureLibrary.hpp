@@ -18,12 +18,13 @@
 #ifndef     __ENGINE_TEXTURE_LIBRARY_HPP__
 # define    __ENGINE_TEXTURE_LIBRARY_HPP__
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Library.hpp"
 #include    "Engine/Core/Texture.hpp"
 
 namespace   Engine
 {
-    class       TextureLibrary : public Library<Texture *>
+    class ENGINE_EXPORTS TextureLibrary : public Library<Texture *>
     {
         public:
             ///

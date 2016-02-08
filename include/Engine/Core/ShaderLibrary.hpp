@@ -20,6 +20,7 @@
 
 #include    <memory>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Library.hpp"
 #include    "Engine/Core/Shader.hpp"
 #include    "Engine/Core/ShaderNames.hpp"
@@ -29,7 +30,7 @@ namespace   Engine
     ///
     /// \brief This class is used to store / create and retrieve every shader used in the engine.
     ///
-    class       ShaderLibrary : public Library<std::shared_ptr<Shader>>
+    class ENGINE_EXPORTS ShaderLibrary : public Library<std::shared_ptr<Shader>>
     {
         public:
             ///
