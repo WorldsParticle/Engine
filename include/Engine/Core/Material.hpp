@@ -22,6 +22,8 @@
 #include    <glm/glm.hpp>
 #include    <assimp/material.h>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
     class   ShaderProgram;
@@ -29,7 +31,7 @@ namespace   Engine
     ///
     /// \brief This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered.
     ///
-    class   Material final
+    class ENGINE_EXPORTS Material final
     {
         public:
             ///

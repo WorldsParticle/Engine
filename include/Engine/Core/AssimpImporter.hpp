@@ -23,6 +23,8 @@
 #include    <assimp/Importer.hpp>
 #include    <assimp/mesh.h>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
 
@@ -31,7 +33,7 @@ namespace   Engine
     ///
     /// \brief This class is used to import a scene with the assimp library.
     ///
-    class       AssimpImporter
+    class ENGINE_EXPORTS AssimpImporter
     {
         public:
             ///

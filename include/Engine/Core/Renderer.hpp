@@ -20,6 +20,8 @@
 
 #include    <list>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
     class   Scene;
@@ -34,7 +36,7 @@ namespace   Engine
     ///
     /// TODO rework.
     ///
-    class       Renderer
+    class ENGINE_EXPORTS Renderer
     {
         public:
             ///

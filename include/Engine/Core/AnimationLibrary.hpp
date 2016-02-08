@@ -20,6 +20,7 @@
 
 #include    <assimp/anim.h>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Library.hpp"
 #include    "Engine/Core/Animation.hpp"
 
@@ -28,7 +29,7 @@ namespace   Engine
     ///
     /// \brief This class is used to contains every animation available in a scene.
     ///
-    class       AnimationLibrary : public Library<Animation *>
+    class ENGINE_EXPORTS AnimationLibrary : public Library<Animation *>
     {
         public:
             ///

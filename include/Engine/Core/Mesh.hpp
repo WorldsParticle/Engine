@@ -23,6 +23,7 @@
 #include    <glm/glm.hpp>
 #include    <assimp/mesh.h>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/BufferObject.hpp"
 #include    "Engine/Core/ArrayObject.hpp"
 
@@ -33,7 +34,7 @@ namespace   Engine
     ///
     /// \brief The Mesh class
     ///
-    class       Mesh final
+    class ENGINE_EXPORTS Mesh final
     {
         public:
             ///

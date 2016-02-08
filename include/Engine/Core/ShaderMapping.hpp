@@ -26,7 +26,7 @@
 namespace   Engine
 {
 
-    struct  ShaderProperty
+    struct ShaderProperty
     {
         Shader::Type    shaderType;
         std::string     filename;

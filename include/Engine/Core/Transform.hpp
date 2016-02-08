@@ -22,6 +22,8 @@
 #include    <assimp/vector3.h>
 #include    <assimp/matrix4x4.h>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
     ///
@@ -29,7 +31,7 @@ namespace   Engine
     ///
     /// This class should be updated with quaternion support.
     ///
-    class   Transform
+    class ENGINE_EXPORTS Transform
     {
         public:
             ///

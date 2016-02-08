@@ -18,6 +18,8 @@
 #ifndef     __ENGINE_CLOCK_HPP__
 #define     __ENGINE_CLOCK_HPP__
 
+#include    "Engine/Configuration.hpp"
+
 namespace Engine
 {
     ///
@@ -25,9 +27,8 @@ namespace Engine
     ///
     /// This class should be entirely reworked.
     ///
-    class   Clock
+    class ENGINE_EXPORTS Clock
     {
-        public:
     };
 }
 

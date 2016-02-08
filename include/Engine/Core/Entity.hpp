@@ -20,6 +20,8 @@
 
 #include    <string>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
 
@@ -30,7 +32,7 @@ namespace   Engine
     ///
     /// \brief This class is used to represent something physically or not in the 3D world.
     ///
-    class       Entity
+    class ENGINE_EXPORTS Entity
     {
         public:
             ///

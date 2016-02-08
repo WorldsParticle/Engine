@@ -22,6 +22,7 @@
 #include    <list>
 #include    <assimp/scene.h>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Transform.hpp"
 
 namespace   Engine
@@ -35,7 +36,7 @@ namespace   Engine
     ///
     /// \brief A Node of the scene graph.
     ///
-    class       SceneGraphNode final
+    class ENGINE_EXPORTS SceneGraphNode final
     {
         public:
             ///

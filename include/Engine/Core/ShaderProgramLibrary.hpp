@@ -20,6 +20,7 @@
 
 #include    <memory>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Library.hpp"
 #include    "Engine/Core/ShaderProgram.hpp"
 #include    "Engine/Core/ShaderProgramNames.hpp"
@@ -32,7 +33,7 @@ namespace   Engine
     ///
     /// We must use a shared_ptr because of the non copiability of a ShaderProgram.
     ///
-    class       ShaderProgramLibrary : public Library<std::shared_ptr<ShaderProgram>>
+    class ENGINE_EXPORTS ShaderProgramLibrary : public Library<std::shared_ptr<ShaderProgram>>
     {
         public:
             ///

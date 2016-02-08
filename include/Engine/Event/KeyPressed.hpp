@@ -18,6 +18,7 @@
 #ifndef     __ENGINE_EVENT_KEYPRESSED_HPP__
 #define     __ENGINE_EVENT_KEYPRESSED_HPP__
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Event/Event.hpp"
 #include    "Engine/Input/Keyboard/Key.hpp"
 
@@ -28,7 +29,7 @@ namespace   Engine
         ///
         /// \brief The KeyPressed event class, containing a key pressed event.
         ///
-        class       KeyPressed final : public Event
+        class ENGINE_EXPORTS KeyPressed final : public Event
         {
             public:
                 ///

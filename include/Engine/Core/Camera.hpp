@@ -22,11 +22,9 @@
 #include    <glm/glm.hpp>
 #include    <assimp/camera.h>
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Entity.hpp"
 
-// Windows compilation, windows...
-#undef  near
-#undef  far
 
 namespace   Engine
 {
@@ -38,7 +36,7 @@ namespace   Engine
     ///
     /// It is not a concrete implementation for a camera.
     ///
-    class       Camera : public Entity
+    class ENGINE_EXPORTS Camera : public Entity
     {
         public:
             ///
@@ -49,11 +47,13 @@ namespace   Engine
                 ///
                 /// \brief Distance of the near clipping plane from the camera.
                 ///
+#undef  near // Windows compilation, windows...
                 float   near;
 
                 ///
                 /// \brief Distance of the far clipping plane from the camera.
                 ///
+#undef  far // Windows compilation, windows...
                 float   far;
             };
 
