@@ -15,22 +15,10 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-//#if defined (WIN32)// && defined (BUILD_SHARED_LIBS)
-//#if defined (_MSC_VER)
-//#pragma warning(disable: 4251)
-//#endif
-//#if defined(MyLib_EXPORT)
-#define  MYLIB_EXPORT __declspec(dllexport)
-//#else
-//#define  MYLIB_EXPORT __declspec(dllimport)
-//#endif
-//#else
-//#define MYLIB_EXPORT
-//#endif
-
 #ifndef     __ENGINE_CORE_HPP__
 #define     __ENGINE_CORE_HPP__
 
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/AssimpImporter.hpp"
 
 namespace Engine
@@ -46,7 +34,7 @@ namespace Engine
     ///
     /// \brief This class is the entry point for the engine library.
     ///
-    class   Core
+    class ENGINE_EXPORT Core
     {
         public:
             ///

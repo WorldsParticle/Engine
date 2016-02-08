@@ -18,6 +18,16 @@
 #ifndef     __ENGINE_CONFIGURATION_HPP__
 # define    __ENGINE_CONFIGURATION_HPP__
 
+#if defined (WIN32)
+# if defined (BUILD_SHARED_LIBS)
+#  define   ENGINE_EXPORT   __declspec(dllexport)
+# else
+#  define   ENGINE_EXPORT   __declspec(dllimport)
+# endif
+#else
+# define    ENGINE_EXPORT
+#endif
+
 #define     RESOURCES_PATH   "@RESOURCES_PATH@"
 
 #endif /* !__ENGINE_CONFIGURATION_HPP__ */
