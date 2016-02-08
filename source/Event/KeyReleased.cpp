@@ -15,27 +15,30 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __MOUSE_KEY_EVENT_HPP__
-#define     __MOUSE_KEY_EVENT_HPP__
-
-#include "Event.hpp"
+#include    "Engine/Event/KeyReleased.hpp"
 
 namespace   Engine
 {
-
-    class MouseClickEvent : public Event
+    namespace   Event
     {
-        public :
-            MouseClickEvent(int key, int x, int y);
+        KeyReleased::KeyReleased(const Keyboard::Key &code) :
+            Event(Type::KEY_RELEASED),
+            m_code(code)
+        {
 
-            int getKey();
-            int getX();
-            int getY();
-        private :
-            int _key;
-            int _x;
-            int _y;
-    };
+        }
+
+        KeyReleased::~KeyReleased(void)
+        {
+
+        }
+
+
+
+        const Keyboard::Key &
+            KeyReleased::get_key(void) const
+            {
+                return this->m_code;
+            }
+    }
 }
-
-#endif // __MOUSE_KEY_EVENT_HPP__

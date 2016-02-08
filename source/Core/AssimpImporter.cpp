@@ -58,9 +58,11 @@ namespace   Engine
     const aiScene *
     AssimpImporter::load(const std::string &filename)
     {
+        Category        &root = Category::getRoot();
         const aiScene   *result = nullptr;
         int             flags = 0;
 
+        root << Priority::DEBUG << "Loading : " << filename;
         flags |= aiProcess_ValidateDataStructure;
         flags |= aiProcess_Triangulate;
         flags |= aiProcess_FindInvalidData;
@@ -69,7 +71,6 @@ namespace   Engine
         flags |= aiProcess_FixInfacingNormals;
         if ((result = this->m_importer.ReadFile(filename, flags)) == nullptr)
         {
-            Category    &root = Category::getRoot();
             root << Priority::ERROR
                 << "Erreur dans le loading du fichier : " << filename;
             root << Priority::ERROR << this->m_importer.GetErrorString();

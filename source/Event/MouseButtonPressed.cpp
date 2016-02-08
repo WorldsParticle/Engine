@@ -15,41 +15,40 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __KEY_EVENT_HPP__
-#define     __KEY_EVENT_HPP__
-
-#include "Event.hpp"
+#include "Engine/Event/MouseButtonPressed.hpp"
 
 namespace   Engine
 {
-    class KeyEvent : public Event
+    namespace   Event
     {
-        public :
 
-            enum Key
+        MouseButtonPressed::MouseButtonPressed(const Mouse::Button &code,
+                const glm::vec2 &position) :
+            Event(Type::MOUSE_BUTTON_PRESSED),
+            m_code(code),
+            m_position(position)
+        {
+
+        }
+
+        MouseButtonPressed::~MouseButtonPressed(void) noexcept
+        {
+
+        }
+
+
+
+        const Mouse::Button &
+            MouseButtonPressed::get_button(void) const
             {
-                Z,
-                Q,
-                S,
-                D,
-                ESC
-            };
+                return this->m_code;
+            }
 
-            enum Action
+        const glm::vec2 &
+            MouseButtonPressed::get_position(void) const
             {
-                PRESS,
-                RELEASE
-            };
+                return this->m_position;
+            }
 
-            KeyEvent(int key, int action);
-
-            int getKey();
-            int getAction();
-
-        private :
-            int _key;
-            int _action;
-    };
+    }
 }
-
-#endif // __KEY_EVENT_HPP__

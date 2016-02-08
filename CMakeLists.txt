@@ -323,7 +323,7 @@ IF (CMAKE_COMPILER_IS_GNUCXX)
     # The only difference between -Wswitch and this option is that this option
     # gives a warning about an omitted enumeration code even if there is a
     # default label.
-    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wswitch-enum)
+    #TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wswitch-enum)
 
     # Warn about functions that might be candidates for attributes pure, const
     # or noreturn.

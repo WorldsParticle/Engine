@@ -15,25 +15,20 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include "Engine/Event/MouseMoveEvent.hpp"
+#ifndef     __ENGINE_INPUT_MOUSE_BUTTON_HPP__
+# define    __ENGINE_INPUT_MOUSE_BUTTON_HPP__
 
 namespace   Engine
 {
-
-    MouseMoveEvent::MouseMoveEvent(int x, int y) :
-        _x(x),
-        _y(y)
+    namespace   Mouse
     {
-
-    }
-
-    int MouseMoveEvent::getX() const
-    {
-        return _x;
-    }
-
-    int MouseMoveEvent::getY() const
-    {
-        return _y;
+        enum        Button
+        {
+            LEFT, // \brief TODO
+            RIGHT,
+            MIDDLE
+        };
     }
 }
+
+#endif // !__ENGINE_INPUT_MOUSE_BUTTON_HPP__

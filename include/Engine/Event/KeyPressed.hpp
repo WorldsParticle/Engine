@@ -15,83 +15,66 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_EVENT_EVENT_HPP__
-#define     __ENGINE_EVENT_EVENT_HPP__
+#ifndef     __ENGINE_EVENT_KEYPRESSED_HPP__
+#define     __ENGINE_EVENT_KEYPRESSED_HPP__
 
-#include    "Engine/Event/Types.hpp"
+#include    "Engine/Event/Event.hpp"
+#include    "Engine/Input/Keyboard/Key.hpp"
 
 namespace   Engine
 {
-    namespace    Event
+    namespace   Event
     {
         ///
-        /// \brief This class is an abstract base class for an event.
+        /// \brief The KeyPressed event class, containing a key pressed event.
         ///
-        class   Event
+        class       KeyPressed final : public Event
         {
-
-            protected:
-                ///
-                /// \brief Default Constructor can be only constructed from child class.
-                ///
-                Event(const Type &event_type);
-
             public:
+                ///
+                /// \brief Default constructor.
+                ///
+                KeyPressed(const Keyboard::Key &code);
+
                 ///
                 /// \brief Copy constructor.
                 ///
-                Event(const Event &other);
+                KeyPressed(const KeyPressed &other);
 
                 ///
                 /// \brief Move constructor.
                 ///
-                Event(Event &&other) noexcept;
+                KeyPressed(KeyPressed &&other) noexcept;
 
                 ///
                 /// \brief Destructor.
                 ///
-                virtual ~Event(void) noexcept;
+                virtual ~KeyPressed(void) noexcept;
 
             public:
                 ///
                 /// \brief Copy assignment operator.
                 ///
-                Event   &operator=(const Event &other);
+                void    operator=(const KeyPressed &other);
 
                 ///
                 /// \brief Move assignment operator.
                 ///
-                Event   &operator=(Event &&other) noexcept;
+                void    operator=(KeyPressed &&other);
 
             public:
                 ///
-                /// \brief This method is used to know if the event have been used.
+                /// \brief Get the key value of the keypressed event.
                 ///
-                bool    is_consumed(void) const;
-
-                ///
-                /// \brief This method consume the event.
-                ///
-                void    consume(void);
-
-            public:
-                ///
-                /// \brief get the type of the event.
-                ///
-                const Type  &get_type(void) const;
+                const Keyboard::Key     &get_key(void) const;
 
             private:
                 ///
-                /// \brief This attribute contains the state of the event. consumed or not consumed.
+                /// \brief The key code of the key pressed.
                 ///
-                bool    m_consumed;
-
-                ///
-                /// \brief The type of the event.
-                ///
-                Type    m_type;
+                Keyboard::Key     m_code;
         };
     }
 }
 
-#endif // __ENGINE_EVENT_EVENT_HPP__
+#endif // !__KEY_EVENT_HPP__
