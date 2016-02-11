@@ -16,7 +16,7 @@
 //
 
 #ifndef     __ENGINE_ASSIMP_SCENE_HPP__
-# define    __ENGINE_ASSIMP_SCENE_HPP_
+# define    __ENGINE_ASSIMP_SCENE_HPP__
 
 #include    <assimp/scene.h>
 #include    <map>
