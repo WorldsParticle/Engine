@@ -19,52 +19,65 @@
 # define    __ENGINE_TEXTURE_HPP__
 
 #include    <assimp/texture.h>
-
-#include    "Engine/Configuration.hpp"
+#include    <assimp/scene.h>
+#include    <GL/gl.h>
+#include    <string>
+#include    <map>
 
 namespace   Engine
 {
-    ///
-    /// \brief TODO
-    ///
-    class ENGINE_EXPORTS Texture
+    class       Texture
     {
-        public:
-            ///
-            /// \brief Default constructor. create an empty texture.
-            ///
-            Texture(void);
+	private:
+	    std::string	_name;
+	    GLuint	_id;
+	public:
+	    ///
+	    /// \brief Default constructor. create an empty texture.
+	    ///
+	    Texture(void);
 
-            ///
-            /// \brief Construct a texture from an assimp texture.
-            ///
-            Texture(const aiTexture *assimpTexture);
+	    ///
+	    /// \brief Construct a texture from its path (non embedded textures)
+	    ///
+	    Texture(GLuint id, const std::string &texturePath);
 
-            ///
-            /// \brief Copy constructor.
-            ///
-            Texture(const Texture &other) = default;
+	    ///
+	    /// \brief Construct a texture from an assimp texture. (embedded textures)
+	    ///
+	    Texture(const aiTexture *assimpTexture);
 
-            ///
-            /// \brief Move constructor.
-            ///
-            Texture(Texture &&other) noexcept = default;
+	    ///
+	    /// \brief Copy constructor.
+	    ///
+	    Texture(const Texture &other) = default;
 
-            ///
-            /// \brief Destructor.
-            ///
-            virtual ~Texture(void) noexcept;
+	    ///
+	    /// \brief Move constructor.
+	    ///
+	    Texture(Texture &&other) noexcept = default;
 
-        public:
-            ///
-            /// \brief Copy assignment operator.
-            ///
-            Texture     &operator=(const Texture &other) = default;
+	    ///
+	    /// \brief Destructor.
+	    ///
+	    virtual ~Texture(void) noexcept;
 
-            ///
-            /// \brief Move assignment operator.
-            ///
-            Texture     &operator=(Texture &&other) noexcept = default;
+	public:
+	    ///
+	    /// \brief Copy assignment operator.
+	    ///
+	    Texture     &operator=(const Texture &other) = default;
+
+	    ///
+	    /// \brief Move assignment operator.
+	    ///
+	    Texture     &operator=(Texture &&other) noexcept = default;
+
+	public:
+	    ///
+	    /// \brief Bind texture
+	    ///
+	    void	bind(void);
     };
 }
 

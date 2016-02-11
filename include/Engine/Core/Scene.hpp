@@ -163,6 +163,11 @@ namespace Engine
             ShaderProgramLibrary        m_shaderprograms;
 
             ///
+            /// \brief Library of usable textures in the scene.
+            ///
+            TextureLibrary              m_textures;
+
+            ///
             /// \brief Library of usable materials.
             ///
             MaterialLibrary             m_materials;
@@ -176,11 +181,6 @@ namespace Engine
             /// \brief Library of usable mesh in the scene.
             ///
             MeshLibrary                 m_meshes;
-
-            ///
-            /// \brief Library of usable textures in the scene.
-            ///
-            TextureLibrary              m_textures;
 
         protected:
             ///

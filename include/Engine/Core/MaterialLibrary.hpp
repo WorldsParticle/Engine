@@ -23,6 +23,7 @@
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Library.hpp"
 #include    "Engine/Core/Material.hpp"
+#include    "Engine/Core/TextureLibrary.hpp"
 
 namespace   Engine
 {
@@ -41,7 +42,8 @@ namespace   Engine
             /// \brief Construct a library from an array of assimp materials.
             ///
             MaterialLibrary(const ShaderProgramLibrary &shaderprograms,
-                    aiMaterial **assimpMaterials, unsigned int size);
+                    aiMaterial **assimpMaterials, unsigned int size,
+		    const TextureLibrary &texLib);
 
             ///
             /// \brief Copy constructor.

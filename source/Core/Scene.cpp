@@ -31,10 +31,10 @@ namespace Engine
     Scene::Scene(void) :
         m_event_register(),
         m_shaderprograms(),
+        m_textures(),
         m_materials(),
         m_animations(),
         m_meshes(),
-        m_textures(),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
         m_scenegraph(this)
@@ -45,10 +45,10 @@ namespace Engine
     Scene::Scene(const AssimpScene &s) :
         m_event_register(),
         m_shaderprograms(),
-        m_materials(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber()),
+        m_textures(s),
+        m_materials(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures),
         m_animations(s.getAnimations(), s.getAnimationsNumber()),
         m_meshes(this->m_materials, s.getMeshes(), s.getMeshesNumber()),
-        m_textures(s.getTextures(), s.getTexturesNumber()),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
         m_scenegraph(s, this)

@@ -28,14 +28,14 @@ namespace   Engine
     }
 
     MaterialLibrary::MaterialLibrary(const ShaderProgramLibrary &shaderprograms,
-            aiMaterial **assimpMaterials, unsigned int size) :
+            aiMaterial **assimpMaterials, unsigned int size, const TextureLibrary &texLib) :
         Library<Material *>()
     {
         this->m_resources.reserve(size);
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const auto &shaderprogram = shaderprograms.get(TEST_SHADER_PROGRAM);
-            this->m_resources.push_back(new Material(assimpMaterials[i], shaderprogram));
+            this->m_resources.push_back(new Material(assimpMaterials[i], shaderprogram, texLib));
         }
     }
 

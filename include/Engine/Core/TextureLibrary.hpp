@@ -18,14 +18,20 @@
 #ifndef     __ENGINE_TEXTURE_LIBRARY_HPP__
 # define    __ENGINE_TEXTURE_LIBRARY_HPP__
 
-#include    "Engine/Configuration.hpp"
+#include    <GL/gl.h>
+#include    <string>
+#include    <map>
 #include    "Engine/Core/Library.hpp"
 #include    "Engine/Core/Texture.hpp"
+#include    "Engine/Core/AssimpScene.hpp"
 
 namespace   Engine
 {
-    class ENGINE_EXPORTS TextureLibrary : public Library<Texture *>
+    class       TextureLibrary : public Library<Texture *>
     {
+	private:
+	    std::map<std::string, Texture*> _textureMap;
+
         public:
             ///
             /// \brief Default constructor.
@@ -38,6 +44,11 @@ namespace   Engine
             /// TODO  GSL array_view
             ///
             TextureLibrary(aiTexture **assimpTextures, unsigned int size);
+
+            ///
+            /// \brief Construct the library from the assimp scene
+            ///
+	    TextureLibrary(const AssimpScene &assimpScene);
 
             ///
             /// \brief Copy constructor.
@@ -65,6 +76,16 @@ namespace   Engine
             ///
             TextureLibrary  &operator=(TextureLibrary &&other) noexcept = default;
 
+	public:
+            ///
+            /// \brief Bind the texture corresponding to the name passed as parameter if it exist and is loaded
+            ///
+	    void BindTexture(const std::string &name);
+
+            ///
+            /// \brief Find the texture corresponding to the name passed as parameter if it exist and is loaded
+            ///
+	    Texture *FindTexture(const std::string &name) const;
     };
 }
 
