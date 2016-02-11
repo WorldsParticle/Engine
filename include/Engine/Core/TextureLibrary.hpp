@@ -17,7 +17,6 @@
 
 #pragma once
 
-//#include    <GL/gl.h>
 #include    <string>
 #include    <map>
 
@@ -29,8 +28,6 @@ namespace   Engine
 {
     class       TextureLibrary : public Library<std::pair<std::string, Texture *>>
     {
-	//private:
-	    //std::map<std::string, Texture*> _textureMap;
         public:
             ///
             /// \brief Default constructor.
