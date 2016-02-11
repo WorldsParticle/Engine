@@ -21,6 +21,8 @@
 #include    <glm/glm.hpp>
 #include    <assimp/material.h>
 
+#include    "Engine/Core/Texture.hpp"
+#include    "Engine/Core/TextureLibrary.hpp"
 #include    "Engine/Configuration.hpp"
 
 namespace   Engine
@@ -42,7 +44,8 @@ namespace   Engine
             /// \brief Construct a material from an assimp material.
             ///
             Material(const aiMaterial *assimpMaterial,
-                    const std::shared_ptr<ShaderProgram> &shaderprogram);
+                    const std::shared_ptr<ShaderProgram> &shaderprogram,
+		    const TextureLibrary &texLib);
 
             ///
             /// \brief Copy constructor.
@@ -110,5 +113,10 @@ namespace   Engine
             /// \brief The shaderprogram used with this material.
             ///
             std::shared_ptr<ShaderProgram>  m_shaderprogram;
+
+            ///
+            /// \brief The ids of the textures of the material
+            ///
+	    Texture			    *_texture;
     };
 }
