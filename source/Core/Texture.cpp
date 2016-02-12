@@ -15,26 +15,29 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include    <iostream>
+#include    <log4cpp/Category.hh>
 #include    <IL/il.h>
 #include    <IL/ilu.h>
 #include    <IL/ilut.h>
 #include    "Engine/Core/Texture.hpp"
 
+using namespace     log4cpp;
+
 namespace   Engine
 {
-    Texture::Texture(void)
+    Texture::Texture(void) : _name(), _id(0)
     {
 	// nothing to do atm.
     }
 
-    Texture::Texture(const aiTexture *assimpTexture)
+    Texture::Texture(const aiTexture *assimpTexture) : _name(), _id(0)
     {
 	// nothing to do atm.
     }
 
     Texture::Texture(GLuint id, const std::string &texturePath) : _name(texturePath), _id(id)
     {
+        Category& root = Category::getRoot();
 	if (ilLoadImage(texturePath.c_str())) /* If no error occured: */
 	{
 	    // Convert every colour component into unsigned byte.If your image contains
@@ -43,11 +46,12 @@ namespace   Engine
 	    if (!ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE))
 	    {
 		// Error occured
-		std::cout << "Couldn't convert image" << std::endl;
+		root << Priority::ERROR << "Couldn't convert image " << _name;
 		return;
 	    }
 	    // Binding of texture name
 	    glBindTexture(GL_TEXTURE_2D, _id);
+	    root << Priority::DEBUG << "Texture " << _name << " " << _id << " created";
 	    // redefine standard texture values
 	    // use linear interpolation for magnification filter
 	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -65,7 +69,7 @@ namespace   Engine
 	else
 	{
 	    /* Error occured */
-	    std::cout << "ERROR: Couldn't load Image: " << _name << std::endl;;
+	    root << Priority::ERROR << "Couldn't load image: " << _name;
 	}
     }
 

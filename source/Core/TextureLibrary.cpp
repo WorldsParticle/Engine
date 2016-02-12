@@ -15,22 +15,26 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include <iostream>
 #include    <IL/il.h>
 #include    <IL/ilu.h>
 #include    <IL/ilut.h>
+#include    <log4cpp/Category.hh>
 #include    "Engine/Core/TextureLibrary.hpp"
+
+using namespace     log4cpp;
 
 namespace   Engine
 {
     TextureLibrary::TextureLibrary(void) :
-        Library<Texture *>()
+        Library<Texture *>(),
+	_textureMap()
     {
         // nothing to do.
     }
 
     TextureLibrary::TextureLibrary(aiTexture **assimpTextures, unsigned int size) :
-        Library<Texture *>()
+        Library<Texture *>(),
+	_textureMap()
     {
         this->m_resources.reserve(size);
         for (unsigned int i = 0 ; i < size ; ++i)
@@ -39,12 +43,15 @@ namespace   Engine
         }
     }
 
-    TextureLibrary::TextureLibrary(const AssimpScene &assimpScene)
+    TextureLibrary::TextureLibrary(const AssimpScene &assimpScene) :
+        Library<Texture *>(),
+	_textureMap()
     {
+        Category& root = Category::getRoot();
 	ilInit(); /* Initialization of DevIL */
 
 	if (assimpScene.getTexturesNumber() != 0)
-	    std::cout <<"Support for meshes with embedded textures is not implemented" << std::endl;
+	    root << Priority::DEBUG << "Support for meshes with embedded textures is not implemented";
 
 	/* getTexture Filenames and Numb of Textures */
 	aiMaterial **mat = assimpScene.getMaterials();;
@@ -58,15 +65,15 @@ namespace   Engine
 	    while (texFound == AI_SUCCESS)
 	    {
 		texFound = mat[m]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
-		_textureMap[path.data] = NULL; //fill map with textures, pointers still NULL yet
+		_textureMap[path.data] = nullptr; //fill map with textures, pointers still nullptr yet
 		texIndex++;
 	    }
 	}
 
-	int numTextures = _textureMap.size();
+	unsigned int numTextures = static_cast<unsigned int>(_textureMap.size());
 
 	/* array with DevIL image IDs */
-	ILuint* imageIds = NULL;
+	ILuint* imageIds = nullptr;
 	imageIds = new ILuint[numTextures];
 
 	/* generate DevIL Image IDs */
@@ -79,12 +86,13 @@ namespace   Engine
 	/* get iterator */
 	std::map<std::string, Texture*>::iterator itr = _textureMap.begin();
 
-	for (int i=0; i<numTextures; i++)
+	for (unsigned int i=0; i<numTextures; i++)
 	{
 	    //save IL image ID
-	    std::string filename = (*itr).first;  // get filename
+	    std::string filename = "/home/sicarde/BUILDEIP/Editor/ressources/" + (*itr).first;  // get filename
 	    ilBindImage(imageIds[i]); /* Binding of DevIL image name */
-	    //std::string fileloc = /*RESOURCES_PATH*/ filename;  /* Loading of image */
+	    //std::string fileloc = RESOURCES_PATH + filename;  /* Loading of image */
+	    root << Priority::DEBUG << "Texture: " << filename << " loaded";
 	    (*itr).second = new Texture(textureIds[i], filename);//&textureIds[i];      // save texture id for filename in map
 	    itr++;				      // next texture
 	}
@@ -93,11 +101,12 @@ namespace   Engine
 
 	// Cleanup
 	delete [] imageIds;
-	imageIds = NULL;
+	imageIds = nullptr;
     }
 
     TextureLibrary::TextureLibrary(const TextureLibrary &other) :
-        Library<Texture *>()
+        Library<Texture *>(),
+	_textureMap()
     {
         this->m_resources.reserve(other.m_resources.size());
         for (Texture *resource : other.m_resources)
@@ -126,7 +135,7 @@ namespace   Engine
 	    //Texture *tmp = _textureMap[_textureMap.find(name)];
 	    return _textureMap.find(name)->second;
 	}
-	return NULL;
+	return nullptr;
     }
 
     TextureLibrary &

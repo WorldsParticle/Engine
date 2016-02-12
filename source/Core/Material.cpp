@@ -24,7 +24,7 @@ namespace   Engine
     Material::Material(const std::shared_ptr<ShaderProgram> &shaderprogram) :
         m_name("Default"),
         m_shaderprogram(shaderprogram),
-	_texture(NULL)
+	_texture(nullptr)
     {
         // nothing to do
     }
@@ -34,7 +34,7 @@ namespace   Engine
 	    const TextureLibrary &texLib) :
         m_name("Default"),
         m_shaderprogram(shaderprogram),
-	_texture(NULL)
+	_texture(nullptr)
     {
         aiString assimpName;
 
@@ -79,7 +79,7 @@ namespace   Engine
     Material::bind(void) const
     {
         this->m_shaderprogram->bind();
-	if (!this->_texture)
+	if (this->_texture != nullptr)
 	{
 	    this->_texture->bind();
 	}
