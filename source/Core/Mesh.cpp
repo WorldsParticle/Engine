@@ -24,234 +24,6 @@
 namespace   Engine
 {
 
-    ///
-    /// VERTEX CLASS
-    ///
-
-    Mesh::Vertex::Vertex(const glm::vec3 &value_position, const glm::vec3 &value_normal) :
-        index(0),
-        position(value_position),
-        normal(value_normal),
-        edge(nullptr),
-        iterator(nullptr)
-    {
-        // nothing more to do.
-    }
-
-
-    Mesh::Vertex::Vertex(const Vertex &other) :
-        index(other.index),
-        position(other.position),
-        normal(other.normal),
-        edge(other.edge),
-        iterator(other.iterator)
-    {
-    }
-
-    Mesh::Vertex::Vertex(Vertex &&other) noexcept :
-        index(std::move(other.index)),
-        position(std::move(other.position)),
-        normal(std::move(other.normal)),
-        edge(std::move(other.edge)),
-        iterator(std::move(other.iterator))
-    {
-    }
-
-    Mesh::Vertex::~Vertex(void) noexcept
-    {
-        // nothign to do atm.
-    }
-
-    Mesh::Vertex &
-    Mesh::Vertex::operator=(const Mesh::Vertex &other)
-    {
-        this->index = other.index;
-        this->position = other.position;
-        this->normal = other.normal;
-        this->edge = other.edge;
-        this->iterator = other.iterator;
-        return *this;
-    }
-
-    Mesh::Vertex &
-    Mesh::Vertex::operator=(Mesh::Vertex &&other) noexcept
-    {
-        this->index = std::move(other.index);
-        this->position = std::move(other.position);
-        this->normal = std::move(other.normal);
-        this->edge = std::move(other.edge);
-        this->iterator = std::move(other.iterator);
-        return *this;
-    }
-
-    std::list<Mesh::Edge>::iterator *
-    Mesh::Vertex::search_edge_to(const std::list<Vertex>::iterator &vertex)
-    {
-        std::list<Edge>::iterator *tmp = this->edge;
-        do
-        {
-            if (tmp != nullptr)
-            {
-                if ((*(*tmp)).match(*this->iterator, vertex))
-                {
-                    return tmp;
-                }
-                if ((*tmp).is_oriented(*this->iterator))
-                    tmp = (*tmp.backward_right_edge);
-                else
-                    tmp = (*tmp).backward_left_edge;
-            }
-        } while (tmp != this->edge && tmp != nullptr);
-        return nullptr;
-    }
-
-    std::list<Mesh::Edge>::iterator *
-    Mesh::Vertex::create_edge_to(const std::list<Vertex>::iterator &vertex)
-    {
-        // first check if the edge don't already exist.
-        std::list<Edge>::iterator *edge = this->search_edge_to(to);
-        // create an edge from this vertex to the "to" vertex with face as left face.
-        if (edge == nullptr)
-        {
-            std::list<Edge>::iterator &edge = this->m_edges.emplace(this->m_edges.end(),
-                    this->iterator, to, face);
-        }
-        return edge;
-    }
-
-
-    ///
-    /// EDGE CLASS
-    ///
-
-    Mesh::Edge::Edge(const std::list<Vertex>::iterator &v1,
-            const std::list<Vertex>::iterator &v2,
-            const std::list<Face>::iterator &face) :
-        begin_vertex(v1),
-        end_vertex(v2),
-        left_face(face),
-        right_face(nullptr),
-        forward_left_edge(nullptr),
-        forward_right_edge(nullptr),
-        backward_left_edge(nullptr),
-        backward_right_edge(nullptr)
-    {
-
-    }
-
-    Mesh::Edge::Edge(const Mesh::Edge &other) :
-        begin_vertex(other.begin_vertex),
-        end_vertex(other.end_vertex),
-        left_face(other.left_face),
-        right_face(other.right_face),
-        forward_left_edge(other.forward_left_edge),
-        forward_right_edge(other.forward_right_edge),
-        backward_left_edge(other.backward_left_edge),
-        backward_right_edge(other.backward_right_edge)
-    {
-
-    }
-
-    Mesh::Edge::Edge(Mesh::Edge &&other) noexcept :
-        begin_vertex(std::move(other.begin_vertex)),
-        end_vertex(std::move(other.end_vertex)),
-        left_face(std::move(other.left_face)),
-        right_face(std::move(other.right_face)),
-        forward_left_edge(std::move(other.forward_left_edge)),
-        forward_right_edge(std::move(other.forward_right_edge)),
-        backward_left_edge(std::move(other.backward_left_edge)),
-        backward_right_edge(std::move(other.backward_right_edge))
-    {
-
-    }
-
-    Mesh::Edge::~Edge(void) noexcept
-    {
-        // nothing to do.
-    }
-
-    Mesh::Edge &
-    Mesh::Edge::operator=(const Mesh::Edge &other)
-    {
-        this->begin_vertex = other.begin_vertex;
-        this->end_vertex = other.end_vertex;
-        this->left_face = other.left_face;
-        this->right_face = other.right_face;
-        this->forward_left_edge = other.forward_left_edge;
-        this->forward_right_edge = other.forward_right_edge;
-        this->backward_left_edge = other.backward_left_edge;
-        this->backward_right_edge = other.backward_right_edge;
-        return *this;
-    }
-
-    Mesh::Edge &
-    Mesh::Edge::operator=(Mesh::Edge &&other) noexcept
-    {
-        this->begin_vertex = std::move(other.begin_vertex);
-        this->end_vertex = std::move(other.end_vertex);
-        this->left_face = std::move(other.left_face);
-        this->right_face = std::move(other.right_face);
-        this->forward_left_edge = std::move(other.forward_left_edge);
-        this->forward_right_edge = std::move(other.forward_right_edge);
-        this->backward_left_edge = std::move(other.backward_left_edge);
-        this->backward_right_edge = std::move(other.backward_right_edge);
-        return *this;
-    }
-
-    bool
-    Mesh::Edge::match(const std::list<Vertex>::iterator &v0, const std::list<Vertex>::iterator &v1) const
-    {
-         if ((v0 == this->begin_vertex && v1 == this->end_vertex) || (v0 == this->end_vertex && v1 == this->begin_vertex))
-             return true;
-         return false;
-    }
-
-    bool
-    Mesh::Edge::is_oriented(std::list<Vertex>::iterator &v0, std::list<Vertex>::iterator &v1)
-    {
-        if ((v0 != this->begin_vertex && v0 != this->end_vertex) || (v1 != this->begin_vertex && v0 != this->end_vertex))
-            throw std::runtime_exception("v0 or v1 don't match begin or end");
-        if (v0 == this->begin_vertex && v1 == this->end_vertex)
-            return true;
-        else if (v0 == this->end_vertex && v1 == this->begin_vertex)
-            return false;
-        throw std::runtime_exception("v0 && v1 are equal.");
-    }
-
-    bool
-    Mesh::Edge::is_oriented(std::list<Vertex>::iterator &v0)
-    {
-         if (v0 == this->end_vertex)
-             return true;
-         return false;
-    }
-
-    void
-    Mesh::Edge::build_connectivity(std::list<Edge>::iterator *backward_edge,
-            std::list<Edge>::iterator *forward_edge,
-            std::list<Face>::iterator *face,
-            bool oriented)
-    {
-        if (backward_edge == nullptr || forward_edge == nullptr || face == nullptr)
-            throw std::runtime_exception("be || fe || face == nullptr.");
-        if (oriented)
-        {
-            this->backward_left_edge = backward_edge;
-            this->forward_left_edge = forward_edge;
-            this->left_face = face;
-        }
-        else
-        {
-            this->backward_right_edge = backward_edge;
-            this->forward_right_edge = forward_edge;
-            this->right_face = face;
-        }
-    }
-
-    ///
-    /// MESH CLASS
-    ///
-
     Mesh::Mesh(Material *material) :
         m_name("default"),
         m_dirty(true),
@@ -277,46 +49,56 @@ namespace   Engine
         m_material(material)
     {
 
-        std::vector<std::list<Vertex>::iterator>   temporary_vertices;
+        std::vector<Vertex *>   temporary_vertices;
         temporary_vertices.reserve(assimp_mesh->mNumVertices);
 
-        for (unsigned int i_vertex ; i_vertex < assimp_mesh->mNumVertices ; ++i_vertex)
+        for (unsigned int i_vertex = 0 ; i_vertex < assimp_mesh->mNumVertices ; ++i_vertex)
         {
             const aiVector3D *vertex = &assimp_mesh->mVertices[i_vertex];
-            temporary_vertices[i_vertex] = this->m_vertices.emplace(this->m_vertices.end(),
+            std::list<Vertex>::iterator it = this->m_vertices.emplace(this->m_vertices.end(),
                     glm::vec3(vertex->x, vertex->y, vertex->z),
                     glm::vec3(0.0f, 0.0f, 0.0f));
-            temporary_vertices[i_vertex]->iterator = temporary_vertices[i_vertex];
+            temporary_vertices[i_vertex] = &(*it);
+            temporary_vertices[i_vertex]->iterator = it;
         }
 
         for (unsigned int i_faces = 0 ; i_faces < assimp_mesh->mNumFaces ; ++i_faces)
         {
             const aiFace    *assimp_face = &assimp_mesh->mFaces[i_faces];
 
-            const std::list<Face>::iterator &face = this->m_faces.emplace(this->m_faces.end());
-
             if (assimp_face->mNumIndices != 3)
             {
                 throw std::runtime_error("Unsupported face");
             }
 
-            std::list<Vertex>::iterator &v0 = temporary_vertices[assimp_face->mIndices[0]];
-            std::list<Vertex>::iterator &v1 = temporary_vertices[assimp_face->mIndices[1]];
-            std::list<Vertex>::iterator &v2 = temporary_vertices[assimp_face->mIndices[2]];
+            auto it_face = this->m_faces.emplace(this->m_faces.end());
+            Face *face = &(*it_face);
+            face->iterator = it_face;
 
-            std::list<Edge>::iterator *e0 = (*v0).create_edge_to(v1);
-            std::list<Edge>::iterator *e1 = (*v1).create_edge_to(v2);
-            std::list<Edge>::iterator *e2 = (*v2).create_edge_to(v0);
+            Vertex *v0 = temporary_vertices[assimp_face->mIndices[0]];
+            Vertex *v1 = temporary_vertices[assimp_face->mIndices[1]];
+            Vertex *v2 = temporary_vertices[assimp_face->mIndices[2]];
 
-            bool orientation_e0 = e0.is_oriented(v0, v1);
-            bool orientation_e1 = e1.is_oriented(v1, v2);
-            bool orientation_e2 = e2.is_oriented(v2, v0);
+            Edge *e0 = v0->search_edge_to(v1);
+            Edge *e1 = v1->search_edge_to(v2);
+            Edge *e2 = v2->search_edge_to(v0);
 
-            e0->build_connectivity(e2, e1, face, orientation_e0);
-            e1->build_connectivity(e0, e2, face, orientation_e1);
-            e2->build_connectivity(e1, e0, face, orientation_e2);
+            auto create_edge = [this](Vertex *ve0, Vertex *ve1) {
+                auto it = this->m_edges.emplace(this->m_edges.end(), ve0, ve1);
+                (*it).iterator = it;
+                if (ve0->edge == nullptr) ve0->edge = &(*it);
+                return &(*it);
+            };
 
-            (*face).first_edge = e0;
+            if (e0 == nullptr) e0 = create_edge(v0, v1);
+            if (e1 == nullptr) e1 = create_edge(v1, v2);
+            if (e2 == nullptr) e2 = create_edge(v2, v0);
+
+            e0->build_connectivity(e2, e1, face, e0->is_oriented(v0, v1));
+            e1->build_connectivity(e0, e2, face, e1->is_oriented(v1, v2));
+            e2->build_connectivity(e1, e0, face, e2->is_oriented(v2, v0));
+
+            face->first_edge = e0;
 
         }
 
