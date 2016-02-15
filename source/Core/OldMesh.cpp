@@ -88,7 +88,7 @@ namespace   Engine
             vertices.insert(vertices.end(), this->m_uvs.begin(), this->m_uvs.end());
         this->m_vertexBuffer->update(vertices.data(), vertices.size() * sizeof(float));
         if (this->hasIndices())
-            this->m_elementBuffer->update(this->m_indices.data(), this->m_indices.size() * sizeof(int));
+            this->m_elementBuffer->update(this->m_indices.data(), this->m_indices.size() * sizeof(unsigned int));
 
         this->m_arrayObject->bind();
 

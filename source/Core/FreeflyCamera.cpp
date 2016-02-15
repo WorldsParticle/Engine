@@ -71,8 +71,6 @@ namespace   Engine
     void
     FreeflyCamera::on_key_pressed(const Event::Event &event)
     {
-        Category    &root = Category::getRoot();
-
         const Event::KeyPressed *key_pressed_event =
             dynamic_cast<const Event::KeyPressed *>(&event);
 
@@ -101,8 +99,8 @@ namespace   Engine
 
         if (e != nullptr)
         {
-            float delta_x = this->m_size.x / 2 - e->get_position().x;
-            float delta_y = this->m_size.y / 2 - e->get_position().y;
+            float delta_x = static_cast<float>(this->m_size.x) / 2.0f - e->get_position().x;
+            float delta_y = static_cast<float>(this->m_size.y) / 2.0f - e->get_position().y;
 
             this->yaw(delta_x * this->m_mouse_sensibility);
             this->pitch(delta_y * this->m_mouse_sensibility);

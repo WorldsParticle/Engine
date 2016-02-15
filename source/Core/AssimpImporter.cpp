@@ -64,11 +64,11 @@ namespace   Engine
 
         root << Priority::DEBUG << "Loading : " << filename;
         flags |= aiProcess_ValidateDataStructure;
-        flags |= aiProcess_Triangulate;
-        flags |= aiProcess_FindInvalidData;
-        flags |= aiProcess_SortByPType;
-        flags |= aiProcessPreset_TargetRealtime_Quality;
-        flags |= aiProcess_FixInfacingNormals;
+        //flags |= aiProcess_Triangulate;
+        //flags |= aiProcess_FindInvalidData;
+        //flags |= aiProcess_SortByPType;
+        //flags |= aiProcessPreset_TargetRealtime_Quality;
+        //flags |= aiProcess_FixInfacingNormals;
         if ((result = this->m_importer.ReadFile(filename, flags)) == nullptr)
         {
             root << Priority::ERROR
