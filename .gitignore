@@ -33,3 +33,6 @@ cmake/*
 sources/worldparticles.hpp
 doc
 *.user
+build
+include
+resources
