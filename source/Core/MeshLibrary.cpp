@@ -43,14 +43,6 @@ namespace   Engine
             const aiMesh *amesh = assimpMeshes[i];
             Material *material = materials.get(amesh->mMaterialIndex);
             this->m_resources.push_back(new Mesh(amesh, material));
-	    if (this->m_resources.back()->hasNormals())
-		root << Priority::DEBUG << "mesh has normals";
-	    if (this->m_resources.back()->hasPositions())
-		root << Priority::DEBUG << "mesh has positions";
-	    if (this->m_resources.back()->hasUVs())
-		root << Priority::DEBUG << "mesh has UVs";
-	    if (this->m_resources.back()->hasIndices())
-		root << Priority::DEBUG << "mesh has indices";
         }
     }
 
