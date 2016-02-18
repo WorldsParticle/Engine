@@ -25,7 +25,9 @@ namespace   Engine
         DEFAULT_VERTEX_SHADER = 0,
         DEFAULT_FRAGMENT_SHADER = 1,
         TEST_VERTEX_SHADER = 2,
-        TEST_FRAGMENT_SHADER = 3
+        TEST_FRAGMENT_SHADER = 3,
+        TEXTURE_VERTEX_SHADER = 4,
+        TEXTURE_FRAGMENT_SHADER = 5
 
     };
 }
