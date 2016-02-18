@@ -15,9 +15,12 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include    <log4cpp/Category.hh>
 #include    "Engine/Core/MaterialLibrary.hpp"
 #include    "Engine/Core/Material.hpp"
 #include    "Engine/Core/ShaderProgramLibrary.hpp"
+
+using namespace     log4cpp;
 
 namespace   Engine
 {
@@ -31,10 +34,12 @@ namespace   Engine
             aiMaterial **assimpMaterials, unsigned int size, const TextureLibrary &texLib) :
         Library<Material *>()
     {
+        Category& root = Category::getRoot();
         this->m_resources.reserve(size);
         for (unsigned int i = 0 ; i < size ; ++i)
         {
-            const auto &shaderprogram = shaderprograms.get(TEST_SHADER_PROGRAM);
+            const auto &shaderprogram = shaderprograms.get(TEXTURE_SHADER_PROGRAM);
+	    root << Priority::DEBUG << "using texture shader";
             this->m_resources.push_back(new Material(assimpMaterials[i], shaderprogram, texLib));
         }
     }

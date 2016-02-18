@@ -80,6 +80,7 @@ namespace   Engine
     void
     Mesh::update(void)
     {
+        Category& root = Category::getRoot();
 
         std::vector<float>  vertices = this->m_positions;
         if (this->hasNormals())
@@ -102,16 +103,21 @@ namespace   Engine
         pointer_offset += this->m_positions.size() * sizeof(float);
         if (this->hasNormals())
         {
+	    root << Priority::DEBUG << "has normals in array object";
             glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void *>(pointer_offset));
             pointer_offset += this->m_normals.size() * sizeof(float);
         }
         if (this->hasUVs())
         {
+	    root << Priority::DEBUG << "has uv in array object";
             glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void *>(pointer_offset));
             pointer_offset += this->m_uvs.size() * sizeof(float);
         }
         if (this->hasIndices())
+	{
             this->m_elementBuffer->bind();
+	    root << Priority::DEBUG << "has indices in array object";
+	}
 
         this->m_arrayObject->unbind();
 
