@@ -1,8 +1,0 @@
-<map id="engine/Camera/Camera.hpp" name="engine/Camera/Camera.hpp">
-<area shape="rect" id="node2" href="$da/d8c/Camera_8cpp.html" title="engine/Camera/Camera.cpp" alt="" coords="5,87,191,114"/>
-<area shape="rect" id="node3" href="$d4/d3e/PerspectiveCamera_8hpp.html" title="engine/PerspectiveCamera\l/PerspectiveCamera.hpp" alt="" coords="215,80,394,121"/>
-<area shape="rect" id="node6" href="$d3/d28/Renderer_8cpp.html" title="engine/Renderer/Renderer.cpp" alt="" coords="419,87,617,114"/>
-<area shape="rect" id="node7" href="$d3/d35/SpatialGraph_8cpp.html" title="engine/SpatialGraph\l/SpatialGraph.cpp" alt="" coords="642,80,781,121"/>
-<area shape="rect" id="node4" href="$da/daf/PerspectiveCamera_8cpp.html" title="engine/PerspectiveCamera\l/PerspectiveCamera.cpp" alt="" coords="117,169,295,211"/>
-<area shape="rect" id="node5" href="$d2/d22/SceneGraphNode_8cpp.html" title="engine/SceneGraphNode\l/SceneGraphNode.cpp" alt="" coords="320,169,487,211"/>
-</map>

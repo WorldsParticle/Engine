@@ -1,8 +1,0 @@
-<map id="engine/AnimationLibrary" name="engine/AnimationLibrary">
-<area shape="rect" id="node1" href="dir_f2fd0b7bba5a7cc47440d48ed6481aff.html" title="AnimationLibrary" alt="" coords="35,52,154,100"/>
-<area shape="rect" id="node2" href="dir_d8cb112fecda772ba4049b91386a9f69.html" title="Animation" alt="" coords="5,148,85,196"/>
-<area shape="rect" id="edge1-headlabel" href="dir_000002_000001.html" title="2" alt="" coords="69,128,77,143"/>
-<area shape="rect" id="node3" href="dir_02303b2d12aef3ee678de5e70c9c5297.html" title="Library" alt="" coords="109,148,181,196"/>
-<area shape="rect" id="edge2-headlabel" href="dir_000002_000011.html" title="1" alt="" coords="128,121,136,135"/>
-<area shape="rect" id="clust1" href="dir_996f45160da62e1a3d7f6046fad68f51.html" title="engine" alt="" coords="25,16,164,111"/>
-</map>

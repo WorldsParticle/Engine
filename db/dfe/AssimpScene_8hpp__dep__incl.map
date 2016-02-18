@@ -1,7 +1,0 @@
-<map id="engine/AssimpScene/AssimpScene.hpp" name="engine/AssimpScene/AssimpScene.hpp">
-<area shape="rect" id="node2" href="$d4/d7f/AssimpImporter_8cpp.html" title="engine/AssimpImporter\l/AssimpImporter.cpp" alt="" coords="5,95,161,136"/>
-<area shape="rect" id="node3" href="$d0/d46/AssimpScene_8cpp.html" title="engine/AssimpScene\l/AssimpScene.cpp" alt="" coords="185,95,331,136"/>
-<area shape="rect" id="node4" href="$de/d15/Scene_8cpp.html" title="engine/Scene/Scene.cpp" alt="" coords="355,102,521,129"/>
-<area shape="rect" id="node5" href="$d1/d20/SceneGraph_8cpp.html" title="engine/SceneGraph/SceneGraph.cpp" alt="" coords="545,102,782,129"/>
-<area shape="rect" id="node6" href="$d2/d22/SceneGraphNode_8cpp.html" title="engine/SceneGraphNode\l/SceneGraphNode.cpp" alt="" coords="805,95,972,136"/>
-</map>

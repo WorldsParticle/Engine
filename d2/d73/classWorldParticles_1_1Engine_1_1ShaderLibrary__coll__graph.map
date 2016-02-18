@@ -1,5 +1,0 @@
-<map id="WorldParticles::Engine::ShaderLibrary" name="WorldParticles::Engine::ShaderLibrary">
-<area shape="rect" id="node2" href="$d6/da4/classWorldParticles_1_1Engine_1_1Library.html" title="{WorldParticles::Engine\l::Library\&lt; std::shared\l_ptr\&lt; Shader \&gt; \&gt;\n||+ Library()\l+ Library()\l+ Library()\l+ ~Library()\l+ operator=()\l+ operator=()\l+ get()\l}" alt="" coords="62,403,217,597"/>
-<area shape="rect" id="node3" href="$d7/d12/classstd_1_1vector_3_01std_1_1shared__ptr_3_01Shader_01_4_01_4.html" title="{vector\&lt; std::shared\l_ptr\&lt; Shader \&gt; \&gt;\n||}" alt="" coords="5,189,140,281"/>
-<area shape="rect" id="node4" href="$d6/da4/classWorldParticles_1_1Engine_1_1Library.html" title="{WorldParticles::Engine\l::Library\&lt; T \&gt;\n||+ Library()\l+ Library()\l+ Library()\l+ ~Library()\l+ operator=()\l+ operator=()\l+ get()\l}" alt="" coords="165,145,319,325"/>
-</map>

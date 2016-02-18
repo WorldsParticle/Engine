@@ -1,6 +1,0 @@
-<map id="WorldParticles::Engine::Entity" name="WorldParticles::Engine::Entity">
-<area shape="rect" id="node2" href="$d3/de4/classWorldParticles_1_1Engine_1_1Camera.html" title="This class is used to store information about a basic camera in a 3D world. " alt="" coords="11,292,165,604"/>
-<area shape="rect" id="node4" href="$d6/def/classWorldParticles_1_1Engine_1_1Light.html" title="This class is used to represent a light in the 3d world. " alt="" coords="189,336,344,560"/>
-<area shape="rect" id="node5" href="$d8/def/classWorldParticles_1_1Engine_1_1Object.html" title="This class is used to represent a physical entity. " alt="" coords="368,336,523,560"/>
-<area shape="rect" id="node3" href="$df/ddc/classWorldParticles_1_1Engine_1_1PerspectiveCamera.html" title="This class defined a perspective camera. This class implement the abstract class Camera. " alt="" coords="5,652,171,891"/>
-</map>
