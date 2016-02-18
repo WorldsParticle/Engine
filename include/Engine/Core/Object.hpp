@@ -28,6 +28,10 @@ namespace   Engine
 {
 
     class   Mesh;
+    namespace Event
+    {
+        class   Event;
+    }
 
     ///
     /// \brief This class is used to represent a physical entity.
@@ -82,6 +86,8 @@ namespace   Engine
             /// \brief Update the object.
             ///
             void    update(void) override;
+
+            void    on_key_pressed(const Event::Event &event);
 
         public:
             ///

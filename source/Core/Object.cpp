@@ -15,10 +15,16 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include    <functional>
 #include    <log4cpp/Category.hh>
 
+#include    "Engine/Core/SceneGraphNode.hpp"
+#include    "Engine/Event/Event.hpp"
+#include    "Engine/Event/KeyPressed.hpp"
+#include    "Engine/Input/Keyboard/Key.hpp"
 #include    "Engine/Core/Object.hpp"
 #include    "Engine/Core/Scene.hpp"
+#include    "Engine/MeshDataStructure/Mesh.hpp"
 
 using namespace     log4cpp;
 
@@ -36,6 +42,7 @@ namespace   Engine
         Entity(node),
         m_meshes()
     {
+        using namespace     std::placeholders;
         Category &root = Category::getRoot();
         root << Priority::DEBUG << "Création object";
         for (unsigned int i = 0 ; i < assimpNode->mNumMeshes ; ++i)
@@ -45,6 +52,9 @@ namespace   Engine
             this->m_meshes.push_back(mesh);
         }
         this->m_scene->add(this);
+
+        node->getScene()->register_callback(Event::Type::KEY_PRESSED,
+                std::bind(&Object::on_key_pressed, this, _1));
     }
 
     Object::~Object(void)
@@ -52,7 +62,37 @@ namespace   Engine
 
     }
 
+    void
+    Object::on_key_pressed(const Event::Event &event)
+    {
+        const Event::KeyPressed *key_pressed_event =
+            dynamic_cast<const Event::KeyPressed *>(&event);
 
+        if (key_pressed_event != nullptr)
+        {
+            switch (key_pressed_event->get_key())
+            {
+                case Keyboard::Key::Add:
+                    {
+                        for (Mesh *mesh : this->m_meshes)
+                        {
+                            mesh->increase();
+                        }
+                        break;
+                    }
+                case Keyboard::Key::Substract:
+                    {
+                        for (Mesh *mesh : this->m_meshes)
+                        {
+                            mesh->reduce();
+                        }
+                        break;
+                    }
+                default:
+                    break;
+            }
+        }
+    }
 
     Object *
     Object::clone(void) const

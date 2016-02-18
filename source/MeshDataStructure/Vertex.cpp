@@ -15,18 +15,45 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include    "Engine/Core/Face.hpp"
+#include    "Engine/MeshDataStructure/Vertex.hpp"
 
-namespace Engine
+namespace   Engine
 {
-    Face::Face(void) :
-        iterator(),
-        first_edge(nullptr)
+    Vertex::Vertex(void) :
+        m_iterator(),
+        m_position(0.0f),
+        m_half_edge(nullptr)
     {
     }
 
-    Face::~Face(void)
+    Vertex::Vertex(const glm::vec3 &position, HalfEdge *half_edge) :
+        m_iterator(),
+        m_position(position),
+        m_half_edge(half_edge)
     {
 
+    }
+
+    Vertex::~Vertex(void)
+    {
+
+    }
+
+    HalfEdge *&
+    Vertex::half_edge(void)
+    {
+        return this->m_half_edge;
+    }
+
+    glm::vec3 &
+    Vertex::position(void)
+    {
+        return this->m_position;
+    }
+
+    std::list<Vertex>::iterator &
+    Vertex::iterator(void)
+    {
+        return this->m_iterator;
     }
 }

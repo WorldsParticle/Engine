@@ -23,7 +23,7 @@
 #include    "Engine/Core/Camera.hpp"
 #include    "Engine/Core/Light.hpp"
 #include    "Engine/Core/Transform.hpp"
-#include    "Engine/Core/Mesh.hpp"
+#include    "Engine/MeshDataStructure/Mesh.hpp"
 
 using namespace     log4cpp;
 

@@ -20,7 +20,7 @@
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Library.hpp"
-#include    "Engine/Core/Mesh.hpp"
+#include    "Engine/MeshDataStructure/Mesh.hpp"
 
 namespace   Engine
 {

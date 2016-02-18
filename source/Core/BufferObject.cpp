@@ -73,12 +73,14 @@ namespace   Engine
         glBindBuffer(this->convert(this->m_type), 0);
     }
 
-	// TODO : passage en std::size_t => mart_p == boulet.
     void
     BufferObject::update(void *data, std::size_t length)
     {
+        Category &root = Category::getRoot();
+
         if (length > this->m_size)
         {
+            root << Priority::DEBUG << "create buffer data";
             this->bind();
             glBufferData(this->convert(this->m_type), length, data, this->convert(this->m_usage));
             this->m_size = length;
@@ -87,6 +89,8 @@ namespace   Engine
         else
         {
             this->bind();
+            root << Priority::DEBUG << "update buffer data";
+            //glBufferData(this->convert(this->m_type), length, data, this->convert(this->m_usage));
             glBufferSubData(this->convert(this->m_type), 0, length, data);
             this->unbind();
         }

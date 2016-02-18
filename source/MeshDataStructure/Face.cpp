@@ -15,47 +15,36 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_INPUT_KEYBOARD_KEY_HPP__
-# define    __ENGINE_INPUT_KEYBOARD_KEY_HPP__
+#include    "Engine/MeshDataStructure/Face.hpp"
 
 namespace   Engine
 {
-    namespace   Keyboard
+    Face::Face(void) :
+        m_half_edge(nullptr),
+        m_iterator()
     {
-        enum        Key
-        {
-            A, // \brief TODO
-            B,
-            C,
-            D,
-            E,
-            F,
-            G,
-            H,
-            I,
-            J,
-            K,
-            L,
-            M,
-            N,
-            O,
-            P,
-            Q,
-            R,
-            S,
-            T,
-            U,
-            V,
-            W,
-            X,
-            Y,
-            Z,
-            ESC,
+    }
 
-            Add,
-            Substract
-        };
+    Face::Face(HalfEdge *half_edge) :
+        m_half_edge(half_edge),
+        m_iterator()
+    {
+
+    }
+
+    Face::~Face(void)
+    {
+    }
+
+    HalfEdge *&
+    Face::half_edge(void)
+    {
+        return this->m_half_edge;
+    }
+
+    std::list<Face>::iterator &
+    Face::iterator(void)
+    {
+         return this->m_iterator;
     }
 }
-
-#endif // !__ENGINE_INPUT_KEYBOARD_KEY_HPP__

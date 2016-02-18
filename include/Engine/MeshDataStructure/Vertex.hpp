@@ -18,45 +18,36 @@
 #pragma once
 
 #include    <list>
+
+#include    <glm/glm.hpp>
+
 #include    "Engine/Configuration.hpp"
 
 namespace   Engine
 {
-    class   Edge;
+    class   HalfEdge;
 
-    class ENGINE_EXPORTS Face
+    class   ENGINE_EXPORTS Vertex final
     {
         public:
-            ///
-            /// \brief Constructor.
-            ///
-            Face(void);
-
-            ///
-            /// \brief Copy constructor.
-            ///
-            Face(const Face &other) = default;
-
-            ///
-            /// \brief Desturctor.
-            ///
-            ~Face(void);
+            Vertex(void);
+            Vertex(const glm::vec3 &position, HalfEdge *half_edge);
+            Vertex(const Vertex &other) noexcept = default;
+            Vertex(Vertex &&other) noexcept = default;
+            ~Vertex(void) noexcept;
 
         public:
-            ///
-            /// \brief copy assignment operator.
-            ///
-            Face &operator=(const Face &other) = default;
+            Vertex  &operator=(const Vertex &other) noexcept = default;
+            Vertex  &operator=(Vertex &&other) noexcept = default;
 
         public:
-        ///
-        ///
-        ///
-        std::list<Face>::iterator   iterator;
+            HalfEdge    *&half_edge(void);
+            glm::vec3   &position(void);
+            std::list<Vertex>::iterator     &iterator(void);
 
-        ///
-        /// \brief The first edge of the face.
-        ///
-        Edge                        *first_edge;
+        private:
+            std::list<Vertex>::iterator     m_iterator;
+            glm::vec3                       m_position;
+            HalfEdge                        *m_half_edge;
     };
 }
