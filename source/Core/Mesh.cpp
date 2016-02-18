@@ -65,7 +65,7 @@ namespace   Engine
         this->setPositions(am->mVertices, am->mNumVertices);
         this->setNormals(am->mNormals, am->mNumVertices);
         if (am->HasTextureCoords(0))
-            this->setUVs(am->mTextureCoords[0], am->mNumUVComponents[0]);
+            this->setUVs(am->mTextureCoords[0], am->mNumVertices);
         this->setIndices(am->mFaces, am->mNumFaces);
         this->update();
     }
@@ -278,7 +278,8 @@ namespace   Engine
         {
             this->m_uvs.push_back(u[i].x);
             this->m_uvs.push_back(u[i].y);
-            this->m_uvs.push_back(u[i].z);
+	    //TODO check mNumUVComponents and if it is 3 it means we have to get z too
+            //this->m_uvs.push_back(u[i].z);
         }
     }
 
