@@ -80,7 +80,7 @@ namespace   Engine
             ///     vertex pointer at their index position in the ai_vertices
             ///     array.
             ///
-            std::vector<Vertex *>   &&build_vertices(
+            std::vector<Vertex *>   build_vertices(
                     const aiVector3D *ai_vertices,
                     unsigned int ai_vertices_number);
 
@@ -92,7 +92,7 @@ namespace   Engine
             /// \return Return an rvalue reference of a vector filled with face
             ///     pointer at their index position in the ai_faces array.
             ///
-            std::vector<Face *>     &&build_faces(unsigned int ai_faces_number);
+            std::vector<Face *>     build_faces(unsigned int ai_faces_number);
 
             ///
             /// \brief Build a set of edge. An edge is just a pair of vertex
@@ -103,7 +103,7 @@ namespace   Engine
             /// \return Return an rvalue reference of a set of pair of vertex
             ///     index that represent an edge between these two vertex index.
             ///
-            std::set<Edge>  &&build_edges(const aiFace *ai_faces,
+            std::set<Edge>  build_edges(const aiFace *ai_faces,
                     unsigned int ai_faces_number,
                     const std::vector<Vertex *> &vertices);
 
@@ -115,7 +115,7 @@ namespace   Engine
             ///     ai_faces array.
             /// \return Return an rvalue reference of the map created.
             ///
-            std::map<Edge, Face *>   &&build_ordered_edge_to_face_map(
+            std::map<Edge, Face *>   build_ordered_edge_to_face_map(
                     const aiFace *ai_faces,
                     unsigned int ai_faces_number,
                     const std::vector<Face *> &faces,
@@ -132,14 +132,14 @@ namespace   Engine
             /// \return Return an rvalue reference of a
             ///     "ordered edge to half edge" map.
             ///
-            std::map<Edge, HalfEdge *> &&build_half_edges(
+            std::map<Edge, HalfEdge *> build_half_edges(
                     const std::set<Edge> &edges,
                     const std::map<Edge, Face *> &ordered_edge_to_face);
 
             ///
             ///
             ///
-            std::map<Face *, FaceVertices> &&build_face_to_vertices(
+            std::map<Face *, FaceVertices> build_face_to_vertices(
                     const aiFace *ai_faces,
                     unsigned int ai_faces_number,
                     const std::vector<Face *> &faces,
@@ -155,31 +155,23 @@ namespace   Engine
             ///
             /// \brief Create a new empty half_edge in the m_half_edges list
             ///     and initialise the iterator member in the half_edge
-            /// \return Return a pointer to the new HalfEdge.
+            /// \return Return a reference to the new HalfEdge.
             ///
-            /// Should not be freed.
-            ///
-            /// TODO Transform the pointer into reference.
-            ///
-            HalfEdge    *build_half_edge(void);
+            HalfEdge    &build_half_edge(void);
 
             ///
             /// \brief Create a new empty vertex in the m_vertices list. Also
             ///     initialise the iterator member of the vertex.
-            /// \return Return a pointer to the new vertex.
+            /// \return Return a reference to the new vertex.
             ///
-            /// TODO Transform the pointer into reference.
-            ///
-            Vertex      *build_vertex(void);
+            Vertex      &build_vertex(void);
 
             ///
             /// \brief Create a new empty face in the m_faces list. Also set the
             ///     iterator member of the new face.
-            /// \return Return a pointer to the new face.
+            /// \return Return a reference to the new face.
             ///
-            /// TODO Transform the pointer into reference.
-            ///
-            Face        *build_face(void);
+            Face        &build_face(void);
 
         private:
             ///

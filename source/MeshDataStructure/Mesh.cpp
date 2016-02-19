@@ -48,14 +48,7 @@ namespace   Engine
         m_array_object(std::make_shared<ArrayObject>()),
         m_material(material)
     {
-        //std::set<std::pair<unsigned int, unsigned int>>   edges;
-
-        //this->build_edge(assimp_mesh);
-
-        // list de face avec des int => faces
-
-        // Face && Vertex && Edge.
-
+        this->build_connectivity(assimp_mesh);
     }
 
     Mesh::~Mesh(void) noexcept
@@ -91,13 +84,12 @@ namespace   Engine
         const auto &faces_to_vertices = this->build_face_to_vertices(ai_mesh->mFaces,
                 ai_mesh->mNumFaces, faces, vertices);
         this->build_half_edge_connectivity(faces_to_vertices, edge_to_half_edge);
-
         std::cerr << "Number of half edges : "<< this->m_half_edges.size() << std::endl;
         std::cerr << "Number of vertices : "<< this->m_vertices.size() << std::endl;
         std::cerr << "Number of faces : "<< this->m_faces.size() << std::endl;
     }
 
-    std::vector<Vertex *> &&
+    std::vector<Vertex *>
     Mesh::build_vertices(const aiVector3D *ai_vertices, unsigned int ai_vertices_number)
     {
         std::vector<Vertex *> vertices;
@@ -106,13 +98,15 @@ namespace   Engine
         for (unsigned int i_vertex = 0 ; i_vertex < ai_vertices_number ; ++i_vertex)
         {
             const aiVector3D &ai_vertex = ai_vertices[i_vertex];
-            Vertex *vertex = vertices[i_vertex] = this->build_vertex();
+            Vertex *vertex = &this->build_vertex();
+            vertices.push_back(vertex);
             vertex->position() = glm::vec3(ai_vertex.x, ai_vertex.y, ai_vertex.z);
         }
-        return std::move(vertices);
+        std::cerr << vertices.size() << std::endl;
+        return vertices;
     }
 
-    std::vector<Face *> &&
+    std::vector<Face *>
     Mesh::build_faces(unsigned int ai_faces_number)
     {
         std::vector<Face *>     faces;
@@ -120,12 +114,12 @@ namespace   Engine
         faces.reserve(ai_faces_number);
         for (unsigned int i_faces = 0 ; i_faces < ai_faces_number ; ++i_faces)
         {
-            faces[i_faces] = this->build_face();
+            faces.push_back(&this->build_face());
         }
-        return std::move(faces);
+        return faces;
     }
 
-    std::set<Edge> &&
+    std::set<Edge>
     Mesh::build_edges(const aiFace *ai_faces, unsigned int ai_faces_number,
             const std::vector<Vertex *> &vertices)
     {
@@ -143,10 +137,10 @@ namespace   Engine
             edges_insert(face.mIndices[1], face.mIndices[2]);
             edges_insert(face.mIndices[2], face.mIndices[0]);
         }
-        return std::move(edges);
+        return edges;
     }
 
-    std::map<Edge, Face *> &&
+    std::map<Edge, Face *>
     Mesh::build_ordered_edge_to_face_map(
             const aiFace *ai_faces, unsigned int ai_faces_number,
             const std::vector<Face *> &faces,
@@ -169,25 +163,32 @@ namespace   Engine
             check_and_insert(face.mIndices[1], face.mIndices[2], faces[i_faces]);
             check_and_insert(face.mIndices[2], face.mIndices[0], faces[i_faces]);
         }
-        return std::move(ordered_edge_to_face_map);
+        return ordered_edge_to_face_map;
     }
 
-    std::map<Edge, HalfEdge *> &&
+    std::map<Edge, HalfEdge *>
     Mesh::build_half_edges(const std::set<Edge> &edges,
             const std::map<Edge, Face *> &ordered_edge_to_face_map)
     {
         std::map<Edge, HalfEdge *>  ordered_edge_to_half_edge_map;
+        auto find_face_or_nullptr = [&](const auto &key) -> Face * {
+            auto it = ordered_edge_to_face_map.find(key);
+            if (it != ordered_edge_to_face_map.end())
+                return (*it).second;
+           return nullptr;
+        };
 
+        std::cerr << ordered_edge_to_face_map.size() << std::endl;
         for (const Edge &edge : edges)
         {
-            HalfEdge    *he1 = this->build_half_edge();
-            HalfEdge    *he2 = this->build_half_edge();
+            HalfEdge    *he1 = &this->build_half_edge();
+            HalfEdge    *he2 = &this->build_half_edge();
 
             const auto &key_he1 = std::make_pair(edge.first, edge.second);
             const auto &key_he2 = std::make_pair(edge.second, edge.first);
 
-            he1->face() = ordered_edge_to_face_map.at(key_he1);
-            he2->face() = ordered_edge_to_face_map.at(key_he2);
+            he1->face() = find_face_or_nullptr(key_he1);
+            he2->face() = find_face_or_nullptr(key_he2);
 
             ordered_edge_to_half_edge_map[key_he1] = he1;
             ordered_edge_to_half_edge_map[key_he2] = he2;
@@ -208,10 +209,10 @@ namespace   Engine
             if (he2->face() != nullptr && he2->face()->half_edge() == nullptr)
                 he2->face()->half_edge() = he2;
         }
-        return std::move(ordered_edge_to_half_edge_map);
+        return ordered_edge_to_half_edge_map;
     }
 
-    std::map<Face *, FaceVertices> &&
+    std::map<Face *, FaceVertices>
     Mesh::build_face_to_vertices(const aiFace *ai_faces,
             unsigned int ai_faces_number,
             const std::vector<Face *> &faces,
@@ -225,7 +226,7 @@ namespace   Engine
             face_to_vertices[faces[i_faces]] = std::tie(vertices[ai_face.mIndices[0]],
                     vertices[ai_face.mIndices[1]], vertices[ai_face.mIndices[2]]);
         }
-        return std::move(face_to_vertices);
+        return face_to_vertices;
     }
 
     void
@@ -266,28 +267,28 @@ namespace   Engine
 
 
 
-    HalfEdge *
+    HalfEdge &
     Mesh::build_half_edge(void)
     {
         auto it = this->m_half_edges.emplace(this->m_half_edges.end());
         (*it).iterator() = it;
-        return &(*it);
+        return *it;
     }
 
-    Vertex *
+    Vertex &
     Mesh::build_vertex(void)
     {
         auto it = this->m_vertices.emplace(this->m_vertices.end());
         (*it).iterator() = it;
-        return &(*it);
+        return *it;
     }
 
-    Face *
+    Face &
     Mesh::build_face(void)
     {
         auto it = this->m_faces.emplace(this->m_faces.end());
         (*it).iterator() = it;
-        return &(*it);
+        return *it;
     }
 
 }

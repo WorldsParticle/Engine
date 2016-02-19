@@ -41,6 +41,7 @@ namespace   Engine
             Vertex  &operator=(Vertex &&other) noexcept = default;
 
         public:
+            std::size_t &index(void);
             HalfEdge    *&half_edge(void);
             glm::vec3   &position(void);
             std::list<Vertex>::iterator     &iterator(void);

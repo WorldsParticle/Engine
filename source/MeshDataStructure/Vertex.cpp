@@ -20,6 +20,7 @@
 namespace   Engine
 {
     Vertex::Vertex(void) :
+        m_index(0),
         m_iterator(),
         m_position(0.0f),
         m_half_edge(nullptr)
@@ -27,6 +28,7 @@ namespace   Engine
     }
 
     Vertex::Vertex(const glm::vec3 &position, HalfEdge *half_edge) :
+        m_index(0),
         m_iterator(),
         m_position(position),
         m_half_edge(half_edge)
@@ -37,6 +39,14 @@ namespace   Engine
     Vertex::~Vertex(void)
     {
 
+    }
+
+
+
+    std::size_t &
+    Vertex::index(void)
+    {
+         return this->m_index;
     }
 
     HalfEdge *&
