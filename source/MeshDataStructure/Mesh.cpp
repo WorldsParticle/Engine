@@ -60,7 +60,25 @@ namespace   Engine
     {
     }
 
+    void
+    Mesh::increase(void)
+    {
+    }
 
+    void
+    Mesh::reduce(void)
+    {
+    }
+
+    void
+    Mesh::collapse(Vertex *v1, Vertex *v2)
+    {
+        // 1) recuperer le half edge entre les deux, ou return.
+        // 2) creer un autre vertex
+        //
+        // POSER SUR PAPIER EXACTEMENT TOUT LES EDGE A UDPATE.
+        //
+    }
 
     void
     Mesh::draw(const glm::mat4 &model, const glm::mat4 &view, const glm::mat4 &projection)
@@ -134,16 +152,6 @@ namespace   Engine
     Mesh::is_dirty(void) const
     {
         return this->m_dirty;
-    }
-
-    void
-    Mesh::increase(void)
-    {
-    }
-
-    void
-    Mesh::reduce(void)
-    {
     }
 
     void

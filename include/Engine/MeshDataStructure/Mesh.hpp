@@ -67,6 +67,10 @@ namespace   Engine
             void    increase(void);
             void    reduce(void);
 
+        public:
+
+            void    collapse(Vertex *v1, Vertex *v2);
+
         private:
 
             ///
