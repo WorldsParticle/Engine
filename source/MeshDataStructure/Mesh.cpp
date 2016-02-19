@@ -268,9 +268,9 @@ namespace   Engine
 
     void
     Mesh::build_half_edge_boundary_connectivity(
-            const std::list<HalfEdge *> &boundary_half_edge)
+            const std::list<HalfEdge *> &boundary_half_edges)
     {
-        for (HalfEdge *half_edge : boundary_half_edge)
+        for (HalfEdge *half_edge : boundary_half_edges)
         {
             if (half_edge->vertex()->half_edge()->is_boundary() == false)
             {
