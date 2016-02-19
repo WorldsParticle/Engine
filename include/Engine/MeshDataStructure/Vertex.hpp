@@ -46,6 +46,7 @@ namespace   Engine
             std::list<Vertex>::iterator     &iterator(void);
 
         private:
+            std::size_t                     m_index;
             std::list<Vertex>::iterator     m_iterator;
             glm::vec3                       m_position;
             HalfEdge                        *m_half_edge;

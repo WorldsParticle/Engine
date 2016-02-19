@@ -19,8 +19,12 @@
 
 #include    "Engine/MeshDataStructure/Mesh.hpp"
 
+
 namespace   Engine
 {
+    using Edge = std::pair<Vertex *, Vertex *>;
+    using FaceVertices = std::tuple<Vertex *, Vertex *, Vertex *>;
+
     Mesh::Mesh(Material *material) :
         m_name("DefaultMesh"),
         m_half_edges(),
@@ -79,11 +83,18 @@ namespace   Engine
     Mesh::build_connectivity(const aiMesh *ai_mesh)
     {
         const auto &vertices = this->build_vertices(ai_mesh->mVertices, ai_mesh->mNumVertices);
-        const auto &faces = this->build_faces(ai_mesh->mFaces, ai_mesh->mNumFaces);
-        const auto &edges = this->build_edges(ai_mesh->mFaces, ai_mesh->mNumFaces);
+        const auto &faces = this->build_faces(ai_mesh->mNumFaces);
+        const auto &edges = this->build_edges(ai_mesh->mFaces, ai_mesh->mNumFaces, vertices);
         const auto &edge_to_face = this->build_ordered_edge_to_face_map(ai_mesh->mFaces,
-                ai_mesh->mNumFaces, faces);
-        const auto &edge_to_half_edge = this->build_half_edges(edges, vertices, edge_to_face);
+                ai_mesh->mNumFaces, faces, vertices);
+        const auto &edge_to_half_edge = this->build_half_edges(edges, edge_to_face);
+        const auto &faces_to_vertices = this->build_face_to_vertices(ai_mesh->mFaces,
+                ai_mesh->mNumFaces, faces, vertices);
+        this->build_half_edge_connectivity(faces_to_vertices, edge_to_half_edge);
+
+        std::cerr << "Number of half edges : "<< this->m_half_edges.size() << std::endl;
+        std::cerr << "Number of vertices : "<< this->m_vertices.size() << std::endl;
+        std::cerr << "Number of faces : "<< this->m_faces.size() << std::endl;
     }
 
     std::vector<Vertex *> &&
@@ -102,7 +113,7 @@ namespace   Engine
     }
 
     std::vector<Face *> &&
-    Mesh::build_faces(const aiFace *ai_faces, unsigned int ai_faces_number)
+    Mesh::build_faces(unsigned int ai_faces_number)
     {
         std::vector<Face *>     faces;
 
@@ -114,29 +125,36 @@ namespace   Engine
         return std::move(faces);
     }
 
-    std::set<std::pair<std::size_t, std::size_t>> &&
-    Mesh::build_edges(const aiFace *ai_faces, unsigned int ai_faces_number)
+    std::set<Edge> &&
+    Mesh::build_edges(const aiFace *ai_faces, unsigned int ai_faces_number,
+            const std::vector<Vertex *> &vertices)
     {
-        std::set<std::pair<std::size_t, std::size_t>> edges;
+        std::set<Edge> edges;
+        auto edges_insert = [&](std::size_t index1, std::size_t index2) {
+            const auto &start = std::min(index1, index2);
+            const auto &end = std::max(index1, index2);
+            edges.insert(std::make_pair(vertices[start], vertices[end]));
+        };
 
         for (unsigned int i_faces = 0 ; i_faces < ai_faces_number ; ++i_faces)
         {
             const aiFace &face = ai_faces[i_faces];
-            edges.insert(std::make_pair(std::min(face.mIndices[0], face.mIndices[1]), std::max(face.mIndices[0], face.mIndices[1])));
-            edges.insert(std::make_pair(std::min(face.mIndices[1], face.mIndices[2]), std::max(face.mIndices[1], face.mIndices[2])));
-            edges.insert(std::make_pair(std::min(face.mIndices[2], face.mIndices[0]), std::max(face.mIndices[2], face.mIndices[0])));
+            edges_insert(face.mIndices[0], face.mIndices[1]);
+            edges_insert(face.mIndices[1], face.mIndices[2]);
+            edges_insert(face.mIndices[2], face.mIndices[0]);
         }
         return std::move(edges);
     }
 
-    std::map<std::pair<std::size_t, std::size_t>, Face *> &&
+    std::map<Edge, Face *> &&
     Mesh::build_ordered_edge_to_face_map(
             const aiFace *ai_faces, unsigned int ai_faces_number,
-            const std::vector<Face *> &faces)
+            const std::vector<Face *> &faces,
+            const std::vector<Vertex *> &vertices)
     {
-        std::map<std::pair<std::size_t, std::size_t>, Face *>   ordered_edge_to_face_map;
+        std::map<Edge, Face *>  ordered_edge_to_face_map;
         auto check_and_insert = [&](std::size_t index1, std::size_t index2, Face *value) {
-            const auto &key = std::make_pair(index1, index2);
+            const auto &key = std::make_pair(vertices[index1], vertices[index2]);
             if (ordered_edge_to_face_map.count(key) == 1) {
                 std::cerr << "Inconsistency in the mesh, an edge share two different face.\n"
                     << "edge : " << key.first << " => " << key.second << std::endl;
@@ -154,14 +172,13 @@ namespace   Engine
         return std::move(ordered_edge_to_face_map);
     }
 
-    std::map<std::pair<std::size_t, std::size_t>, HalfEdge *> &&
-    Mesh::build_half_edges(const std::set<std::pair<std::size_t, std::size_t>> &edges,
-            const std::vector<Vertex *> &vertices,
-            const std::map<std::pair<std::size_t, std::size_t>, Face *> &ordered_edge_to_face_map)
+    std::map<Edge, HalfEdge *> &&
+    Mesh::build_half_edges(const std::set<Edge> &edges,
+            const std::map<Edge, Face *> &ordered_edge_to_face_map)
     {
-        std::map<std::pair<std::size_t, std::size_t>, HalfEdge *> ordered_edge_to_half_edge_map;
+        std::map<Edge, HalfEdge *>  ordered_edge_to_half_edge_map;
 
-        for (const std::pair<std::size_t, std::size_t> &edge : edges)
+        for (const Edge &edge : edges)
         {
             HalfEdge    *he1 = this->build_half_edge();
             HalfEdge    *he2 = this->build_half_edge();
@@ -175,8 +192,8 @@ namespace   Engine
             ordered_edge_to_half_edge_map[key_he1] = he1;
             ordered_edge_to_half_edge_map[key_he2] = he2;
 
-            he1->vertex() = vertices[edge.second];
-            he2->vertex() = vertices[edge.first];
+            he1->vertex() = edge.second;
+            he2->vertex() = edge.first;
 
             he1->pair() = he2;
             he2->pair() = he1;
@@ -194,32 +211,57 @@ namespace   Engine
         return std::move(ordered_edge_to_half_edge_map);
     }
 
+    std::map<Face *, FaceVertices> &&
+    Mesh::build_face_to_vertices(const aiFace *ai_faces,
+            unsigned int ai_faces_number,
+            const std::vector<Face *> &faces,
+            const std::vector<Vertex *> &vertices)
+    {
+        std::map<Face *, FaceVertices>  face_to_vertices;
+
+        for (unsigned int i_faces = 0 ; i_faces < ai_faces_number ; ++i_faces)
+        {
+            const aiFace &ai_face = ai_faces[i_faces];
+            face_to_vertices[faces[i_faces]] = std::tie(vertices[ai_face.mIndices[0]],
+                    vertices[ai_face.mIndices[1]], vertices[ai_face.mIndices[2]]);
+        }
+        return std::move(face_to_vertices);
+    }
+
     void
-    Mesh::build_half_edge_connectivity(const aiMesh *assimp_mesh)
+    Mesh::build_half_edge_connectivity(
+            const std::map<Face *, FaceVertices> &faces_to_vertices,
+            const std::map<Edge, HalfEdge *> &ordered_edge_to_half_edge)
     {
         std::list<HalfEdge *>   boundary_half_edge_list;
 
         for (HalfEdge &half_edge : this->m_half_edges)
         {
-
-            if (half_edge.face() == nullptr) // we have a boundary half_edge
+            // we have a boundary half_edge
+            if (half_edge.face() == nullptr)
             {
                 // we will set the next component after.
                 boundary_half_edge_list.push_back(&half_edge);
                 continue;
             }
 
+            Vertex *start = half_edge.vertex();
+            Vertex *end = nullptr;
 
-            half_edge.next() = nullptr;
-            // I must set the next component of the half_edge.
+            const auto &face_vertices = faces_to_vertices.at(half_edge.face());
 
+            if (std::get<0>(face_vertices) == start)
+                end = std::get<1>(face_vertices);
+            else if (std::get<1>(face_vertices) == start)
+                end = std::get<2>(face_vertices);
+            else if (std::get<2>(face_vertices) == start)
+                end = std::get<0>(face_vertices);
+            else
+                throw std::runtime_error("Datastructure inconsistency.");
+
+            const auto &key = std::make_pair(start, end);
+            half_edge.next() = ordered_edge_to_half_edge.at(key);
         }
-    }
-
-    void
-    Mesh::build_boundary_half_edge_connectivity(void)
-    {
-
     }
 
 
