@@ -60,24 +60,75 @@ namespace   Engine
 
         private:
 
-            std::vector<Vertex *>   &&build_vertices(const aiMesh *assimp_mesh);
+            ///
+            /// \brief Build all vertices of the mesh from the vertices assimp array.
+            /// \param[in] ai_vertices The assimp array of vertices.
+            /// \param[in] ai_vertices_number The number of vertices in the ai_vertices array.
+            /// \return Return an rvalue reference of a vector filled with vertex pointer at their index position in the ai_vertices array.
+            ///
+            std::vector<Vertex *>   &&build_vertices(const aiVector3D *ai_vertices,
+                    unsigned int ai_vertices_number);
 
-            std::vector<Face *>     &&build_faces(const aiMesh *assimp_mesh);
+            ///
+            /// \brief Build all faces of the mesh from the face assimp array.
+            /// \param[in] ai_faces The assimp array of faces.
+            /// \param[in] ai_faces_number The number of elements in the
+            ///     ai_faces array.
+            /// \return Return an rvalue reference of a vector filled with face
+            ///     pointer at their index position in the ai_faces array.
+            ///
+            std::vector<Face *>     &&build_faces(const aiFace *ai_faces,
+                    unsigned int ai_faces_number);
 
+            ///
+            /// \brief Build a set of edge. An edge is just a pair of vertex index.
+            /// \param[in] ai_faces The assimp array of faces.
+            /// \param[in] ai_faces_number The number of elements in the ai_faces array.
+            /// \return Return an rvalue reference of a set of pair of vertex index
+            ///     that represent an edge between these two vertex index.
+            ///
             std::set<std::pair<std::size_t, std::size_t>>     &&build_edges(
-                    const aiMesh *assimp_mesh);
+                    const aiFace *ai_faces, unsigned int ai_faces_number);
 
-            std::map<std::pair<std::size_t, std::size_t>, Face *>     &&build_ordered_edge_to_face_map(
-                    const aiMesh *assimp_mesh, const std::vector<Face *> &faces);
+            ///
+            /// \brief Build a map of edge to face, edge are directional. An
+            ///     edge have one entry for its two direction. 0 to 1 && 1 to 0.
+            /// \param[in] ai_faces The assimp array of faces.
+            /// \param[in] ai_faces_number The number of elements in the ai_faces array.
+            /// \return Return an rvalue reference of the map created.
+            ///
+            std::map<std::pair<std::size_t, std::size_t>, Face *>   &&build_ordered_edge_to_face_map(
+                    const aiFace *ai_faces, unsigned int ai_faces_number,
+                    const std::vector<Face *> &faces);
+
+            ///
+            /// \brief Build all the half edges of the mesh.
+            /// \param[in] edges the set of edge created by the "build_edges" method.
+            /// \param[in] vertices The vector of vertices created by the "build_vertices" method.
+            /// \param[in] ordered_edge_to_face_map The edge to face map created by the "build_ordered_edge_to_face_map" method.
+            /// \return Return an rvalue reference of a ordered edge to half_edge map.
+            ///
+            std::map<std::pair<std::size_t, std::size_t>, HalfEdge *> &&
+                build_half_edges(const std::set<std::pair<std::size_t, std::size_t>> &edges,
+                        const std::vector<Vertex *> &vertices,
+                        const std::map<std::pair<std::size_t, std::size_t>, Face *> &ordered_edge_to_face_map);
+
+            ///
+            /// \brief Build the connectivity of an assimp mesh.
+            ///
+            void    build_connectivity(const aiMesh *ai_mesh);
+
+            void    build_half_edge_connectivity(const aiMesh *assimp_mesh);
 
 
-            void    build_connectivity(const std::set<std::pair<std::size_t, std::size_t>> &edges,
-                    const std::vector<Vertex *> &vertices, const std::vector<Face *> &faces,
-                    const std::map<std::pair<std::size_t, std::size_t>, Face *> &ordered_edge_to_face_map);
-
-            HalfEdge *build_half_edge(void);
+            HalfEdge    *build_half_edge(void);
+            Vertex      *build_vertex(void);
+            Face        *build_face(void);
 
         private:
+            ///
+            /// \brief The name of the mesh.
+            ///
             std::string         m_name;
 
             std::list<HalfEdge> m_half_edges;
