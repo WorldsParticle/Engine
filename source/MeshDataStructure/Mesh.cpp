@@ -15,10 +15,12 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include    <GL/glew.h>
 #include    <iostream>
 
+#include    "Engine/Core/Material.hpp"
+#include    "Engine/Core/ShaderProgram.hpp"
 #include    "Engine/MeshDataStructure/Mesh.hpp"
-
 
 namespace   Engine
 {
@@ -33,9 +35,10 @@ namespace   Engine
         m_vertices_buffer(std::make_shared<BufferObject>(BufferObject::Type::ARRAY_BUFFER, BufferObject::Usage::DYNAMIC_DRAW)),
         m_elements_buffer(std::make_shared<BufferObject>(BufferObject::Type::ELEMENT_ARRAY_BUFFER, BufferObject::Usage::DYNAMIC_DRAW)),
         m_array_object(std::make_shared<ArrayObject>()),
-        m_material(material)
+        m_material(material),
+        m_dirty(true)
     {
-
+        this->update_vao();
     }
 
     Mesh::Mesh(const aiMesh *assimp_mesh, Material *material) :
@@ -46,9 +49,11 @@ namespace   Engine
         m_vertices_buffer(std::make_shared<BufferObject>(BufferObject::Type::ARRAY_BUFFER, BufferObject::Usage::DYNAMIC_DRAW)),
         m_elements_buffer(std::make_shared<BufferObject>(BufferObject::Type::ELEMENT_ARRAY_BUFFER, BufferObject::Usage::DYNAMIC_DRAW)),
         m_array_object(std::make_shared<ArrayObject>()),
-        m_material(material)
+        m_material(material),
+        m_dirty(true)
     {
         this->build_connectivity(assimp_mesh);
+        this->update_vao();
     }
 
     Mesh::~Mesh(void) noexcept
@@ -60,6 +65,75 @@ namespace   Engine
     void
     Mesh::draw(const glm::mat4 &model, const glm::mat4 &view, const glm::mat4 &projection)
     {
+        if (this->is_dirty())
+        {
+             this->update();
+        }
+        const auto &shaderprogram = this->m_material->getShaderProgram();
+        this->m_array_object->bind();
+        this->m_material->bind();
+        shaderprogram->setUniform("model", model);
+        shaderprogram->setUniform("view", view);
+        shaderprogram->setUniform("projection", projection);
+        glDrawArrays(GL_TRIANGLES, 0, static_cast<int>(this->m_faces.size() * 3));
+        this->m_material->unbind();
+        this->m_array_object->unbind();
+    }
+
+    void
+    Mesh::update(void)
+    {
+        std::vector<float>  vertices;
+
+        vertices.reserve(this->m_faces.size() * 3 * 9);
+        for (Face &face : this->m_faces)
+        {
+            auto face_vertices = face.vertices();
+            if (face_vertices.size() != 3)
+            {
+                throw std::runtime_error("Inconsistency in the datastructure");
+            }
+            glm::vec3 normal = face.normal();
+            for (Vertex *vertex : face_vertices)
+            {
+                vertices.push_back(vertex->position().x);
+                vertices.push_back(vertex->position().y);
+                vertices.push_back(vertex->position().z);
+                vertices.push_back(normal.x);
+                vertices.push_back(normal.y);
+                vertices.push_back(normal.z);
+                vertices.push_back(face.color().x);
+                vertices.push_back(face.color().y);
+                vertices.push_back(face.color().z);
+            }
+        }
+        std::cerr << "Number of elements in the vertices_buffer : " << vertices.size() << std::endl;
+        this->m_vertices_buffer->update(vertices.data(), vertices.size() * sizeof(float));
+        this->m_dirty = false;
+    }
+
+    void
+    Mesh::update_vao(void)
+    {
+        this->m_array_object->bind();
+        this->m_vertices_buffer->bind();
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glEnableVertexAttribArray(2);
+        std::uintptr_t pointer_offset = 0;
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), reinterpret_cast<void *>(pointer_offset));
+        pointer_offset += 3 * sizeof(float);
+        glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), reinterpret_cast<void *>(pointer_offset));
+        pointer_offset += 3 * sizeof(float);
+        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 9 * sizeof(float), reinterpret_cast<void *>(pointer_offset));
+        this->m_array_object->unbind();
+        this->m_vertices_buffer->unbind();
+    }
+
+    bool
+    Mesh::is_dirty(void) const
+    {
+        return this->m_dirty;
     }
 
     void
@@ -84,9 +158,7 @@ namespace   Engine
         const auto &faces_to_vertices = this->build_face_to_vertices(ai_mesh->mFaces,
                 ai_mesh->mNumFaces, faces, vertices);
         this->build_half_edge_connectivity(faces_to_vertices, edge_to_half_edge);
-        std::cerr << "Number of half edges : "<< this->m_half_edges.size() << std::endl;
-        std::cerr << "Number of vertices : "<< this->m_vertices.size() << std::endl;
-        std::cerr << "Number of faces : "<< this->m_faces.size() << std::endl;
+        this->m_dirty = true;
     }
 
     std::vector<Vertex *>

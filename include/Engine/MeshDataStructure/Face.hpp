@@ -17,7 +17,9 @@
 
 #pragma once
 
-#include    <list>
+#include    <glm/glm.hpp>
+
+#include    <vector>
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/MeshDataStructure/HalfEdge.hpp"
@@ -40,10 +42,16 @@ namespace   Engine
         public:
             HalfEdge                    *&half_edge(void);
             std::list<Face>::iterator   &iterator(void);
+            glm::vec3                   &color(void);
+
+        public:
+            glm::vec3                   normal(void);
+            std::vector<Vertex *>       vertices(void);
 
         private:
             HalfEdge                    *m_half_edge;
             std::list<Face>::iterator   m_iterator;
+            glm::vec3                   m_color;
      };
 }
 

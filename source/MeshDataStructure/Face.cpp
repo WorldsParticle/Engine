@@ -15,26 +15,32 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include    <glm/gtc/random.hpp>
+
+#include    "Engine/MeshDataStructure/Vertex.hpp"
 #include    "Engine/MeshDataStructure/Face.hpp"
 
 namespace   Engine
 {
     Face::Face(void) :
         m_half_edge(nullptr),
-        m_iterator()
+        m_iterator(),
+        m_color(glm::linearRand(glm::vec3(0.0f), glm::vec3(1.0f)))
     {
     }
 
     Face::Face(HalfEdge *half_edge) :
         m_half_edge(half_edge),
-        m_iterator()
+        m_iterator(),
+        m_color(glm::linearRand(glm::vec3(0.0f), glm::vec3(1.0f)))
     {
-
     }
 
     Face::~Face(void)
     {
     }
+
+
 
     HalfEdge *&
     Face::half_edge(void)
@@ -47,4 +53,36 @@ namespace   Engine
     {
          return this->m_iterator;
     }
+
+    glm::vec3 &
+    Face::color(void)
+    {
+         return this->m_color;
+    }
+
+
+
+    glm::vec3
+    Face::normal(void)
+    {
+        auto v = this->vertices();
+        return glm::cross(v[1]->position() - v[0]->position(), v[2]->position() - v[1]->position());
+    }
+
+    std::vector<Vertex *>
+    Face::vertices(void)
+    {
+        std::vector<Vertex *> vertices;
+
+        HalfEdge *end = this->m_half_edge;
+        HalfEdge *he = end;
+        do
+        {
+            vertices.push_back(he->vertex());
+            he = he->next();
+        } while (he != end);
+        return vertices;
+    }
+
+
 }

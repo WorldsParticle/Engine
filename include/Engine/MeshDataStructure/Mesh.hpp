@@ -59,6 +59,10 @@ namespace   Engine
             void    draw(const glm::mat4 &model, const glm::mat4 &view,
                         const glm::mat4 &projection);
 
+        private:
+            void    update(void);
+            void    update_vao(void);
+
         public:
             void    increase(void);
             void    reduce(void);
@@ -197,6 +201,14 @@ namespace   Engine
             Face        &build_face(void);
 
         private:
+
+            ///
+            /// \return True if the mesh must be updated in the graphic card.
+            ///     False otherwise.
+            ///
+            bool        is_dirty(void) const;
+
+        private:
             ///
             /// \brief The name of the mesh.
             ///
@@ -210,6 +222,12 @@ namespace   Engine
             std::shared_ptr<BufferObject>   m_elements_buffer;
             std::shared_ptr<ArrayObject>    m_array_object;
             Material        *m_material;
+
+            ///
+            /// \brief Set to true if the mesh must be updated in the graphic
+            ///     card.
+            ///
+            bool            m_dirty;
 
     };
 }
