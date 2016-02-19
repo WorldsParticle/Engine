@@ -46,6 +46,10 @@ namespace   Engine
             Face        *&face(void);
             std::list<HalfEdge>::iterator   &iterator(void);
 
+        public:
+
+            bool        is_boundary(void) const;
+
         private:
             std::list<HalfEdge>::iterator   m_iterator;
             ///

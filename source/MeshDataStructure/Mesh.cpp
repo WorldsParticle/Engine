@@ -199,9 +199,9 @@ namespace   Engine
             he1->pair() = he2;
             he2->pair() = he1;
 
-            if (he1->vertex()->half_edge() == nullptr || he1->face() == nullptr)
+            if (he1->vertex()->half_edge() == nullptr || he2->face() == nullptr)
                 he1->vertex()->half_edge() = he1->pair();
-            if (he2->vertex()->half_edge() == nullptr || he2->face() == nullptr)
+            if (he2->vertex()->half_edge() == nullptr || he1->face() == nullptr)
                 he2->vertex()->half_edge() = he2->pair();
 
             if (he1->face() != nullptr && he1->face()->half_edge() == nullptr)
@@ -263,9 +263,22 @@ namespace   Engine
             const auto &key = std::make_pair(start, end);
             half_edge.next() = ordered_edge_to_half_edge.at(key);
         }
+        this->build_half_edge_boundary_connectivity(boundary_half_edge_list);
     }
 
-
+    void
+    Mesh::build_half_edge_boundary_connectivity(
+            const std::list<HalfEdge *> &boundary_half_edge)
+    {
+        for (HalfEdge *half_edge : boundary_half_edge)
+        {
+            if (half_edge->vertex()->half_edge()->is_boundary() == false)
+            {
+                throw std::runtime_error("boundary half_edge pointing to a vertex without a boundary vertex outgoing");
+            }
+            half_edge->next() = half_edge->vertex()->half_edge();
+        }
+    }
 
     HalfEdge &
     Mesh::build_half_edge(void)

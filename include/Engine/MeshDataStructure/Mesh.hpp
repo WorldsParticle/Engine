@@ -152,6 +152,9 @@ namespace   Engine
                     const std::map<Face *, FaceVertices> &faces_to_vertices,
                     const std::map<Edge, HalfEdge *> &ord_edge_to_half_edge);
 
+            void    build_half_edge_boundary_connectivity(
+                    const std::list<HalfEdge *> &boundary_half_edge);
+
             ///
             /// \brief Create a new empty half_edge in the m_half_edges list
             ///     and initialise the iterator member in the half_edge

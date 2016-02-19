@@ -71,4 +71,10 @@ namespace   Engine
     {
         return this->m_iterator;
     }
+
+    bool
+    HalfEdge::is_boundary(void) const
+    {
+         return this->m_face == nullptr;
+    }
 }
