@@ -15,6 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include    "Engine/MeshDataStructure/HalfEdge.hpp"
 #include    "Engine/MeshDataStructure/Vertex.hpp"
 
 namespace   Engine
@@ -65,5 +66,79 @@ namespace   Engine
     Vertex::iterator(void)
     {
         return this->m_iterator;
+    }
+
+
+
+    std::vector<HalfEdge *>
+    Vertex::ingoing_half_edges(void)
+    {
+        std::vector<HalfEdge *> ingoing_half_edges;
+
+        HalfEdge *start = this->m_half_edge;
+        HalfEdge *e = start;
+        do
+        {
+            ingoing_half_edges.push_back(e->pair());
+            e = e->pair()->next();
+        } while (e != start);
+        return ingoing_half_edges;
+    }
+
+    std::vector<HalfEdge *>
+    Vertex::outgoing_half_edges(void)
+    {
+        std::vector<HalfEdge *> outgoing_half_edges;
+
+        HalfEdge *start = this->m_half_edge;
+        HalfEdge *e = start;
+        do
+        {
+            outgoing_half_edges.push_back(e);
+            e = e->pair()->next();
+        } while (e != start);
+        return outgoing_half_edges;
+    }
+
+    HalfEdge *
+    Vertex::outgoing_half_edge_to(Vertex *vertex)
+    {
+        HalfEdge *start = this->m_half_edge;
+        HalfEdge *e = start;
+        do
+        {
+            if (e->vertex() == vertex)
+                return e;
+            e = e->pair()->next();
+        } while (e != start);
+        return nullptr;
+    }
+
+    std::vector<Vertex *>
+    Vertex::neighbour_vertices(void)
+    {
+        std::vector<Vertex *>   neighbours;
+        HalfEdge *start = this->m_half_edge;
+        HalfEdge *e = start;
+        do
+        {
+            neighbours.push_back(e->vertex());
+            e = e->pair()->next();
+        } while (e != start);
+        return neighbours;
+    }
+
+    bool
+    Vertex::is_boundary(void) const
+    {
+        HalfEdge *start = this->m_half_edge;
+        HalfEdge *e = start;
+        do
+        {
+            if (e->is_boundary())
+                return true;
+            e = e->pair()->next();
+        } while (e != start);
+        return false;
     }
 }

@@ -69,7 +69,9 @@ namespace   Engine
 
         public:
 
-            void    collapse(Vertex *v1, Vertex *v2);
+            bool check_consistency(void);
+            Vertex  *collapse(Vertex *v1, Vertex *v2);
+            HalfEdge *merge(HalfEdge *he1, HalfEdge *he2);
 
         private:
 

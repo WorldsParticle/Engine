@@ -50,6 +50,7 @@ namespace   Engine
 
             bool        is_boundary(void) const;
 
+
         private:
             std::list<HalfEdge>::iterator   m_iterator;
             ///

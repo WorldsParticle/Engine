@@ -56,6 +56,7 @@ void main() {
     vec3    lightColor = vec3(1.0, 1.0, 1.0);
 
     float   brightness = flat_shading(lightPosition, lightDir);
+    brightness = 1.0;
     finalColor = vec4(brightness * lightColor * fragColor, 1.0);
 }
 

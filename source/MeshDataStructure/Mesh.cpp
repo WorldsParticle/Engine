@@ -63,21 +63,221 @@ namespace   Engine
     void
     Mesh::increase(void)
     {
+        static auto it = this->m_half_edges.begin();
+        if (this->m_dirty == true)
+            return;
+        if (it != this->m_half_edges.end())
+        {
+            HalfEdge *he = &(*it);
+            if (this->collapse(he->vertex(), he->pair()->vertex()) == nullptr)
+            {
+                std::cerr << "error" << std::endl;
+                ++it;
+            }
+            else
+            {
+                it = this->m_half_edges.begin();
+            }
+
+        }
     }
 
     void
     Mesh::reduce(void)
     {
+        if (this->m_dirty == true)
+            return;
+
+        std::vector<Vertex *> vertices = (*this->m_faces.begin()).vertices();
+
+        Vertex *result = this->collapse(vertices[0], vertices[1]);
+        this->collapse(vertices[2], result);
+
+/*        HalfEdge *he = &(*this->m_half_edges.begin());*/
+
+        //if (he->face() != nullptr)
+        //{
+            //he->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f);
+        //}
+        //if (he->pair()->face() != nullptr)
+        //{
+            //he->pair()->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f);
+        /*}*/
+/*        HalfEdge *he_test = he->vertex()->outgoing_half_edge_to(he->pair()->vertex());*/
+        //if (he_test->face() != nullptr)
+        //{
+            //he_test->face()->color() += glm::vec3(0.0f, 1.0f, 0.0f);
+        //}
+        //if (he_test->pair()->face() != nullptr)
+        //{
+            //he_test->pair()->face()->color() += glm::vec3(0.0f, 1.0f, 0.0f);
+        //}
+
+        this->m_dirty = true;
     }
 
-    void
+
+    bool
+    Mesh::check_consistency(void)
+    {
+        bool result = true;
+        for (Vertex &vertex : this->m_vertices)
+        {
+            if (vertex.half_edge() == nullptr)
+            {
+                std::cerr << "vertex half edge nullptr" << std::endl;
+                result = false;
+            }
+        }
+        for (Face &face : this->m_faces)
+        {
+            if (face.half_edge() == nullptr)
+            {
+                std::cerr << "face he nullptr" << std::endl;
+                result = false;
+            }
+        }
+        for (HalfEdge &he : this->m_half_edges)
+        {
+            if (he.vertex() == nullptr)
+            {
+                std::cerr << "he vertex nullptr" << std::endl;
+                result = false;
+            }
+            if (he.pair() == nullptr)
+            {
+                std::cerr << "he pair nullptr" << std::endl;
+                 result = false;
+            }
+            if (he.pair()->pair() != &he)
+            {
+                std::cerr << "he pair pair != he" << std::endl;
+                result = false;
+            }
+            if (he.next() == nullptr)
+            {
+                std::cerr << "he next nullptr" << std::endl;
+                result = false;
+            }
+            if (he.pair()->vertex() == he.vertex())
+            {
+                std::cerr << "he pair vertex== he.verterx" << std::endl;
+                 result = false;
+            }
+            if (&he != he.next()->next()->next())
+            {
+                std::cerr << "cannot turn around a face" << std::endl;
+                result = false;
+            }
+        }
+        return result;
+    }
+
+    HalfEdge *
+    Mesh::merge(HalfEdge *he1, HalfEdge *he2)
+    {
+        HalfEdge    *outgoing_he = he2->pair();
+
+        if (he1->is_boundary() || he1->pair()->is_boundary())
+            std::cerr << "BOUNDARY" << std::endl;
+        if (he2->is_boundary() || he2->pair()->is_boundary())
+            std::cerr << "BOUNDARY" << std::endl;
+
+        if (he1->pair()->is_boundary())
+            he1->pair()->next() = he1->pair()->next()->next();
+        if (he2->pair()->is_boundary())
+            he2->pair()->next() = he2->pair()->next()->next();
+
+        he1->pair()->pair() = he2->pair();
+        he2->pair()->pair() = he1->pair();
+
+        he1->vertex()->half_edge() = he1->pair();
+
+        this->m_half_edges.erase(he1->iterator());
+        this->m_half_edges.erase(he2->iterator());
+
+        return outgoing_he;
+    }
+
+    Vertex *
     Mesh::collapse(Vertex *v1, Vertex *v2)
     {
-        // 1) recuperer le half edge entre les deux, ou return.
-        // 2) creer un autre vertex
-        //
-        // POSER SUR PAPIER EXACTEMENT TOUT LES EDGE A UDPATE.
-        //
+
+        std::vector<Vertex *> v1n = v1->neighbour_vertices();
+        std::vector<Vertex *> v2n = v2->neighbour_vertices();
+
+        std::vector<Vertex *> result;
+        for (Vertex *n_v1 : v1n)
+        {
+            for (Vertex *n_v2 : v2n)
+            {
+                if (n_v1 == n_v2)
+                {
+                    result.push_back(n_v1);
+                }
+            }
+        }
+        if (result.size() > 2)
+            return nullptr;
+
+        auto replace = [](Vertex *old_vertex, Vertex *new_vertex) {
+            auto ingoing_he = old_vertex->ingoing_half_edges();
+            for (auto *he : ingoing_he)
+                he->vertex() = new_vertex;
+        };
+        HalfEdge *he = v1->outgoing_half_edge_to(v2);
+        Vertex *new_vertex = &this->build_vertex();
+        new_vertex->position() = v1->position() + (v2->position() - v1->position()) / 2.0f;
+
+        if (he == nullptr) throw std::runtime_error("v1 don't share any edge with v2");
+
+        replace(v1, new_vertex);
+        replace(v2, new_vertex);
+
+        this->m_vertices.erase(v1->iterator());
+        this->m_vertices.erase(v2->iterator());
+
+        if (he->face() != nullptr)
+        {
+            HalfEdge *new_he = this->merge(he->next(), he->next()->next());
+            if (new_vertex->half_edge() == nullptr || new_he->is_boundary())
+                new_vertex->half_edge() = new_he;
+            this->m_faces.erase(he->face()->iterator());
+        }
+        else
+        {
+            std::cerr << "something here ?" << std::endl;
+        }
+
+        if (he->pair()->face() != nullptr)
+        {
+            HalfEdge *new_he = this->merge(he->pair()->next(), he->pair()->next()->next());
+            if (new_vertex->half_edge() == nullptr || new_he->is_boundary())
+                new_vertex->half_edge() = new_he;
+            this->m_faces.erase(he->pair()->face()->iterator());
+        }
+        else
+        {
+            std::cerr << "something here ?" << std::endl;
+        }
+
+
+/*        // boundary*/
+        //if (he->is_boundary())
+        //{
+
+        //}
+
+        //if (he->pair()->is_boundary())
+        //{
+
+        //}
+
+        this->m_half_edges.erase(he->pair()->iterator());
+        this->m_half_edges.erase(he->iterator());
+
+        this->m_dirty = true;
+        return new_vertex;
     }
 
     void

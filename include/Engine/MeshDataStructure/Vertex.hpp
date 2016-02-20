@@ -18,6 +18,7 @@
 #pragma once
 
 #include    <list>
+#include    <vector>
 
 #include    <glm/glm.hpp>
 
@@ -45,6 +46,16 @@ namespace   Engine
             HalfEdge    *&half_edge(void);
             glm::vec3   &position(void);
             std::list<Vertex>::iterator     &iterator(void);
+
+        public:
+
+            std::vector<HalfEdge *>     ingoing_half_edges(void);
+            std::vector<HalfEdge *>     outgoing_half_edges(void);
+
+            HalfEdge    *outgoing_half_edge_to(Vertex *vertex);
+            std::vector<Vertex *>       neighbour_vertices(void);
+
+            bool                        is_boundary(void) const;
 
         private:
             std::size_t                     m_index;
