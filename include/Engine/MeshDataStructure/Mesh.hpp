@@ -72,7 +72,7 @@ namespace   Engine
             bool check_consistency(void);
             Vertex  *collapse(Vertex *v1, Vertex *v2);
             HalfEdge *merge(HalfEdge *he1, HalfEdge *he2);
-
+            void tmp(int);
         private:
 
             ///
@@ -184,6 +184,12 @@ namespace   Engine
             ///
             void    build_half_edge_boundary_connectivity(
                     const std::list<HalfEdge *> &boundary_half_edge);
+
+            ///
+            /// \brief Set the prev component of each half_edge. prev component
+            ///     is add in order to support boundary mesh decimation.
+            ///
+            void    set_half_edge_prev_component(void);
 
             ///
             /// \brief Create a new empty half_edge in the m_half_edges list

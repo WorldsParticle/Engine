@@ -30,7 +30,6 @@ namespace   Engine
     {
         public:
             HalfEdge(void);
-            HalfEdge(Vertex *vertex, HalfEdge *next, HalfEdge *pair, Face *face);
             HalfEdge(const HalfEdge &other) noexcept = default;
             HalfEdge(HalfEdge &&other) noexcept = default;
             ~HalfEdge(void);
@@ -42,6 +41,7 @@ namespace   Engine
         public:
             Vertex      *&vertex(void);
             HalfEdge    *&next(void);
+            HalfEdge    *&prev(void);
             HalfEdge    *&pair(void);
             Face        *&face(void);
             std::list<HalfEdge>::iterator   &iterator(void);
@@ -58,6 +58,7 @@ namespace   Engine
             ///
             Vertex      *m_vertex;
             HalfEdge    *m_next;
+            HalfEdge    *m_prev;
             HalfEdge    *m_pair;
             Face        *m_face;
     };

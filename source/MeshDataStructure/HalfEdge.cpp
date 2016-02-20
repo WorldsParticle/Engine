@@ -23,17 +23,9 @@ namespace   Engine
         m_iterator(),
         m_vertex(nullptr),
         m_next(nullptr),
+        m_prev(nullptr),
         m_pair(nullptr),
         m_face(nullptr)
-    {
-    }
-
-    HalfEdge::HalfEdge(Vertex *vertex, HalfEdge *next, HalfEdge *pair, Face *face) :
-        m_iterator(),
-        m_vertex(vertex),
-        m_next(next),
-        m_pair(pair),
-        m_face(face)
     {
     }
 
@@ -52,6 +44,12 @@ namespace   Engine
     HalfEdge::next(void)
     {
         return this->m_next;
+    }
+
+    HalfEdge *&
+    HalfEdge::prev(void)
+    {
+        return this->m_prev;
     }
 
     HalfEdge *&

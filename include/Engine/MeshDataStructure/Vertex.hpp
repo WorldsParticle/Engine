@@ -32,7 +32,6 @@ namespace   Engine
     {
         public:
             Vertex(void);
-            Vertex(const glm::vec3 &position, HalfEdge *half_edge);
             Vertex(const Vertex &other) noexcept = default;
             Vertex(Vertex &&other) noexcept = default;
             ~Vertex(void) noexcept;
@@ -54,6 +53,8 @@ namespace   Engine
 
             HalfEdge    *outgoing_half_edge_to(Vertex *vertex);
             std::vector<Vertex *>       neighbour_vertices(void);
+
+            std::vector<Vertex *>       shared_neighbour_vertices_with(Vertex *vertex);
 
             bool                        is_boundary(void) const;
 

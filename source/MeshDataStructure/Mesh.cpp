@@ -17,6 +17,9 @@
 
 #include    <GL/glew.h>
 #include    <iostream>
+#include    <mutex>
+
+std::mutex  g_mutex;
 
 #include    "Engine/Core/Material.hpp"
 #include    "Engine/Core/ShaderProgram.hpp"
@@ -63,57 +66,43 @@ namespace   Engine
     void
     Mesh::increase(void)
     {
-        static auto it = this->m_half_edges.begin();
-        if (this->m_dirty == true)
-            return;
-        if (it != this->m_half_edges.end())
-        {
-            HalfEdge *he = &(*it);
-            if (this->collapse(he->vertex(), he->pair()->vertex()) == nullptr)
-            {
-                std::cerr << "error" << std::endl;
-                ++it;
-            }
-            else
-            {
-                it = this->m_half_edges.begin();
-            }
-
-        }
+        std::lock_guard<std::mutex> lock(g_mutex);
+        this->tmp(1);
     }
+
+    void
+    Mesh::tmp(int a)
+    {
+        if (this->m_dirty == true) return;
+        auto it = this->m_half_edges.begin();
+
+        std::cerr << " ----------------- " << std::endl;
+
+        std::cerr << "Number of faces : " << this->m_faces.size() << std::endl;
+        std::cerr << "Number of he : " << this->m_half_edges.size() << std::endl;
+        std::cerr << "Number of vertices : " << this->m_vertices.size() << std::endl;
+
+
+        while (it != this->m_half_edges.end() && this->collapse((*it).vertex(), (*it).next()->vertex()) == nullptr && this->m_half_edges.size() > 0)
+        {
+            ++it;
+        }
+
+        std::cerr << "Number of faces : " << this->m_faces.size() << std::endl;
+        std::cerr << "Number of he : " << this->m_half_edges.size() << std::endl;
+        std::cerr << "Number of vertices : " << this->m_vertices.size() << std::endl;
+
+        std::cerr << " ----------------- " << std::endl;
+
+        this->m_dirty = true;
+    }
+
 
     void
     Mesh::reduce(void)
     {
-        if (this->m_dirty == true)
-            return;
-
-        std::vector<Vertex *> vertices = (*this->m_faces.begin()).vertices();
-
-        Vertex *result = this->collapse(vertices[0], vertices[1]);
-        this->collapse(vertices[2], result);
-
-/*        HalfEdge *he = &(*this->m_half_edges.begin());*/
-
-        //if (he->face() != nullptr)
-        //{
-            //he->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f);
-        //}
-        //if (he->pair()->face() != nullptr)
-        //{
-            //he->pair()->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f);
-        /*}*/
-/*        HalfEdge *he_test = he->vertex()->outgoing_half_edge_to(he->pair()->vertex());*/
-        //if (he_test->face() != nullptr)
-        //{
-            //he_test->face()->color() += glm::vec3(0.0f, 1.0f, 0.0f);
-        //}
-        //if (he_test->pair()->face() != nullptr)
-        //{
-            //he_test->pair()->face()->color() += glm::vec3(0.0f, 1.0f, 0.0f);
-        //}
-
-        this->m_dirty = true;
+        std::lock_guard<std::mutex> lock(g_mutex);
+        this->tmp(0);
     }
 
 
@@ -125,7 +114,7 @@ namespace   Engine
         {
             if (vertex.half_edge() == nullptr)
             {
-                std::cerr << "vertex half edge nullptr" << std::endl;
+                std::cerr << "INCONSISTENCY vertex half edge nullptr" << std::endl;
                 result = false;
             }
         }
@@ -133,7 +122,7 @@ namespace   Engine
         {
             if (face.half_edge() == nullptr)
             {
-                std::cerr << "face he nullptr" << std::endl;
+                std::cerr << "INCONSISTENCY face he nullptr" << std::endl;
                 result = false;
             }
         }
@@ -141,33 +130,38 @@ namespace   Engine
         {
             if (he.vertex() == nullptr)
             {
-                std::cerr << "he vertex nullptr" << std::endl;
+                std::cerr << "INCONSISTENCY he vertex nullptr" << std::endl;
                 result = false;
             }
             if (he.pair() == nullptr)
             {
-                std::cerr << "he pair nullptr" << std::endl;
+                std::cerr << "INCONSISTENCY he pair nullptr" << std::endl;
                  result = false;
             }
             if (he.pair()->pair() != &he)
             {
-                std::cerr << "he pair pair != he" << std::endl;
+                std::cerr << "INCONSISTENCY he pair pair != he" << std::endl;
                 result = false;
             }
             if (he.next() == nullptr)
             {
-                std::cerr << "he next nullptr" << std::endl;
+                std::cerr << "INCONSISTENCY he next nullptr" << std::endl;
                 result = false;
             }
             if (he.pair()->vertex() == he.vertex())
             {
-                std::cerr << "he pair vertex== he.verterx" << std::endl;
+                std::cerr << "INCONSISTENCY he pair vertex== he.verterx" << std::endl;
                  result = false;
             }
-            if (&he != he.next()->next()->next())
+            if (he.is_boundary() == false && &he != he.next()->next()->next())
             {
-                std::cerr << "cannot turn around a face" << std::endl;
+                std::cerr << "INCONSISTENCY cannot turn around a face" << std::endl;
                 result = false;
+            }
+            if (he.pair()->face() != nullptr)
+            {
+                he.pair()->face()->color() = he.pair()->face()->color();
+                // dumb
             }
         }
         return result;
@@ -176,48 +170,22 @@ namespace   Engine
     HalfEdge *
     Mesh::merge(HalfEdge *he1, HalfEdge *he2)
     {
-        HalfEdge    *outgoing_he = he2->pair();
+        HalfEdge    *merged_he = nullptr;
 
-        if (he1->is_boundary() || he1->pair()->is_boundary())
-            std::cerr << "BOUNDARY" << std::endl;
-        if (he2->is_boundary() || he2->pair()->is_boundary())
-            std::cerr << "BOUNDARY" << std::endl;
-
-        if (he1->pair()->is_boundary())
-            he1->pair()->next() = he1->pair()->next()->next();
-        if (he2->pair()->is_boundary())
-            he2->pair()->next() = he2->pair()->next()->next();
-
+        merged_he = he2->pair();
         he1->pair()->pair() = he2->pair();
         he2->pair()->pair() = he1->pair();
-
         he1->vertex()->half_edge() = he1->pair();
-
         this->m_half_edges.erase(he1->iterator());
         this->m_half_edges.erase(he2->iterator());
-
-        return outgoing_he;
+        return merged_he;
     }
 
     Vertex *
     Mesh::collapse(Vertex *v1, Vertex *v2)
     {
 
-        std::vector<Vertex *> v1n = v1->neighbour_vertices();
-        std::vector<Vertex *> v2n = v2->neighbour_vertices();
-
-        std::vector<Vertex *> result;
-        for (Vertex *n_v1 : v1n)
-        {
-            for (Vertex *n_v2 : v2n)
-            {
-                if (n_v1 == n_v2)
-                {
-                    result.push_back(n_v1);
-                }
-            }
-        }
-        if (result.size() > 2)
+        if (v1->shared_neighbour_vertices_with(v2).size() > 2)
             return nullptr;
 
         auto replace = [](Vertex *old_vertex, Vertex *new_vertex) {
@@ -225,11 +193,39 @@ namespace   Engine
             for (auto *he : ingoing_he)
                 he->vertex() = new_vertex;
         };
+        auto merge_adjacent_he = [this](HalfEdge *he) -> HalfEdge * {
+            if (he->face() != nullptr)
+            {
+                HalfEdge *merged_he = this->merge(he->next(), he->next()->next());
+                this->m_faces.erase(he->face()->iterator());
+                return merged_he;
+            }
+            return nullptr;
+        };
+        auto remove_if_useless = [this](HalfEdge *he, Vertex *tmp) -> HalfEdge * {
+            if (he != nullptr && he->is_boundary() && he->pair()->is_boundary())
+            {
+                std::cerr << "deletion vertex" << std::endl;
+
+                he->prev()->next() = he->pair()->next();
+                he->pair()->next()->prev() = he->prev();
+
+                if (he->vertex() != tmp)
+                    this->m_vertices.erase(he->vertex()->iterator());
+                this->m_half_edges.erase(he->pair()->iterator());
+                this->m_half_edges.erase(he->iterator());
+                return nullptr;
+            }
+            return he;
+        };
         HalfEdge *he = v1->outgoing_half_edge_to(v2);
         Vertex *new_vertex = &this->build_vertex();
         new_vertex->position() = v1->position() + (v2->position() - v1->position()) / 2.0f;
 
-        if (he == nullptr) throw std::runtime_error("v1 don't share any edge with v2");
+        if (he == nullptr)
+        {
+            return nullptr;
+        }
 
         replace(v1, new_vertex);
         replace(v2, new_vertex);
@@ -237,44 +233,34 @@ namespace   Engine
         this->m_vertices.erase(v1->iterator());
         this->m_vertices.erase(v2->iterator());
 
-        if (he->face() != nullptr)
-        {
-            HalfEdge *new_he = this->merge(he->next(), he->next()->next());
-            if (new_vertex->half_edge() == nullptr || new_he->is_boundary())
-                new_vertex->half_edge() = new_he;
-            this->m_faces.erase(he->face()->iterator());
-        }
-        else
-        {
-            std::cerr << "something here ?" << std::endl;
-        }
+        HalfEdge *he_f1 = merge_adjacent_he(he);
+        HalfEdge *he_f2 = merge_adjacent_he(he->pair());
 
-        if (he->pair()->face() != nullptr)
-        {
-            HalfEdge *new_he = this->merge(he->pair()->next(), he->pair()->next()->next());
-            if (new_vertex->half_edge() == nullptr || new_he->is_boundary())
-                new_vertex->half_edge() = new_he;
-            this->m_faces.erase(he->pair()->face()->iterator());
-        }
-        else
-        {
-            std::cerr << "something here ?" << std::endl;
-        }
+        // Boundary specific
+        he->next()->prev() = he->prev();
+        he->prev()->next() = he->next();
+        he->pair()->next()->prev() = he->pair()->prev();
+        he->pair()->prev()->next() = he->pair()->next();
+        // !Boundary specific
 
+        he_f1 = remove_if_useless(he_f1, he_f2 != nullptr ? he_f2->vertex() : nullptr);
+        he_f2 = remove_if_useless(he_f2, nullptr);
 
-/*        // boundary*/
-        //if (he->is_boundary())
-        //{
-
-        //}
-
-        //if (he->pair()->is_boundary())
-        //{
-
-        //}
+        if (he_f1 != nullptr && (new_vertex->half_edge() == nullptr || he_f1->is_boundary()))
+            new_vertex->half_edge() = he_f1;
+        if (he_f2 != nullptr && (new_vertex->half_edge() == nullptr || he_f2->is_boundary()))
+            new_vertex->half_edge() = he_f2;
 
         this->m_half_edges.erase(he->pair()->iterator());
         this->m_half_edges.erase(he->iterator());
+
+        if (new_vertex->half_edge() == nullptr || this->m_half_edges.size() == 0)
+        {
+            this->m_vertices.clear();
+            return nullptr;
+        }
+
+        this->check_consistency();
 
         this->m_dirty = true;
         return new_vertex;
@@ -301,6 +287,7 @@ namespace   Engine
     void
     Mesh::update(void)
     {
+        std::lock_guard<std::mutex> lock(g_mutex);
         std::vector<float>  vertices;
 
         vertices.reserve(this->m_faces.size() * 3 * 9);
@@ -366,6 +353,10 @@ namespace   Engine
         const auto &faces_to_vertices = this->build_face_to_vertices(ai_mesh->mFaces,
                 ai_mesh->mNumFaces, faces, vertices);
         this->build_half_edge_connectivity(faces_to_vertices, edge_to_half_edge);
+        this->set_half_edge_prev_component();
+        std::cerr << "start check..." << std::endl;
+        this->check_consistency();
+        std::cerr << "end check..." << std::endl;
         this->m_dirty = true;
     }
 
@@ -560,10 +551,19 @@ namespace   Engine
         }
     }
 
+    void
+    Mesh::set_half_edge_prev_component(void)
+    {
+        for (HalfEdge &half_edge : this->m_half_edges)
+        {
+            half_edge.next()->prev() = &half_edge;
+        }
+    }
+
     HalfEdge &
     Mesh::build_half_edge(void)
     {
-        auto it = this->m_half_edges.emplace(this->m_half_edges.end());
+        auto it = this->m_half_edges.emplace(this->m_half_edges.end(), HalfEdge());
         (*it).iterator() = it;
         return *it;
     }
@@ -571,7 +571,7 @@ namespace   Engine
     Vertex &
     Mesh::build_vertex(void)
     {
-        auto it = this->m_vertices.emplace(this->m_vertices.end());
+        auto it = this->m_vertices.emplace(this->m_vertices.end(), Vertex());
         (*it).iterator() = it;
         return *it;
     }
@@ -579,7 +579,7 @@ namespace   Engine
     Face &
     Mesh::build_face(void)
     {
-        auto it = this->m_faces.emplace(this->m_faces.end());
+        auto it = this->m_faces.emplace(this->m_faces.end(), Face());
         (*it).iterator() = it;
         return *it;
     }

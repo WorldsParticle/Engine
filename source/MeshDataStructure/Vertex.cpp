@@ -28,15 +28,6 @@ namespace   Engine
     {
     }
 
-    Vertex::Vertex(const glm::vec3 &position, HalfEdge *half_edge) :
-        m_index(0),
-        m_iterator(),
-        m_position(position),
-        m_half_edge(half_edge)
-    {
-
-    }
-
     Vertex::~Vertex(void)
     {
 
@@ -140,5 +131,26 @@ namespace   Engine
             e = e->pair()->next();
         } while (e != start);
         return false;
+    }
+
+
+    std::vector<Vertex *>
+    Vertex::shared_neighbour_vertices_with(Vertex *vertex)
+    {
+        std::vector<Vertex *>     owner_neighbour = this->neighbour_vertices();
+        std::vector<Vertex *>     target_neighbour = vertex->neighbour_vertices();
+        std::vector<Vertex *> result;
+
+        for (Vertex *n_v1 : owner_neighbour)
+        {
+            for (Vertex *n_v2 : target_neighbour)
+            {
+                if (n_v1 == n_v2)
+                {
+                    result.push_back(n_v1);
+                }
+            }
+        }
+        return result;
     }
 }
