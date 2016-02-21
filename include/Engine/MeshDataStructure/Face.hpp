@@ -46,7 +46,13 @@ namespace   Engine
 
         public:
             glm::vec3                   normal(void);
-            std::vector<Vertex *>       vertices(void);
+            std::vector<Vertex *>       vertices(void) const;
+
+        public:
+            ///
+            /// \brief Compute and return the plane equation of the face.
+            ///
+            glm::vec4                   plane_equation(void) const;
 
         private:
             HalfEdge                    *m_half_edge;

@@ -23,6 +23,7 @@
 
 namespace   Engine
 {
+    class   EdgeCollapse;
     class   Vertex;
     class   Face;
 
@@ -50,16 +51,18 @@ namespace   Engine
 
             bool        is_boundary(void) const;
 
+            EdgeCollapse    *&edge(void);
 
         private:
             std::list<HalfEdge>::iterator   m_iterator;
             ///
             /// \brief Vertex at the end of the half edge.
             ///
-            Vertex      *m_vertex;
-            HalfEdge    *m_next;
-            HalfEdge    *m_prev;
-            HalfEdge    *m_pair;
-            Face        *m_face;
+            Vertex          *m_vertex;
+            HalfEdge        *m_next;
+            HalfEdge        *m_prev;
+            HalfEdge        *m_pair;
+            Face            *m_face;
+            EdgeCollapse    *m_edge;
     };
 }

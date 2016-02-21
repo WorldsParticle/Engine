@@ -22,7 +22,10 @@
 #include    <list>
 #include    <string>
 #include    <memory>
+#include    <algorithm>
 
+#define GLM_SWIZZLE
+#define GLM_SWIZZLE_XYZW
 #include    <glm/glm.hpp>
 
 #include    <assimp/mesh.h>
@@ -36,6 +39,69 @@
 
 namespace   Engine
 {
+
+
+    class   EdgeCollapse
+    {
+        public:
+        HalfEdge   *m_he;
+        std::multiset<EdgeCollapse>::iterator  m_iterator;
+        mutable float       m_error;
+
+        public:
+        float       error(void) const
+        {
+            Vertex *v1 = this->m_he->vertex();
+            Vertex *v2 = this->m_he->pair()->vertex();
+
+            glm::mat4 Q = v1->quadric() + v2->quadric();
+            glm::mat4 Qp = glm::mat4(Q[0], Q[1], Q[2], glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+            glm::vec4 pos = glm::inverse(Qp) * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+            float val = v1->compute_quadric_error(glm::vec3(pos)) + v2->compute_quadric_error(glm::vec3(pos));
+            m_error = std::abs(val);
+            return std::abs(val);
+        };
+
+        public:
+        friend bool   operator<(const EdgeCollapse &l, const EdgeCollapse &r)
+        {
+            return l.error() < r.error();
+        };
+
+        friend bool   operator>(const EdgeCollapse &l, const EdgeCollapse &r)
+        {
+            return l.error() > r.error();
+        };
+
+
+/*        bool   operator>(const EdgeCollapse &other) const*/
+        //{
+            //return this->error() > other.error();
+        //};
+
+        public:
+        EdgeCollapse(HalfEdge *ptr) : m_he(ptr), m_iterator(), m_error(42)
+        {
+
+        }
+
+        HalfEdge *&half_edge(void)
+        {
+             return this->m_he;
+        }
+
+        HalfEdge *half_edge_const(void) const
+        {
+             return this->m_he;
+        }
+
+        std::set<EdgeCollapse>::iterator &
+        iterator(void)
+        {
+             return this->m_iterator;
+        }
+    };
 
     using Edge = std::pair<Vertex *, Vertex *>;
     using FaceVertices = std::tuple<Vertex *, Vertex *, Vertex *>;
@@ -191,6 +257,9 @@ namespace   Engine
             ///
             void    set_half_edge_prev_component(void);
 
+            void    compute_quadric(void);
+            void    compute_priority_queue(void);
+
             ///
             /// \brief Create a new empty half_edge in the m_half_edges list
             ///     and initialise the iterator member in the half_edge
@@ -226,9 +295,13 @@ namespace   Engine
             ///
             std::string         m_name;
 
-            std::list<HalfEdge> m_half_edges;
-            std::list<Face>     m_faces;
-            std::list<Vertex>   m_vertices;
+            /// TODO => do better.
+            std::list<HalfEdge *>   m_edges;
+            std::multiset<EdgeCollapse, std::greater<EdgeCollapse>>   m_collapse;
+
+            std::list<HalfEdge>     m_half_edges;
+            std::list<Face>         m_faces;
+            std::list<Vertex>       m_vertices;
 
             std::shared_ptr<BufferObject>   m_vertices_buffer;
             std::shared_ptr<BufferObject>   m_elements_buffer;

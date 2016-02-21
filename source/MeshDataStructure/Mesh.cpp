@@ -32,6 +32,8 @@ namespace   Engine
 
     Mesh::Mesh(Material *material) :
         m_name("DefaultMesh"),
+        m_edges(),
+        m_collapse(),
         m_half_edges(),
         m_faces(),
         m_vertices(),
@@ -46,6 +48,8 @@ namespace   Engine
 
     Mesh::Mesh(const aiMesh *assimp_mesh, Material *material) :
         m_name(assimp_mesh->mName.C_Str()),
+        m_edges(),
+        m_collapse(),
         m_half_edges(),
         m_faces(),
         m_vertices(),
@@ -55,6 +59,24 @@ namespace   Engine
         m_material(material),
         m_dirty(true)
     {
+
+
+        /// TODO remove => only here to test plane equation.
+
+        glm::vec4   eq = glm::vec4(0.0f);
+        glm::vec3   a = glm::vec3(0.0f, -2.0f, 0.0f);
+        glm::vec3   b = glm::vec3(2.0f, 1.0f, -1.0f);
+        glm::vec3   c = glm::vec3(1.0f, -1.0f, 2.0f);
+
+
+        glm::vec3   ab = b - a;
+        glm::vec3   ac = c - a;
+        glm::vec3   n = glm::cross(ab, ac);
+
+        eq = glm::vec4(n, a.x * eq.x + a.y * eq.y + a.z * eq.z);
+
+        std::cerr << eq.x << " " << eq.y << " " << eq.z << " " << eq.w << std::endl;
+
         this->build_connectivity(assimp_mesh);
         this->update_vao();
     }
@@ -74,25 +96,63 @@ namespace   Engine
     Mesh::tmp(int a)
     {
         if (this->m_dirty == true) return;
-        auto it = this->m_half_edges.begin();
+        //auto it = this->m_half_edges.begin();
 
-        std::cerr << " ----------------- " << std::endl;
+/*        std::cerr << " ----------------- " << std::endl;*/
 
-        std::cerr << "Number of faces : " << this->m_faces.size() << std::endl;
-        std::cerr << "Number of he : " << this->m_half_edges.size() << std::endl;
-        std::cerr << "Number of vertices : " << this->m_vertices.size() << std::endl;
+        //std::cerr << "Number of faces : " << this->m_faces.size() << std::endl;
+        //std::cerr << "Number of he : " << this->m_half_edges.size() << std::endl;
+        //std::cerr << "Number of vertices : " << this->m_vertices.size() << std::endl;
 
+        auto it = this->m_collapse.begin();
+        HalfEdge *he = (*it).half_edge_const();
 
-        while (it != this->m_half_edges.end() && this->collapse((*it).vertex(), (*it).next()->vertex()) == nullptr && this->m_half_edges.size() > 0)
+        std::cerr << "picked : " << (*it).error() << std::endl;
+
+  /*      for (const EdgeCollapse &ec : this->m_collapse)*/
+        //{
+            //std::cerr << ec.error() << " ";
+        //}
+        //std::cerr << std::endl;
+
+        this->collapse(he->vertex(), he->pair()->vertex());
+
+        auto ermax = 1000.0f;
+
+/*        for (const EdgeCollapse &ec : this->m_collapse)*/
+        //{
+            //if (ermax > ec.error())
+                //ermax = ec.error();
+            //else
+                //std::cerr << "INCONSISTENCY HERE" << " ";
+            //std::cerr << ec.error() << " ";
+        //}
+        //std::cerr << std::endl;
+
+        float pas = 1.0f / this->m_collapse.size();
+        float ac = 1.0f;
+
+        for (const EdgeCollapse &ec : this->m_collapse)
         {
-            ++it;
+            if (ec.half_edge_const()->face() != nullptr)
+                ec.half_edge_const()->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f) * ac;
+            if (ec.half_edge_const()->pair()->face() != nullptr)
+            ec.half_edge_const()->pair()->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f) * ac;
+
+            ac -= pas;
         }
 
-        std::cerr << "Number of faces : " << this->m_faces.size() << std::endl;
-        std::cerr << "Number of he : " << this->m_half_edges.size() << std::endl;
-        std::cerr << "Number of vertices : " << this->m_vertices.size() << std::endl;
 
-        std::cerr << " ----------------- " << std::endl;
+/*        while (it != this->m_half_edges.end() && this->collapse((*it).vertex(), (*it).next()->vertex()) == nullptr && this->m_half_edges.size() > 0)*/
+        //{
+            //++it;
+        //}
+
+  /*      std::cerr << "Number of faces : " << this->m_faces.size() << std::endl;*/
+        //std::cerr << "Number of he : " << this->m_half_edges.size() << std::endl;
+        //std::cerr << "Number of vertices : " << this->m_vertices.size() << std::endl;
+
+        //std::cerr << " ----------------- " << std::endl;
 
         this->m_dirty = true;
     }
@@ -173,9 +233,12 @@ namespace   Engine
         HalfEdge    *merged_he = nullptr;
 
         merged_he = he2->pair();
+        he1->pair()->edge() = he2->edge();
+        he2->edge()->half_edge() = he2->pair();
         he1->pair()->pair() = he2->pair();
         he2->pair()->pair() = he1->pair();
         he1->vertex()->half_edge() = he1->pair();
+        this->m_collapse.erase(he1->edge()->iterator());
         this->m_half_edges.erase(he1->iterator());
         this->m_half_edges.erase(he2->iterator());
         return merged_he;
@@ -186,9 +249,11 @@ namespace   Engine
     {
 
         if (v1->shared_neighbour_vertices_with(v2).size() > 2)
+        {
             return nullptr;
+        }
 
-        auto replace = [](Vertex *old_vertex, Vertex *new_vertex) {
+        auto replace = [this](Vertex *old_vertex, Vertex *new_vertex) {
             auto ingoing_he = old_vertex->ingoing_half_edges();
             for (auto *he : ingoing_he)
                 he->vertex() = new_vertex;
@@ -220,7 +285,14 @@ namespace   Engine
         };
         HalfEdge *he = v1->outgoing_half_edge_to(v2);
         Vertex *new_vertex = &this->build_vertex();
-        new_vertex->position() = v1->position() + (v2->position() - v1->position()) / 2.0f;
+
+        new_vertex->quadric() = v1->quadric() + v2->quadric();
+
+        glm::mat4 Q = v1->quadric() + v2->quadric();
+        glm::mat4 Qp = glm::mat4(Q[0], Q[1], Q[2], glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+        glm::vec4 pos = glm::inverse(Qp) * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+
+        new_vertex->position() = glm::vec3(pos);
 
         if (he == nullptr)
         {
@@ -251,6 +323,7 @@ namespace   Engine
         if (he_f2 != nullptr && (new_vertex->half_edge() == nullptr || he_f2->is_boundary()))
             new_vertex->half_edge() = he_f2;
 
+        this->m_collapse.erase(he->edge()->iterator());
         this->m_half_edges.erase(he->pair()->iterator());
         this->m_half_edges.erase(he->iterator());
 
@@ -260,7 +333,34 @@ namespace   Engine
             return nullptr;
         }
 
-        this->check_consistency();
+        if (new_vertex != nullptr)
+        {
+            auto out = new_vertex->outgoing_half_edges();
+            std::vector<EdgeCollapse> tmp;
+            std::vector<float> errors1;
+            std::vector<float> errors2;
+
+            for (HalfEdge *out_he : out)
+            {
+                errors1.push_back(out_he->edge()->m_error);
+                tmp.push_back(*out_he->edge());
+                this->m_collapse.erase(out_he->edge()->iterator());
+            }
+            for (int i = 0 ; i < out.size() ; ++i)
+            {
+                auto it = this->m_collapse.insert(tmp[i]);
+                EdgeCollapse &c = const_cast<EdgeCollapse&>(*it);
+                c.iterator() = it;
+                out[i]->edge() = &c;
+                out[i]->pair()->edge() = &c;
+                errors2.push_back(c.error());
+            }
+
+            for (std::size_t i = 0 ; i < errors1.size() ; ++i)
+            {
+                std::cerr << errors1[i] << " => " << errors2[i] << std::endl;
+            }
+        }
 
         this->m_dirty = true;
         return new_vertex;
@@ -354,6 +454,10 @@ namespace   Engine
                 ai_mesh->mNumFaces, faces, vertices);
         this->build_half_edge_connectivity(faces_to_vertices, edge_to_half_edge);
         this->set_half_edge_prev_component();
+
+        this->compute_quadric();
+        this->compute_priority_queue();
+
         std::cerr << "start check..." << std::endl;
         this->check_consistency();
         std::cerr << "end check..." << std::endl;
@@ -470,6 +574,8 @@ namespace   Engine
             he1->pair() = he2;
             he2->pair() = he1;
 
+            this->m_edges.push_back(he1);
+
             if (he1->vertex()->half_edge() == nullptr || he2->face() == nullptr)
                 he1->vertex()->half_edge() = he1->pair();
             if (he2->vertex()->half_edge() == nullptr || he1->face() == nullptr)
@@ -558,6 +664,50 @@ namespace   Engine
         {
             half_edge.next()->prev() = &half_edge;
         }
+    }
+
+    void
+    Mesh::compute_quadric(void)
+    {
+        for (Face &face : this->m_faces)
+        {
+            std::vector<Vertex *> vertices = face.vertices();
+            glm::vec4 eq = face.plane_equation();
+            for (Vertex *vertex : vertices)
+            {
+                vertex->quadric() += glm::outerProduct(eq, eq);
+            }
+        }
+    }
+
+    void
+    Mesh::compute_priority_queue(void)
+    {
+        float   pas = 1.0f / this->m_edges.size();
+        float ac = 1.0f;
+
+        for (HalfEdge *he : this->m_edges)
+        {
+            auto it = this->m_collapse.insert(EdgeCollapse(he));
+            EdgeCollapse &ec = const_cast<EdgeCollapse&>(*it);
+            ec.iterator() = it;
+            he->edge() = &ec;
+            he->pair()->edge() = &ec;
+        }
+        //auto max = (*this->m_collapse.rbegin()).error();
+        //auto min = (*this->m_collapse.begin()).error();
+
+        for (const EdgeCollapse &ec : this->m_collapse)
+        {
+            //auto actual = ec.error();
+            //ac = 1.0 - (actual - min) / max;
+            if (ec.half_edge_const()->face() != nullptr)
+                ec.half_edge_const()->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f) * ac;
+            if (ec.half_edge_const()->pair()->face() != nullptr)
+            ec.half_edge_const()->pair()->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f) * ac;
+            ac -= pas;
+        }
+        this->m_edges.clear();
     }
 
     HalfEdge &

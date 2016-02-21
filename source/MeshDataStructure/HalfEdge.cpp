@@ -25,7 +25,8 @@ namespace   Engine
         m_next(nullptr),
         m_prev(nullptr),
         m_pair(nullptr),
-        m_face(nullptr)
+        m_face(nullptr),
+        m_edge(nullptr)
     {
     }
 
@@ -74,5 +75,11 @@ namespace   Engine
     HalfEdge::is_boundary(void) const
     {
          return this->m_face == nullptr;
+    }
+
+    EdgeCollapse *&
+    HalfEdge::edge(void)
+    {
+        return this->m_edge;
     }
 }

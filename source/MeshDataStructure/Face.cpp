@@ -70,7 +70,7 @@ namespace   Engine
     }
 
     std::vector<Vertex *>
-    Face::vertices(void)
+    Face::vertices(void) const
     {
         std::vector<Vertex *> vertices;
 
@@ -84,5 +84,20 @@ namespace   Engine
         return vertices;
     }
 
+    glm::vec4
+    Face::plane_equation(void) const
+    {
+        std::vector<Vertex *>   vertices = this->vertices();
+
+        glm::vec3   a = vertices[0]->position();
+        glm::vec3   b = vertices[1]->position();
+        glm::vec3   c = vertices[2]->position();
+
+        glm::vec3   ab = b - a;
+        glm::vec3   ac = c - a;
+        glm::vec3   n = glm::cross(ab, ac);
+
+        return glm::vec4(n, a.x * n.x + a.y * n.y + a.z * n.z);
+    }
 
 }
