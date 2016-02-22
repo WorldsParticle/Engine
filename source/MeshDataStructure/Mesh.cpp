@@ -105,7 +105,12 @@ namespace   Engine
         //std::cerr << "Number of vertices : " << this->m_vertices.size() << std::endl;
 
         auto it = this->m_collapse.begin();
+
+        if (it == this->m_collapse.end())
+            return;
+
         HalfEdge *he = (*it).half_edge_const();
+
 
         std::cerr << "picked : " << (*it).error() << std::endl;
 
@@ -286,11 +291,13 @@ namespace   Engine
         HalfEdge *he = v1->outgoing_half_edge_to(v2);
         Vertex *new_vertex = &this->build_vertex();
 
-        new_vertex->quadric() = v1->quadric() + v2->quadric();
 
         glm::mat4 Q = v1->quadric() + v2->quadric();
-        glm::mat4 Qp = glm::mat4(Q[0], Q[1], Q[2], glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-        glm::vec4 pos = glm::inverse(Qp) * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        new_vertex->quadric() = Q;
+        Q[3] = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+        glm::mat4 Qi = glm::inverse(Q);
+        glm::vec4 pos = -glm::vec4(Qi[0][3], Qi[1][3], Qi[2][3], Qi[3][3]);
+
 
         new_vertex->position() = glm::vec3(pos);
 
@@ -379,6 +386,7 @@ namespace   Engine
         shaderprogram->setUniform("model", model);
         shaderprogram->setUniform("view", view);
         shaderprogram->setUniform("projection", projection);
+        //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE  );
         glDrawArrays(GL_TRIANGLES, 0, static_cast<int>(this->m_faces.size() * 3));
         this->m_material->unbind();
         this->m_array_object->unbind();
@@ -675,7 +683,20 @@ namespace   Engine
             glm::vec4 eq = face.plane_equation();
             for (Vertex *vertex : vertices)
             {
+/*                glm::mat4 test = glm::mat4(*/
+                        //glm::vec4(eq.x * eq.x, eq.x * eq.y, eq.x * eq.z, eq.x * eq.w),
+                        //glm::vec4(eq.y * eq.x, eq.y * eq.y, eq.y * eq.z, eq.y * eq.w),
+                        //glm::vec4(eq.z * eq.x, eq.z * eq.y, eq.z * eq.z, eq.z * eq.w),
+                        /*glm::vec4(eq.w * eq.x, eq.w * eq.y, eq.w * eq.z, eq.w * eq.w));*/
                 vertex->quadric() += glm::outerProduct(eq, eq);
+/*                if (test != glm::outerProduct(eq, eq))*/
+                //{
+                    //std::cerr << "ERRROROOROROROOR" << std::endl;
+                //}
+                //else
+                //{
+                    //std::cerr << "GOOD" << std::endl;
+                /*}*/
             }
         }
     }

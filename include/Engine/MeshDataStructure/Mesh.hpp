@@ -49,18 +49,32 @@ namespace   Engine
         mutable float       m_error;
 
         public:
+
+        // MUST BE ORDERED BY SMALLEST ERROR
+
         float       error(void) const
         {
             Vertex *v1 = this->m_he->vertex();
             Vertex *v2 = this->m_he->pair()->vertex();
 
-            glm::mat4 Q = v1->quadric() + v2->quadric();
-            glm::mat4 Qp = glm::mat4(Q[0], Q[1], Q[2], glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
-            glm::vec4 pos = glm::inverse(Qp) * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+/*            glm::vec4 pos = glm::vec4(v1->position() + v2->position(), 1.0f);*/
+            //pos /= 2;
+            //pos.w = 1.0f;
 
-            float val = v1->compute_quadric_error(glm::vec3(pos)) + v2->compute_quadric_error(glm::vec3(pos));
-            m_error = std::abs(val);
-            return std::abs(val);
+            glm::mat4 Q = v1->quadric() + v2->quadric();
+            glm::mat4 Qi = glm::mat4(Q[0], Q[1], Q[2], glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+            Qi = glm::inverse(Qi);
+            glm::vec4 pos = glm::vec4(Qi[0][3], Qi[1][3], Qi[2][3], Qi[3][3]);
+
+            glm::vec4   v = pos;
+
+            glm::vec4   t = v * Q;
+            float val = glm::dot(t, v);
+
+/*            float val = v1->compute_quadric_error(v1->position())*/
+                /*+ v2->compute_quadric_error(v2->position());*/
+            m_error = val;
+            return val;
         };
 
         public:
@@ -297,7 +311,7 @@ namespace   Engine
 
             /// TODO => do better.
             std::list<HalfEdge *>   m_edges;
-            std::multiset<EdgeCollapse, std::greater<EdgeCollapse>>   m_collapse;
+            std::multiset<EdgeCollapse, std::less<EdgeCollapse>>   m_collapse;
 
             std::list<HalfEdge>     m_half_edges;
             std::list<Face>         m_faces;

@@ -167,10 +167,16 @@ namespace   Engine
     Vertex::compute_quadric_error(const glm::vec3 &p)
     {
         glm::mat4   Q = this->m_quadric;
+        glm::vec4   v = glm::vec4(p, 1.0f);
 
-        return Q[0][0] * p.x * p.x + 2.0f * Q[0][1] * p.x * p.y + 2.0f * Q[0][2] * p.x * p.y + 2.0f * Q[0][3] * p.x
+        glm::vec4   t = v * Q;
+        float res = glm::dot(t, v);
+
+        float res2 =  Q[0][0] * p.x * p.x + 2.0f * Q[0][1] * p.x * p.y + 2.0f * Q[0][2] * p.x * p.y + 2.0f * Q[0][3] * p.x
             + Q[1][1] * p.y * p.y + 2.0f * Q[1][2] * p.y * p.z + 2.0f * Q[1][3]
             + Q[2][2] * p.z * p.z + 2.0f * Q[2][3] * p.z
             + Q[3][3];
+
+        return std::abs(res);
     }
 }
