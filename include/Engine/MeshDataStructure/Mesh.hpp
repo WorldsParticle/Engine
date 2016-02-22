@@ -57,10 +57,6 @@ namespace   Engine
             Vertex *v1 = this->m_he->vertex();
             Vertex *v2 = this->m_he->pair()->vertex();
 
-/*            glm::vec4 pos = glm::vec4(v1->position() + v2->position(), 1.0f);*/
-            //pos /= 2;
-            //pos.w = 1.0f;
-
             glm::mat4 Q = v1->quadric() + v2->quadric();
             glm::mat4 Qi = glm::mat4(Q[0], Q[1], Q[2], glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
             Qi = glm::inverse(Qi);
@@ -71,8 +67,6 @@ namespace   Engine
             glm::vec4   t = v * Q;
             float val = glm::dot(t, v);
 
-/*            float val = v1->compute_quadric_error(v1->position())*/
-                /*+ v2->compute_quadric_error(v2->position());*/
             m_error = val;
             return val;
         };

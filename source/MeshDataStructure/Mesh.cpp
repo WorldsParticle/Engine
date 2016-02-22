@@ -96,43 +96,27 @@ namespace   Engine
     Mesh::tmp(int a)
     {
         if (this->m_dirty == true) return;
-        //auto it = this->m_half_edges.begin();
-
-/*        std::cerr << " ----------------- " << std::endl;*/
-
-        //std::cerr << "Number of faces : " << this->m_faces.size() << std::endl;
-        //std::cerr << "Number of he : " << this->m_half_edges.size() << std::endl;
-        //std::cerr << "Number of vertices : " << this->m_vertices.size() << std::endl;
-
-        auto it = this->m_collapse.begin();
-
-        if (it == this->m_collapse.end())
-            return;
-
-        HalfEdge *he = (*it).half_edge_const();
 
 
-        std::cerr << "picked : " << (*it).error() << std::endl;
+/*        auto it = this->m_collapse.begin();*/
 
-  /*      for (const EdgeCollapse &ec : this->m_collapse)*/
-        //{
-            //std::cerr << ec.error() << " ";
-        //}
-        //std::cerr << std::endl;
+        //if (it == this->m_collapse.end())
+            //return;
 
-        this->collapse(he->vertex(), he->pair()->vertex());
+        int i = 0;
+        for (auto it = this->m_collapse.begin() ; it != this->m_collapse.end() ; )
+        {
+            ++i;
+            HalfEdge *he = (*it).half_edge_const();
+            if (this->collapse(he->vertex(), he->pair()->vertex()) == nullptr)
+                ++it;
+            else
+                it = this->m_collapse.begin();
+            if (i >= 10000)
+                break;
+        }
 
         auto ermax = 1000.0f;
-
-/*        for (const EdgeCollapse &ec : this->m_collapse)*/
-        //{
-            //if (ermax > ec.error())
-                //ermax = ec.error();
-            //else
-                //std::cerr << "INCONSISTENCY HERE" << " ";
-            //std::cerr << ec.error() << " ";
-        //}
-        //std::cerr << std::endl;
 
         float pas = 1.0f / this->m_collapse.size();
         float ac = 1.0f;
@@ -146,18 +130,6 @@ namespace   Engine
 
             ac -= pas;
         }
-
-
-/*        while (it != this->m_half_edges.end() && this->collapse((*it).vertex(), (*it).next()->vertex()) == nullptr && this->m_half_edges.size() > 0)*/
-        //{
-            //++it;
-        //}
-
-  /*      std::cerr << "Number of faces : " << this->m_faces.size() << std::endl;*/
-        //std::cerr << "Number of he : " << this->m_half_edges.size() << std::endl;
-        //std::cerr << "Number of vertices : " << this->m_vertices.size() << std::endl;
-
-        //std::cerr << " ----------------- " << std::endl;
 
         this->m_dirty = true;
     }
@@ -270,6 +242,10 @@ namespace   Engine
                 this->m_faces.erase(he->face()->iterator());
                 return merged_he;
             }
+            else
+            {
+                std::cerr << "BOUNDARY" << std::endl;
+            }
             return nullptr;
         };
         auto remove_if_useless = [this](HalfEdge *he, Vertex *tmp) -> HalfEdge * {
@@ -363,10 +339,6 @@ namespace   Engine
                 errors2.push_back(c.error());
             }
 
-            for (std::size_t i = 0 ; i < errors1.size() ; ++i)
-            {
-                std::cerr << errors1[i] << " => " << errors2[i] << std::endl;
-            }
         }
 
         this->m_dirty = true;
