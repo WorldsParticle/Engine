@@ -60,23 +60,6 @@ namespace   Engine
         m_dirty(true)
     {
 
-
-        /// TODO remove => only here to test plane equation.
-
-        glm::vec4   eq = glm::vec4(0.0f);
-        glm::vec3   a = glm::vec3(0.0f, -2.0f, 0.0f);
-        glm::vec3   b = glm::vec3(2.0f, 1.0f, -1.0f);
-        glm::vec3   c = glm::vec3(1.0f, -1.0f, 2.0f);
-
-
-        glm::vec3   ab = b - a;
-        glm::vec3   ac = c - a;
-        glm::vec3   n = glm::cross(ab, ac);
-
-        eq = glm::vec4(n, a.x * eq.x + a.y * eq.y + a.z * eq.z);
-
-        std::cerr << eq.x << " " << eq.y << " " << eq.z << " " << eq.w << std::endl;
-
         this->build_connectivity(assimp_mesh);
         this->update_vao();
     }
@@ -97,12 +80,6 @@ namespace   Engine
     {
         if (this->m_dirty == true) return;
 
-
-/*        auto it = this->m_collapse.begin();*/
-
-        //if (it == this->m_collapse.end())
-            //return;
-
         int i = 0;
         for (auto it = this->m_collapse.begin() ; it != this->m_collapse.end() ; )
         {
@@ -112,7 +89,7 @@ namespace   Engine
                 ++it;
             else
                 it = this->m_collapse.begin();
-            if (i >= 10000)
+            if (i >= 10)
                 break;
         }
 
@@ -655,20 +632,7 @@ namespace   Engine
             glm::vec4 eq = face.plane_equation();
             for (Vertex *vertex : vertices)
             {
-/*                glm::mat4 test = glm::mat4(*/
-                        //glm::vec4(eq.x * eq.x, eq.x * eq.y, eq.x * eq.z, eq.x * eq.w),
-                        //glm::vec4(eq.y * eq.x, eq.y * eq.y, eq.y * eq.z, eq.y * eq.w),
-                        //glm::vec4(eq.z * eq.x, eq.z * eq.y, eq.z * eq.z, eq.z * eq.w),
-                        /*glm::vec4(eq.w * eq.x, eq.w * eq.y, eq.w * eq.z, eq.w * eq.w));*/
                 vertex->quadric() += glm::outerProduct(eq, eq);
-/*                if (test != glm::outerProduct(eq, eq))*/
-                //{
-                    //std::cerr << "ERRROROOROROROOR" << std::endl;
-                //}
-                //else
-                //{
-                    //std::cerr << "GOOD" << std::endl;
-                /*}*/
             }
         }
     }
@@ -687,13 +651,9 @@ namespace   Engine
             he->edge() = &ec;
             he->pair()->edge() = &ec;
         }
-        //auto max = (*this->m_collapse.rbegin()).error();
-        //auto min = (*this->m_collapse.begin()).error();
 
         for (const EdgeCollapse &ec : this->m_collapse)
         {
-            //auto actual = ec.error();
-            //ac = 1.0 - (actual - min) / max;
             if (ec.half_edge_const()->face() != nullptr)
                 ec.half_edge_const()->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f) * ac;
             if (ec.half_edge_const()->pair()->face() != nullptr)
@@ -726,5 +686,4 @@ namespace   Engine
         (*it).iterator() = it;
         return *it;
     }
-
 }

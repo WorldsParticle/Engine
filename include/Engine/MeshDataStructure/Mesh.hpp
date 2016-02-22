@@ -41,6 +41,16 @@ namespace   Engine
 {
 
 
+    class   RestorePoint
+    {
+        public:
+            Vertex      *v1;
+            Vertex      *v2;
+            Vertex      *target;
+            Vertex      *left_face_vertex;
+            Vertex      *right_face_vertex;
+    };
+
     class   EdgeCollapse
     {
         public:
