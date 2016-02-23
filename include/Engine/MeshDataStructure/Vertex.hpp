@@ -63,15 +63,20 @@ namespace   Engine
             glm::mat4                   &quadric(void);
             float                       compute_quadric_error(const glm::vec3 &pos);
 
+            bool &init(void) {return this->m_init;}
+            glm::vec3 &origin(void) {return this->m_origin;}
+
         private:
             std::size_t                     m_index;
             std::list<Vertex>::iterator     m_iterator;
             glm::vec3                       m_position;
             HalfEdge                        *m_half_edge;
-
             ///
             /// \brief The quadric error of the vertex.
             ///
             glm::mat4                       m_quadric;
+            glm::vec3                       m_origin;
+            bool                            m_init;
+
     };
 }

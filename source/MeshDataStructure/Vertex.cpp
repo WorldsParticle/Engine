@@ -27,7 +27,9 @@ namespace   Engine
         m_iterator(),
         m_position(0.0f),
         m_half_edge(nullptr),
-        m_quadric(0)
+        m_quadric(0),
+        m_origin(0.0f),
+        m_init(false)
     {
     }
 

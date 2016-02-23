@@ -18,6 +18,7 @@
 #include    <GL/glew.h>
 #include    <iostream>
 #include    <mutex>
+#include    <chrono>
 
 std::mutex  g_mutex;
 
@@ -41,6 +42,7 @@ namespace   Engine
         m_elements_buffer(std::make_shared<BufferObject>(BufferObject::Type::ELEMENT_ARRAY_BUFFER, BufferObject::Usage::DYNAMIC_DRAW)),
         m_array_object(std::make_shared<ArrayObject>()),
         m_material(material),
+        m_restore_points(),
         m_dirty(true)
     {
         this->update_vao();
@@ -57,6 +59,7 @@ namespace   Engine
         m_elements_buffer(std::make_shared<BufferObject>(BufferObject::Type::ELEMENT_ARRAY_BUFFER, BufferObject::Usage::DYNAMIC_DRAW)),
         m_array_object(std::make_shared<ArrayObject>()),
         m_material(material),
+        m_restore_points(),
         m_dirty(true)
     {
 
@@ -72,30 +75,35 @@ namespace   Engine
     Mesh::increase(void)
     {
         std::lock_guard<std::mutex> lock(g_mutex);
-        this->tmp(1);
-    }
-
-    void
-    Mesh::tmp(int a)
-    {
         if (this->m_dirty == true) return;
 
+        std::chrono::time_point<std::chrono::high_resolution_clock> start, end;
+        start = std::chrono::high_resolution_clock::now();
         int i = 0;
         for (auto it = this->m_collapse.begin() ; it != this->m_collapse.end() ; )
         {
             ++i;
-            HalfEdge *he = (*it).half_edge_const();
-            if (this->collapse(he->vertex(), he->pair()->vertex()) == nullptr)
+            Vertex *v1 = (*it).half_edge_const()->vertex();
+            Vertex *v2 = (*it).half_edge_const()->pair()->vertex();
+            if (this->collapse(v1, v2) == nullptr)
+            //this->smooth_collapse((*it));
                 ++it;
             else
                 it = this->m_collapse.begin();
-            if (i >= 10)
+            if (i >= 1)
                 break;
         }
+        end = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed_seconds = end - start;
+        std::cerr << "elapsed time: " << elapsed_seconds.count() << "s" << std::endl;
+        //this->tmp();
+        this->m_dirty = true;
+    }
 
-        auto ermax = 1000.0f;
-
-        float pas = 1.0f / this->m_collapse.size();
+    void
+    Mesh::tmp()
+    {
+        float pas = 1.0f / static_cast<float>(this->m_collapse.size());
         float ac = 1.0f;
 
         for (const EdgeCollapse &ec : this->m_collapse)
@@ -104,11 +112,9 @@ namespace   Engine
                 ec.half_edge_const()->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f) * ac;
             if (ec.half_edge_const()->pair()->face() != nullptr)
             ec.half_edge_const()->pair()->face()->color() = glm::vec3(1.0f, 0.0f, 0.0f) * ac;
-
             ac -= pas;
         }
 
-        this->m_dirty = true;
     }
 
 
@@ -116,7 +122,63 @@ namespace   Engine
     Mesh::reduce(void)
     {
         std::lock_guard<std::mutex> lock(g_mutex);
-        this->tmp(0);
+        if (this->m_dirty == true) return;
+        int i = 0;
+        while (this->m_restore_points.empty() == false)
+        {
+            ++i;
+            this->perform_restore(this->m_restore_points.top());
+            this->m_restore_points.pop();
+            if (i >= 1)
+                break;
+        }
+        this->tmp();
+        this->m_dirty = true;
+    }
+
+    void
+    Mesh::perform_restore(RestorePoint &rp)
+    {
+
+
+        std::cerr << rp.v1->position().x << rp.v1->position().y << rp.v1->position().z << std::endl;
+        std::cerr << rp.v2->position().x << rp.v2->position().y << rp.v2->position().z << std::endl;
+    }
+
+    Vertex *
+    Mesh::smooth_collapse(const EdgeCollapse &ec)
+    {
+        Vertex *v1 = ec.half_edge_const()->vertex();
+        Vertex *v2 = ec.half_edge_const()->pair()->vertex();
+
+        if (v1->init() == false)
+        {
+            v1->origin() = v1->position();
+            v1->init() = true;
+        }
+        if (v2->init() == false)
+        {
+            v2->origin() = v2->position();
+            v2->init() = true;
+        }
+
+        if (ec.state < 10.0f)
+        {
+            ec.state += 1.0f;
+
+            glm::mat4 Q = v1->quadric() + v2->quadric();
+            glm::mat4 Qi = glm::mat4(Q[0], Q[1], Q[2], glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
+            Qi = glm::inverse(Qi);
+            glm::vec4 pos = -glm::vec4(Qi[0][3], Qi[1][3], Qi[2][3], Qi[3][3]);
+
+            v1->position() = v1->origin() + (glm::vec3(pos) - v1->origin()) * (ec.state / 10.0f);
+            v2->position() = v2->origin() + (glm::vec3(pos) - v2->origin()) * (ec.state / 10.0f);
+        }
+        else
+        {
+            return this->collapse(v1, v2);
+        }
+        return v1;
     }
 
 
@@ -262,6 +324,16 @@ namespace   Engine
         replace(v1, new_vertex);
         replace(v2, new_vertex);
 
+/*        RestorePoint    rp;*/
+
+        //rp.v1 = v1;
+        //rp.v2 = v2;
+        //rp.target = new_vertex;
+        //rp.left_face_vertex = he->next()->vertex();
+        //rp.right_face_vertex = he->pair()->next()->vertex();
+
+        //this->m_restore_points.push();
+
         this->m_vertices.erase(v1->iterator());
         this->m_vertices.erase(v2->iterator());
 
@@ -297,23 +369,20 @@ namespace   Engine
         {
             auto out = new_vertex->outgoing_half_edges();
             std::vector<EdgeCollapse> tmp;
-            std::vector<float> errors1;
-            std::vector<float> errors2;
 
             for (HalfEdge *out_he : out)
             {
-                errors1.push_back(out_he->edge()->m_error);
                 tmp.push_back(*out_he->edge());
                 this->m_collapse.erase(out_he->edge()->iterator());
             }
-            for (int i = 0 ; i < out.size() ; ++i)
+            for (unsigned int i = 0 ; i < out.size() ; ++i)
             {
+                tmp[i].compute_error();
                 auto it = this->m_collapse.insert(tmp[i]);
                 EdgeCollapse &c = const_cast<EdgeCollapse&>(*it);
                 c.iterator() = it;
                 out[i]->edge() = &c;
                 out[i]->pair()->edge() = &c;
-                errors2.push_back(c.error());
             }
 
         }
@@ -640,12 +709,14 @@ namespace   Engine
     void
     Mesh::compute_priority_queue(void)
     {
-        float   pas = 1.0f / this->m_edges.size();
+        float   pas = 1.0f / static_cast<float>(this->m_edges.size());
         float ac = 1.0f;
 
         for (HalfEdge *he : this->m_edges)
         {
-            auto it = this->m_collapse.insert(EdgeCollapse(he));
+            auto ec_f = EdgeCollapse(he);
+            ec_f.compute_error();
+            auto it = this->m_collapse.insert(ec_f);
             EdgeCollapse &ec = const_cast<EdgeCollapse&>(*it);
             ec.iterator() = it;
             he->edge() = &ec;

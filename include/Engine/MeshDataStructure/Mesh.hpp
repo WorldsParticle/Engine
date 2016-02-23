@@ -17,6 +17,7 @@
 
 #pragma once
 
+#include    <stack>
 #include    <set>
 #include    <map>
 #include    <list>
@@ -49,6 +50,8 @@ namespace   Engine
             Vertex      *target;
             Vertex      *left_face_vertex;
             Vertex      *right_face_vertex;
+            std::list<Vertex *>     vertex_connected_v1;
+            std::list<Vertex *>     vertex_connected_v2;
     };
 
     class   EdgeCollapse
@@ -57,12 +60,13 @@ namespace   Engine
         HalfEdge   *m_he;
         std::multiset<EdgeCollapse>::iterator  m_iterator;
         mutable float       m_error;
+        mutable float       state;
 
         public:
 
         // MUST BE ORDERED BY SMALLEST ERROR
 
-        float       error(void) const
+        void compute_error()
         {
             Vertex *v1 = this->m_he->vertex();
             Vertex *v2 = this->m_he->pair()->vertex();
@@ -70,36 +74,22 @@ namespace   Engine
             glm::mat4 Q = v1->quadric() + v2->quadric();
             glm::mat4 Qi = glm::mat4(Q[0], Q[1], Q[2], glm::vec4(0.0f, 0.0f, 0.0f, 1.0f));
             Qi = glm::inverse(Qi);
-            glm::vec4 pos = glm::vec4(Qi[0][3], Qi[1][3], Qi[2][3], Qi[3][3]);
+            glm::vec4 pos = -glm::vec4(Qi[0][3], Qi[1][3], Qi[2][3], Qi[3][3]);
 
             glm::vec4   v = pos;
 
             glm::vec4   t = v * Q;
-            float val = glm::dot(t, v);
-
-            m_error = val;
-            return val;
-        };
+            this->m_error = glm::dot(t, v);;
+        }
 
         public:
         friend bool   operator<(const EdgeCollapse &l, const EdgeCollapse &r)
         {
-            return l.error() < r.error();
+            return l.m_error < r.m_error;
         };
-
-        friend bool   operator>(const EdgeCollapse &l, const EdgeCollapse &r)
-        {
-            return l.error() > r.error();
-        };
-
-
-/*        bool   operator>(const EdgeCollapse &other) const*/
-        //{
-            //return this->error() > other.error();
-        //};
 
         public:
-        EdgeCollapse(HalfEdge *ptr) : m_he(ptr), m_iterator(), m_error(42)
+        EdgeCollapse(HalfEdge *ptr) : m_he(ptr), m_iterator(), m_error(42), state(0.0f)
         {
 
         }
@@ -155,8 +145,10 @@ namespace   Engine
 
             bool check_consistency(void);
             Vertex  *collapse(Vertex *v1, Vertex *v2);
+            Vertex  *smooth_collapse(const EdgeCollapse &ec);
             HalfEdge *merge(HalfEdge *he1, HalfEdge *he2);
-            void tmp(int);
+            void tmp();
+            void perform_restore(RestorePoint &rp);
         private:
 
             ///
@@ -325,6 +317,8 @@ namespace   Engine
             std::shared_ptr<BufferObject>   m_elements_buffer;
             std::shared_ptr<ArrayObject>    m_array_object;
             Material        *m_material;
+
+            std::stack<RestorePoint>        m_restore_points;
 
             ///
             /// \brief Set to true if the mesh must be updated in the graphic
