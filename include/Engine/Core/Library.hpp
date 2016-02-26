@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_LIBRARY_HPP__
-# define    __ENGINE_LIBRARY_HPP__
+#pragma once
 
 #include    <vector>
 
@@ -126,7 +125,4 @@ namespace   Engine
         return this->m_resources.at(id);
     }
 
-
 }
-
-#endif /* !__ENGINE_LIBRARY_HPP__ */

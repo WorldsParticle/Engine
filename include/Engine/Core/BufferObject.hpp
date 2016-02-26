@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_BUFFER_OBJECT_HPP__
-# define    __ENGINE_BUFFER_OBJECT_HPP__
+#pragma once
 
 #include    <vector>
 #include    <glm/glm.hpp>
@@ -146,5 +145,3 @@ namespace   Engine
             std::size_t     m_size;
     };
 }
-
-#endif /* !__ENGINE_BUFFER_OBJECT_HPP__ */

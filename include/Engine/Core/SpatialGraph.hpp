@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_SPATIAL_GRAPH_HPP__
-# define    __ENGINE_SPATIAL_GRAPH_HPP__
+#pragma once
 
 #include    <list>
 
@@ -124,5 +123,3 @@ namespace   Engine
             std::list<Light *>      m_lights;
     };
 }
-
-#endif /* !__ENGINE_SPATIAL_GRAPH_HPP__ */

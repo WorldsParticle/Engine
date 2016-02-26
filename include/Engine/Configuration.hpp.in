@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_CONFIGURATION_HPP__
-# define    __ENGINE_CONFIGURATION_HPP__
+#pragma once
 
 #if defined (WIN32) && defined (BUILD_SHARED_LIBRARIES)
 # pragma	warning (disable : 4251)
@@ -27,4 +26,3 @@
 
 #define     RESOURCES_PATH   "@RESOURCES_PATH@"
 
-#endif /* !__ENGINE_CONFIGURATION_HPP__ */

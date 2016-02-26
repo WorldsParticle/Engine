@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef         __ENGINE_SHADER_HPP__
-# define        __ENGINE_SHADER_HPP__
+#pragma once
 
 #include    <string>
 
@@ -135,5 +134,3 @@ namespace   Engine
             Type    m_type;
     };
 }
-
-#endif /* !__ENGINE_SHADER_HPP__ */

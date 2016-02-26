@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_ASSIMP_IMPORTER_HPP__
-# define    __ENGINE_ASSIMP_IMPORTER_HPP__
+#pragma once
 
 #include    <string>
 #include    <list>
@@ -86,5 +85,3 @@ namespace   Engine
             Assimp::Importer    m_importer;
     };
 }
-
-#endif /* !__ENGINE_ASSIMP_IMPORTER_HPP__ */

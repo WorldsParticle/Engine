@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef         __ENGINE_SHADER_LIST_HPP__
-# define        __ENGINE_SHADER_LIST_HPP__
+#pragma once
 
 namespace   Engine
 {
@@ -29,5 +28,3 @@ namespace   Engine
 
     };
 }
-
-#endif /* !__ENGINE_SHADER_LIST_HPP__ */

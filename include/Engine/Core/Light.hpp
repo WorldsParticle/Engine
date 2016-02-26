@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_LIGHT_HPP__
-# define    __ENGINE_LIGHT_HPP__
+#pragma once
 
 #include    <string>
 #include    <assimp/light.h>
@@ -84,5 +83,3 @@ namespace Engine
 
     };
 }
-
-#endif /* !__ENGINE_LIGHT_HPP__ */

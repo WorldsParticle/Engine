@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_SHADER_PROGRAM_HPP__
-# define    __ENGINE_SHADER_PROGRAM_HPP__
+#pragma once
 
 #include    <glm/glm.hpp>
 #include    <vector>
@@ -332,5 +331,3 @@ namespace   Engine
 
     };
 }
-
-#endif /* !__ENGINE_SHADER_PROGRAM_HPP__ */

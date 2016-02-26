@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_PERSPECTIVE_CAMERA_HPP__
-# define    __ENGINE_PERSPECTIVE_CAMERA_HPP__
+#pragma once
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Camera.hpp"
@@ -112,5 +111,3 @@ namespace   Engine
             glm::mat4       m_view;
     };
 }
-
-#endif /* !__ENGINE_PERSPECTIVE_CAMERA_HPP__ */

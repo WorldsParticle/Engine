@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_MESH_HPP__
-# define    __ENGINE_MESH_HPP__
+#pragma once
 
 #include    <vector>
 #include    <memory>
@@ -234,5 +233,3 @@ namespace   Engine
             Material    *m_material; // TODO GSL not null.
     };
 }
-
-#endif /* !__ENGINE_MESH_HPP__ */

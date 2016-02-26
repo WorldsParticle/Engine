@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_EVENT_RESIZE_HPP__
-# define    __ENGINE_EVENT_RESIZE_HPP__
+#pragma once
 
 #include    <glm/glm.hpp>
 
@@ -54,5 +53,3 @@ namespace   Engine
         };
     }
 }
-
-#endif // !__ENGINE_EVENT_RESIZE_HPP__

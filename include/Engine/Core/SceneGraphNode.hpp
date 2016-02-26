@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_SCENE_GRAPH_NODE_HPP__
-# define    __ENGINE_SCENE_GRAPH_NODE_HPP__
+#pragma once
 
 #include    <string>
 #include    <list>
@@ -169,5 +168,3 @@ namespace   Engine
             Transform   m_transform;
     };
 }
-
-#endif /* !__ENGINE_SCENE_GRAPH_NODE_HPP__ */

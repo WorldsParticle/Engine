@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_TEXTURE_HPP__
-# define    __ENGINE_TEXTURE_HPP__
+#pragma once
 
 #include    <assimp/texture.h>
 
@@ -67,5 +66,3 @@ namespace   Engine
             Texture     &operator=(Texture &&other) noexcept = default;
     };
 }
-
-#endif /* !__ENGINE_TEXTURE_HPP__ */

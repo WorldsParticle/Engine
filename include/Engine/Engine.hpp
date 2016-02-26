@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_ENGINE_HPP__
-# define    __ENGINE_ENGINE_HPP__
+#pragma once
 
 #include    "Engine/Version.hpp"
 #include    "Engine/Configuration.hpp"
@@ -71,5 +70,3 @@
 #include    "Engine/Input/Mouse/Button.hpp"
 
 #include    "Engine/Particles/Particles.hpp"
-
-#endif // !__ENGINE_ENGINE_HPP__
