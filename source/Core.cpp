@@ -18,6 +18,7 @@
 #include    <GL/glew.h>
 #include    <log4cpp/Category.hh>
 #include    <log4cpp/PropertyConfigurator.hh>
+#include    <IL/il.h>
 
 #include    "Engine/Version.hpp"
 #include    "Engine/Configuration.hpp"
@@ -45,6 +46,7 @@ namespace   Engine
         {
             std::cerr << "Glew Init failure" << std::endl;
         }
+	ilInit(); /* Initialization of DevIL */
 
         // nothing to do
     }
