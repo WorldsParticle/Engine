@@ -117,6 +117,6 @@ namespace   Engine
             ///
             /// \brief The ids of the textures of the material
             ///
-	    Texture			    *_texture;
+	    Texture			    *m_texture;
     };
 }

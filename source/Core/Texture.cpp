@@ -19,23 +19,24 @@
 #include    <IL/il.h>
 #include    <IL/ilu.h>
 #include    <IL/ilut.h>
+#include    <GL/gl.h>
 #include    "Engine/Core/Texture.hpp"
 
 using namespace     log4cpp;
 
 namespace   Engine
 {
-    Texture::Texture(void) : _name(), _id(0)
+    Texture::Texture(void) : m_name(), m_id(0)
     {
 	// nothing to do atm.
     }
 
-    Texture::Texture(const aiTexture *assimpTexture) : _name(), _id(0)
+    Texture::Texture(const aiTexture *assimpTexture) : m_name(), m_id(0)
     {
 	// nothing to do atm.
     }
 
-    Texture::Texture(GLuint id, const std::string &texturePath) : _name(texturePath), _id(id)
+    Texture::Texture(unsigned int id, const std::string &texturePath) : m_name(texturePath), m_id(id)
     {
         Category& root = Category::getRoot();
 	if (ilLoadImage(texturePath.c_str())) /* If no error occured: */
@@ -46,12 +47,12 @@ namespace   Engine
 	    if (!ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE))
 	    {
 		// Error occured
-		root << Priority::ERROR << "Couldn't convert image " << _name;
+		root << Priority::ERROR << "Couldn't convert image " << m_name;
 		return;
 	    }
 	    // Binding of texture name
-	    glBindTexture(GL_TEXTURE_2D, _id);
-	    root << Priority::DEBUG << "Texture " << _name << " " << _id << " created";
+	    glBindTexture(GL_TEXTURE_2D, m_id);
+	    root << Priority::DEBUG << "Texture " << m_name << " " << m_id << " created";
 	    // redefine standard texture values
 	    // use linear interpolation for magnification filter
 	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -69,13 +70,13 @@ namespace   Engine
 	else
 	{
 	    /* Error occured */
-	    root << Priority::ERROR << "Couldn't load image: " << _name;
+	    root << Priority::ERROR << "Couldn't load image: " << m_name;
 	}
     }
 
     void Texture::bind(void)
     {
-	glBindTexture(GL_TEXTURE_2D, _id);
+	glBindTexture(GL_TEXTURE_2D, m_id);
     }
 
     Texture::~Texture(void)
