@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_RENDERER_HPP__
-# define    __ENGINE_RENDERER_HPP__
+#pragma once
 
 #include    <list>
 
@@ -121,5 +120,3 @@ namespace   Engine
 
     };
 }
-
-#endif /* !__ENGINE_RENDERER_HPP__ */

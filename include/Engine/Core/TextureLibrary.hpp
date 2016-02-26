@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_TEXTURE_LIBRARY_HPP__
-# define    __ENGINE_TEXTURE_LIBRARY_HPP__
+#pragma once
 
 //#include    <GL/gl.h>
 #include    <string>
@@ -88,5 +87,3 @@ namespace   Engine
 	    Texture *FindTexture(const std::string &name) const;
     };
 }
-
-#endif /* !__ENGINE_TEXTURE_LIBRARY_HPP__ */

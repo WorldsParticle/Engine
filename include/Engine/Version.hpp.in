@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_VERSION_HPP__
-# define    __ENGINE_VERSION_HPP__
+#pragma once
 
 #define PROJECT_VERSION_MAJOR   @PROJECT_VERSION_MAJOR@
 #define PROJECT_VERSION_MINOR   @PROJECT_VERSION_MINOR@
@@ -24,5 +23,3 @@
 #define PROJECT_VERSION_EXTRA   @PROJECT_VERSION_EXTRA@
 #define PROJECT_VERSION         "@PROJECT_VERSION@"
 #define PROJECT_VERSION_FULL    "@PROJECT_VERSION_FULL@"
-
-#endif /* !__ENGINE_VERSION_HPP__ */

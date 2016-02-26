@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_ANIMATION_HPP__
-# define    __ENGINE_ANIMATION_HPP__
+#pragma once
 
 #include    <assimp/anim.h>
 #include    <string>
@@ -71,5 +70,3 @@ namespace   Engine
             std::string     m_name;
     };
 }
-
-#endif /* !__ENGINE_ANIMATION_HPP__ */

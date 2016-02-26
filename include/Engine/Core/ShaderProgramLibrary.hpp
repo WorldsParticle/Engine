@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_SHADER_PROGRAM_LIBRARY_HPP__
-# define    __ENGINE_SHADER_PROGRAM_LIBRARY_HPP__
+#pragma once
 
 #include    <memory>
 
@@ -75,5 +74,3 @@ namespace   Engine
             ShaderLibrary           m_shaders;
     };
 }
-
-#endif /* !__ENGINE_SHADER_PROGRAM_MANAGER_HPP__ */

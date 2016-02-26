@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_CORE_FREEFLYCAMERA_HPP__
-# define    __ENGINE_CORE_FREEFLYCAMERA_HPP__
+#pragma once
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/PerspectiveCamera.hpp"
@@ -81,5 +80,3 @@ namespace   Engine
             float       m_mouse_sensibility;
     };
 }
-
-#endif // !__ENGINE_CORE_FREEFLYCAMERA_HPP__

@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_CLOCK_HPP__
-#define     __ENGINE_CLOCK_HPP__
+#pragma once
 
 #include    "Engine/Configuration.hpp"
 
@@ -31,5 +30,3 @@ namespace Engine
     {
     };
 }
-
-#endif // GAMECLOCK_H

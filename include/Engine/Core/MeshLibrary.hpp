@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_MESH_LIBRARY_HPP__
-# define    __ENGINE_MESH_LIBRARY_HPP__
+#pragma once
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Library.hpp"
@@ -72,5 +71,3 @@ namespace   Engine
             MeshLibrary     &operator=(MeshLibrary &&other) noexcept = default;
     };
 }
-
-#endif /* !__ENGINE_MESH_LIBRARY_HPP__ */

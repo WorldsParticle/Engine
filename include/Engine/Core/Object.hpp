@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_OBJECT_HPP__
-# define    __ENGINE_OBJECT_HPP__
+#pragma once
 
 #include    <list>
 #include    <assimp/scene.h>
@@ -96,5 +95,3 @@ namespace   Engine
             std::list<Mesh *>     m_meshes; // TODO GSL NOT NULL
     };
 }
-
-#endif /* !__ENGINE_OBJECT_HPP__ */

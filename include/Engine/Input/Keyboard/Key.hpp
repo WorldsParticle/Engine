@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_INPUT_KEYBOARD_KEY_HPP__
-# define    __ENGINE_INPUT_KEYBOARD_KEY_HPP__
+#pragma once
 
 namespace   Engine
 {
@@ -54,5 +53,3 @@ namespace   Engine
         };
     }
 }
-
-#endif // !__ENGINE_INPUT_KEYBOARD_KEY_HPP__

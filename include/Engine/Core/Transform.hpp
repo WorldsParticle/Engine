@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_TRANSFORM_HPP__
-# define    __ENGINE_TRANSFORM_HPP__
+#pragma once
 
 #include    <glm/glm.hpp>
 #include    <assimp/vector3.h>
@@ -91,5 +90,3 @@ namespace   Engine
             glm::mat4       m_matrix;
     };
 }
-
-#endif /* !__ENGINE_TRANSFORM_HPP__ */

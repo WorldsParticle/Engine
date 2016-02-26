@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __INTERNAL_ENGINE_SHADER_MAPPING_HPP__
-# define    __INTERNAL_ENGINE_SHADER_MAPPING_HPP__
+#pragma once
 
 #include    <map>
 
@@ -42,5 +41,3 @@ namespace   Engine
     };
 
 }
-
-#endif /* !__INTERNAL_ENGINE_SHADER_MAPPING_HPP__ */

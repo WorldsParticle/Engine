@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_MATERIAL_HPP__
-# define    __ENGINE_MATERIAL_HPP__
+#pragma once
 
 #include    <memory>
 #include    <glm/glm.hpp>
@@ -121,5 +120,3 @@ namespace   Engine
 	    Texture			    *m_texture;
     };
 }
-
-#endif /* !__ENGINE_MATERIAL_HPP__ */
