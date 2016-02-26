@@ -23,7 +23,8 @@ namespace   Engine
     enum    ShaderProgramName
     {
         DEFAULT_SHADER_PROGRAM = 0,
-        TEST_SHADER_PROGRAM = 1
+        TEST_SHADER_PROGRAM = 1,
+        TEXTURE_SHADER_PROGRAM = 2
     };
 
 }

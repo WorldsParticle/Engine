@@ -35,7 +35,9 @@ namespace   Engine
         {DEFAULT_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "default.vert"}},
         {DEFAULT_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "default.frag"}},
         {TEST_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "light.vert"}},
-        {TEST_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "light.frag"}}
+        {TEST_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "light.frag"}},
+        {TEXTURE_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "texture.vert"}},
+        {TEXTURE_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "texture.frag"}}
     };
 
 }

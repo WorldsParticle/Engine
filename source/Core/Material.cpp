@@ -23,20 +23,33 @@ namespace   Engine
 
     Material::Material(const std::shared_ptr<ShaderProgram> &shaderprogram) :
         m_name("Default"),
-        m_shaderprogram(shaderprogram)
+        m_shaderprogram(shaderprogram),
+	m_texture(nullptr)
     {
         // nothing to do
     }
 
     Material::Material(const aiMaterial *assimpMaterial,
-            const std::shared_ptr<ShaderProgram> &shaderprogram) :
+            const std::shared_ptr<ShaderProgram> &shaderprogram,
+	    const TextureLibrary &texLib) :
         m_name("Default"),
-        m_shaderprogram(shaderprogram)
+        m_shaderprogram(shaderprogram),
+	m_texture(nullptr)
     {
         aiString assimpName;
 
         assimpMaterial->Get(AI_MATKEY_NAME, assimpName);
         this->m_name = assimpName.C_Str();
+	unsigned int count = assimpMaterial->GetTextureCount(aiTextureType_DIFFUSE);
+	if (count != 0)
+	{
+	    aiString texPath;
+	    for (unsigned int i = 0; i < count; i++)
+	    {
+		assimpMaterial->GetTexture(aiTextureType_DIFFUSE, i, &texPath);
+		m_texture = texLib.FindTexture(texPath.data);
+	    }
+	}
     }
 
     Material::~Material(void) noexcept
@@ -44,23 +57,17 @@ namespace   Engine
         // nothind to do.
     }
 
-
-
     const std::string &
     Material::getName(void) const
     {
         return this->m_name;
     }
 
-
-
     void
     Material::setName(const std::string &name)
     {
         this->m_name = name;
     }
-
-
 
     const std::shared_ptr<ShaderProgram> &
     Material::getShaderProgram(void) const
@@ -72,6 +79,10 @@ namespace   Engine
     Material::bind(void) const
     {
         this->m_shaderprogram->bind();
+	if (this->m_texture != nullptr)
+	{
+	    this->m_texture->bind();
+	}
     }
 
     void

@@ -31,10 +31,10 @@ namespace Engine
     Scene::Scene(void) :
         m_event_register(),
         m_shaderprograms(),
+        m_textures(),
         m_materials(),
         m_animations(),
         m_meshes(),
-        m_textures(),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
         m_scenegraph(this)
@@ -42,13 +42,13 @@ namespace Engine
         // nothing to do.
     }
 
-    Scene::Scene(const AssimpScene &s) :
+    Scene::Scene(const AssimpScene &s, const std::string &modelPath) :
         m_event_register(),
         m_shaderprograms(),
-        m_materials(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber()),
+        m_textures(s, modelPath),
+        m_materials(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures),
         m_animations(s.getAnimations(), s.getAnimationsNumber()),
         m_meshes(this->m_materials, s.getMeshes(), s.getMeshesNumber()),
-        m_textures(s.getTextures(), s.getTexturesNumber()),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
         m_scenegraph(s, this)
@@ -103,9 +103,9 @@ namespace Engine
     }
 
     Texture *
-    Scene::getTexture(unsigned int id) const
+    Scene::getTexture(const std::string &name) const
     {
-        return this->m_textures.get(id);
+        return this->m_textures.FindTexture(name);
     }
 
 

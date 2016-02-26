@@ -50,7 +50,8 @@ namespace   Engine
         if (loadedScene != nullptr)
         {
             AssimpScene     aiscene(loadedScene);
-            scene = new Scene(aiscene);
+	    std::string modelPath = filename.substr(0,filename.find_last_of("/")) + "/";
+            scene = new Scene(aiscene, modelPath);
         }
         return scene;
     }
