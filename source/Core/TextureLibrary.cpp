@@ -18,7 +18,9 @@
 #include    <IL/il.h>
 #include    <IL/ilu.h>
 #include    <IL/ilut.h>
+#include    <GL/gl.h>
 #include    <log4cpp/Category.hh>
+
 #include    "Engine/Core/TextureLibrary.hpp"
 
 using namespace     log4cpp;
@@ -26,35 +28,33 @@ using namespace     log4cpp;
 namespace   Engine
 {
     TextureLibrary::TextureLibrary(void) :
-        Library<Texture *>(),
-	_textureMap()
+	Library<std::pair<std::string, Texture *>>()
     {
-        // nothing to do.
+	// nothing to do.
     }
 
     TextureLibrary::TextureLibrary(aiTexture **assimpTextures, unsigned int size) :
-        Library<Texture *>(),
-	_textureMap()
+	Library<std::pair<std::string, Texture *>>()
     {
-        this->m_resources.reserve(size);
-        for (unsigned int i = 0 ; i < size ; ++i)
-        {
-            this->m_resources.push_back(new Texture(assimpTextures[i]));
-        }
+	this->m_resources.reserve(size);
+	for (unsigned int i = 0 ; i < size ; ++i)
+	{
+	    this->m_resources.push_back(std::make_pair("", new Texture(assimpTextures[i])));
+	}
     }
 
-    TextureLibrary::TextureLibrary(const AssimpScene &assimpScene) :
-        Library<Texture *>(),
-	_textureMap()
+    TextureLibrary::TextureLibrary(const AssimpScene &assimpScene, const std::string &modelPath) :
+	Library<std::pair<std::string, Texture *>>()
     {
-        Category& root = Category::getRoot();
-	ilInit(); /* Initialization of DevIL */
+	Category& root = Category::getRoot();
 
 	if (assimpScene.getTexturesNumber() != 0)
 	    root << Priority::DEBUG << "Support for meshes with embedded textures is not implemented";
 
 	/* getTexture Filenames and Numb of Textures */
 	aiMaterial **mat = assimpScene.getMaterials();;
+	unsigned int numTextures = 0;
+	std::vector<std::string> textureNames;
 	for (unsigned int m=0; m<assimpScene.getMaterialsNumber(); m++)
 	{
 	    int texIndex = 0;
@@ -65,12 +65,11 @@ namespace   Engine
 	    while (texFound == AI_SUCCESS)
 	    {
 		texFound = mat[m]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
-		_textureMap[path.data] = nullptr; //fill map with textures, pointers still nullptr yet
+		numTextures++;
+		textureNames.push_back(path.data);
 		texIndex++;
 	    }
 	}
-
-	unsigned int numTextures = static_cast<unsigned int>(_textureMap.size());
 
 	/* array with DevIL image IDs */
 	ILuint* imageIds = nullptr;
@@ -83,18 +82,15 @@ namespace   Engine
 	GLuint*	    textureIds = new GLuint[numTextures];
 	glGenTextures(numTextures, textureIds); /* Texture name generation */
 
-	/* get iterator */
-	std::map<std::string, Texture*>::iterator itr = _textureMap.begin();
-
 	for (unsigned int i=0; i<numTextures; i++)
 	{
 	    //save IL image ID
-	    std::string filename = "/home/sicarde/BUILDEIP/Editor/ressources/" + (*itr).first;  // get filename
+	    std::string filename = modelPath + textureNames[i];  // get filename
 	    ilBindImage(imageIds[i]); /* Binding of DevIL image name */
 	    //std::string fileloc = RESOURCES_PATH + filename;  /* Loading of image */
 	    root << Priority::DEBUG << "Texture: " << filename << " loaded";
-	    (*itr).second = new Texture(textureIds[i], filename);//&textureIds[i];      // save texture id for filename in map
-	    itr++;				      // next texture
+	    Texture *tmp = new Texture(textureIds[i], filename); // save texture id for filename in map
+	    m_resources.push_back(std::make_pair(textureNames[i], tmp));
 	}
 	// Because we have already copied image data into texture data  we can release memory used by image.
 	ilDeleteImages(numTextures, imageIds);
@@ -105,47 +101,51 @@ namespace   Engine
     }
 
     TextureLibrary::TextureLibrary(const TextureLibrary &other) :
-        Library<Texture *>(),
-	_textureMap()
+	Library<std::pair<std::string, Texture *>>()
     {
-        this->m_resources.reserve(other.m_resources.size());
-        for (Texture *resource : other.m_resources)
-        {
-            this->m_resources.push_back(new Texture(*resource));
-        }
+	this->m_resources.reserve(other.m_resources.size());
+	for (std::pair<std::string, Texture *> resource : other.m_resources)
+	{
+	    this->m_resources.push_back(std::make_pair(resource.first, new Texture(*(resource.second))));
+	}
     }
 
     TextureLibrary::~TextureLibrary(void)
     {
-        // nothing to do.
+	// nothing to do.
     }
 
     void TextureLibrary::BindTexture(const std::string &name)
     {
-	if (_textureMap.find(name) != _textureMap.end())
+	Texture *tmp = this->FindTexture(name);
+	if (tmp != nullptr)
 	{
-	    _textureMap[name]->bind();
+	    tmp->bind();
 	}
     }
 
     Texture *TextureLibrary::FindTexture(const std::string &name) const
     {
-	if (_textureMap.find(name) != _textureMap.end())
+	for (std::pair<std::string, Texture *> resource : this->m_resources)
 	{
-	    //Texture *tmp = _textureMap[_textureMap.find(name)];
-	    return _textureMap.find(name)->second;
+	    if (name == resource.first)
+	    {
+		return resource.second;
+	    }
 	}
 	return nullptr;
     }
 
     TextureLibrary &
-    TextureLibrary::operator=(const TextureLibrary &other)
-    {
-         this->m_resources.reserve(other.m_resources.size());
-         for (Texture *resource : other.m_resources)
-         {
-             this->m_resources.push_back(new Texture(*resource));
-         }
-         return *this;
-    }
+	TextureLibrary::operator=(const TextureLibrary &other)
+	{
+	    this->m_resources.reserve(other.m_resources.size());
+	    //for (Texture *resource : other.m_resources)
+	    for (std::pair<std::string, Texture *> resource : other.m_resources)
+	    {
+		// this->m_resources.push_back(new Texture(*resource));
+		this->m_resources.push_back(std::make_pair(resource.first, new Texture(*(resource.second))));
+	    }
+	    return *this;
+	}
 }

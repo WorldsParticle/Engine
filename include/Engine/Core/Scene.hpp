@@ -55,9 +55,9 @@ namespace Engine
             Scene(void);
 
             ///
+            /// \brief Construct a scene form an assimp scene. Need the path to the scene to load other file like textures
             ///
-            ///
-            Scene(const AssimpScene &assimpScene);
+            Scene(const AssimpScene &assimpScene, const std::string &modelPath);
 
             ///
             /// \brief Copy constructor.
@@ -120,7 +120,7 @@ namespace Engine
             ///
             /// \brief This method allow to retrieve a texture from the texture library.
             ///
-            Texture     *getTexture(unsigned int id) const;
+            Texture     *getTexture(const std::string &name) const;
 
         public:
 

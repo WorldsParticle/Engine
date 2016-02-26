@@ -20,7 +20,6 @@
 
 #include    <assimp/texture.h>
 #include    <assimp/scene.h>
-#include    <GL/gl.h>
 #include    <string>
 #include    <map>
 
@@ -28,9 +27,6 @@ namespace   Engine
 {
     class       Texture
     {
-	private:
-	    std::string	_name;
-	    GLuint	_id;
 	public:
 	    ///
 	    /// \brief Default constructor. create an empty texture.
@@ -40,7 +36,7 @@ namespace   Engine
 	    ///
 	    /// \brief Construct a texture from its path (non embedded textures)
 	    ///
-	    Texture(GLuint id, const std::string &texturePath);
+	    Texture(unsigned int id, const std::string &texturePath);
 
 	    ///
 	    /// \brief Construct a texture from an assimp texture. (embedded textures)
@@ -78,6 +74,17 @@ namespace   Engine
 	    /// \brief Bind texture
 	    ///
 	    void	bind(void);
+
+	private:
+	    ///
+	    /// \brief This attribute is the name of the texture
+	    /// (its path is relative to the file loaded)
+	    ///
+	    std::string		m_name;
+	    ///
+	    /// \brief This attribute is the id of the texture
+	    ///
+	    unsigned int	m_id;
     };
 }
 

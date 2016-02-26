@@ -18,20 +18,20 @@
 #ifndef     __ENGINE_TEXTURE_LIBRARY_HPP__
 # define    __ENGINE_TEXTURE_LIBRARY_HPP__
 
-#include    <GL/gl.h>
+//#include    <GL/gl.h>
 #include    <string>
 #include    <map>
+
 #include    "Engine/Core/Library.hpp"
 #include    "Engine/Core/Texture.hpp"
 #include    "Engine/Core/AssimpScene.hpp"
 
 namespace   Engine
 {
-    class       TextureLibrary : public Library<Texture *>
+    class       TextureLibrary : public Library<std::pair<std::string, Texture *>>
     {
-	private:
-	    std::map<std::string, Texture*> _textureMap;
-
+	//private:
+	    //std::map<std::string, Texture*> _textureMap;
         public:
             ///
             /// \brief Default constructor.
@@ -48,7 +48,7 @@ namespace   Engine
             ///
             /// \brief Construct the library from the assimp scene
             ///
-	    TextureLibrary(const AssimpScene &assimpScene);
+	    TextureLibrary(const AssimpScene &assimpScene, const std::string &modelPath);
 
             ///
             /// \brief Copy constructor.
