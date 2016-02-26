@@ -19,6 +19,7 @@
 #include    <IL/il.h>
 #include    <IL/ilu.h>
 #include    <IL/ilut.h>
+#include    <GL/gl.h>
 #include    "Engine/Core/Texture.hpp"
 
 using namespace     log4cpp;
