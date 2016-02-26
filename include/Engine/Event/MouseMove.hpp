@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __MOUSE_MOVE_EVENT_HPP__
-#define     __MOUSE_MOVE_EVENT_HPP__
+#pragma once
 
 #include    <glm/glm.hpp>
 
@@ -65,5 +64,3 @@ namespace   Engine
         };
     }
 }
-
-#endif // __MOUSE_MOVE_EVENT_HPP__

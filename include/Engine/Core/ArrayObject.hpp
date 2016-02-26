@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_ARRAY_OBJECT_HPP__
-# define    __ENGINE_ARRAY_OBJECT_HPP__
+#pragma once
 
 #include    "Engine/Configuration.hpp"
 
@@ -83,5 +82,3 @@ namespace   Engine
             unsigned int    m_id;
     };
 }
-
-#endif /* !__ENGINE_ARRAY_OBJECT_HPP__ */

@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_CAMERA_HPP__
-# define    __ENGINE_CAMERA_HPP__
+#pragma once
 
 #include    <string>
 #include    <glm/glm.hpp>
@@ -152,5 +151,3 @@ namespace   Engine
             glm::ivec2  m_size;
     };
 }
-
-#endif /* !__ENGINE_CAMERA_HPP__ */

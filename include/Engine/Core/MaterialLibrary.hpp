@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_MATERIAL_LIBRARY_HPP__
-# define    __ENGINE_MATERIAL_LIBRARY_HPP__
+#pragma once
 
 #include    <assimp/material.h>
 
@@ -72,5 +71,3 @@ namespace   Engine
 
     };
 }
-
-#endif /* !__ENGINE_MATERIAL_LIBRARY_HPP__ */

@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __INTERNAL_ENGINE_SHADER_PROGRAM_MAPPING_HPP__
-# define    __INTERNAL_ENGINE_SHADER_PROGRAM_MAPPING_HPP__
+#pragma once
 
 #include    <map>
 #include    <vector>
@@ -37,5 +36,3 @@ namespace   Engine
         {TEST_SHADER_PROGRAM, {{TEST_VERTEX_SHADER, TEST_FRAGMENT_SHADER}}}
     };
 }
-
-#endif /* !__INTERNAL_ENGINE_SHADER_PROGRAM_MAPPING_HPP__ */

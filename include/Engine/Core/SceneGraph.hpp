@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_SCENE_GRAPH_HPP__
-# define    __ENGINE_SCENE_GRAPH_HPP__
+#pragma once
 
 #include    <assimp/scene.h>
 
@@ -96,5 +95,3 @@ namespace   Engine
 
     };
 }
-
-#endif /* !__ENGINE_SCENE_GRAPH_HPP__ */

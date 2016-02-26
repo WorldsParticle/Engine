@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef     __ENGINE_EVENT_EVENT_HPP__
-#define     __ENGINE_EVENT_EVENT_HPP__
+#pragma once
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Event/Types.hpp"
@@ -94,5 +93,3 @@ namespace   Engine
         };
     }
 }
-
-#endif // __ENGINE_EVENT_EVENT_HPP__

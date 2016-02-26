@@ -15,8 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#ifndef         __EVENT_REGISTER_HPP__
-# define        __EVENT_REGISTER_HPP__
+#pragma once
 
 #include    <map>
 #include    <list>
@@ -67,5 +66,3 @@ namespace   Engine
         };
     }
 }
-
-#endif /* !__EVENT_REGISTER_HPP__ */
