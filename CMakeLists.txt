@@ -355,7 +355,7 @@ IF (CMAKE_COMPILER_IS_GNUCXX)
     #
     # This warning is more effective with link time optimization, where the
     # information about the class hierarchy graph is more complete.
-    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE )#-Wsuggest-final-types)
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsuggest-final-types)
 
     # Warn about virtual methods where code quality would be improved if the
     # method were declared with the C++11 final specifier, or, if possible, its
@@ -365,11 +365,11 @@ IF (CMAKE_COMPILER_IS_GNUCXX)
     # information about the class hierarchy graph is more complete. It is
     # recommended to first consider suggestions of -Wsuggest-final-types and
     # then rebuild with new annotations.
-    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE )#-Wsuggest-final-methods)
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsuggest-final-methods)
 
     # Warn about overriding virtual functions that are not marked with the
     # override keyword.
-    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE )#-Wsuggest-override)
+    TARGET_COMPILE_OPTIONS(${CMAKE_PROJECT_NAME} PRIVATE -Wsuggest-override)
 
     # Warn about duplicated conditions in an if-else-if chain. For instance,
     # warn for the following code:
