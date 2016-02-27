@@ -24,7 +24,8 @@ namespace   Engine
     {
         DEFAULT_SHADER_PROGRAM = 0,
         TEST_SHADER_PROGRAM = 1,
-        TEXTURE_SHADER_PROGRAM = 2
+        TEXTURE_SHADER_PROGRAM = 2,
+	FRAMEBUFFER_SHADER_PROGRAM = 3
     };
 
 }

@@ -20,6 +20,7 @@
 #include    <list>
 
 #include    "Engine/Configuration.hpp"
+#include    "Engine/Core/ShaderProgramLibrary.hpp"
 
 namespace   Engine
 {
@@ -41,7 +42,7 @@ namespace   Engine
             ///
             /// \brief Default Constructor.
             ///
-            Renderer(Scene *scene);
+            Renderer(const ShaderProgramLibrary &shaderprograms, Scene *scene);
 
             ///
             /// \brief Copy constructor.
@@ -95,28 +96,51 @@ namespace   Engine
             ///
             /// \brief The scene in which the Renderer act.
             ///
-            Scene   *m_scene;
+            Scene				    *m_scene;
 
             ///
             /// \brief The list of object needed to be rendered with the render method.
             ///
             /// TODO container type
             ///
-            std::list<Object *>     m_objects;
+            std::list<Object *>			    m_objects;
 
             ///
             /// \brief The list of cameras needed to be rendered with the render method.
             ///
             /// TODO container type
             ///
-            std::list<Camera *>     m_cameras;
+            std::list<Camera *>			    m_cameras;
 
             ///
             /// \brief The list of lights needed to be rendered with the light method.
             ///
             /// TODO container type
             ///
-            std::list<Light *>      m_lights;
+            std::list<Light *>			    m_lights;
 
+            ///
+            /// \brief The framebuffers (one for each camera, with the same size)
+            ///
+            /// TODO container type
+            ///
+	    std::list<unsigned int>		    m_framebuffers;
+
+            ///
+            /// \brief The textures inside each framebuffer (oen for each camera)
+            ///
+            /// TODO container type
+            ///
+	    std::list<unsigned int>		    m_textureColorbuffers;
+
+            ///
+            /// \brief The shader for the framebuffer
+            ///
+	    const std::shared_ptr<ShaderProgram>    m_shaderFramebuff;
+
+            ///
+            /// \brief The shader for the framebuffer
+            ///
+	    unsigned int			    m_quadVAO;
     };
 }
