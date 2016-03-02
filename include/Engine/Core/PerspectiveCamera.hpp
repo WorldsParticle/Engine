@@ -80,7 +80,7 @@ namespace   Engine
             ///
             /// \brief This method is used to update the perspective camera.
             ///
-            virtual void                update(void) override;
+            virtual void    update(void) override;
 
         public:
             ///
@@ -97,7 +97,7 @@ namespace   Engine
             ///
             /// \brief Callback used when a resize event happen.
             ///
-            void                on_resize_event(const Event::Event &event);
+            void    on_resize_event(const Event::Event &event);
 
         protected:
             ///
