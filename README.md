@@ -10,7 +10,8 @@ Ce projet est un Moteur graphique utilisant OpenGL 4.2, c++14 && gsl.
 ### Debug
 
 ```shell
-cd cmake
+mkdir build
+cd build
 cmake -DCMAKE_BUILD_TYPE=debug ..
 make
 ```
@@ -18,7 +19,8 @@ make
 ### Release
 
 ```shell
-cd cmake
+mkdir build
+cd build
 cmake -DCMAKE_BUILD_TYPE=release ..
 make
 ```
