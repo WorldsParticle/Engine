@@ -69,7 +69,6 @@ namespace Engine
     Scene::update(void)
     {
         this->m_clock.restart();
-        std::cout << this->m_clock.elapsed_time() << std::endl;
         this->m_scenegraph.update();
     }
 
