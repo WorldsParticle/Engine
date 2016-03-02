@@ -21,14 +21,16 @@
 #include    <glm/glm.hpp>
 #include    <assimp/material.h>
 
-#include    "Engine/Core/Texture.hpp"
-#include    "Engine/Core/TextureLibrary.hpp"
 #include    "Engine/Configuration.hpp"
 
 namespace   Engine
 {
+
     class   ShaderProgram;
     class   ShaderProgramLibrary;
+    class   Texture;
+    class   TextureLibrary;
+
     ///
     /// \brief This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered.
     ///
@@ -45,7 +47,7 @@ namespace   Engine
             ///
             Material(const aiMaterial *assimpMaterial,
                     const std::shared_ptr<ShaderProgram> &shaderprogram,
-		    const TextureLibrary &texLib);
+                    const TextureLibrary &texture_library);
 
             ///
             /// \brief Copy constructor.
@@ -117,6 +119,6 @@ namespace   Engine
             ///
             /// \brief The ids of the textures of the material
             ///
-	    Texture			    *m_texture;
+            Texture     *m_texture;
     };
 }

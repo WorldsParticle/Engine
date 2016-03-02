@@ -63,6 +63,12 @@ namespace   Engine
             ///
             Animation   &operator=(Animation &&other) noexcept;
 
+        public:
+            ///
+            /// \brief Return the name of the animation.
+            ///
+            const std::string   &name(void) const;
+
         private:
             ///
             /// \brief The name of the animation.

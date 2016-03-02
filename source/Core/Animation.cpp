@@ -20,7 +20,7 @@
 namespace   Engine
 {
     Animation::Animation(void) :
-        m_name("")
+        m_name("Default")
     {
         // nothing more to do actually.
     }
@@ -63,6 +63,14 @@ namespace   Engine
     {
         this->m_name = std::move(other.m_name);
         return *this;
+    }
+
+
+
+    const std::string &
+    Animation::name(void) const
+    {
+         return this->m_name;
     }
 
 }

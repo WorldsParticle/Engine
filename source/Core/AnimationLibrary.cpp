@@ -21,37 +21,38 @@
 namespace   Engine
 {
     AnimationLibrary::AnimationLibrary(void) :
-        Library<Animation *>()
+        Library<std::string, Animation *>()
     {
         // nothing to do.
     }
 
     AnimationLibrary::AnimationLibrary(aiAnimation **assimpAnimations,
             unsigned int size) :
-        Library<Animation *>()
+        Library<std::string, Animation *>()
     {
-        this->m_resources.reserve(size);
         for (unsigned int i = 0 ; i < size ; ++i)
         {
-            this->m_resources.push_back(new Animation(assimpAnimations[i]));
+            std::string name = assimpAnimations[i]->mName.C_Str();
+            this->m_resources.insert(
+                    std::make_pair(name, new Animation(assimpAnimations[i])));
         }
     }
 
     AnimationLibrary::AnimationLibrary(const AnimationLibrary &other) :
-        Library<Animation *>()
+        Library<std::string, Animation *>()
     {
-        this->m_resources.reserve(other.m_resources.size());
-        for (Animation *resource : other.m_resources)
+        for (const auto &key_value : other.m_resources)
         {
-            this->m_resources.push_back(new Animation(*resource));
+            this->m_resources.insert(
+                    std::make_pair(key_value.first, new Animation(*key_value.second)));
         }
     }
 
     AnimationLibrary::~AnimationLibrary(void)
     {
-        for (Animation *resource : this->m_resources)
+        for (const auto &key_value : this->m_resources)
         {
-            delete resource;
+            delete key_value.second;
         }
     }
 
@@ -60,10 +61,10 @@ namespace   Engine
     AnimationLibrary &
     AnimationLibrary::operator=(const AnimationLibrary &other)
     {
-        this->m_resources.reserve(other.m_resources.size());
-        for (Animation *resource : other.m_resources)
+        for (const auto &key_value : other.m_resources)
         {
-            this->m_resources.push_back(new Animation(*resource));
+            this->m_resources.insert(
+                    std::make_pair(key_value.first, new Animation(*key_value.second)));
         }
         return *this;
     }

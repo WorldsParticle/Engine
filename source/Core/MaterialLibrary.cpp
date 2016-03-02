@@ -25,40 +25,44 @@ using namespace     log4cpp;
 namespace   Engine
 {
     MaterialLibrary::MaterialLibrary(void) :
-        Library<Material *>()
+        Library<unsigned int, Material *>()
     {
         // nothing to do.
     }
 
     MaterialLibrary::MaterialLibrary(const ShaderProgramLibrary &shaderprograms,
-            aiMaterial **assimpMaterials, unsigned int size, const TextureLibrary &texLib) :
-        Library<Material *>()
+            aiMaterial **ai_materials, unsigned int size,
+            const TextureLibrary &texture_library) :
+        Library<unsigned int, Material *>()
     {
         Category& root = Category::getRoot();
-        this->m_resources.reserve(size);
+
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const auto &shaderprogram = shaderprograms.get(TEXTURE_SHADER_PROGRAM);
-	    root << Priority::DEBUG << "using texture shader";
-            this->m_resources.push_back(new Material(assimpMaterials[i], shaderprogram, texLib));
+            root << Priority::DEBUG << "using texture shader";
+            this->m_resources.insert(std::make_pair(i,
+                        new Material(ai_materials[i], shaderprogram,
+                            texture_library)));
         }
     }
 
     MaterialLibrary::MaterialLibrary(const MaterialLibrary &other) :
-        Library<Material *>()
+        Library<unsigned int, Material *>()
     {
-        this->m_resources.reserve(other.m_resources.size());
-        for (Material *resource : other.m_resources)
+        for (const auto &key_value : other.m_resources)
         {
-            this->m_resources.push_back(new Material(*resource));
+            this->m_resources.insert(
+                    std::make_pair(key_value.first,
+                        new Material(*key_value.second)));
         }
     }
 
     MaterialLibrary::~MaterialLibrary(void)
     {
-        for (Material *resource : this->m_resources)
+        for (const auto &key_value : this->m_resources)
         {
-            delete resource;
+            delete key_value.second;
         }
     }
 
@@ -66,11 +70,12 @@ namespace   Engine
     MaterialLibrary &
     MaterialLibrary::operator=(const MaterialLibrary &other)
     {
-         this->m_resources.reserve(other.m_resources.size());
-         for (Material *resource : other.m_resources)
-         {
-             this->m_resources.push_back(new Material(*resource));
-         }
-         return *this;
+        for (const auto &key_value : other.m_resources)
+        {
+            this->m_resources.insert(
+                    std::make_pair(key_value.first,
+                        new Material(*key_value.second)));
+        }
+        return *this;
     }
 }

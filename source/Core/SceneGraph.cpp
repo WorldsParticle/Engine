@@ -38,15 +38,15 @@ namespace   Engine
         m_scene(scene),
         m_rootNode(new SceneGraphNode(s, s.getRootNode(), this))
     {
-//#warning TODO temporary
-		if (s.getCameraNumber() == 0)
-		{
-			SceneGraphNode  *node = new SceneGraphNode(this);
-			node->setName("DefaultCamera");
-			Entity *camera = new FreeflyCamera(node);
-			node->setEntity(camera);
-			this->m_rootNode->addChildren(node);
-		}
+        //#warning TODO temporary
+        if (s.getCameraNumber() == 0)
+        {
+            SceneGraphNode  *node = new SceneGraphNode(this);
+            node->setName("DefaultCamera");
+            Entity *camera = new FreeflyCamera(node);
+            node->setEntity(camera);
+            this->m_rootNode->addChildren(node);
+        }
 
         // nothing to do.
     }

@@ -28,7 +28,7 @@ namespace   Engine
     ///
     /// \brief This class is used as a container for the mesh used in the scene.
     ///
-    class ENGINE_EXPORTS MeshLibrary : public Library<Mesh *>
+    class ENGINE_EXPORTS MeshLibrary : public Library<unsigned int, Mesh *>
     {
         public:
             ///

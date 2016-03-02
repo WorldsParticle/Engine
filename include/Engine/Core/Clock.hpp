@@ -28,5 +28,6 @@ namespace Engine
     ///
     class ENGINE_EXPORTS Clock
     {
+
     };
 }

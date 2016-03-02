@@ -120,7 +120,9 @@ namespace   Engine
 
         private:
 
+            // TODO temporary
             unsigned int    convert(const Type &type) const;
+            // TODO temporary
             unsigned int    convert(const Usage &usage) const;
 
         private:
