@@ -30,6 +30,7 @@ namespace Engine
     /// TODO : delete push object
     Scene::Scene(void) :
         m_event_register(),
+        m_clock(),
         m_shaderprograms(),
         m_textures(),
         m_materials(),
@@ -42,8 +43,9 @@ namespace Engine
         // nothing to do.
     }
 
-    Scene::Scene(const AssimpScene &s, const std::string &modelPath) :
+    Scene::Scene(const AssimpScene &s) :
         m_event_register(),
+        m_clock(),
         m_shaderprograms(),
         m_textures(s),
         m_materials(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures),
@@ -66,6 +68,8 @@ namespace Engine
     void
     Scene::update(void)
     {
+        this->m_clock.restart();
+        std::cout << this->m_clock.elapsed_time() << std::endl;
         this->m_scenegraph.update();
     }
 
