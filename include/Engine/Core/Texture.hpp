@@ -35,12 +35,12 @@ namespace   Engine
             ///
             /// \brief Construct a texture from its path (non embedded textures)
             ///
-            Texture(const std::string &texturePath);
+            Texture(const std::string &texture_name);
 
             ///
             /// \brief Construct a texture from an assimp texture. (embedded textures)
             ///
-            Texture(const aiTexture *assimpTexture);
+            Texture(const aiTexture *ai_texture);
 
             ///
             /// \brief Copy constructor.
