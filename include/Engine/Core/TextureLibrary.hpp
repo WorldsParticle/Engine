@@ -26,7 +26,7 @@
 
 namespace   Engine
 {
-    class       TextureLibrary : public Library<std::pair<std::string, Texture *>>
+    class       TextureLibrary : public Library<std::string, Texture *>
     {
         public:
             ///
@@ -44,7 +44,7 @@ namespace   Engine
             ///
             /// \brief Construct the library from the assimp scene
             ///
-	    TextureLibrary(const AssimpScene &assimpScene, const std::string &modelPath);
+            TextureLibrary(const AssimpScene &assimpScene, const std::string &modelPath);
 
             ///
             /// \brief Copy constructor.
@@ -72,15 +72,5 @@ namespace   Engine
             ///
             TextureLibrary  &operator=(TextureLibrary &&other) noexcept = default;
 
-	public:
-            ///
-            /// \brief Bind the texture corresponding to the name passed as parameter if it exist and is loaded
-            ///
-	    void BindTexture(const std::string &name);
-
-            ///
-            /// \brief Find the texture corresponding to the name passed as parameter if it exist and is loaded
-            ///
-	    Texture *FindTexture(const std::string &name) const;
     };
 }

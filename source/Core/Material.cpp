@@ -15,8 +15,12 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include    <iostream>
+
 #include    "Engine/Core/Material.hpp"
 #include    "Engine/Core/ShaderProgram.hpp"
+#include    "Engine/Core/Texture.hpp"
+#include    "Engine/Core/TextureLibrary.hpp"
 
 namespace   Engine
 {
@@ -24,38 +28,38 @@ namespace   Engine
     Material::Material(const std::shared_ptr<ShaderProgram> &shaderprogram) :
         m_name("Default"),
         m_shaderprogram(shaderprogram),
-	m_texture(nullptr)
+        m_texture(nullptr)
     {
         // nothing to do
     }
 
     Material::Material(const aiMaterial *assimpMaterial,
             const std::shared_ptr<ShaderProgram> &shaderprogram,
-	    const TextureLibrary &texLib) :
+            const TextureLibrary &texture_library) :
         m_name("Default"),
         m_shaderprogram(shaderprogram),
-	m_texture(nullptr)
+        m_texture(nullptr)
     {
         aiString assimpName;
 
         assimpMaterial->Get(AI_MATKEY_NAME, assimpName);
         this->m_name = assimpName.C_Str();
-	unsigned int count = assimpMaterial->GetTextureCount(aiTextureType_DIFFUSE);
-	if (count != 0)
-	{
-	    aiString texPath;
-	    for (unsigned int i = 0; i < count; i++)
-	    {
-		assimpMaterial->GetTexture(aiTextureType_DIFFUSE, i, &texPath);
-		m_texture = texLib.FindTexture(texPath.data);
-	    }
-	}
+
+        if (assimpMaterial->GetTextureCount(aiTextureType_DIFFUSE) > 0)
+        {
+            aiString texture_path;
+            assimpMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &texture_path);
+            std::cout << texture_path.data << std::endl;
+            this->m_texture = texture_library.get(texture_path.data);
+        }
     }
 
     Material::~Material(void) noexcept
     {
         // nothind to do.
     }
+
+
 
     const std::string &
     Material::getName(void) const
@@ -72,22 +76,28 @@ namespace   Engine
     const std::shared_ptr<ShaderProgram> &
     Material::getShaderProgram(void) const
     {
-         return this->m_shaderprogram;
+        return this->m_shaderprogram;
     }
+
+
 
     void
     Material::bind(void) const
     {
         this->m_shaderprogram->bind();
-	if (this->m_texture != nullptr)
-	{
-	    this->m_texture->bind();
-	}
+        if (this->m_texture != nullptr)
+        {
+            this->m_texture->bind();
+        }
     }
 
     void
     Material::unbind(void) const
     {
-         this->m_shaderprogram->unbind();
+        this->m_shaderprogram->unbind();
+        if (this->m_texture != nullptr)
+        {
+             this->m_texture->unbind();
+        }
     }
 }

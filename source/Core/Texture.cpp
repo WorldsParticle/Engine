@@ -26,61 +26,88 @@ using namespace     log4cpp;
 
 namespace   Engine
 {
-    Texture::Texture(void) : m_name(), m_id(0)
+
+    Texture::Texture(void) :
+        m_name("Default"),
+        m_id(0)
     {
-	// nothing to do atm.
+        glGenTextures(1, &this->m_id);
+        // nothing to do atm.
     }
 
-    Texture::Texture(const aiTexture *assimpTexture) : m_name(), m_id(0)
+    Texture::Texture(const aiTexture *assimpTexture) :
+        m_name(),
+        m_id(0)
     {
-	// nothing to do atm.
+        glGenTextures(1, &this->m_id);
+        // nothing to do atm.
     }
 
-    Texture::Texture(unsigned int id, const std::string &texturePath) : m_name(texturePath), m_id(id)
+    Texture::Texture(const std::string &texture_path) :
+        m_name(texture_path),
+        m_id()
     {
         Category& root = Category::getRoot();
-	if (ilLoadImage(texturePath.c_str())) /* If no error occured: */
-	{
-	    // Convert every colour component into unsigned byte.If your image contains
-	    // alpha channel you can replace IL_RGB with IL_RGBA
-	    //success = ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
-	    if (!ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE))
-	    {
-		// Error occured
-		root << Priority::ERROR << "Couldn't convert image " << m_name;
-		return;
-	    }
-	    // Binding of texture name
-	    glBindTexture(GL_TEXTURE_2D, m_id);
-	    root << Priority::DEBUG << "Texture " << m_name << " " << m_id << " created";
-	    // redefine standard texture values
-	    // use linear interpolation for magnification filter
-	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-	    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	    // Texture specification
-	    glTexImage2D(GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_WIDTH),
-	    ilGetInteger(IL_IMAGE_HEIGHT), 0, ilGetInteger(IL_IMAGE_FORMAT), GL_UNSIGNED_BYTE,
-	    ilGetData());
-	    // we also want to be able to deal with odd texture dimensions
-	    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	    glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-	    glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
-	    glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
-	}
-	else
-	{
-	    /* Error occured */
-	    root << Priority::ERROR << "Couldn't load image: " << m_name;
-	}
-    }
+        unsigned int    devil_id;
 
-    void Texture::bind(void)
-    {
-	glBindTexture(GL_TEXTURE_2D, m_id);
+        glGenTextures(1, &this->m_id);
+        ilGenImages(1, &devil_id);
+
+        ilBindImage(devil_id);
+        /* If no error occured: */
+        if (ilLoadImage(texture_path.c_str()))
+        {
+            // Convert every colour component into unsigned byte.If your image contains
+            // alpha channel you can replace IL_RGB with IL_RGBA
+            //success = ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE);
+            if (!ilConvertImage(IL_RGB, IL_UNSIGNED_BYTE))
+            {
+                // Error occured
+                root << Priority::ERROR << "Couldn't convert image " << m_name;
+                return;
+            }
+            // Binding of texture name
+            glBindTexture(GL_TEXTURE_2D, this->m_id);
+            root << Priority::DEBUG << "Texture " << m_name << " " << m_id << " created";
+
+            // redefine standard texture values
+            // use linear interpolation for magnification filter
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+            // Texture specification
+            glTexImage2D(GL_TEXTURE_2D, 0, ilGetInteger(IL_IMAGE_FORMAT), ilGetInteger(IL_IMAGE_WIDTH),
+                    ilGetInteger(IL_IMAGE_HEIGHT), 0, ilGetInteger(IL_IMAGE_FORMAT), GL_UNSIGNED_BYTE,
+                    ilGetData());
+            // we also want to be able to deal with odd texture dimensions
+            glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+            glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+            glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
+            glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
+        }
+        else
+        {
+            /* Error occured */
+            root << Priority::ERROR << "Couldn't load image: " << m_name;
+        }
+        ilDeleteImages(1, &devil_id);
     }
 
     Texture::~Texture(void)
     {
-	// nothing to do atm.
+        glDeleteTextures(1, &this->m_id);
     }
+
+
+
+    void Texture::bind(void)
+    {
+        glBindTexture(GL_TEXTURE_2D, this->m_id);
+    }
+
+    void
+    Texture::unbind(void)
+    {
+        glBindTexture(GL_TEXTURE_2D, 0);
+    }
+
 }

@@ -41,7 +41,7 @@ namespace   Engine
                 result->add(this->m_shaders.get(shadername));
             }
             result->link();
-            this->m_resources.push_back(result);
+            this->m_resources.insert(std::make_pair(it.first, result));
         }
         // TODO initialisation.
     }

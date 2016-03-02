@@ -91,9 +91,9 @@ namespace Engine
     }
 
     Animation *
-    Scene::getAnimation(unsigned int id) const
+    Scene::getAnimation(const std::string &name) const
     {
-        return this->m_animations.get(id);
+        return this->m_animations.get(name);
     }
 
     Mesh *
@@ -105,7 +105,7 @@ namespace Engine
     Texture *
     Scene::getTexture(const std::string &name) const
     {
-        return this->m_textures.FindTexture(name);
+        return this->m_textures.get(name);
     }
 
 

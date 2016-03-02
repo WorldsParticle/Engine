@@ -29,7 +29,7 @@ namespace   Engine
     ///
     /// \brief This class is used to store / create and retrieve every shader used in the engine.
     ///
-    class ENGINE_EXPORTS ShaderLibrary : public Library<std::shared_ptr<Shader>>
+    class ENGINE_EXPORTS ShaderLibrary : public Library<ShaderName, std::shared_ptr<Shader>>
     {
         public:
             ///

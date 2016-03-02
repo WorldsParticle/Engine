@@ -109,7 +109,7 @@ namespace Engine
             ///
             /// \brief This method allow to retrieve an animation from the animation library.
             ///
-            Animation   *getAnimation(unsigned int id) const;
+            Animation   *getAnimation(const std::string &name) const;
 
             ///
             /// \brief This method allow to retrieve a mesh from the mesh library.
