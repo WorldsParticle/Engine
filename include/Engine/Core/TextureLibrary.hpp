@@ -44,7 +44,7 @@ namespace   Engine
             ///
             /// \brief Construct the library from the assimp scene
             ///
-            TextureLibrary(const AssimpScene &assimpScene, const std::string &modelPath);
+            TextureLibrary(const AssimpScene &ai_scene);
 
             ///
             /// \brief Copy constructor.

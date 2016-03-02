@@ -20,6 +20,8 @@
 #include    <IL/ilu.h>
 #include    <IL/ilut.h>
 #include    <GL/gl.h>
+
+#include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Texture.hpp"
 
 using namespace     log4cpp;
@@ -43,8 +45,8 @@ namespace   Engine
         // nothing to do atm.
     }
 
-    Texture::Texture(const std::string &texture_path) :
-        m_name(texture_path),
+    Texture::Texture(const std::string &texture_name) :
+        m_name(texture_name),
         m_id()
     {
         Category& root = Category::getRoot();
@@ -55,7 +57,7 @@ namespace   Engine
 
         ilBindImage(devil_id);
         /* If no error occured: */
-        if (ilLoadImage(texture_path.c_str()))
+        if (ilLoadImage((RESOURCES_PATH "/textures/" + texture_name).c_str()))
         {
             // Convert every colour component into unsigned byte.If your image contains
             // alpha channel you can replace IL_RGB with IL_RGBA

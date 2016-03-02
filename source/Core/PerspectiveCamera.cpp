@@ -53,18 +53,8 @@ namespace   Engine
         m_projection(glm::mat4(1)),
         m_view(glm::mat4(1))
     {
-        Category    &root = Category::getRoot();
-
         const Transform &transform = this->getTransform();
         glm::vec4 realPosition = transform.getMatrix() * glm::vec4(this->m_position, 1.0);
-
-        root << Priority::DEBUG << "Camera fov " << this->m_fov;
-        root << Priority::DEBUG << "Camera aspect " << this->m_aspect;
-        root << Priority::DEBUG << "Camera near " << this->m_clippingPlane.near;
-        root << Priority::DEBUG << "Camera far " << this->m_clippingPlane.far;
-        root << Priority::DEBUG << "Camera position " << realPosition.x << " " << realPosition.y << " " << realPosition.z;
-        root << Priority::DEBUG << "Camera lookat " << this->m_lookat.x << " " << this->m_lookat.y << " " << this->m_lookat.z;
-        root << Priority::DEBUG << "Camera up " << this->m_up.x << " " << this->m_up.y << " " << this->m_up.z;
 
         this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
                 this->m_clippingPlane.near, this->m_clippingPlane.far);

@@ -105,10 +105,10 @@ namespace   Engine
             ///
             const aiNode        *getRootNode(void) const;
 
-			inline std::size_t	getCameraNumber(void) const
-			{
-				return this->m_cameras.size();
-			}
+            ///
+            /// \brief Get the number of camera in the scene.
+            ///
+            std::size_t         getCameraNumber(void) const;
 
         private:
             ///

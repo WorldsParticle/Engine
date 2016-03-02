@@ -44,36 +44,29 @@ namespace   Engine
         }
     }
 
-    TextureLibrary::TextureLibrary(const AssimpScene &assimpScene,
-            const std::string &modelPath) :
+    TextureLibrary::TextureLibrary(const AssimpScene &ai_scene) :
         Library<std::string, Texture *>()
     {
-        aiMaterial **mat = assimpScene.getMaterials();;
-        unsigned int numTextures = 0;
-        std::vector<std::string> textureNames;
-        for (unsigned int m = 0 ; m < assimpScene.getMaterialsNumber(); m++)
+        aiMaterial **materials = ai_scene.getMaterials();
+        unsigned int materials_number = ai_scene.getMaterialsNumber();
+
+        // iterate over each materials
+        for (unsigned int material_index = 0 ;
+                material_index < materials_number ; ++material_index)
         {
-            int texIndex = 0;
-            aiReturn texFound = AI_SUCCESS;
+            const aiMaterial *material = materials[material_index];
+            int texture_index = 0;
+            aiString texture_name;
 
-            aiString path;  // filename
-
-            while (texFound == AI_SUCCESS)
+            // get each textures used by the material and insert it.
+            while (material->GetTexture(aiTextureType_DIFFUSE, texture_index,
+                        &texture_name) == AI_SUCCESS)
             {
-                texFound = mat[m]->GetTexture(aiTextureType_DIFFUSE, texIndex, &path);
-                numTextures++;
-                textureNames.push_back(path.data);
-                texIndex++;
+                // WARNING potential problem with material sharing the same texture.
+                this->m_resources.insert(std::make_pair(texture_name.data,
+                            new Texture(texture_name.data)));
+                ++texture_index;
             }
-        }
-
-        for (unsigned int i = 0; i < numTextures ; ++i)
-        {
-            std::string filename = modelPath + textureNames[i];  // get filename
-            //std::string fileloc = RESOURCES_PATH + filename;  /* Loading of image */
-            //root << Priority::DEBUG << "Texture: " << filename << " loaded";
-            this->m_resources.insert(std::make_pair(textureNames[i],
-                        new Texture(filename)));
         }
     }
 

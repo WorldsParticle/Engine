@@ -15,8 +15,6 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
-#include    <iostream>
-
 #include    "Engine/Core/Material.hpp"
 #include    "Engine/Core/ShaderProgram.hpp"
 #include    "Engine/Core/Texture.hpp"
@@ -49,7 +47,6 @@ namespace   Engine
         {
             aiString texture_path;
             assimpMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &texture_path);
-            std::cout << texture_path.data << std::endl;
             this->m_texture = texture_library.get(texture_path.data);
         }
     }

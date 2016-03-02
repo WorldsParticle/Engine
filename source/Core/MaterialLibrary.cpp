@@ -42,7 +42,8 @@ namespace   Engine
             const auto &shaderprogram = shaderprograms.get(TEXTURE_SHADER_PROGRAM);
             root << Priority::DEBUG << "using texture shader";
             this->m_resources.insert(std::make_pair(i,
-                    new Material(ai_materials[i], shaderprogram, texture_library)));
+                        new Material(ai_materials[i], shaderprogram,
+                            texture_library)));
         }
     }
 
@@ -52,7 +53,8 @@ namespace   Engine
         for (const auto &key_value : other.m_resources)
         {
             this->m_resources.insert(
-                    std::make_pair(key_value.first, new Material(*key_value.second)));
+                    std::make_pair(key_value.first,
+                        new Material(*key_value.second)));
         }
     }
 
@@ -71,7 +73,8 @@ namespace   Engine
         for (const auto &key_value : other.m_resources)
         {
             this->m_resources.insert(
-                    std::make_pair(key_value.first, new Material(*key_value.second)));
+                    std::make_pair(key_value.first,
+                        new Material(*key_value.second)));
         }
         return *this;
     }
