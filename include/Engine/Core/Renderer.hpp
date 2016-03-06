@@ -29,7 +29,6 @@ namespace   Engine
     class   Object;
     class   Light;
     class   ArrayObject;
-    class   BufferObject;
 
     ///
     /// \brief The render graph is used to render efficiently 3D data.
