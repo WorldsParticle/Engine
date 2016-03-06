@@ -1,6 +1,6 @@
 #pragma once
 
-#include    "Engine/Configuration.hpp"
+#include "Engine/Configuration.hpp"
 #include "Engine/Core/Entity.hpp"
 
 namespace Engine

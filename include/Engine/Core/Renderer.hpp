@@ -27,7 +27,8 @@ namespace   Engine
     class   Scene;
     class   Camera;
     class   Object;
-    class   Light;
+	class   Light;
+    class   Terrain;
 
     ///
     /// \brief The render graph is used to render efficiently 3D data.
@@ -87,10 +88,15 @@ namespace   Engine
             ///
             void            add(Light *light);
 
-            ///
-            /// \brief This method is used to add a camera for the next rendering.
-            ///
-            void            add(Camera *camera);
+			///
+			/// \brief This method is used to add a camera for the next rendering.
+			///
+			void            add(Camera *camera);
+
+			///
+			/// \brief This method is used to add a terrain for the next rendering.
+			///
+			void            add(Terrain *terrain);
 
         private:
             ///
@@ -112,12 +118,19 @@ namespace   Engine
             ///
             std::list<Camera *>     m_cameras;
 
-            ///
-            /// \brief The list of lights needed to be rendered with the light method.
-            ///
-            /// TODO container type
-            ///
-            std::list<Light *>      m_lights;
+			///
+			/// \brief The list of lights needed to be rendered with the light method.
+			///
+			/// TODO container type
+			///
+			std::list<Light *>      m_lights;
+
+			///
+			/// \brief The list of terrains needed to be rendered with the light method.
+			///
+			/// TODO container type
+			///
+			std::list<Terrain *>      m_terrains;
 
     };
 }
