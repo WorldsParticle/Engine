@@ -104,6 +104,15 @@ namespace   Engine
             ///
             virtual const glm::mat4     &getView(void) const = 0;
 
+            ///
+            /// \brief Bind the texture of the camera (the one on which the scene has been rendered, attached to the framebuffer of the camera)
+            ///
+	    void bindTexture(void);
+
+            ///
+            /// \brief Bind a framebuffer of the size of the camera so the scene will render there and we can use post effects after that
+            ///
+	    void bindFramebuffer(void);
         public:
 
             ///
@@ -149,5 +158,31 @@ namespace   Engine
             /// \brief The size used for the glviewport.
             ///
             glm::ivec2  m_size;
+
+            ///
+            /// \brief A framebuffer with the same size than the camera
+            ///
+	    unsigned int m_framebuffer;
+
+            ///
+            /// \brief A texture (color) with the same size than the camera
+            ///
+	    unsigned int m_textureColorbuffer;
+
+	private:
+            ///
+            /// \brief Generate a framebuffer of the size of the camera
+            ///
+	    void createFramebuffer(void);
+
+            ///
+            /// \brief Generate a texture attached to the framebuffer of the camera
+            ///
+	    void createTexture(void);
+
+            ///
+            /// \brief Delete the framebuffer and the texture of the size of the camera
+            ///
+	    void deleteFramebufferAndTexture(void);
     };
 }

@@ -28,6 +28,8 @@ namespace   Engine
     class   Camera;
     class   Object;
     class   Light;
+    class   ArrayObject;
+    class   BufferObject;
 
     ///
     /// \brief The render graph is used to render efficiently 3D data.
@@ -94,6 +96,12 @@ namespace   Engine
 
         private:
             ///
+            /// \brief This method is used to render the texture (attached to the framebuffer) to the screen so we can see the scene
+            ///
+	    void	    renderTextureToScreen(Camera *camera);
+
+        private:
+            ///
             /// \brief The scene in which the Renderer act.
             ///
             Scene				    *m_scene;
@@ -120,27 +128,13 @@ namespace   Engine
             std::list<Light *>			    m_lights;
 
             ///
-            /// \brief The framebuffers (one for each camera, with the same size)
-            ///
-            /// TODO container type
-            ///
-	    std::list<unsigned int>		    m_framebuffers;
-
-            ///
-            /// \brief The textures inside each framebuffer (oen for each camera)
-            ///
-            /// TODO container type
-            ///
-	    std::list<unsigned int>		    m_textureColorbuffers;
-
-            ///
             /// \brief The shader for the framebuffer
             ///
 	    const std::shared_ptr<ShaderProgram>    m_shaderFramebuff;
 
             ///
-            /// \brief The shader for the framebuffer
+            /// \brief The array object (a simple quad) to print the image (framebuffer) on the screen
             ///
-	    unsigned int			    m_quadVAO;
+            std::shared_ptr<ArrayObject>	    m_vao;
     };
 }

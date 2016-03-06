@@ -97,7 +97,7 @@ namespace   Engine
 
 	// Cleanup
 	delete [] imageIds;
-	imageIds = NULL;
+	imageIds = nullptr;
     }
 
     TextureLibrary::TextureLibrary(const TextureLibrary &other) :
