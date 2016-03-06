@@ -50,6 +50,10 @@ namespace   Engine
         aiMaterial **materials = ai_scene.getMaterials();
         unsigned int materials_number = ai_scene.getMaterialsNumber();
 
+	Category& root = Category::getRoot();
+
+	if (ai_scene.getTexturesNumber() != 0)
+	    root << Priority::DEBUG << "Support for meshes with embedded textures is not implemented";
         // iterate over each materials
         for (unsigned int material_index = 0 ;
                 material_index < materials_number ; ++material_index)
@@ -58,7 +62,7 @@ namespace   Engine
             int texture_index = 0;
             aiString texture_name;
 
-            // get each textures used by the material and insert it.
+            // get each diffuse textures used by the material and insert it.
             while (material->GetTexture(aiTextureType_DIFFUSE, texture_index,
                         &texture_name) == AI_SUCCESS)
             {
