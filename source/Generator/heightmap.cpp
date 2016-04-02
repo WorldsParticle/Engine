@@ -158,7 +158,7 @@ void    HeightMap::generateMesh()
             v[((i) * _width + (j)) * 3 + 1] = (float)(_points[i * _width + j].z);
             v[((i) * _width + (j)) * 3 + 2] = (float)(_points[i * _width + j].y);
 
-            ind[((i) * _width + (j)) * 6] = 1; // j + i * _width;
+            ind[((i) * _width + (j)) * 6] = j + i * _width;
             ind[((i) * _width + (j)) * 6 + 1] = j + 1 + (i + 1) * _width;
             ind[((i) * _width + (j)) * 6 + 2] = j + (i + 1) * _width;
 
