@@ -24,9 +24,9 @@ void    HeightMap::init(MAP::Map & m)
 
     _points.resize((_width + 2) * (_height + 2));
     _zoneLookUp.createCloud(m);
-    for (int i = 0; i <= _height; ++i)
+    for (int i = 0; i < _height; ++i)
     {
-     for (int j = 0; j <= _width; ++j)
+     for (int j = 0; j < _width; ++j)
      {
          _points[i * _width + j].x = (double)j;
          _points[i * _width + j].y = (double)i;
@@ -48,8 +48,8 @@ void    HeightMap::init(MAP::Map & m)
 
 void    HeightMap::paintByMoisture()
 {
-    for (int i = 0; i <= _height; ++i)
-        for (int j = 0; j <= _width; ++j)
+    for (int i = 0; i < _height; ++i)
+        for (int j = 0; j < _width; ++j)
         {
             HeightPoint & p = _points[i * _width + j];
             if (p.zone->ocean)
@@ -62,8 +62,8 @@ void    HeightMap::paintByMoisture()
 
 void    HeightMap::paintByHeight()
 {
-    for (int i = 0; i <= _height; ++i)
-        for (int j = 0; j <= _width; ++j)
+    for (int i = 0; i < _height; ++i)
+        for (int j = 0; j < _width; ++j)
         {
             HeightPoint & p = _points[i * _width + j];
             if (p.zone->ocean)
@@ -76,8 +76,8 @@ void    HeightMap::paintByHeight()
 
 void    HeightMap::paintByLandType()
 {
-    for (int i = 0; i <= _height; ++i)
-        for (int j = 0; j <= _width; ++j)
+    for (int i = 0; i < _height; ++i)
+        for (int j = 0; j < _width; ++j)
         {
             HeightPoint & p = _points[i * _width + j];
             if (p.zone->border)
@@ -94,8 +94,8 @@ void    HeightMap::paintByLandType()
 
 void    HeightMap::paintByBiome()
 {
-    for (int i = 0; i <= _height; ++i)
-        for (int j = 0; j <= _width; ++j)
+    for (int i = 0; i < _height; ++i)
+        for (int j = 0; j < _width; ++j)
         {
             HeightPoint & p = _points[i * _width + j];
             if (p.zone->biome == MAP::BEACH)
@@ -151,8 +151,8 @@ void    HeightMap::generateMesh()
     std::vector<int> &   ind = *_indices;
     std::vector<float> & n = *_normals;
 
-    for (int i = 0; i <= _height; ++i)
-        for (int j = 0; j <= _width; ++j)
+    for (int i = 0; i < (_height - 1); ++i)
+        for (int j = 0; j < (_width - 1); ++j)
         {
             v[((i) * _width + (j)) * 3] = (float)(_points[i * _width + j].x);
             v[((i) * _width + (j)) * 3 + 1] = (float)(_points[i * _width + j].z);
