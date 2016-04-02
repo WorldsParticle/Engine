@@ -1,14 +1,14 @@
-#include "voronoi.hpp"
+#include "Generator/voronoi/voronoi.hpp"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
 #include <math.h>
 #include <algorithm>
 
-#include "../map/map.hpp"
+#include "Generator/map/map.hpp"
 
-#include "parabola.hpp"
-#include "edge.hpp"
+#include "Generator/voronoi/parabola.hpp"
+#include "Generator/voronoi/edge.hpp"
 
 #define DRAND(min, max) (min) + ((double)std::rand() / RAND_MAX) * ((max) - (min))
 

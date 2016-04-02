@@ -1,4 +1,4 @@
-#include "biomizator.hpp"
+#include "Generator/biomizator.hpp"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>

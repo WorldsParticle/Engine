@@ -1,13 +1,13 @@
-#include "generator.hpp"
+#include "Generator/generator.hpp"
 
-#include "map/map.hpp"
-#include "voronoi/voronoi.hpp"
-#include "shaper.hpp"
-#include "elevator.hpp"
-#include "riveror.hpp"
-#include "moistor.hpp"
-#include "biomizator.hpp"
-#include "heightmap.hpp"
+#include "Generator/map/map.hpp"
+#include "Generator/voronoi/voronoi.hpp"
+#include "Generator/shaper.hpp"
+#include "Generator/elevator.hpp"
+#include "Generator/riveror.hpp"
+#include "Generator/moistor.hpp"
+#include "Generator/biomizator.hpp"
+#include "Generator/heightmap.hpp"
 
 namespace GEN
 {

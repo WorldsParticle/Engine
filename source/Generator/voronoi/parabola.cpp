@@ -1,4 +1,4 @@
-#include "parabola.hpp"
+#include "Generator/voronoi/parabola.hpp"
 
 namespace VOR
 {

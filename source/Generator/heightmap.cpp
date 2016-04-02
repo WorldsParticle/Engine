@@ -1,10 +1,10 @@
-#include "heightmap.hpp"
+#include "Generator/heightmap.hpp"
 
 #include <cstdlib>
 #include <iostream>
 
-#include "map/map.hpp"
-#include "tools/simplexnoise.hpp"
+#include "Generator/map/map.hpp"
+#include "Generator/tools/simplexnoise.hpp"
 
 namespace MAP
 {

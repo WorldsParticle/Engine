@@ -1,1 +1,1 @@
-#include "edge.hpp"
+#include "Generator/voronoi/edge.hpp"

@@ -1,4 +1,4 @@
-#include "map/corner.hpp"
+#include "Generator/map/corner.hpp"
 
 namespace MAP
 {

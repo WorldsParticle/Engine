@@ -1,4 +1,4 @@
-#include "riveror.hpp"
+#include "Generator/riveror.hpp"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
