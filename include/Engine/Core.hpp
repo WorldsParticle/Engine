@@ -19,6 +19,7 @@
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/AssimpImporter.hpp"
+#include    "Generator/generator.hpp"
 
 namespace Engine
 {
@@ -91,6 +92,15 @@ namespace Engine
             ///
             void    load(const std::string &filename);
 
+        public:
+
+            ///
+            /// \brief generator
+            /// \return the generator
+            ///
+            inline GEN::Generator   &generator()
+            { return m_generator; }
+
         protected:
             ///
             /// \brief This attribute is used to store all scenes present in the engine.
@@ -101,5 +111,10 @@ namespace Engine
             /// \brief The importer used to import new scene.
             ///
             AssimpImporter          m_importer;
+
+            ///
+            /// \brief m_generator
+            ///
+            GEN::Generator          m_generator;
     };
 }
