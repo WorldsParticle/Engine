@@ -26,7 +26,7 @@ public:
         INTERSECTION    // Vertex, remove parabola
     };
 
-    explicit Event(MAP::Zone *p) :
+    explicit Event(std::shared_ptr<MAP::Zone> p) :
         type(POINT),
         intersect(0, 0),
         arch(NULL),
@@ -44,7 +44,7 @@ public:
 
     Point       intersect; // if intersection
     Parabola    *arch; // if interesection
-    MAP::Zone   *site; // if point
+    std::shared_ptr<MAP::Zone> site; // if point
     double      y;
 
     // Doit y'avoir moyen rester sur une map ou un set simple, voir une liste

@@ -13,13 +13,13 @@ namespace GEN
 {
 
 Generator::Generator() :
-    _map(NULL),
-    _fillStep(NULL),
-    _shapeStep(NULL),
-    _elevateStep(NULL),
-    _riverStep(NULL),
-    _moistureStep(NULL),
-    _biomeStep(NULL)
+    _map(nullptr),
+    _fillStep(nullptr),
+    _shapeStep(nullptr),
+    _elevateStep(nullptr),
+    _riverStep(nullptr),
+    _moistureStep(nullptr),
+    _biomeStep(nullptr)
 {
     _fillStep = new VOR::Voronoi();
 }

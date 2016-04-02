@@ -8,6 +8,7 @@
 #include <map>
 #include <queue>
 #include <set>
+#include <memory>
 
 namespace MAP
 {
@@ -40,9 +41,9 @@ private:
     void    finishEdge(Parabola *p);
 
     void        computeFinalMap();
-    MAP::Corner *checkCorner(MAP::Zone *z, Point &p);
+    std::shared_ptr<MAP::Corner> checkCorner(std::shared_ptr<MAP::Zone> z, Point &p);
 
-    void    addParabola(MAP::Zone *site);
+    void    addParabola(std::shared_ptr<MAP::Zone> site);
     void    removeParabola(Event *e); // should pass Parabola as argument when implemented
 
     // to review
@@ -72,7 +73,7 @@ private:
     bool    getEdgeIntersection(Edge *a, Edge *b, Point &result); // à refaire en plus propre
 
     std::vector<Edge *>         _tempEdges;
-    std::vector<MAP::Zone *>    _tempZones;
+    std::vector<std::shared_ptr<MAP::Zone>>    _tempZones;
 
     ///
     /// \brief _events potential future events wich can modify the beach line

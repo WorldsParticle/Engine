@@ -72,12 +72,12 @@ public:
       load_bitmap();
    }
 
-   bitmap_image(const unsigned int width, const unsigned int height)
+   bitmap_image(const unsigned int newWidth, const unsigned int newHeight)
    : file_name_(""),
      data_  (0),
      length_(0),
-     width_(width),
-     height_(height),
+     width_(newWidth),
+     height_(newHeight),
      row_increment_(0),
      bytes_per_pixel_(3),
      channel_mode_(bgr_mode)
@@ -88,6 +88,7 @@ public:
    bitmap_image(const bitmap_image& image)
    : file_name_(image.file_name_),
      data_(0),
+     length_(0),
      width_(image.width_),
      height_(image.height_),
      row_increment_(0),
@@ -122,7 +123,7 @@ public:
 
    inline bool operator!()
    {
-      return (data_         == 0) ||
+      return (data_         == nullptr) ||
              (length_       == 0) ||
              (width_        == 0) ||
              (height_       == 0) ||
@@ -226,25 +227,25 @@ public:
 
    inline bool region(const unsigned int& x,
                       const unsigned int& y,
-                      const unsigned int& width,
-                      const unsigned int& height,
+                      const unsigned int& newWidth,
+                      const unsigned int& newHeight,
                       bitmap_image& dest_image)
    {
-      if ((x + width ) > width_ ) { return false; }
-      if ((y + height) > height_) { return false; }
+      if ((x + newWidth ) > width_ ) { return false; }
+      if ((y + newHeight) > height_) { return false; }
 
       if (
            (dest_image.width_  < width_ ) ||
            (dest_image.height_ < height_)
          )
       {
-         dest_image.setwidth_height(width,height);
+         dest_image.setwidth_height(newWidth, newHeight);
       }
 
-      for (unsigned int r = 0; r < height; ++r)
+      for (unsigned int r = 0; r < newHeight; ++r)
       {
          unsigned char* itr1     = row(r + y) + x * bytes_per_pixel_;
-         unsigned char* itr1_end = itr1 + (width * bytes_per_pixel_);
+         unsigned char* itr1_end = itr1 + (newWidth * bytes_per_pixel_);
          unsigned char* itr2     = dest_image.row(r);
          std::copy(itr1,itr1_end,itr2);
       }
@@ -254,17 +255,17 @@ public:
 
    inline bool set_region(const unsigned int& x,
                           const unsigned int& y,
-                          const unsigned int& width,
-                          const unsigned int& height,
+                          const unsigned int& newWidth,
+                          const unsigned int& newHeight,
                           const unsigned char& value)
    {
-      if ((x + width) > width_)   { return false; }
-      if ((y + height) > height_) { return false; }
+      if ((x + newWidth) > width_)   { return false; }
+      if ((y + newHeight) > height_) { return false; }
 
-      for (unsigned int r = 0; r < height; ++r)
+      for (unsigned int r = 0; r < newHeight; ++r)
       {
          unsigned char* itr     = row(r + y) + x * bytes_per_pixel_;
-         unsigned char* itr_end = itr + (width * bytes_per_pixel_);
+         unsigned char* itr_end = itr + (newWidth * bytes_per_pixel_);
          std::fill(itr,itr_end,value);
       }
 
@@ -273,20 +274,20 @@ public:
 
    inline bool set_region(const unsigned int& x,
                           const unsigned int& y,
-                          const unsigned int& width,
-                          const unsigned int& height,
+                          const unsigned int& newWidth,
+                          const unsigned int& newHeight,
                           const color_plane color,
                           const unsigned char& value)
    {
-      if ((x + width) > width_)   { return false; }
-      if ((y + height) > height_) { return false; }
+      if ((x + newWidth) > width_)   { return false; }
+      if ((y + newHeight) > height_) { return false; }
 
       const unsigned int color_plane_offset = offset(color);
 
-      for (unsigned int r = 0; r < height; ++r)
+      for (unsigned int r = 0; r < newHeight; ++r)
       {
          unsigned char* itr     = row(r + y) + x * bytes_per_pixel_ + color_plane_offset;
-         unsigned char* itr_end = itr + (width * bytes_per_pixel_);
+         unsigned char* itr_end = itr + (newWidth * bytes_per_pixel_);
 
          while (itr != itr_end)
          {
@@ -300,19 +301,19 @@ public:
 
    inline bool set_region(const unsigned int& x,
                           const unsigned int& y,
-                          const unsigned int& width,
-                          const unsigned int& height,
+                          const unsigned int& newWidth,
+                          const unsigned int& newHeight,
                           const unsigned char& red,
                           const unsigned char& green,
                           const unsigned char& blue)
    {
-      if ((x +  width) >  width_) { return false; }
-      if ((y + height) > height_) { return false; }
+      if ((x +  newWidth) >  width_) { return false; }
+      if ((y + newHeight) > height_) { return false; }
 
-      for (unsigned int r = 0; r < height; ++r)
+      for (unsigned int r = 0; r < newHeight; ++r)
       {
          unsigned char* itr     = row(r + y) + x * bytes_per_pixel_;
-         unsigned char* itr_end = itr + (width * bytes_per_pixel_);
+         unsigned char* itr_end = itr + (newWidth * bytes_per_pixel_);
 
          while (itr != itr_end)
          {
@@ -359,18 +360,18 @@ public:
       return width_ *  height_;
    }
 
-   inline void setwidth_height(const unsigned int width,
-                               const unsigned int height,
-                               const bool clear = false)
+   inline void setwidth_height(const unsigned int newWidth,
+                               const unsigned int newHeight,
+                               const bool nClear = false)
    {
       delete[] data_;
-      data_   = 0;
-      width_  = width;
-      height_ = height;
+      data_   = nullptr;
+      width_  = newWidth;
+      height_ = newHeight;
 
       create_bitmap();
 
-      if (clear)
+      if (nClear)
       {
          std::fill(data_,data_ + length_,0x00);
       }
@@ -1077,13 +1078,13 @@ public:
 
       double mse = 0.0;
 
-      const unsigned int height = image.height();
-      const unsigned int width  = image.width();
+      const unsigned int h = image.height();
+      const unsigned int w  = image.width();
 
-      for (unsigned int r = 0; r < height; ++r)
+      for (unsigned int r = 0; r < h; ++r)
       {
          unsigned char* itr1       = row(r + y) + x * bytes_per_pixel_;
-         unsigned char* itr1_end   = itr1 + (width * bytes_per_pixel_);
+         unsigned char* itr1_end   = itr1 + (w * bytes_per_pixel_);
          const unsigned char* itr2 = image.row(r);
 
          while (itr1 != itr1_end)
@@ -1122,11 +1123,11 @@ public:
 
       double* h_itr = hist;
       const double* h_end = hist + 256;
-      const double pixel_count = static_cast<double>(width_ * height_);
+      const double pixel_c = static_cast<double>(width_ * height_);
 
       while (h_end != h_itr)
       {
-         *(h_itr++) /= pixel_count;
+         *(h_itr++) /= pixel_c;
       }
    }
 
@@ -1359,7 +1360,7 @@ private:
       length_        = width_ * height_ * bytes_per_pixel_;
       row_increment_ = width_ * bytes_per_pixel_;
 
-      if (0 != data_)
+      if (nullptr != data_)
       {
          delete[] data_;
       }
@@ -1709,7 +1710,7 @@ inline void plasma(bitmap_image& image,
                    const double& c1,    const double& c2,
                    const double& c3,    const double& c4,
                    const double& roughness = 3.0,
-                   const rgb_store colormap[] = 0)
+                   const rgb_store colormap[] = nullptr)
 {
    // Note: c1,c2,c3,c4 -> [0.0,1.0]
 
