@@ -22,6 +22,7 @@
 #include    "Engine/Core/Object.hpp"
 #include    "Engine/Core/Camera.hpp"
 #include    "Engine/Core/Light.hpp"
+#include    "Engine/Core/Terrain.hpp"
 #include    "Engine/Core/Transform.hpp"
 #include    "Engine/Core/Mesh.hpp"
 
@@ -33,7 +34,8 @@ namespace   Engine
         m_scene(scene),
         m_objects(),
         m_cameras(),
-        m_lights()
+        m_lights(),
+		m_terrains()
     {
 
     }
@@ -42,8 +44,9 @@ namespace   Engine
         m_scene(other.m_scene),
         m_objects(),
         m_cameras(),
-        m_lights()
-    {
+        m_lights(),
+		m_terrains()
+	{
 
     }
 
@@ -51,8 +54,9 @@ namespace   Engine
         m_scene(std::move(other.m_scene)),
         m_objects(),
         m_cameras(),
-        m_lights()
-    {
+        m_lights(),
+		m_terrains()
+	{
 
     }
 
@@ -97,14 +101,23 @@ namespace   Engine
         this->m_cameras.push_back(camera);
     }
 
-    void
-    Renderer::add(Light *light)
-    {
-        //Category &root = Category::getRoot();
+	void
+		Renderer::add(Light *light)
+	{
+		//Category &root = Category::getRoot();
 
-        //root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
-        this->m_lights.push_back(light);
-    }
+		//root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
+		this->m_lights.push_back(light);
+	}
+
+	void
+		Renderer::add(Terrain *terrain)
+	{
+		//Category &root = Category::getRoot();
+
+		//root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
+		this->m_terrains.push_back(terrain);
+	}
 
 
 
@@ -131,9 +144,11 @@ namespace   Engine
                     part->draw(model, view, projection);
                 }
             }
+			//TODO lefebv_z : render terrain
         }
         this->m_cameras.clear();
         this->m_objects.clear();
-        this->m_lights.clear();
+		this->m_lights.clear();
+		this->m_terrains.clear();
     }
 }

@@ -138,10 +138,15 @@ namespace Engine
             ///
             void        add(Light *light);
 
-            ///
-            /// \brief add a camera in the spatial graph.
-            ///
-            void        add(Camera *camera);
+			///
+			/// \brief add a camera in the spatial graph.
+			///
+			void        add(Camera *camera);
+
+			///
+			/// \brief add a terrain in the spatial graph.
+			///
+			void        add(Terrain *terrain);
 
         public:
 

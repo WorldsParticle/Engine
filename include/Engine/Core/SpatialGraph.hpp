@@ -28,7 +28,8 @@ namespace   Engine
     class   Scene;
     class   Camera;
     class   Object;
-    class   Light;
+	class   Light;
+	class   Terrain;
 
     ///
     /// \brief This class will be used to implement an occlusion culling algorithm.
@@ -89,11 +90,17 @@ namespace   Engine
             ///
             void    add(Light *light);
 
-            ///
-            /// \brief This method add the camera in the spatial graph,
-            /// it's used to reduce the rendering time.
-            ///
-            void    add(Camera *camera);
+			///
+			/// \brief This method add the camera in the spatial graph,
+			/// it's used to reduce the rendering time.
+			///
+			void    add(Camera *camera);
+
+			///
+			/// \brief This method add the terrain in the spatial graph,
+			/// it's used to reduce the rendering time.
+			///
+			void    add(Terrain *terrain);
 
         protected:
             ///
@@ -117,9 +124,14 @@ namespace   Engine
             ///
             std::list<Object *>     m_objects;
 
-            ///
-            /// \brief The lights existing in the scene.
-            ///
-            std::list<Light *>      m_lights;
-    };
+			///
+			/// \brief The lights existing in the scene.
+			///
+			std::list<Light *>      m_lights;
+
+			///
+			/// \brief The terrains existing in the scene.
+			///
+			std::list<Terrain *>      m_terrains;
+	};
 }

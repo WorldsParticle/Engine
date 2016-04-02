@@ -21,6 +21,7 @@
 #include    "Engine/Core/Camera.hpp"
 #include    "Engine/Core/Object.hpp"
 #include    "Engine/Core/Light.hpp"
+#include    "Engine/Core/Terrain.hpp"
 
 using namespace     log4cpp;
 
@@ -31,7 +32,8 @@ namespace   Engine
         m_renderer(renderer),
         m_cameras(),
         m_objects(),
-        m_lights()
+        m_lights(),
+		m_terrains()
     {
 
     }
@@ -55,11 +57,17 @@ namespace   Engine
         this->m_lights.push_back(light);
     }
 
-    void
-    SpatialGraph::add(Camera *camera)
-    {
-        this->m_cameras.push_back(camera);
-    }
+	void
+		SpatialGraph::add(Camera *camera)
+	{
+		this->m_cameras.push_back(camera);
+	}
+
+	void
+		SpatialGraph::add(Terrain *terrain)
+	{
+		this->m_terrains.push_back(terrain);
+	}
 
 
 
@@ -74,11 +82,15 @@ namespace   Engine
         {
             this->m_renderer.add(object);
         }
-        for (Light *light : this->m_lights)
-        {
-            this->m_renderer.add(light);
-        }
-    }
+		for (Light *light : this->m_lights)
+		{
+			this->m_renderer.add(light);
+		}
+		for (Terrain *terrain : this->m_terrains)
+		{
+			this->m_renderer.add(terrain);
+		}
+	}
 
 }
 
