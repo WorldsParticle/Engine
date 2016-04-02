@@ -20,7 +20,7 @@ Parabola::Parabola() :
     _right = NULL;
 }
 
-Parabola::Parabola(std::shared_ptr<MAP::Zone> p) :
+Parabola::Parabola(Point *p) :
     index(indexMax),
     site(p)
 {

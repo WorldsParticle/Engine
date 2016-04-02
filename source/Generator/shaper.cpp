@@ -73,7 +73,7 @@ void        Shaper::assignCornerLandPerlin(int seed)
 
 void        Shaper::assignOceanCostAndLand()
 {
-    std::queue<std::shared_ptr<MAP::Zone>> q;
+    std::queue<MAP::Zone *> q;
 
 
     // assigning ocean to border zones,
@@ -82,7 +82,7 @@ void        Shaper::assignOceanCostAndLand()
     {
         zone.second->ocean = false;
         int numWater = 0;
-        for (auto corner : zone.second->corners)
+        for (auto * corner : zone.second->corners)
         {
             if (corner->border)
             {
@@ -102,9 +102,9 @@ void        Shaper::assignOceanCostAndLand()
     // propagating ocean zones
     while (q.size())
     {
-        auto zone = q.front();
+        auto * zone = q.front();
         q.pop();
-        for (auto neighbor : zone->neighbors)
+        for (auto * neighbor : zone->neighbors)
         {
             if (neighbor->water && !neighbor->ocean) {
                 neighbor->ocean = true;
@@ -118,7 +118,7 @@ void        Shaper::assignOceanCostAndLand()
     {
         int numOcean = 0;
         int numLand = 0;
-        for (auto neighbor : zone.second->neighbors)
+        for (auto * neighbor : zone.second->neighbors)
         {
             numOcean += (int)(neighbor->ocean);
             numLand += (int)(!neighbor->water);
@@ -131,7 +131,7 @@ void        Shaper::assignOceanCostAndLand()
     {
         unsigned int numOcean = 0;
         unsigned int numLand = 0;
-        for (auto zone : corner.second->faces)
+        for (auto * zone : corner.second->faces)
         {
             numOcean += (int)(zone->ocean);
             numLand += (int)(!zone->water);

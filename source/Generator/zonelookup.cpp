@@ -30,7 +30,7 @@ void    ZoneLookUp::createCloud(MAP::Map & m)
     _tree->buildIndex();
 }
 
-std::shared_ptr<Zone> ZoneLookUp::getNearestZone(double x, double y)
+Zone *  ZoneLookUp::getNearestZone(double x, double y)
 {
     double          queryPoint[2] = {x, y};
     const size_t    num_results = 1;

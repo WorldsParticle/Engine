@@ -11,7 +11,6 @@ Zone::Zone(double x, double y) :
     ocean(false),
     coast(false),
     border(false),
-    biome(),
     elevation(0.0),
     moisture(0.0),
     neighbors(),
@@ -21,7 +20,7 @@ Zone::Zone(double x, double y) :
     ++indexMax;
 }
 
-bool    Zone::haveNeighbor(std::shared_ptr<Zone> zone)
+bool    Zone::haveNeighbor(Zone *zone)
 {
     for (const auto &z: neighbors)
         if (z == zone)

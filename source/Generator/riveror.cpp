@@ -43,7 +43,7 @@ void        Riveror::calculateWatersheds()
             auto corner = c.second;
             if (!corner->ocean && !corner->coast && !corner->watershed->coast)
             {
-		std::shared_ptr<MAP::Corner> adj = corner->downslope->watershed;
+                MAP::Corner * adj = corner->downslope->watershed;
                 if (!adj->ocean)
                 {
                     corner->watershed = adj;
@@ -56,7 +56,7 @@ void        Riveror::calculateWatersheds()
 
     for (auto & corner : _map->corners())
     {
-	std::shared_ptr<MAP::Corner> adj = corner.second->watershed;
+        MAP::Corner * adj = corner.second->watershed;
         adj->watershedSize += 1;
     }
 }
@@ -65,14 +65,14 @@ void        Riveror::createRivers()
 {
     for (unsigned int i; i < (_map->zoneNumber() / 2); ++i)
     {
-	std::shared_ptr<MAP::Corner> corner = _map->corners().at(rand() % _map->corners().size());
-        if (corner->ocean || corner->elevation < 0.3f || corner->elevation > 0.9f)
+        auto * corner = _map->corners().at(rand() % _map->corners().size());
+        if (corner->ocean || corner->elevation < 0.3 || corner->elevation > 0.9)
             continue;
         while (!corner->coast)
         {
             if (corner->downslope == corner)
                 break;
-	    std::shared_ptr<MAP::CrossedEdge> edge = lookupEdgeFromCorner(corner, corner->downslope);
+            MAP::CrossedEdge * edge = lookupEdgeFromCorner(corner, corner->downslope);
             edge->river += 1;
             corner->river += 1;
             corner->downslope->river += 1;
@@ -81,9 +81,9 @@ void        Riveror::createRivers()
     }
 }
 
-std::shared_ptr<MAP::CrossedEdge> Riveror::lookupEdgeFromCorner(std::shared_ptr<MAP::Corner> from, std::shared_ptr<MAP::Corner> to)
+MAP::CrossedEdge * Riveror::lookupEdgeFromCorner(MAP::Corner * from, MAP::Corner * to)
 {
-    for (std::shared_ptr<MAP::CrossedEdge> edge : from->edges)
+    for (auto * edge : from->edges)
     {
         if (edge->c0 == to || edge->c1 == to)
             return (edge);

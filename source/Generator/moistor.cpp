@@ -28,31 +28,29 @@ void    Moistor::run()
 }
 
 
-// assigne l'humidité des polygones en faisant la moyenne de la somme de celle des sommets
 void        Moistor::assignPolygonMoisture()
 {
     for (auto & z : _map->zones())
     {
-        float sumMoisture = 0.0f;
-        for (auto corner : z.second->corners)
+        float sumMoisture = 0.0;
+        for (auto * corner : z.second->corners)
         {
-            if (corner->moisture > 1.0f)
-                corner->moisture = 1.0f;
+            if (corner->moisture > 1.0)
+                corner->moisture = 1.0;
             sumMoisture += corner->moisture;
         }
-        z.second->moisture = sumMoisture / static_cast<float>(z.second->corners.size());
+        z.second->moisture = sumMoisture / z.second->corners.size();
     }
 }
 
 struct sortByMoisture
 {
-  bool operator() (std::shared_ptr<MAP::Corner> L, std::shared_ptr<MAP::Corner> R) { return L->moisture < R->moisture; }
+  bool operator() (MAP::Corner const * L, MAP::Corner const * R) { return L->moisture < R->moisture; }
 };
 
-// redistribue l'humidité de 0 à 1.0 uniformément
 void        Moistor::redistributeMoisture()
 {
-    std::vector<std::shared_ptr<MAP::Corner>> corners;
+    std::vector<MAP::Corner *> corners;
 
     for (const auto & corner : _map->corners())
     {
@@ -62,23 +60,21 @@ void        Moistor::redistributeMoisture()
     std::sort(corners.begin(), corners.end(), sortByMoisture());
     for (unsigned int i = 0; i < corners.size(); ++i)
     {
-        corners[i]->moisture = static_cast<float>(i) / (static_cast<float>(corners.size()) - 1.0f);
+        corners[i]->moisture = (float)i / (corners.size() - 1);
     }
 }
 
-// calcule l'humidité d'un sommet de polygone
 void        Moistor::assignCornerMoisture()
 {
-    std::queue<std::shared_ptr<MAP::Corner>> q;
+    std::queue<MAP::Corner *> q;
 
-    // si le sommet est lié à un point d'eau, ou si il possède une rivière,
-    // on lui assigne un humidité et on le push dans la queue
     for (auto & c : _map->corners())
     {
-        auto corner = c.second;
+        auto * corner = c.second;
         if ((corner->water || corner->river > 0) && !corner->ocean)
         {
-            corner->moisture = corner->river > 0 ? std::min(3.0f, (0.2f * corner->river)) : 1.0f;
+                            std::cout << corner->river << std::endl;
+            corner->moisture = corner->river > 0 ? std::min(3.0, (0.2 * corner->river)) : 1.0;
             q.push(corner);
         }
         else
@@ -89,16 +85,14 @@ void        Moistor::assignCornerMoisture()
 
     float   newMoisture = 0.0;
 
-    // on propage l'humidité des rivières et zones d'eau vers les zones sèches,
-    // en diminuant l'humidité de 10% à chaque bond.
     while (q.size())
     {
-        auto corner = q.front();
+        auto * corner = q.front();
         q.pop();
 
-        for (auto adj : corner->adjacent)
+        for (auto * adj : corner->adjacent)
         {
-            newMoisture = corner->moisture * 0.9f;
+            newMoisture = corner->moisture * 0.9;
             if (newMoisture > adj->moisture)
             {
                 adj->moisture = newMoisture;;
@@ -107,7 +101,6 @@ void        Moistor::assignCornerMoisture()
         }
     }
 
-    // l'humidité est au maximum pour les océans et beachs.
     for (auto & corner : _map->corners())
     {
         if (corner.second->ocean || corner.second->coast)

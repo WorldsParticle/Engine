@@ -28,9 +28,9 @@ public:
 
     void    generateMesh();
 
-    std::vector<float> const &getPoints();
-    std::vector<int> const &getIndices();
-    std::vector<float> const &getNormals();
+    std::vector<float> * getPoints();
+    std::vector<int>     * getIndices();
+    std::vector<float> * getNormals();
 
 private:
 
@@ -41,9 +41,9 @@ private:
     ZoneLookUp                  _zoneLookUp;
     bitmap_image                image;
 
-    std::vector<float> _vertices;
-    std::vector<int>   _indices;
-    std::vector<float> _normals;
+    std::vector<float> * _vertices;
+    std::vector<int>   * _indices;
+    std::vector<float> * _normals;
 
 };
 
