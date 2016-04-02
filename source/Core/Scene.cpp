@@ -125,11 +125,17 @@ namespace Engine
         this->m_spatialgraph.add(light);
     }
 
-    void
-    Scene::add(Camera *camera)
-    {
-        this->m_spatialgraph.add(camera);
-    }
+	void
+		Scene::add(Camera *camera)
+	{
+		this->m_spatialgraph.add(camera);
+	}
+
+	void
+		Scene::add(Terrain *terrain)
+	{
+		this->m_spatialgraph.add(terrain);
+	}
 
 
 
