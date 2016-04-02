@@ -2,6 +2,7 @@
 #define CORNER_H
 
 #include <vector>
+#include <memory>
 #include "point.hpp"
 
 namespace MAP
@@ -36,13 +37,13 @@ public:
     float   elevation; // 0.0-1.0
     float   moisture;  // 0.0-1.0
 
-    std::vector<Zone *>         faces; // touching faces
-    std::vector<CrossedEdge *>  edges; // touching edges
-    std::vector<Corner *>       adjacent; // adjacent corners
+    std::vector<std::shared_ptr<Zone>>         faces; // touching faces
+    std::vector<std::shared_ptr<CrossedEdge>>  edges; // touching edges
+    std::vector<std::shared_ptr<Corner>>       adjacent; // adjacent corners
 
     int     river;     // 0 if no river, or volume of water in river
-    Corner  *downslope; // pointer to adjacent corner most downhill
-    Corner  *watershed; // pointer to coastal corner, or null
+    std::shared_ptr<Corner> downslope; // pointer to adjacent corner most downhill
+    std::shared_ptr<Corner> watershed; // pointer to coastal corner, or null
     int     watershedSize;
 };
 

@@ -21,7 +21,7 @@ public:
 private:
     void                createRivers();
     void                calculateWatersheds();
-    MAP::CrossedEdge *  lookupEdgeFromCorner(MAP::Corner * from, MAP::Corner * to);
+    std::shared_ptr<MAP::CrossedEdge> lookupEdgeFromCorner(std::shared_ptr<MAP::Corner> from, std::shared_ptr<MAP::Corner> to);
 
 };
 

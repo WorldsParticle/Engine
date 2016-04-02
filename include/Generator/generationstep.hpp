@@ -19,7 +19,7 @@ public:
         BIOMIZATING
     };
 
-    GenerationStep() : _map(NULL) {}
+    GenerationStep() : _map(nullptr), _step() {}
 
     inline void    generate(MAP::Map *map)
     { _map = map; run(); }

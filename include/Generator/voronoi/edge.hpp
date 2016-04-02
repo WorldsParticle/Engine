@@ -27,8 +27,8 @@ public:
     Point       start;
     Point       end;
     Point       direction;
-    MAP::Zone   *left;
-    MAP::Zone	*right;
+    std::shared_ptr<MAP::Zone> left;
+    std::shared_ptr<MAP::Zone> right;
 
     double		f;
     double		g;
@@ -43,15 +43,16 @@ public:
         r		: pointer to right place
     */
 
-    Edge(const Point &s, MAP::Zone *l, MAP::Zone *r) :
+    Edge(const Point &s, std::shared_ptr<MAP::Zone> l, std::shared_ptr<MAP::Zone> r) :
         start(s.x, s.y),
         end(0, 0),
         direction(0, 0),
         left(l),
-        right(r)
+        right(r),
+	f(0.0f),
+	g(0.0f),
+	neighbour(nullptr)
     {
-        neighbour	= NULL;
-
         f = (r->point.x - l->point.x) / (l->point.y - r->point.y) ;
         g = s.y - f * s.x ;
         direction.x =  (r->point.y - l->point.y); // revoir

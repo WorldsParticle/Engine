@@ -31,7 +31,7 @@ void    Elevator::run()
 
 void        Elevator::assignCornerElevation()
 {
-    std::queue<MAP::Corner *>   q;
+    std::queue<std::shared_ptr<MAP::Corner>>   q;
 int a = 0;
     for (auto & corner : _map->corners())
     {
@@ -48,15 +48,15 @@ int a = 0;
 
     while (q.size())
     {
-        auto * corner = q.front();
+	std::shared_ptr<MAP::Corner> corner = q.front();
         q.pop();
 
-        for (auto * adj : corner->adjacent)
+        for (std::shared_ptr<MAP::Corner> adj : corner->adjacent)
         {
-            float newElevation = 0.00001 + corner->elevation;
+            float newElevation = 0.00001f + corner->elevation;
             if (!corner->water && !adj->water)
             {
-                newElevation += 1;
+                newElevation += 1.0f;
                 // add randomness here if map looks too dull
             }
             if (newElevation < adj->elevation)
@@ -71,13 +71,13 @@ int a = 0;
 
 struct sortByElevation
 {
-  bool operator() (MAP::Corner const * L, MAP::Corner const * R) { return L->elevation < R->elevation; }
+  bool operator() (std::shared_ptr<MAP::Corner> L, std::shared_ptr<MAP::Corner> R) { return L->elevation < R->elevation; }
 };
 
 void        Elevator::redistributeElevation()
 {
-    float scaleFactor = 1.1;
-    std::vector<MAP::Corner *> corners;
+    float scaleFactor = 1.1f;
+    std::vector<std::shared_ptr<MAP::Corner>> corners;
 
     for (const auto & corner : _map->corners())
     {
@@ -90,10 +90,10 @@ void        Elevator::redistributeElevation()
     {
        float y, x;
 
-       y = (float)i / (float)(corners.size() - 1);
-       x = sqrt(scaleFactor) - sqrt(scaleFactor * (1.0-y));
-       if (x > 1.0)
-           x = 1.0;
+       y = static_cast<float>(i) / static_cast<float>(corners.size() - 1);
+       x = sqrt(scaleFactor) - sqrt(scaleFactor * (1.0f - y));
+       if (x > 1.0f)
+           x = 1.0f;
        corners[i]->elevation = x;
     }
 
@@ -104,11 +104,11 @@ void        Elevator::setPolygonElevation()
     for (const auto & zone : _map->zones())
     {
         float sumElevation = 0.0;
-        for (auto * corner : zone.second->corners)
+        for (auto corner : zone.second->corners)
         {
             sumElevation += corner->elevation;
         }
-        zone.second->elevation = sumElevation / zone.second->corners.size();
+        zone.second->elevation = sumElevation / static_cast<float>(zone.second->corners.size());
     }
 }
 
@@ -116,8 +116,8 @@ void        Elevator::calculateDownSlopes()
 {
     for (const auto & q : _map->corners())
     {
-        auto * steepest = q.second;
-        for (auto * neighbor : q.second->adjacent)
+	std::shared_ptr<MAP::Corner> steepest = q.second;
+        for (std::shared_ptr<MAP::Corner> neighbor : q.second->adjacent)
         {
             if (neighbor->elevation < steepest->elevation)
                 steepest = neighbor;

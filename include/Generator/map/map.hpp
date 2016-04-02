@@ -2,6 +2,7 @@
 #define MAP_H
 
 #include <map>
+#include <memory>
 #include "point.hpp"
 #include "zone.hpp"
 #include "corner.hpp"
@@ -16,11 +17,11 @@ public:
     Map(unsigned int xMax = 0, unsigned int yMax = 0, unsigned int zoneNumber = 0);
     ~Map();
 
-    inline std::map<int, Zone *>        &zones()
+    inline std::map<int, std::shared_ptr<Zone>>        &zones()
     { return _zones; }
-    inline std::map<int, Corner *>      &corners()
+    inline std::map<int, std::shared_ptr<Corner>>      &corners()
     { return _corners; }
-    inline std::map<int, CrossedEdge *> &edges()
+    inline std::map<int, std::shared_ptr<CrossedEdge>> &edges()
     { return _edges; }
 
     inline double xMax()
@@ -32,9 +33,9 @@ public:
 
 private:
 
-    std::map<int, Zone *>         _zones;
-    std::map<int, Corner *>       _corners;
-    std::map<int, CrossedEdge *>  _edges;
+    std::map<int, std::shared_ptr<Zone>>         _zones;
+    std::map<int, std::shared_ptr<Corner>>       _corners;
+    std::map<int, std::shared_ptr<CrossedEdge>>  _edges;
 
     double    _xMax;
     double    _yMax;

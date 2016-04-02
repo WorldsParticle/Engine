@@ -2,6 +2,7 @@
 #define ZONE_H
 
 #include <vector>
+#include <memory>
 #include "point.hpp"
 
 namespace MAP
@@ -46,7 +47,7 @@ public:
     inline friend std::ostream &operator<<(std::ostream &os, const Zone &s)
     { return os << "[" << s.index << "](" << s.point.x << ", " << s.point.y << ")"; }
 
-    bool    haveNeighbor(Zone *zone);
+    bool    haveNeighbor(std::shared_ptr<Zone> zone);
 
     static int  indexMax;  // change this
     const int   index;
@@ -61,9 +62,9 @@ public:
 
     MAP::Biome biome;     // biome type (see article)
 
-    std::vector<Zone *>         neighbors;
-    std::vector<CrossedEdge *>  borders;
-    std::vector<Corner *>       corners;
+    std::vector<std::shared_ptr<Zone>>         neighbors;
+    std::vector<std::shared_ptr<CrossedEdge>>  borders;
+    std::vector<std::shared_ptr<Corner>>       corners;
 };
 
 }

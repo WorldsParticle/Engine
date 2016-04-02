@@ -3,26 +3,19 @@
 namespace MAP
 {
 
-Map::Map(unsigned int xMax, unsigned int yMax, unsigned int zoneNumber) :
+Map::Map(unsigned int xMx, unsigned int yMx, unsigned int zNumber) :
     _zones(),
     _corners(),
     _edges(),
-    _xMax(xMax),
-    _yMax(yMax),
-    _zoneNumber(zoneNumber)
+    _xMax(xMx),
+    _yMax(yMx),
+    _zoneNumber(zNumber)
 {
 
 }
 
 Map::~Map()
 {
-    for(std::map<int, Zone *>::iterator it = _zones.begin(); it != _zones.end(); ++it)
-        delete (*it).second;
-    for(std::map<int, Corner *>::iterator it = _corners.begin(); it != _corners.end(); ++it)
-        delete (*it).second;
-    for(std::map<int, CrossedEdge *>::iterator it = _edges.begin(); it != _edges.end(); ++it)
-        delete (*it).second;
-
     _zones.clear();
     _corners.clear();
     _edges.clear();

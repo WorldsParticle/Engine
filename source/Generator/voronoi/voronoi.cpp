@@ -10,7 +10,7 @@
 #include "Generator/voronoi/parabola.hpp"
 #include "Generator/voronoi/edge.hpp"
 
-#define DRAND(min, max) (min) + ((double)std::rand() / RAND_MAX) * ((max) - (min))
+#define DRAND(min, max) (min) + (static_cast<double>(std::rand()) / RAND_MAX) * ((max) - (min))
 
 namespace VOR
 {
@@ -20,7 +20,7 @@ Voronoi::Voronoi() :
     _events(),
     _deleted(),
     _sweepLine(0),
-    _root(NULL)
+    _root(nullptr)
 {
     _step = FILL;
 }
@@ -55,7 +55,7 @@ void    Voronoi::generateRandomSites()
 {
     for (unsigned int i = 0; i < _map->zoneNumber(); ++i)
     {
-        MAP::Zone *zone = new MAP::Zone(DRAND(0, _map->xMax()), DRAND(0, _map->yMax()));
+	std::shared_ptr<MAP::Zone> zone = std::make_shared<MAP::Zone>(DRAND(0, _map->xMax()), DRAND(0, _map->yMax()));
         _events.push(new Event(zone));
         _tempZones.push_back(zone);
     }
@@ -76,7 +76,7 @@ void    Voronoi::generateTestSites()
 
 void    Voronoi::fortuneAlgo()
 {
-    _root = NULL;
+    _root = nullptr;
     Parabola::indexMax = 0;
     for(std::vector<Edge *>::iterator it = _tempEdges.begin(); it != _tempEdges.end(); ++it)
         delete (*it);
@@ -134,8 +134,8 @@ void    Voronoi::LloydRelaxation() // NOT WORKING FOR NOW
             z->point.x += n->point.x;
             z->point.y += n->point.y;
         }
-        z->point.x /= z->neighbors.size();
-        z->point.y /= z->neighbors.size();
+        z->point.x /= static_cast<double>(z->neighbors.size());
+        z->point.y /= static_cast<double>(z->neighbors.size());
         z->neighbors.clear();
         _events.push(new Event(z));
     }
@@ -165,15 +165,15 @@ void        Voronoi::computeFinalMap()
 {
     for (const auto &e: _tempEdges)
     {
-        MAP::CrossedEdge    *edge = new MAP::CrossedEdge();
-        MAP::Corner *c0;
-        MAP::Corner *c1;
+	std::shared_ptr<MAP::CrossedEdge> edge = std::make_shared<MAP::CrossedEdge>();
+        std::shared_ptr<MAP::Corner> c0;
+        std::shared_ptr<MAP::Corner> c1;
 
         // Ugly workaround
         if (!_map->zones().count(e->left->index))
-            _map->zones().insert(std::pair<int, MAP::Zone *>(e->left->index, e->left));
+            _map->zones().insert(std::pair<int, std::shared_ptr<MAP::Zone>>(e->left->index, e->left));
         if (!_map->zones().count(e->right->index))
-            _map->zones().insert(std::pair<int, MAP::Zone *>(e->right->index, e->right));
+            _map->zones().insert(std::pair<int, std::shared_ptr<MAP::Zone>>(e->right->index, e->right));
 
         if (!e->left->haveNeighbor(e->right))
             e->left->neighbors.push_back(e->right);
@@ -189,8 +189,8 @@ void        Voronoi::computeFinalMap()
         {
             if (!(c0 = checkCorner(e->right, e->start)))
             {
-                c0 = new MAP::Corner();
-                _map->corners().insert(std::pair<int, MAP::Corner *>(c0->index, c0));
+                c0 = std::make_shared<MAP::Corner>();
+                _map->corners().insert(std::pair<int, std::shared_ptr<MAP::Corner>>(c0->index, c0));
 
                 c0->point.x = e->start.x;
                 c0->point.y = e->start.y;
@@ -205,8 +205,8 @@ void        Voronoi::computeFinalMap()
         {
             if (!(c1 = checkCorner(e->right, e->end)))
             {
-                c1 = new MAP::Corner();
-                _map->corners().insert(std::pair<int, MAP::Corner *>(c1->index, c1));
+                c1 = std::make_shared<MAP::Corner>();
+                _map->corners().insert(std::pair<int, std::shared_ptr<MAP::Corner>>(c1->index, c1));
 
                 c1->point.x = e->end.x;
                 c1->point.y = e->end.y;
@@ -225,20 +225,20 @@ void        Voronoi::computeFinalMap()
         c0->adjacent.push_back(c1);
         c1->adjacent.push_back(c0);
 
-        _map->edges().insert(std::pair<int, MAP::CrossedEdge *>(edge->index, edge));
+        _map->edges().insert(std::pair<int, std::shared_ptr<MAP::CrossedEdge>>(edge->index, edge));
     }
 }
 
-MAP::Corner *Voronoi::checkCorner(MAP::Zone *z, Point &p)
+std::shared_ptr<MAP::Corner> Voronoi::checkCorner(std::shared_ptr<MAP::Zone> z, Point &p)
 {
-    for (std::vector<MAP::Corner *>::iterator it = z->corners.begin(); it != z->corners.end(); ++it)
+    for (std::vector<std::shared_ptr<MAP::Corner>>::iterator it = z->corners.begin(); it != z->corners.end(); ++it)
         if ((*it)->point.x == p.x && (*it)->point.y == p.y)
             return (*it);
-    return NULL;
+    return nullptr;
 }
 
 
-void    Voronoi::addParabola(MAP::Zone *site)
+void    Voronoi::addParabola(std::shared_ptr<MAP::Zone> site)
 {
     std::cout << "<===== addParabola(" << *site << ") =====>" << std::endl << std::endl;
     if (!_root) { _root = new Parabola(site); return; }
@@ -265,7 +265,7 @@ void    Voronoi::addParabola(MAP::Zone *site)
     if (topParabola->cEvent) // Event annulé car bouffé par une nouvelle parabole
     {
         _deleted.insert(topParabola->cEvent);
-        topParabola->cEvent = NULL;
+        topParabola->cEvent = nullptr;
     }
 
     Point   start(0, 0);
@@ -310,12 +310,12 @@ void    Voronoi::removeParabola(Event *e)
     if (p0->cEvent)
     {
         _deleted.insert(p0->cEvent);
-        p0->cEvent = NULL;
+        p0->cEvent = nullptr;
     }
     if (p2->cEvent)
     {
         _deleted.insert(p2->cEvent);
-        p2->cEvent = NULL;
+        p2->cEvent = nullptr;
     }
 
     Point   p(0, 0);

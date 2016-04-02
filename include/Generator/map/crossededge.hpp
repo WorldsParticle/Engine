@@ -1,6 +1,7 @@
 #ifndef CROSSEDEDGE_H
 #define CROSSEDEDGE_H
 
+#include <memory>
 #include "point.hpp"
 #include "zone.hpp"
 
@@ -30,8 +31,8 @@ public:
     static int  indexMax;  // change this
     const int   index;
 
-    Zone        *z0, *z1;   // Delaunay edge (during computing, é0 will be used as left, z1 as right)
-    Corner      *c0, *c1;   // Voronoi edge
+    std::shared_ptr<Zone>        z0, z1;   // Delaunay edge (during computing, é0 will be used as left, z1 as right)
+    std::shared_ptr<Corner>      c0, c1;   // Voronoi edge
     Point       midpoint;  // cross point, halfway between c0 / c1
     int         river;     // Volume of water, not necessary right now
 };
