@@ -18,8 +18,10 @@ HeightMap::~HeightMap()
 {
 }
 
+// assigne l'altitude de chaque point de la heightmap, peut ajouter du bruit pour rendre le résultat un peu plus random
 void    HeightMap::init(MAP::Map & m)
 {
+    // seed pour le bruit
     int seed = rand() % 1000000;
 
     _points.resize((_width + 2) * (_height + 2));
@@ -31,13 +33,16 @@ void    HeightMap::init(MAP::Map & m)
          _points[i * _width + j].x = (double)j;
          _points[i * _width + j].y = (double)i;
          MAP::Zone * z;
+
+         // trouve la zone à laquelle appartient le pixel en (j, i)
          z = _zoneLookUp.getNearestZone((double)(j), (double)(i));
          _points[i * _width + j].zone = z;
 
+         // génère du bruit aléatoire
          float  additionalNoise = octave_noise_2d(8, 0.5, 0.012, (float)j + seed, (float)i + seed);
          additionalNoise = additionalNoise / 10.0;
 
-
+        // set le z du point sur la heightmap
          _points[i * _width + j].z = (double)z->elevation; //+ additionalNoise;
          if (_points[i * _width + j].z > 1.0)
              _points[i * _width + j].z = 1.0;
@@ -46,6 +51,7 @@ void    HeightMap::init(MAP::Map & m)
     }
 }
 
+// crée une bitmap coloriée en en greyscale selon l'humidité des points
 void    HeightMap::paintByMoisture()
 {
     for (int i = 0; i < _height; ++i)
@@ -60,6 +66,7 @@ void    HeightMap::paintByMoisture()
     image.save_image("mapmoisture.bmp");
 }
 
+// crée une bitmap coloriée en greyscale selon la hauteur des points
 void    HeightMap::paintByHeight()
 {
     for (int i = 0; i < _height; ++i)
@@ -74,6 +81,7 @@ void    HeightMap::paintByHeight()
     image.save_image("mapheight.bmp");
 }
 
+// crée une bitmap qui assigne différentes couleures selon le land time (bordure, océan, beach/coast et water
 void    HeightMap::paintByLandType()
 {
     for (int i = 0; i < _height; ++i)
@@ -92,6 +100,7 @@ void    HeightMap::paintByLandType()
     image.save_image("maptype.bmp");
 }
 
+// crée une bitmap qui colorie les zones selon leur biome
 void    HeightMap::paintByBiome()
 {
     for (int i = 0; i < _height; ++i)
@@ -140,7 +149,7 @@ void    HeightMap::paintByBiome()
 }
 
 
-
+// génère la mesh du terrain en procédant deux triangles par deux triangles (ou carré par carré)
 void    HeightMap::generateMesh()
 {
     _vertices = new std::vector<float>[_height * _width * 3];
@@ -192,6 +201,7 @@ void    HeightMap::generateMesh()
         }
 }
 
+// get les arrays à envoyer à la carte graphique via le renderer
 std::vector<float> * HeightMap::getPoints()     { return _vertices; }
 std::vector<int>     * HeightMap::getIndices()   { return _indices; }
 std::vector<float> * HeightMap::getNormals()     { return _normals; }
