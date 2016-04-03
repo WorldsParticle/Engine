@@ -21,6 +21,7 @@ public:
     ~HeightMap();
 
     void    init(MAP_NAMESPACE::Map & m);
+    bool    pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::vec3 c);
     void    paintByMoisture();
     void    paintByHeight();
     void    paintByLandType();

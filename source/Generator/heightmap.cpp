@@ -4,6 +4,7 @@
 #include <iostream>
 
 #include "Generator/map/map.hpp"
+#include "Generator/map/point.hpp"
 #include "Generator/tools/simplexnoise.hpp"
 
 namespace MAP_NAMESPACE
@@ -18,13 +19,14 @@ HeightMap::~HeightMap()
 {
 }
 
+
 // assigne l'altitude de chaque point de la heightmap, peut ajouter du bruit pour rendre le résultat un peu plus random
 void    HeightMap::init(MAP_NAMESPACE::Map & m)
 {
     // seed pour le bruit
     int seed = rand() % 1000000;
 
-    _points.resize((_width + 2) * (_height + 2));
+    _points.resize((_width) * (_height));
     _zoneLookUp.createCloud(m);
     for (int i = 0; i < _height; ++i)
     {
@@ -38,17 +40,62 @@ void    HeightMap::init(MAP_NAMESPACE::Map & m)
          z = _zoneLookUp.getNearestZone(static_cast<double>(j), static_cast<double>(i));
          _points[i * _width + j].zone = z;
 
+         float elevation = 0.0;
+          for (auto & e : z->borders)
+          {
+              glm::vec3 a, b, c;
+              a.x = z->point.x;
+              a.y = z->point.y;
+              a.z = z->elevation;
+
+              b.x = e->c0->point.x;
+              b.y = e->c0->point.y;
+              b.z = e->c0->elevation;
+
+              c.x = e->c1->point.x;
+              c.y = e->c1->point.y;
+              c.z = e->c1->elevation;
+
+              if (pointInsideTrigon(glm::vec3(static_cast<float>(j), static_cast<float>(i), 0.0), a, b, c))
+              {
+                  glm::vec3 cross;
+                  float d;
+                  b = b - a;
+                  c = c - a;
+                  cross = glm::cross(b, c);
+                  d = cross.x * a.x + cross.y * a.y + cross.z * a.z;
+                  elevation = (d - cross.x * static_cast<float>j - static_cast<float>i * cross.y) / cross.z;
+                  break;
+              }
+          }
+
+
          // génère du bruit aléatoire
-         float  additionalNoise = octave_noise_2d(8.0f, 0.5f, 0.012f, static_cast<float>(j) + static_cast<float>(seed), static_cast<float>(i) + static_cast<float>(seed));
-         additionalNoise = additionalNoise / 10.0f;
+         /*float  additionalNoise = octave_noise_2d(8.0f, 0.5f, 0.012f, static_cast<float>(j) + static_cast<float>(seed), static_cast<float>(i) + static_cast<float>(seed));
+         additionalNoise = additionalNoise / 10.0f;*/
 
         // set le z du point sur la heightmap
-         _points[i * _width + j].z = static_cast<double>(z->elevation); //+ additionalNoise;
+         _points[i * _width + j].z = static_cast<double>(elevation); //+ additionalNoise;
          if (_points[i * _width + j].z > 1.0)
              _points[i * _width + j].z = 1.0;
 
      }
     }
+}
+
+// vérifie qu'un point s appartient au triangle a,b,c
+bool HeightMap::pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::vec3 c)
+{
+    float as_x = s.x-a.x;
+    float as_y = s.y-a.y;
+
+    bool s_ab = (b.x-a.x)*as_y-(b.y-a.y)*as_x >= 0;
+
+    if(((c.x-a.x)*as_y-(c.y-a.y)*as_x > 0) == s_ab) return false;
+
+    if(((c.x-b.x)*(s.y-b.y)-(c.y-b.y)*(s.x-b.x) > 0) != s_ab) return false;
+
+    return true;
 }
 
 // crée une bitmap coloriée en en greyscale selon l'humidité des points
