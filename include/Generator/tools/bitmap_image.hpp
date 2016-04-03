@@ -19,8 +19,8 @@
 */
 
 
-#ifndef INCLUDE_BITMAP_IMAGE_HPP
-#define INCLUDE_BITMAP_IMAGE_HPP
+#ifndef INCLUDE_BITMAP_NAMESPACE_IMAGE_HPP
+#define INCLUDE_BITMAP_NAMESPACE_IMAGE_HPP
 
 #include <algorithm>
 #include <cmath>

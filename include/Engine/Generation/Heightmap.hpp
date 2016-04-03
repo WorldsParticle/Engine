@@ -1,5 +1,5 @@
-#ifndef HEIGHTMAP_HPP
-#define HEIGHTMAP_HPP
+#ifndef HEIGHTMAP_NAMESPACE_HPP
+#define HEIGHTMAP_NAMESPACE_HPP
 
 #include <vector>
 #include "HeightTile.hpp"
@@ -63,4 +63,4 @@ protected:
 
 }
 
-#endif /* HEIGHTMAP */
+#endif /* HEIGHTMAP_NAMESPACE */

@@ -31,7 +31,7 @@ void    Elevator::run()
 
 void        Elevator::assignCornerElevation()
 {
-    std::queue<std::shared_ptr<MAP::Corner>>   q;
+    std::queue<std::shared_ptr<MAP_NAMESPACE::Corner>>   q;
 int a = 0;
     for (auto & corner : _map->corners())
     {
@@ -48,10 +48,10 @@ int a = 0;
 
     while (q.size())
     {
-	std::shared_ptr<MAP::Corner> corner = q.front();
+	std::shared_ptr<MAP_NAMESPACE::Corner> corner = q.front();
         q.pop();
 
-        for (std::shared_ptr<MAP::Corner> adj : corner->adjacent)
+        for (std::shared_ptr<MAP_NAMESPACE::Corner> adj : corner->adjacent)
         {
             float newElevation = 0.00001f + corner->elevation;
             if (!corner->water && !adj->water)
@@ -71,13 +71,13 @@ int a = 0;
 
 struct sortByElevation
 {
-  bool operator() (std::shared_ptr<MAP::Corner> L, std::shared_ptr<MAP::Corner> R) { return L->elevation < R->elevation; }
+  bool operator() (std::shared_ptr<MAP_NAMESPACE::Corner> L, std::shared_ptr<MAP_NAMESPACE::Corner> R) { return L->elevation < R->elevation; }
 };
 
 void        Elevator::redistributeElevation()
 {
     float scaleFactor = 1.1f;
-    std::vector<std::shared_ptr<MAP::Corner>> corners;
+    std::vector<std::shared_ptr<MAP_NAMESPACE::Corner>> corners;
 
     for (const auto & corner : _map->corners())
     {
@@ -116,8 +116,8 @@ void        Elevator::calculateDownSlopes()
 {
     for (const auto & q : _map->corners())
     {
-	std::shared_ptr<MAP::Corner> steepest = q.second;
-        for (std::shared_ptr<MAP::Corner> neighbor : q.second->adjacent)
+	std::shared_ptr<MAP_NAMESPACE::Corner> steepest = q.second;
+        for (std::shared_ptr<MAP_NAMESPACE::Corner> neighbor : q.second->adjacent)
         {
             if (neighbor->elevation < steepest->elevation)
                 steepest = neighbor;

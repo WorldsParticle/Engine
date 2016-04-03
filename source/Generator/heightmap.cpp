@@ -6,7 +6,7 @@
 #include "Generator/map/map.hpp"
 #include "Generator/tools/simplexnoise.hpp"
 
-namespace MAP
+namespace MAP_NAMESPACE
 {
 
 
@@ -19,7 +19,7 @@ HeightMap::~HeightMap()
 }
 
 // assigne l'altitude de chaque point de la heightmap, peut ajouter du bruit pour rendre le résultat un peu plus random
-void    HeightMap::init(MAP::Map & m)
+void    HeightMap::init(MAP_NAMESPACE::Map & m)
 {
     // seed pour le bruit
     int seed = rand() % 1000000;
@@ -33,7 +33,7 @@ void    HeightMap::init(MAP::Map & m)
          _points[i * _width + j].x = static_cast<double>(j);
          _points[i * _width + j].y = static_cast<double>(i);
 
-	 std::shared_ptr<MAP::Zone> z;
+	 std::shared_ptr<MAP_NAMESPACE::Zone> z;
          // trouve la zone à laquelle appartient le pixel en (j, i)
          z = _zoneLookUp.getNearestZone(static_cast<double>(j), static_cast<double>(i));
          _points[i * _width + j].zone = z;
@@ -107,41 +107,41 @@ void    HeightMap::paintByBiome()
         for (int j = 0; j < _width; ++j)
         {
             HeightPoint & p = _points[i * _width + j];
-            if (p.zone->biome == MAP::BEACH)
+            if (p.zone->biome == MAP_NAMESPACE::BEACH)
                 image.set_pixel(j, _height - i - 1, 255, 255, 204);
-            else if (p.zone->biome == MAP::OCEAN)
+            else if (p.zone->biome == MAP_NAMESPACE::OCEAN)
                 image.set_pixel(j, _height - i - 1, 26, 0, 153);
-            else if (p.zone->biome == MAP::MARSH)
+            else if (p.zone->biome == MAP_NAMESPACE::MARSH)
                 image.set_pixel(j, _height - i - 1, 0, 204, 153);
-            else if (p.zone->biome == MAP::ICE)
+            else if (p.zone->biome == MAP_NAMESPACE::ICE)
                 image.set_pixel(j, _height - i - 1, 220, 250, 255);
-            else if (p.zone->biome == MAP::LAKE)
+            else if (p.zone->biome == MAP_NAMESPACE::LAKE)
                 image.set_pixel(j, _height - i - 1, 61, 139, 255);
-            else if (p.zone->biome == MAP::SNOW)
+            else if (p.zone->biome == MAP_NAMESPACE::SNOW)
                 image.set_pixel(j, _height - i - 1, 248, 248, 248);
-            else if (p.zone->biome == MAP::TUNDRA)
+            else if (p.zone->biome == MAP_NAMESPACE::TUNDRA)
                 image.set_pixel(j, _height - i - 1, 208, 208, 176);
-            else if (p.zone->biome == MAP::BARE)
+            else if (p.zone->biome == MAP_NAMESPACE::BARE)
                 image.set_pixel(j, _height - i - 1, 176, 176, 176);
-            else if (p.zone->biome == MAP::SCORCHED)
+            else if (p.zone->biome == MAP_NAMESPACE::SCORCHED)
                 image.set_pixel(j, _height - i - 1, 144, 144, 144);
-            else if (p.zone->biome == MAP::TAIGA)
+            else if (p.zone->biome == MAP_NAMESPACE::TAIGA)
                 image.set_pixel(j, _height - i - 1, 204, 212, 187);
-            else if (p.zone->biome == MAP::SHRUBLAND)
+            else if (p.zone->biome == MAP_NAMESPACE::SHRUBLAND)
                 image.set_pixel(j, _height - i - 1, 196, 204, 187);
-            else if (p.zone->biome == MAP::TEMPERATE_DESERT)
+            else if (p.zone->biome == MAP_NAMESPACE::TEMPERATE_DESERT)
                 image.set_pixel(j, _height - i - 1, 228, 232, 202);
-            else if (p.zone->biome == MAP::TEMPERATE_RAIN_FOREST)
+            else if (p.zone->biome == MAP_NAMESPACE::TEMPERATE_RAIN_FOREST)
                 image.set_pixel(j, _height - i - 1, 164, 196, 168);
-            else if (p.zone->biome == MAP::TEMPERATE_DECIDUOUS_FOREST)
+            else if (p.zone->biome == MAP_NAMESPACE::TEMPERATE_DECIDUOUS_FOREST)
                 image.set_pixel(j, _height - i - 1, 180, 196, 169);
-            else if (p.zone->biome == MAP::GRASSLAND)
+            else if (p.zone->biome == MAP_NAMESPACE::GRASSLAND)
                 image.set_pixel(j, _height - i - 1, 196, 212, 170);
-            else if (p.zone->biome == MAP::TROPICAL_SEASONAL_FOREST)
+            else if (p.zone->biome == MAP_NAMESPACE::TROPICAL_SEASONAL_FOREST)
                 image.set_pixel(j, _height - i - 1, 169, 204, 164);
-            else if (p.zone->biome == MAP::TROPICAL_RAIN_FOREST)
+            else if (p.zone->biome == MAP_NAMESPACE::TROPICAL_RAIN_FOREST)
                 image.set_pixel(j, _height - i - 1, 228, 232, 202);
-            else if (p.zone->biome == MAP::SUBTROPICAL_DESERT)
+            else if (p.zone->biome == MAP_NAMESPACE::SUBTROPICAL_DESERT)
                 image.set_pixel(j, _height - i - 1, 233, 221, 199);
 
         }
@@ -199,7 +199,7 @@ void    HeightMap::generateMesh()
 
 // get les arrays à envoyer à la carte graphique via le renderer
 std::vector<float> const &HeightMap::getPoints()     { return _vertices; }
-std::vector<int> const &HeightMap::getIndices()   { return _indices; }
+std::vector<unsigned int> const &HeightMap::getIndices()   { return _indices; }
 std::vector<float> const &HeightMap::getNormals()     { return _normals; }
 
 }

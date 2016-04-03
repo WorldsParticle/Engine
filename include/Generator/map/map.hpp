@@ -1,5 +1,5 @@
-#ifndef MAP_H
-#define MAP_H
+#ifndef MAP_NAMESPACE_H
+#define MAP_NAMESPACE_H
 
 #include <map>
 #include <memory>
@@ -8,7 +8,7 @@
 #include "corner.hpp"
 #include "crossededge.hpp"
 
-namespace MAP
+namespace MAP_NAMESPACE
 {
 
 class Map
@@ -44,4 +44,4 @@ private:
 
 }
 
-#endif // MAP_H
+#endif // MAP_NAMESPACE_H

@@ -5,7 +5,7 @@
 #include <memory>
 #include "point.hpp"
 
-namespace MAP
+namespace MAP_NAMESPACE
 {
 
 class CrossedEdge;
@@ -60,7 +60,7 @@ public:
     float       elevation; // 0.0-1.0
     float       moisture;  // 0.0-1.0
 
-    MAP::Biome biome;     // biome type (see article)
+    MAP_NAMESPACE::Biome biome;     // biome type (see article)
 
     std::vector<std::shared_ptr<Zone>>         neighbors;
     std::vector<std::shared_ptr<CrossedEdge>>  borders;

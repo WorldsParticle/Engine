@@ -1,6 +1,6 @@
 #include "Generator/map/map.hpp"
 
-namespace MAP
+namespace MAP_NAMESPACE
 {
 
 Map::Map(unsigned int xMx, unsigned int yMx, unsigned int zNumber) :

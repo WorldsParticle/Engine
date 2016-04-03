@@ -23,61 +23,61 @@ void    Biomizator::run()
 }
 
 
-MAP::Biome        Biomizator::getBiome(std::shared_ptr<MAP::Zone> z)
+MAP_NAMESPACE::Biome        Biomizator::getBiome(std::shared_ptr<MAP_NAMESPACE::Zone> z)
 {
     if (z->ocean)
-        return MAP::OCEAN;
+        return MAP_NAMESPACE::OCEAN;
     else if (z->water)
     {
         if (z->elevation < 0.1f)
-            return MAP::MARSH;
+            return MAP_NAMESPACE::MARSH;
         if (z->elevation > 0.8f)
-            return MAP::ICE;
-        return MAP::LAKE;
+            return MAP_NAMESPACE::ICE;
+        return MAP_NAMESPACE::LAKE;
     }
     else if (z->coast)
-        return MAP::BEACH;
+        return MAP_NAMESPACE::BEACH;
     else if (z->elevation > 0.8f)
     {
         if (z->moisture > 0.5f)
-            return MAP::SNOW;
+            return MAP_NAMESPACE::SNOW;
         else if (z->moisture > 0.33f)
-            return MAP::TUNDRA;
+            return MAP_NAMESPACE::TUNDRA;
         else if (z->moisture > 0.16f)
-            return MAP::BARE;
+            return MAP_NAMESPACE::BARE;
         else
-            return MAP::SCORCHED;
+            return MAP_NAMESPACE::SCORCHED;
     }
     else if (z->elevation > 0.6f)
     {
         if (z->moisture > 0.66f)
-                return MAP::TAIGA;
+                return MAP_NAMESPACE::TAIGA;
         else if (z->moisture > 0.33f)
-                return MAP::SHRUBLAND;
+                return MAP_NAMESPACE::SHRUBLAND;
         else
-            return MAP::TEMPERATE_DESERT;
+            return MAP_NAMESPACE::TEMPERATE_DESERT;
     }
     else if (z->elevation > 0.3f)
     {
         if (z->moisture > 0.83f)
-            return MAP::TEMPERATE_RAIN_FOREST;
+            return MAP_NAMESPACE::TEMPERATE_RAIN_FOREST;
         else if (z->moisture > 0.50f)
-            return MAP::TEMPERATE_DECIDUOUS_FOREST;
+            return MAP_NAMESPACE::TEMPERATE_DECIDUOUS_FOREST;
         else if (z->moisture > 0.16f)
-            return MAP::GRASSLAND;
+            return MAP_NAMESPACE::GRASSLAND;
         else
-            return MAP::TEMPERATE_DESERT;
+            return MAP_NAMESPACE::TEMPERATE_DESERT;
     }
     else
     {
         if (z->moisture > 0.66f)
-            return MAP::TROPICAL_RAIN_FOREST;
+            return MAP_NAMESPACE::TROPICAL_RAIN_FOREST;
         else if (z->moisture > 0.33f)
-            return MAP::TROPICAL_SEASONAL_FOREST;
+            return MAP_NAMESPACE::TROPICAL_SEASONAL_FOREST;
         else if (z->moisture > 0.16f)
-            return MAP::GRASSLAND;
+            return MAP_NAMESPACE::GRASSLAND;
         else
-            return (MAP::SUBTROPICAL_DESERT);
+            return (MAP_NAMESPACE::SUBTROPICAL_DESERT);
     }
 }
 

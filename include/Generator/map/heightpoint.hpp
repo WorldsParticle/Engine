@@ -24,7 +24,7 @@ public:
     double  y;
     double  z;
 
-    std::shared_ptr<MAP::Zone>     zone;
+    std::shared_ptr<MAP_NAMESPACE::Zone>     zone;
 };
 
 #endif // HEIGHTPOINT_H

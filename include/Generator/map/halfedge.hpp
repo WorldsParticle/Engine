@@ -1,7 +1,7 @@
 #ifndef HALFEDGE_H
 #define HALFEDGE_H
 
-namespace MAP
+namespace MAP_NAMESPACE
 {
 
 class Zone;

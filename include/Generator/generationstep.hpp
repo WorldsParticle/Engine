@@ -21,12 +21,12 @@ public:
 
     GenerationStep() : _map(nullptr), _step() {}
 
-    inline void    generate(MAP::Map *map)
+    inline void    generate(MAP_NAMESPACE::Map *map)
     { _map = map; run(); }
 
 protected:
     virtual void    run() = 0;
-    MAP::Map        *_map;
+    MAP_NAMESPACE::Map        *_map;
     STEP            _step;
 };
 

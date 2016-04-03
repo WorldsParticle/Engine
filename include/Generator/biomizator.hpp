@@ -18,7 +18,7 @@ public:
 
     virtual void run();
 
-    MAP::Biome      getBiome(std::shared_ptr<MAP::Zone> z);
+    MAP_NAMESPACE::Biome      getBiome(std::shared_ptr<MAP_NAMESPACE::Zone> z);
     void            assignBiomes();
 
 private:

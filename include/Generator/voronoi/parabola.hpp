@@ -4,7 +4,7 @@
 #include "../map/point.hpp"
 #include <memory>
 
-namespace MAP
+namespace MAP_NAMESPACE
 {
     class Zone;
 }
@@ -35,7 +35,7 @@ public:
     */
 
     bool		isLeaf;
-    std::shared_ptr<MAP::Zone> site;
+    std::shared_ptr<MAP_NAMESPACE::Zone> site;
 
     // when not leaf
     Edge        *edge;
@@ -48,7 +48,7 @@ public:
     */
 
     Parabola	();
-    Parabola	(std::shared_ptr<MAP::Zone> p);
+    Parabola	(std::shared_ptr<MAP_NAMESPACE::Zone> p);
     ~Parabola   ();
 
     inline friend std::ostream &operator<<(std::ostream &os, const Parabola &p)

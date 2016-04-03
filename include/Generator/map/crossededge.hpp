@@ -5,7 +5,7 @@
 #include "point.hpp"
 #include "zone.hpp"
 
-namespace MAP
+namespace MAP_NAMESPACE
 {
 
 class Zone;

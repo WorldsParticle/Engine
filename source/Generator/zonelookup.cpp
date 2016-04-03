@@ -1,7 +1,7 @@
 #include "Generator/map/map.hpp"
 #include "Generator/zonelookup.hpp"
 
-namespace MAP
+namespace MAP_NAMESPACE
 {
 
 
@@ -18,11 +18,11 @@ if (_tree)
    delete(_tree);
 }
 
-void    ZoneLookUp::createCloud(MAP::Map & m)
+void    ZoneLookUp::createCloud(MAP_NAMESPACE::Map & m)
 {
     for (const auto & zone : m.zones())
     {
-        MAP::ZoneLookUp::PointCloud<double>::LPoint p = {zone.second->point.x, zone.second->point.y, zone.second};
+        MAP_NAMESPACE::ZoneLookUp::PointCloud<double>::LPoint p = {zone.second->point.x, zone.second->point.y, zone.second};
         _cloud.pts.push_back(p);
     }
     _pc2kd = new PC2KD(_cloud);

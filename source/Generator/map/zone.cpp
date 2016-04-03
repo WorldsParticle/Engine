@@ -1,6 +1,6 @@
 #include "Generator/map/zone.hpp"
 
-namespace MAP
+namespace MAP_NAMESPACE
 {
 
 int Zone::indexMax = 0;
