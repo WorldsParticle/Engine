@@ -56,7 +56,7 @@ void    HeightMap::init(MAP::Map & m)
               c.y = e->c1->point.y;
               c.z = e->c1->elevation;
 
-              if (pointInsideTrigon(glm::vec3((float)j, (float)i, 0.0), a, b, c))
+              if (pointInsideTrigon(glm::vec3(static_cast<float>(j), static_cast<float>(i), 0.0), a, b, c))
               {
                   glm::vec3 cross;
                   float d;
@@ -64,7 +64,7 @@ void    HeightMap::init(MAP::Map & m)
                   c = c - a;
                   cross = glm::cross(b, c);
                   d = cross.x * a.x + cross.y * a.y + cross.z * a.z;
-                  elevation = (d - cross.x * (float)j - (float)i * cross.y) / cross.z;
+                  elevation = (d - cross.x * static_cast<float>j - static_cast<float>i * cross.y) / cross.z;
                   break;
               }
           }
