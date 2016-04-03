@@ -26,7 +26,7 @@ public:
         struct LPoint
         {
             T  x,y;
-            MAP::Zone   *zone;
+	    std::shared_ptr<MAP::Zone>   zone;
         };
 
         std::vector<LPoint>  pts;
@@ -86,7 +86,7 @@ public:
     ~ZoneLookUp();
 
     void    createCloud(MAP::Map & m);
-    Zone *  getNearestZone(double x, double y);
+    std::shared_ptr<Zone> getNearestZone(double x, double y);
 
 
 private:

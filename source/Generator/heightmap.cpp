@@ -10,7 +10,7 @@ namespace MAP
 {
 
 
-HeightMap::HeightMap(int width, int height) : _width(width), _height(height), _zoneLookUp(), image(width, height)
+HeightMap::HeightMap(int width, int height) : _width(width), _height(height), _points(), _zoneLookUp(), image(width, height), _vertices(), _indices(), _normals()
 {
 }
 
@@ -18,27 +18,32 @@ HeightMap::~HeightMap()
 {
 }
 
+// assigne l'altitude de chaque point de la heightmap, peut ajouter du bruit pour rendre le résultat un peu plus random
 void    HeightMap::init(MAP::Map & m)
 {
+    // seed pour le bruit
     int seed = rand() % 1000000;
 
-    _points.resize((_width) * (_height));
+    _points.resize((_width + 2) * (_height + 2));
     _zoneLookUp.createCloud(m);
     for (int i = 0; i < _height; ++i)
     {
      for (int j = 0; j < _width; ++j)
      {
-         _points[i * _width + j].x = (double)j;
-         _points[i * _width + j].y = (double)i;
-         MAP::Zone * z;
-         z = _zoneLookUp.getNearestZone((double)(j), (double)(i));
+         _points[i * _width + j].x = static_cast<double>(j);
+         _points[i * _width + j].y = static_cast<double>(i);
+
+	 std::shared_ptr<MAP::Zone> z;
+         // trouve la zone à laquelle appartient le pixel en (j, i)
+         z = _zoneLookUp.getNearestZone(static_cast<double>(j), static_cast<double>(i));
          _points[i * _width + j].zone = z;
 
-         float  additionalNoise = octave_noise_2d(8, 0.5, 0.012, (float)j + seed, (float)i + seed);
-         additionalNoise = additionalNoise / 10.0;
+         // génère du bruit aléatoire
+         float  additionalNoise = octave_noise_2d(8.0f, 0.5f, 0.012f, static_cast<float>(j) + static_cast<float>(seed), static_cast<float>(i) + static_cast<float>(seed));
+         additionalNoise = additionalNoise / 10.0f;
 
-
-         _points[i * _width + j].z = (double)z->elevation; //+ additionalNoise;
+        // set le z du point sur la heightmap
+         _points[i * _width + j].z = static_cast<double>(z->elevation); //+ additionalNoise;
          if (_points[i * _width + j].z > 1.0)
              _points[i * _width + j].z = 1.0;
 
@@ -46,6 +51,7 @@ void    HeightMap::init(MAP::Map & m)
     }
 }
 
+// crée une bitmap coloriée en en greyscale selon l'humidité des points
 void    HeightMap::paintByMoisture()
 {
     for (int i = 0; i < _height; ++i)
@@ -55,11 +61,12 @@ void    HeightMap::paintByMoisture()
             if (p.zone->ocean)
                 image.set_pixel(j, _height - i - 1, 0, 0, 125);
             else
-                image.set_pixel(j, _height - i - 1, (int)(p.zone->moisture * 255.0), (int)(p.zone->moisture * 255.0), (int)(p.zone->moisture * 255.0));
+                image.set_pixel(j, _height - i - 1, static_cast<unsigned char>(p.zone->moisture * 255.0f), static_cast<unsigned char>(p.zone->moisture * 255.0f), static_cast<unsigned char>(p.zone->moisture * 255.0f));
         }
     image.save_image("mapmoisture.bmp");
 }
 
+// crée une bitmap coloriée en greyscale selon la hauteur des points
 void    HeightMap::paintByHeight()
 {
     for (int i = 0; i < _height; ++i)
@@ -69,11 +76,12 @@ void    HeightMap::paintByHeight()
             if (p.zone->ocean)
                 image.set_pixel(j, _height - i - 1, 0, 0, 125);
             else
-                image.set_pixel(j, _height - i - 1, (int)(p.z * 255.0), (int)(p.z * 255.0), (int)(p.z * 255.0));
+                image.set_pixel(j, _height - i - 1, static_cast<unsigned char>(p.z * 255.0), static_cast<unsigned char>(p.z * 255.0), static_cast<unsigned char>(p.z * 255.0));
         }
     image.save_image("mapheight.bmp");
 }
 
+// crée une bitmap qui assigne différentes couleures selon le land time (bordure, océan, beach/coast et water
 void    HeightMap::paintByLandType()
 {
     for (int i = 0; i < _height; ++i)
@@ -92,6 +100,7 @@ void    HeightMap::paintByLandType()
     image.save_image("maptype.bmp");
 }
 
+// crée une bitmap qui colorie les zones selon leur biome
 void    HeightMap::paintByBiome()
 {
     for (int i = 0; i < _height; ++i)
@@ -140,31 +149,27 @@ void    HeightMap::paintByBiome()
 }
 
 
-
+// génère la mesh du terrain en procédant deux triangles par deux triangles (ou carré par carré)
 void    HeightMap::generateMesh()
 {
-    _vertices = new std::vector<float>[_height * _width * 3];
-    _indices = new std::vector<int>[(_height - 1) * (_width - 1) * 6];
-    _normals = new std::vector<float>[(_height - 1) * (_width - 1) * 2 * 3];
-
-    std::vector<float> & v = *_vertices;
-    std::vector<int> &   ind = *_indices;
-    std::vector<float> & n = *_normals;
+    _vertices.reserve(_height * _width * 3);
+    _indices.reserve((_height - 1) * (_width - 1) * 6);
+    _normals.reserve((_height - 1) * (_width - 1) * 2 * 3);
 
     for (int i = 0; i < (_height - 1); ++i)
         for (int j = 0; j < (_width - 1); ++j)
         {
-            v[((i) * _width + (j)) * 3] = (float)(_points[i * _width + j].x);
-            v[((i) * _width + (j)) * 3 + 1] = (float)(_points[i * _width + j].z);
-            v[((i) * _width + (j)) * 3 + 2] = (float)(_points[i * _width + j].y);
+            _vertices[((i) * _width + (j)) * 3] = static_cast<float>(_points[i * _width + j].x);
+            _vertices[((i) * _width + (j)) * 3 + 1] = static_cast<float>(_points[i * _width + j].z);
+            _vertices[((i) * _width + (j)) * 3 + 2] = static_cast<float>(_points[i * _width + j].y);
 
-            ind[((i) * _width + (j)) * 6] = j + i * _width;
-            ind[((i) * _width + (j)) * 6 + 1] = j + 1 + (i + 1) * _width;
-            ind[((i) * _width + (j)) * 6 + 2] = j + (i + 1) * _width;
+            _indices[((i) * _width + (j)) * 6] = j + i * _width;
+            _indices[((i) * _width + (j)) * 6 + 1] = j + 1 + (i + 1) * _width;
+            _indices[((i) * _width + (j)) * 6 + 2] = j + (i + 1) * _width;
 
-            ind[((i) * _width + (j)) * 6 + 3] = j + i * _width;
-            ind[((i) * _width + (j)) * 6 + 4] = j + 1 + i * _width;
-            ind[((i) * _width + (j)) * 6 + 5] = j + 1 + (i + 1) * _width;
+            _indices[((i) * _width + (j)) * 6 + 3] = j + i * _width;
+            _indices[((i) * _width + (j)) * 6 + 4] = j + 1 + i * _width;
+            _indices[((i) * _width + (j)) * 6 + 5] = j + 1 + (i + 1) * _width;
 
             glm::vec3 a, b, c, result;
             a = {_points[(i + 1) * _width + j].x - _points[i * _width + j].x,
@@ -179,21 +184,22 @@ void    HeightMap::generateMesh()
 
             result = glm::cross(a, b);
 
-            n[(j + i * _width) * 6] = result.x;
-            n[(j + i * _width) * 6 + 1] = result.y;
-            n[(j + i * _width) * 6 + 2] = result.z;
+            _normals[(j + i * _width) * 6] = result.x;
+            _normals[(j + i * _width) * 6 + 1] = result.y;
+            _normals[(j + i * _width) * 6 + 2] = result.z;
 
             result = glm::cross(b, c);
 
-            n[(j + i * _width) * 6 + 3] = result.x;
-            n[(j + i * _width) * 6 + 4] = result.y;
-            n[(j + i * _width) * 6 + 5] = result.z;
+            _normals[(j + i * _width) * 6 + 3] = result.x;
+            _normals[(j + i * _width) * 6 + 4] = result.y;
+            _normals[(j + i * _width) * 6 + 5] = result.z;
 
         }
 }
 
-std::vector<float> * HeightMap::getPoints()     { return _vertices; }
-std::vector<int>     * HeightMap::getIndices()   { return _indices; }
-std::vector<float> * HeightMap::getNormals()     { return _normals; }
+// get les arrays à envoyer à la carte graphique via le renderer
+std::vector<float> const &HeightMap::getPoints()     { return _vertices; }
+std::vector<int> const &HeightMap::getIndices()   { return _indices; }
+std::vector<float> const &HeightMap::getNormals()     { return _normals; }
 
 }

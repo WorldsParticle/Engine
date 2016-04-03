@@ -6,12 +6,7 @@
 class   Point
 {
 public:
-    explicit Point(double nx = 0, double ny = 0) : x(nx), y(ny) {}
-
-    Point(const Point &p) : x(p.x), y(p.y) {}
-
-    inline Point &operator=(const Point &p)
-    { x = p.x; y = p.y; return *this; }
+    explicit Point(double nx, double ny) : x(nx), y(ny) {}
 
     inline friend std::ostream &operator<<(std::ostream &os, const Point &p)
     { return os << "(" << p.x << ", " << p.y << ")"; }

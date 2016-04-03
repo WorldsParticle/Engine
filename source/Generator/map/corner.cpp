@@ -17,7 +17,9 @@ Corner::Corner() :
     edges(),
     adjacent(),
     river(0),
-    watershedSize(0)
+    watershedSize(0),
+    downslope(),
+    watershed()
 {
     ++indexMax;
 }

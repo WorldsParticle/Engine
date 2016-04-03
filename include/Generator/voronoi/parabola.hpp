@@ -2,6 +2,7 @@
 #define PARABOLA_H
 
 #include "../map/point.hpp"
+#include <memory>
 
 namespace MAP
 {
@@ -34,7 +35,7 @@ public:
     */
 
     bool		isLeaf;
-    Point       *site;
+    std::shared_ptr<MAP::Zone> site;
 
     // when not leaf
     Edge        *edge;
@@ -47,7 +48,7 @@ public:
     */
 
     Parabola	();
-    Parabola	(Point *p);
+    Parabola	(std::shared_ptr<MAP::Zone> p);
     ~Parabola   ();
 
     inline friend std::ostream &operator<<(std::ostream &os, const Parabola &p)
