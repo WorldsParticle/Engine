@@ -64,7 +64,7 @@ void    HeightMap::init(MAP_NAMESPACE::Map & m)
                   c = c - a;
                   cross = glm::cross(b, c);
                   d = cross.x * a.x + cross.y * a.y + cross.z * a.z;
-                  elevation = (d - cross.x * static_cast<float>(j) - static_cast<float>(i * cross.y)) / cross.z;
+                  elevation = (d - cross.x * static_cast<float>(j) - static_cast<float>(i) * cross.y) / cross.z;
                   break;
               }
           }
