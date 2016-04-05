@@ -1,6 +1,6 @@
 #include "Generator/map/crossededge.hpp"
 
-namespace MAP_NAMESPACE
+namespace map
 {
 
 int CrossedEdge::indexMax = 0;

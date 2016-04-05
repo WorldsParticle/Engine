@@ -87,8 +87,8 @@ namespace   Engine
 	protected:
 
 	private:
-		MAP_NAMESPACE::HeightMap* _heightmap;
-		GEN::Generator*	_generator;
+		map::HeightMap* _heightmap;
+		gen::Generator*	_generator;
 
         ///
         /// \brief The mesh associated with the terrain.

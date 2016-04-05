@@ -5,7 +5,7 @@
 #include "point.hpp"
 #include "zone.hpp"
 
-namespace MAP_NAMESPACE
+namespace map
 {
 
 class Zone;
@@ -31,8 +31,8 @@ public:
     static int  indexMax;  // change this
     const int   index;
 
-    std::shared_ptr<Zone>        z0, z1;   // Delaunay edge (during computing, é0 will be used as left, z1 as right)
-    std::shared_ptr<Corner>      c0, c1;   // Voronoi edge
+    Zone         *z0, *z1;   // Delaunay edge (during computing, é0 will be used as left, z1 as right)
+    Corner       *c0, *c1;   // Voronoi edge
     Point       midpoint;  // cross point, halfway between c0 / c1
     int         river;     // Volume of water, not necessary right now
 };

@@ -5,9 +5,9 @@
 #include "map/point.hpp"
 #include "tools/nanoflann.hpp"
 
-namespace MAP_NAMESPACE {
+namespace map {
 
-class Map;
+class MapGraph;
 class Zone;
 
 ///
@@ -26,7 +26,7 @@ public:
         struct LPoint
         {
             T  x,y;
-	    std::shared_ptr<MAP_NAMESPACE::Zone>   zone;
+        map::Zone   *zone;
         };
 
         std::vector<LPoint>  pts;
@@ -85,8 +85,8 @@ public:
     ZoneLookUp();
     ~ZoneLookUp();
 
-    void    createCloud(MAP_NAMESPACE::Map & m);
-    std::shared_ptr<Zone> getNearestZone(double x, double y);
+    void    createCloud(map::MapGraph & m);
+    Zone    *getNearestZone(double x, double y);
 
 
 private:

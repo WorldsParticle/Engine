@@ -14,20 +14,20 @@
 #include "Generator/moistor.hpp"
 #include "Generator/biomizator.hpp"
 
-namespace MAP_NAMESPACE
+namespace map
 {
-class Map;
+class MapGraph;
 }
 
-namespace GEN
+namespace gen
 {
 
 class Generator
 {
 
 protected:
-    MAP_NAMESPACE::Map        *_map;
-    MAP_NAMESPACE::HeightMap  *_heightmap;
+    map::MapGraph        *_map;
+    map::HeightMap  *_heightmap;
     GenerationStep  *_fillStep;
     GenerationStep  *_shapeStep;
     GenerationStep  *_elevateStep;
@@ -38,8 +38,8 @@ protected:
 public:
     Generator();
 
-    MAP_NAMESPACE::Map    *generate(double xMax, double yMax, unsigned int zoneNumber);
-    MAP_NAMESPACE::HeightMap *getHeightmap() {
+    map::MapGraph    *generate(double xMax, double yMax, unsigned int zoneNumber);
+    map::HeightMap *getHeightmap() {
     	return _heightmap;
     }
 

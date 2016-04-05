@@ -9,7 +9,7 @@ namespace MOI {
 /// \brief The Moistor class, probably a male for being such an accurate moist hunter
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Moistor : public GEN::GenerationStep
+class Moistor : public gen::GenerationStep
 {
 public:
     Moistor();

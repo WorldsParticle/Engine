@@ -1,6 +1,6 @@
 #include "Generator/map/zone.hpp"
 
-namespace MAP_NAMESPACE
+namespace map
 {
 
 int Zone::indexMax = 0;
@@ -21,7 +21,7 @@ Zone::Zone(double x, double y) :
     ++indexMax;
 }
 
-bool    Zone::haveNeighbor(std::shared_ptr<Zone> zone)
+bool    Zone::haveNeighbor(Zone *zone)
 {
     for (const auto &z: neighbors)
         if (z == zone)

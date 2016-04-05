@@ -9,7 +9,7 @@ namespace SHA {
 /// \brief The Shaper class, transforming dirt into Mona Lisa
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Shaper : public GEN::GenerationStep
+class Shaper : public gen::GenerationStep
 {
 public:
     Shaper();

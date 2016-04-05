@@ -98,7 +98,7 @@ namespace Engine
             /// \brief generator
             /// \return the generator
             ///
-            inline GEN::Generator   &generator()
+            inline gen::Generator   &generator()
             { return m_generator; }
 
         protected:
@@ -115,6 +115,6 @@ namespace Engine
             ///
             /// \brief m_generator
             ///
-            GEN::Generator          m_generator;
+            gen::Generator          m_generator;
     };
 }

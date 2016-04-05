@@ -5,7 +5,7 @@
 #include <memory>
 #include "point.hpp"
 
-namespace MAP_NAMESPACE
+namespace map
 {
 
 class CrossedEdge;
@@ -47,7 +47,7 @@ public:
     inline friend std::ostream &operator<<(std::ostream &os, const Zone &s)
     { return os << "[" << s.index << "](" << s.point.x << ", " << s.point.y << ")"; }
 
-    bool    haveNeighbor(std::shared_ptr<Zone> zone);
+    bool    haveNeighbor(Zone *zone);
 
     static int  indexMax;  // change this
     const int   index;
@@ -60,11 +60,11 @@ public:
     float       elevation; // 0.0-1.0
     float       moisture;  // 0.0-1.0
 
-    MAP_NAMESPACE::Biome biome;     // biome type (see article)
+    map::Biome biome;     // biome type (see article)
 
-    std::vector<std::shared_ptr<Zone>>         neighbors;
-    std::vector<std::shared_ptr<CrossedEdge>>  borders;
-    std::vector<std::shared_ptr<Corner>>       corners;
+    std::vector<Zone *>         neighbors;
+    std::vector<CrossedEdge *>  borders;
+    std::vector<Corner *>       corners;
 };
 
 }
