@@ -17,12 +17,12 @@ namespace   Engine
 //		_mesh()
 	{
 		this->m_scene->add(this);
-		_generator = new gen::Generator();
-
-
-		_generator->generate(10, 10, 2);
-		_heightmap = _generator->getHeightmap();
-		_heightmap->generateMesh();
+//		_generator = new gen::Generator();
+//
+//
+//		_generator->generate(10, 10, 2);
+//		_heightmap = _generator->getHeightmap();
+//		_heightmap->generateMesh();
 
 		const auto& myShader = shaderprograms.get(DEFAULT_SHADER_PROGRAM);
 
@@ -49,9 +49,63 @@ namespace   Engine
 //		//_mesh->setNormals(vertices);
 //		//_mesh->setIndices(indices);
 
-		_mesh->setPositions(getVertex());
-		_mesh->setNormals(getNormals());
-		_mesh->setIndices(getIndices());
+this->_mesh->setPositions(std::vector<float>{
+                        -0.01f, -0.01f, 0.0f,
+                        0.01f, -0.01f, 0.0f,
+                        0.0f,  0.01f, 0.0f,
+
+                        -0.01f, -0.01f, -0.01f,
+                        -0.01f, -0.01f, 0.01f,
+                        -0.01f, 0.01f, 0.01f,
+
+                        -0.01f, -0.01f, 0.0f,
+                        0.01f, -0.01f, 0.0f,
+                        0.0f,  0.01f, 0.0f,
+
+                        0.01f, -0.01f, 0.01f,
+                        -0.01f, -0.01f, -0.01f,
+                        0.01f, -0.01f, -0.01f,
+
+                        0.01f, 0.01f, -0.01f,
+                        0.01f, -0.01f, -0.01f,
+                        -0.01f, -0.01f, -0.01f,
+
+                        -0.01f, -0.01f, -0.01f,
+                        -0.01f, 0.01f, 0.01f,
+                        -0.01f, 0.01f, -0.01f,
+
+                        0.01f, -0.01f, 0.01f,
+                        -0.01f, -0.01f, 0.01f,
+                        -0.01f, -0.01f, -0.01f,
+
+                        -0.01f, 0.01f, 0.01f,
+                        -0.01f, -0.01f, 0.01f,
+                        0.01f, -0.01f, 0.01f,
+
+                        0.01f, 0.01f, 0.01f,
+                        0.01f, -0.01f, -0.01f,
+                        0.01f, 0.01f, -0.01f,
+
+                        0.01f, -0.01f, -0.01f,
+                        0.01f, 0.01f, 0.01f,
+                        0.01f, -0.01f, 0.01f,
+
+                        0.01f, 0.01f, 0.01f,
+                        0.01f, 0.01f, -0.01f,
+                        -0.01f, 0.01f, -0.01f,
+
+                        0.01f, 0.01f, 0.01f,
+                        -0.01f, 0.01f, -0.01f,
+                        -0.01f, 0.01f, 0.01f,
+
+                        0.01f, 0.01f, 0.01f,
+                        -0.01f, 0.01f, 0.01f,
+                        0.01f, -0.01f, 0.01f
+
+                });
+//		_mesh->setPositions(getVertex());
+//		_mesh->setNormals(getNormals());
+//		_mesh->setIndices(getIndices());
 		_mesh->update();
 	}
 	//const Resource  &get(const Key &key) const;
@@ -72,8 +126,13 @@ namespace   Engine
 	void
 		Terrain::update(void)
 	{
+<<<<<<< Updated upstream
 	    _mesh->update();
 		Category    &root = Category::getRoot();
+=======
+	_mesh->update();
+		//Category    &root = Category::getRoot();
+>>>>>>> Stashed changes
 
 		root << Priority::DEBUG << "Terrain - update()";
 		// nothing to do actually.
