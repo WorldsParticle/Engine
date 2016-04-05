@@ -41,6 +41,11 @@ namespace   Engine
             Entity(SceneGraphNode *node); // TODO GSL NOT NULL
 
             ///
+            /// \brief Default constructor without node, be careful when using it
+            ///
+            Entity();
+
+            ///
             /// \brief Copy constructor.
             ///
             Entity(const Entity &other);

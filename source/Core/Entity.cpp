@@ -27,6 +27,13 @@ namespace   Engine
 
     }
 
+    Entity::Entity() :
+        m_node(nullptr),
+        m_scene()
+    {
+
+    }
+
     Entity::Entity(const Entity &other) :
         m_node(other.m_node),
         m_scene(this->m_node->getScene())
@@ -69,12 +76,16 @@ namespace   Engine
     const std::string &
     Entity::getName(void) const
     {
+        if (!this->m_node)
+            return "";
          return this->m_node->getName();
     }
 
     const Transform &
     Entity::getTransform(void) const
     {
+        if (!this->m_node)
+            return Transform();
         return this->m_node->getTransform();
     }
 }
