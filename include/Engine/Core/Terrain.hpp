@@ -12,6 +12,7 @@ namespace   Engine
 
 	class   Mesh;
 	class	ShaderProgramLibrary;
+	class	Scene;
 
 	///
 	/// \brief This class is used to represent a physical entity.
@@ -23,7 +24,7 @@ namespace   Engine
 		/// \brief Default constructor.
 		/// \param node the node related to the terrain.
 		///
-		Terrain(SceneGraphNode *node, ShaderProgramLibrary const& shaderprograms); // TODO GSL NOT NULL
+		Terrain(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms); // TODO GSL NOT NULL
 
 		///
 		/// \brief Copy constructor.
@@ -63,6 +64,15 @@ namespace   Engine
 		void    update(void) override;
 
 	public:
+		std::vector<float> const& getVertex() {
+			return _heightmap->getPoints();
+		}
+		std::vector<unsigned int> const& getIndices() {
+			return _heightmap->getIndices();
+		}
+		std::vector<float> const& getNormals() {
+			return _heightmap->getNormals();
+		}
 //		//TODO: stocké les points directement dans le terrain ?
 //	    std::vector<float> const &getVertex() {
 //	    	return _heightmap->getPoints();

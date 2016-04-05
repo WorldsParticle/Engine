@@ -4,13 +4,14 @@
 #include    "Engine/Core/Scene.hpp"
 #include    "Engine/Core/Mesh.hpp"
 #include    "Engine/Core/ShaderProgramLibrary.hpp"
+#include    "Engine/Core/Scene.hpp"
 
 using namespace     log4cpp;
 
 namespace   Engine
 {
-	Terrain::Terrain(SceneGraphNode *node, ShaderProgramLibrary const& shaderprograms) :
-		Entity(node),
+	Terrain::Terrain(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms) :
+		Entity(scene),
 		_heightmap(nullptr)
 //		_generator()
 //		_mesh()
@@ -28,9 +29,9 @@ namespace   Engine
 
 		_mesh = new Mesh(myMaterial);
 
-//		_mesh->setPositions(getVertex());
-//		_mesh->setNormals(getNormals());
-//		_mesh->setIndices(getIndices());
+		_mesh->setPositions(getVertex());
+		_mesh->setNormals(getNormals());
+		_mesh->setIndices(getIndices());
 	}
 	//const Resource  &get(const Key &key) const;
 //ShaderProgramLibrary : public Library<ShaderProgramName, std::shared_ptr<ShaderProgram>>

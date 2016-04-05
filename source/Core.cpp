@@ -25,6 +25,7 @@
 #include    "Engine/Core.hpp"
 #include    "Engine/Event/Event.hpp"
 #include    "Engine/Core/Scene.hpp"
+#include    "Engine/Core/Terrain.hpp"
 
 using namespace     log4cpp;
 
@@ -138,8 +139,10 @@ namespace   Engine
     {
         // TODO GSL OWNER && NOT NULL
         Scene *test = this->m_importer.import(filename);
+//        test->add(new Terrain(test, test->getShaderPrograms()));
 
         this->m_scenes.push_back(test);
+//        this->m_scenes.push_back(test);
     }
 
 }

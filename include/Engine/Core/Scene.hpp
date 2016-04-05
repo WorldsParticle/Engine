@@ -126,6 +126,10 @@ namespace Engine
             ///
             const Clock &clock(void) const;
 
+            ShaderProgramLibrary const&     getShaderPrograms() const{
+                return m_shaderprograms;
+            }
+
         public:
 
             ///
