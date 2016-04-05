@@ -10,7 +10,7 @@ namespace BIO {
 /// \brief The Biomizator class, transforming dirt into Mona Lisa
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Biomizator : public GEN::GenerationStep
+class Biomizator : public gen::GenerationStep
 {
 public:
     Biomizator();
@@ -18,7 +18,7 @@ public:
 
     virtual void run();
 
-    MAP_NAMESPACE::Biome      getBiome(std::shared_ptr<MAP_NAMESPACE::Zone> z);
+    map::Biome      getBiome(map::Zone *z);
     void            assignBiomes();
 
 private:

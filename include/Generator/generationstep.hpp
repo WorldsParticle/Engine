@@ -3,7 +3,7 @@
 
 #include "map/map.hpp"
 
-namespace GEN
+namespace gen
 {
 
 class GenerationStep
@@ -21,12 +21,12 @@ public:
 
     GenerationStep() : _map(nullptr), _step() {}
 
-    inline void    generate(MAP_NAMESPACE::Map *map)
+    inline void    generate(map::MapGraph *map)
     { _map = map; run(); }
 
 protected:
     virtual void    run() = 0;
-    MAP_NAMESPACE::Map        *_map;
+    map::MapGraph        *_map;
     STEP            _step;
 };
 

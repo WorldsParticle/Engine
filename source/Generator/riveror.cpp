@@ -43,7 +43,7 @@ void        Riveror::calculateWatersheds()
             auto corner = c.second;
             if (!corner->ocean && !corner->coast && !corner->watershed->coast)
             {
-		std::shared_ptr<MAP_NAMESPACE::Corner> adj = corner->downslope->watershed;
+        map::Corner *adj = corner->downslope->watershed;
                 if (!adj->ocean)
                 {
                     corner->watershed = adj;
@@ -56,7 +56,7 @@ void        Riveror::calculateWatersheds()
 
     for (auto & corner : _map->corners())
     {
-	std::shared_ptr<MAP_NAMESPACE::Corner> adj = corner.second->watershed;
+    map::Corner *adj = corner.second->watershed;
         adj->watershedSize += 1;
     }
 }
@@ -65,14 +65,14 @@ void        Riveror::createRivers()
 {
     for (unsigned int i; i < (_map->zoneNumber() / 2); ++i)
     {
-	std::shared_ptr<MAP_NAMESPACE::Corner> corner = _map->corners().at(rand() % _map->corners().size());
+    map::Corner *corner = _map->corners().at(rand() % _map->corners().size());
         if (corner->ocean || corner->elevation < 0.3f || corner->elevation > 0.9f)
             continue;
         while (!corner->coast)
         {
             if (corner->downslope == corner)
                 break;
-	    std::shared_ptr<MAP_NAMESPACE::CrossedEdge> edge = lookupEdgeFromCorner(corner, corner->downslope);
+        map::CrossedEdge *edge = lookupEdgeFromCorner(corner, corner->downslope);
             edge->river += 1;
             corner->river += 1;
             corner->downslope->river += 1;
@@ -81,9 +81,9 @@ void        Riveror::createRivers()
     }
 }
 
-std::shared_ptr<MAP_NAMESPACE::CrossedEdge> Riveror::lookupEdgeFromCorner(std::shared_ptr<MAP_NAMESPACE::Corner> from, std::shared_ptr<MAP_NAMESPACE::Corner> to)
+map::CrossedEdge *Riveror::lookupEdgeFromCorner(map::Corner *from, map::Corner *to)
 {
-    for (std::shared_ptr<MAP_NAMESPACE::CrossedEdge> edge : from->edges)
+    for (map::CrossedEdge *edge : from->edges)
     {
         if (edge->c0 == to || edge->c1 == to)
             return (edge);

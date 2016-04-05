@@ -2,14 +2,13 @@
 #define PARABOLA_H
 
 #include "../map/point.hpp"
-#include <memory>
 
-namespace MAP_NAMESPACE
+namespace map
 {
     class Zone;
 }
 
-namespace VOR
+namespace vor
 {
 
 class Event;
@@ -35,12 +34,12 @@ public:
     */
 
     bool		isLeaf;
-    std::shared_ptr<MAP_NAMESPACE::Zone> site;
+    Point       *site;
 
     // when not leaf
     Edge        *edge;
 
-    Event    *cEvent;
+    Event       *cEvent;
     Parabola    *parent;
 
     /*
@@ -48,7 +47,7 @@ public:
     */
 
     Parabola	();
-    Parabola	(std::shared_ptr<MAP_NAMESPACE::Zone> p);
+    Parabola	(Point *p);
     ~Parabola   ();
 
     inline friend std::ostream &operator<<(std::ostream &os, const Parabola &p)

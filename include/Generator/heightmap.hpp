@@ -8,7 +8,7 @@
 #include "zonelookup.hpp"
 #include "tools/bitmap_image.hpp"
 
-namespace MAP_NAMESPACE {
+namespace map {
 
 ///
 /// \brief The HeightMap class, propelling floor to space like a rocketeer
@@ -20,7 +20,7 @@ public:
     HeightMap(int width, int height);
     ~HeightMap();
 
-    void    init(MAP_NAMESPACE::Map & m);
+    void    init(map::MapGraph & m);
     bool    pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::vec3 c);
     void    paintByMoisture();
     void    paintByHeight();

@@ -1,7 +1,7 @@
 #include "Generator/map/map.hpp"
 #include "Generator/zonelookup.hpp"
 
-namespace MAP_NAMESPACE
+namespace map
 {
 
 
@@ -18,11 +18,11 @@ if (_tree)
    delete(_tree);
 }
 
-void    ZoneLookUp::createCloud(MAP_NAMESPACE::Map & m)
+void    ZoneLookUp::createCloud(map::MapGraph & m)
 {
     for (const auto & zone : m.zones())
     {
-        MAP_NAMESPACE::ZoneLookUp::PointCloud<double>::LPoint p = {zone.second->point.x, zone.second->point.y, zone.second};
+        map::ZoneLookUp::PointCloud<double>::LPoint p = {zone.second->point.x, zone.second->point.y, zone.second};
         _cloud.pts.push_back(p);
     }
     _pc2kd = new PC2KD(_cloud);
@@ -30,7 +30,7 @@ void    ZoneLookUp::createCloud(MAP_NAMESPACE::Map & m)
     _tree->buildIndex();
 }
 
-std::shared_ptr<Zone> ZoneLookUp::getNearestZone(double x, double y)
+Zone *ZoneLookUp::getNearestZone(double x, double y)
 {
     double          queryPoint[2] = {x, y};
     const size_t    num_results = 1;

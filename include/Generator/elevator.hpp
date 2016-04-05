@@ -9,7 +9,7 @@ namespace ELE {
 /// \brief The Elevator class, propelling floor to space like a rocketeer
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Elevator : public GEN::GenerationStep
+class Elevator : public gen::GenerationStep
 {
 public:
     Elevator();

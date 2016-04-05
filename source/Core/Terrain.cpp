@@ -17,7 +17,7 @@ namespace   Engine
 //		_mesh()
 	{
 		this->m_scene->add(this);
-		_generator = new GEN::Generator();
+		_generator = new gen::Generator();
 
 
 		_generator->generate(10, 10, 2);

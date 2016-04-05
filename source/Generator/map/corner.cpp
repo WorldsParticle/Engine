@@ -1,6 +1,6 @@
 #include "Generator/map/corner.hpp"
 
-namespace MAP_NAMESPACE
+namespace map
 {
 
 int Corner::indexMax = 0;

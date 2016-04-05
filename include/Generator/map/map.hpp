@@ -1,27 +1,28 @@
-#ifndef MAP_NAMESPACE_H
-#define MAP_NAMESPACE_H
+#ifndef MAP_H
+#define MAP_H
 
 #include <map>
-#include <memory>
 #include "point.hpp"
 #include "zone.hpp"
 #include "corner.hpp"
 #include "crossededge.hpp"
 
-namespace MAP_NAMESPACE
+namespace map
 {
 
-class Map
+class MapGraph
 {
 public:
-    Map(unsigned int xMax = 0, unsigned int yMax = 0, unsigned int zoneNumber = 0);
-    ~Map();
+    MapGraph(unsigned int xMax = 0, unsigned int yMax = 0, unsigned int zoneNumber = 0);
+    ~MapGraph();
 
-    inline std::map<int, std::shared_ptr<Zone>>        &zones()
+    Zone    *findZone(const Point *p); // ugly and slow
+
+    inline std::map<int, Zone *>        &zones()
     { return _zones; }
-    inline std::map<int, std::shared_ptr<Corner>>      &corners()
+    inline std::map<int, Corner *>      &corners()
     { return _corners; }
-    inline std::map<int, std::shared_ptr<CrossedEdge>> &edges()
+    inline std::map<int, CrossedEdge *> &edges()
     { return _edges; }
 
     inline double xMax()
@@ -33,9 +34,9 @@ public:
 
 private:
 
-    std::map<int, std::shared_ptr<Zone>>         _zones;
-    std::map<int, std::shared_ptr<Corner>>       _corners;
-    std::map<int, std::shared_ptr<CrossedEdge>>  _edges;
+    std::map<int, Zone *>         _zones;
+    std::map<int, Corner *>       _corners;
+    std::map<int, CrossedEdge *>  _edges;
 
     double    _xMax;
     double    _yMax;
@@ -44,4 +45,4 @@ private:
 
 }
 
-#endif // MAP_NAMESPACE_H
+#endif // MAP_H

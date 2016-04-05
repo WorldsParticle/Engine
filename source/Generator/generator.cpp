@@ -9,7 +9,7 @@
 #include "Generator/biomizator.hpp"
 #include "Generator/heightmap.hpp"
 
-namespace GEN
+namespace gen
 {
 
 Generator::Generator() :
@@ -22,16 +22,16 @@ Generator::Generator() :
     _moistureStep(nullptr),
     _biomeStep(nullptr)
 {
-    _fillStep = new VOR::Voronoi();
+    _fillStep = new vor::Voronoi();
 }
 
-MAP_NAMESPACE::Map    *Generator::generate(double xMax, double yMax, unsigned int zoneNumber)
+map::MapGraph    *Generator::generate(double xMax, double yMax, unsigned int zoneNumber)
 {
-    _map = new MAP_NAMESPACE::Map(xMax, yMax, zoneNumber);
+    _map = new map::MapGraph(xMax, yMax, zoneNumber);
 
-    MAP_NAMESPACE::Zone::indexMax = 0;
-    MAP_NAMESPACE::Corner::indexMax = 0;
-    MAP_NAMESPACE::CrossedEdge::indexMax = 0;
+    map::Zone::indexMax = 0;
+    map::Corner::indexMax = 0;
+    map::CrossedEdge::indexMax = 0;
 
     _fillStep->generate(_map);
 
@@ -50,7 +50,7 @@ MAP_NAMESPACE::Map    *Generator::generate(double xMax, double yMax, unsigned in
     _biomeStep = new BIO::Biomizator();
     _biomeStep->generate(_map);
 
-    MAP_NAMESPACE::HeightMap h(xMax, yMax);
+    map::HeightMap h(xMax, yMax);
     std::cout << "making heightmap..." << std::endl;
     h.init(*_map);
     std::cout << "painting..." << std::endl;
@@ -59,7 +59,7 @@ MAP_NAMESPACE::Map    *Generator::generate(double xMax, double yMax, unsigned in
     h.paintByLandType();
     h.paintByBiome();
     std::cout << "painted..." << std::endl;
-    _heightmap = new MAP_NAMESPACE::HeightMap(h);
+    _heightmap = new map::HeightMap(h);
 
     return _map;
 }

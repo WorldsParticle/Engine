@@ -10,7 +10,7 @@ namespace RIV {
 /// \brief The Riveror class, daughter of rain and mother of rivers and watersheds
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Riveror : public GEN::GenerationStep
+class Riveror : public gen::GenerationStep
 {
 public:
     Riveror();
@@ -21,7 +21,7 @@ public:
 private:
     void                createRivers();
     void                calculateWatersheds();
-    std::shared_ptr<MAP_NAMESPACE::CrossedEdge> lookupEdgeFromCorner(std::shared_ptr<MAP_NAMESPACE::Corner> from, std::shared_ptr<MAP_NAMESPACE::Corner> to);
+    map::CrossedEdge    *lookupEdgeFromCorner(map::Corner *from, map::Corner *to);
 
 };
 

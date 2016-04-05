@@ -4,7 +4,7 @@
 #include "../map/point.hpp"
 #include "../map/zone.hpp"
 
-namespace VOR
+namespace vor
 {
 
 /*
@@ -24,11 +24,11 @@ class Edge  // should find a way to not use it
 {
 public:
 
-    Point       start;
-    Point       end;
-    Point       direction;
-    std::shared_ptr<MAP_NAMESPACE::Zone> left;
-    std::shared_ptr<MAP_NAMESPACE::Zone> right;
+    Point       *start;
+    Point       *end;
+    Point       *direction;
+    Point       *left;
+    Point       *right;
 
     double		f;
     double		g;
@@ -43,24 +43,25 @@ public:
         r		: pointer to right place
     */
 
-    Edge(const Point &s, std::shared_ptr<MAP_NAMESPACE::Zone> l, std::shared_ptr<MAP_NAMESPACE::Zone> r) :
-        start(s.x, s.y),
-        end(0, 0),
-        direction(0, 0),
+    Edge(Point *s, Point *l, Point *r) :
+        start(s),
+        end(NULL),
+        direction(NULL),
         left(l),
-        right(r),
-	f(0.0f),
-	g(0.0f),
-	neighbour(nullptr)
+        right(r)
     {
-        f = (r->point.x - l->point.x) / (l->point.y - r->point.y) ;
-        g = s.y - f * s.x ;
-        direction.x =  (r->point.y - l->point.y); // revoir
-        direction.y =  -(r->point.x - l->point.x); // revoir
+        neighbour	= NULL;
+
+        f = (r->x - l->x) / (l->y - r->y) ;
+        g = s->y - f * s->x ;
+
+        // Revoir
+        direction = new Point((r->y - l->y),
+                              -(r->x - l->x));
     }
 
     inline friend std::ostream &operator<<(std::ostream &os, const Edge &e)
-    { return os << "[" << e.left->index << "|" << e.right->index << "]s" << e.start << "d" << e.direction; }
+    { return os << "[" << *e.left << "|" << *e.right << "]s" << *e.start << "d" << *e.direction; }
 };
 
 }

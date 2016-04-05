@@ -1,6 +1,6 @@
 #include "Generator/voronoi/parabola.hpp"
 
-namespace VOR
+namespace vor
 {
 
 int Parabola::indexMax = 0;
@@ -20,7 +20,7 @@ Parabola::Parabola() :
     _right = NULL;
 }
 
-Parabola::Parabola(std::shared_ptr<MAP_NAMESPACE::Zone> p) :
+Parabola::Parabola(Point *p) :
     index(indexMax),
     site(p)
 {

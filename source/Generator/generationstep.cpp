@@ -1,6 +1,6 @@
 #include "Generator/generationstep.hpp"
 
-namespace GEN
+namespace gen
 {
 
 }
