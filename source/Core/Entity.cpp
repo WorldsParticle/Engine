@@ -27,9 +27,9 @@ namespace   Engine
 
     }
 
-    Entity::Entity() :
+    Entity::Entity(Scene *scene) :
         m_node(nullptr),
-        m_scene()
+        m_scene(scene)
     {
 
     }

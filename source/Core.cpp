@@ -139,7 +139,7 @@ namespace   Engine
     {
         // TODO GSL OWNER && NOT NULL
         Scene *test = this->m_importer.import(filename);
-        //test->add(new Terrain(test->getShaderPrograms()));
+//        test->add(new Terrain(test, test->getShaderPrograms()));
 
         this->m_scenes.push_back(test);
 //        this->m_scenes.push_back(test);

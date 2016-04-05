@@ -4,13 +4,14 @@
 #include    "Engine/Core/Scene.hpp"
 #include    "Engine/Core/Mesh.hpp"
 #include    "Engine/Core/ShaderProgramLibrary.hpp"
+#include    "Engine/Core/Scene.hpp"
 
 using namespace     log4cpp;
 
 namespace   Engine
 {
-	Terrain::Terrain(/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms) :
-		Entity(),
+	Terrain::Terrain(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms) :
+		Entity(scene),
 		_heightmap(nullptr)
 //		_generator()
 //		_mesh()
