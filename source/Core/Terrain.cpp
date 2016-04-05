@@ -126,13 +126,8 @@ this->_mesh->setPositions(std::vector<float>{
 	void
 		Terrain::update(void)
 	{
-<<<<<<< Updated upstream
 	    _mesh->update();
 		Category    &root = Category::getRoot();
-=======
-	_mesh->update();
-		//Category    &root = Category::getRoot();
->>>>>>> Stashed changes
 
 		root << Priority::DEBUG << "Terrain - update()";
 		// nothing to do actually.
