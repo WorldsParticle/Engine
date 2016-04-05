@@ -1,11 +1,13 @@
 #include "Generator/heightmap.hpp"
 
 #include <cstdlib>
-#include <iostream>
+#include <log4cpp/Category.hh>
 
 #include "Generator/map/map.hpp"
 #include "Generator/map/point.hpp"
 #include "Generator/tools/simplexnoise.hpp"
+
+using namespace log4cpp;
 
 namespace map
 {
@@ -13,6 +15,8 @@ namespace map
 
 HeightMap::HeightMap(int width, int height) : _width(width), _height(height), _points(), _zoneLookUp(), image(width, height), _vertices(), _indices(), _normals()
 {
+    Category& root = Category::getRoot();
+    root << Priority::DEBUG << "construct heightmap";
 }
 
 HeightMap::~HeightMap()
@@ -44,16 +48,16 @@ void    HeightMap::init(map::MapGraph & m)
           for (auto & e : z->borders)
           {
               glm::vec3 a, b, c;
-              a.x = z->point.x;
-              a.y = z->point.y;
+              a.x = static_cast<float>(z->point.x);
+              a.y = static_cast<float>(z->point.y);
               a.z = z->elevation;
 
-              b.x = e->c0->point.x;
-              b.y = e->c0->point.y;
+              b.x = static_cast<float>(e->c0->point.x);
+              b.y = static_cast<float>(e->c0->point.y);
               b.z = e->c0->elevation;
 
-              c.x = e->c1->point.x;
-              c.y = e->c1->point.y;
+              c.x = static_cast<float>(e->c1->point.x);
+              c.y = static_cast<float>(e->c1->point.y);
               c.z = e->c1->elevation;
 
               if (pointInsideTrigon(glm::vec3(static_cast<float>(j), static_cast<float>(i), 0.0), a, b, c))
@@ -199,48 +203,63 @@ void    HeightMap::paintByBiome()
 // génère la mesh du terrain en procédant deux triangles par deux triangles (ou carré par carré)
 void    HeightMap::generateMesh()
 {
+    Category& root = Category::getRoot();
+    root << Priority::DEBUG << "yo " << _points.size();
     _vertices.reserve(_height * _width * 3);
-    _indices.reserve((_height - 1) * (_width - 1) * 6);
-    _normals.reserve((_height - 1) * (_width - 1) * 2 * 3);
+    _indices.reserve(_height * _width * 3 / 2);
+    _normals.reserve(_height * _width * 3 / 2);
 
     for (int i = 0; i < (_height - 1); ++i)
-        for (int j = 0; j < (_width - 1); ++j)
+        for (int j = 0; j < (_width - 1); j += 4)
         {
-            _vertices[((i) * _width + (j)) * 3] = static_cast<float>(_points[i * _width + j].x);
-            _vertices[((i) * _width + (j)) * 3 + 1] = static_cast<float>(_points[i * _width + j].z);
-            _vertices[((i) * _width + (j)) * 3 + 2] = static_cast<float>(_points[i * _width + j].y);
+            glm::vec3 p1 = glm::vec3(static_cast<float>(_points[i * _width + j].x),
+                                     static_cast<float>(_points[i * _width + j].z),
+                                     static_cast<float>(_points[i * _width + j].y));
+	    glm::vec3 p2 = glm::vec3(static_cast<float>(_points[i * _width + j + 1].x),
+                                     static_cast<float>(_points[i * _width + j + 1].z),
+                                     static_cast<float>(_points[i * _width + j + 1].y));
+	    glm::vec3 p3 = glm::vec3(static_cast<float>(_points[i * _width + j + 2].x),
+                                     static_cast<float>(_points[i * _width + j + 2].z),
+                                     static_cast<float>(_points[i * _width + j + 2].y));
+	    glm::vec3 p4 = glm::vec3(static_cast<float>(_points[i * _width + j + 3].x),
+                                     static_cast<float>(_points[i * _width + j + 3].z),
+                                     static_cast<float>(_points[i * _width + j + 3].y));
 
-            _indices[((i) * _width + (j)) * 6] = j + i * _width;
-            _indices[((i) * _width + (j)) * 6 + 1] = j + 1 + (i + 1) * _width;
-            _indices[((i) * _width + (j)) * 6 + 2] = j + (i + 1) * _width;
+            _vertices.push_back(p1.x);
+            _vertices.push_back(p1.y);
+            _vertices.push_back(p1.z);
 
-            _indices[((i) * _width + (j)) * 6 + 3] = j + i * _width;
-            _indices[((i) * _width + (j)) * 6 + 4] = j + 1 + i * _width;
-            _indices[((i) * _width + (j)) * 6 + 5] = j + 1 + (i + 1) * _width;
+            _vertices.push_back(p2.x);
+            _vertices.push_back(p2.y);
+            _vertices.push_back(p2.z);
 
-            glm::vec3 a, b, c, result;
-            a = {_points[(i + 1) * _width + j].x - _points[i * _width + j].x,
-                _points[(i + 1) * _width + j].z - _points[i * _width + j].z,
-                _points[(i + 1) * _width + j].y - _points[i * _width + j].y};
-            b = {_points[(i + 1) * _width + j + 1].x - _points[i * _width + j].x,
-                _points[(i + 1) * _width + j + 1].z - _points[i * _width + j].z,
-                _points[(i + 1) * _width + j + 1].y - _points[i * _width + j].y};
-            c = {_points[i * _width + j + 1].x - _points[i * _width + j].x,
-                _points[i * _width + j + 1].z - _points[i * _width + j].z,
-                _points[i * _width + j + 1].y - _points[i * _width + j].y};
+            _vertices.push_back(p3.x);
+            _vertices.push_back(p3.y);
+            _vertices.push_back(p3.z);
 
-            result = glm::cross(a, b);
+            _vertices.push_back(p4.x);
+            _vertices.push_back(p4.y);
+            _vertices.push_back(p4.z);
 
-            _normals[(j + i * _width) * 6] = result.x;
-            _normals[(j + i * _width) * 6 + 1] = result.y;
-            _normals[(j + i * _width) * 6 + 2] = result.z;
+            _indices.push_back(j + i * _width);
+            _indices.push_back(j + 1 + i * _width);
+            _indices.push_back(j + 2 + i * _width);
 
-            result = glm::cross(b, c);
+            _indices.push_back(j + i * _width);
+            _indices.push_back(j + 1 + i * _width);
+            _indices.push_back(j + 3 + i * _width);
 
-            _normals[(j + i * _width) * 6 + 3] = result.x;
-            _normals[(j + i * _width) * 6 + 4] = result.y;
-            _normals[(j + i * _width) * 6 + 5] = result.z;
+	    glm::vec3 result = glm::cross(p2 -p1, p3 - p1);
 
+            _normals.push_back(result.x);
+            _normals.push_back(result.y);
+            _normals.push_back(result.z);
+
+            result = glm::cross(p2 - p1, p4 - p1);
+
+            _normals.push_back(result.x);
+            _normals.push_back(result.y);
+            _normals.push_back(result.z);
         }
 }
 

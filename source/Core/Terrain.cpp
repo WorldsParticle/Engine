@@ -52,6 +52,7 @@ namespace   Engine
 		_mesh->setPositions(getVertex());
 		_mesh->setNormals(getNormals());
 		_mesh->setIndices(getIndices());
+		_mesh->update();
 	}
 	//const Resource  &get(const Key &key) const;
 //ShaderProgramLibrary : public Library<ShaderProgramName, std::shared_ptr<ShaderProgram>>
@@ -71,9 +72,10 @@ namespace   Engine
 	void
 		Terrain::update(void)
 	{
-		//Category    &root = Category::getRoot();
+	    _mesh->update();
+		Category    &root = Category::getRoot();
 
-		//root << Priority::DEBUG << "Terrain - update()";
+		root << Priority::DEBUG << "Terrain - update()";
 		// nothing to do actually.
 	}
 

@@ -50,16 +50,15 @@ map::MapGraph    *Generator::generate(double xMax, double yMax, unsigned int zon
     _biomeStep = new BIO::Biomizator();
     _biomeStep->generate(_map);
 
-    map::HeightMap h(xMax, yMax);
+    _heightmap = new map::HeightMap(xMax, yMax);
     std::cout << "making heightmap..." << std::endl;
-    h.init(*_map);
+    _heightmap->init(*_map);
     std::cout << "painting..." << std::endl;
-    h.paintByHeight();
-    h.paintByMoisture();
-    h.paintByLandType();
-    h.paintByBiome();
+    _heightmap->paintByHeight();
+    _heightmap->paintByMoisture();
+    _heightmap->paintByLandType();
+    _heightmap->paintByBiome();
     std::cout << "painted..." << std::endl;
-    _heightmap = new map::HeightMap(h);
 
     return _map;
 }
