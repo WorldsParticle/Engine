@@ -73,22 +73,6 @@ namespace   Engine
 		std::vector<float> const& getNormals() {
 			return _heightmap->getNormals();
 		}
-//		//TODO: stocké les points directement dans le terrain ?
-//	    std::vector<float> const &getVertex() {
-//	    	return _heightmap->getPoints();
-//	    }
-//	    std::vector<unsigned int> const &getIndices() {
-//	    	return _heightmap−>getIndices();
-////	    	std::vector<int> tmpIndices = _heightmap->getIndices();
-////	    	return static_cast<std::vector<unsigned int>>(tmpIndices);
-//	    }
-//    	std::vector<float> const &getNormals() {
-//	    	return _heightmap->getNormals();
-//	    }
-//
-////		MAP_NAMESPACE::HeightMap*		getHeightmap {
-////			return _heightmap;
-////		}
 
 	    Mesh *     getMesh() {
 	    	return _mesh;
@@ -104,6 +88,10 @@ namespace   Engine
         /// \brief The mesh associated with the terrain.
         ///
         Mesh *     _mesh; // TODO opti by not using a mesh
+
+		std::vector<float> vertices;
+   		std::vector<unsigned int> indices;
+
 
 	};
 }

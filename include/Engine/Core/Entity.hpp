@@ -20,6 +20,7 @@
 #include    <string>
 
 #include    "Engine/Configuration.hpp"
+#include    "Engine/Core/Transform.hpp"
 
 namespace   Engine
 {
@@ -105,5 +106,7 @@ namespace   Engine
             /// \brief The scene that contains the Entity.
             ///
             Scene           *m_scene;
+
+            Transform   m_transform_zero_test;
     };
 }

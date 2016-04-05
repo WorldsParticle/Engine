@@ -139,10 +139,12 @@ namespace   Engine
     {
         // TODO GSL OWNER && NOT NULL
         Scene *test = this->m_importer.import(filename);
-//        test->add(new Terrain(test, test->getShaderPrograms()));
+        std::cout << "ready to add terrain..." << std::endl;
+        test->add(new Terrain(test, test->getShaderPrograms()));
+        std::cout << "added terrain..." << std::endl;
 
         this->m_scenes.push_back(test);
-//        this->m_scenes.push_back(test);
+        std::cout << "added scene..." << std::endl;
     }
 
 }
