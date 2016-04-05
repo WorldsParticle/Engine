@@ -209,21 +209,22 @@ void    HeightMap::generateMesh()
     _indices.reserve(_height * _width * 3 / 2);
     _normals.reserve(_height * _width * 3 / 2);
 
-    for (int i = 0; i < (_height - 1); ++i)
-        for (int j = 0; j < (_width - 1); j += 4)
+    for (int i = 0; i < _height; i++)
+        for (int j = 0; j < _width; j++)
         {
+	    float scaleZ = 1000000;
             glm::vec3 p1 = glm::vec3(static_cast<float>(_points[i * _width + j].x),
-                                     static_cast<float>(_points[i * _width + j].z),
-                                     static_cast<float>(_points[i * _width + j].y));
+                                     static_cast<float>(_points[i * _width + j].y),
+                                     static_cast<float>(_points[i * _width + j].z) * scaleZ);
 	    glm::vec3 p2 = glm::vec3(static_cast<float>(_points[i * _width + j + 1].x),
-                                     static_cast<float>(_points[i * _width + j + 1].z),
-                                     static_cast<float>(_points[i * _width + j + 1].y));
-	    glm::vec3 p3 = glm::vec3(static_cast<float>(_points[i * _width + j + 2].x),
-                                     static_cast<float>(_points[i * _width + j + 2].z),
-                                     static_cast<float>(_points[i * _width + j + 2].y));
-	    glm::vec3 p4 = glm::vec3(static_cast<float>(_points[i * _width + j + 3].x),
-                                     static_cast<float>(_points[i * _width + j + 3].z),
-                                     static_cast<float>(_points[i * _width + j + 3].y));
+                                     static_cast<float>(_points[i * _width + j + 1].y),
+                                     static_cast<float>(_points[i * _width + j + 1].z) * scaleZ);
+	    glm::vec3 p3 = glm::vec3(static_cast<float>(_points[(i + 1) * _width + j].x),
+                                     static_cast<float>(_points[(i + 1) * _width + j].y),
+                                     static_cast<float>(_points[(i + 1) * _width + j].z) * scaleZ);
+	    glm::vec3 p4 = glm::vec3(static_cast<float>(_points[(i + 1) * _width + j + 1].x),
+                                     static_cast<float>(_points[(i + 1) * _width + j + 1].y),
+                                     static_cast<float>(_points[(i + 1) * _width + j + 1].z) * scaleZ);
 
             _vertices.push_back(p1.x);
             _vertices.push_back(p1.y);
@@ -246,8 +247,8 @@ void    HeightMap::generateMesh()
             _indices.push_back(j + 2 + i * _width);
 
             _indices.push_back(j + i * _width);
-            _indices.push_back(j + 1 + i * _width);
             _indices.push_back(j + 3 + i * _width);
+            _indices.push_back(j + 2 + i * _width);
 
 	    glm::vec3 result = glm::cross(p2 -p1, p3 - p1);
 
@@ -260,6 +261,7 @@ void    HeightMap::generateMesh()
             _normals.push_back(result.x);
             _normals.push_back(result.y);
             _normals.push_back(result.z);
+	    root << Priority::DEBUG << "quad: " << p1.x << " " << p1.y << " " << p1.z << "\n" << p2.x << " " << p2.y << " " << p2.z << "\n" << p3.x << " " << p3.y << " " << p3.z << "\n" << p4.x << " " << p4.y << " " << p4.z << "\n";
         }
 }
 
