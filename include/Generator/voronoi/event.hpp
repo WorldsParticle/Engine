@@ -21,10 +21,11 @@ class Event
 public:
 
     explicit Event(Point *p, bool ispe) :
-        arch(NULL),
+        arch(nullptr),
         point(p),
         is_par_event(ispe),
-        y(p->y) {}
+        y(p->y)
+        {}
 
     Parabola    *arch; // if interesection
     Point       *point; // if point

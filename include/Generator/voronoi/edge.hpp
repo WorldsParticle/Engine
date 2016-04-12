@@ -45,12 +45,15 @@ public:
 
     Edge(Point *s, Point *l, Point *r) :
         start(s),
-        end(NULL),
-        direction(NULL),
+        end(nullptr),
+        direction(nullptr),
         left(l),
-        right(r)
+        right(r),
+        f(0.0),
+        g(0.0),
+        neighbour(nullptr)
     {
-        neighbour	= NULL;
+
 
         f = (r->x - l->x) / (l->y - r->y) ;
         g = s->y - f * s->x ;

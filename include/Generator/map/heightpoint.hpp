@@ -3,6 +3,8 @@
 
 #include <iostream>
 #include <memory>
+#include <cmath>
+#include <limits>
 #include "zone.hpp"
 
 class   HeightPoint
@@ -15,7 +17,8 @@ public:
     { return os << "(" << p.x << ", " << p.y << ", " << p.z << ")"; }
 
     inline bool operator==(const HeightPoint &other)
-    { return (x == other.x) && (y == other.y); }
+    { return (std::abs(x - other.x) < std::numeric_limits<double>::epsilon())
+                && (std::abs(y - other.y) < std::numeric_limits<double>::epsilon()); }
 
     inline bool operator!=(const HeightPoint &other)
     { return !(*this == other); }

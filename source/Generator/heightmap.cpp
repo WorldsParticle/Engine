@@ -1,22 +1,18 @@
 #include "Generator/heightmap.hpp"
 
 #include <cstdlib>
-#include <log4cpp/Category.hh>
 
 #include "Generator/map/map.hpp"
 #include "Generator/map/point.hpp"
 #include "Generator/tools/simplexnoise.hpp"
 
-using namespace log4cpp;
 
 namespace map
 {
 
 
-HeightMap::HeightMap(int width, int height) : _width(width), _height(height), _points(), _zoneLookUp(), image(width, height), _vertices(), _indices(), _normals()
+HeightMap::HeightMap(unsigned int width, unsigned int height) : _width(width), _height(height), _points(), _zoneLookUp(), _vertices(), _indices(), _normals()
 {
-    Category& root = Category::getRoot();
-    root << Priority::DEBUG << "construct heightmap";
 }
 
 HeightMap::~HeightMap()
@@ -28,13 +24,13 @@ HeightMap::~HeightMap()
 void    HeightMap::init(map::MapGraph & m)
 {
     // seed pour le bruit
-    int seed = rand() % 1000000;
+    //int seed = rand() % 1000000;
 
     _points.resize((_width) * (_height));
     _zoneLookUp.createCloud(m);
-    for (int i = 0; i < _height; ++i)
+    for (unsigned int i = 0; i < _height; ++i)
     {
-     for (int j = 0; j < _width; ++j)
+     for (unsigned int j = 0; j < _width; ++j)
      {
          _points[i * _width + j].x = static_cast<double>(j);
          _points[i * _width + j].y = static_cast<double>(i);
@@ -102,115 +98,15 @@ bool HeightMap::pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::ve
     return true;
 }
 
-// crée une bitmap coloriée en en greyscale selon l'humidité des points
-void    HeightMap::paintByMoisture()
-{
-    for (int i = 0; i < _height; ++i)
-        for (int j = 0; j < _width; ++j)
-        {
-            HeightPoint & p = _points[i * _width + j];
-            if (p.zone->ocean)
-                image.set_pixel(j, _height - i - 1, 0, 0, 125);
-            else
-                image.set_pixel(j, _height - i - 1, static_cast<unsigned char>(p.zone->moisture * 255.0f), static_cast<unsigned char>(p.zone->moisture * 255.0f), static_cast<unsigned char>(p.zone->moisture * 255.0f));
-        }
-    image.save_image("mapmoisture.bmp");
-}
-
-// crée une bitmap coloriée en greyscale selon la hauteur des points
-void    HeightMap::paintByHeight()
-{
-    for (int i = 0; i < _height; ++i)
-        for (int j = 0; j < _width; ++j)
-        {
-            HeightPoint & p = _points[i * _width + j];
-            if (p.zone->ocean)
-                image.set_pixel(j, _height - i - 1, 0, 0, 125);
-            else
-                image.set_pixel(j, _height - i - 1, static_cast<unsigned char>(p.z * 255.0), static_cast<unsigned char>(p.z * 255.0), static_cast<unsigned char>(p.z * 255.0));
-        }
-    image.save_image("mapheight.bmp");
-}
-
-// crée une bitmap qui assigne différentes couleures selon le land time (bordure, océan, beach/coast et water
-void    HeightMap::paintByLandType()
-{
-    for (int i = 0; i < _height; ++i)
-        for (int j = 0; j < _width; ++j)
-        {
-            HeightPoint & p = _points[i * _width + j];
-            if (p.zone->border)
-                image.set_pixel(j, _height - i - 1, 200, 50, 50);
-            else if (p.zone->ocean)
-                image.set_pixel(j, _height - i - 1, 50, 50, 200);
-            else if (p.zone->coast)
-                image.set_pixel(j, _height - i - 1, 255, 255, 204);
-            else if (p.zone->water)
-                image.set_pixel(j, _height - i - 1, 0, 255, 255);
-        }
-    image.save_image("maptype.bmp");
-}
-
-// crée une bitmap qui colorie les zones selon leur biome
-void    HeightMap::paintByBiome()
-{
-    for (int i = 0; i < _height; ++i)
-        for (int j = 0; j < _width; ++j)
-        {
-            HeightPoint & p = _points[i * _width + j];
-            if (p.zone->biome == map::BEACH)
-                image.set_pixel(j, _height - i - 1, 255, 255, 204);
-            else if (p.zone->biome == map::OCEAN)
-                image.set_pixel(j, _height - i - 1, 26, 0, 153);
-            else if (p.zone->biome == map::MARSH)
-                image.set_pixel(j, _height - i - 1, 0, 204, 153);
-            else if (p.zone->biome == map::ICE)
-                image.set_pixel(j, _height - i - 1, 220, 250, 255);
-            else if (p.zone->biome == map::LAKE)
-                image.set_pixel(j, _height - i - 1, 61, 139, 255);
-            else if (p.zone->biome == map::SNOW)
-                image.set_pixel(j, _height - i - 1, 248, 248, 248);
-            else if (p.zone->biome == map::TUNDRA)
-                image.set_pixel(j, _height - i - 1, 208, 208, 176);
-            else if (p.zone->biome == map::BARE)
-                image.set_pixel(j, _height - i - 1, 176, 176, 176);
-            else if (p.zone->biome == map::SCORCHED)
-                image.set_pixel(j, _height - i - 1, 144, 144, 144);
-            else if (p.zone->biome == map::TAIGA)
-                image.set_pixel(j, _height - i - 1, 204, 212, 187);
-            else if (p.zone->biome == map::SHRUBLAND)
-                image.set_pixel(j, _height - i - 1, 196, 204, 187);
-            else if (p.zone->biome == map::TEMPERATE_DESERT)
-                image.set_pixel(j, _height - i - 1, 228, 232, 202);
-            else if (p.zone->biome == map::TEMPERATE_RAIN_FOREST)
-                image.set_pixel(j, _height - i - 1, 164, 196, 168);
-            else if (p.zone->biome == map::TEMPERATE_DECIDUOUS_FOREST)
-                image.set_pixel(j, _height - i - 1, 180, 196, 169);
-            else if (p.zone->biome == map::GRASSLAND)
-                image.set_pixel(j, _height - i - 1, 196, 212, 170);
-            else if (p.zone->biome == map::TROPICAL_SEASONAL_FOREST)
-                image.set_pixel(j, _height - i - 1, 169, 204, 164);
-            else if (p.zone->biome == map::TROPICAL_RAIN_FOREST)
-                image.set_pixel(j, _height - i - 1, 228, 232, 202);
-            else if (p.zone->biome == map::SUBTROPICAL_DESERT)
-                image.set_pixel(j, _height - i - 1, 233, 221, 199);
-
-        }
-    image.save_image("mapbiome.bmp");
-}
-
-
 // génère la mesh du terrain en procédant deux triangles par deux triangles (ou carré par carré)
 void    HeightMap::generateMesh()
 {
-    Category& root = Category::getRoot();
-    root << Priority::DEBUG << "yo " << _points.size();
     _vertices.reserve(_height * _width * 3);
     _indices.reserve(_height * _width * 3 / 2);
     _normals.reserve(_height * _width * 3 / 2);
 
-    for (int i = 0; i < _height; i++)
-        for (int j = 0; j < _width; j++)
+    for (unsigned int i = 0; i < _height; i++)
+        for (unsigned int j = 0; j < _width; j++)
         {
 	    float scaleZ = 1000000;
             glm::vec3 p1 = glm::vec3(static_cast<float>(_points[i * _width + j].x),
@@ -261,8 +157,7 @@ void    HeightMap::generateMesh()
             _normals.push_back(result.x);
             _normals.push_back(result.y);
             _normals.push_back(result.z);
-	    root << Priority::DEBUG << "quad: " << p1.x << " " << p1.y << " " << p1.z << "\n" << p2.x << " " << p2.y << " " << p2.z << "\n" << p3.x << " " << p3.y << " " << p3.z << "\n" << p4.x << " " << p4.y << " " << p4.z << "\n";
-        }
+       }
 }
 
 // get les arrays à envoyer à la carte graphique via le renderer

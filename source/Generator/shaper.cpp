@@ -61,7 +61,7 @@ void        Shaper::assignCornerLandPerlin(int seed)
         p.y = (p.y / yMax - 0.5) * 2;
 
         double magnitude = sqrt(pow(p.x, 2) + pow(p.y, 2));
-        double z = (octave_noise_2d(8, 0.5, 0.3, p.x + seed, p.y + seed) + 1) / 2;
+        double z = static_cast<double>((octave_noise_2d(8.0f, 0.5f, 0.3f, static_cast<float>(p.x + seed), static_cast<float>(p.y + seed)) + 1) / 2.0f);
         double threshold = (0.3 + 0.3 * magnitude * magnitude);
         if (z > threshold && !corner.second->border)
             corner.second->water = false;
@@ -96,7 +96,7 @@ void        Shaper::assignOceanCostAndLand()
                 numWater += 1;
             }
         }
-        zone.second->water = (zone.second->ocean || (numWater >= zone.second->corners.size() * 0.3)); // 0.3 == LAKE_TRESHOLD
+        zone.second->water = (zone.second->ocean || (numWater >= static_cast<double>(zone.second->corners.size()) * 0.3)); // 0.3 == LAKE_TRESHOLD
     }
 
     // propagating ocean zones
@@ -120,8 +120,8 @@ void        Shaper::assignOceanCostAndLand()
         int numLand = 0;
         for (auto neighbor : zone.second->neighbors)
         {
-            numOcean += (int)(neighbor->ocean);
-            numLand += (int)(!neighbor->water);
+            numOcean += static_cast<int>(neighbor->ocean);
+            numLand += static_cast<int>(!neighbor->water);
         }
         zone.second->coast = (numOcean > 0) && (numLand > 0);
     }
@@ -133,8 +133,8 @@ void        Shaper::assignOceanCostAndLand()
         unsigned int numLand = 0;
         for (auto zone : corner.second->faces)
         {
-            numOcean += (int)(zone->ocean);
-            numLand += (int)(!zone->water);
+            numOcean += static_cast<int>(zone->ocean);
+            numLand += static_cast<int>(!zone->water);
         }
         corner.second->ocean = (numOcean == corner.second->faces.size());
         corner.second->coast = (numOcean > 0) && (numLand > 0);

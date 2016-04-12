@@ -17,11 +17,67 @@ Corner::Corner() :
     edges(),
     adjacent(),
     river(0),
-    watershedSize(0),
     downslope(),
-    watershed()
+    watershed(),
+    watershedSize(0)
 {
     ++indexMax;
+}
+
+Corner::Corner(const Corner& other) :
+index(other.index),
+point(other.point.x, other.point.y),
+ocean(other.ocean),
+water(other.water),
+coast(other.coast),
+border(other.border),
+elevation(other.elevation),
+moisture(other.moisture),
+faces(other.faces),
+edges(other.edges),
+adjacent(other.adjacent),
+river(other.river),
+downslope(other.downslope),
+watershed(other.watershed),
+watershedSize(other.watershedSize)
+{
+}
+
+Corner::Corner(Corner& other) :
+    index(other.index),
+    point(other.point.x, other.point.y),
+    ocean(other.ocean),
+    water(other.water),
+    coast(other.coast),
+    border(other.border),
+    elevation(other.elevation),
+    moisture(other.moisture),
+    faces(other.faces),
+    edges(other.edges),
+    adjacent(other.adjacent),
+    river(other.river),
+    downslope(other.downslope),
+    watershed(other.watershed),
+    watershedSize(other.watershedSize)
+{
+}
+
+Corner& Corner::operator=(const Corner& other)
+{
+if (&other != this)
+{
+
+}
+return *this;
+}
+
+Corner& Corner::operator=(Corner& other)
+{
+if (&other != this)
+{
+
+}
+return *this;
 }
 
 }

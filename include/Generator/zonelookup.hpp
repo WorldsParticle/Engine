@@ -10,6 +10,20 @@ namespace map {
 class MapGraph;
 class Zone;
 
+template <typename T>
+struct PointCloud
+{
+    typedef T coord_t; //!< The type of each coordinate
+
+    struct LPoint
+    {
+        T  x,y;
+    map::Zone   *zone;
+    };
+
+    std::vector<LPoint>  pts = std::vector<LPoint> ();
+};
+
 ///
 /// \brief The ZoneLookUp class
 /// Based on the design found between two neurons
@@ -17,20 +31,6 @@ class Zone;
 class ZoneLookUp
 {
 public:
-
-    template <typename T>
-    struct PointCloud
-    {
-        typedef T coord_t; //!< The type of each coordinate
-
-        struct LPoint
-        {
-            T  x,y;
-        map::Zone   *zone;
-        };
-
-        std::vector<LPoint>  pts;
-    };
 
     // And this is the "dataset to kd-tree" adaptor class:
     template <typename Derived>
@@ -92,8 +92,8 @@ public:
 private:
 
     PointCloud<double>  _cloud;
-    const PC2KD         * _pc2kd;
-    my_kd_tree_t        * _tree;
+    std::shared_ptr<PC2KD>          _pc2kd;
+    std::shared_ptr<my_kd_tree_t>    _tree;
 };
 
 }

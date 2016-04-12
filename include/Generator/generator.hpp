@@ -38,7 +38,7 @@ protected:
 public:
     Generator();
 
-    map::MapGraph    *generate(double xMax, double yMax, unsigned int zoneNumber);
+    map::MapGraph    *generate(unsigned int xMax, unsigned int yMax, unsigned int zoneNumber);
     map::HeightMap *getHeightmap() {
     	return _heightmap;
     }

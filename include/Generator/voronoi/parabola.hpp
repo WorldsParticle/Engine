@@ -60,8 +60,8 @@ public:
     inline void setLeft (Parabola * p) {_left  = p; p->parent = this;}
     inline void setRight(Parabola * p) {_right = p; p->parent = this;}
 
-    Parabola    *left () { return _left;  }
-    Parabola    *right() { return _right; }
+    Parabola    *left () const { return _left;  }
+    Parabola    *right() const { return _right; }
 
     /*
         Some useful tree operations  // why static ?
@@ -80,6 +80,14 @@ public:
     static Parabola * getRightParent	(Parabola * p);
     static Parabola * getLeftChild		(Parabola * p);
     static Parabola * getRightChild     (Parabola * p);
+
+            Parabola(const Parabola& other);
+
+            Parabola(Parabola& other);
+
+            Parabola& operator=(const Parabola& other);
+
+            Parabola& operator=(Parabola & other);
 
 private:
 

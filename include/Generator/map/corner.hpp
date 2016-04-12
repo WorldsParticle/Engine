@@ -45,6 +45,14 @@ public:
     Corner  *downslope; // pointer to adjacent corner most downhill
     Corner  *watershed; // pointer to coastal corner, or null
     int     watershedSize;
+
+    Corner(const Corner& other);
+
+    Corner(Corner& other);
+
+    Corner& operator=(const Corner& other);
+
+    Corner& operator=(Corner& other);
 };
 
 }

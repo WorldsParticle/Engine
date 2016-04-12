@@ -22,11 +22,13 @@ public:
     GenerationStep() : _map(nullptr), _step() {}
 
     inline void    generate(map::MapGraph *map)
-    { _map = map; run(); }
+    { _map = std::shared_ptr<map::MapGraph>(map); run(); }
+
+    virtual ~GenerationStep() {}
 
 protected:
     virtual void    run() = 0;
-    map::MapGraph        *_map;
+    std::shared_ptr<map::MapGraph>        _map;
     STEP            _step;
 };
 

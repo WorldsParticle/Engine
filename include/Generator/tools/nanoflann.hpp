@@ -81,7 +81,7 @@ namespace nanoflann
 		CountType count;
 
 	public:
-		inline KNNResultSet(CountType capacity_) : indices(0), dists(0), capacity(capacity_), count(0)
+                inline KNNResultSet(CountType capacity_) : indices(nullptr), dists(nullptr), capacity(capacity_), count(0)
 		{
 		}
 
@@ -487,6 +487,35 @@ namespace nanoflann
 		size_t  usedMemory;
 		size_t  wastedMemory;
 
+
+                PooledAllocator(const PooledAllocator& other) :
+                    remaining(0), base(nullptr), loc(nullptr), usedMemory(other.usedMemory), wastedMemory(0)
+                {
+                }
+
+                PooledAllocator(PooledAllocator& other) :
+                    remaining(0), base(nullptr), loc(nullptr), usedMemory(other.usedMemory), wastedMemory(0)
+                {
+                }
+
+                PooledAllocator& operator=(const PooledAllocator& other)
+                {
+                if (&other != this)
+                {
+
+                }
+                return *this;
+                }
+
+                PooledAllocator& operator=(PooledAllocator& other)
+                {
+                if (&other != this)
+                {
+
+                }
+                return *this;
+                }
+
 		/**
 		    Default constructor. Initializes a new pool.
 		 */
@@ -832,21 +861,42 @@ namespace nanoflann
 		 * @param inputData Dataset with the input features
 		 * @param params Basically, the maximum leaf node size
 		 */
-		KDTreeSingleIndexAdaptor(const int dimensionality, const DatasetAdaptor& inputData, const KDTreeSingleIndexAdaptorParams& params = KDTreeSingleIndexAdaptorParams() ) :
-			dataset(inputData), index_params(params), root_node(nullptr), distance(inputData)
+
+
+                KDTreeSingleIndexAdaptor& operator=(const KDTreeSingleIndexAdaptor& other)
+                {
+                if (&other != this)
+                {
+
+                }
+                return *this;
+                }
+
+                KDTreeSingleIndexAdaptor& operator=(KDTreeSingleIndexAdaptor& other)
+                {
+                if (&other != this)
+                {
+
+                }
+                return *this;
+                }
+
+                KDTreeSingleIndexAdaptor(const int dimensionality, const DatasetAdaptor& inputData, const KDTreeSingleIndexAdaptorParams& params = KDTreeSingleIndexAdaptorParams() ) : vind(),
+                         m_leaf_max_size(params.leaf_max_size), dataset(inputData), index_params(params), m_size(dataset.kdtree_get_point_count()), m_size_at_index_build(m_size), dim(dimensionality), root_node(nullptr), root_bbox(), pool(), distance(inputData)
 		{
-			m_size = dataset.kdtree_get_point_count();
-			m_size_at_index_build = m_size;
-			dim = dimensionality;
+                        //m_size = dataset.kdtree_get_point_count();
+                        //m_size_at_index_build = m_size;
+                        //dim = dimensionality;
 			if (DIM>0) dim=DIM;
-			m_leaf_max_size = params.leaf_max_size;
+
+                        //m_leaf_max_size = params.leaf_max_size;
 
 			// Create a permutable array of indices to the input vectors.
 			init_vind();
 		}
 
 		/** Standard destructor */
-		~KDTreeSingleIndexAdaptor() { }
+                ~KDTreeSingleIndexAdaptor() { }
 
 		/** Frees the previously-built index. Automatically called within buildIndex(). */
 		void freeIndex()
@@ -1248,7 +1298,7 @@ namespace nanoflann
 			DistanceType dst = dists[idx];
 			mindistsq = mindistsq + cut_dist - dst;
 			dists[idx] = cut_dist;
-			if (mindistsq*epsError<=result_set.worstDist()) {
+                        if (mindistsq*static_cast<double>(epsError)<=result_set.worstDist()) {
 				searchLevel(result_set, vec, otherChild, mindistsq, dists, epsError);
 			}
 			dists[idx] = dst;

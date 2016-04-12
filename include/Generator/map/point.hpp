@@ -2,6 +2,8 @@
 #define POINT_H
 
 #include <iostream>
+#include <limits>
+#include <cmath>
 
 class   Point
 {
@@ -12,7 +14,8 @@ public:
     { return os << "(" << p.x << ", " << p.y << ")"; }
 
     inline bool operator==(const Point &other)
-    { return (x == other.x) && (y == other.y); }
+    { return (std::abs(x - other.x) < std::numeric_limits<double>::epsilon())
+                && (std::abs(y - other.y) < std::numeric_limits<double>::epsilon()); }
 
     inline bool operator!=(const Point &other)
     { return !(*this == other); }

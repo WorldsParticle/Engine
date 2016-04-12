@@ -7,42 +7,38 @@ int Parabola::indexMax = 0;
 
 Parabola::Parabola() :
     index(indexMax),
-    site(NULL)
+    isLeaf(false),
+    site(nullptr),
+    edge(nullptr),
+    cEvent(nullptr),
+    parent(nullptr),
+    _left(nullptr),
+    _right(nullptr)
 {
     ++indexMax;
-
-    isLeaf	= false;
-    cEvent	= 0;
-    edge	= 0;
-    parent	= NULL;
-
-    _left = NULL;
-    _right = NULL;
 }
 
 Parabola::Parabola(Point *p) :
     index(indexMax),
-    site(p)
+    isLeaf(true),
+    site(p),
+    edge(nullptr),
+    cEvent(nullptr),
+    parent(nullptr),
+    _left(nullptr),
+    _right(nullptr)
 {
     ++indexMax;
-
-    isLeaf	= true;
-    cEvent	= 0;
-    edge	= 0;
-    parent	= NULL;
-
-    _left = NULL;
-    _right = NULL;
 }
 
 Parabola::~Parabola()
 {
-    site = NULL;
-    cEvent = NULL;
-    edge = NULL;
-    parent = NULL;
-    _left = NULL;
-    _right = NULL;
+    site = nullptr;
+    cEvent = nullptr;
+    edge = nullptr;
+    parent = nullptr;
+    _left = nullptr;
+    _right = nullptr;
 }
 
 /*
@@ -66,7 +62,7 @@ Parabola * Parabola::getLeftParent(Parabola * p)
     Parabola * pLast	= p;
     while(par->left() == pLast)
     {
-        if(!par->parent) return 0;
+        if(!par->parent) return nullptr;
         pLast = par;
         par = par->parent;
     }
@@ -79,7 +75,7 @@ Parabola * Parabola::getRightParent(Parabola * p)
     Parabola * pLast	= p;
     while(par->right() == pLast)
     {
-        if(!par->parent) return 0;
+        if(!par->parent) return nullptr;
         pLast = par; par = par->parent;
     }
     return par;
@@ -87,7 +83,7 @@ Parabola * Parabola::getRightParent(Parabola * p)
 
 Parabola * Parabola::getLeftChild(Parabola * p)
 {
-    if(!p) return 0;
+    if(!p) return nullptr;
     Parabola * par = p->left();
     while(par && !par->isLeaf)
         par = par->right();
@@ -96,11 +92,53 @@ Parabola * Parabola::getLeftChild(Parabola * p)
 
 Parabola * Parabola::getRightChild(Parabola * p)
 {
-    if(!p) return 0;
+    if(!p) return nullptr;
     Parabola * par = p->right();
     while(par && !par->isLeaf)
         par = par->left();
     return par;
+}
+
+Parabola::Parabola(const Parabola& other) :
+index(other.index),
+isLeaf(other.isLeaf),
+site(other.site),
+edge(other.edge),
+cEvent(other.cEvent),
+parent(other.parent),
+_left(other.left()),
+_right(other.right())
+{
+}
+
+Parabola::Parabola(Parabola& other) :
+    index(other.index),
+    isLeaf(other.isLeaf),
+    site(other.site),
+    edge(other.edge),
+    cEvent(other.cEvent),
+    parent(other.parent),
+    _left(other.left()),
+    _right(other.right())
+{
+}
+
+Parabola& Parabola::operator=(const Parabola& other)
+{
+    if (&other != this)
+    {
+
+    }
+    return *this;
+}
+
+Parabola& Parabola::operator=(Parabola & other)
+{
+    if (&other != this)
+    {
+
+    }
+    return *this;
 }
 
 }

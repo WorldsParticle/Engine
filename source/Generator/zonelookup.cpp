@@ -5,28 +5,24 @@ namespace map
 {
 
 
-ZoneLookUp::ZoneLookUp() : _pc2kd(NULL), _tree(NULL)
+ZoneLookUp::ZoneLookUp() : _cloud(), _pc2kd(nullptr), _tree(nullptr)
 {
 
 }
 
 ZoneLookUp::~ZoneLookUp()
 {
-if (_pc2kd)
-   delete(_pc2kd);
-if (_tree)
-   delete(_tree);
 }
 
 void    ZoneLookUp::createCloud(map::MapGraph & m)
 {
     for (const auto & zone : m.zones())
     {
-        map::ZoneLookUp::PointCloud<double>::LPoint p = {zone.second->point.x, zone.second->point.y, zone.second};
+        map::PointCloud<double>::LPoint p = {zone.second->point.x, zone.second->point.y, zone.second};
         _cloud.pts.push_back(p);
     }
-    _pc2kd = new PC2KD(_cloud);
-    _tree = new my_kd_tree_t(2 /*dim*/, *_pc2kd, nanoflann::KDTreeSingleIndexAdaptorParams(10 /* max leaf */) );
+    _pc2kd = std::shared_ptr<PC2KD>(new PC2KD(_cloud));
+    _tree = std::shared_ptr<my_kd_tree_t>(new my_kd_tree_t(2 /*dim*/, *_pc2kd, nanoflann::KDTreeSingleIndexAdaptorParams(10 /* max leaf */) ));
     _tree->buildIndex();
 }
 

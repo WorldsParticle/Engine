@@ -8,6 +8,7 @@
 #include <map>
 #include <queue>
 #include <set>
+#include <memory>
 
 namespace map
 {
@@ -128,7 +129,7 @@ private:
     std::set<Event *>   _deleted; // comme je repasse sur une queue
 
     double                  _sweepLine;     // sweep line going down
-    Parabola                *_root;         // root parabola containing the beach line
+    std::shared_ptr<Parabola>                _root;         // root parabola containing the beach line
 };
 
 }

@@ -13,7 +13,7 @@ namespace map
 class MapGraph
 {
 public:
-    MapGraph(unsigned int xMax = 0, unsigned int yMax = 0, unsigned int zoneNumber = 0);
+    MapGraph(unsigned int xMaxx = 0, unsigned int yMaxx = 0, unsigned int zoneNumberr = 0);
     ~MapGraph();
 
     Zone    *findZone(const Point *p); // ugly and slow

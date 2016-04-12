@@ -6,7 +6,6 @@
 #include "map/heightpoint.hpp"
 //#include "generator.hpp"
 #include "zonelookup.hpp"
-#include "tools/bitmap_image.hpp"
 
 namespace map {
 
@@ -17,15 +16,11 @@ namespace map {
 class HeightMap
 {
 public:
-    HeightMap(int width, int height);
+    HeightMap(unsigned int width, unsigned int height);
     ~HeightMap();
 
     void    init(map::MapGraph & m);
     bool    pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::vec3 c);
-    void    paintByMoisture();
-    void    paintByHeight();
-    void    paintByLandType();
-    void    paintByBiome();
 
     void    generateMesh();
 
@@ -35,12 +30,11 @@ public:
 
 private:
 
-    int _width;
-    int _height;
+    unsigned int _width;
+    unsigned int _height;
 
     std::vector<HeightPoint>    _points;
     ZoneLookUp                  _zoneLookUp;
-    bitmap_image                image;
 
     std::vector<float> _vertices;
     std::vector<unsigned int>   _indices;
