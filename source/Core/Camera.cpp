@@ -28,9 +28,9 @@ namespace Engine
         m_clippingPlane{0.1f, 100.0f},
         m_aspect(4.0f/3.0f),
         m_fov(1.22173f),
-        m_up(glm::vec3(0.0f, 1.0f, 0.0f)),
+        m_up(glm::vec3(0.0f, 0.0f, 1.0f)),
         m_lookat(glm::vec3(0.0f, 0.0f, 0.0f)),
-        m_position(glm::vec3(10.0f, 10.0f, 10.0f)),
+        m_position(glm::vec3(0.0f, -10.0f, 5.0f)),
         m_size(glm::ivec2(1024, 768))
     {
         // nothing to do.
@@ -41,10 +41,10 @@ namespace Engine
         m_clippingPlane{assimpCamera->mClipPlaneNear, assimpCamera->mClipPlaneFar},
         m_aspect(assimpCamera->mAspect),
         m_fov(assimpCamera->mHorizontalFOV * 2.0f),
-        m_up(glm::vec3(0.0f)),
-        m_lookat(glm::vec3(0.0f)),
-        m_position(glm::vec3(0.0f)),
-        m_size(glm::ivec2(1024, 768))
+        m_up(0.0f, 1.0f, 0.0f),
+        m_lookat(0.0f),
+        m_position(0.0f),
+        m_size(1024, 768)
     {
         this->m_node->setName(assimpCamera->mName.C_Str());
         auto convert = [&](const aiVector3D &v) {return glm::vec3(v.x, v.y, v.z);};

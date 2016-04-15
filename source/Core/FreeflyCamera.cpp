@@ -41,24 +41,19 @@ namespace   Engine
     FreeflyCamera::FreeflyCamera(SceneGraphNode *node) :
         PerspectiveCamera(node),
         m_right(0.0f, 0.0f, 0.0f),
-        m_look(0.0f, 0.0f, 0.0f),
+        m_look(0.0f, 1.0f, 0.0f),
         m_speed(0.5f),
         m_mouse_sensibility(0.001f)
     {
+        this->m_right = glm::normalize(glm::cross(glm::vec3(0.0f, 0.0f, 1.0f), this->m_look));
+        this->m_up = glm::cross(this->m_look, this->m_right);
+        this->update_matrix();
+
         using namespace     std::placeholders;
         node->getScene()->register_callback(Event::Type::KEY_PRESSED,
                 std::bind(&FreeflyCamera::on_key_pressed, this, _1));
         node->getScene()->register_callback(Event::Type::MOUSE_MOVE,
                 std::bind(&FreeflyCamera::on_mouse_move, this, _1));
-
-        this->m_look = glm::normalize(this->m_lookat - this->m_position);
-        this->m_right = glm::normalize(glm::cross(this->m_up, this->m_look));
-
-        this->m_look = glm::normalize(this->m_look);
-        this->m_up = glm::normalize(glm::cross(this->m_look, this->m_right));
-        this->m_right = glm::cross(this->m_up, this->m_look);
-
-        this->update_matrix();
     }
 
     FreeflyCamera::~FreeflyCamera(void)
@@ -71,8 +66,6 @@ namespace   Engine
     void
     FreeflyCamera::on_key_pressed(const Event::Event &event)
     {
-        Category    &root = Category::getRoot();
-
         const Event::KeyPressed *key_pressed_event =
             dynamic_cast<const Event::KeyPressed *>(&event);
 
@@ -101,9 +94,8 @@ namespace   Engine
 
         if (e != nullptr)
         {
-            float delta_x = this->m_size.x / 2 - e->get_position().x;
-            float delta_y = this->m_size.y / 2 - e->get_position().y;
-
+            float delta_x = static_cast<float>(this->m_size.x) / 2.0f - e->get_position().x;
+            float delta_y = static_cast<float>(this->m_size.y) / 2.0f - e->get_position().y;
             this->yaw(delta_x * this->m_mouse_sensibility);
             this->pitch(delta_y * this->m_mouse_sensibility);
         }
@@ -174,11 +166,10 @@ namespace   Engine
                 glm::vec4(this->m_right.x, this->m_up.x, -this->m_look.x, 0.0f),
                 glm::vec4(this->m_right.y, this->m_up.y, -this->m_look.y, 0.0f),
                 glm::vec4(this->m_right.z, this->m_up.z, -this->m_look.z, 0.0f),
-                glm::vec4(glm::dot(this->m_right, this->m_position) * -1.0f,
-                    glm::dot(this->m_up, this->m_position) * -1.0f,
-                    glm::dot(-this->m_look, this->m_position) * -1.0f, 1.0f)
+                glm::vec4(glm::dot(this->m_right, this->m_position.xyz()) * -1.0f,
+                    glm::dot(this->m_up, this->m_position.xyz()) * -1.0f,
+                    glm::dot(-this->m_look, this->m_position.xyz()) * -1.0f, 1.0f)
             );
-
     }
 
 }
