@@ -33,5 +33,9 @@ include/Engine/version.hpp
 doc
 build/
 
+# Atom configuration
+.gcc-flags.json
+.atom-build.json
+
 # OFF files
 *.off
