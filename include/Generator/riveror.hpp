@@ -42,6 +42,8 @@ private:
 
     ///
     /// \brief Find edge associated to two corners.
+    /// \param From corner.
+    /// \param To corner.
     ///
     map::CrossedEdge    *lookupEdgeFromCorner(map::Corner *from, map::Corner *to);
 

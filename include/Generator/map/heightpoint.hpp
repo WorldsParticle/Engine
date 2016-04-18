@@ -21,6 +21,8 @@ public:
 
     ///
     /// \brief Parametrized arguments using (x, y) 2D coordinates.
+    /// \param x coordinate
+    /// \param y coordinate
     ///
     HeightPoint(double nx, double ny) : x(nx), y(ny), z(0.0), zone(nullptr) {}
 

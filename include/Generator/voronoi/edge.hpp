@@ -77,6 +77,9 @@ public:
 
     ///
     /// \brief Default constructor.
+    /// \param Pointer to start
+    /// \param Pointer to left place.
+    /// \param Pointer to right place.
     ///
     Edge(Point *s, Point *l, Point *r) :
         start(s),

@@ -13,6 +13,8 @@ class   Point
 public:
     ///
     /// \brief Default constructors : expect x & y parameters.
+    /// \param x coordinate
+    /// \param y coordinate
     ///
     explicit Point(double nx, double ny) : x(nx), y(ny) {}
 

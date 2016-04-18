@@ -31,6 +31,7 @@ public:
 
     ///
     /// \brief Returns the biome of a zone.
+    /// \param Zone to be inspected.
     ///
     map::Biome      getBiome(map::Zone *z);
 

@@ -76,6 +76,7 @@ public:
 
     ///
     /// \brief Constructor with focus parameter for an arch.
+    /// \param Focus parameter
     ///
     Parabola	(Point *p);
 
@@ -93,11 +94,13 @@ public:
 
     ///
     /// \brief Sets the left parabola.
+    /// \param Pointer to new left parabola.
     ///
     inline void setLeft (Parabola * p) {_left  = p; p->parent = this;}
 
     ///
     /// \brief Sets the right parabola.
+    /// \param Pointer to new right parabola.
     ///
     inline void setRight(Parabola * p) {_right = p; p->parent = this;}
 
@@ -124,31 +127,37 @@ public:
 
     ///
     /// \brief Returns the closest left leave of the tree.
+    /// \param Parabola.
     ///
     static Parabola * getLeft			(Parabola * p);
 
     ///
     /// \brief Returns the closest right leafe of the tree.
+    /// \param Parabola.
     ///
     static Parabola * getRight			(Parabola * p);
 
     ///
     /// \brief Returns the closest parent which is on the left.
+    /// \param Parabola.
     ///
     static Parabola * getLeftParent     (Parabola * p);
 
     ///
     /// \brief Returns the closest parent which is on the right.
+    /// \param Parabola.
     ///
     static Parabola * getRightParent	(Parabola * p);
 
     ///
     /// \brief Returns the closest leave which is on the left of current node.
+    /// \param Parabola.
     ///
     static Parabola * getLeftChild		(Parabola * p);
 
     ///
     /// \brief Default constructor.
+    /// \param Parabola.
     ///
     static Parabola * getRightChild     (Parabola * p);
 

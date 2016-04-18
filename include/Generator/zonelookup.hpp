@@ -97,11 +97,14 @@ public:
 
     ///
     /// \brief Default destructor.
+    /// \param Map from which to build the point cloud.
     ///
     void    createCloud(map::MapGraph & m);
 
     ///
     /// \brief Default destructor.
+    /// \param X coordinate of the point whose neightbor we have to find.
+    /// \param Y coordinate of the point whose neightbor we have to find.
     ///
     Zone    *getNearestZone(double x, double y);
 

@@ -26,6 +26,7 @@ public:
 
     ///
     /// \brief Find the associated polygon to a 2D (x, y) point
+    /// \param point for which we need to find nearest neighbor
     ///
     Zone    *findZone(const Point *p); // ugly and slow
 

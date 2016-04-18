@@ -36,6 +36,9 @@ public:
 
     ///
     /// \brief Executes the map generation steps.
+    /// \param Max x coordinate for Voronoi diagram.
+    /// \param Max y coordinate for Voronoi diagram.
+    /// \param Number of zones (= polygons) for the Voronoi diagram.
     ///
     map::MapGraph    *generate(unsigned int xMax, unsigned int yMax, unsigned int zoneNumber);
 

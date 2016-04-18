@@ -18,6 +18,8 @@ class HeightMap
 public:
     ///
     /// \brief Default constructor.
+    /// \param Width of the heightmap.
+    /// \param Height of the heightmap.
     ///
     HeightMap(unsigned int width, unsigned int height);
 
@@ -28,11 +30,16 @@ public:
 
     ///
     /// \brief Initialize the heightmap from a Voronoi diagram.
+    /// \param Map from which to build the heightmap.
     ///
     void    init(map::MapGraph & m);
 
     ///
     /// \brief Veryfies that a point s is inside the abc triangle.
+    /// \param Point to be checked.
+    /// \param Vertice a.
+    /// \param Vertice b.
+    /// \param Vertice c.
     ///
     bool    pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::vec3 c);
 

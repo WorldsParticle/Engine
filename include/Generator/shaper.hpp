@@ -31,6 +31,7 @@ private:
 
     ///
     /// \brief Assign land corners and ocean corners.
+    /// \param Seed for randomization of noise on the z coordinate.
     ///
     void        assignCornerLandPerlin(int seed);
 

@@ -48,6 +48,8 @@ public:
 
     ///
     /// \brief Default constructor.
+    /// \param Center's x coordinates
+    /// \param Center's y coordinates
     ///
     explicit Zone(double x = 0, double y = 0);
 
@@ -56,6 +58,7 @@ public:
 
     ///
     /// \brief Checks if the zone zone has a neighbor.
+    /// \param The zone for which we need to check whether is has neighbors or not.
     ///
     bool    haveNeighbor(Zone *zone);
 
