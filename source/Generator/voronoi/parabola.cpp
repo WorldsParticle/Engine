@@ -111,7 +111,7 @@ _right(other.right())
 {
 }
 
-Parabola::Parabola(Parabola& other) :
+Parabola::Parabola(Parabola&& other) :
     index(other.index),
     isLeaf(other.isLeaf),
     site(other.site),
@@ -127,16 +127,30 @@ Parabola& Parabola::operator=(const Parabola& other)
 {
     if (&other != this)
     {
-
+        *(const_cast<int *>(&(this->index))) = other.index;
+        isLeaf = other.isLeaf;
+        site = other.site;
+        edge = other.edge;
+        cEvent = other.cEvent;
+        parent = other.parent;
+        _left = other.left();
+        _right = other.right();
     }
     return *this;
 }
 
-Parabola& Parabola::operator=(Parabola & other)
+Parabola& Parabola::operator=(Parabola && other)
 {
     if (&other != this)
     {
-
+        *(const_cast<int *>(&(this->index))) = other.index;
+        isLeaf = other.isLeaf;
+        site = other.site;
+        edge = other.edge;
+        cEvent = other.cEvent;
+        parent = other.parent;
+        _left = other.left();
+        _right = other.right();
     }
     return *this;
 }

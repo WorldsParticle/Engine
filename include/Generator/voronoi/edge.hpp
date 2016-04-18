@@ -20,19 +20,51 @@ namespace vor
     direction	: directional vector, from "start", points to "end", normal of |left, right|
     f, g		: directional coeffitients satisfying equation y = f*x + g (edge lies on this line)
 */
+///
+/// \brief This class stores an edge in a Voronoi diagram.
+///
 class Edge  // should find a way to not use it
 {
 public:
 
+    ///
+    /// \brief Pointer to start point.
+    ///
     Point       *start;
+
+    ///
+    /// \brief Pointer to end point.
+    ///
     Point       *end;
+
+    ///
+    /// \brief Directional vector, from "start", points to "end", normal of |left, right|.
+    ///
     Point       *direction;
+
+    ///
+    /// \brief Pointer to Voronoi place on the left side of edge.
+    ///
     Point       *left;
+
+    ///
+    /// \brief Pointer to Voronoi place on the right side of edge.
+    ///
     Point       *right;
 
+    ///
+    /// \brief Directional coeffitients satisfying equation y = f*x + g (edge lies on this line).
+    ///
     double		f;
+
+    ///
+    /// \brief Directional coeffitients satisfying equation y = f*x + g (edge lies on this line).
+    ///
     double		g;
 
+    ///
+    /// \brief Some edges consist of two parts, so we add the pointer to another part to connect them at the end of an algorithm.
+    ///
     Edge * neighbour;
 
     /*
@@ -43,6 +75,9 @@ public:
         r		: pointer to right place
     */
 
+    ///
+    /// \brief Default constructor.
+    ///
     Edge(Point *s, Point *l, Point *r) :
         start(s),
         end(nullptr),

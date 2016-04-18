@@ -10,34 +10,87 @@
 namespace map {
 
 ///
-/// \brief The HeightMap class, propelling floor to space like a rocketeer
-/// Based on the design found between two neurons
+/// \brief This class stores the height of the (x, y) points of a 2D map
+/// and also generates the buffers describing the map's mesh
 ///
 class HeightMap
 {
 public:
+    ///
+    /// \brief Default constructor.
+    ///
     HeightMap(unsigned int width, unsigned int height);
+
+    ///
+    /// \brief Default destructor.
+    ///
     ~HeightMap();
 
+    ///
+    /// \brief Initialize the heightmap from a Voronoi diagram.
+    ///
     void    init(map::MapGraph & m);
+
+    ///
+    /// \brief Veryfies that a point s is inside the abc triangle.
+    ///
     bool    pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::vec3 c);
 
+    ///
+    /// \brief Generates the mesh associated to the heightmap.
+    ///
     void    generateMesh();
 
+    ///
+    /// \brief Vertice buffer getter.
+    ///
     std::vector<float> const &getPoints();
+
+    ///
+    /// \brief Indices buffer getter.
+    ///
     std::vector<unsigned int> const &getIndices();
+
+    ///
+    /// \brief Normals buffer getter.
+    ///
     std::vector<float> const &getNormals();
 
 private:
 
+    ///
+    /// \brief Width of the heightmap.
+    ///
     unsigned int _width;
+
+    ///
+    /// \brief Height of the heightmap.
+    ///
     unsigned int _height;
 
+    ///
+    /// \brief Every point of the heightmap.
+    ///
     std::vector<HeightPoint>    _points;
+
+    ///
+    /// \brief Class holding the zone's center kd-tree.
+    ///
     ZoneLookUp                  _zoneLookUp;
 
+    ///
+    /// \brief Heightmap's vertices buffer.
+    ///
     std::vector<float> _vertices;
+
+    ///
+    /// \brief Heightmap's indices buffer.
+    ///
     std::vector<unsigned int>   _indices;
+
+    ///
+    /// \brief Heightmap's normals buffer.
+    ///
     std::vector<float> _normals;
 
 };

@@ -22,26 +22,71 @@ class MapGraph;
 namespace gen
 {
 
+///
+/// \brief This class generates and fills a Voronoi diagram, while also generating the associated heightmap.
+///
 class Generator
 {
-
-protected:
-    map::MapGraph        *_map;
-    map::HeightMap  *_heightmap;
-    GenerationStep  *_fillStep;
-    GenerationStep  *_shapeStep;
-    GenerationStep  *_elevateStep;
-    GenerationStep  *_riverStep;
-    GenerationStep  *_moistureStep;
-    GenerationStep  *_biomeStep;
-    
 public:
+
+    ///
+    /// \brief Default constructor.
+    ///
     Generator();
 
+    ///
+    /// \brief Executes the map generation steps.
+    ///
     map::MapGraph    *generate(unsigned int xMax, unsigned int yMax, unsigned int zoneNumber);
+
+    ///
+    /// \brief Heightmap getter.
+    ///
     map::HeightMap *getHeightmap() {
-    	return _heightmap;
+        return _heightmap;
     }
+
+
+protected:
+    ///
+    /// \brief Map being generated.
+    ///
+    map::MapGraph        *_map;
+
+    ///
+    /// \brief heightmap associated to the map
+    ///
+    map::HeightMap  *_heightmap;
+
+    ///
+    /// \brief Voronoi diagram generation step.
+    ///
+    GenerationStep  *_fillStep;
+
+    ///
+    /// \brief Land & ocean assignation step.
+    ///
+    GenerationStep  *_shapeStep;
+
+    ///
+    /// \brief Height assignation step.
+    ///
+    GenerationStep  *_elevateStep;
+
+    ///
+    /// \brief River generating step.
+    ///
+    GenerationStep  *_riverStep;
+
+    ///
+    /// \brief Moisture assignation step.
+    ///
+    GenerationStep  *_moistureStep;
+
+    ///
+    /// \brief Biome assignation step.
+    ///
+    GenerationStep  *_biomeStep;
 
 };
 

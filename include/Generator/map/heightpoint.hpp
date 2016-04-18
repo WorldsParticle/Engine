@@ -7,10 +7,21 @@
 #include <limits>
 #include "zone.hpp"
 
+///
+/// \brief Point with an added pointer to the zone the point belongs to.
+///
 class   HeightPoint
 {
 public:
+
+    ///
+    /// \brief Default constructor.
+    ///
     HeightPoint() : x(0.0), y(0.0), z(0.0), zone(nullptr) {}
+
+    ///
+    /// \brief Parametrized arguments using (x, y) 2D coordinates.
+    ///
     HeightPoint(double nx, double ny) : x(nx), y(ny), z(0.0), zone(nullptr) {}
 
     inline friend std::ostream &operator<<(std::ostream &os, const HeightPoint &p)
@@ -23,10 +34,24 @@ public:
     inline bool operator!=(const HeightPoint &other)
     { return !(*this == other); }
 
+    ///
+    /// \brief X coordinate of the heightpoint.
+    ///
     double  x;
+
+    ///
+    /// \brief Y coordinate of the heightpoint.
+    ///
     double  y;
+
+    ///
+    /// \brief Z coordinate of the heightpoint.
+    ///
     double  z;
 
+    ///
+    /// \brief Zone to which the heightpoint belongs.
+    ///
     map::Zone     *zone;
 };
 

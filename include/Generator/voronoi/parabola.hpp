@@ -22,7 +22,14 @@ class Parabola
 {
 public:
 
+    ///
+    /// \brief Max parabola index on the associated Voronoi diagram.
+    ///
     static int  indexMax;  // change this
+
+    ///
+    /// \brief Index of the parabola on the associated Voronoi diagram.
+    ///
     const int   index;
 
     /*
@@ -33,21 +40,48 @@ public:
         parent		: pointer to the parent node in tree
     */
 
+    ///
+    /// \brief Flag whether the node is Leaf or internal node.
+    ///
     bool		isLeaf;
+
+    ///
+    /// \brief Pointer to the focus point of parabola (when it is parabola).
+    ///
     Point       *site;
 
     // when not leaf
+    ///
+    /// \brief Default constructor.
+    ///
     Edge        *edge;
 
+    ///
+    /// \brief Pointer to the event, when the arch disappears (circle event).
+    ///
     Event       *cEvent;
+
+    ///
+    /// \brief Pointer to the parent node in tree.
+    ///
     Parabola    *parent;
 
     /*
         Constructors of the class (empty for edge, with focus parameter for an arch).
     */
-
+    ///
+    /// \brief Default constructor.
+    ///
     Parabola	();
+
+    ///
+    /// \brief Constructor with focus parameter for an arch.
+    ///
     Parabola	(Point *p);
+
+    ///
+    /// \brief Default desructor..
+    ///
     ~Parabola   ();
 
     inline friend std::ostream &operator<<(std::ostream &os, const Parabola &p)
@@ -57,10 +91,24 @@ public:
         Access to the children (in tree).
     */
 
+    ///
+    /// \brief Sets the left parabola.
+    ///
     inline void setLeft (Parabola * p) {_left  = p; p->parent = this;}
+
+    ///
+    /// \brief Sets the right parabola.
+    ///
     inline void setRight(Parabola * p) {_right = p; p->parent = this;}
 
+    ///
+    /// \brief Left parabola getter.
+    ///
     Parabola    *left () const { return _left;  }
+
+    ///
+    /// \brief Right parabola getter.
+    ///
     Parabola    *right() const { return _right; }
 
     /*
@@ -69,29 +117,71 @@ public:
         GetLeft			: returns the closest left leave of the tree
         GetRight		: returns the closest right leafe of the tree
         GetLeftParent	: returns the closest parent which is on the left
-        GetLeftParent	: returns the closest parent which is on the right
+        GetRightParent	: returns the closest parent which is on the right
         GetLeftChild	: returns the closest leave which is on the left of current node
         GetRightChild	: returns the closest leave which is on the right of current node
     */
 
+    ///
+    /// \brief Returns the closest left leave of the tree.
+    ///
     static Parabola * getLeft			(Parabola * p);
+
+    ///
+    /// \brief Returns the closest right leafe of the tree.
+    ///
     static Parabola * getRight			(Parabola * p);
+
+    ///
+    /// \brief Returns the closest parent which is on the left.
+    ///
     static Parabola * getLeftParent     (Parabola * p);
+
+    ///
+    /// \brief Returns the closest parent which is on the right.
+    ///
     static Parabola * getRightParent	(Parabola * p);
+
+    ///
+    /// \brief Returns the closest leave which is on the left of current node.
+    ///
     static Parabola * getLeftChild		(Parabola * p);
+
+    ///
+    /// \brief Default constructor.
+    ///
     static Parabola * getRightChild     (Parabola * p);
 
-            Parabola(const Parabola& other);
+    ///
+    /// \brief Returns the closest leave which is on the right of current node.
+    ///
+    Parabola(const Parabola& other);
 
-            Parabola(Parabola& other);
+    ///
+    /// \brief Default constructor.
+    ///
+    Parabola(Parabola&& other);
 
-            Parabola& operator=(const Parabola& other);
+    ///
+    /// \brief Default constructor.
+    ///
+    Parabola& operator=(const Parabola& other);
 
-            Parabola& operator=(Parabola & other);
+    ///
+    /// \brief Default constructor.
+    ///
+    Parabola& operator=(Parabola && other);
 
 private:
 
+    ///
+    /// \brief Left parabola.
+    ///
     Parabola * _left;
+
+    ///
+    /// \brief Right parabola.
+    ///
     Parabola * _right;
 };
 

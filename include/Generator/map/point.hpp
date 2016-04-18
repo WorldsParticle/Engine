@@ -5,9 +5,15 @@
 #include <limits>
 #include <cmath>
 
+///
+/// \brief This class stores the 2d (x, y) coordinates of a point.
+///
 class   Point
 {
 public:
+    ///
+    /// \brief Default constructors : expect x & y parameters.
+    ///
     explicit Point(double nx, double ny) : x(nx), y(ny) {}
 
     inline friend std::ostream &operator<<(std::ostream &os, const Point &p)
@@ -20,7 +26,14 @@ public:
     inline bool operator!=(const Point &other)
     { return !(*this == other); }
 
+    ///
+    /// \brief X coordinates of the point.
+    ///
     double  x;
+
+    ///
+    /// \brief Y coordinates of the point.
+    ///
     double  y;
 };
 

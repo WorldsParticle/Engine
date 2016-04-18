@@ -23,18 +23,43 @@ class CrossedEdge
 
 public:
 
+    ///
+    /// \brief Default constructor.
+    ///
     explicit CrossedEdge();
 
     inline friend std::ostream &operator<<(std::ostream &os, const CrossedEdge &e)
     { return os << "[" << e.index << "](" << e.z0->index << ", " << e.z1->index << ") mid" << e.midpoint; }
 
-    static int  indexMax;  // change this
+    ///
+    /// \brief Max crossededge index in the associated Voronoi diagram
+    ///
+    static int  indexMax;
+
+    ///
+    /// \brief Crossededge's index in the associated Voronoi diagram
+    ///
     const int   index;
 
-    Zone         *z0, *z1;   // Delaunay edge (during computing, é0 will be used as left, z1 as right)
-    Corner       *c0, *c1;   // Voronoi edge
-    Point       midpoint;  // cross point, halfway between c0 / c1
-    int         river;     // Volume of water, not necessary right now
+    ///
+    /// \brief Both side zones, which draw Delaunay (z0 used as left & z1 as right during computing)
+    ///
+    Zone         *z0, *z1;
+
+    ///
+    /// \brief Both end corners, draws a Voronoi edge
+    ///
+    Corner       *c0, *c1;
+
+    ///
+    /// \brief Location of the mid point of the edge
+    ///
+    Point       midpoint;
+
+    ///
+    /// \brief Number of rivers going through the edge
+    ///
+    int         river;
 };
 
 }

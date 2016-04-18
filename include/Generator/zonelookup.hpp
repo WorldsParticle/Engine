@@ -10,6 +10,9 @@ namespace map {
 class MapGraph;
 class Zone;
 
+///
+/// \brief a cloud of points used as the input of the kd-tree construction.
+///
 template <typename T>
 struct PointCloud
 {
@@ -25,8 +28,8 @@ struct PointCloud
 };
 
 ///
-/// \brief The ZoneLookUp class
-/// Based on the design found between two neurons
+/// \brief This class holds a kd-tree of the map's zones,
+/// thus allowing to detect the closest neighboor to a random point
 ///
 class ZoneLookUp
 {
@@ -82,17 +85,42 @@ public:
         2 /* dim */
         > my_kd_tree_t;
 
+    ///
+    /// \brief Default constructor.
+    ///
     ZoneLookUp();
+
+    ///
+    /// \brief Default destructor.
+    ///
     ~ZoneLookUp();
 
+    ///
+    /// \brief Default destructor.
+    ///
     void    createCloud(map::MapGraph & m);
+
+    ///
+    /// \brief Default destructor.
+    ///
     Zone    *getNearestZone(double x, double y);
 
 
 private:
 
+    ///
+    /// \brief Creates a point cloud with the Voronoi diagram zones' centers.
+    ///
     PointCloud<double>  _cloud;
+
+    ///
+    /// \brief Adaptator for the point cloud.
+    ///
     std::shared_ptr<PC2KD>          _pc2kd;
+
+    ///
+    /// \brief KD-tree.
+    ///
     std::shared_ptr<my_kd_tree_t>    _tree;
 };
 
