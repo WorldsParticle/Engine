@@ -34,7 +34,7 @@ namespace Engine
         m_up(glm::vec3(0.0f, 0.0f, 1.0f)),
         m_lookat(glm::vec3(0.0f, 0.0f, 0.0f)),
         m_position(glm::vec3(0.0f, -10.0f, 5.0f)),
-        m_size(glm::ivec2(1024, 768))
+        m_size(glm::ivec2(1024, 768)),
 	m_framebuffer(std::make_shared<Framebuffer>(shaderprograms, m_size))
     {
     }
@@ -47,7 +47,7 @@ namespace Engine
         m_up(0.0f, 1.0f, 0.0f),
         m_lookat(0.0f),
         m_position(0.0f),
-        m_size(1024, 768)
+        m_size(1024, 768),
 	m_framebuffer(std::make_shared<Framebuffer>(shaderprograms, m_size))
     {
         this->m_node->setName(assimpCamera->mName.C_Str());

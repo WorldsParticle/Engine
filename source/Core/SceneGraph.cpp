@@ -46,7 +46,7 @@ namespace   Engine
         {
             SceneGraphNode  *node = new SceneGraphNode(this);
             node->setName("DefaultCamera");
-            Entity *camera = new FreeflyCamera(node);
+            Entity *camera = new FreeflyCamera(node, shaderprograms);
             node->setEntity(camera);
             this->m_rootNode->addChildren(node);
         }

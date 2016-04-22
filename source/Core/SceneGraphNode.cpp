@@ -62,7 +62,7 @@ namespace   Engine
             const aiLight   *light = nullptr;
             if ((camera = assimpScene.getCamera(this->m_name)) != nullptr)
             {
-                this->m_entity = new FreeflyCamera(this);
+                this->m_entity = new FreeflyCamera(this, shaderprograms);
             }
             else if ((light = assimpScene.getLight(this->m_name)) != nullptr)
             {
