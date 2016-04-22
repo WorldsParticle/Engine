@@ -41,7 +41,9 @@ namespace   Engine
         root << Priority::INFO << "Lancement engine :";
         root << Priority::INFO << "\t version : " PROJECT_VERSION_FULL;
 
+        glewExperimental = GL_TRUE;
         GLenum err = glewInit();
+
         if (GLEW_OK != err)
         {
             std::cerr << "Glew Init failure" << std::endl;

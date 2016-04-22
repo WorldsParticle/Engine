@@ -23,6 +23,7 @@
 #include    "Engine/Core/PerspectiveCamera.hpp"
 #include    "Engine/Core/Light.hpp"
 #include    "Engine/Core/Object.hpp"
+#include    "Engine/Core/FreeflyCamera.hpp"
 
 using namespace     log4cpp;
 
@@ -61,7 +62,7 @@ namespace   Engine
             const aiLight   *light = nullptr;
             if ((camera = assimpScene.getCamera(this->m_name)) != nullptr)
             {
-                this->m_entity = new PerspectiveCamera(camera, this, shaderprograms);
+                this->m_entity = new FreeflyCamera(this);
             }
             else if ((light = assimpScene.getLight(this->m_name)) != nullptr)
             {

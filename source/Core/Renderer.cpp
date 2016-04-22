@@ -21,6 +21,7 @@
 #include    "Engine/Core/Object.hpp"
 #include    "Engine/Core/Camera.hpp"
 #include    "Engine/Core/Light.hpp"
+#include    "Engine/Core/Terrain.hpp"
 #include    "Engine/Core/Transform.hpp"
 #include    "Engine/Core/Mesh.hpp"
 #include    "Engine/Core/ArrayObject.hpp"
@@ -28,32 +29,35 @@
 namespace   Engine
 {
     Renderer::Renderer(Scene *scene) :
-	m_scene(scene),
-	m_objects(),
-	m_cameras(),
-	m_lights()
+        m_scene(scene),
+        m_objects(),
+        m_cameras(),
+        m_lights(),
+    	m_terrains()
     {
     }
 
     Renderer::Renderer(const Renderer &other) :
-	m_scene(other.m_scene),
-	m_objects(),
-	m_cameras(other.m_cameras),
-	m_lights()
-    {
-    }
+        m_scene(other.m_scene),
+        m_objects(),
+        m_cameras(),
+        m_lights(),
+    	m_terrains()
+	{
+	}
 
     Renderer::Renderer(Renderer &&other) noexcept :
-	m_scene(std::move(other.m_scene)),
-	m_objects(),
-	m_cameras(std::move(other.m_cameras)),
-	m_lights()
+        m_scene(std::move(other.m_scene)),
+        m_objects(),
+        m_cameras(),
+        m_lights(),
+	m_terrains()
 	{
 	}
 
     Renderer::~Renderer(void) noexcept
-    {
-    }
+	{
+	}
 
     Renderer &
 	Renderer::operator=(const Renderer &other)
@@ -88,14 +92,24 @@ namespace   Engine
 	    this->m_cameras.push_back(camera);
 	}
 
-    void
-	Renderer::add(Light *light)
+	void
+		Renderer::add(Light *light)
 	{
-	    //Category &root = Category::getRoot();
+		//Category &root = Category::getRoot();
 
-	    //root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
-	    this->m_lights.push_back(light);
+		//root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
+		this->m_lights.push_back(light);
 	}
+
+	void
+		Renderer::add(Terrain *terrain)
+	{
+		//Category &root = Category::getRoot();
+
+		//root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
+		this->m_terrains.push_back(terrain);
+	}
+
 
     void
 	Renderer::render(void)
@@ -124,9 +138,11 @@ namespace   Engine
 		}
 		camera->unbindFramebuffer();
 		camera->drawFramebuffer();
+			//TODO lefebv_z : render terrain
 	    }
 	    this->m_cameras.clear();
 	    this->m_objects.clear();
 	    this->m_lights.clear();
+	    this->m_terrains.clear();
 	}
 }

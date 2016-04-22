@@ -33,18 +33,13 @@ namespace   Engine
 {
     PerspectiveCamera::PerspectiveCamera(SceneGraphNode *node, ShaderProgramLibrary &shaderprograms) :
         Camera(node, shaderprograms),
-        m_projection(glm::mat4(1)),
-        m_view(glm::mat4(1))
+        m_projection(glm::perspective(this->m_fov, this->m_aspect,
+                this->m_clippingPlane.near, this->m_clippingPlane.far)),
+        m_view(glm::lookAt(this->m_position, this->m_lookat, this->m_up))
     {
-        this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
-                this->m_clippingPlane.near, this->m_clippingPlane.far);
-        this->m_view = glm::lookAt(this->m_position, this->m_lookat, this->m_up);
-
         node->getScene()->register_callback(Event::Type::RESIZE,
                 std::bind(&PerspectiveCamera::on_resize_event, this, std::placeholders::_1));
-
         this->m_scene->add(this);
-
     }
 
     PerspectiveCamera::PerspectiveCamera(const aiCamera *assimpCamera,
@@ -54,13 +49,15 @@ namespace   Engine
         m_view(glm::mat4(1))
     {
         const Transform &transform = this->getTransform();
-        glm::vec4 realPosition = transform.getMatrix() * glm::vec4(this->m_position, 1.0);
-
+        glm::vec4 pos = transform.getMatrix() * glm::vec4(this->m_position, 1.0);
+        glm::vec4 look = transform.getMatrix() * glm::vec4(this->m_lookat, 1.0);
         this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
                 this->m_clippingPlane.near, this->m_clippingPlane.far);
-        this->m_view = glm::lookAt(realPosition.xyz(), this->m_lookat, this->m_up);
+        this->m_view = glm::lookAt(pos.xyz(), look.xyz(), this->m_up);
 
         this->m_scene->add(this);
+
+        std::cout << "look : " << look.x << "," << look.y << "," << look.z << std::endl;
     }
 
     PerspectiveCamera::~PerspectiveCamera(void)
@@ -109,7 +106,8 @@ namespace   Engine
             this->m_size = resize_event->size();
             this->m_aspect = width / height;
             this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
-                    this->m_clippingPlane.near, this->m_clippingPlane.far);
+            this->m_clippingPlane.near, this->m_clippingPlane.far);
+	    //TODO koziar_c resize framebuffer
         }
     }
 }
