@@ -27,43 +27,19 @@
 
 namespace   Engine
 {
-    Renderer::Renderer(const ShaderProgramLibrary &shaderprograms, Scene *scene) :
+    Renderer::Renderer(Scene *scene) :
 	m_scene(scene),
 	m_objects(),
 	m_cameras(),
-	m_lights(),
-	m_shaderFramebuff(shaderprograms.get(FRAMEBUFFER_SHADER_PROGRAM)),
-	m_vao(std::make_shared<ArrayObject>())
+	m_lights()
     {
-	GLfloat quadVertices[] = {   // Vertex attributes for a simple quad
-	    // Positions   // TexCoords
-	    -1.0f,  1.0f,  0.0f, 1.0f,
-	    -1.0f, -1.0f,  0.0f, 0.0f,
-	    1.0f, -1.0f,  1.0f, 0.0f,
-
-	    -1.0f,  1.0f,  0.0f, 1.0f,
-	    1.0f, -1.0f,  1.0f, 0.0f,
-	    1.0f,  1.0f,  1.0f, 1.0f
-	};
-	unsigned int vbo;
-	glGenBuffers(1, &vbo);
-	m_vao->bind();
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(quadVertices), &quadVertices, GL_STATIC_DRAW);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), nullptr);
-	glEnableVertexAttribArray(1);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), reinterpret_cast<GLvoid*>(2 * sizeof(GLfloat)));
-	m_vao->unbind();
     }
 
     Renderer::Renderer(const Renderer &other) :
 	m_scene(other.m_scene),
 	m_objects(),
 	m_cameras(other.m_cameras),
-	m_lights(),
-	m_shaderFramebuff(other.m_shaderFramebuff),
-	m_vao(other.m_vao)
+	m_lights()
     {
     }
 
@@ -71,9 +47,7 @@ namespace   Engine
 	m_scene(std::move(other.m_scene)),
 	m_objects(),
 	m_cameras(std::move(other.m_cameras)),
-	m_lights(),
-	m_shaderFramebuff(std::move(other.m_shaderFramebuff)),
-	m_vao(std::move(other.m_vao))
+	m_lights()
 	{
 	}
 
@@ -85,7 +59,6 @@ namespace   Engine
 	Renderer::operator=(const Renderer &other)
 	{
 	    this->m_scene = other.m_scene;
-	    this->m_vao = other.m_vao;
 	    return *this;
 	}
 
@@ -93,7 +66,6 @@ namespace   Engine
 	Renderer::operator=(Renderer &&other) noexcept
 	{
 	    this->m_scene = std::move(other.m_scene);
-	    this->m_vao = std::move(other.m_vao);
 	    return *this;
 	}
 
@@ -126,24 +98,6 @@ namespace   Engine
 	}
 
     void
-	Renderer::renderTextureToScreen(Camera *camera)
-	{
-	    // Bind to default framebuffer and draw a quad with the screen texture
-	    glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	    glClearColor(155.0f / 255.0f , 155.0f / 255.0f, 155.0f / 255.0f, 1.0);
-	    glClear(GL_COLOR_BUFFER_BIT);
-	    glDisable(GL_DEPTH_TEST); // depth useless for the quad
-
-	    // Draw Screen
-	    m_shaderFramebuff->bind();
-	    m_vao->bind();
-	    camera->bindTexture();
-	    glDrawArrays(GL_TRIANGLES, 0, 6);
-	    m_vao->unbind();
-	    m_shaderFramebuff->unbind();
-	}
-
-    void
 	Renderer::render(void)
 	{
 	    for (Camera *camera : this->m_cameras)
@@ -168,7 +122,8 @@ namespace   Engine
 			part->draw(model, view, projection);
 		    }
 		}
-		renderTextureToScreen(camera);
+		camera->unbindFramebuffer();
+		camera->drawFramebuffer();
 	    }
 	    this->m_cameras.clear();
 	    this->m_objects.clear();

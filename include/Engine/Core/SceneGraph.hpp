@@ -26,6 +26,7 @@ namespace   Engine
     class       Scene;
     class       SceneGraphNode;
     class       AssimpScene;
+    class	ShaderProgramLibrary;
 
     class ENGINE_EXPORTS SceneGraph final
     {
@@ -35,14 +36,14 @@ namespace   Engine
             ///
             /// This constructor will generate a empty scene graph.
             ///
-            SceneGraph(Scene *scene);
+            SceneGraph(Scene *scene, ShaderProgramLibrary &shaderprograms);
 
             ///
             /// \brief Constructor from an assimp scene graph.
             ///
             /// TODO GSL NOT NULL
             ///
-            SceneGraph(const AssimpScene &assimpScene, Scene *scene);
+            SceneGraph(const AssimpScene &assimpScene, Scene *scene, ShaderProgramLibrary &shaderprograms);
 
             ///
             /// \brief Copy constructor.
@@ -93,5 +94,9 @@ namespace   Engine
             ///
             SceneGraphNode  *m_rootNode; // TODO GSL OWNER
 
+            ///
+            /// \brief The shader library
+            ///
+            ShaderProgramLibrary &m_shaderprograms;
     };
 }

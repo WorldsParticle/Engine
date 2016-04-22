@@ -31,8 +31,8 @@ using namespace     log4cpp;
 
 namespace   Engine
 {
-    PerspectiveCamera::PerspectiveCamera(SceneGraphNode *node) :
-        Camera(node),
+    PerspectiveCamera::PerspectiveCamera(SceneGraphNode *node, ShaderProgramLibrary &shaderprograms) :
+        Camera(node, shaderprograms),
         m_projection(glm::mat4(1)),
         m_view(glm::mat4(1))
     {
@@ -48,8 +48,8 @@ namespace   Engine
     }
 
     PerspectiveCamera::PerspectiveCamera(const aiCamera *assimpCamera,
-            SceneGraphNode *node) :
-        Camera(assimpCamera, node),
+            SceneGraphNode *node, ShaderProgramLibrary &shaderprograms) :
+        Camera(assimpCamera, node, shaderprograms),
         m_projection(glm::mat4(1)),
         m_view(glm::mat4(1))
     {

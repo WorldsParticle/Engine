@@ -35,9 +35,9 @@ namespace Engine
         m_materials(),
         m_animations(),
         m_meshes(),
-        m_renderer(this->m_shaderprograms, this),
+        m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
-        m_scenegraph(this)
+        m_scenegraph(this, m_shaderprograms)
     {
         // nothing to do.
     }
@@ -49,9 +49,9 @@ namespace Engine
         m_materials(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures),
         m_animations(s.getAnimations(), s.getAnimationsNumber()),
         m_meshes(this->m_materials, s.getMeshes(), s.getMeshesNumber()),
-        m_renderer(this->m_shaderprograms, this),
+        m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
-        m_scenegraph(s, this)
+        m_scenegraph(s, this, m_shaderprograms)
     {
         // nothing to do.
     }
