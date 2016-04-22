@@ -102,6 +102,12 @@ namespace   Engine
          return this->m_rootNode;
     }
 
+    std::size_t
+    AssimpScene::getCameraNumber(void) const
+    {
+        return this->m_cameras.size();
+    }
+
 
 
     unsigned int

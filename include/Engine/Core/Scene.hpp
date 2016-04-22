@@ -29,7 +29,7 @@
 #include    "Engine/Core/AnimationLibrary.hpp"
 #include    "Engine/Core/MeshLibrary.hpp"
 #include    "Engine/Core/TextureLibrary.hpp"
-
+#include    "Engine/Core/Clock.hpp"
 #include    "Engine/Event/EventRegister.hpp"
 
 namespace Engine
@@ -54,9 +54,9 @@ namespace Engine
             Scene(void);
 
             ///
-            /// \brief Construct a scene form an assimp scene. Need the path to the scene to load other file like textures
+            /// \brief Construct a scene form an assimp scene.
             ///
-            Scene(const AssimpScene &assimpScene, const std::string &modelPath);
+            Scene(const AssimpScene &assimpScene);
 
             ///
             /// \brief Copy constructor.
@@ -109,7 +109,7 @@ namespace Engine
             ///
             /// \brief This method allow to retrieve an animation from the animation library.
             ///
-            Animation   *getAnimation(unsigned int id) const;
+            Animation   *getAnimation(const std::string &name) const;
 
             ///
             /// \brief This method allow to retrieve a mesh from the mesh library.
@@ -120,6 +120,11 @@ namespace Engine
             /// \brief This method allow to retrieve a texture from the texture library.
             ///
             Texture     *getTexture(const std::string &name) const;
+
+            ///
+            /// \brief Return the clock of the scene.
+            ///
+            const Clock &clock(void) const;
 
         public:
 
@@ -154,6 +159,11 @@ namespace Engine
             /// \brief temporary, but something similar to what I want do.
             ///
             Event::EventRegister    m_event_register;
+
+            ///
+            /// \brief The clock used in the scene.
+            ///
+            Clock                   m_clock;
 
         protected:
             ///

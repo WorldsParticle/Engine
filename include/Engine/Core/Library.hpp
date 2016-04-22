@@ -17,13 +17,11 @@
 
 #pragma once
 
-#include    <vector>
-
-#include    "Engine/Configuration.hpp"
+#include    <map>
 
 namespace   Engine
 {
-    template<typename T>
+    template<typename Key, typename Resource>
     class       Library
     {
         public:
@@ -62,55 +60,55 @@ namespace   Engine
             ///
             /// \brief Getter for a resource.
             ///
-            const T     &get(unsigned int id) const;
+            const Resource  &get(const Key &key) const;
 
         protected:
             ///
             /// \brief Resources container.
             ///
-            std::vector<T>  m_resources;
+            std::map<Key, Resource>     m_resources;
     };
 
-    template<typename T>
-    Library<T>::Library(void) :
+    template<typename Key, typename Resource>
+    Library<Key, Resource>::Library(void) :
         m_resources()
     {
         // nothing to do.
     }
 
-    template<typename T>
-    Library<T>::Library(const Library<T> &other) :
+    template<typename Key, typename Resource>
+    Library<Key, Resource>::Library(const Library<Key, Resource> &other) :
         m_resources(other.m_resources)
     {
         // nothing to do.
     }
 
-    template<typename T>
-    Library<T>::Library(Library<T> &&other) noexcept :
+    template<typename Key, typename Resource>
+    Library<Key, Resource>::Library(Library<Key, Resource> &&other) noexcept :
         m_resources(std::move(other.m_resources))
     {
         // nothing to do.
     }
 
-    template<typename T>
-    Library<T>::~Library(void) noexcept
+    template<typename Key, typename Resource>
+    Library<Key, Resource>::~Library(void) noexcept
     {
         // nothing to do.
     }
 
 
 
-    template<typename T>
-    Library<T> &
-    Library<T>::operator=(const Library<T> &other)
+    template<typename Key, typename Resource>
+    Library<Key, Resource> &
+    Library<Key, Resource>::operator=(const Library<Key, Resource> &other)
     {
         this->m_resources = other.m_resources;
         return *this;
     }
 
-    template<typename T>
-    Library<T> &
-    Library<T>::operator=(Library<T> &&other) noexcept
+    template<typename Key, typename Resource>
+    Library<Key, Resource> &
+    Library<Key, Resource>::operator=(Library<Key, Resource> &&other) noexcept
     {
         this->m_resources = std::move(other.m_resources);
         return *this;
@@ -118,11 +116,11 @@ namespace   Engine
 
 
 
-    template<typename T>
-    const T &
-    Library<T>::get(unsigned int id) const
+    template<typename Key, typename Resource>
+    const Resource &
+    Library<Key, Resource>::get(const Key &key) const
     {
-        return this->m_resources.at(id);
+        return this->m_resources.at(key);
     }
 
 }

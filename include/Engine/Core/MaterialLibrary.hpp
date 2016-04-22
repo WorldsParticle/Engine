@@ -29,7 +29,7 @@ namespace   Engine
     ///
     /// \brief This material library wrap the Library<Material> and provide a constructor from assimp materials.
     ///
-    class ENGINE_EXPORTS MaterialLibrary : public Library<Material *>
+    class ENGINE_EXPORTS MaterialLibrary : public Library<unsigned int, Material *>
     {
         public:
             ///
@@ -42,7 +42,7 @@ namespace   Engine
             ///
             MaterialLibrary(const ShaderProgramLibrary &shaderprograms,
                     aiMaterial **assimpMaterials, unsigned int size,
-		    const TextureLibrary &texLib);
+                    const TextureLibrary &texture_library);
 
             ///
             /// \brief Copy constructor.
@@ -69,7 +69,6 @@ namespace   Engine
             /// \brief Move assignment operator.
             ///
             MaterialLibrary     &operator=(MaterialLibrary &&other) noexcept = default;
-
 
     };
 }

@@ -26,63 +26,69 @@ namespace   Engine
 {
     class       Texture
     {
-	public:
-	    ///
-	    /// \brief Default constructor. create an empty texture.
-	    ///
-	    Texture(void);
+        public:
+            ///
+            /// \brief Default constructor. create an empty texture.
+            ///
+            Texture(void);
 
-	    ///
-	    /// \brief Construct a texture from its path (non embedded textures)
-	    ///
-	    Texture(unsigned int id, const std::string &texturePath);
+            ///
+            /// \brief Construct a texture from its path (non embedded textures)
+            ///
+            Texture(const std::string &texture_name);
 
-	    ///
-	    /// \brief Construct a texture from an assimp texture. (embedded textures)
-	    ///
-	    Texture(const aiTexture *assimpTexture);
+            ///
+            /// \brief Construct a texture from an assimp texture. (embedded textures)
+            ///
+            Texture(const aiTexture *ai_texture);
 
-	    ///
-	    /// \brief Copy constructor.
-	    ///
-	    Texture(const Texture &other) = default;
+            ///
+            /// \brief Copy constructor.
+            ///
+            Texture(const Texture &other) = default;
 
-	    ///
-	    /// \brief Move constructor.
-	    ///
-	    Texture(Texture &&other) noexcept = default;
+            ///
+            /// \brief Move constructor.
+            ///
+            Texture(Texture &&other) noexcept = default;
 
-	    ///
-	    /// \brief Destructor.
-	    ///
-	    virtual ~Texture(void) noexcept;
+            ///
+            /// \brief Destructor.
+            ///
+            virtual ~Texture(void) noexcept;
 
-	public:
-	    ///
-	    /// \brief Copy assignment operator.
-	    ///
-	    Texture     &operator=(const Texture &other) = default;
+        public:
+            ///
+            /// \brief Copy assignment operator.
+            ///
+            Texture     &operator=(const Texture &other) = default;
 
-	    ///
-	    /// \brief Move assignment operator.
-	    ///
-	    Texture     &operator=(Texture &&other) noexcept = default;
+            ///
+            /// \brief Move assignment operator.
+            ///
+            Texture     &operator=(Texture &&other) noexcept = default;
 
-	public:
-	    ///
-	    /// \brief Bind texture
-	    ///
-	    void	bind(void);
+        public:
+            ///
+            /// \brief bind the texture in the graphic pipeline.
+            ///
+            void        bind(void);
 
-	private:
-	    ///
-	    /// \brief This attribute is the name of the texture
-	    /// (its path is relative to the file loaded)
-	    ///
-	    std::string		m_name;
-	    ///
-	    /// \brief This attribute is the id of the texture
-	    ///
-	    unsigned int	m_id;
+            ///
+            /// \brief unbind the texture from the graphic pipeline.
+            ///
+            void        unbind(void);
+
+        private:
+            ///
+            /// \brief This attribute is the name of the texture
+            /// (its path is relative to the file loaded)
+            ///
+            std::string     m_name;
+
+            ///
+            /// \brief This attribute is the id of the texture
+            ///
+            unsigned int    m_id;
     };
 }

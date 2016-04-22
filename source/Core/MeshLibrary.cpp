@@ -25,42 +25,42 @@ using namespace     log4cpp;
 namespace   Engine
 {
     MeshLibrary::MeshLibrary(void) :
-        Library<Mesh *>()
+        Library<unsigned int, Mesh *>()
     {
         // nothing to do.
     }
 
     MeshLibrary::MeshLibrary(const MaterialLibrary &materials,
             aiMesh **assimpMeshes, unsigned int size) :
-        Library<Mesh *>()
+        Library<unsigned int, Mesh *>()
     {
         Category    &root = Category::getRoot();
 
         root << Priority::DEBUG << "MeshLibrary constructor with size = " << size;
-        this->m_resources.reserve(size);
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const aiMesh *amesh = assimpMeshes[i];
             Material *material = materials.get(amesh->mMaterialIndex);
-            this->m_resources.push_back(new Mesh(amesh, material));
+            this->m_resources.insert(std::make_pair(i,
+                        new Mesh(amesh, material)));
         }
     }
 
     MeshLibrary::MeshLibrary(const MeshLibrary &other) :
-        Library<Mesh *>()
+        Library<unsigned int, Mesh *>()
     {
-        this->m_resources.reserve(other.m_resources.size());
-        for (Mesh *resource : other.m_resources)
+        for (const auto &key_value : other.m_resources)
         {
-             this->m_resources.push_back(new Mesh(*resource));
+            this->m_resources.insert(std::make_pair(key_value.first,
+                        new Mesh(*key_value.second)));
         }
     }
 
     MeshLibrary::~MeshLibrary(void)
     {
-        for (Mesh *resource : this->m_resources)
+        for (const auto &key_value : this->m_resources)
         {
-            delete resource;
+            delete key_value.second;
         }
     }
 
@@ -69,11 +69,11 @@ namespace   Engine
     MeshLibrary &
     MeshLibrary::operator=(const MeshLibrary &other)
     {
-         this->m_resources.reserve(other.m_resources.size());
-         for (Mesh *resource : other.m_resources)
-         {
-             this->m_resources.push_back(new Mesh(*resource));
-         }
-         return *this;
+        for (const auto &key_value : other.m_resources)
+        {
+            this->m_resources.insert(std::make_pair(key_value.first,
+                        new Mesh(*key_value.second)));
+        }
+        return *this;
     }
 }

@@ -28,7 +28,7 @@ namespace   Engine
     ///
     /// \brief This class is used to contains every animation available in a scene.
     ///
-    class ENGINE_EXPORTS AnimationLibrary : public Library<Animation *>
+    class ENGINE_EXPORTS AnimationLibrary : public Library<std::string, Animation *>
     {
         public:
             ///

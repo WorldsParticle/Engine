@@ -45,7 +45,8 @@ namespace   Engine
         // nothing to do
     }
 
-//#warning check si plusieurs type de primitives différente sont présente & si elles sont soit TRIANGLE, soit LINE, soit POINT.
+//#warning check si plusieurs type de primitives différente sont présente
+//& si elles sont soit TRIANGLE, soit LINE, soit POINT.
     Mesh::Mesh(const aiMesh *am, Material *material) :
         m_name(""),
         m_positions(),
@@ -103,21 +104,21 @@ namespace   Engine
         pointer_offset += this->m_positions.size() * sizeof(float);
         if (this->hasNormals())
         {
-	    root << Priority::DEBUG << "has normals in array object";
+            root << Priority::DEBUG << "has normals in array object";
             glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void *>(pointer_offset));
             pointer_offset += this->m_normals.size() * sizeof(float);
         }
         if (this->hasUVs())
         {
-	    root << Priority::DEBUG << "has uv in array object";
+            root << Priority::DEBUG << "has uv in array object";
             glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 0, reinterpret_cast<void *>(pointer_offset));
             pointer_offset += this->m_uvs.size() * sizeof(float);
         }
         if (this->hasIndices())
-	{
+        {
             this->m_elementBuffer->bind();
-	    root << Priority::DEBUG << "has indices in array object";
-	}
+            root << Priority::DEBUG << "has indices in array object";
+        }
 
         this->m_arrayObject->unbind();
 
