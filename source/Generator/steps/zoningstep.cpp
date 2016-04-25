@@ -31,9 +31,8 @@ ZoningStep::~ZoningStep()
 void    ZoningStep::run()
 {
     std::vector<Point *>                    sites = generateRandomSites();
-
     std::cout << "Generating Voronoi edges .." << std::endl;
-    const std::vector<vor::Edge *>    *edges = m_voronoi.fortuneAlgo(&sites);
+    const std::vector<vor::Edge *>    *edges = m_voronoi.fortuneAlgo(sites);
 
     // do lloyd, relaunch fortune, and again (nb depending of a user param)
     // todo
@@ -49,6 +48,7 @@ std::vector<Point *>    ZoningStep::generateRandomSites()
     for (unsigned int i = 0; i < m_zoneNumber.value(); ++i)
         sites.push_back(new Point(DRAND(0, m_map->xMax()),
                                   DRAND(0, m_map->yMax())));
+    return sites;
 }
 
 void    ZoningStep::LloydRelaxation() // NOT WORKING FOR NOW

@@ -33,8 +33,9 @@ public:
 
     ///
     /// \brief fortuneAlgo
+    /// \param sites is a copied list of points from where to start
     ///
-    const std::vector<Edge *> *fortuneAlgo(const std::vector<Point *> *sites);
+    const std::vector<Edge *> *fortuneAlgo(const std::vector<Point *> &sites);
 
 private:
     void    clearData();

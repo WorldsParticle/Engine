@@ -16,15 +16,6 @@ public:
     };
 
     ///
-    /// \brief Param default constructor
-    /// \param name
-    ///
-    Param(paramType type, const std::string &name = "") :
-        m_type(type),
-        m_name(name)
-    {}
-
-    ///
     /// \brief ~Param
     ///
     virtual ~Param() {}
@@ -47,6 +38,15 @@ public:
     { m_name = name; }
 
 protected:
+    ///
+    /// \brief Param default constructor
+    /// \param name
+    ///
+    Param(paramType type, const std::string &name = "") :
+        m_type(type),
+        m_name(name)
+    {}
+
     paramType   m_type;
     std::string m_name;
 };

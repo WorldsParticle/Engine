@@ -28,7 +28,7 @@ void    Generator::run(map::MapGraph *map)
 {
     for (const auto &step: m_steps)
     {
-        std::cout << step->name();
+        std::cout << step->name() << std::endl;
         step->launch(map);
     }
 

@@ -22,7 +22,7 @@ public:
 
     ///
     /// \brief Default constructor.
-    /// \param Point at which the event is located
+    /// \param Point at which the event is located. NO NOT DELETE
     /// \param True if event is special.
     ///
     explicit Event(Point *p, bool ispe) :
