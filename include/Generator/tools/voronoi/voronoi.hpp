@@ -2,7 +2,7 @@
 #define VORONOIGENERATOR_H
 
 #include "Generator/generator.hpp"
-#include "../map/point.hpp"
+#include "Generator/map/point.hpp"
 #include "event.hpp"
 #include <list>
 #include <map>
@@ -25,53 +25,25 @@ class Edge;
 /// \brief The VoronoiGenerator class
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Voronoi : public gen::GenerationStep
+class Voronoi
 {
 public:
     Voronoi();
     ~Voronoi();
 
     ///
-    /// \brief run. For now it contain non-voronoi concept, must move it in the futur standalone generation step
+    /// \brief fortuneAlgo
     ///
-    virtual void run();
+    const std::vector<Edge *> *fortuneAlgo(const std::vector<Point *> *sites);
 
 private:
     void    clearData();
-
-    ///
-    /// \brief generate a randome set of site
-    ///
-    void    generateRandomSites();
-
-    ///
-    /// \brief fortuneAlgo
-    ///
-    void    fortuneAlgo();
-
-    ///
-    /// \brief LloydRelaxation
-    ///
-    void    LloydRelaxation();
 
     ///
     /// \brief finishEdge
     /// \param p
     ///
     void    finishEdge(Parabola *p);
-
-    ///
-    /// \brief computeFinalMap
-    ///
-    void        computeFinalMap();
-
-    ///
-    /// \brief checkCorner
-    /// \param z
-    /// \param p
-    /// \return
-    ///
-    map::Corner *checkCorner(map::Zone *z, Point &p);
 
     ///
     /// \brief addParabola
@@ -107,29 +79,24 @@ private:
     Point *getEdgeIntersection(Edge *a, Edge *b); // à refaire en plus propre
 
     ///
-    /// \brief _sites
-    ///
-    std::vector<Point *>        _sites;
-
-    ///
     /// \brief _edges
     ///
-    std::vector<Edge *>         _edges;
+    std::vector<Edge *>         m_edges;
 
     ///
     /// \brief temporary points (edges interesct, ...)
     ///
-    std::vector<Point *>        _points;
+    std::vector<Point *>        m_points;
 
     ///
     /// \brief _events potential future events wich can modify the beach line
     /// (another point or parabola intersection)
     ///
-    std::priority_queue<Event *, std::vector<Event *>, Event::compareEvent>   _events;
-    std::set<Event *>   _deleted; // comme je repasse sur une queue
+    std::priority_queue<Event *, std::vector<Event *>, Event::compareEvent>   m_events;
+    std::set<Event *>   m_deleted; // comme je repasse sur une queue
 
-    double                  _sweepLine;     // sweep line going down
-    std::shared_ptr<Parabola>                _root;         // root parabola containing the beach line
+    double                      m_sweepLine;     // sweep line going down
+    std::shared_ptr<Parabola>   m_root;         // root parabola containing the beach line
 };
 
 }

@@ -1,18 +1,14 @@
 #ifndef GENERATOR_MARIE_H
 #define GENERATOR_MARIE_H
 
-#include "generationstep.hpp"
+#include "steps/generationstep.hpp"
 #include <map>
+#include <list>
 
 
-#include "Generator/map/map.hpp"
-#include "Generator/heightmap.hpp"
-#include "Generator/voronoi/voronoi.hpp"
-#include "Generator/shaper.hpp"
-#include "Generator/elevator.hpp"
-#include "Generator/riveror.hpp"
-#include "Generator/moistor.hpp"
-#include "Generator/biomizator.hpp"
+#include "map/map.hpp"
+#include "heightmap.hpp"
+#include "steps/generationstep.hpp"
 
 namespace map
 {
@@ -23,7 +19,8 @@ namespace gen
 {
 
 ///
-/// \brief This class generates and fills a Voronoi diagram, while also generating the associated heightmap.
+/// \brief This class fill the mapgraph and the heightmap (who should be insinde the mapgraph)
+/// for now it will juste launch one by one the generation steps which have been assigned (actually in a static way)
 ///
 class Generator
 {
@@ -36,61 +33,26 @@ public:
 
     ///
     /// \brief Executes the map generation steps.
-    /// \param Max x coordinate for Voronoi diagram.
-    /// \param Max y coordinate for Voronoi diagram.
-    /// \param Number of zones (= polygons) for the Voronoi diagram.
     ///
-    map::MapGraph    *generate(unsigned int xMax, unsigned int yMax, unsigned int zoneNumber);
+    void run(map::MapGraph *map);
 
     ///
     /// \brief Heightmap getter.
     ///
-    map::HeightMap *getHeightmap() {
-        return _heightmap;
+    inline map::HeightMap   *heightmap() {
+        return m_heightmap;
     }
-
 
 protected:
     ///
-    /// \brief Map being generated.
-    ///
-    map::MapGraph        *_map;
-
-    ///
     /// \brief heightmap associated to the map
     ///
-    map::HeightMap  *_heightmap;
+    map::HeightMap              *m_heightmap;
 
     ///
-    /// \brief Voronoi diagram generation step.
+    /// \brief steps which are run (in order)
     ///
-    GenerationStep  *_fillStep;
-
-    ///
-    /// \brief Land & ocean assignation step.
-    ///
-    GenerationStep  *_shapeStep;
-
-    ///
-    /// \brief Height assignation step.
-    ///
-    GenerationStep  *_elevateStep;
-
-    ///
-    /// \brief River generating step.
-    ///
-    GenerationStep  *_riverStep;
-
-    ///
-    /// \brief Moisture assignation step.
-    ///
-    GenerationStep  *_moistureStep;
-
-    ///
-    /// \brief Biome assignation step.
-    ///
-    GenerationStep  *_biomeStep;
-
+    std::list<GenerationStep *> m_steps;
 };
 
 }

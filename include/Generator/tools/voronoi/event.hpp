@@ -1,8 +1,8 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include "../map/point.hpp"
-#include "../map/zone.hpp"
+#include "Generator/map/point.hpp"
+#include "Generator/map/zone.hpp"
 
 namespace vor
 

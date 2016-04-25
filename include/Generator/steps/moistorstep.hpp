@@ -1,26 +1,26 @@
 #ifndef MOISTOR_H
 #define MOISTOR_H
 
-#include "generator.hpp"
+#include "generationstep.hpp"
 
-namespace MOI {
+namespace gen {
 
 ///
 /// \brief This class assigns moisture to the corners and zones of a Voronoi diagram.
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Moistor : public gen::GenerationStep
+class MoistorStep : public GenerationStep
 {
 public:
     ///
     /// \brief Default constructor.
     ///
-    Moistor();
+    MoistorStep();
 
     ///
     /// \brief Default destructor.
     ///
-    ~Moistor();
+    ~MoistorStep();
 
     ///
     /// \brief Runs the generation step.

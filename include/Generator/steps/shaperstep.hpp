@@ -1,26 +1,26 @@
 #ifndef SHAPER_H
 #define SHAPER_H
 
-#include "generator.hpp"
+#include "generationstep.hpp"
 
-namespace SHA {
+namespace gen {
 
 ///
 /// \brief This class determines the land types of the corners and zones of a Voronoi diagram.
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Shaper : public gen::GenerationStep
+class ShaperStep : public GenerationStep
 {
 public:
     ///
     /// \brief Default constructor.
     ///
-    Shaper();
+    ShaperStep();
 
     ///
     /// \brief Default destructor.
     ///
-    ~Shaper();
+    ~ShaperStep();
 
     ///
     /// \brief Runs the generation step.

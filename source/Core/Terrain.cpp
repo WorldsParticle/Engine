@@ -16,13 +16,18 @@ namespace   Engine
 //		_generator()
 //		_mesh()
 	{
+        /*
+         * 25 Avril
+         * Thibaud
+         * Comment de l'ensemble du constructeur de Terrain, car modification important du générateur
+
 		this->m_scene->add(this);
-		_generator = new gen::Generator();
+        _generator = new gen::Generator();
 
 
-		_generator->generate(10, 10, 2);
-		_heightmap = _generator->getHeightmap();
-		_heightmap->generateMesh();
+        _generator->run(10, 10, 2);
+        _heightmap = _generator->heightmap();
+        _heightmap->generateMesh();
 
 		const auto& myShader = shaderprograms.get(DEFAULT_SHADER_PROGRAM);
 
@@ -53,6 +58,11 @@ namespace   Engine
 		_mesh->setNormals(getNormals());
 		_mesh->setIndices(getIndices());
 		_mesh->update();
+
+        * 25 Avril
+        * Thibaud
+        * Fin comment
+        */
 	}
 	//const Resource  &get(const Key &key) const;
 //ShaderProgramLibrary : public Library<ShaderProgramName, std::shared_ptr<ShaderProgram>>

@@ -1,7 +1,7 @@
 #ifndef PARABOLA_H
 #define PARABOLA_H
 
-#include "../map/point.hpp"
+#include "Generator/map/point.hpp"
 
 namespace map
 {

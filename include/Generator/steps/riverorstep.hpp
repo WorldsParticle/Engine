@@ -1,27 +1,27 @@
 #ifndef RIVEROR_H
 #define RIVEROR_H
 
-#include "generator.hpp"
-#include "map/map.hpp"
+#include "generationstep.hpp"
+#include "../map/map.hpp"
 
-namespace RIV {
+namespace gen {
 
 ///
 /// \brief This class generates rivers and determine watersheds on a Voronoi diagram.
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Riveror : public gen::GenerationStep
+class RiverorStep : public GenerationStep
 {
 public:
     ///
     /// \brief Default constructor.
     ///
-    Riveror();
+    RiverorStep();
 
     ///
     /// \brief Default destructor.
     ///
-    ~Riveror();
+    ~RiverorStep();
 
 
     ///

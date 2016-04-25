@@ -1,28 +1,28 @@
 #ifndef BIOMIZATOR_H
 #define BIOMIZATOR_H
 
-#include "generator.hpp"
-#include "map/map.hpp"
+#include "generationstep.hpp"
+#include "../map/map.hpp"
 
-namespace BIO {
+namespace gen {
 
 ///
 /// \brief This class assign biomes to the zones of a Voronoi diagram.
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Biomizator : public gen::GenerationStep
+class BiomizatorStep : public gen::GenerationStep
 {
 public:
 
     ///
     /// \brief Default constructor.
     ///
-    Biomizator();
+    BiomizatorStep();
 
     ///
     /// \brief Default destructor.
     ///
-    ~Biomizator();
+    ~BiomizatorStep();
 
     ///
     /// \brief Runs the generation step.

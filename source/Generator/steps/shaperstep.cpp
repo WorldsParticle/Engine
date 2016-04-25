@@ -6,22 +6,22 @@
 #include <queue>
 
 #include "Generator/map/map.hpp"
-#include "Generator/shaper.hpp"
+#include "Generator/steps/shaperstep.hpp"
 #include "Generator/tools/simplexnoise.hpp"
 
-namespace SHA
+namespace gen
 {
 
-Shaper::Shaper()
-{
-    _step = SHAPE;
-}
-
-Shaper::~Shaper()
+ShaperStep::ShaperStep() :
+    GenerationStep("Limite terre/mer")
 {
 }
 
-void    Shaper::run()
+ShaperStep::~ShaperStep()
+{
+}
+
+void    ShaperStep::run()
 {
     assignCornerLandPerlin(rand() % 100000);
     assignOceanCostAndLand();
@@ -29,13 +29,13 @@ void    Shaper::run()
 
 // TODO : assignCornerLandRadial()
 
-void        Shaper::assignCornerLandPerlin(int seed)
+void        ShaperStep::assignCornerLandPerlin(int seed)
 {
-    for (const auto & corner : _map->corners())
+    for (const auto & corner : m_map->corners())
     {
         Point p = corner.second->point;
-        double xMax = _map->xMax();
-        double yMax = _map->yMax();
+        double xMax = m_map->xMax();
+        double yMax = m_map->yMax();
 
         // assign corner.border if a corner is out of the map's bounding box
         if (p.x <= 0 || p.y <= 0 || p.x >= xMax || p.y >= yMax)
@@ -71,14 +71,14 @@ void        Shaper::assignCornerLandPerlin(int seed)
 }
 
 
-void        Shaper::assignOceanCostAndLand()
+void        ShaperStep::assignOceanCostAndLand()
 {
     std::queue<map::Zone *> q;
 
 
     // assigning ocean to border zones,
     // and water based on corners
-    for (auto & zone : _map->zones())
+    for (auto & zone : m_map->zones())
     {
         zone.second->ocean = false;
         int numWater = 0;
@@ -114,7 +114,7 @@ void        Shaper::assignOceanCostAndLand()
     }
 
     // assigning coast zones
-    for (auto & zone : _map->zones())
+    for (auto & zone : m_map->zones())
     {
         int numOcean = 0;
         int numLand = 0;
@@ -127,7 +127,7 @@ void        Shaper::assignOceanCostAndLand()
     }
 
     // assigning corner's ocean, coast & water
-    for (auto & corner : _map->corners())
+    for (auto & corner : m_map->corners())
     {
         unsigned int numOcean = 0;
         unsigned int numLand = 0;
