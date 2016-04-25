@@ -7,13 +7,12 @@
 #include "Generator/steps/riverorstep.hpp"
 #include "Generator/steps/moistorstep.hpp"
 #include "Generator/steps/biomizatorstep.hpp"
-#include "Generator/heightmap.hpp"
+#include "Generator/steps/heightmapingstep.hpp"
 
 namespace gen
 {
 
 Generator::Generator() :
-    m_heightmap(nullptr),
     m_steps()
 {
     m_steps.push_back(new ZoningStep());
@@ -22,6 +21,7 @@ Generator::Generator() :
     m_steps.push_back(new RiverorStep());
     m_steps.push_back(new MoistorStep());
     m_steps.push_back(new BiomizatorStep());
+    m_steps.push_back(new HeightMapingStep());
 }
 
 void    Generator::run(map::MapGraph *map)
@@ -31,10 +31,6 @@ void    Generator::run(map::MapGraph *map)
         std::cout << step->name() << std::endl;
         step->launch(map);
     }
-
-    m_heightmap = new map::HeightMap(map->xMax(), map->yMax());
-    std::cout << "making heightmap..." << std::endl;
-    m_heightmap->init(*map);
 }
 
 }

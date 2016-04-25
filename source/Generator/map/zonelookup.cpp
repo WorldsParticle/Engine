@@ -1,5 +1,5 @@
 #include "Generator/map/map.hpp"
-#include "Generator/zonelookup.hpp"
+#include "Generator/map/zonelookup.hpp"
 
 namespace map
 {
@@ -14,9 +14,9 @@ ZoneLookUp::~ZoneLookUp()
 {
 }
 
-void    ZoneLookUp::createCloud(map::MapGraph & m)
+void    ZoneLookUp::createCloud(map::MapGraph *m)
 {
-    for (const auto & zone : m.zones())
+    for (const auto & zone : m->zones())
     {
         map::PointCloud<double>::LPoint p = {zone.second->point.x, zone.second->point.y, zone.second};
         _cloud.pts.push_back(p);

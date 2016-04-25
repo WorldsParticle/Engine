@@ -4,7 +4,7 @@
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Entity.hpp"
-#include 	"Generator/heightmap.hpp"
+#include 	"Generator/map/heightmap.hpp"
 #include 	"Generator/generator.hpp"
 
 namespace   Engine
@@ -65,13 +65,13 @@ namespace   Engine
 
 	public:
 		std::vector<float> const& getVertex() {
-			return _heightmap->getPoints();
+			return _heightmap->vertices();
 		}
 		std::vector<unsigned int> const& getIndices() {
-			return _heightmap->getIndices();
+			return _heightmap->indices();
 		}
 		std::vector<float> const& getNormals() {
-			return _heightmap->getNormals();
+			return _heightmap->normals();
 		}
 
 	    Mesh *     getMesh() {

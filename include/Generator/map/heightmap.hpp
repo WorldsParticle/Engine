@@ -3,11 +3,10 @@
 
 #include <vector>
 #include <glm/glm.hpp>
-#include "map/heightpoint.hpp"
-//#include "generator.hpp"
-#include "zonelookup.hpp"
+#include "heightpoint.hpp"
 
-namespace map {
+namespace map
+{
 
 ///
 /// \brief This class stores the height of the (x, y) points of a 2D map
@@ -29,76 +28,77 @@ public:
     ~HeightMap();
 
     ///
-    /// \brief Initialize the heightmap from a Voronoi diagram.
-    /// \param Map from which to build the heightmap.
-    ///
-    void    init(map::MapGraph & m);
-
-    ///
     /// \brief Veryfies that a point s is inside the abc triangle.
     /// \param Point to be checked.
     /// \param Vertice a.
     /// \param Vertice b.
     /// \param Vertice c.
     ///
-    bool    pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::vec3 c);
+    static bool pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::vec3 c);
 
     ///
     /// \brief Generates the mesh associated to the heightmap.
     ///
     void    generateMesh();
 
+    inline HeightPoint  &pointAt(unsigned int x, unsigned int y)
+    { return m_points[x * m_width + y]; }
+
+    ///
+    /// \brief points buffer getter
+    ///
+    inline const std::vector<HeightPoint>   &points()
+    { return m_points; }
+
     ///
     /// \brief Vertice buffer getter.
     ///
-    std::vector<float> const &getPoints();
+    inline const std::vector<float>         &vertices()
+    { return m_vertices; }
 
     ///
     /// \brief Indices buffer getter.
     ///
-    std::vector<unsigned int> const &getIndices();
+    inline const std::vector<unsigned int>  &indices()
+    { return m_indices; }
 
     ///
     /// \brief Normals buffer getter.
     ///
-    std::vector<float> const &getNormals();
+    std::vector<float> const &normals()
+    { return m_normals; }
 
 private:
 
     ///
     /// \brief Width of the heightmap.
     ///
-    unsigned int _width;
+    unsigned int m_width;
 
     ///
     /// \brief Height of the heightmap.
     ///
-    unsigned int _height;
+    unsigned int m_height;
 
     ///
     /// \brief Every point of the heightmap.
     ///
-    std::vector<HeightPoint>    _points;
-
-    ///
-    /// \brief Class holding the zone's center kd-tree.
-    ///
-    ZoneLookUp                  _zoneLookUp;
+    std::vector<HeightPoint>    m_points;
 
     ///
     /// \brief Heightmap's vertices buffer.
     ///
-    std::vector<float> _vertices;
+    std::vector<float> m_vertices;
 
     ///
     /// \brief Heightmap's indices buffer.
     ///
-    std::vector<unsigned int>   _indices;
+    std::vector<unsigned int>   m_indices;
 
     ///
     /// \brief Heightmap's normals buffer.
     ///
-    std::vector<float> _normals;
+    std::vector<float> m_normals;
 
 };
 

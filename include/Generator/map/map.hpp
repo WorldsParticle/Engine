@@ -6,6 +6,7 @@
 #include "zone.hpp"
 #include "corner.hpp"
 #include "crossededge.hpp"
+#include "heightmap.hpp"
 
 namespace map
 {
@@ -25,7 +26,7 @@ public:
     ~MapGraph();
 
     ///
-    /// \brief Find the associated polygon to a 2D (x, y) point
+    /// \brief Find the polygon to a 2D (x, y) point (only work if center of the polygon, see zonelookup for better result)
     /// \param point for which we need to find nearest neighbor
     ///
     Zone    *findZone(const Point *p); // ugly and slow
@@ -60,6 +61,9 @@ public:
     inline double yMax()
     { return m_yMax; }
 
+    inline HeightMap   &heightMap()
+    { return m_heightMap; }
+
 private:
 
     ///
@@ -86,6 +90,8 @@ private:
     /// \brief Height of the map
     ///
     double    m_yMax;
+
+    HeightMap m_heightMap;
 };
 
 }

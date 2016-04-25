@@ -8,7 +8,8 @@ MapGraph::MapGraph(unsigned int xMax, unsigned int yMax) :
     m_corners(),
     m_edges(),
     m_xMax(xMax),
-    m_yMax(yMax)
+    m_yMax(yMax),
+    m_heightMap(xMax, yMax)
 {
     map::Zone::indexMax = 0;
     map::Corner::indexMax = 0;
