@@ -39,9 +39,15 @@ public:
     ///
     /// \brief Heightmap getter.
     ///
-    inline map::HeightMap   *heightmap() {
-        return m_heightmap;
-    }
+    inline map::HeightMap   *heightmap()
+    { return m_heightmap; }
+
+    ///
+    /// \brief steps getter
+    /// \return
+    ///
+    inline const std::list<GenerationStep *>  &steps()
+    { return m_steps; }
 
 protected:
     ///
