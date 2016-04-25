@@ -22,7 +22,7 @@ public:
 private:
     ///
     /// \brief Class holding the zone's center kd-tree.
-    /// should move it inside MapGraph when it will be 100% usable
+    /// should move it inside MapGraph, and createCould at the end of zoningStep
     ///
     map::ZoneLookUp m_zoneLookUp;
 };
