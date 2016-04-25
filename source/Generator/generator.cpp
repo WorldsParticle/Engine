@@ -33,4 +33,11 @@ void    Generator::run(map::MapGraph *map)
     }
 }
 
+GenerationStep  *Generator::stepFromName(const std::string &name)
+{
+    for (const auto &s: m_steps)
+        if (s->name() == name)
+            return s;
+}
+
 }

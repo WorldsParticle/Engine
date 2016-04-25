@@ -23,6 +23,11 @@ public:
     { m_map = map; run(); }
 
     ///
+    /// \brief Destructor
+    ///
+    virtual ~GenerationStep() {}
+
+    ///
     /// \brief name getter
     /// \return name
     ///
@@ -37,9 +42,11 @@ public:
     { return m_params; }
 
     ///
-    /// \brief Destructor
+    /// \brief paramFromName
+    /// \param name
+    /// \return param
     ///
-    virtual ~GenerationStep() {}
+    Param   *paramFromName(const std::string &name);
 
 protected:
     ///

@@ -42,6 +42,13 @@ public:
     inline const std::list<GenerationStep *>  &steps()
     { return m_steps; }
 
+    ///
+    /// \brief stepFromName
+    /// \param name
+    /// \return step
+    ///
+    GenerationStep  *stepFromName(const std::string &name);
+
 protected:
     ///
     /// \brief steps which are run (in order)
