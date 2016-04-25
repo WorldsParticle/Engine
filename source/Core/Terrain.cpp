@@ -19,7 +19,9 @@ namespace   Engine
         /*
          * 25 Avril
          * Thibaud
-         * Comment de l'ensemble du constructeur de Terrain, car modification important du générateur
+         * Comment de l'ensemble du constructeur de Terrain, car modification importante du générateur
+         * truc à rajouter : instancier une MapGraph, et _generator->run(map)
+         * Truc à enlever : _heightmap, car sera déjà généré dans MapGraph::heightMap()
 
 		this->m_scene->add(this);
         _generator = new gen::Generator();
