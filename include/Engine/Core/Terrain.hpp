@@ -24,7 +24,7 @@ namespace   Engine
 		/// \brief Default constructor.
 		/// \param node the node related to the terrain.
 		///
-		Terrain(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms); // TODO GSL NOT NULL
+        Terrain(map::HeightMap &map, Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms); // TODO GSL NOT NULL
 
 		///
 		/// \brief Copy constructor.
@@ -64,33 +64,31 @@ namespace   Engine
 		void    update(void) override;
 
 	public:
-		std::vector<float> const& getVertex() {
-			return _heightmap->vertices();
-		}
-		std::vector<unsigned int> const& getIndices() {
-			return _heightmap->indices();
-		}
-		std::vector<float> const& getNormals() {
-			return _heightmap->normals();
-		}
 
-	    Mesh *     getMesh() {
-	    	return _mesh;
-	    }
+        inline std::vector<float> const& getVertex()
+        { return m_heightmap.vertices(); }
+
+        inline std::vector<unsigned int> const& getIndices()
+        { return m_heightmap.indices(); }
+
+        inline std::vector<float> const& getNormals()
+        { return m_heightmap.normals(); }
+
+        inline Mesh *mesh()
+        { return m_mesh; }
 
 	protected:
 
 	private:
-		map::HeightMap* _heightmap;
-		gen::Generator*	_generator;
+        map::HeightMap  &m_heightmap;
 
         ///
         /// \brief The mesh associated with the terrain.
         ///
-        Mesh *     _mesh; // TODO opti by not using a mesh
+        Mesh *          m_mesh; // TODO opti by not using a mesh
 
-		std::vector<float> vertices;
-   		std::vector<unsigned int> indices;
+        std::vector<float>          m_vertices;
+        std::vector<unsigned int>   m_indices;
 
 
 	};

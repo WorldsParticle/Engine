@@ -87,7 +87,7 @@ namespace   Engine
 
         public:
             ///
-            /// \brief Getter for the associated node name.
+            /// \ter for the associated node name.
             ///
             virtual const std::string   &getName(void) const;
 

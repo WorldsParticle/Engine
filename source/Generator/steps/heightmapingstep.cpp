@@ -77,6 +77,8 @@ void    HeightMapingStep::run()
 
         }
     }
+
+    m_map->heightMap().generateMesh();
 }
 
 }

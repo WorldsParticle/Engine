@@ -147,7 +147,7 @@ namespace   Engine
             for (Terrain *terrain : this->m_terrains)
             {
                 const glm::mat4 &model = terrain->getTransform().getMatrix();
-                terrain->getMesh()->draw(model, view, projection);
+                terrain->mesh()->draw(model, view, projection);
             }
         }
         this->m_cameras.clear();
