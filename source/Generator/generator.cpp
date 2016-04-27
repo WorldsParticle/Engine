@@ -25,40 +25,34 @@ Generator::Generator() :
     _fillStep = new vor::Voronoi();
 }
 
-map::MapGraph    *Generator::generate(double xMax, double yMax, unsigned int zoneNumber)
+map::MapGraph    *Generator::generate(unsigned int xMax, unsigned int yMax, unsigned int zoneNumber)
 {
     _map = new map::MapGraph(xMax, yMax, zoneNumber);
 
     map::Zone::indexMax = 0;
     map::Corner::indexMax = 0;
     map::CrossedEdge::indexMax = 0;
-
+    std::cout << "Starting fill step..." << std::endl;
     _fillStep->generate(_map);
-
+    std::cout << "Ending fill step." << std::endl;
     _shapeStep = new SHA::Shaper();
     _shapeStep->generate(_map);
-
+  std::cout << "Ending fill step.." << std::endl;
     _elevateStep = new ELE::Elevator();
     _elevateStep->generate(_map);
-
+  std::cout << "Ending fill step..." << std::endl;
     _riverStep = new RIV::Riveror();
     _riverStep->generate(_map);
-
+  std::cout << "Ending fill step...."<< std::endl;
     _moistureStep = new MOI::Moistor();
     _moistureStep->generate(_map);
-
+  std::cout << "Ending fill step....." << std::endl;
     _biomeStep = new BIO::Biomizator();
     _biomeStep->generate(_map);
-
+  std::cout << "Ending fill step......" << std::endl;
     _heightmap = new map::HeightMap(xMax, yMax);
     std::cout << "making heightmap..." << std::endl;
     _heightmap->init(*_map);
-    std::cout << "painting..." << std::endl;
-    _heightmap->paintByHeight();
-    _heightmap->paintByMoisture();
-    _heightmap->paintByLandType();
-    _heightmap->paintByBiome();
-    std::cout << "painted..." << std::endl;
 
     return _map;
 }

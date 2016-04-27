@@ -11,9 +11,9 @@ Zone::Zone(double x, double y) :
     ocean(false),
     coast(false),
     border(false),
-    biome(),
     elevation(0.0),
     moisture(0.0),
+    biome(),
     neighbors(),
     borders(),
     corners()

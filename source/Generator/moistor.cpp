@@ -78,7 +78,7 @@ void        Moistor::assignCornerMoisture()
         auto corner = c.second;
         if ((corner->water || corner->river > 0) && !corner->ocean)
         {
-            corner->moisture = corner->river > 0 ? std::min(3.0f, (0.2f * corner->river)) : 1.0f;
+            corner->moisture = corner->river > 0 ? std::min(3.0f, (0.2f * static_cast<float>(corner->river))) : 1.0f;
             q.push(corner);
         }
         else

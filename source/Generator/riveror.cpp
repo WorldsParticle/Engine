@@ -65,7 +65,7 @@ void        Riveror::createRivers()
 {
     for (unsigned int i; i < (_map->zoneNumber() / 2); ++i)
     {
-    map::Corner *corner = _map->corners().at(rand() % _map->corners().size());
+    map::Corner *corner = _map->corners().at(rand() % static_cast<int>(_map->corners().size()));
         if (corner->ocean || corner->elevation < 0.3f || corner->elevation > 0.9f)
             continue;
         while (!corner->coast)

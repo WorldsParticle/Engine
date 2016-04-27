@@ -10,7 +10,7 @@
 #include "Generator/voronoi/parabola.hpp"
 #include "Generator/voronoi/edge.hpp"
 
-#define DRAND(min, max) (min) + ((double)std::rand() / RAND_MAX) * ((max) - (min))
+#define DRAND(min, max) (min) + (static_cast<double>(std::rand()) / RAND_MAX) * ((max) - (min))
 
 namespace vor
 {
@@ -22,7 +22,7 @@ Voronoi::Voronoi() :
     _events(),
     _deleted(),
     _sweepLine(0),
-    _root(NULL)
+    _root(nullptr)
 {
     _step = FILL;
 }
@@ -58,7 +58,7 @@ void    Voronoi::clearData()
     _points.clear();
     _edges.clear();
 
-    _root = NULL;
+    _root = nullptr;
     Parabola::indexMax = 0;
 }
 
@@ -99,7 +99,7 @@ void    Voronoi::fortuneAlgo()
             removeParabola(event);
     }
 
-    finishEdge(_root);
+    finishEdge(_root.get());
 
     for(std::vector<Edge *>::iterator it = _edges.begin(); it != _edges.end(); ++it)
     {
@@ -235,15 +235,16 @@ void        Voronoi::computeFinalMap()// TOOOOODOOOOOOO
 map::Corner *Voronoi::checkCorner(map::Zone *z, Point &p)
 {
     for (std::vector<map::Corner *>::iterator it = z->corners.begin(); it != z->corners.end(); ++it)
-        if ((*it)->point.x == p.x && (*it)->point.y == p.y)
+        if (std::abs((*it)->point.x - p.x) < std::numeric_limits<double>::epsilon()
+                    && (std::abs((*it)->point.y - p.y) < std::numeric_limits<double>::epsilon()))
             return (*it);
-    return NULL;
+    return nullptr;
 }
 
 
 void    Voronoi::addParabola(Point *site)
 {
-    if (!_root) { _root = new Parabola(site); return; }
+    if (!_root) { _root = std::shared_ptr<Parabola>(new Parabola(site)); return; }
 
     // Nop
     /*if (_root->isLeaf && _root->site->point.y - site->point.y < 1)
@@ -267,7 +268,7 @@ void    Voronoi::addParabola(Point *site)
     if (topParabola->cEvent) // Event annulé car bouffé par une nouvelle parabole
     {
         _deleted.insert(topParabola->cEvent);
-        topParabola->cEvent = NULL;
+        topParabola->cEvent = nullptr;
     }
 
     Point   *start = new Point(site->x, getY(topParabola->site, site->x));
@@ -310,12 +311,12 @@ void    Voronoi::removeParabola(Event *e)
     if (p0->cEvent)
     {
         _deleted.insert(p0->cEvent);
-        p0->cEvent = NULL;
+        p0->cEvent = nullptr;
     }
     if (p2->cEvent)
     {
         _deleted.insert(p2->cEvent);
-        p2->cEvent = NULL;
+        p2->cEvent = nullptr;
     }
 
     Point   *p = new Point(e->point->x, getY(p1->site, e->point->x));
@@ -326,7 +327,7 @@ void    Voronoi::removeParabola(Event *e)
 
     Parabola * higher;
     Parabola * par = p1;
-    while(par != _root)
+    while(par != _root.get())
     {
         par = par->parent;
         if(par == pLeft) higher = pLeft;
@@ -401,7 +402,7 @@ double      Voronoi::getXofEdge(Parabola *p, double y)
 
 Parabola    *Voronoi::getParabolaAtX(double nx)
 {
-    Parabola *p = _root;
+    Parabola *p = _root.get();
     double x = 0.0;
 
     while(!p->isLeaf)

@@ -11,6 +11,10 @@ namespace map
 class CrossedEdge;
 class Corner;
 
+
+///
+/// \brief Enumeration of all the possible zone biomes.
+///
 enum Biome {
     OCEAN,
     MARSH,
@@ -42,28 +46,85 @@ class Zone
 
 public:
 
+    ///
+    /// \brief Default constructor.
+    /// \param Center's x coordinates
+    /// \param Center's y coordinates
+    ///
     explicit Zone(double x = 0, double y = 0);
 
     inline friend std::ostream &operator<<(std::ostream &os, const Zone &s)
     { return os << "[" << s.index << "](" << s.point.x << ", " << s.point.y << ")"; }
 
+    ///
+    /// \brief Checks if the zone zone has a neighbor.
+    /// \param The zone for which we need to check whether is has neighbors or not.
+    ///
     bool    haveNeighbor(Zone *zone);
 
+    ///
+    /// \brief Max zone index of the associated Voronoi diagram.
+    ///
     static int  indexMax;  // change this
+
+    ///
+    /// \brief Zone's index on the associated Voronoi diagram.
+    ///
     const int   index;
 
-    Point       point;     // location
-    bool        water;     // lake or ocean
-    bool        ocean;     // ocean
-    bool        coast;     // land polygon touching an ocean
-    bool        border;    // at the edge of the map
-    float       elevation; // 0.0-1.0
-    float       moisture;  // 0.0-1.0
+    ///
+    /// \brief (x, y) location of the center of the zone.
+    ///
+    Point       point;
 
-    map::Biome biome;     // biome type (see article)
+    ///
+    /// \brief True if the zone is a lake or an ocean zone.
+    ///
+    bool        water;
 
+    ///
+    /// \brief True if the zone is an ocean zone.
+    ///
+    bool        ocean;
+
+    ///
+    /// \brief True if the zone touches at least one land and one ocean polygon.
+    ///
+    bool        coast;
+
+    ///
+    /// \brief True if the zone touches the border of the map
+    ///
+    bool        border;
+
+    ///
+    /// \brief Average elevation of the zone's corners (range : 0.0 to 1.0)
+    ///
+    float       elevation;
+
+    ///
+    /// \brief Average moisture of the zone's corners (range : 0.0 to 1.0)
+    ///
+    float       moisture;
+
+    ///
+    /// \brief Zone's biome type.
+    ///
+    map::Biome biome;
+
+    ///
+    /// \brief Neighboring zones.
+    ///
     std::vector<Zone *>         neighbors;
+
+    ///
+    /// \brief Edges the zone's polygon.
+    ///
     std::vector<CrossedEdge *>  borders;
+
+    ///
+    /// \brief Vertices of the zone's polygon.
+    ///
     std::vector<Corner *>       corners;
 };
 

@@ -11,26 +11,29 @@ class MapGraph;
 class Zone;
 
 ///
-/// \brief The ZoneLookUp class
-/// Based on the design found between two neurons
+/// \brief a cloud of points used as the input of the kd-tree construction.
+///
+template <typename T>
+struct PointCloud
+{
+    typedef T coord_t; //!< The type of each coordinate
+
+    struct LPoint
+    {
+        T  x,y;
+    map::Zone   *zone;
+    };
+
+    std::vector<LPoint>  pts = std::vector<LPoint> ();
+};
+
+///
+/// \brief This class holds a kd-tree of the map's zones,
+/// thus allowing to detect the closest neighboor to a random point
 ///
 class ZoneLookUp
 {
 public:
-
-    template <typename T>
-    struct PointCloud
-    {
-        typedef T coord_t; //!< The type of each coordinate
-
-        struct LPoint
-        {
-            T  x,y;
-        map::Zone   *zone;
-        };
-
-        std::vector<LPoint>  pts;
-    };
 
     // And this is the "dataset to kd-tree" adaptor class:
     template <typename Derived>
@@ -82,18 +85,46 @@ public:
         2 /* dim */
         > my_kd_tree_t;
 
+    ///
+    /// \brief Default constructor.
+    ///
     ZoneLookUp();
+
+    ///
+    /// \brief Default destructor.
+    ///
     ~ZoneLookUp();
 
+    ///
+    /// \brief Default destructor.
+    /// \param Map from which to build the point cloud.
+    ///
     void    createCloud(map::MapGraph & m);
+
+    ///
+    /// \brief Default destructor.
+    /// \param X coordinate of the point whose neightbor we have to find.
+    /// \param Y coordinate of the point whose neightbor we have to find.
+    ///
     Zone    *getNearestZone(double x, double y);
 
 
 private:
 
+    ///
+    /// \brief Creates a point cloud with the Voronoi diagram zones' centers.
+    ///
     PointCloud<double>  _cloud;
-    const PC2KD         * _pc2kd;
-    my_kd_tree_t        * _tree;
+
+    ///
+    /// \brief Adaptator for the point cloud.
+    ///
+    std::shared_ptr<PC2KD>          _pc2kd;
+
+    ///
+    /// \brief KD-tree.
+    ///
+    std::shared_ptr<my_kd_tree_t>    _tree;
 };
 
 }

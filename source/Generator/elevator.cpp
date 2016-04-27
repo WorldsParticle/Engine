@@ -91,7 +91,7 @@ void        Elevator::redistributeElevation()
        float y, x;
 
        y = static_cast<float>(i) / static_cast<float>(corners.size() - 1);
-       x = sqrt(scaleFactor) - sqrt(scaleFactor * (1.0f - y));
+       x = static_cast<float>(sqrt(scaleFactor) - sqrt(scaleFactor * (1.0f - y)));
        if (x > 1.0f)
            x = 1.0f;
        corners[i]->elevation = x;
