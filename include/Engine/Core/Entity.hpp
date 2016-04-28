@@ -20,6 +20,7 @@
 #include    <string>
 
 #include    "Engine/Configuration.hpp"
+#include    "Engine/Core/Transform.hpp"
 
 namespace   Engine
 {
@@ -39,6 +40,12 @@ namespace   Engine
             /// \param node the node which the entity is attached.
             ///
             Entity(SceneGraphNode *node); // TODO GSL NOT NULL
+
+            ///
+            /// \brief Constructor with scene
+            /// \param scene
+            ///
+            Entity(Scene *scene);
 
             ///
             /// \brief Copy constructor.
@@ -80,7 +87,7 @@ namespace   Engine
 
         public:
             ///
-            /// \brief Getter for the associated node name.
+            /// \ter for the associated node name.
             ///
             virtual const std::string   &getName(void) const;
 
@@ -99,5 +106,7 @@ namespace   Engine
             /// \brief The scene that contains the Entity.
             ///
             Scene           *m_scene;
+
+            Transform   m_transform_zero_test;
     };
 }

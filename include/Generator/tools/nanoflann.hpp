@@ -81,7 +81,7 @@ namespace nanoflann
 		CountType count;
 
 	public:
-		inline KNNResultSet(CountType capacity_) : indices(0), dists(0), capacity(capacity_), count(0)
+                inline KNNResultSet(CountType capacity_) : indices(nullptr), dists(nullptr), capacity(capacity_), count(0)
 		{
 		}
 
@@ -478,7 +478,7 @@ namespace nanoflann
 		void internal_init()
 		{
 			remaining = 0;
-			base = NULL;
+			base = nullptr;
 			usedMemory = 0;
 			wastedMemory = 0;
 		}
@@ -487,10 +487,39 @@ namespace nanoflann
 		size_t  usedMemory;
 		size_t  wastedMemory;
 
+
+                PooledAllocator(const PooledAllocator& other) :
+                    remaining(0), base(nullptr), loc(nullptr), usedMemory(other.usedMemory), wastedMemory(0)
+                {
+                }
+
+                PooledAllocator(PooledAllocator& other) :
+                    remaining(0), base(nullptr), loc(nullptr), usedMemory(other.usedMemory), wastedMemory(0)
+                {
+                }
+
+                PooledAllocator& operator=(const PooledAllocator& other)
+                {
+                if (&other != this)
+                {
+
+                }
+                return *this;
+                }
+
+                PooledAllocator& operator=(PooledAllocator& other)
+                {
+                if (&other != this)
+                {
+
+                }
+                return *this;
+                }
+
 		/**
 		    Default constructor. Initializes a new pool.
 		 */
-		PooledAllocator() {
+		PooledAllocator() : remaining(0), base(nullptr), loc(nullptr), usedMemory(0), wastedMemory(0) {
 			internal_init();
 		}
 
@@ -504,7 +533,7 @@ namespace nanoflann
 		/** Frees all allocated memory chunks */
 		void free_all()
 		{
-			while (base != NULL) {
+			while (base != nullptr) {
 				void *prev = *(static_cast<void**>( base)); /* Get pointer to prev block. */
 				::free(base);
 				base = prev;
@@ -539,7 +568,7 @@ namespace nanoflann
 				void* m = ::malloc(blocksize);
 				if (!m) {
 					fprintf(stderr,"Failed to allocate memory.\n");
-					return NULL;
+					return nullptr;
 				}
 
 				/* Fill first word of new block with pointer to previous block. */
@@ -786,7 +815,7 @@ namespace nanoflann
 					DistanceType divlow, divhigh; //!< The values used for subdivision.
 				} sub;
 			} node_type;
-			Node* child1, * child2;  //!< Child nodes (both=NULL mean its a leaf node)
+			Node* child1, * child2;  //!< Child nodes (both=nullptr mean its a leaf node)
 		};
 		typedef Node* NodePtr;
 
@@ -832,27 +861,48 @@ namespace nanoflann
 		 * @param inputData Dataset with the input features
 		 * @param params Basically, the maximum leaf node size
 		 */
-		KDTreeSingleIndexAdaptor(const int dimensionality, const DatasetAdaptor& inputData, const KDTreeSingleIndexAdaptorParams& params = KDTreeSingleIndexAdaptorParams() ) :
-			dataset(inputData), index_params(params), root_node(NULL), distance(inputData)
+
+
+                KDTreeSingleIndexAdaptor& operator=(const KDTreeSingleIndexAdaptor& other)
+                {
+                if (&other != this)
+                {
+
+                }
+                return *this;
+                }
+
+                KDTreeSingleIndexAdaptor& operator=(KDTreeSingleIndexAdaptor& other)
+                {
+                if (&other != this)
+                {
+
+                }
+                return *this;
+                }
+
+                KDTreeSingleIndexAdaptor(const int dimensionality, const DatasetAdaptor& inputData, const KDTreeSingleIndexAdaptorParams& params = KDTreeSingleIndexAdaptorParams() ) : vind(),
+                         m_leaf_max_size(params.leaf_max_size), dataset(inputData), index_params(params), m_size(dataset.kdtree_get_point_count()), m_size_at_index_build(m_size), dim(dimensionality), root_node(nullptr), root_bbox(), pool(), distance(inputData)
 		{
-			m_size = dataset.kdtree_get_point_count();
-			m_size_at_index_build = m_size;
-			dim = dimensionality;
+                        //m_size = dataset.kdtree_get_point_count();
+                        //m_size_at_index_build = m_size;
+                        //dim = dimensionality;
 			if (DIM>0) dim=DIM;
-			m_leaf_max_size = params.leaf_max_size;
+
+                        //m_leaf_max_size = params.leaf_max_size;
 
 			// Create a permutable array of indices to the input vectors.
 			init_vind();
 		}
 
 		/** Standard destructor */
-		~KDTreeSingleIndexAdaptor() { }
+                ~KDTreeSingleIndexAdaptor() { }
 
 		/** Frees the previously-built index. Automatically called within buildIndex(). */
 		void freeIndex()
 		{
 			pool.free_all();
-			root_node=NULL;
+			root_node=nullptr;
 			m_size_at_index_build = 0;
 		}
 
@@ -985,10 +1035,10 @@ namespace nanoflann
 		void save_tree(FILE* stream, NodePtr tree)
 		{
 			save_value(stream, *tree);
-			if (tree->child1!=NULL) {
+			if (tree->child1!=nullptr) {
 				save_tree(stream, tree->child1);
 			}
-			if (tree->child2!=NULL) {
+			if (tree->child2!=nullptr) {
 				save_tree(stream, tree->child2);
 			}
 		}
@@ -998,10 +1048,10 @@ namespace nanoflann
 		{
 			tree = pool.allocate<Node>();
 			load_value(stream, *tree);
-			if (tree->child1!=NULL) {
+			if (tree->child1!=nullptr) {
 				load_tree(stream, tree->child1);
 			}
-			if (tree->child2!=NULL) {
+			if (tree->child2!=nullptr) {
 				load_tree(stream, tree->child2);
 			}
 		}
@@ -1045,7 +1095,7 @@ namespace nanoflann
 
 			/* If too few exemplars remain, then make this a leaf node. */
 			if ( (right-left) <= m_leaf_max_size) {
-				node->child1 = node->child2 = NULL;    /* Mark as leaf node. */
+				node->child1 = node->child2 = nullptr;    /* Mark as leaf node. */
 				node->node_type.lr.left = left;
 				node->node_type.lr.right = right;
 
@@ -1209,7 +1259,7 @@ namespace nanoflann
 						 distance_vector_t& dists, const float epsError) const
 		{
 			/* If this is a leaf node, then do check and return. */
-			if ((node->child1 == NULL)&&(node->child2 == NULL)) {
+			if ((node->child1 == nullptr)&&(node->child2 == nullptr)) {
 				//count_leaf += (node->lr.right-node->lr.left);  // Removed since was neither used nor returned to the user.
 				DistanceType worst_dist = result_set.worstDist();
 				for (IndexType i=node->node_type.lr.left; i<node->node_type.lr.right; ++i) {
@@ -1248,7 +1298,7 @@ namespace nanoflann
 			DistanceType dst = dists[idx];
 			mindistsq = mindistsq + cut_dist - dst;
 			dists[idx] = cut_dist;
-			if (mindistsq*epsError<=result_set.worstDist()) {
+                        if (mindistsq*static_cast<double>(epsError)<=result_set.worstDist()) {
 				searchLevel(result_set, vec, otherChild, mindistsq, dists, epsError);
 			}
 			dists[idx] = dst;

@@ -6,39 +6,92 @@
 #include "zone.hpp"
 #include "corner.hpp"
 #include "crossededge.hpp"
+#include "heightmap.hpp"
 
-namespace MAP
+namespace map
 {
 
-class Map
+
+///
+/// \brief This class stores every information about the map
+///
+class MapGraph
 {
 public:
-    Map(unsigned int xMax = 0, unsigned int yMax = 0, unsigned int zoneNumber = 0);
-    ~Map();
+    MapGraph(unsigned int xMax = 0, unsigned int yMax = 0);
 
+    ///
+    /// \brief Copy constructor.
+    ///
+    ~MapGraph();
+
+    ///
+    /// \brief Find the polygon to a 2D (x, y) point (only work if center of the polygon, see zonelookup for better result)
+    /// \param point for which we need to find nearest neighbor
+    ///
+    Zone    *findZone(const Point *p); // ugly and slow
+
+    ///
+    /// \brief Map's zones getter.
+    ///
     inline std::map<int, Zone *>        &zones()
-    { return _zones; }
-    inline std::map<int, Corner *>      &corners()
-    { return _corners; }
-    inline std::map<int, CrossedEdge *> &edges()
-    { return _edges; }
+    { return m_zones; }
 
+    ///
+    /// \brief Map's corners getter.
+    ///
+    inline std::map<int, Corner *>      &corners()
+    { return m_corners; }
+
+    ///
+    /// \brief Map's edges getter.
+    ///
+    inline std::map<int, CrossedEdge *> &edges()
+    { return m_edges; }
+
+    ///
+    /// \brief Width getter.
+    ///
     inline double xMax()
-    { return _xMax; }
+    { return m_xMax; }
+
+    ///
+    /// \brief Height getter.
+    ///
     inline double yMax()
-    { return _yMax; }
-    inline unsigned int zoneNumber()
-    { return _zoneNumber; }
+    { return m_yMax; }
+
+    inline HeightMap   &heightMap()
+    { return m_heightMap; }
 
 private:
 
-    std::map<int, Zone *>         _zones;
-    std::map<int, Corner *>       _corners;
-    std::map<int, CrossedEdge *>  _edges;
+    ///
+    /// \brief Map's zones (= Voronoi polygons).
+    ///
+    std::map<int, Zone *>         m_zones;
 
-    double    _xMax;
-    double    _yMax;
-    unsigned int    _zoneNumber;
+    ///
+    /// \brief Map's zone's corners (= vertices of the Voronoi polygons).
+    ///
+    std::map<int, Corner *>       m_corners;
+
+    ///
+    /// \brief Edges of the map (= edges of the Voronoi polygons)
+    ///
+    std::map<int, CrossedEdge *>  m_edges;
+
+    ///
+    /// \brief Width of the map
+    ///
+    double    m_xMax;
+
+    ///
+    /// \brief Height of the map
+    ///
+    double    m_yMax;
+
+    HeightMap m_heightMap;
 };
 
 }

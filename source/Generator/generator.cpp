@@ -1,65 +1,43 @@
 #include "Generator/generator.hpp"
 
 #include "Generator/map/map.hpp"
-#include "Generator/voronoi/voronoi.hpp"
-#include "Generator/shaper.hpp"
-#include "Generator/elevator.hpp"
-#include "Generator/riveror.hpp"
-#include "Generator/moistor.hpp"
-#include "Generator/biomizator.hpp"
-#include "Generator/heightmap.hpp"
+#include "Generator/steps/zoningstep.hpp"
+#include "Generator/steps/shaperstep.hpp"
+#include "Generator/steps/elevatorstep.hpp"
+#include "Generator/steps/riverorstep.hpp"
+#include "Generator/steps/moistorstep.hpp"
+#include "Generator/steps/biomizatorstep.hpp"
+#include "Generator/steps/heightmapingstep.hpp"
 
-namespace GEN
+namespace gen
 {
 
 Generator::Generator() :
-    _map(NULL),
-    _fillStep(NULL),
-    _shapeStep(NULL),
-    _elevateStep(NULL),
-    _riverStep(NULL),
-    _moistureStep(NULL),
-    _biomeStep(NULL)
+    m_steps()
 {
-    _fillStep = new VOR::Voronoi();
+    m_steps.push_back(new ZoningStep());
+    m_steps.push_back(new ShaperStep());
+    m_steps.push_back(new ElevatorStep());
+    m_steps.push_back(new RiverorStep());
+    m_steps.push_back(new MoistorStep());
+    m_steps.push_back(new BiomizatorStep());
+    m_steps.push_back(new HeightMapingStep());
 }
 
-MAP::Map    *Generator::generate(double xMax, double yMax, unsigned int zoneNumber)
+void    Generator::run(map::MapGraph *map)
 {
-    _map = new MAP::Map(xMax, yMax, zoneNumber);
+    for (const auto &step: m_steps)
+    {
+        std::cout << step->name() << std::endl;
+        step->launch(map);
+    }
+}
 
-    MAP::Zone::indexMax = 0;
-    MAP::Corner::indexMax = 0;
-    MAP::CrossedEdge::indexMax = 0;
-
-    _fillStep->generate(_map);
-
-    _shapeStep = new SHA::Shaper();
-    _shapeStep->generate(_map);
-
-    _elevateStep = new ELE::Elevator();
-    _elevateStep->generate(_map);
-
-    _riverStep = new RIV::Riveror();
-    _riverStep->generate(_map);
-
-    _moistureStep = new MOI::Moistor();
-    _moistureStep->generate(_map);
-
-    _biomeStep = new BIO::Biomizator();
-    _biomeStep->generate(_map);
-
-    MAP::HeightMap h(xMax, yMax);
-    std::cout << "making heightmap..." << std::endl;
-    h.init(*_map);
-    std::cout << "painting..." << std::endl;
-    h.paintByHeight();
-    h.paintByMoisture();
-    h.paintByLandType();
-    h.paintByBiome();
-std::cout << "painted..." << std::endl;
-
-    return _map;
+GenerationStep  *Generator::stepFromName(const std::string &name)
+{
+    for (const auto &s: m_steps)
+        if (s->name() == name)
+            return s;
 }
 
 }

@@ -28,7 +28,7 @@ namespace Engine
     {
         class       Event;
     }
-
+    
     class   Scene;
 
     ///
@@ -92,14 +92,8 @@ namespace Engine
             ///
             void    load(const std::string &filename);
 
-        public:
-
-            ///
-            /// \brief generator
-            /// \return the generator
-            ///
-            inline GEN::Generator   &generator()
-            { return m_generator; }
+            inline std::list<Scene *> &scenes()
+            { return m_scenes; }
 
         protected:
             ///
@@ -115,6 +109,6 @@ namespace Engine
             ///
             /// \brief m_generator
             ///
-            GEN::Generator          m_generator;
+            gen::Generator          m_generator;
     };
 }

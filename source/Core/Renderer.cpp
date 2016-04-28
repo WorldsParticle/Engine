@@ -144,7 +144,11 @@ namespace   Engine
                     part->draw(model, view, projection);
                 }
             }
-			//TODO lefebv_z : render terrain
+            for (Terrain *terrain : this->m_terrains)
+            {
+                const glm::mat4 &model = terrain->getTransform().getMatrix();
+                terrain->mesh()->draw(model, view, projection);
+            }
         }
         this->m_cameras.clear();
         this->m_objects.clear();
@@ -152,3 +156,14 @@ namespace   Engine
 		this->m_terrains.clear();
     }
 }
+//
+//        std::vector<float> const &getVertex() {
+//            return _heightmap->getPoints();
+//        }
+//        std::vector<int> const &getIndices() {
+//            return _heightmap->getIndices();
+//        }
+//        std::vector<float> const &getNormals() {
+//            return _heightmap->getNormals();
+//        }
+//
