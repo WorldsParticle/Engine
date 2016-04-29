@@ -23,7 +23,7 @@ namespace   Engine
 		/// \brief Default constructor.
         /// \param node the node related to the Nuages.
 		///
-        Nuages(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms); // TODO GSL NOT NULL
+        Nuages(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms, float z); // TODO GSL NOT NULL
 
 		///
 		/// \brief Copy constructor.

@@ -10,13 +10,13 @@ using namespace     log4cpp;
 
 namespace   Engine
 {
-    Nuages::Nuages(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms) :
+    Nuages::Nuages(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms, float z) :
         Entity(scene),
         m_mesh(nullptr),
-        m_vertices({5000.0, 500.0, 5000.0,
-                   5000.0, 500.0, -5000.0,
-                    -5000.0, 500.0, -5000.0,
-                   -5000.0, 500.0, 5000.0}),
+        m_vertices({5000.0, z, 5000.0,
+                   5000.0, z, -5000.0,
+                    -5000.0, z, -5000.0,
+                   -5000.0, z, 5000.0}),
         m_indices({0, 1, 3,
                   1, 3, 2}),
         m_normals({0.0, 0.0, 0.0,
