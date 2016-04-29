@@ -36,7 +36,8 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-		m_terrains()
+        m_terrains(),
+        m_nuages()
     {
 
     }

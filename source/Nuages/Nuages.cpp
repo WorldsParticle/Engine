@@ -1,11 +1,9 @@
 #include    <log4cpp/Category.hh>
 
-#include    <chrono>
 #include    "Engine/Nuages/Nuages.hpp"
 #include    "Engine/Core/Scene.hpp"
 #include    "Engine/Core/Mesh.hpp"
 #include    "Engine/Core/ShaderProgramLibrary.hpp"
-#include    "Engine/Core/Scene.hpp"
 #include    "Engine/Nuages/NuagesMaterial.hpp"
 
 using namespace     log4cpp;

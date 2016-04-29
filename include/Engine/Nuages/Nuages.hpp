@@ -4,8 +4,6 @@
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Entity.hpp"
-#include 	"Generator/map/heightmap.hpp"
-#include 	"Generator/generator.hpp"
 #include    "Engine/Core/ShaderProgram.hpp"
 
 namespace   Engine
