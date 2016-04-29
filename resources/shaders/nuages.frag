@@ -192,19 +192,17 @@ void main(void) {
     vec4 bg = vec4(0.0, 0.59766, 1.0, 0.0);
 
 
-    float n = fbm3d(4.0, 0.8, 0.5, vec3(pos.x, pos.y + float(elapsed) / 25000.0, pos.z + float(elapsed) / 5000.0));
+    float noise = fbm3d(4.0, 0.8, 0.5, vec3(pos.x, pos.y + float(elapsed) / 25000.0, pos.z + float(elapsed) / 5000.0));
 
-    n += 1.0;
-    n /= 2.0;
+    noise += 1.0;
+    noise /= 2.0;
 
-    if (n < 0.55)
+    if (noise < 0.55)
         color = bg;
     else
     {
-        n -= 0.3;
-        n = pow(n, 2);
-        color = (1.0 - n) * vec4(1.0);
+        noise -= 0.3;
+        noise = pow(noise, 2);
+        color = (1.0 - noise) * vec4(1.0);
     }
-    if (elapsed == 0)
-        color = bg;
 }
