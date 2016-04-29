@@ -96,7 +96,6 @@ namespace   Engine
         {
             float delta_x = static_cast<float>(this->m_size.x) / 2.0f - e->get_position().x;
             float delta_y = static_cast<float>(this->m_size.y) / 2.0f - e->get_position().y;
-std::cout << e->get_position().x << " " << e->get_position().y << std::endl;
             this->yaw(delta_x * this->m_mouse_sensibility);
             this->pitch(delta_y * this->m_mouse_sensibility);
         }
