@@ -51,8 +51,8 @@ namespace   Engine
         {
             std::stringstream errMsg;
             errMsg << "Glew Init failure :" << glewGetErrorString(err);
-            throw std::runtime_error(errMsg.str());
             root << Priority::ERROR << errMsg.str();
+            throw std::runtime_error(errMsg.str());
         }
 
 	ilInit(); /* Initialization of DevIL */
@@ -62,8 +62,8 @@ namespace   Engine
         {
             std::stringstream errMsg;
             errMsg << "Devil Init failure :" << ilGetString(ilErr);
-            throw std::runtime_error(errMsg.str());
             root << Priority::ERROR << errMsg.str();
+            throw std::runtime_error(errMsg.str());
         }
         // nothing to do
     }
@@ -153,6 +153,10 @@ namespace   Engine
     {
         // TODO GSL OWNER && NOT NULL
         Scene *test = this->m_importer.import(filename);
+//        if (!test)
+//        {
+//            this->m_importer.GetErrorString();
+//        }
 
 //        Terrain should not be added there
 //        std::cout << "ready to add terrain..." << std::endl;

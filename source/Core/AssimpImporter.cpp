@@ -71,9 +71,12 @@ namespace   Engine
         flags |= aiProcess_FixInfacingNormals;
         if ((result = this->m_importer.ReadFile(filename, flags)) == nullptr)
         {
-            root << Priority::ERROR
-                << "Erreur dans le loading du fichier : " << filename;
-            root << Priority::ERROR << this->m_importer.GetErrorString();
+            std::stringstream errMsg;
+            errMsg << "Error in file loading : "
+                    << filename << ": "
+                    << this->m_importer.GetErrorString();
+            root << Priority::ERROR << errMsg.str();
+            throw std::runtime_error(errMsg.str());
         }
         return result;
     }
