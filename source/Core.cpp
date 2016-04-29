@@ -19,6 +19,8 @@
 #include    <log4cpp/Category.hh>
 #include    <log4cpp/PropertyConfigurator.hh>
 #include    <IL/il.h>
+#include    <stdexcept>
+#include    <sstream>
 
 #include    "Engine/Version.hpp"
 #include    "Engine/Configuration.hpp"
@@ -47,7 +49,10 @@ namespace   Engine
 
         if (GLEW_OK != err)
         {
-            std::cerr << "Glew Init failure" << std::endl;
+            std::stringstream errMsg;
+            errMsg << "Glew Init failure :" << glewGetErrorString(err);
+            throw std::runtime_error(errMsg.str());
+            root << Priority::ERROR << errMsg;
         }
 	ilInit(); /* Initialization of DevIL */
 
