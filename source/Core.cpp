@@ -52,10 +52,19 @@ namespace   Engine
             std::stringstream errMsg;
             errMsg << "Glew Init failure :" << glewGetErrorString(err);
             throw std::runtime_error(errMsg.str());
-            root << Priority::ERROR << errMsg;
+            root << Priority::ERROR << errMsg.str();
         }
+
 	ilInit(); /* Initialization of DevIL */
 
+        ILenum ilErr = ilGetError();
+        if (ilErr != IL_NO_ERROR)
+        {
+            std::stringstream errMsg;
+            errMsg << "Devil Init failure :" << ilGetString(ilErr);
+            throw std::runtime_error(errMsg.str());
+            root << Priority::ERROR << errMsg.str();
+        }
         // nothing to do
     }
 
