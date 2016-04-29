@@ -7,6 +7,9 @@
 #include <limits>
 #include "zone.hpp"
 
+namespace map
+{
+
 ///
 /// \brief Point with an added pointer to the zone the point belongs to.
 ///
@@ -56,5 +59,7 @@ public:
     ///
     map::Zone     *zone;
 };
+
+}
 
 #endif // HEIGHTPOINT_H

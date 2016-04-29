@@ -92,14 +92,8 @@ namespace Engine
             ///
             void    load(const std::string &filename);
 
-        public:
-
-            ///
-            /// \brief generator
-            /// \return the generator
-            ///
-            inline gen::Generator   &generator()
-            { return m_generator; }
+            inline std::list<Scene *> &scenes()
+            { return m_scenes; }
 
         protected:
             ///

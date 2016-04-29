@@ -1,4 +1,4 @@
-#include "Generator/voronoi/voronoi.hpp"
+#include "Generator/tools/voronoi/voronoi.hpp"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
@@ -7,89 +7,58 @@
 
 #include "Generator/map/map.hpp"
 
-#include "Generator/voronoi/parabola.hpp"
-#include "Generator/voronoi/edge.hpp"
-
-#define DRAND(min, max) (min) + (static_cast<double>(std::rand()) / RAND_MAX) * ((max) - (min))
+#include "Generator/tools/voronoi/parabola.hpp"
+#include "Generator/tools/voronoi/edge.hpp"
 
 namespace vor
 {
 
 Voronoi::Voronoi() :
-    _sites(),
-    _edges(),
-    _points(),
-    _events(),
-    _deleted(),
-    _sweepLine(0),
-    _root(nullptr)
+    m_edges(),
+    m_points(),
+    m_events(),
+    m_deleted(),
+    m_sweepLine(0),
+    m_root(nullptr)
 {
-    _step = FILL;
 }
 
 Voronoi::~Voronoi()
 {
-}
-
-void    Voronoi::run()
-{
-    generateRandomSites();
-
-    std::cout << "Generating Voronoi edges .." << std::endl;
-    fortuneAlgo();
-    std::cout << "Done !" << std::endl;
-
-    /*
-    LloydRelaxation();
-    fortuneAlgo();*/
-
-    std::cout << "Translating into dual graph .." << std::endl;
-    computeFinalMap();
-    std::cout << "Done !" << std::endl;
-
+    clearData();
 }
 
 void    Voronoi::clearData()
 {
-    for(std::vector<Point *>::iterator it = _points.begin(); it != _points.end(); ++it)
+    for(std::vector<Point *>::iterator it = m_points.begin(); it != m_points.end(); ++it)
         delete (*it);
-    for(std::vector<Edge *>::iterator it = _edges.begin(); it != _edges.end(); ++it)
+    for(std::vector<Edge *>::iterator it = m_edges.begin(); it != m_edges.end(); ++it)
         delete (*it);
-    _points.clear();
-    _edges.clear();
+    m_points.clear();
+    m_edges.clear();
 
-    _root = nullptr;
+    m_root = nullptr;
     Parabola::indexMax = 0;
 }
 
-void    Voronoi::generateRandomSites()
-{
-    for(std::vector<Point *>::iterator it = _sites.begin(); it != _sites.end(); ++it)
-        delete (*it);
-    _sites.clear();
-
-    for (unsigned int i = 0; i < _map->zoneNumber(); ++i)
-        _sites.push_back(new Point(DRAND(0, _map->xMax()), DRAND(0, _map->yMax())));
-}
-
-void    Voronoi::fortuneAlgo()
+const std::vector<Edge *> *Voronoi::fortuneAlgo(const std::vector<Point *> &sites)
 {
     clearData();
 
-    for (std::vector<Point *>::iterator it = _sites.begin(); it != _sites.end(); ++it)
-        _events.push(new Event(*it, true));
+    for (std::vector<Point *>::const_iterator it = sites.begin(); it != sites.end(); ++it)
+        m_events.push(new Event(new Point((*it)->x, (*it)->y), true));
 
-    while (!_events.empty())
+    while (!m_events.empty())
     {
-        Event *event = _events.top();
-        _events.pop();
+        Event *event = m_events.top();
+        m_events.pop();
 
-        _sweepLine = event->point->y;
+        m_sweepLine = event->point->y;
 
-        if(_deleted.find(event) != _deleted.end())
+        if(m_deleted.find(event) != m_deleted.end())
         {
             delete(event);
-            _deleted.erase(event);
+            m_deleted.erase(event);
             continue;
         }
 
@@ -99,9 +68,9 @@ void    Voronoi::fortuneAlgo()
             removeParabola(event);
     }
 
-    finishEdge(_root.get());
+    finishEdge(m_root.get());
 
-    for(std::vector<Edge *>::iterator it = _edges.begin(); it != _edges.end(); ++it)
+    for(std::vector<Edge *>::iterator it = m_edges.begin(); it != m_edges.end(); ++it)
     {
         if( (*it)->neighbour)
         {
@@ -109,33 +78,8 @@ void    Voronoi::fortuneAlgo()
             delete (*it)->neighbour;
         }
     }
-}
 
-void    Voronoi::LloydRelaxation() // NOT WORKING FOR NOW
-{
-    // filling neighbors temporarly.. ugly for now. will have to remove totally Zone from this algorythme
-    /*for (const auto &e: _edges)
-    {
-        if (!e->left->haveNeighbor(e->right))
-            e->left->neighbors.push_back(e->right);
-        if (!e->right->haveNeighbor(e->left))
-            e->right->neighbors.push_back(e->left);
-    }
-
-    for (const auto &z: _points)
-    {
-        z->point.x = 0;
-        z->point.y = 0;
-        for (const auto &n: z->neighbors)
-        {
-            z->point.x += n->point.x;
-            z->point.y += n->point.y;
-        }
-        z->point.x /= z->neighbors.size();
-        z->point.y /= z->neighbors.size();
-        z->neighbors.clear();
-        _events.push(new Event(z));
-    }*/
+    return &m_edges;
 }
 
 void	Voronoi::finishEdge(Parabola * p)
@@ -144,107 +88,21 @@ void	Voronoi::finishEdge(Parabola * p)
 
     double mx;
     if(p->edge->direction->x > 0.0)
-        mx = std::max(_map->xMax(), p->edge->start->x + 10 );
+        mx = p->edge->start->x + 10; //std::max(_map->xMax(), p->edge->start->x + 10 ); a vérifier
     else
         mx = std::min(0.0, p->edge->start->x - 10);
 
     p->edge->end = new Point(mx, mx * p->edge->f + p->edge->g);
-    _points.push_back(p->edge->end);
+    m_points.push_back(p->edge->end);
 
     finishEdge(p->left());
     finishEdge(p->right());
     delete p;
 }
 
-void        Voronoi::computeFinalMap()// TOOOOODOOOOOOO
-{
-    for (const auto &e: _edges)
-    {
-        map::CrossedEdge    *edge = new map::CrossedEdge();
-        map::Zone   *left = _map->findZone(e->left);
-        map::Zone   *right = _map->findZone(e->right);
-        map::Corner *c0;
-        map::Corner *c1;
-
-        // Ugly workaround
-        if (!left)
-        {
-            left = new map::Zone(e->left->x, e->left->y);
-            _map->zones().insert(std::pair<int, map::Zone *>(left->index, left));
-        }
-        if (!right)
-        {
-            right = new map::Zone(e->right->x, e->right->y);
-            _map->zones().insert(std::pair<int, map::Zone *>(right->index, right));
-        }
-
-        if (!left->haveNeighbor(right))
-            left->neighbors.push_back(right);
-        if (!right->haveNeighbor(left))
-            right->neighbors.push_back(left);
-
-        edge->z0 = left;
-        edge->z1 = right;
-        left->borders.push_back(edge);
-        right->borders.push_back(edge);
-
-        if (!(c0 = checkCorner(left, *e->start)))
-        {
-            if (!(c0 = checkCorner(right, *e->start)))
-            {
-                c0 = new map::Corner();
-                _map->corners().insert(std::pair<int, map::Corner *>(c0->index, c0));
-
-                c0->point.x = e->start->x;
-                c0->point.y = e->start->y;
-                right->corners.push_back(c0);
-                c0->faces.push_back(right);
-            }
-            left->corners.push_back(c0);
-            c0->faces.push_back(left);
-        }
-
-        if (!(c1 = checkCorner(left, *e->end)))
-        {
-            if (!(c1 = checkCorner(right, *e->end)))
-            {
-                c1 = new map::Corner();
-                _map->corners().insert(std::pair<int, map::Corner *>(c1->index, c1));
-
-                c1->point.x = e->end->x;
-                c1->point.y = e->end->y;
-                right->corners.push_back(c1);
-                c1->faces.push_back(right);
-            }
-            left->corners.push_back(c1);
-            c1->faces.push_back(left);
-        }
-
-
-        edge->c0 = c0;
-        edge->c1 = c1;
-        c0->edges.push_back(edge);
-        c1->edges.push_back(edge);
-        c0->adjacent.push_back(c1);
-        c1->adjacent.push_back(c0);
-
-        _map->edges().insert(std::pair<int, map::CrossedEdge *>(edge->index, edge));
-    }
-}
-
-map::Corner *Voronoi::checkCorner(map::Zone *z, Point &p)
-{
-    for (std::vector<map::Corner *>::iterator it = z->corners.begin(); it != z->corners.end(); ++it)
-        if (std::abs((*it)->point.x - p.x) < std::numeric_limits<double>::epsilon()
-                    && (std::abs((*it)->point.y - p.y) < std::numeric_limits<double>::epsilon()))
-            return (*it);
-    return nullptr;
-}
-
-
 void    Voronoi::addParabola(Point *site)
 {
-    if (!_root) { _root = std::shared_ptr<Parabola>(new Parabola(site)); return; }
+    if (!m_root) { m_root = std::shared_ptr<Parabola>(new Parabola(site)); return; }
 
     // Nop
     /*if (_root->isLeaf && _root->site->point.y - site->point.y < 1)
@@ -267,17 +125,17 @@ void    Voronoi::addParabola(Point *site)
     Parabola    *topParabola = getParabolaAtX(site->x); // get first parabola above the new site
     if (topParabola->cEvent) // Event annulé car bouffé par une nouvelle parabole
     {
-        _deleted.insert(topParabola->cEvent);
+        m_deleted.insert(topParabola->cEvent);
         topParabola->cEvent = nullptr;
     }
 
     Point   *start = new Point(site->x, getY(topParabola->site, site->x));
-    _points.push_back(start);
+    m_points.push_back(start);
 
     Edge    *el = new Edge(start, topParabola->site, site);
     Edge    *er = new Edge(start, site, topParabola->site);
     el->neighbour = er;
-    _edges.push_back(el);
+    m_edges.push_back(el);
     topParabola->edge = er;
     topParabola->isLeaf = false;
 
@@ -310,24 +168,24 @@ void    Voronoi::removeParabola(Event *e)
 
     if (p0->cEvent)
     {
-        _deleted.insert(p0->cEvent);
+        m_deleted.insert(p0->cEvent);
         p0->cEvent = nullptr;
     }
     if (p2->cEvent)
     {
-        _deleted.insert(p2->cEvent);
+        m_deleted.insert(p2->cEvent);
         p2->cEvent = nullptr;
     }
 
     Point   *p = new Point(e->point->x, getY(p1->site, e->point->x));
-    _points.push_back(p);
+    m_points.push_back(p);
 
     pLeft->edge->end = p;
     pRight->edge->end = p;
 
     Parabola * higher;
     Parabola * par = p1;
-    while(par != _root.get())
+    while(par != m_root.get())
     {
         par = par->parent;
         if(par == pLeft) higher = pLeft;
@@ -335,7 +193,7 @@ void    Voronoi::removeParabola(Event *e)
     }
 
     higher->edge = new Edge(p, p0->site, p2->site);
-    _edges.push_back(higher->edge);
+    m_edges.push_back(higher->edge);
 
     Parabola * gparent = p1->parent->parent;
     if(p1->parent->left() == p1)
@@ -382,7 +240,7 @@ double      Voronoi::getXofEdge(Parabola *p, double y)
     dp = 2.0 * (sRight->y - y);
     a2 = 1.0 / dp;
     b2 = -2.0 * sRight->x / dp;
-    c2 = _sweepLine + dp / 4 + sRight->x * sRight->x / dp; // why _sweepline ?
+    c2 = m_sweepLine + dp / 4 + sRight->x * sRight->x / dp; // why _sweepline ?
 
     a = a1 - a2;
     b = b1 - b2;
@@ -402,12 +260,12 @@ double      Voronoi::getXofEdge(Parabola *p, double y)
 
 Parabola    *Voronoi::getParabolaAtX(double nx)
 {
-    Parabola *p = _root.get();
+    Parabola *p = m_root.get();
     double x = 0.0;
 
     while(!p->isLeaf)
     {
-        x = getXofEdge(p, _sweepLine);
+        x = getXofEdge(p, m_sweepLine);
         if (x > nx)
             p = p->left();
         else
@@ -419,10 +277,10 @@ Parabola    *Voronoi::getParabolaAtX(double nx)
 double      Voronoi::getY(const Point *s, double x)
 {
     // Formule d'intersection, à reviser
-    double dp = 2 * (s->y - _sweepLine);
+    double dp = 2 * (s->y - m_sweepLine);
     double a1 = 1 / dp;
     double b1 = -2 * s->x / dp;
-    double c1 = _sweepLine + dp / 4 + s->x * s->x / dp;
+    double c1 = m_sweepLine + dp / 4 + s->x * s->x / dp;
 
     double result = a1*x*x + b1*x + c1;
 
@@ -448,15 +306,15 @@ void        Voronoi::checkCircle(Parabola *b)
     double dx = a->site->x - s->x;
     double dy = a->site->y - s->y;
     double d = sqrt( (dx * dx) + (dy * dy) );
-    if(s->y - d >= _sweepLine)
+    if(s->y - d >= m_sweepLine)
         return;
 
     Event *e = new Event(new Point(s->x, s->y - d), false);
-    _points.push_back(e->point);
+    m_points.push_back(e->point);
     b->cEvent = e;
     e->arch = b;
 
-    _events.push(e);
+    m_events.push(e);
 }
 
 Point   *Voronoi::getEdgeIntersection(Edge *a, Edge *b)
@@ -470,7 +328,7 @@ Point   *Voronoi::getEdgeIntersection(Edge *a, Edge *b)
     if((y - b->start->y)/b->direction->y < 0) return NULL;
 
     Point   *result = new Point(x, y);
-    _points.push_back(result);
+    m_points.push_back(result);
     return result;
 }
 

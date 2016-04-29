@@ -3,29 +3,31 @@
 namespace map
 {
 
-MapGraph::MapGraph(unsigned int xMaxx, unsigned int yMaxx, unsigned int zoneNumberr) :
-    _zones(),
-    _corners(),
-    _edges(),
-    _xMax(xMaxx),
-    _yMax(yMaxx),
-    _zoneNumber(zoneNumberr)
+MapGraph::MapGraph(unsigned int xMax, unsigned int yMax) :
+    m_zones(),
+    m_corners(),
+    m_edges(),
+    m_xMax(xMax),
+    m_yMax(yMax),
+    m_heightMap(xMax, yMax)
 {
-
+    map::Zone::indexMax = 0;
+    map::Corner::indexMax = 0;
+    map::CrossedEdge::indexMax = 0;
 }
 
 MapGraph::~MapGraph()
 {
-    for(std::map<int, Zone *>::iterator it = _zones.begin(); it != _zones.end(); ++it)
+    for(std::map<int, Zone *>::iterator it = m_zones.begin(); it != m_zones.end(); ++it)
         delete (*it).second;
-    for(std::map<int, Corner *>::iterator it = _corners.begin(); it != _corners.end(); ++it)
+    for(std::map<int, Corner *>::iterator it = m_corners.begin(); it != m_corners.end(); ++it)
         delete (*it).second;
-    for(std::map<int, CrossedEdge *>::iterator it = _edges.begin(); it != _edges.end(); ++it)
+    for(std::map<int, CrossedEdge *>::iterator it = m_edges.begin(); it != m_edges.end(); ++it)
         delete (*it).second;
 
-    _zones.clear();
-    _corners.clear();
-    _edges.clear();
+    m_zones.clear();
+    m_corners.clear();
+    m_edges.clear();
 }
 
 Zone   *MapGraph::findZone(const Point *p)
@@ -33,7 +35,7 @@ Zone   *MapGraph::findZone(const Point *p)
     if (!p)
         return NULL;
 
-    for(std::map<int, Zone *>::iterator it = _zones.begin(); it != _zones.end(); ++it)
+    for(std::map<int, Zone *>::iterator it = m_zones.begin(); it != m_zones.end(); ++it)
         if ((*it).second->point == *p)
             return (*it).second;
 

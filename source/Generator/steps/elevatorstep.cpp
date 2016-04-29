@@ -1,4 +1,4 @@
-#include "Generator/elevator.hpp"
+#include "Generator/steps/elevatorstep.hpp"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
@@ -8,19 +8,19 @@
 
 #include "Generator/map/map.hpp"
 
-namespace ELE
+namespace gen
 {
 
-Elevator::Elevator()
-{
-    _step = ELEVATE;
-}
-
-Elevator::~Elevator()
+ElevatorStep::ElevatorStep() :
+    GenerationStep("Elevation")
 {
 }
 
-void    Elevator::run()
+ElevatorStep::~ElevatorStep()
+{
+}
+
+void    ElevatorStep::run()
 {
     assignCornerElevation();
     redistributeElevation();
@@ -29,11 +29,11 @@ void    Elevator::run()
 }
 
 
-void        Elevator::assignCornerElevation()
+void        ElevatorStep::assignCornerElevation()
 {
     std::queue<map::Corner *>   q;
 int a = 0;
-    for (auto & corner : _map->corners())
+    for (auto & corner : m_map->corners())
     {
 
         if (corner.second->border)
@@ -74,12 +74,12 @@ struct sortByElevation
   bool operator() (map::Corner *L, map::Corner *R) { return L->elevation < R->elevation; }
 };
 
-void        Elevator::redistributeElevation()
+void        ElevatorStep::redistributeElevation()
 {
     float scaleFactor = 1.1f;
     std::vector<map::Corner *> corners;
 
-    for (const auto & corner : _map->corners())
+    for (const auto & corner : m_map->corners())
     {
         if (!corner.second->ocean)
             corners.push_back(corner.second);
@@ -99,9 +99,9 @@ void        Elevator::redistributeElevation()
 
 }
 
-void        Elevator::setPolygonElevation()
+void        ElevatorStep::setPolygonElevation()
 {
-    for (const auto & zone : _map->zones())
+    for (const auto & zone : m_map->zones())
     {
         float sumElevation = 0.0;
         for (auto corner : zone.second->corners)
@@ -112,9 +112,9 @@ void        Elevator::setPolygonElevation()
     }
 }
 
-void        Elevator::calculateDownSlopes()
+void        ElevatorStep::calculateDownSlopes()
 {
-    for (const auto & q : _map->corners())
+    for (const auto & q : m_map->corners())
     {
     map::Corner *steepest = q.second;
         for (map::Corner *neighbor : q.second->adjacent)

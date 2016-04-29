@@ -1,29 +1,29 @@
-#include "Generator/biomizator.hpp"
+#include "Generator/steps/biomizatorstep.hpp"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
 #include <math.h>
 #include <algorithm>
 
-namespace BIO
+namespace gen
 {
 
-Biomizator::Biomizator()
-{
-    _step = BIOMIZATING;
-}
-
-Biomizator::~Biomizator()
+BiomizatorStep::BiomizatorStep() :
+    GenerationStep("Attribution des biomes")
 {
 }
 
-void    Biomizator::run()
+BiomizatorStep::~BiomizatorStep()
+{
+}
+
+void    BiomizatorStep::run()
 {
     assignBiomes();
 }
 
 
-map::Biome        Biomizator::getBiome(map::Zone *z)
+map::Biome        BiomizatorStep::getBiome(map::Zone *z)
 {
     if (z->ocean)
         return map::OCEAN;
@@ -81,9 +81,9 @@ map::Biome        Biomizator::getBiome(map::Zone *z)
     }
 }
 
-void        Biomizator::assignBiomes()
+void        BiomizatorStep::assignBiomes()
 {
-    for (auto & z : _map->zones())
+    for (auto & z : m_map->zones())
     {
         z.second->biome = getBiome(z.second);
     }

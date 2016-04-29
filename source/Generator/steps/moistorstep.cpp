@@ -1,4 +1,4 @@
-#include "Generator/moistor.hpp"
+#include "Generator/steps/moistorstep.hpp"
 #include <ctime>
 #include <cstdlib>
 #include <iostream>
@@ -8,19 +8,19 @@
 
 #include "Generator/map/map.hpp"
 
-namespace MOI
+namespace gen
 {
 
-Moistor::Moistor()
-{
-    _step = MOISTING;
-}
-
-Moistor::~Moistor()
+MoistorStep::MoistorStep() :
+    GenerationStep("Humidité")
 {
 }
 
-void    Moistor::run()
+MoistorStep::~MoistorStep()
+{
+}
+
+void    MoistorStep::run()
 {
     assignCornerMoisture();
     redistributeMoisture();
@@ -29,9 +29,9 @@ void    Moistor::run()
 
 
 // assigne l'humidité des polygones en faisant la moyenne de la somme de celle des sommets
-void        Moistor::assignPolygonMoisture()
+void        MoistorStep::assignPolygonMoisture()
 {
-    for (auto & z : _map->zones())
+    for (auto & z : m_map->zones())
     {
         float sumMoisture = 0.0f;
         for (auto corner : z.second->corners)
@@ -50,11 +50,11 @@ struct sortByMoisture
 };
 
 // redistribue l'humidité de 0 à 1.0 uniformément
-void        Moistor::redistributeMoisture()
+void        MoistorStep::redistributeMoisture()
 {
     std::vector<map::Corner *> corners;
 
-    for (const auto & corner : _map->corners())
+    for (const auto & corner : m_map->corners())
     {
         if (!corner.second->ocean && !corner.second->coast)
             corners.push_back(corner.second);
@@ -67,13 +67,13 @@ void        Moistor::redistributeMoisture()
 }
 
 // calcule l'humidité d'un sommet de polygone
-void        Moistor::assignCornerMoisture()
+void        MoistorStep::assignCornerMoisture()
 {
     std::queue<map::Corner *> q;
 
     // si le sommet est lié à un point d'eau, ou si il possède une rivière,
     // on lui assigne un humidité et on le push dans la queue
-    for (auto & c : _map->corners())
+    for (auto & c : m_map->corners())
     {
         auto corner = c.second;
         if ((corner->water || corner->river > 0) && !corner->ocean)
@@ -108,7 +108,7 @@ void        Moistor::assignCornerMoisture()
     }
 
     // l'humidité est au maximum pour les océans et beachs.
-    for (auto & corner : _map->corners())
+    for (auto & corner : m_map->corners())
     {
         if (corner.second->ocean || corner.second->coast)
             corner.second->moisture = 1.0;

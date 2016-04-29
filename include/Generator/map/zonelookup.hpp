@@ -2,8 +2,8 @@
 #define ZONELOOKUP_H
 
 #include <vector>
-#include "map/point.hpp"
-#include "tools/nanoflann.hpp"
+#include "Generator/map/point.hpp"
+#include "Generator/tools/nanoflann.hpp"
 
 namespace map {
 
@@ -99,7 +99,7 @@ public:
     /// \brief Default destructor.
     /// \param Map from which to build the point cloud.
     ///
-    void    createCloud(map::MapGraph & m);
+    void    createCloud(map::MapGraph *m);
 
     ///
     /// \brief Default destructor.

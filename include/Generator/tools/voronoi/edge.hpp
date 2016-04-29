@@ -1,8 +1,8 @@
 #ifndef EDGE_H
 #define EDGE_H
 
-#include "../map/point.hpp"
-#include "../map/zone.hpp"
+#include "Generator/map/point.hpp"
+#include "Generator/map/zone.hpp"
 
 namespace vor
 {

@@ -1,8 +1,8 @@
 #ifndef EVENT_H
 #define EVENT_H
 
-#include "../map/point.hpp"
-#include "../map/zone.hpp"
+#include "Generator/map/point.hpp"
+#include "Generator/map/zone.hpp"
 
 namespace vor
 
@@ -22,7 +22,7 @@ public:
 
     ///
     /// \brief Default constructor.
-    /// \param Point at which the event is located
+    /// \param Point at which the event is located. NO NOT DELETE
     /// \param True if event is special.
     ///
     explicit Event(Point *p, bool ispe) :

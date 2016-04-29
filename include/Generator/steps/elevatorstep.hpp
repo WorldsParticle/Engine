@@ -1,26 +1,26 @@
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
-#include "generator.hpp"
+#include "generationstep.hpp"
 
-namespace ELE {
+namespace gen {
 
 ///
 /// \brief This class assign heights to the corners and zones of a Voronoi diagram
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class Elevator : public gen::GenerationStep
+class ElevatorStep : public GenerationStep
 {
 public:
     ///
     /// \brief Default constructor.
     ///
-    Elevator();
+    ElevatorStep();
 
     ///
     /// \brief Default destructor.
     ///
-    ~Elevator();
+    ~ElevatorStep();
 
     ///
     /// \brief Runs the generation step.
