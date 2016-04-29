@@ -28,6 +28,7 @@ namespace   Engine
     class   Object;
 	class   Light;
     class   Terrain;
+    class   Nuages;
 
     ///
     /// \brief The render graph is used to render efficiently 3D data.
@@ -97,6 +98,11 @@ namespace   Engine
 			///
 			void            add(Terrain *terrain);
 
+            ///
+            /// \brief This method is used to add a nuages for the next rendering.
+            ///
+            void            add(Nuages *nuages);
+
         private:
             ///
             /// \brief The scene in which the Renderer act.
@@ -130,6 +136,13 @@ namespace   Engine
 			/// TODO container type
 			///
 			std::list<Terrain *>      m_terrains;
+
+            ///
+            /// \brief The list of nuages needed to be rendered with the light method.
+            ///
+            /// TODO container type
+            ///
+            std::list<Nuages *>      m_nuages;
 
     };
 }

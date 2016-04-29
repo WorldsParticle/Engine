@@ -25,6 +25,7 @@
 #include    "Engine/Core/Terrain.hpp"
 #include    "Engine/Core/Transform.hpp"
 #include    "Engine/Core/Mesh.hpp"
+#include    "Engine/Nuages/Nuages.hpp"
 
 using namespace     log4cpp;
 
@@ -120,6 +121,16 @@ namespace   Engine
 	}
 
 
+    void
+        Renderer::add(Nuages *nuages)
+    {
+        //Category &root = Category::getRoot();
+
+        //root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
+        this->m_nuages.push_back(nuages);
+    }
+
+
 
     void
     Renderer::render(void)
@@ -149,11 +160,17 @@ namespace   Engine
                 const glm::mat4 &model = terrain->getTransform().getMatrix();
                 terrain->mesh()->draw(model, view, projection);
             }
+            for (Nuages *nuages : this->m_nuages)
+            {
+                const glm::mat4 &model = nuages->getTransform().getMatrix();
+                nuages->mesh()->draw(model, view, projection);
+            }
         }
         this->m_cameras.clear();
         this->m_objects.clear();
 		this->m_lights.clear();
 		this->m_terrains.clear();
+        this->m_nuages.clear();
     }
 }
 //

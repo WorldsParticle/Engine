@@ -26,7 +26,9 @@ namespace   Engine
         TEST_VERTEX_SHADER = 2,
         TEST_FRAGMENT_SHADER = 3,
         TEXTURE_VERTEX_SHADER = 4,
-        TEXTURE_FRAGMENT_SHADER = 5
+        TEXTURE_FRAGMENT_SHADER = 5,
+        NUAGES_VERTEX_SHADER = 6,
+        NUAGES_FRAGMENT_SHADER = 7
 
     };
 }

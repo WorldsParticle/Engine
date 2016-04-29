@@ -22,6 +22,7 @@
 #include    "Engine/Core/Object.hpp"
 #include    "Engine/Core/Light.hpp"
 #include    "Engine/Core/Terrain.hpp"
+#include    "Engine/Nuages/Nuages.hpp"
 
 using namespace     log4cpp;
 
@@ -69,6 +70,13 @@ namespace   Engine
 		this->m_terrains.push_back(terrain);
 	}
 
+    void
+        SpatialGraph::add(Nuages *nuages)
+    {
+        this->m_nuages.push_back(nuages);
+    }
+
+
 
 
     void
@@ -90,6 +98,10 @@ namespace   Engine
 		{
 			this->m_renderer.add(terrain);
 		}
+        for (Nuages *nuages : this->m_nuages)
+        {
+            this->m_renderer.add(nuages);
+        }
 	}
 
 }

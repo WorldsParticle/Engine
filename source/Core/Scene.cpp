@@ -137,6 +137,13 @@ namespace Engine
 		this->m_spatialgraph.add(terrain);
 	}
 
+    void
+        Scene::add(Nuages *nuages)
+    {
+        this->m_spatialgraph.add(nuages);
+    }
+
+
 
 
     void

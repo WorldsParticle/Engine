@@ -27,7 +27,7 @@ namespace   Engine
 //		     0.5f, -0.5f, 0.0f, // Vertex 2 (X, Y)
 //		    -0.5f, -0.5f, 0.0f,  // Vertex 3 (X, Y)
 //		};
-//		
+//
 //		unsigned int indices_[] = {
 //			0,1,2//,3,4,5,6,7,8
 //		};
@@ -65,7 +65,7 @@ namespace   Engine
 	void
 		Terrain::update(void)
 	{
-        m_mesh->update();
+        //m_mesh->update();
 		Category    &root = Category::getRoot();
 
 		root << Priority::DEBUG << "Terrain - update()";

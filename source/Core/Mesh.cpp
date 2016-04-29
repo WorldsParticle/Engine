@@ -81,6 +81,7 @@ namespace   Engine
     void
     Mesh::update(void)
     {
+        std::cout << "updating a mesh !" << std::endl;
         Category& root = Category::getRoot();
 
         std::vector<float>  vertices = this->m_positions;
