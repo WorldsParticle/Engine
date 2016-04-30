@@ -34,12 +34,14 @@ namespace   Engine
     const std::map<ShaderName, ShaderProperty>    MappedShaders = {
         {DEFAULT_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "default.vert"}},
         {DEFAULT_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "default.frag"}},
-        {NUAGES_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "nuages.vert"}},
-        {NUAGES_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "nuages.frag"}},
         {TEST_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "light.vert"}},
         {TEST_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "light.frag"}},
         {TEXTURE_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "texture.vert"}},
-        {TEXTURE_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "texture.frag"}}
+        {TEXTURE_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "texture.frag"}},
+        {NUAGES_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "nuages.vert"}},
+        {NUAGES_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "nuages.frag"}},
+        {LIGHTNINGBOLT_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "lightningbolt.vert"}},
+        {LIGHTNINGBOLT_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "lightningbolt.frag"}}
     };
 
 }

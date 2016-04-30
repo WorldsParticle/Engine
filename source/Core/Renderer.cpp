@@ -26,6 +26,7 @@
 #include    "Engine/Core/Transform.hpp"
 #include    "Engine/Core/Mesh.hpp"
 #include    "Engine/Nuages/Nuages.hpp"
+#include    "Engine/Nuages/LightningBolt.hpp"
 
 using namespace     log4cpp;
 
@@ -37,7 +38,8 @@ namespace   Engine
         m_cameras(),
         m_lights(),
         m_terrains(),
-        m_nuages()
+        m_nuages(),
+        m_lightningbolts()
     {
 
     }
@@ -47,7 +49,9 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-		m_terrains()
+        m_terrains(),
+        m_nuages(),
+        m_lightningbolts()
 	{
 
     }
@@ -57,7 +61,9 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-		m_terrains()
+        m_terrains(),
+        m_nuages(),
+        m_lightningbolts()
 	{
 
     }
@@ -131,6 +137,15 @@ namespace   Engine
         this->m_nuages.push_back(nuages);
     }
 
+    void
+        Renderer::add(LightningBolt *lightningbolt)
+    {
+        //Category &root = Category::getRoot();
+
+        //root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
+        this->m_lightningbolts.push_back(lightningbolt);
+    }
+
 
 
     void
@@ -166,12 +181,18 @@ namespace   Engine
                 const glm::mat4 &model = nuages->getTransform().getMatrix();
                 nuages->mesh()->draw(model, view, projection);
             }
+            for (LightningBolt *lightningbolt : this->m_lightningbolts)
+            {
+                const glm::mat4 &model = lightningbolt->getTransform().getMatrix();
+                lightningbolt->mesh()->draw(model, view, projection);
+            }
         }
         this->m_cameras.clear();
         this->m_objects.clear();
 		this->m_lights.clear();
 		this->m_terrains.clear();
         this->m_nuages.clear();
+        this->m_lightningbolts.clear();
     }
 }
 //

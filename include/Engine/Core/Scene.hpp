@@ -157,6 +157,11 @@ namespace Engine
             ///
             void        add(Nuages *nuages);
 
+            ///
+            /// \brief adds a lightning bolt to the spatial graph.
+            ///
+            void        add(LightningBolt *lightningbolt);
+
         public:
 
             ///

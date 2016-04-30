@@ -25,7 +25,8 @@ namespace   Engine
         DEFAULT_SHADER_PROGRAM = 0,
         TEST_SHADER_PROGRAM = 1,
         TEXTURE_SHADER_PROGRAM = 2,
-        NUAGES_SHADER_PROGRAM = 3
+        NUAGES_SHADER_PROGRAM = 3,
+        LIGHTNINGBOLT_SHADER_PROGRAM = 4
     };
 
 }

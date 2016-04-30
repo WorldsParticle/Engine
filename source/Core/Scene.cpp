@@ -143,7 +143,11 @@ namespace Engine
         this->m_spatialgraph.add(nuages);
     }
 
-
+    void
+        Scene::add(LightningBolt *lightningbolt)
+    {
+        this->m_spatialgraph.add(lightningbolt);
+    }
 
 
     void

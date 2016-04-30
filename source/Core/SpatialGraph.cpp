@@ -23,6 +23,7 @@
 #include    "Engine/Core/Light.hpp"
 #include    "Engine/Core/Terrain.hpp"
 #include    "Engine/Nuages/Nuages.hpp"
+#include    "Engine/Nuages/LightningBolt.hpp"
 
 using namespace     log4cpp;
 
@@ -35,7 +36,8 @@ namespace   Engine
         m_objects(),
         m_lights(),
         m_terrains(),
-        m_nuages()
+        m_nuages(),
+        m_lightningbolts()
     {
 
     }
@@ -77,6 +79,11 @@ namespace   Engine
         this->m_nuages.push_back(nuages);
     }
 
+    void
+        SpatialGraph::add(LightningBolt *lightningbolt)
+    {
+        this->m_lightningbolts.push_back(lightningbolt);
+    }
 
 
 
@@ -102,6 +109,10 @@ namespace   Engine
         for (Nuages *nuages : this->m_nuages)
         {
             this->m_renderer.add(nuages);
+        }
+        for (LightningBolt *lightningbolt : this->m_lightningbolts)
+        {
+            this->m_renderer.add(lightningbolt);
         }
 	}
 
