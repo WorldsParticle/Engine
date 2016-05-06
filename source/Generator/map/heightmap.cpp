@@ -41,59 +41,81 @@ bool HeightMap::pointInsideTrigon(glm::vec3 s, glm::vec3 a, glm::vec3 b, glm::ve
 // génère la mesh du terrain en procédant deux triangles par deux triangles (ou carré par carré)
 void    HeightMap::generateMesh()
 {
-    for (unsigned int i = 0; i < m_height; i++)
-        for (unsigned int j = 0; j < m_width; j++)
+    m_vertices.reserve(m_height * m_width * 3);
+    m_indices.reserve(m_height * m_width * 3 * 2);
+    m_normals.reserve(m_height * m_width * 3 * 2);
+    m_uvs.reserve(m_height * m_width * 2);
+
+    for (unsigned int i = 0; i < m_height - 1; i++)
+        for (unsigned int j = 0; j < m_width - 1; j++)
         {
-            float scaleZ = 1000000;
+	    float scaleZ = 1000000;
             glm::vec3 p1 = glm::vec3(static_cast<float>(m_points[i * m_width + j].x),
-                    static_cast<float>(m_points[i * m_width + j].y),
-                    static_cast<float>(m_points[i * m_width + j].z) * scaleZ);
-            glm::vec3 p2 = glm::vec3(static_cast<float>(m_points[i * m_width + j + 1].x),
-                    static_cast<float>(m_points[i * m_width + j + 1].y),
-                    static_cast<float>(m_points[i * m_width + j + 1].z) * scaleZ);
-            glm::vec3 p3 = glm::vec3(static_cast<float>(m_points[(i + 1) * m_width + j].x),
-                    static_cast<float>(m_points[(i + 1) * m_width + j].y),
-                    static_cast<float>(m_points[(i + 1) * m_width + j].z) * scaleZ);
-            glm::vec3 p4 = glm::vec3(static_cast<float>(m_points[(i + 1) * m_width + j + 1].x),
-                    static_cast<float>(m_points[(i + 1) * m_width + j + 1].y),
-                    static_cast<float>(m_points[(i + 1) * m_width + j + 1].z) * scaleZ);
+                                     static_cast<float>(m_points[i * m_width + j].y),
+                                     static_cast<float>(m_points[i * m_width + j].z) * scaleZ);
+	    glm::vec3 p2 = glm::vec3(static_cast<float>(m_points[i * m_width + j + 1].x),
+                                     static_cast<float>(m_points[i * m_width + j + 1].y),
+                                     static_cast<float>(m_points[i * m_width + j + 1].z) * scaleZ);
+	    glm::vec3 p3 = glm::vec3(static_cast<float>(m_points[(i + 1) * m_width + j].x),
+                                     static_cast<float>(m_points[(i + 1) * m_width + j].y),
+                                     static_cast<float>(m_points[(i + 1) * m_width + j].z) * scaleZ);
+	    glm::vec3 p4 = glm::vec3(static_cast<float>(m_points[(i + 1) * m_width + j + 1].x),
+                                     static_cast<float>(m_points[(i + 1) * m_width + j + 1].y),
+                                     static_cast<float>(m_points[(i + 1) * m_width + j + 1].z) * scaleZ);
 
             m_vertices.push_back(p1.x);
             m_vertices.push_back(p1.y);
             m_vertices.push_back(p1.z);
 
-            m_vertices.push_back(p2.x);
-            m_vertices.push_back(p2.y);
-            m_vertices.push_back(p2.z);
+	    m_uvs.push_back((float)j/(float)m_width);
+	    m_uvs.push_back((float)i/(float)m_height);
 
-            m_vertices.push_back(p3.x);
-            m_vertices.push_back(p3.y);
-            m_vertices.push_back(p3.z);
+	    if (j == m_width - 2)
+	    {
+		m_vertices.push_back(p2.x);
+            	m_vertices.push_back(p2.y);
+            	m_vertices.push_back(p2.z);
+		m_uvs.push_back((float)(j + 1)/(float)m_width);
+	        m_uvs.push_back((float)i/(float)m_height);
+	    }
+	    if (i == m_height - 2)
+	    {
+		m_vertices.push_back(p3.x);
+		m_vertices.push_back(p3.y);
+		m_vertices.push_back(p3.z);
+		m_uvs.push_back((float)j/(float)m_width);
+	        m_uvs.push_back((float)(i + 1)/(float)m_height);
+		if (j == m_width - 2)
+	    	{
+	    	    m_vertices.push_back(p4.x);
+                    m_vertices.push_back(p4.y);
+                    m_vertices.push_back(p4.z);
+	    	    m_uvs.push_back((float)(j + 1)/(float)m_width);
+	    	    m_uvs.push_back((float)(i + 1)/(float)m_height);
+	    	}
+	    }
 
-            m_vertices.push_back(p4.x);
-            m_vertices.push_back(p4.y);
-            m_vertices.push_back(p4.z);
 
-            m_indices.push_back(j + i * m_width);
-            m_indices.push_back(j + 1 + i * m_width);
-            m_indices.push_back(j + 2 + i * m_width);
+            m_indices.push_back(j + i * m_width); //p1
+            m_indices.push_back(j + 1 + i * m_width); //p2
+            m_indices.push_back(j + (i + 1) * m_width); //p3
 
-            m_indices.push_back(j + i * m_width);
-            m_indices.push_back(j + 3 + i * m_width);
-            m_indices.push_back(j + 2 + i * m_width);
+            m_indices.push_back(j + (i + 1) * m_width); //p3
+            m_indices.push_back(j + 1 + (i + 1) * m_width); //p4
+            m_indices.push_back(j + 1 + i * m_width); //p2
 
-            glm::vec3 result = glm::cross(p2 -p1, p3 - p1);
+	    glm::vec3 result = glm::cross(p2 - p1, p3 - p1);
 
             m_normals.push_back(result.x);
             m_normals.push_back(result.y);
             m_normals.push_back(result.z);
 
-            result = glm::cross(p2 - p1, p4 - p1);
+            result = glm::cross(p4 - p3, p2 - p3);
 
             m_normals.push_back(result.x);
             m_normals.push_back(result.y);
             m_normals.push_back(result.z);
-        }
+       }
 }
 
 }

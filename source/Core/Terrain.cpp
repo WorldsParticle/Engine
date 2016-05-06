@@ -17,10 +17,19 @@ namespace   Engine
 	{
 		this->m_scene->add(this);
 
-		const auto& myShader = shaderprograms.get(DEFAULT_SHADER_PROGRAM);
+		//shaderprograms
+		const auto& myShader = shaderprograms.get(TEXTURE_SHADER_PROGRAM);
 
 		Material* myMaterial = new Material(myShader);
-        m_mesh = new Mesh(myMaterial);
+		myMaterial->setTexture(new Texture("BuohNyo2.jpg"));
+		//TODO: reflechir a comment mettre plusieurs textures selon la hauteur -> shader specifique?
+		m_mesh = new Mesh(myMaterial);
+
+		m_mesh->setPositions(getVertex());
+		m_mesh->setNormals(getNormals());
+		m_mesh->setIndices(getIndices());
+		m_mesh->setUVs(getUVs());
+		m_mesh->update();
 
 //		float v[] = {
 //		     0.0f,  0.0f, 0.0f, // Vertex 1 (X, Y,Z)
@@ -41,11 +50,6 @@ namespace   Engine
 //		_mesh->setPositions(vertices);
 //		//_mesh->setNormals(vertices);
 //		//_mesh->setIndices(indices);
-
-        m_mesh->setPositions(getVertex());
-        m_mesh->setNormals(getNormals());
-        m_mesh->setIndices(getIndices());
-        m_mesh->update();
 	}
 	//const Resource  &get(const Key &key) const;
 //ShaderProgramLibrary : public Library<ShaderProgramName, std::shared_ptr<ShaderProgram>>
