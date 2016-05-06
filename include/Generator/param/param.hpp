@@ -34,17 +34,17 @@ public:
     inline paramType type()
     { return m_type; }
 
-    inline void setName(const std::string &name)
-    { m_name = name; }
+    inline void setName(const std::string &namee)
+    { m_name = namee; }
 
 protected:
     ///
     /// \brief Param default constructor
     /// \param name
     ///
-    Param(paramType type, const std::string &name = "") :
-        m_type(type),
-        m_name(name)
+    Param(paramType typee, const std::string &namee = "") :
+        m_type(typee),
+        m_name(namee)
     {}
 
     paramType   m_type;

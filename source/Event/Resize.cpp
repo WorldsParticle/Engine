@@ -21,9 +21,9 @@ namespace   Engine
 {
     namespace   Event
     {
-        Resize::Resize(const glm::ivec2 &size) :
+        Resize::Resize(const glm::ivec2 &s) :
             Event(Type::RESIZE),
-            m_size(size)
+            m_size(s)
         {
 
         }

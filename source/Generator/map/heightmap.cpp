@@ -11,7 +11,7 @@ namespace map
 {
 
 
-HeightMap::HeightMap(unsigned int width, unsigned int height) : m_width(width), m_height(height), m_points(), m_vertices(), m_indices(), m_normals()
+HeightMap::HeightMap(unsigned int width, unsigned int height) : m_width(width), m_height(height), m_points(), m_vertices(), m_indices(), m_normals(), m_uvs()
 {
     m_points.reserve(m_width * m_height);
     m_vertices.reserve(m_height * m_width * 3);
@@ -67,31 +67,31 @@ void    HeightMap::generateMesh()
             m_vertices.push_back(p1.y);
             m_vertices.push_back(p1.z);
 
-	    m_uvs.push_back((float)j/(float)m_width);
-	    m_uvs.push_back((float)i/(float)m_height);
+        m_uvs.push_back(static_cast<float>(j)/static_cast<float>(m_width));
+        m_uvs.push_back(static_cast<float>(i)/static_cast<float>(m_height));
 
 	    if (j == m_width - 2)
 	    {
 		m_vertices.push_back(p2.x);
             	m_vertices.push_back(p2.y);
             	m_vertices.push_back(p2.z);
-		m_uvs.push_back((float)(j + 1)/(float)m_width);
-	        m_uvs.push_back((float)i/(float)m_height);
+        m_uvs.push_back(static_cast<float>(j + 1)/static_cast<float>(m_width));
+            m_uvs.push_back(static_cast<float>(i)/static_cast<float>(m_height));
 	    }
 	    if (i == m_height - 2)
 	    {
 		m_vertices.push_back(p3.x);
 		m_vertices.push_back(p3.y);
 		m_vertices.push_back(p3.z);
-		m_uvs.push_back((float)j/(float)m_width);
-	        m_uvs.push_back((float)(i + 1)/(float)m_height);
+        m_uvs.push_back(static_cast<float>(j)/static_cast<float>(m_width));
+            m_uvs.push_back(static_cast<float>(i + 1)/static_cast<float>(m_height));
 		if (j == m_width - 2)
 	    	{
 	    	    m_vertices.push_back(p4.x);
                     m_vertices.push_back(p4.y);
                     m_vertices.push_back(p4.z);
-	    	    m_uvs.push_back((float)(j + 1)/(float)m_width);
-	    	    m_uvs.push_back((float)(i + 1)/(float)m_height);
+                m_uvs.push_back(static_cast<float>(j + 1)/static_cast<float>(m_width));
+                m_uvs.push_back(static_cast<float>(i + 1)/static_cast<float>(m_height));
 	    	}
 	    }
 

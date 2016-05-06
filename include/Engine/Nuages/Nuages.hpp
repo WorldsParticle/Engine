@@ -3,7 +3,7 @@
 #include    <list>
 
 #include    "Engine/Configuration.hpp"
-#include    "Engine/Core/Entity.hpp"
+#include    "Engine/Core/Object.hpp"
 #include    "Engine/Core/ShaderProgram.hpp"
 
 namespace   Engine
@@ -16,7 +16,7 @@ namespace   Engine
 	///
 	/// \brief This class is used to represent a physical entity.
 	///
-    class ENGINE_EXPORTS Nuages : public Entity
+    class ENGINE_EXPORTS Nuages : public Object
 	{
 	public:
 		///

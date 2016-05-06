@@ -4,7 +4,7 @@
 
 #include    <glm/glm.hpp>
 #include    "Engine/Configuration.hpp"
-#include    "Engine/Core/Entity.hpp"
+#include    "Engine/Core/Object.hpp"
 #include    "Engine/Core/ShaderProgram.hpp"
 
 namespace   Engine
@@ -17,7 +17,7 @@ namespace   Engine
 	///
 	/// \brief This class is used to represent a physical entity.
 	///
-    class ENGINE_EXPORTS LightningBolt : public Entity
+    class ENGINE_EXPORTS LightningBolt : public Object
 	{
 	public:
 		///

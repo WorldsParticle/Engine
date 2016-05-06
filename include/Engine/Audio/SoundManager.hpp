@@ -25,6 +25,12 @@ public:
     ~SoundManager();
 
 public:
+
+    SoundManager(const SoundManager &other) : _error (), _device(nullptr), _context(nullptr) { if (&other != &other) {} /* TODO */}
+    SoundManager(SoundManager &&other) noexcept : _error (), _device(nullptr), _context(nullptr) {if (&other != &other) {} /* TODO */}
+    SoundManager& operator=(const SoundManager &other) {if (&other != &other) {} /* TODO */ return *this;}
+    SoundManager& operator=(SoundManager &&other) noexcept {if (&other != &other) {} /* TODO */ return *this;}
+
     void    initAudio();
     void    createBuffers();
     void    createSources();

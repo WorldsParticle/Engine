@@ -45,7 +45,7 @@ std::vector<Point *>    ZoningStep::generateRandomSites()
 {
 
     std::vector<Point *> sites;
-    for (unsigned int i = 0; i < m_zoneNumber.value(); ++i)
+    for (int i = 0; i < m_zoneNumber.value(); ++i)
         sites.push_back(new Point(DRAND(0, m_map->xMax()),
                                   DRAND(0, m_map->yMax())));
     return sites;

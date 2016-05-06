@@ -11,7 +11,7 @@ using namespace     log4cpp;
 namespace   Engine
 {
     LightningBolt::LightningBolt(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms) :
-        Entity(scene),
+        Object(scene),
         m_mesh(nullptr),
         m_vertices(),
         m_indices(),
@@ -20,8 +20,6 @@ namespace   Engine
         m_points(),
         m_displacementFactors()
 	{
-		this->m_scene->add(this);
-
        // const auto& myShader = shaderprograms.get(LightningBolt_SHADER_PROGRAM);
 
         Material* myMaterial = new LightningBoltMaterial(_shader);
@@ -31,6 +29,8 @@ namespace   Engine
         m_mesh->setNormals(getNormals());
         m_mesh->setIndices(getIndices());
         m_mesh->update();
+
+        this->m_meshes.push_back(m_mesh);
 	}
 	//const Resource  &get(const Key &key) const;
 //ShaderProgramLibrary : public Library<ShaderProgramName, std::shared_ptr<ShaderProgram>>

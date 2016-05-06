@@ -14,8 +14,8 @@ public:
     /// \brief IntValue default constructor
     /// \param name
     ///
-    IntValue(const std::string &name = "") :
-        Param(intvalue, name),
+    IntValue(const std::string &namee = "") :
+        Param(intvalue, namee),
         m_minValue(0),
         m_maxValue(100),
         m_value(0)
@@ -29,20 +29,20 @@ public:
     ///
     /// \brief setMinValue
     ///
-    inline  void    setMinValue(int minValue)
-    { m_minValue = minValue; }
+    inline  void    setMinValue(int minValuee)
+    { m_minValue = minValuee; }
 
     ///
     /// \brief setMaxValue
     ///
-    inline  void    setMaxValue(int maxValue)
-    { m_maxValue = maxValue; }
+    inline  void    setMaxValue(int maxValuee)
+    { m_maxValue = maxValuee; }
 
     ///
     /// \brief setValue
     ///
-    inline  void    setValue(int value)
-    { m_value = value; }
+    inline  void    setValue(int valuee)
+    { m_value = valuee; }
 
     ///
     /// \brief minValue getter

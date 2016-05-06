@@ -152,16 +152,6 @@ namespace Engine
 			///
 			void        add(Terrain *terrain);
 
-            ///
-            /// \brief adds a cloud plane to the spatial graph.
-            ///
-            void        add(Nuages *nuages);
-
-            ///
-            /// \brief adds a lightning bolt to the spatial graph.
-            ///
-            void        add(LightningBolt *lightningbolt);
-
         public:
 
             ///
