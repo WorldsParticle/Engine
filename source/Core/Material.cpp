@@ -57,6 +57,10 @@ namespace   Engine
     }
 
 
+    void Material::setTexture(Texture *texture)
+    {
+	m_texture = texture;
+    }
 
     const std::string &
     Material::getName(void) const

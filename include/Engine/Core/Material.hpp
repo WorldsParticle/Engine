@@ -101,6 +101,11 @@ namespace   Engine
 
         public:
             ///
+            /// \brief Setter for the texture attribute.
+            ///
+            void    setTexture(Texture *texture);
+
+            ///
             /// \brief Setter for the name attribute.
             ///
             void    setName(const std::string &name);
