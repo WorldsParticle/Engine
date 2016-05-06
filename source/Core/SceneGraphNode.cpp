@@ -45,7 +45,7 @@ namespace   Engine
 
     SceneGraphNode::SceneGraphNode(const AssimpScene &assimpScene,
             const aiNode *assimpNode, SceneGraph *scenegraph,
-            SceneGraphNode *parent) :
+            ShaderProgramLibrary &shaderprograms, SceneGraphNode *parent) :
         m_name(assimpNode->mName.C_Str()),
         m_parent(parent),
         m_childrens(),
@@ -62,7 +62,7 @@ namespace   Engine
             const aiLight   *light = nullptr;
             if ((camera = assimpScene.getCamera(this->m_name)) != nullptr)
             {
-                this->m_entity = new FreeflyCamera(this);
+                this->m_entity = new FreeflyCamera(this, shaderprograms);
             }
             else if ((light = assimpScene.getLight(this->m_name)) != nullptr)
             {
@@ -79,7 +79,7 @@ namespace   Engine
         for (unsigned int i = 0 ; i < assimpNode->mNumChildren ; ++i)
         {
             SceneGraphNode  *child = new SceneGraphNode(assimpScene,
-                    assimpNode->mChildren[i], scenegraph, this);
+                    assimpNode->mChildren[i], scenegraph, shaderprograms, this);
             this->m_childrens.push_back(child);
         }
     }

@@ -23,12 +23,14 @@
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Entity.hpp"
+#include    "Engine/Core/Framebuffer.hpp"
 
 
 namespace   Engine
 {
 
     class   SceneGraphNode;
+    class   ShaderProgramLibrary;
 
     ///
     /// \brief This class is used to store information about a basic camera in a 3D world.
@@ -60,12 +62,12 @@ namespace   Engine
             ///
             /// \brief Default constructor
             ///
-            Camera(SceneGraphNode *node);
+            Camera(SceneGraphNode *node, const ShaderProgramLibrary &shaderprograms);
 
             ///
             /// \brief Construct a camera from an assimp camera.
             ///
-            Camera(const aiCamera *assimpCamera, SceneGraphNode *node); // TODO GSL NOT NULL
+            Camera(const aiCamera *assimpCamera, SceneGraphNode *node, const ShaderProgramLibrary &shaderprograms); // TODO GSL NOT NULL
 
             ///
             /// \brief Copy constructor.
@@ -104,6 +106,20 @@ namespace   Engine
             ///
             virtual const glm::mat4     &getView(void) const = 0;
 
+            ///
+            /// \brief Bind a framebuffer of the size of the camera so the scene will render there and we can use post effects after that
+            ///
+	    void bindFramebuffer(void);
+
+            ///
+            /// \brief unbind the framebuffer
+            ///
+	    void unbindFramebuffer(void);
+
+            ///
+            /// \brief draw the framebuffer
+            ///
+	    void drawFramebuffer(void);
         public:
 
             ///
@@ -149,5 +165,10 @@ namespace   Engine
             /// \brief The size used for the glviewport.
             ///
             glm::ivec2  m_size;
+
+            ///
+            /// \brief A framebuffer with the same size than the camera
+            ///
+	    std::shared_ptr<Framebuffer> m_framebuffer;
     };
 }

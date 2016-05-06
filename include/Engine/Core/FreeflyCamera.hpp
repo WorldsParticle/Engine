@@ -29,6 +29,7 @@ namespace   Engine
         class       KeyPressed;
     }
     class   KeyPressed;
+    class   ShaderProgramLibrary;
 
     ///
     /// \brief A basic implementation of a freefly camera.
@@ -39,7 +40,7 @@ namespace   Engine
             ///
             /// \brief Default constructor.
             ///
-            FreeflyCamera(SceneGraphNode *node);
+            FreeflyCamera(SceneGraphNode *node, ShaderProgramLibrary &shaderprograms);
 
             ///
             /// \brief Destructor.

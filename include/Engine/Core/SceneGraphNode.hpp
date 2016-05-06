@@ -31,6 +31,7 @@ namespace   Engine
     class       SceneGraph;
     class       Scene;
     class       AssimpScene;
+    class	ShaderProgramLibrary;
 
     ///
     /// \brief A Node of the scene graph.
@@ -50,6 +51,7 @@ namespace   Engine
             ///
             SceneGraphNode(const AssimpScene &assimpScene,
                     const aiNode *assimpNode, SceneGraph *scenegraph,
+		    ShaderProgramLibrary &shaderprograms,
                     SceneGraphNode *parent = nullptr);
 
             ///

@@ -16,14 +16,17 @@
 //
 
 #include    <glm/gtc/matrix_transform.hpp>
+#include    <GL/glew.h>
+#include    <log4cpp/Category.hh>
 
 #include    "Engine/Core/Camera.hpp"
 #include    "Engine/Core/SceneGraphNode.hpp"
 
+using namespace     log4cpp;
+
 namespace Engine
 {
-
-    Camera::Camera(SceneGraphNode *node) :
+    Camera::Camera(SceneGraphNode *node, const ShaderProgramLibrary &shaderprograms) :
         Entity(node),
         m_clippingPlane{0.1f, 100.0f},
         m_aspect(4.0f/3.0f),
@@ -31,12 +34,12 @@ namespace Engine
         m_up(glm::vec3(0.0f, 0.0f, 1.0f)),
         m_lookat(glm::vec3(0.0f, 0.0f, 0.0f)),
         m_position(glm::vec3(0.0f, -10.0f, 5.0f)),
-        m_size(glm::ivec2(1024, 768))
+        m_size(glm::ivec2(1024, 768)),
+	m_framebuffer(std::make_shared<Framebuffer>(shaderprograms, m_size))
     {
-        // nothing to do.
     }
 
-    Camera::Camera(const aiCamera *assimpCamera, SceneGraphNode *node) :
+    Camera::Camera(const aiCamera *assimpCamera, SceneGraphNode *node, const ShaderProgramLibrary &shaderprograms) :
         Entity(node),
         m_clippingPlane{assimpCamera->mClipPlaneNear, assimpCamera->mClipPlaneFar},
         m_aspect(assimpCamera->mAspect),
@@ -44,7 +47,8 @@ namespace Engine
         m_up(0.0f, 1.0f, 0.0f),
         m_lookat(0.0f),
         m_position(0.0f),
-        m_size(1024, 768)
+        m_size(1024, 768),
+	m_framebuffer(std::make_shared<Framebuffer>(shaderprograms, m_size))
     {
         this->m_node->setName(assimpCamera->mName.C_Str());
         auto convert = [&](const aiVector3D &v) {return glm::vec3(v.x, v.y, v.z);};
@@ -55,7 +59,6 @@ namespace Engine
 
     Camera::~Camera(void)
     {
-        // nothing to do.
     }
 
 
@@ -65,4 +68,18 @@ namespace Engine
          return this->m_size;
     }
 
+    void Camera::bindFramebuffer(void)
+    {
+	m_framebuffer->bind();
+    }
+
+    void Camera::unbindFramebuffer(void)
+    {
+	m_framebuffer->unbind();
+    }
+
+    void Camera::drawFramebuffer(void)
+    {
+	m_framebuffer->draw();
+    }
 }

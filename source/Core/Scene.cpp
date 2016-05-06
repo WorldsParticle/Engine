@@ -38,7 +38,7 @@ namespace Engine
         m_meshes(),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
-        m_scenegraph(this)
+        m_scenegraph(this, m_shaderprograms)
     {
         // nothing to do.
     }
@@ -53,7 +53,7 @@ namespace Engine
         m_meshes(this->m_materials, s.getMeshes(), s.getMeshesNumber()),
         m_renderer(this),
         m_spatialgraph(this->m_renderer, this),
-        m_scenegraph(s, this)
+        m_scenegraph(s, this, m_shaderprograms)
     {
         // nothing to do.
     }

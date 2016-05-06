@@ -31,8 +31,8 @@ using namespace     log4cpp;
 
 namespace   Engine
 {
-    PerspectiveCamera::PerspectiveCamera(SceneGraphNode *node) :
-        Camera(node),
+    PerspectiveCamera::PerspectiveCamera(SceneGraphNode *node, ShaderProgramLibrary &shaderprograms) :
+        Camera(node, shaderprograms),
         m_projection(glm::perspective(this->m_fov, this->m_aspect,
                 this->m_clippingPlane.near, this->m_clippingPlane.far)),
         m_view(glm::lookAt(this->m_position, this->m_lookat, this->m_up))
@@ -43,8 +43,8 @@ namespace   Engine
     }
 
     PerspectiveCamera::PerspectiveCamera(const aiCamera *assimpCamera,
-            SceneGraphNode *node) :
-        Camera(assimpCamera, node),
+            SceneGraphNode *node, ShaderProgramLibrary &shaderprograms) :
+        Camera(assimpCamera, node, shaderprograms),
         m_projection(glm::mat4(1)),
         m_view(glm::mat4(1))
     {
@@ -106,7 +106,8 @@ namespace   Engine
             this->m_size = resize_event->size();
             this->m_aspect = width / height;
             this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
-                    this->m_clippingPlane.near, this->m_clippingPlane.far);
+            this->m_clippingPlane.near, this->m_clippingPlane.far);
+	    //TODO koziar_c resize framebuffer
         }
     }
 }

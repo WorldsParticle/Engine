@@ -38,8 +38,8 @@ using namespace     log4cpp;
 namespace   Engine
 {
 
-    FreeflyCamera::FreeflyCamera(SceneGraphNode *node) :
-        PerspectiveCamera(node),
+    FreeflyCamera::FreeflyCamera(SceneGraphNode *node, ShaderProgramLibrary &shaderprograms) :
+        PerspectiveCamera(node, shaderprograms),
         m_right(0.0f, 0.0f, 0.0f),
         m_look(0.0f, 1.0f, 0.0f),
         m_speed(0.5f),

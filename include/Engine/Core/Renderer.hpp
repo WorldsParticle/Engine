@@ -20,6 +20,7 @@
 #include    <list>
 
 #include    "Engine/Configuration.hpp"
+#include    "Engine/Core/ShaderProgramLibrary.hpp"
 
 namespace   Engine
 {
@@ -101,21 +102,21 @@ namespace   Engine
             ///
             /// \brief The scene in which the Renderer act.
             ///
-            Scene   *m_scene;
+            Scene				    *m_scene;
 
             ///
             /// \brief The list of object needed to be rendered with the render method.
             ///
             /// TODO container type
             ///
-            std::list<Object *>     m_objects;
+            std::list<Object *>			    m_objects;
 
             ///
             /// \brief The list of cameras needed to be rendered with the render method.
             ///
             /// TODO container type
             ///
-            std::list<Camera *>     m_cameras;
+            std::list<Camera *>			    m_cameras;
 
 			///
 			/// \brief The list of lights needed to be rendered with the light method.
@@ -130,6 +131,5 @@ namespace   Engine
 			/// TODO container type
 			///
 			std::list<Terrain *>      m_terrains;
-
     };
 }

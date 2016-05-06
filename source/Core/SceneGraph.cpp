@@ -21,29 +21,32 @@
 #include    "Engine/Core/SceneGraphNode.hpp"
 #include    "Engine/Core/AssimpScene.hpp"
 #include    "Engine/Core/FreeflyCamera.hpp"
+#include    "Engine/Core/ShaderProgramLibrary.hpp"
 
 using namespace     log4cpp;
 
 namespace   Engine
 {
-    SceneGraph::SceneGraph(Scene *scene) :
+    SceneGraph::SceneGraph(Scene *scene, ShaderProgramLibrary &shaderprograms) :
         m_scene(scene),
-        m_rootNode(nullptr)
+        m_rootNode(nullptr),
+	m_shaderprograms(shaderprograms)
     {
         // nothing to do.
     }
 
     /// TODO GSL NOT NULL
-    SceneGraph::SceneGraph(const AssimpScene &s, Scene *scene) :
+    SceneGraph::SceneGraph(const AssimpScene &s, Scene *scene, ShaderProgramLibrary &shaderprograms) :
         m_scene(scene),
-        m_rootNode(new SceneGraphNode(s, s.getRootNode(), this))
+        m_rootNode(new SceneGraphNode(s, s.getRootNode(), this, shaderprograms)),
+	m_shaderprograms(shaderprograms)
     {
         //#warning TODO temporary
         if (s.getCameraNumber() == 0)
         {
             SceneGraphNode  *node = new SceneGraphNode(this);
             node->setName("DefaultCamera");
-            Entity *camera = new FreeflyCamera(node);
+            Entity *camera = new FreeflyCamera(node, shaderprograms);
             node->setEntity(camera);
             this->m_rootNode->addChildren(node);
         }
@@ -53,14 +56,16 @@ namespace   Engine
 
     SceneGraph::SceneGraph(const SceneGraph &other) :
         m_scene(other.m_scene),
-        m_rootNode(new SceneGraphNode(*other.m_rootNode))
+        m_rootNode(new SceneGraphNode(*other.m_rootNode)),
+	m_shaderprograms(other.m_shaderprograms)
     {
         // nothing to do.
     }
 
     SceneGraph::SceneGraph(SceneGraph &&other) noexcept :
         m_scene(other.m_scene),
-        m_rootNode(other.m_rootNode)
+        m_rootNode(other.m_rootNode),
+	m_shaderprograms(other.m_shaderprograms)
     {
         other.m_rootNode = nullptr;
     }
@@ -77,6 +82,7 @@ namespace   Engine
     {
         this->m_scene = other.m_scene;
         this->m_rootNode = new SceneGraphNode(*other.m_rootNode);
+	this->m_shaderprograms = other.m_shaderprograms;
         return *this;
     }
 
@@ -86,6 +92,7 @@ namespace   Engine
         this->m_scene = other.m_scene;
         this->m_rootNode = other.m_rootNode;
         other.m_rootNode = nullptr;
+	this->m_shaderprograms = other.m_shaderprograms;
         return *this;
     }
 

@@ -27,6 +27,7 @@ namespace   Engine
         class       Event;
     }
 
+    class ShaderProgramLibrary;
     ///
     /// \brief This class defined a perspective camera. This class implement the abstract class Camera.
     ///
@@ -38,12 +39,12 @@ namespace   Engine
             ///
             /// \brief Default constructor.
             ///
-            PerspectiveCamera(SceneGraphNode *node);
+            PerspectiveCamera(SceneGraphNode *node, ShaderProgramLibrary &shaderprograms);
 
             ///
             /// \brief Construct a perspective camera from an assimp camera.
             ///
-            PerspectiveCamera(const aiCamera *assimpCamera, SceneGraphNode *node);
+            PerspectiveCamera(const aiCamera *assimpCamera, SceneGraphNode *node, ShaderProgramLibrary &shaderprograms);
 
             ///
             /// \brief Copy constructor.

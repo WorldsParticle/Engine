@@ -16,7 +16,6 @@
 //
 
 #include    <GL/glew.h>
-#include    <log4cpp/Category.hh>
 
 #include    "Engine/Core/Renderer.hpp"
 #include    "Engine/Core/Object.hpp"
@@ -25,8 +24,7 @@
 #include    "Engine/Core/Terrain.hpp"
 #include    "Engine/Core/Transform.hpp"
 #include    "Engine/Core/Mesh.hpp"
-
-using namespace     log4cpp;
+#include    "Engine/Core/ArrayObject.hpp"
 
 namespace   Engine
 {
@@ -35,9 +33,8 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-		m_terrains()
+    	m_terrains()
     {
-
     }
 
     Renderer::Renderer(const Renderer &other) :
@@ -45,61 +42,55 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-		m_terrains()
+    	m_terrains()
 	{
-
-    }
+	}
 
     Renderer::Renderer(Renderer &&other) noexcept :
         m_scene(std::move(other.m_scene)),
         m_objects(),
         m_cameras(),
         m_lights(),
-		m_terrains()
+	m_terrains()
 	{
-
-    }
+	}
 
     Renderer::~Renderer(void) noexcept
-    {
-
-    }
-
-
+	{
+	}
 
     Renderer &
-    Renderer::operator=(const Renderer &other)
-    {
-        this->m_scene = other.m_scene;
-        return *this;
-    }
+	Renderer::operator=(const Renderer &other)
+	{
+	    this->m_scene = other.m_scene;
+	    return *this;
+	}
 
     Renderer &
-    Renderer::operator=(Renderer &&other) noexcept
-    {
-        this->m_scene = std::move(other.m_scene);
-        return *this;
-    }
-
-
+	Renderer::operator=(Renderer &&other) noexcept
+	{
+	    this->m_scene = std::move(other.m_scene);
+	    return *this;
+	}
 
     void
-    Renderer::add(Object *object)
-    {
-        //Category &root = Category::getRoot();
+	Renderer::add(Object *object)
+	{
+	    //Category &root = Category::getRoot();
 
-        //root << Priority::DEBUG << "Renderer - add object()" << object->getName();
-        this->m_objects.push_back(object);
-    }
+	    //root << Priority::DEBUG << "Renderer - add object()" << object->getName();
+	    this->m_objects.push_back(object);
+	}
 
     void
-    Renderer::add(Camera *camera)
-    {
-        //Category &root = Category::getRoot();
+	Renderer::add(Camera *camera)
+	{
+	    //Category& root = Category::getRoot();
+	    //const glm::ivec2 &size = camera->size();
 
-        //root << Priority::DEBUG << "Renderer - add camera()" << camera->getName();
-        this->m_cameras.push_back(camera);
-    }
+	    //root << Priority::DEBUG << "Renderer - add camera()" << camera->getName();
+	    this->m_cameras.push_back(camera);
+	}
 
 	void
 		Renderer::add(Light *light)
@@ -120,35 +111,38 @@ namespace   Engine
 	}
 
 
-
     void
-    Renderer::render(void)
-    {
-        glEnable(GL_DEPTH_TEST);
-        for (Camera *camera : this->m_cameras)
-        {
-            const glm::mat4 &projection = camera->getProjection();
-            const glm::mat4 &view = camera->getView();
+	Renderer::render(void)
+	{
+	    for (Camera *camera : this->m_cameras)
+	    {
+		const glm::mat4 &projection = camera->getProjection();
+		const glm::mat4 &view = camera->getView();
+		// Bind to framebuffer and draw to color texture as we normally would.
+		camera->bindFramebuffer();
+		glClearColor(155.0f / 255.0f , 155.0f / 255.0f, 155.0f / 255.0f, 1.0);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glEnable(GL_DEPTH_TEST);
 
-            glClearColor(155.0f / 255.0f , 155.0f / 255.0f, 155.0f / 255.0f, 1.0);
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-            const glm::ivec2 &size = camera->size();
-            glViewport(0, 0, size.x, size.y);
+		const glm::ivec2 &size = camera->size();
+		glViewport(0, 0, size.x, size.y);
 
-            for (Object *object : this->m_objects)
-            {
-                const glm::mat4 &model = object->getTransform().getMatrix();
-                const std::list<Mesh *>     &meshes = object->getMeshes();
-                for (Mesh *part : meshes)
-                {
-                    part->draw(model, view, projection);
-                }
-            }
+		for (Object *object : this->m_objects)
+		{
+		    const glm::mat4 &model = object->getTransform().getMatrix();
+		    const std::list<Mesh *> &meshes = object->getMeshes();
+		    for (Mesh *part : meshes)
+		    {
+			part->draw(model, view, projection);
+		    }
+		}
+		camera->unbindFramebuffer();
+		camera->drawFramebuffer();
 			//TODO lefebv_z : render terrain
-        }
-        this->m_cameras.clear();
-        this->m_objects.clear();
-		this->m_lights.clear();
-		this->m_terrains.clear();
-    }
+	    }
+	    this->m_cameras.clear();
+	    this->m_objects.clear();
+	    this->m_lights.clear();
+	    this->m_terrains.clear();
+	}
 }
