@@ -41,7 +41,7 @@ namespace   Engine
 
         PropertyConfigurator::configure(RESOURCES_PATH "/log4cpp.conf");
         Category& root = Category::getRoot();
-        root << Priority::INFO << "Lancement engine :";
+        root << Priority::INFO << "Engine launch :";
         root << Priority::INFO << "\t version : " PROJECT_VERSION_FULL;
 
         glewExperimental = GL_TRUE;
@@ -151,12 +151,8 @@ namespace   Engine
     void
     Core::load(const std::string &filename)
     {
-        // TODO GSL OWNER && NOT NULL
+        // TODO GSL OWNER
         Scene *test = this->m_importer.import(filename);
-//        if (!test)
-//        {
-//            this->m_importer.GetErrorString();
-//        }
 
 //        Terrain should not be added there
 //        std::cout << "ready to add terrain..." << std::endl;
