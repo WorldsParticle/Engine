@@ -32,7 +32,7 @@ namespace   Engine
                 ///
                 /// \brief Default constructor.
                 ///
-                Resize(const glm::ivec2 &size);
+                Resize(const glm::ivec2 &s);
 
                 ///
                 /// \brief Destructor.

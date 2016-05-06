@@ -1,6 +1,6 @@
 #include "Generator/map/zone.hpp"
 
-namespace MAP
+namespace map
 {
 
 int Zone::indexMax = 0;
@@ -13,6 +13,7 @@ Zone::Zone(double x, double y) :
     border(false),
     elevation(0.0),
     moisture(0.0),
+    biome(),
     neighbors(),
     borders(),
     corners()

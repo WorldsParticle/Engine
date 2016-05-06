@@ -34,7 +34,7 @@ namespace   Engine
     ///
     /// \brief This class is used to represent a material which, applied to a mesh, determine how the mesh should be rendered.
     ///
-    class ENGINE_EXPORTS Material final
+    class ENGINE_EXPORTS Material
     {
         public:
             ///
@@ -79,7 +79,7 @@ namespace   Engine
             ///
             /// \brief Bind the material in the graphic pipeline.
             ///
-            void        bind(void) const;
+            virtual void        bind(void) const;
 
             ///
             /// \brief Unbind the material off the graphic pipeline.
@@ -101,13 +101,18 @@ namespace   Engine
 
         public:
             ///
+            /// \brief Setter for the texture attribute.
+            ///
+            void    setTexture(Texture *texture);
+
+            ///
             /// \brief Setter for the name attribute.
             ///
             void    setName(const std::string &name);
 
         private:
             ///
-            /// \brief The name of the material.
+            /// \brief The name of the material
             ///
             std::string     m_name;
 

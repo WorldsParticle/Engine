@@ -39,7 +39,11 @@ namespace   Engine
         {TEXTURE_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "texture.vert"}},
         {TEXTURE_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "texture.frag"}},
         {FRAMEBUFFER_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "framebuffer.vert"}},
-        {FRAMEBUFFER_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "framebuffer.frag"}}
+        {FRAMEBUFFER_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "framebuffer.frag"}},
+        {NUAGES_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "nuages.vert"}},
+        {NUAGES_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "nuages.frag"}},
+        {LIGHTNINGBOLT_VERTEX_SHADER, {Shader::Type::VERTEX_SHADER, "lightningbolt.vert"}},
+        {LIGHTNINGBOLT_FRAGMENT_SHADER, {Shader::Type::FRAGMENT_SHADER, "lightningbolt.frag"}}
     };
 
 }

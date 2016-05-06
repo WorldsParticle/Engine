@@ -4,11 +4,14 @@
 
 #include    "Engine/Configuration.hpp"
 #include    "Engine/Core/Entity.hpp"
+#include 	"Generator/map/heightmap.hpp"
 
 namespace   Engine
 {
 
 	class   Mesh;
+	class	ShaderProgramLibrary;
+	class	Scene;
 
 	///
 	/// \brief This class is used to represent a physical entity.
@@ -20,7 +23,7 @@ namespace   Engine
 		/// \brief Default constructor.
 		/// \param node the node related to the terrain.
 		///
-		Terrain(SceneGraphNode *node); // TODO GSL NOT NULL
+        Terrain(map::HeightMap &map, Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms); // TODO GSL NOT NULL
 
 		///
 		/// \brief Copy constructor.
@@ -61,6 +64,34 @@ namespace   Engine
 
 	public:
 
+        inline std::vector<float> const& getVertex()
+        { return m_heightmap.vertices(); }
+
+        inline std::vector<unsigned int> const& getIndices()
+        { return m_heightmap.indices(); }
+
+        inline std::vector<float> const& getNormals()
+        { return m_heightmap.normals(); }
+
+        inline std::vector<float> const& getUVs()
+        { return m_heightmap.UVs(); }
+
+        inline Mesh *mesh()
+        { return m_mesh; }
+
 	protected:
+
+	private:
+        map::HeightMap  &m_heightmap;
+
+        ///
+        /// \brief The mesh associated with the terrain.
+        ///
+        Mesh *          m_mesh; // TODO opti by not using a mesh
+
+        std::vector<float>          m_vertices;
+        std::vector<unsigned int>   m_indices;
+
+
 	};
 }

@@ -126,6 +126,10 @@ namespace Engine
             ///
             const Clock &clock(void) const;
 
+            ShaderProgramLibrary const&     getShaderPrograms() const{
+                return m_shaderprograms;
+            }
+
         public:
 
             ///
@@ -147,6 +151,16 @@ namespace Engine
 			/// \brief add a terrain in the spatial graph.
 			///
 			void        add(Terrain *terrain);
+
+            ///
+            /// \brief adds a cloud plane to the spatial graph.
+            ///
+            void        add(Nuages *nuages);
+
+            ///
+            /// \brief adds a lightning bolt to the spatial graph.
+            ///
+            void        add(LightningBolt *lightningbolt);
 
         public:
 

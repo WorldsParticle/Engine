@@ -30,6 +30,8 @@ namespace   Engine
     class   Object;
 	class   Light;
 	class   Terrain;
+    class   Nuages;
+    class   LightningBolt;
 
     ///
     /// \brief This class will be used to implement an occlusion culling algorithm.
@@ -102,6 +104,18 @@ namespace   Engine
 			///
 			void    add(Terrain *terrain);
 
+            ///
+            /// \brief This method add the nuages in the spatial graph,
+            /// it's used to reduce the rendering time.
+            ///
+            void    add(Nuages *nuages);
+
+            ///
+            /// \brief This method add the nuages in the spatial graph,
+            /// it's used to reduce the rendering time.
+            ///
+            void    add(LightningBolt *lightningbolt);
+
         protected:
             ///
             /// \brief The scene which the spatial graph act.
@@ -133,5 +147,15 @@ namespace   Engine
 			/// \brief The terrains existing in the scene.
 			///
 			std::list<Terrain *>      m_terrains;
+
+            ///
+            /// \brief The nuages existing in the scene.
+            ///
+            std::list<Nuages *>      m_nuages;
+
+            ///
+            /// \brief The lightning bolts existing in the scene.
+            ///
+            std::list<LightningBolt *>      m_lightningbolts;
 	};
 }

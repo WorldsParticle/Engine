@@ -1,32 +1,59 @@
-#ifndef GENERATOR_H
-#define GENERATOR_H
+#ifndef GENERATOR_MARIE_H
+#define GENERATOR_MARIE_H
 
-#include "generationstep.hpp"
+#include "steps/generationstep.hpp"
 #include <map>
+#include <list>
 
-namespace MAP
+
+#include "map/map.hpp"
+#include "steps/generationstep.hpp"
+
+namespace map
 {
-class Map;
+class MapGraph;
 }
 
-namespace GEN
+namespace gen
 {
 
+///
+/// \brief This class run a bunch of step whose fill the mapgraph
+/// for now it will juste launch one by one the generation steps which have been assigned (actually in a static way)
+///
 class Generator
 {
 public:
+
+    ///
+    /// \brief Default constructor.
+    ///
     Generator();
 
-    MAP::Map    *generate(double xMax, double yMax, unsigned int zoneNumber);
+    ///
+    /// \brief Executes the map generation steps.
+    ///
+    void run(map::MapGraph *map);
+
+    ///
+    /// \brief steps getter
+    /// \return
+    ///
+    inline const std::list<GenerationStep *>  &steps()
+    { return m_steps; }
+
+    ///
+    /// \brief stepFromName
+    /// \param name
+    /// \return step
+    ///
+    GenerationStep  *stepFromName(const std::string &name);
 
 protected:
-    MAP::Map        *_map;
-    GenerationStep  *_fillStep;
-    GenerationStep  *_shapeStep;
-    GenerationStep  *_elevateStep;
-    GenerationStep  *_riverStep;
-    GenerationStep  *_moistureStep;
-    GenerationStep  *_biomeStep;
+    ///
+    /// \brief steps which are run (in order)
+    ///
+    std::list<GenerationStep *> m_steps;
 };
 
 }
