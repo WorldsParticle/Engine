@@ -68,6 +68,12 @@ public:
     std::vector<float> const &normals()
     { return m_normals; }
 
+    ///
+    /// \brief UV buffer getter.
+    ///
+    std::vector<float> const &UVs()
+    { return m_uvs; }
+
 private:
 
     ///
@@ -99,6 +105,11 @@ private:
     /// \brief Heightmap's normals buffer.
     ///
     std::vector<float> m_normals;
+
+    ///
+    /// \brief Heightmap's normals buffer.
+    ///
+    std::vector<float> m_uvs;
 
 };
 

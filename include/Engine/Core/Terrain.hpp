@@ -74,6 +74,9 @@ namespace   Engine
         inline std::vector<float> const& getNormals()
         { return m_heightmap.normals(); }
 
+        inline std::vector<float> const& getUVs()
+        { return m_heightmap.UVs(); }
+
         inline Mesh *mesh()
         { return m_mesh; }
 
