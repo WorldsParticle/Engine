@@ -19,6 +19,8 @@
 #include    <log4cpp/Category.hh>
 #include    <log4cpp/PropertyConfigurator.hh>
 #include    <IL/il.h>
+#include    <stdexcept>
+#include    <sstream>
 
 #include    "Engine/Version.hpp"
 #include    "Engine/Configuration.hpp"
@@ -39,7 +41,7 @@ namespace   Engine
 
         PropertyConfigurator::configure(RESOURCES_PATH "/log4cpp.conf");
         Category& root = Category::getRoot();
-        root << Priority::INFO << "Lancement engine :";
+        root << Priority::INFO << "Engine launch :";
         root << Priority::INFO << "\t version : " PROJECT_VERSION_FULL;
 
         glewExperimental = GL_TRUE;
@@ -47,10 +49,22 @@ namespace   Engine
 
         if (GLEW_OK != err)
         {
-            std::cerr << "Glew Init failure" << std::endl;
+            std::stringstream errMsg;
+            errMsg << "Glew Init failure :" << glewGetErrorString(err);
+            root << Priority::ERROR << errMsg.str();
+            throw std::runtime_error(errMsg.str());
         }
+
 	ilInit(); /* Initialization of DevIL */
 
+        ILenum ilErr = ilGetError();
+        if (ilErr != IL_NO_ERROR)
+        {
+            std::stringstream errMsg;
+            errMsg << "Devil Init failure :" << ilGetString(ilErr);
+            root << Priority::ERROR << errMsg.str();
+            throw std::runtime_error(errMsg.str());
+        }
         // nothing to do
     }
 
@@ -137,7 +151,7 @@ namespace   Engine
     void
     Core::load(const std::string &filename)
     {
-        // TODO GSL OWNER && NOT NULL
+        // TODO GSL OWNER
         Scene *test = this->m_importer.import(filename);
 
 //        Terrain should not be added there
