@@ -138,19 +138,6 @@ namespace Engine
 	}
 
     void
-        Scene::add(Nuages *nuages)
-    {
-        this->m_spatialgraph.add(nuages);
-    }
-
-    void
-        Scene::add(LightningBolt *lightningbolt)
-    {
-        this->m_spatialgraph.add(lightningbolt);
-    }
-
-
-    void
     Scene::register_callback(const Event::Type &event_type,
             const std::function<void(const Event::Event &)> &callback)
     {

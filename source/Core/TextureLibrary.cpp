@@ -36,6 +36,10 @@ namespace   Engine
     TextureLibrary::TextureLibrary(aiTexture **assimpTextures, unsigned int size) :
         Library<std::string, Texture *>()
     {
+        if (assimpTextures != assimpTextures)
+        {
+            // UNUSED VARIABLE
+        }
         if (size > 0)
         {
             Category& root = Category::getRoot();

@@ -12,8 +12,10 @@ namespace   Engine
 {
     Terrain::Terrain(map::HeightMap &map, Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms) :
 		Entity(scene),
-        m_heightmap(map)
-//		_mesh()
+        m_heightmap(map),
+        m_mesh(nullptr),
+        m_vertices(),
+        m_indices()
 	{
 		this->m_scene->add(this);
 

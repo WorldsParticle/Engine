@@ -47,7 +47,7 @@ public:
     /// \param name
     /// \return step
     ///
-    GenerationStep  *stepFromName(const std::string &name);
+    GenerationStep  *stepFromName(const std::string &namee);
 
 protected:
     ///

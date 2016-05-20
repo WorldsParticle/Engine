@@ -41,6 +41,10 @@ namespace   Engine
         m_name(),
         m_id(0)
     {
+        if (assimpTexture == assimpTexture)
+        {
+            // UNUSED VARIABLE
+        }
         glGenTextures(1, &this->m_id);
         // nothing to do atm.
     }

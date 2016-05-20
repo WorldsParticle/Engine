@@ -11,7 +11,7 @@ using namespace     log4cpp;
 namespace   Engine
 {
     Nuages::Nuages(Scene *scene,/*SceneGraphNode *node, */ShaderProgramLibrary const& shaderprograms, float z) :
-        Entity(scene),
+        Object(scene),
         m_mesh(nullptr),
         m_vertices({5000.0, z, 5000.0,
                    5000.0, z, -5000.0,
@@ -23,7 +23,6 @@ namespace   Engine
                     0.0, 0.0, 0.0}),
         _shader(shaderprograms.get(NUAGES_SHADER_PROGRAM))
 	{
-		this->m_scene->add(this);
 
        // const auto& myShader = shaderprograms.get(NUAGES_SHADER_PROGRAM);
 
@@ -34,6 +33,8 @@ namespace   Engine
         m_mesh->setNormals(getNormals());
         m_mesh->setIndices(getIndices());
         m_mesh->update();
+
+        this->m_meshes.push_back(m_mesh);
 	}
 	//const Resource  &get(const Key &key) const;
 //ShaderProgramLibrary : public Library<ShaderProgramName, std::shared_ptr<ShaderProgram>>

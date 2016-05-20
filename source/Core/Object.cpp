@@ -31,6 +31,14 @@ namespace   Engine
         this->m_scene->add(this);
     }
 
+
+    Object::Object(Scene *scene) :
+    Entity(scene),
+    m_meshes()
+    {
+        this->m_scene->add(this);
+    }
+
     // TODO GSL NOT NULL
     Object::Object(const aiNode *assimpNode, SceneGraphNode *node) :
         Entity(node),

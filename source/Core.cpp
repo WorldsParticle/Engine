@@ -36,7 +36,8 @@ namespace   Engine
 
     Core::Core(void) :
         m_scenes(),
-        m_importer()
+        m_importer(),
+        m_generator()
     {
 
         PropertyConfigurator::configure(RESOURCES_PATH "/log4cpp.conf");
@@ -70,7 +71,8 @@ namespace   Engine
 
     Core::Core(const Core &other) :
         m_scenes(),
-        m_importer(other.m_importer)
+        m_importer(other.m_importer),
+        m_generator()
     {
         for (Scene *scene : other.m_scenes)
         {
@@ -80,7 +82,8 @@ namespace   Engine
 
     Core::Core(Core &&other) noexcept :
         m_scenes(std::move(other.m_scenes)),
-        m_importer(std::move(other.m_importer))
+        m_importer(std::move(other.m_importer)),
+        m_generator()
     {
         // nothing to do.
     }

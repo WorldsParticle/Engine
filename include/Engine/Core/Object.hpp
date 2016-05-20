@@ -41,6 +41,12 @@ namespace   Engine
             Object(SceneGraphNode *node); // TODO GSL NOT NULL
 
             ///
+            /// \brief Construct from scene.
+            /// \param scene related to the object.
+            ///
+            Object(Scene *scene);
+
+            ///
             /// \brief Construct an object from an assimp node.
             ///
             Object(const aiNode *assimpNode, SceneGraphNode *node); // TODO GSL NOT NULL

@@ -18,7 +18,7 @@ namespace map
 class MapGraph
 {
 public:
-    MapGraph(unsigned int xMax = 0, unsigned int yMax = 0);
+    MapGraph(unsigned int xMaxx = 0, unsigned int yMaxx = 0);
 
     ///
     /// \brief Copy constructor.

@@ -28,7 +28,7 @@ namespace Engine
 {
     Camera::Camera(SceneGraphNode *node, const ShaderProgramLibrary &shaderprograms) :
         Entity(node),
-        m_clippingPlane{0.1f, 100.0f},
+        m_clippingPlane{0.1f, 100000.0f},
         m_aspect(4.0f/3.0f),
         m_fov(1.22173f),
         m_up(glm::vec3(0.0f, 0.0f, 1.0f)),

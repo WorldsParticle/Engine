@@ -10,11 +10,16 @@
 
 #include "Engine/Audio/SoundManager.hpp"
 
-SoundManager::SoundManager() {
+SoundManager::SoundManager() :
+_error (),
+_device(nullptr),
+_context(nullptr)
+{
 
 }
 
-SoundManager::~SoundManager() {
+SoundManager::~SoundManager()
+{
 }
 
 void	SoundManager::initAudio() {
@@ -28,7 +33,7 @@ void	SoundManager::initAudio() {
 	}
     }
     */
-    alutInit(0, nullptr);
+    alutInit(nullptr, nullptr);
 }
 
 void	SoundManager::createBuffers() {
@@ -51,11 +56,11 @@ void	SoundManager::fillBuffer(int position, const char *filename) {
     ALenum     format;
     ALsizei    size;
     ALfloat    freq;
-    ALboolean  loop; // NOT USED
+    // ALboolean  loop; NOT USED
     ALvoid*    data;
 
     data = alutLoadMemoryFromFile(filename, &format, &size, &freq);
-    alBufferData(_buffers[position],format,data,size,freq);
+    alBufferData(_buffers[position],format,data,size,static_cast<int>(freq));
     free(data);
     if ((_error = alGetError()) != AL_NO_ERROR)
 	std::cout << "Error in fillBuffer: " <<  alGetString(_error) << std::endl;

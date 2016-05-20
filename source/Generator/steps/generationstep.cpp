@@ -3,11 +3,12 @@
 namespace gen
 {
 
-Param  *GenerationStep::paramFromName(const std::string &name)
+Param  *GenerationStep::paramFromName(const std::string &namee)
 {
     for (const auto &p: m_params)
-        if (p->name() == name)
+        if (p->name() == namee)
             return p;
+    return (nullptr);
 }
 
 }

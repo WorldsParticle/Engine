@@ -17,7 +17,15 @@ public:
     ///
     /// \brief Default constructor.
     ///
-    GenerationStep(const std::string &name) : m_name(name), m_params(), m_map(nullptr) {}
+    GenerationStep(const std::string &namee) : m_name(namee), m_params(), m_map(nullptr) {}
+
+    GenerationStep(const GenerationStep &other) : m_name(other.name()), m_params(), m_map(nullptr) {}
+
+    GenerationStep(GenerationStep &&other) noexcept : m_name(other.name()), m_params(), m_map(nullptr) {}
+
+    GenerationStep& operator=(const GenerationStep &other) {if (other.name() != ""){} /* TODO */ return *this;}
+
+    GenerationStep& operator=(GenerationStep &&other) noexcept { if (other.name() != ""){} /* TODO */ return *this;}
 
     inline void launch(map::MapGraph *map)
     { m_map = map; run(); }
@@ -46,7 +54,7 @@ public:
     /// \param name
     /// \return param
     ///
-    Param   *paramFromName(const std::string &name);
+    Param   *paramFromName(const std::string &namee);
 
 protected:
     ///

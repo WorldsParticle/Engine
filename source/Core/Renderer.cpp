@@ -25,8 +25,6 @@
 #include    "Engine/Core/Transform.hpp"
 #include    "Engine/Core/Mesh.hpp"
 #include    "Engine/Core/ArrayObject.hpp"
-#include    "Engine/Nuages/Nuages.hpp"
-#include    "Engine/Nuages/LightningBolt.hpp"
 
 namespace   Engine
 {
@@ -35,9 +33,7 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-        m_terrains(),
-        m_nuages(),
-        m_lightningbolts()
+        m_terrains()
     {
     }
 
@@ -46,9 +42,7 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-        m_terrains(),
-        m_nuages(),
-        m_lightningbolts()
+        m_terrains()
 	{
 	}
 
@@ -57,9 +51,7 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-        m_terrains(),
-        m_nuages(),
-        m_lightningbolts()
+        m_terrains()
 	{
 	}
 
@@ -118,26 +110,6 @@ namespace   Engine
 		this->m_terrains.push_back(terrain);
 	}
 
-
-    void
-        Renderer::add(Nuages *nuages)
-    {
-        //Category &root = Category::getRoot();
-
-        //root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
-        this->m_nuages.push_back(nuages);
-    }
-
-    void
-        Renderer::add(LightningBolt *lightningbolt)
-    {
-        //Category &root = Category::getRoot();
-
-        //root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
-        this->m_lightningbolts.push_back(lightningbolt);
-    }
-
-
     void
 	Renderer::render(void)
 	{
@@ -170,23 +142,11 @@ namespace   Engine
                 const glm::mat4 &model = terrain->getTransform().getMatrix();
                 terrain->mesh()->draw(model, view, projection);
             }
-            for (Nuages *nuages : this->m_nuages)
-            {
-                const glm::mat4 &model = nuages->getTransform().getMatrix();
-                nuages->mesh()->draw(model, view, projection);
-            }
-            for (LightningBolt *lightningbolt : this->m_lightningbolts)
-            {
-                const glm::mat4 &model = lightningbolt->getTransform().getMatrix();
-                lightningbolt->mesh()->draw(model, view, projection);
-            }
 	    }
 	    this->m_cameras.clear();
 	    this->m_objects.clear();
 	    this->m_lights.clear();
 	    this->m_terrains.clear();
-        this->m_nuages.clear();
-        this->m_lightningbolts.clear();
 	}
 }
 //

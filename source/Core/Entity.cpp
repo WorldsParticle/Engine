@@ -22,28 +22,32 @@ namespace   Engine
 {
     Entity::Entity(SceneGraphNode *node) :
         m_node(node),
-        m_scene(this->m_node->getScene())
+        m_scene(this->m_node->getScene()),
+        m_transform_zero_test()
     {
 
     }
 
     Entity::Entity(Scene *scene) :
         m_node(nullptr),
-        m_scene(scene)
+        m_scene(scene),
+        m_transform_zero_test()
     {
 
     }
 
     Entity::Entity(const Entity &other) :
         m_node(other.m_node),
-        m_scene(this->m_node->getScene())
+        m_scene(this->m_node->getScene()),
+        m_transform_zero_test()
     {
 
     }
 
     Entity::Entity(Entity &&other) :
         m_node(std::move(other.m_node)),
-        m_scene(this->m_node->getScene())
+        m_scene(this->m_node->getScene()),
+        m_transform_zero_test()
     {
 
     }
@@ -76,8 +80,9 @@ namespace   Engine
     const std::string &
     Entity::getName(void) const
     {
+        static  std::string s = ""; // because of return reference to temporary variable
         if (!this->m_node)
-            return "";
+            return s;
          return this->m_node->getName();
     }
 
