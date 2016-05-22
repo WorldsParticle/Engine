@@ -87,6 +87,13 @@ namespace   Engine
             /// \brief Update the object.
             ///
             void    update(void) override;
+            
+            ///
+            /// \brief Change the scene in which the object is.
+            /// \param node the node related to the object in the new scene
+            ///
+            void    moveToScene(SceneGraphNode *node);
+
 
         public:
             ///

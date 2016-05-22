@@ -122,7 +122,7 @@ namespace   Engine
             ///
             /// \brief The objects present in the scene.
             ///
-            std::list<Object *>     m_objects;
+        std::list<Object *>     m_objects;
 
 			///
 			/// \brief The lights existing in the scene.

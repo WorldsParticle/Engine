@@ -69,5 +69,15 @@ namespace   Engine
             /// \brief Move assignment operator.
             ///
             MeshLibrary     &operator=(MeshLibrary &&other) noexcept = default;
+
+        public:
+            ///
+            /// \brief Append an assimp mesh array.
+            ///
+            /// TODO GSL array_view
+            ///
+            void    appendMeshes(const MaterialLibrary &materials,
+                aiMesh **assimpMeshes, unsigned int size);
+
     };
 }

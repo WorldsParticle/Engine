@@ -84,6 +84,8 @@ namespace   Engine
         Category& root = Category::getRoot();
 
         std::vector<float>  vertices = this->m_positions;
+        Category::getRoot() << Priority::DEBUG << this->m_name << " " << this->m_positions.size();
+
         if (this->hasNormals())
             vertices.insert(vertices.end(), this->m_normals.begin(), this->m_normals.end());
         if (this->hasUVs())
@@ -151,6 +153,8 @@ namespace   Engine
         shaderprogram->setUniform("model", model);
         shaderprogram->setUniform("view", view);
         shaderprogram->setUniform("projection", projection);
+        Category::getRoot() << Priority::DEBUG << this->m_name << " " << this->m_positions.size();
+
         if (this->hasIndices())
         {
             std::uintptr_t  pointer_offset = 0;
@@ -191,6 +195,12 @@ namespace   Engine
     }
 
 
+    const std::string &
+    Mesh::getName(void) const
+    {
+//        static  std::string s = ""; // because of return reference to temporary variable
+        return this->m_name;
+    }
 
     const std::vector<float> &
     Mesh::getPositions(void) const
