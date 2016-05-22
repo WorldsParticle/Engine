@@ -21,6 +21,7 @@
 
 #include    "Engine/Core/Scene.hpp"
 #include    "Engine/Core/AssimpScene.hpp"
+#include "Engine/Core/SceneGraphNode.hpp"
 
 using namespace     log4cpp;
 
@@ -63,7 +64,16 @@ namespace Engine
         // nothing to do.
     }
 
-
+    void
+    Scene::addModel(const AssimpScene &s)
+    {
+        this->m_textures.append(TextureLibrary(s));
+        this->m_materials.append(MaterialLibrary(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures));
+        this->m_animations.append(AnimationLibrary(s.getAnimations(), s.getAnimationsNumber()));
+        this->m_meshes.append(MeshLibrary(this->m_materials, s.getMeshes(), s.getMeshesNumber()));
+        this->m_scenegraph.getRootNode()->addChildren(new SceneGraphNode(s, s.getRootNode(), 
+                &m_scenegraph, m_shaderprograms, m_scenegraph.getRootNode(), true));
+    }
 
     void
     Scene::update(void)

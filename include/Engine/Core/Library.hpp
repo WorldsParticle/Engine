@@ -58,6 +58,11 @@ namespace   Engine
 
         public:
             ///
+            /// \brief Append the content of another library to this one.
+            ///
+            void     append(const Library &other);
+
+            ///
             /// \brief Getter for a resource.
             ///
             const Resource  &get(const Key &key) const;
@@ -114,6 +119,17 @@ namespace   Engine
         return *this;
     }
 
+
+    template<typename Key, typename Resource>
+    void
+    Library<Key, Resource>::append(const Library<Key, Resource> &other)
+    {
+        for (const auto &resource : other.m_resources)
+        {
+            this->m_resources.insert(
+                    std::make_pair(resource.first, resource.second));
+        }
+    }
 
 
     template<typename Key, typename Resource>

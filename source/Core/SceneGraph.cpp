@@ -114,4 +114,10 @@ namespace   Engine
     {
         return this->m_scene;
     }
+
+    SceneGraphNode *
+    SceneGraph::getRootNode(void) const
+    {
+        return this->m_rootNode;
+    }
 }

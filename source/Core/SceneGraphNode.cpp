@@ -36,7 +36,6 @@ namespace   Engine
         m_parent(parent),
         m_childrens(),
         m_scenegraph(scenegraph),
-        m_scene(scenegraph->getScene()),
         m_entity(nullptr),
         m_transform()
     {
@@ -45,18 +44,18 @@ namespace   Engine
 
     SceneGraphNode::SceneGraphNode(const AssimpScene &assimpScene,
             const aiNode *assimpNode, SceneGraph *scenegraph,
-            ShaderProgramLibrary &shaderprograms, SceneGraphNode *parent) :
+            ShaderProgramLibrary &shaderprograms, SceneGraphNode *parent,
+            bool meshOnly) :
         m_name(assimpNode->mName.C_Str()),
         m_parent(parent),
         m_childrens(),
         m_scenegraph(scenegraph),
-        m_scene(scenegraph->getScene()),
         m_entity(nullptr),
         m_transform(assimpNode->mTransformation)
     {
         Category &root = Category::getRoot();
         root << Priority::DEBUG << "SceneGraphNode : " << this->m_name;
-        if (!this->m_name.empty())
+        if (!this->m_name.empty() && !meshOnly)
         {
             const aiCamera  *camera = nullptr;
             const aiLight   *light = nullptr;
@@ -129,7 +128,7 @@ namespace   Engine
     Scene *
     SceneGraphNode::getScene(void) const
     {
-         return this->m_scene;
+         return this->m_scenegraph->getScene();
     }
 
     const Transform &

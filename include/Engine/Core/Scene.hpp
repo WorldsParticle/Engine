@@ -86,6 +86,11 @@ namespace Engine
 
         public:
             ///
+            /// \brief This function is used to import a model with assimp.
+            ///
+            void        addModel(const AssimpScene &s);
+
+            ///
             /// \brief This function is used to update the scene.
             ///
             void        update(void);
