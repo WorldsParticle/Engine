@@ -13,8 +13,13 @@ namespace gen
 {
 
 ShaperStep::ShaperStep() :
-    GenerationStep("Limite terre/mer")
+    GenerationStep("Limite terre/mer"),
+    m_landRatio("Pourcentage de terre")
 {
+    m_landRatio.setMinValue(0);
+    m_landRatio.setMaxValue(100);
+    m_landRatio.setValue(80);
+    params().push_back(&m_landRatio);
 }
 
 ShaperStep::~ShaperStep()
@@ -31,6 +36,7 @@ void    ShaperStep::run()
 
 void        ShaperStep::assignCornerLandPerlin(int seed)
 {
+    std::cout << m_landRatio.value() << std::endl;
     for (const auto & corner : m_map->corners())
     {
         Point p = corner.second->point;
@@ -62,7 +68,7 @@ void        ShaperStep::assignCornerLandPerlin(int seed)
 
         double magnitude = sqrt(pow(p.x, 2) + pow(p.y, 2));
         double z = static_cast<double>((octave_noise_2d(8.0f, 0.5f, 0.3f, static_cast<float>(p.x + seed), static_cast<float>(p.y + seed)) + 1) / 2.0f);
-        double threshold = (0.3 + 0.3 * magnitude * magnitude);
+        double threshold = ((1.0 - static_cast<double>(m_landRatio.value()) / 100.0) * 0.78 + 0.3 * magnitude * magnitude);
         if (z > threshold && !corner.second->border)
             corner.second->water = false;
         else

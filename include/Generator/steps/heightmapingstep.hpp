@@ -3,6 +3,7 @@
 
 #include "generationstep.hpp"
 #include "Generator/map/zonelookup.hpp"
+#include "Generator/tools/bitmap_image.hpp"
 
 namespace gen
 {
@@ -20,6 +21,13 @@ public:
     void    run();
 
 private:
+
+    // temporary painters
+    void    paintByMoisture();
+    void    paintByHeight();
+    void    paintByBiome();
+    void    paintByLandType();
+
     ///
     /// \brief Class holding the zone's center kd-tree.
     /// should move it inside MapGraph, and createCould at the end of zoningStep

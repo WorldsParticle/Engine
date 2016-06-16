@@ -9,8 +9,13 @@ namespace gen
 {
 
 RiverorStep::RiverorStep() :
-    GenerationStep("Assignement des rivières")
+    GenerationStep("Assignement des rivières"),
+    m_riverFactor("Facteur rivière (%)")
 {
+    m_riverFactor.setMinValue(0);
+    m_riverFactor.setMaxValue(1000);
+    m_riverFactor.setValue(100);
+    params().push_back(&m_riverFactor);
 }
 
 RiverorStep::~RiverorStep()
@@ -63,7 +68,7 @@ void        RiverorStep::calculateWatersheds()
 
 void        RiverorStep::createRivers()
 {
-    for (unsigned int i; i < (m_map->zones().size() / 2); ++i)
+    for (unsigned int i; i < static_cast<unsigned int>(static_cast<float>(m_map->zones().size() / 2) * (static_cast<float>(m_riverFactor.value()) / 100.0f)); ++i)
     {
     map::Corner *corner = m_map->corners().at(rand() % static_cast<int>(m_map->corners().size()));
         if (corner->ocean || corner->elevation < 0.3f || corner->elevation > 0.9f)

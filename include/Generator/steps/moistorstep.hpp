@@ -2,6 +2,7 @@
 #define MOISTOR_H
 
 #include "generationstep.hpp"
+#include "Generator/param/intvalue.hpp"
 
 namespace gen {
 
@@ -41,6 +42,11 @@ public:
     /// \brief Assign Voronoi polygon's moisture (= avg. of its corners).
     ///
     void    assignPolygonMoisture();
+
+    ///
+    /// \brief let the user influence the moisture
+    ///
+    IntValue        m_moistureFactor;
 
 private:
 

@@ -2,6 +2,7 @@
 #define ELEVATOR_H
 
 #include "generationstep.hpp"
+#include "Generator/param/intvalue.hpp"
 
 namespace gen {
 
@@ -48,6 +49,11 @@ private:
     /// \brief Find for each Voronoi diagram's corners its neighboring corner with the lowest elevation.
     ///
     void        calculateDownSlopes();
+
+    ///
+    /// \brief let the user select how flat the terrain will be.
+    ///
+    IntValue        m_slopeFactor;
 
 };
 

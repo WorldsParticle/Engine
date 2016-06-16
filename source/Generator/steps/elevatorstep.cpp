@@ -12,8 +12,13 @@ namespace gen
 {
 
 ElevatorStep::ElevatorStep() :
-    GenerationStep("Elevation")
+    GenerationStep("Elevation"),
+    m_slopeFactor("Facteur d'aplanissement")
 {
+    m_slopeFactor.setMinValue(0);
+    m_slopeFactor.setMaxValue(100);
+    m_slopeFactor.setValue(50);
+    params().push_back(&m_slopeFactor);
 }
 
 ElevatorStep::~ElevatorStep()
@@ -76,7 +81,7 @@ struct sortByElevation
 
 void        ElevatorStep::redistributeElevation()
 {
-    float scaleFactor = 1.1f;
+    float scaleFactor = 0.2f + (1.0f - static_cast<float>(m_slopeFactor.value()) / 100.0f) * 1.8f;
     std::vector<map::Corner *> corners;
 
     for (const auto & corner : m_map->corners())

@@ -12,8 +12,13 @@ namespace gen
 {
 
 MoistorStep::MoistorStep() :
-    GenerationStep("Humidité")
+    GenerationStep("Humidité"),
+    m_moistureFactor("Facteur humidité (%)")
 {
+    m_moistureFactor.setMinValue(0);
+    m_moistureFactor.setMaxValue(200);
+    m_moistureFactor.setValue(100);
+    params().push_back(&m_moistureFactor);
 }
 
 MoistorStep::~MoistorStep()
@@ -63,6 +68,9 @@ void        MoistorStep::redistributeMoisture()
     for (unsigned int i = 0; i < corners.size(); ++i)
     {
         corners[i]->moisture = static_cast<float>(i) / (static_cast<float>(corners.size()) - 1.0f);
+        corners[i]->moisture = (corners[i]->moisture * static_cast<float>(m_moistureFactor.value())) / 100.0f;
+        if (corners[i]->moisture > 1.0f)
+            corners[i]->moisture = 1.0f;
     }
 }
 

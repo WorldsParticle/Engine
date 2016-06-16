@@ -3,6 +3,7 @@
 
 #include "generationstep.hpp"
 #include "../map/map.hpp"
+#include "Generator/param/intvalue.hpp"
 
 namespace gen {
 
@@ -46,6 +47,11 @@ private:
     /// \param To corner.
     ///
     map::CrossedEdge    *lookupEdgeFromCorner(map::Corner *from, map::Corner *to);
+
+    ///
+    /// \brief let the user select the number of rivers
+    ///
+    IntValue        m_riverFactor;
 
 };
 

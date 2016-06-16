@@ -2,6 +2,7 @@
 #define SHAPER_H
 
 #include "generationstep.hpp"
+#include "Generator/param/intvalue.hpp"
 
 namespace gen {
 
@@ -39,6 +40,11 @@ private:
     /// \brief Assign land and ocean zones according to corners' value.
     ///
     void        assignOceanCostAndLand();
+
+    ///
+    /// \brief let the user select the percentage of land
+    ///
+    IntValue        m_landRatio;
 };
 
 }
