@@ -83,6 +83,11 @@ namespace   Engine
             ///
             void    rotate(const glm::vec3 &rotation);
 
+            ///
+            /// \brief Print the transform matrix, used to debug.
+            ///
+            void    print() const;
+
         protected:
             ///
             /// \brief This matrix represent the actual state of the transform.

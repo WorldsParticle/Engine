@@ -53,12 +53,6 @@ namespace Engine
         m_matrix[1][3] = m.d2;
         m_matrix[2][3] = m.d3;
         m_matrix[3][3] = m.d4;
-        Category &root = Category::getRoot();
-
-        root << Priority::DEBUG << "[" << m_matrix[0][0] << "][" << m_matrix[1][0] << "][" << m_matrix[2][0] << "][" << m_matrix[3][0] << "]";
-        root << Priority::DEBUG << "[" << m_matrix[0][1] << "][" << m_matrix[1][1] << "][" << m_matrix[2][1] << "][" << m_matrix[3][1] << "]";
-        root << Priority::DEBUG << "[" << m_matrix[0][2] << "][" << m_matrix[1][2] << "][" << m_matrix[2][2] << "][" << m_matrix[3][2] << "]";
-        root << Priority::DEBUG << "[" << m_matrix[0][3] << "][" << m_matrix[1][3] << "][" << m_matrix[2][3] << "][" << m_matrix[3][3] << "";
     }
 
     Transform::~Transform(void)
@@ -80,6 +74,16 @@ namespace Engine
          this->m_matrix = glm::rotate(this->m_matrix, rotation.x, glm::vec3(1.0, 0.0, 0.0));
          this->m_matrix = glm::rotate(this->m_matrix, rotation.y, glm::vec3(0.0, 1.0, 0.0));
          this->m_matrix = glm::rotate(this->m_matrix, rotation.z, glm::vec3(0.0, 0.0, 1.0));
+    }
+
+    void
+    Transform::print() const
+    {
+        Category &root = Category::getRoot();
+        root << Priority::DEBUG << "[" << m_matrix[0][0] << "][" << m_matrix[1][0] << "][" << m_matrix[2][0] << "][" << m_matrix[3][0] << "]";
+        root << Priority::DEBUG << "[" << m_matrix[0][1] << "][" << m_matrix[1][1] << "][" << m_matrix[2][1] << "][" << m_matrix[3][1] << "]";
+        root << Priority::DEBUG << "[" << m_matrix[0][2] << "][" << m_matrix[1][2] << "][" << m_matrix[2][2] << "][" << m_matrix[3][2] << "]";
+        root << Priority::DEBUG << "[" << m_matrix[0][3] << "][" << m_matrix[1][3] << "][" << m_matrix[2][3] << "][" << m_matrix[3][3] << "";        
     }
 
 }

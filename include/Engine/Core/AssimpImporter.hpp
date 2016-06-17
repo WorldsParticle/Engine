@@ -72,6 +72,11 @@ namespace   Engine
             ///
             Scene   *import(const std::string &filename);
 
+            ///
+            /// \brief This method is used to load a model from a filename and add it to an existing scene
+            ///
+            bool   importModel(const std::string &filename, Scene *scene);
+
         private:
             ///
             /// \brief This method use the ReadFile method with appropriate assimp flags.

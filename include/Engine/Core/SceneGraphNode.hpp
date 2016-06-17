@@ -52,7 +52,7 @@ namespace   Engine
             SceneGraphNode(const AssimpScene &assimpScene,
                     const aiNode *assimpNode, SceneGraph *scenegraph,
 		    ShaderProgramLibrary &shaderprograms,
-                    SceneGraphNode *parent = nullptr);
+                    SceneGraphNode *parent = nullptr, bool meshOnly = false);
 
             ///
             /// \brief Copy constructor.
@@ -98,7 +98,7 @@ namespace   Engine
             SceneGraphNode      *getParent(void) const;
 
             ///
-            /// \brief Getter for the scene attribute.
+            /// \brief Getter for the scene that contain the scene graph related to this node
             ///
             Scene               *getScene(void) const;
 
@@ -153,11 +153,6 @@ namespace   Engine
             /// \brief The scene graph that contain this node.
             ///
             SceneGraph  *m_scenegraph;
-
-            ///
-            /// \brief The scene that contain the scene graph related to this node.
-            ///
-            Scene   *m_scene; // TODO GSL NOT NULL
 
             ///
             /// \brief The entity related to the node.

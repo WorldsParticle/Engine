@@ -18,6 +18,10 @@
 #pragma once
 
 #include    <map>
+#include    <log4cpp/Category.hh>
+#include    <log4cpp/PropertyConfigurator.hh>
+
+using namespace     log4cpp;
 
 namespace   Engine
 {
@@ -57,6 +61,11 @@ namespace   Engine
             Library     &operator=(Library &&other) noexcept;
 
         public:
+            ///
+            /// \brief Append the content of another library to this one.
+            ///
+            void     append(const Library &other);
+
             ///
             /// \brief Getter for a resource.
             ///
@@ -114,6 +123,20 @@ namespace   Engine
         return *this;
     }
 
+
+    template<typename Key, typename Resource>
+    void
+    Library<Key, Resource>::append(const Library<Key, Resource> &other)
+    {
+        Category::getRoot() << Priority::DEBUG << "Library append with before size = " << m_resources.size();
+        for (const auto &resource : other.m_resources)
+        {
+            Category::getRoot() << Priority::DEBUG << "insert (append) : " << resource.second << "with key " << resource.first;
+            this->m_resources.insert(
+                    std::make_pair(resource.first, resource.second));
+        }
+        Category::getRoot() << Priority::DEBUG << "Library append with after size = " << m_resources.size();
+    }
 
 
     template<typename Key, typename Resource>

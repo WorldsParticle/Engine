@@ -83,6 +83,11 @@ namespace   Engine
             ///
             Scene   *getScene(void) const;
 
+            ///
+            /// \brief Getter for the root node.
+            ///
+            SceneGraphNode   *getRootNode(void) const;
+
         private:
             ///
             /// \brief The Scene represented by the scene graph.

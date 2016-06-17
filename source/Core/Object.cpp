@@ -19,6 +19,7 @@
 
 #include    "Engine/Core/Object.hpp"
 #include    "Engine/Core/Scene.hpp"
+#include    "Engine/Core/SceneGraphNode.hpp"
 
 using namespace     log4cpp;
 
@@ -48,8 +49,9 @@ namespace   Engine
         root << Priority::DEBUG << "Création object";
         for (unsigned int i = 0 ; i < assimpNode->mNumMeshes ; ++i)
         {
-            root << Priority::DEBUG << "Add mesh";
+            root << Priority::DEBUG << "Add mesh " << assimpNode->mName.C_Str();
             auto *mesh = this->m_scene->getMesh(assimpNode->mMeshes[i]);
+            mesh->m_name = std::string(assimpNode->mName.C_Str());
             this->m_meshes.push_back(mesh);
         }
         this->m_scene->add(this);
@@ -75,6 +77,14 @@ namespace   Engine
 
         //root << Priority::DEBUG << "Object - update()";
         // nothing to do actually.
+    }
+
+    void
+    Object::moveToScene(SceneGraphNode *node)
+    {
+        this->m_node = node;
+        this->m_scene = node->getScene();
+        this->m_scene->add(this);
     }
 
 

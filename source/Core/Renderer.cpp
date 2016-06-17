@@ -16,6 +16,8 @@
 //
 
 #include    <GL/glew.h>
+#include    <log4cpp/Category.hh>
+#include    <log4cpp/PropertyConfigurator.hh>
 
 #include    "Engine/Core/Renderer.hpp"
 #include    "Engine/Core/Object.hpp"
@@ -25,6 +27,8 @@
 #include    "Engine/Core/Transform.hpp"
 #include    "Engine/Core/Mesh.hpp"
 #include    "Engine/Core/ArrayObject.hpp"
+
+using namespace     log4cpp;
 
 namespace   Engine
 {
@@ -76,35 +80,35 @@ namespace   Engine
     void
 	Renderer::add(Object *object)
 	{
-	    //Category &root = Category::getRoot();
+	    Category &root = Category::getRoot();
 
-	    //root << Priority::DEBUG << "Renderer - add object()" << object->getName();
+//	    root << Priority::DEBUG << "Renderer - add object()" << object->getName();
 	    this->m_objects.push_back(object);
 	}
 
     void
 	Renderer::add(Camera *camera)
 	{
-	    //Category& root = Category::getRoot();
-	    //const glm::ivec2 &size = camera->size();
+	    Category& root = Category::getRoot();
+//	    const glm::ivec2 &size = camera->size();
 
-	    //root << Priority::DEBUG << "Renderer - add camera()" << camera->getName();
+//	    root << Priority::DEBUG << "Renderer - add camera()" << camera->getName();
 	    this->m_cameras.push_back(camera);
 	}
 
 	void
 		Renderer::add(Light *light)
 	{
-		//Category &root = Category::getRoot();
+		Category &root = Category::getRoot();
 
-		//root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
+//		root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
 		this->m_lights.push_back(light);
 	}
 
 	void
 		Renderer::add(Terrain *terrain)
 	{
-		//Category &root = Category::getRoot();
+//		Category &root = Category::getRoot();
 
 		//root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
 		this->m_terrains.push_back(terrain);
@@ -113,8 +117,11 @@ namespace   Engine
     void
 	Renderer::render(void)
 	{
+            Category &root = Category::getRoot();
+//            root << Priority::DEBUG << "render " << this;
 	    for (Camera *camera : this->m_cameras)
 	    {
+//                root << Priority::DEBUG << "render camera " << camera->getName();
 		const glm::mat4 &projection = camera->getProjection();
 		const glm::mat4 &view = camera->getView();
 		// Bind to framebuffer and draw to color texture as we normally would.
@@ -130,18 +137,22 @@ namespace   Engine
 		{
 		    const glm::mat4 &model = object->getTransform().getMatrix();
 		    const std::list<Mesh *> &meshes = object->getMeshes();
+//                    root << Priority::DEBUG << "render object " << object->getName();
+//                         << "at ";
+//                    object->getTransform().print();
 		    for (Mesh *part : meshes)
 		    {
+//                        root << Priority::DEBUG << "render mesh " << part->getName();                       
 			part->draw(model, view, projection);
 		    }
 		}
 		camera->unbindFramebuffer();
 		camera->drawFramebuffer();
-            for (Terrain *terrain : this->m_terrains)
-            {
-                const glm::mat4 &model = terrain->getTransform().getMatrix();
-                terrain->mesh()->draw(model, view, projection);
-            }
+                for (Terrain *terrain : this->m_terrains)
+                {
+                    const glm::mat4 &model = terrain->getTransform().getMatrix();
+                    terrain->mesh()->draw(model, view, projection);
+                }
 	    }
 	    this->m_cameras.clear();
 	    this->m_objects.clear();
@@ -149,14 +160,3 @@ namespace   Engine
 	    this->m_terrains.clear();
 	}
 }
-//
-//        std::vector<float> const &getVertex() {
-//            return _heightmap->getPoints();
-//        }
-//        std::vector<int> const &getIndices() {
-//            return _heightmap->getIndices();
-//        }
-//        std::vector<float> const &getNormals() {
-//            return _heightmap->getNormals();
-//        }
-//

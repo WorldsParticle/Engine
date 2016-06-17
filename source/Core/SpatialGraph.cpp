@@ -57,17 +57,17 @@ namespace   Engine
         this->m_lights.push_back(light);
     }
 
-	void
-		SpatialGraph::add(Camera *camera)
-	{
-		this->m_cameras.push_back(camera);
-	}
+    void
+    SpatialGraph::add(Camera *camera)
+    {
+        this->m_cameras.push_back(camera);
+    }
 
-	void
-		SpatialGraph::add(Terrain *terrain)
-	{
-		this->m_terrains.push_back(terrain);
-	}
+    void
+    SpatialGraph::add(Terrain *terrain)
+    {
+        this->m_terrains.push_back(terrain);
+    }
 
     void
     SpatialGraph::cull(void)
@@ -80,15 +80,15 @@ namespace   Engine
         {
             this->m_renderer.add(object);
         }
-		for (Light *light : this->m_lights)
-		{
-			this->m_renderer.add(light);
-		}
-		for (Terrain *terrain : this->m_terrains)
-		{
-			this->m_renderer.add(terrain);
-		}
-	}
+        for (Light *light : this->m_lights)
+        {
+            this->m_renderer.add(light);
+        }
+        for (Terrain *terrain : this->m_terrains)
+        {
+            this->m_renderer.add(terrain);
+        }
+    }
 
 }
 

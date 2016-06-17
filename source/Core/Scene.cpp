@@ -21,6 +21,8 @@
 
 #include    "Engine/Core/Scene.hpp"
 #include    "Engine/Core/AssimpScene.hpp"
+#include    "Engine/Core/SceneGraphNode.hpp"
+#include    "Engine/Core/Object.hpp"
 
 using namespace     log4cpp;
 
@@ -63,7 +65,20 @@ namespace Engine
         // nothing to do.
     }
 
+    void
+    Scene::addModel(const AssimpScene &s)
+    {
+        this->m_textures.append(TextureLibrary(s));
+        this->m_materials.append(MaterialLibrary(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures));
+        this->m_animations.append(AnimationLibrary(s.getAnimations(), s.getAnimationsNumber()));
+//        this->m_meshes.append(MeshLibrary(this->m_materials, s.getMeshes(), s.getMeshesNumber()));
+        this->m_meshes.appendMeshes(this->m_materials, s.getMeshes(), s.getMeshesNumber());
 
+        SceneGraphNode * modelNode = new SceneGraphNode(s, s.getRootNode(), 
+                &m_scenegraph, m_shaderprograms, m_scenegraph.getRootNode(), true);
+//        this->m_scenegraph.getRootNode()->addChildren(modelNode);
+        Category::getRoot() << Priority::DEBUG << "Added model ";
+    }
 
     void
     Scene::update(void)
@@ -116,6 +131,8 @@ namespace Engine
     void
     Scene::add(Object *object)
     {
+        Category &root = Category::getRoot();
+        root << Priority::DEBUG << "Scene - add object()" << object->getName();
         this->m_spatialgraph.add(object);
     }
 
@@ -125,17 +142,17 @@ namespace Engine
         this->m_spatialgraph.add(light);
     }
 
-	void
-		Scene::add(Camera *camera)
-	{
-		this->m_spatialgraph.add(camera);
-	}
+    void
+    Scene::add(Camera *camera)
+    {
+        this->m_spatialgraph.add(camera);
+    }
 
-	void
-		Scene::add(Terrain *terrain)
-	{
-		this->m_spatialgraph.add(terrain);
-	}
+    void
+    Scene::add(Terrain *terrain)
+    {
+        this->m_spatialgraph.add(terrain);
+    }
 
     void
     Scene::register_callback(const Event::Type &event_type,

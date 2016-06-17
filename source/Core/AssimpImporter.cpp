@@ -46,21 +46,44 @@ namespace   Engine
     {
         Scene           *scene = nullptr;
         const aiScene   *loadedScene = this->load(filename);
+        Category::getRoot() << Priority::DEBUG << "Loaded : " << filename;
+
+        if (loadedScene == nullptr)
+        {
+            std::stringstream errMsg;
+            errMsg << "Error in file loading : "
+                    << filename << ": "
+                    << this->m_importer.GetErrorString();
+            throw std::runtime_error(errMsg.str());
+        }
+        AssimpScene     aiscene(loadedScene);
+        scene = new Scene(aiscene);
+        return scene;
+    }
+    
+    bool
+    AssimpImporter::importModel(const std::string &filename, Scene *scene)
+    {
+        const aiScene   *loadedScene = this->load(filename);
 
         if (loadedScene != nullptr)
         {
             AssimpScene     aiscene(loadedScene);
-            scene = new Scene(aiscene);
+            Category::getRoot() << Priority::INFO << "Importing... " << filename;
+
+            scene->addModel(aiscene);
+            return true;
         }
-        return scene;
+        return false;        
     }
+
 
     const aiScene *
     AssimpImporter::load(const std::string &filename)
     {
         Category        &root = Category::getRoot();
-        const aiScene   *result = nullptr;
         int             flags = 0;
+        const aiScene * result = nullptr;
 
         root << Priority::DEBUG << "Loading : " << filename;
         flags |= aiProcess_ValidateDataStructure;
@@ -69,15 +92,17 @@ namespace   Engine
         flags |= aiProcess_SortByPType;
         flags |= aiProcessPreset_TargetRealtime_Quality;
         flags |= aiProcess_FixInfacingNormals;
-        if ((result = this->m_importer.ReadFile(filename, flags)) == nullptr)
+        result = this->m_importer.ReadFile(filename, flags);
+        if (result == nullptr)
         {
             std::stringstream errMsg;
             errMsg << "Error in file loading : "
                     << filename << ": "
                     << this->m_importer.GetErrorString();
-            root << Priority::ERROR << errMsg.str();
             throw std::runtime_error(errMsg.str());
         }
+
+        root << Priority::DEBUG << "Loaded : " << result;        
         return result;
     }
 }

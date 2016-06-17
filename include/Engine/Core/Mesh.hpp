@@ -117,6 +117,11 @@ namespace   Engine
 
         public:
             ///
+            /// \brief Getter for the name attribute.
+            ///
+            const std::string                   &getName(void) const;
+
+            ///
             /// \brief Getter for the vertices attribute.
             ///
             const std::vector<float>            &getPositions(void) const;
@@ -191,6 +196,8 @@ namespace   Engine
             /// the name is optional, could be an empty string.
             ///
             std::string     m_name;
+
+        private:
 
             ///
             /// \brief The vertices attribute is used to store all vertex of the mesh.

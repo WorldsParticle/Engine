@@ -76,4 +76,23 @@ namespace   Engine
         }
         return *this;
     }
+    
+    void    MeshLibrary::appendMeshes(const MaterialLibrary &materials,
+            aiMesh **assimpMeshes, unsigned int size)
+    {
+        Category    &root = Category::getRoot();
+
+        unsigned int previousSize = this->m_resources.size();
+        root << Priority::DEBUG << "appendMeshes with size = " << size << " to previous size " << previousSize;
+        
+        for (unsigned int i = 0 ; i < size ; ++i)
+        {
+            const aiMesh *amesh = assimpMeshes[i];
+            Material *material = materials.get(amesh->mMaterialIndex);
+            root << Priority::DEBUG << "append key = " << i + previousSize << " and mesh " << new Mesh(amesh, material);
+            this->m_resources.insert(std::make_pair(i + previousSize,
+                        new Mesh(amesh, material)));
+        }
+    }
+
 }

@@ -36,7 +36,6 @@ namespace   Engine
         m_parent(parent),
         m_childrens(),
         m_scenegraph(scenegraph),
-        m_scene(scenegraph->getScene()),
         m_entity(nullptr),
         m_transform()
     {
@@ -45,18 +44,19 @@ namespace   Engine
 
     SceneGraphNode::SceneGraphNode(const AssimpScene &assimpScene,
             const aiNode *assimpNode, SceneGraph *scenegraph,
-            ShaderProgramLibrary &shaderprograms, SceneGraphNode *parent) :
+            ShaderProgramLibrary &shaderprograms, SceneGraphNode *parent,
+            bool meshOnly) :
         m_name(assimpNode->mName.C_Str()),
         m_parent(parent),
         m_childrens(),
         m_scenegraph(scenegraph),
-        m_scene(scenegraph->getScene()),
         m_entity(nullptr),
         m_transform(assimpNode->mTransformation)
     {
         Category &root = Category::getRoot();
-        root << Priority::DEBUG << "SceneGraphNode : " << this->m_name;
-        if (!this->m_name.empty())
+//        root << Priority::DEBUG << "SceneGraphNode : " << this->m_name;
+//        root << Priority::DEBUG << "SceneGraphNode scene : " << this->getScene();
+        if (!this->m_name.empty() && !meshOnly)
         {
             const aiCamera  *camera = nullptr;
             const aiLight   *light = nullptr;
@@ -69,12 +69,15 @@ namespace   Engine
                  this->m_entity = new Light(light, this);
             }
         }
+        root << Priority::DEBUG << "nummesh : " << assimpNode->mNumMeshes;
+        root << Priority::DEBUG << "SceneGraphNode scene : " << this->getScene();
         if (assimpNode->mNumMeshes > 0)
         {
             // if the name is empty and the meshes related to the node > 0
             // the node is an object.
             this->m_entity = new Object(assimpNode, this);
         }
+
         // we just need to create the others child.
         for (unsigned int i = 0 ; i < assimpNode->mNumChildren ; ++i)
         {
@@ -129,7 +132,7 @@ namespace   Engine
     Scene *
     SceneGraphNode::getScene(void) const
     {
-         return this->m_scene;
+         return this->m_scenegraph->getScene();
     }
 
     const Transform &
@@ -161,6 +164,9 @@ namespace   Engine
     void
     SceneGraphNode::addChildren(SceneGraphNode *child)
     {
+//        Category &root = Category::getRoot();
+//        root << Priority::DEBUG << "SceneGraphNode add children : " << this->m_name;
+
         child->m_parent = this;
         this->m_childrens.push_back(child);
     }

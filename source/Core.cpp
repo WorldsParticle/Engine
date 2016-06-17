@@ -157,13 +157,19 @@ namespace   Engine
         // TODO GSL OWNER
         Scene *test = this->m_importer.import(filename);
 
-//        Terrain should not be added there
-//        std::cout << "ready to add terrain..." << std::endl;
-//        test->add(new Terrain(test, test->getShaderPrograms()));
-//        std::cout << "added terrain..." << std::endl;
+        Category& root = Category::getRoot();
+        root << Priority::DEBUG << "Imported " << filename;
+
+//        std::string modelFilename("/home/marie/project/WorldsParticleMaster/Engine/resources/models/monkey.dae");
+//        if (!this->m_importer.importModel(modelFilename, test))
+//        {
+//            root << Priority::WARN << "Could not import " << modelFilename;
+//        }
+//
+//        root << Priority::INFO << "Imported " << modelFilename;
 
         this->m_scenes.push_back(test);
-        std::cout << "added scene..." << std::endl;
+        root << Priority::DEBUG << "added scene.. " << filename;
     }
 
 }
