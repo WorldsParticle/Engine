@@ -136,11 +136,6 @@ namespace   Engine
                     std::make_pair(resource.first, resource.second));
         }
         Category::getRoot() << Priority::DEBUG << "Library append with after size = " << m_resources.size();
-//        for (const auto &key_value : other.m_resources)
-//        {
-//            this->m_resources.insert(std::make_pair(key_value.first,
-//                        new Mesh(*key_value.second)));
-//        }
     }
 
 

@@ -84,7 +84,7 @@ namespace   Engine
         Category& root = Category::getRoot();
 
         std::vector<float>  vertices = this->m_positions;
-        Category::getRoot() << Priority::DEBUG << this->m_name << " " << this->m_positions.size();
+//        Category::getRoot() << Priority::DEBUG << this->m_name << " " << this->m_positions.size();
 
         if (this->hasNormals())
             vertices.insert(vertices.end(), this->m_normals.begin(), this->m_normals.end());
@@ -153,7 +153,7 @@ namespace   Engine
         shaderprogram->setUniform("model", model);
         shaderprogram->setUniform("view", view);
         shaderprogram->setUniform("projection", projection);
-        Category::getRoot() << Priority::DEBUG << this->m_name << " " << this->m_positions.size();
+//        Category::getRoot() << Priority::DEBUG << this->m_name << " " << this->m_positions.size();
 
         if (this->hasIndices())
         {

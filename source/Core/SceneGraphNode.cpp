@@ -54,17 +54,17 @@ namespace   Engine
         m_transform(assimpNode->mTransformation)
     {
         Category &root = Category::getRoot();
-        root << Priority::DEBUG << "SceneGraphNode : " << this->m_name;
-        root << Priority::DEBUG << "SceneGraphNode scene : " << this->getScene();
+//        root << Priority::DEBUG << "SceneGraphNode : " << this->m_name;
+//        root << Priority::DEBUG << "SceneGraphNode scene : " << this->getScene();
         if (!this->m_name.empty() && !meshOnly)
         {
-//            const aiCamera  *camera = nullptr;
+            const aiCamera  *camera = nullptr;
             const aiLight   *light = nullptr;
-//            if ((camera = assimpScene.getCamera(this->m_name)) != nullptr)
-//            {
-//                this->m_entity = new FreeflyCamera(this, shaderprograms);
-//            }
-            /*else */if ((light = assimpScene.getLight(this->m_name)) != nullptr)
+            if ((camera = assimpScene.getCamera(this->m_name)) != nullptr)
+            {
+                this->m_entity = new FreeflyCamera(this, shaderprograms);
+            }
+            else if ((light = assimpScene.getLight(this->m_name)) != nullptr)
             {
                  this->m_entity = new Light(light, this);
             }
@@ -77,7 +77,6 @@ namespace   Engine
             // the node is an object.
             this->m_entity = new Object(assimpNode, this);
         }
-//        root << Priority::DEBUG << "entity : " << this->m_entity->getName();
 
         // we just need to create the others child.
         for (unsigned int i = 0 ; i < assimpNode->mNumChildren ; ++i)
@@ -166,7 +165,7 @@ namespace   Engine
     SceneGraphNode::addChildren(SceneGraphNode *child)
     {
 //        Category &root = Category::getRoot();
-//        root << Priority::DEBUG << "SceneGraphNode : " << this->m_name;
+//        root << Priority::DEBUG << "SceneGraphNode add children : " << this->m_name;
 
         child->m_parent = this;
         this->m_childrens.push_back(child);

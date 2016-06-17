@@ -68,16 +68,16 @@ namespace Engine
     void
     Scene::addModel(const AssimpScene &s)
     {
-//        this->m_textures.append(TextureLibrary(s));
-//        this->m_materials.append(MaterialLibrary(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures));
-//        this->m_animations.append(AnimationLibrary(s.getAnimations(), s.getAnimationsNumber()));
-////        this->m_meshes.append(MeshLibrary(this->m_materials, s.getMeshes(), s.getMeshesNumber()));
+        this->m_textures.append(TextureLibrary(s));
+        this->m_materials.append(MaterialLibrary(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures));
+        this->m_animations.append(AnimationLibrary(s.getAnimations(), s.getAnimationsNumber()));
+//        this->m_meshes.append(MeshLibrary(this->m_materials, s.getMeshes(), s.getMeshesNumber()));
         this->m_meshes.appendMeshes(this->m_materials, s.getMeshes(), s.getMeshesNumber());
 
         SceneGraphNode * modelNode = new SceneGraphNode(s, s.getRootNode(), 
                 &m_scenegraph, m_shaderprograms, m_scenegraph.getRootNode(), true);
 //        this->m_scenegraph.getRootNode()->addChildren(modelNode);
-        Category::getRoot() << Priority::INFO << "Added model... ";
+        Category::getRoot() << Priority::DEBUG << "Added model ";
     }
 
     void
