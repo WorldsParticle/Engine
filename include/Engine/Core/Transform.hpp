@@ -84,6 +84,11 @@ namespace   Engine
             void    translate(const glm::vec3 &translation);
 
             ///
+            /// \brief This method scale the transform.
+            ///
+            void    scale(const glm::vec3 &s);
+
+            ///
             /// \brief This method rotate the transform.
             ///
             void    rotate(const glm::vec3 &rotation);

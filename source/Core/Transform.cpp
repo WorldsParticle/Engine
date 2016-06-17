@@ -73,6 +73,12 @@ namespace Engine
     {
         m_matrix = glm::translate(m_matrix, tranlation);
     }
+    
+    void
+    Transform::scale(const glm::vec3 &s)
+    {
+        m_matrix = glm::scale(m_matrix, s);
+    }
 
     void
     Transform::rotate(const glm::vec3 &rotation)
