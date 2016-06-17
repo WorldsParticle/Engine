@@ -74,7 +74,7 @@ namespace   Engine
         //m_mesh->update();
 		Category    &root = Category::getRoot();
 
-		root << Priority::DEBUG << "Terrain - update()";
+//		root << Priority::DEBUG << "Terrain - update()";
 		// nothing to do actually.
 	}
 

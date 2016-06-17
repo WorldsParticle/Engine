@@ -189,7 +189,7 @@ namespace   Engine
             ///
             void    setUVs(const aiVector3D *uvs, unsigned int numberElements);
 
-        private:
+        public://TODO put back to private
             ///
             /// \brief The name of the mesh.
             ///
