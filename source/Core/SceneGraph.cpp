@@ -42,14 +42,14 @@ namespace   Engine
 	m_shaderprograms(shaderprograms)
     {
         //#warning TODO temporary
-//        if (s.getCameraNumber() == 0)
-//        {
+        if (s.getCameraNumber() == 0)
+        {
             SceneGraphNode  *node = new SceneGraphNode(this);
             node->setName("DefaultCamera");
             Entity *camera = new FreeflyCamera(node, shaderprograms);
             node->setEntity(camera);
             this->m_rootNode->addChildren(node);
-//        }
+        }
 
         // nothing to do.
     }
