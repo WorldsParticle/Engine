@@ -23,7 +23,7 @@ namespace   Engine
 		const auto& myShader = shaderprograms.get(TEXTURE_SHADER_PROGRAM);
 
 		Material* myMaterial = new Material(myShader);
-		myMaterial->setTexture(new Texture("BuohNyo2.jpg"));
+		myMaterial->setTexture(new Texture("grounds/Lawn_grass_pxr128.tif"));
 		//TODO: reflechir a comment mettre plusieurs textures selon la hauteur -> shader specifique?
 		m_mesh = new Mesh(myMaterial);
 

@@ -1,9 +1,9 @@
 #ifndef HEIGHTMAP_NAMESPACE_H
 #define HEIGHTMAP_NAMESPACE_H
 
-#include <vector>
-#include <glm/glm.hpp>
 #include "heightpoint.hpp"
+#include <glm/glm.hpp>
+#include <vector>
 
 namespace map
 {

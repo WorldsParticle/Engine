@@ -63,7 +63,8 @@ namespace   Engine
         this->m_scene->add(this);
                 
         Transform titi;
-        titi.translate(glm::vec3(rand() % 50, rand() % 50,0));
+        titi.translate(glm::vec3(rand() % 500, rand() % 500, 2));
+        titi.scale(glm::vec3(0.1, 0.1, 0.1));
 
         node->setTransform(titi);
         node->getTransform().print();

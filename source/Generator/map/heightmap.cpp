@@ -49,7 +49,7 @@ void    HeightMap::generateMesh()
     for (unsigned int i = 0; i < m_height - 1; i++)
         for (unsigned int j = 0; j < m_width - 1; j++)
         {
-	    float scaleZ = 1000000;
+	    float scaleZ = 100;
             glm::vec3 p1 = glm::vec3(static_cast<float>(m_points[i * m_width + j].x),
                                      static_cast<float>(m_points[i * m_width + j].y),
                                      static_cast<float>(m_points[i * m_width + j].z) * scaleZ);

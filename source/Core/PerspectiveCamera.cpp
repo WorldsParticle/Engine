@@ -40,6 +40,8 @@ namespace   Engine
         node->getScene()->register_callback(Event::Type::RESIZE,
                 std::bind(&PerspectiveCamera::on_resize_event, this, std::placeholders::_1));
         this->m_scene->add(this);
+        m_transform_zero_test.translate(glm::vec3(0, 0, -500));
+        m_transform_zero_test.print();
     }
 
     PerspectiveCamera::PerspectiveCamera(const aiCamera *assimpCamera,
@@ -49,6 +51,9 @@ namespace   Engine
         m_view(glm::mat4(1))
     {
         const Transform &transform = this->getTransform();
+//        m_transform_zero_test.translate(glm::vec3(0, 0, 100));
+//        m_transform_zero_test.print();
+
         glm::vec4 pos = transform.getMatrix() * glm::vec4(this->m_position, 1.0);
         glm::vec4 look = transform.getMatrix() * glm::vec4(this->m_lookat, 1.0);
         this->m_projection = glm::perspective(this->m_fov, this->m_aspect,
