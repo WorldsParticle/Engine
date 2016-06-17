@@ -160,16 +160,20 @@ namespace   Engine
         Category& root = Category::getRoot();
         root << Priority::DEBUG << "Imported " << filename;
 
-//        std::string modelFilename("/home/marie/project/WorldsParticleMaster/Engine/resources/models/monkey.dae");
-//        if (!this->m_importer.importModel(modelFilename, test))
+//        std::string modelFilename("/home/marie/project/WorldsParticleMaster/Engine/resources/models/tree.dae");
+//        for (int i = 0; i < 10; i++)
 //        {
-//            root << Priority::WARN << "Could not import " << modelFilename;
+//            if (!this->m_importer.importModel(modelFilename, test))
+//            {
+//                root << Priority::WARN << "Could not import " << modelFilename;
+//            }
 //        }
-//
 //        root << Priority::INFO << "Imported " << modelFilename;
 
         this->m_scenes.push_back(test);
         root << Priority::DEBUG << "added scene.. " << filename;
+
+        test->render();//debug
     }
 
 }

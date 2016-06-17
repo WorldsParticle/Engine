@@ -123,6 +123,8 @@ namespace   Engine
             ///
             void    setEntity(Entity *entity);
 
+            void    setTransform(Transform& transform);
+
 //#warning Temporary function
             ///
             /// \brief Add a children in this node.

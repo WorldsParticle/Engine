@@ -162,6 +162,12 @@ namespace   Engine
     }
 
     void
+    SceneGraphNode::setTransform(Transform& transform)
+    {
+         this->m_transform = transform;
+    }
+
+    void
     SceneGraphNode::addChildren(SceneGraphNode *child)
     {
 //        Category &root = Category::getRoot();

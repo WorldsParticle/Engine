@@ -137,9 +137,14 @@ namespace   Engine
 		{
 		    const glm::mat4 &model = object->getTransform().getMatrix();
 		    const std::list<Mesh *> &meshes = object->getMeshes();
-//                    root << Priority::DEBUG << "render object " << object->getName();
+//                    root << Priority::DEBUG << "render object " << object->getName()
 //                         << "at ";
 //                    object->getTransform().print();
+//        Category &root = Category::getRoot();
+//        root << Priority::DEBUG << "[" << model[0][0] << "][" << model[1][0] << "][" << model[2][0] << "][" << model[3][0] << "]";
+//        root << Priority::DEBUG << "[" << model[0][1] << "][" << model[1][1] << "][" << model[2][1] << "][" << model[3][1] << "]";
+//        root << Priority::DEBUG << "[" << model[0][2] << "][" << model[1][2] << "][" << model[2][2] << "][" << model[3][2] << "]";
+//        root << Priority::DEBUG << "[" << model[0][3] << "][" << model[1][3] << "][" << model[2][3] << "][" << model[3][3] << "";        
 		    for (Mesh *part : meshes)
 		    {
 //                        root << Priority::DEBUG << "render mesh " << part->getName();                       

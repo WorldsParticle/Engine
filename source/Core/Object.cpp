@@ -30,6 +30,12 @@ namespace   Engine
         m_meshes()
     {
         this->m_scene->add(this);
+                
+//        Transform titi;
+//        titi.translate(glm::vec3(rand() % 50, rand() % 50,0));
+//
+//        node->setTransform(titi);
+//        node->getTransform().print();
     }
 
 
@@ -55,6 +61,13 @@ namespace   Engine
             this->m_meshes.push_back(mesh);
         }
         this->m_scene->add(this);
+                
+        Transform titi;
+        titi.translate(glm::vec3(rand() % 50, rand() % 50,0));
+
+        node->setTransform(titi);
+        node->getTransform().print();
+
     }
 
     Object::~Object(void)

@@ -79,6 +79,11 @@ namespace   Engine
 
         public:
             ///
+            /// \brief This method translate the transform.
+            ///
+            void    translate(const glm::vec3 &translation);
+
+            ///
             /// \brief This method rotate the transform.
             ///
             void    rotate(const glm::vec3 &rotation);

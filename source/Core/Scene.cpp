@@ -78,6 +78,15 @@ namespace Engine
                 &m_scenegraph, m_shaderprograms, m_scenegraph.getRootNode(), true);
 //        this->m_scenegraph.getRootNode()->addChildren(modelNode);
         Category::getRoot() << Priority::DEBUG << "Added model ";
+        
+        //TEST FOREST
+//        for (int i = 0; i < 10; i++)
+//        {
+//            SceneGraphNode * model2 = new SceneGraphNode(*modelNode);
+////            Transform toto;
+////            toto.translate(glm::vec3(500,10,10));
+////            model2->setTransform(toto);
+//        }
     }
 
     void
