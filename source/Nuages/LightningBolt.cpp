@@ -136,11 +136,11 @@ namespace   Engine
             return;
         size /= 2;
         glm::vec3 middle = (from + to) / 2.0f;
-        middle.x += (static_cast<float>(random() % 50 - 25) / 100.0f) *
+        middle.x += (static_cast<float>(rand() % 50 - 25) / 100.0f) *
                     (displace) * m_displacementFactors.x;
-        middle.y += (static_cast<float>(random() % 50 - 25) / 100.0f) *
+        middle.y += (static_cast<float>(rand() % 50 - 25) / 100.0f) *
                 (displace) * m_displacementFactors.y;
-        middle.z += (static_cast<float>(random() % 50 - 25) / 100.0f) *
+        middle.z += (static_cast<float>(rand() % 50 - 25) / 100.0f) *
                 (displace) * m_displacementFactors.z;
 
         m_points[idx] = middle;

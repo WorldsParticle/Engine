@@ -33,7 +33,6 @@ void	SoundManager::initAudio() {
 	}
     }
     */
-    alutInit(nullptr, nullptr);
 }
 
 void	SoundManager::createBuffers() {
@@ -53,17 +52,7 @@ void	SoundManager::createSources() {
 }
 
 void	SoundManager::fillBuffer(int position, const char *filename) {
-    ALenum     format;
-    ALsizei    size;
-    ALfloat    freq;
-    // ALboolean  loop; NOT USED
-    ALvoid*    data;
 
-    data = alutLoadMemoryFromFile(filename, &format, &size, &freq);
-    alBufferData(_buffers[position],format,data,size,static_cast<int>(freq));
-    free(data);
-    if ((_error = alGetError()) != AL_NO_ERROR)
-	std::cout << "Error in fillBuffer: " <<  alGetString(_error) << std::endl;
 }
 
 void    SoundManager::attachBuffer(int sourcepos, int bufferpos) {
@@ -102,6 +91,5 @@ void	SoundManager::closeAudio() {
     alDeleteBuffers(NUM_BUFFERS, _buffers);
     alcCloseDevice(_device);
     alcDestroyContext(_context);
-    alutExit();
     //TODO: ajouter des messages d'erreur ici
 }

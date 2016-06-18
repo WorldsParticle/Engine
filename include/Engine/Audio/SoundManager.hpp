@@ -14,7 +14,6 @@
 #include    <iostream>
 #include    <AL/al.h>
 #include    <AL/alc.h>
-#include    <AL/alut.h>
 
 #define	    NUM_BUFFERS 1
 #define	    NUM_SOURCES 1

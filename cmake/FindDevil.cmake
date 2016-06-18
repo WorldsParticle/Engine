@@ -1,96 +1,69 @@
-# -Try to find DevIL (developer image) library
-# formerly known as OpenIL, see
-# http://openil.sourceforge.net
+# Locate DevIL / ILU / ILUT libraries, this module defines :
 #
-# Once run this will define:
+# ::
 #
-# DevIL_FOUND
-# DevIL_INCLUDE_DIR
-# DevIL_LIBRARIES
-#
-# Jan Woetzel 12/2005.
-#
-# www.mip.informatik.uni-kiel.de/~jw
-# --------------------------------
+#   DEVIL_FOUND			   - if false, do not try to link DevIL
+#   DEVIL_LIBRARY_IL       - DevIL library
+#   DEVIL_LIBRARY_ILU      - DevILU library
+#   DEVIL_LIBRARY_ILUT     - DevILUT library
+#   DEVIL_LIBRARIES        - All DevILs library found
+#   DEVIL_INCLUDE_DIR      - where to find DevILs headers
+#-------------------------------
 
-# base dirs:
-SET(DevIL_POSSIBLE_ROOT_PATHS
-    ${DevIL_ROOT_DIR} $ENV{DevIL_ROOT_DIR}
-    ${DevIL_DIR} $ENV{DevIL_DIR}
-    ${DEVIL_DIR} $ENV{DEVIL_DIR}
-    ${DEVIL_HOME} $ENV{DEVIL_HOME}
-    "$ENV{EXTERN_LIBS_DIR}/DevIL"
-    $ENV{EXTRA_DIR} $ENV{EXTRA}
-    $ENV{ProgramFiles}/DevIL
-    /usr/local/ /usr/ /usr/lib/
-    /opt/net/gcc41/DevIL
-    /opt/net/gcc33/DevIL
-    C:/library/DevIL
-    "C:/Program Files/DevIL"
-    C:/DevIL
-    D:/)
+FIND_PATH(DEVIL_INCLUDE_DIR
+    NAMES IL/il.h
+    HINTS
+    ENV DEVIL_DIR
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
+    )
 
-# appended
-SET(DevIL_POSSIBLE_INCDIR_SUFFIXES include DevIL/include )
-SET(DevIL_POSSIBLE_LIBDIR_SUFFIXES lib lib64)
+FIND_LIBRARY(DEVIL_LIBRARY_IL
+    NAMES DevIL devil IL
+    HINTS
+    ENV DEVIL_DIR
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
+    )
 
-FIND_PATH(DevIL_INCLUDE_DIR NAMES IL/il.h
-    PATHS ${DevIL_POSSIBLE_ROOT_PATHS} PATH_SUFFIXES ${DevIL_POSSIBLE_INCDIR_SUFFIXES})
-#MESSAGE("DBG DevIL_INCLUDE_DIR=${DevIL_INCLUDE_DIR}")
-
-FIND_LIBRARY(DevIL_LIBRARY_IL
-    NAMES DevIL devil DevIL IL
-    PATHS ${DevIL_POSSIBLE_ROOT_PATHS} PATH_SUFFIXES ${DevIL_POSSIBLE_LIBDIR_SUFFIXES})
-#MESSAGE("DBG DevIL_LIBRARY_IL=${DevIL_LIBRARY_IL}")
-
-FIND_LIBRARY(DevIL_LIBRARY_ILU
+FIND_LIBRARY(DEVIL_LIBRARY_ILU
     NAMES ILU ilu Ilu
-    PATHS ${DevIL_POSSIBLE_ROOT_PATHS} PATH_SUFFIXES ${DevIL_POSSIBLE_LIBDIR_SUFFIXES})
-#MESSAGE("DBG DevIL_LIBRARY_ILU=${DevIL_LIBRARY_ILU}")
+    HINTS
+    ENV DEVIL_DIR
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
+    )
 
-FIND_LIBRARY(DevIL_LIBRARY_ILUT
-    NAMES ILUT ilu Ilut
-    PATHS ${DevIL_POSSIBLE_ROOT_PATHS} PATH_SUFFIXES ${DevIL_POSSIBLE_LIBDIR_SUFFIXES})
-#MESSAGE("DBG DevIL_LIBRARY_ILUT=${DevIL_LIBRARY_ILUT}")
+FIND_LIBRARY(DEVIL_LIBRARY_ILUT
+    NAMES ILUT ilut ILut
+    HINTS
+    ENV DEVIL_DIR
+    PATHS
+    ~/Library/Frameworks
+    /Library/Frameworks
+    /sw
+    /opt/local
+    /opt/csw
+    /opt
+    )
 
+FIND_PACKAGE_HANDLE_STANDARD_ARGS(DevIL
+    REQUIRED_VARS DEVIL_INCLUDE_DIR DEVIL_LIBRARY_IL DEVIL_LIBRARY_ILU
+    )
 
-
-# --------------------------------
-
-IF (DevIL_INCLUDE_DIR)
-    IF (DevIL_LIBRARY_IL)
-	IF (DevIL_LIBRARY_ILU) #AND DevIL_LIBRARY_ILUT)
-	    SET(DevIL_FOUND TRUE)
-	    SET(DevIL_LIBRARIES
-		${DevIL_LIBRARY_IL}
-		${DevIL_LIBRARY_ILU})
-	    IF (DevIL_LIBRARY_ILUT)
-		SET(DevIL_LIBRARIES ${DevIL_LIBRARIES} ${DevIL_LIBRARY_ILUT})
-	    ENDIF (DevIL_LIBRARY_ILUT)
-
-	    # get the link directory for rpath to be used with LINK_DIRECTORIES:
-	    GET_FILENAME_COMPONENT(DevIL_LINK_DIRECTORIES ${DevIL_LIBRARY_IL} PATH)
-	ENDIF(DevIL_LIBRARY_ILU)# AND DevIL_LIBRARY_ILUT)
-    ENDIF(DevIL_LIBRARY_IL)
-ENDIF (DevIL_INCLUDE_DIR)
-
-
-MARK_AS_ADVANCED( DevIL_INCLUDE_DIR DevIL_LIBRARY_IL DevIL_LIBRARY_ILU
-    DevIL_LIBRARY_ILUT DevIL_LIBRARIES)
-
-# ==========================================
-IF(NOT DevIL_FOUND)
-    # make FIND_PACKAGE friendly
-    IF(NOT DevIL_FIND_QUIETLY)
-	IF(DevIL_FIND_REQUIRED)
-	    MESSAGE(FATAL_ERROR "DevIL required, please specify it's location.")
-	ELSE(DevIL_FIND_REQUIRED)
-	    MESSAGE(STATUS "ERROR: DevIL was not found.")
-	ENDIF(DevIL_FIND_REQUIRED)
-    ENDIF(NOT DevIL_FIND_QUIETLY)
-ENDIF(NOT DevIL_FOUND)
-
-# backward compatibility
-SET(DEVIL_FOUND ${DevIL_FOUND})
-SET(DEVIL_LIBRARIES ${DevIL_LIBRARIES})
-SET(DEVIL_INCLUDE_DIR ${DevIL_INCLUDE_DIR})
+SET(DEVIL_LIBRARIES ${DEVIL_LIBRARY_IL} ${DEVIL_LIBRARY_ILU} ${DEVIL_LIBRARY_ILUT})
