@@ -18,8 +18,8 @@
 #pragma once
 
 #define PROJECT_VERSION_MAJOR   2
-#define PROJECT_VERSION_MINOR   2
+#define PROJECT_VERSION_MINOR   3
 #define PROJECT_VERSION_PATCH   1
 #define PROJECT_VERSION_EXTRA   0
-#define PROJECT_VERSION         "2.2.1"
-#define PROJECT_VERSION_FULL    "2.2.1.0"
+#define PROJECT_VERSION         "2.3.1"
+#define PROJECT_VERSION_FULL    "2.3.1.0"

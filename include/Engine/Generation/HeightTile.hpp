@@ -3,6 +3,8 @@
 
 #include <vector>
 
+#include "Engine/Configuration.hpp"
+
 namespace   Engine
 {
 

@@ -4,13 +4,15 @@
 #include <vector>
 #include "HeightTile.hpp"
 
+#include "Engine/Configuration.hpp"
+
 namespace   Engine
 {
 
 ///
 /// \brief The Heightmap class
 ///
-class Heightmap
+class ENGINE_EXPORTS Heightmap
 {
 public:
 

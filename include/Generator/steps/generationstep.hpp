@@ -5,13 +5,15 @@
 #include "../param/param.hpp"
 #include <list>
 
+#include "Engine/Configuration.hpp"
+
 namespace gen
 {
 
 ///
 /// \brief This abstract class describes the backbone of a map's generation step.
 ///
-class GenerationStep
+class ENGINE_EXPORTS GenerationStep
 {
 public:
     ///

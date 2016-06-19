@@ -5,6 +5,8 @@
 #include <memory>
 #include "point.hpp"
 
+#include "Engine/Configuration.hpp"
+
 namespace map
 {
 
@@ -16,7 +18,7 @@ class CrossedEdge;
 /// represent the vertices of zones
 /// contains the shape of Voronoi polygons
 ///
-class Corner
+class ENGINE_EXPORTS Corner
 {
 
 public:

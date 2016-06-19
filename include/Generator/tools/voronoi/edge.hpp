@@ -4,6 +4,8 @@
 #include "Generator/map/point.hpp"
 #include "Generator/map/zone.hpp"
 
+#include "Engine/Configuration.hpp"
+
 namespace vor
 {
 

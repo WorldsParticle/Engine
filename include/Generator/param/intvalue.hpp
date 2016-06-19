@@ -3,6 +3,8 @@
 
 #include "param.hpp"
 
+#include "Engine/Configuration.hpp"
+
 namespace gen
 {
 

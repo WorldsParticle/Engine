@@ -8,6 +8,8 @@
 #include "crossededge.hpp"
 #include "heightmap.hpp"
 
+#include "Engine/Configuration.hpp"
+
 namespace map
 {
 
@@ -15,7 +17,7 @@ namespace map
 ///
 /// \brief This class stores every information about the map
 ///
-class MapGraph
+class ENGINE_EXPORTS MapGraph
 {
 public:
     MapGraph(unsigned int xMaxx = 0, unsigned int yMaxx = 0);

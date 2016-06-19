@@ -21,7 +21,7 @@ namespace gen
 /// \brief This class run a bunch of step whose fill the mapgraph
 /// for now it will juste launch one by one the generation steps which have been assigned (actually in a static way)
 ///
-class Generator
+class ENGINE_EXPORTS Generator
 {
 public:
 

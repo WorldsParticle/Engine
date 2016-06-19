@@ -4,6 +4,8 @@
 #include "generationstep.hpp"
 #include "Generator/map/zonelookup.hpp"
 
+#include "Engine/Configuration.hpp"
+
 namespace gen
 {
 

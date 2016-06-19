@@ -4,13 +4,15 @@
 #include "generationstep.hpp"
 #include "../map/map.hpp"
 
+#include    "Engine/Configuration.hpp"
+
 namespace gen {
 
 ///
 /// \brief This class assign biomes to the zones of a Voronoi diagram.
 /// Based on the design found in https://github.com/amitp/mapgen2
 ///
-class BiomizatorStep : public gen::GenerationStep
+class ENGINE_EXPORTS BiomizatorStep : public gen::GenerationStep
 {
 public:
 

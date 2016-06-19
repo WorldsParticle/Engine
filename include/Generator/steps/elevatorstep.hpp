@@ -3,6 +3,8 @@
 
 #include "generationstep.hpp"
 
+#include "Engine/Configuration.hpp"
+
 namespace gen {
 
 ///

@@ -160,8 +160,7 @@ namespace   Engine
         Category& root = Category::getRoot();
         root << Priority::DEBUG << "Imported " << filename;
 
-//        std::string modelFilename("/home/marie/project/WorldsParticleMaster/Engine/resources/models/tree.DAE");
-        std::string modelFilename("../../Engine/resources/models/tree.DAE");
+        std::string modelFilename("C:/Users/louis/Documents/GitHub/Engine/resources/models/tree.dae");
 
         for (int i = 0; i < 20; i++)
         {

@@ -5,6 +5,8 @@
 #include "point.hpp"
 #include "zone.hpp"
 
+#include "Engine/Configuration.hpp"
+
 namespace map
 {
 

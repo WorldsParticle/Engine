@@ -4,13 +4,15 @@
 #include <list>
 #include <vector>
 
+#include    "Engine/Configuration.hpp"
+
 namespace   Engine
 {
 
 ///
 /// \brief The AbstractZone class
 ///
-class AbstractZone
+class ENGINE_EXPORTS AbstractZone
 {
 public:
     enum    ZoneType

@@ -5,6 +5,8 @@
 #include <glm/glm.hpp>
 #include <vector>
 
+#include "Engine/Configuration.hpp"
+
 namespace map
 {
 
@@ -12,7 +14,7 @@ namespace map
 /// \brief This class stores the height of the (x, y) points of a 2D map
 /// and also generates the buffers describing the map's mesh
 ///
-class HeightMap
+class ENGINE_EXPORTS HeightMap
 {
 public:
     ///
