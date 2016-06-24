@@ -1,17 +1,10 @@
 #include "Generator/map/heightmap.hpp"
 
-#include <cstdlib>
-
-#include "Generator/map/map.hpp"
-#include "Generator/map/point.hpp"
-#include "Generator/tools/simplexnoise.hpp"
-
-
 namespace map
 {
 
 
-HeightMap::HeightMap(unsigned int width, unsigned int height) : m_width(width), m_height(height), m_points(), m_vertices(), m_indices(), m_normals(), m_uvs()
+HeightMap::HeightMap(unsigned int width, unsigned int height) : m_width(width), m_height(height), m_points(), m_vertices(), m_indices(), m_normals(), m_uvs(), m_cul()
 {
     m_points.reserve(m_width * m_height);
     m_vertices.reserve(m_height * m_width * 3);

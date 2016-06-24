@@ -111,6 +111,8 @@ private:
     ///
     std::vector<float> m_uvs;
 
+    std::vector<float> m_cul;
+
 };
 
 }

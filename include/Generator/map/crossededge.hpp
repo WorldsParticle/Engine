@@ -1,7 +1,6 @@
 #ifndef CROSSEDEDGE_H
 #define CROSSEDEDGE_H
 
-#include <memory>
 #include "point.hpp"
 #include "zone.hpp"
 

@@ -18,12 +18,12 @@ MapGraph::MapGraph(unsigned int xMaxx, unsigned int yMaxx) :
 
 MapGraph::~MapGraph()
 {
-    for(std::map<int, Zone *>::iterator it = m_zones.begin(); it != m_zones.end(); ++it)
-        delete (*it).second;
-    for(std::map<int, Corner *>::iterator it = m_corners.begin(); it != m_corners.end(); ++it)
-        delete (*it).second;
-    for(std::map<int, CrossedEdge *>::iterator it = m_edges.begin(); it != m_edges.end(); ++it)
-        delete (*it).second;
+//    for(std::map<int, Zone *>::iterator it = m_zones.begin(); it != m_zones.end(); ++it)
+//        delete (*it).second;
+//    for(std::map<int, Corner *>::iterator it = m_corners.begin(); it != m_corners.end(); ++it)
+//        delete (*it).second;
+//    for(std::map<int, CrossedEdge *>::iterator it = m_edges.begin(); it != m_edges.end(); ++it)
+//        delete (*it).second;
 
     m_zones.clear();
     m_corners.clear();

@@ -2,7 +2,6 @@
 #define CORNER_H
 
 #include <vector>
-#include <memory>
 #include "point.hpp"
 
 namespace map
