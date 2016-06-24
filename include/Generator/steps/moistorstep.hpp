@@ -25,7 +25,7 @@ public:
     ///
     /// \brief Runs the generation step.
     ///
-    virtual void run();
+    virtual void run() override;
 
     ///
     /// \brief Assign moisture to Voronoi polygon's corners.

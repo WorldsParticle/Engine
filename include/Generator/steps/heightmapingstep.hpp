@@ -17,7 +17,7 @@ public:
     HeightMapingStep();
     virtual ~HeightMapingStep();
 
-    void    run();
+    virtual void    run() override;
 
 private:
     ///
