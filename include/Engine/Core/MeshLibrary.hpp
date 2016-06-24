@@ -78,6 +78,5 @@ namespace   Engine
             ///
             void    appendMeshes(const MaterialLibrary &materials,
                 aiMesh **assimpMeshes, unsigned int size);
-
     };
 }

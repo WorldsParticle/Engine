@@ -47,7 +47,7 @@ namespace   Engine
     }
 
     // TODO GSL NOT NULL
-    Object::Object(const aiNode *assimpNode, SceneGraphNode *node) :
+    Object::Object(const aiNode *assimpNode, SceneGraphNode *node, unsigned int previousMeshNumber) :
         Entity(node),
         m_meshes()
     {
@@ -56,12 +56,16 @@ namespace   Engine
         for (unsigned int i = 0 ; i < assimpNode->mNumMeshes ; ++i)
         {
             root << Priority::DEBUG << "Add mesh " << assimpNode->mName.C_Str();
-            auto *mesh = this->m_scene->getMesh(assimpNode->mMeshes[i]);
+
+            auto *mesh = this->m_scene->getMesh(assimpNode->mMeshes[i] + previousMeshNumber);
+	    if (previousMeshNumber > 0) {
+		std::cout << "________________________________" << std::endl << std::endl;
+	    }
+	    std::cout << mesh->getName() << " " << assimpNode->mName.C_Str() << " " << assimpNode->mMeshes[i] + previousMeshNumber << std::endl;
             mesh->m_name = std::string(assimpNode->mName.C_Str());
             this->m_meshes.push_back(mesh);
         }
         this->m_scene->add(this);
-                
         Transform titi;
         titi.translate(glm::vec3(rand() % 500, rand() % 500, 2));
         titi.scale(glm::vec3(0.1, 0.1, 0.1));
@@ -96,6 +100,7 @@ namespace   Engine
     void
     Object::moveToScene(SceneGraphNode *node)
     {
+	std::cout << "moved to another scene " << getName() << std::endl;
         this->m_node = node;
         this->m_scene = node->getScene();
         this->m_scene->add(this);
@@ -105,6 +110,11 @@ namespace   Engine
     const std::list<Mesh *> &
     Object::getMeshes(void) const
     {
+	//int i = 0;
+	//for (auto tmp = m_meshes.begin(); tmp != m_meshes.end(); tmp++) {
+	//    std::cout << (*tmp)->getName() << " is number " << i << std::endl;
+	//    i++;
+	//}
         return this->m_meshes;
     }
 

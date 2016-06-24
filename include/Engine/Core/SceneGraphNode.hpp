@@ -52,7 +52,7 @@ namespace   Engine
             SceneGraphNode(const AssimpScene &assimpScene,
                     const aiNode *assimpNode, SceneGraph *scenegraph,
 		    ShaderProgramLibrary &shaderprograms,
-                    SceneGraphNode *parent = nullptr, bool meshOnly = false);
+                    SceneGraphNode *parent = nullptr, bool meshOnly = false, unsigned int previousMeshNumber = 0);
 
             ///
             /// \brief Copy constructor.

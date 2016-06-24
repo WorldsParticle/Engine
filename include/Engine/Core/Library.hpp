@@ -67,6 +67,11 @@ namespace   Engine
             ///
             const Resource  &get(const Key &key) const;
 
+            ///
+            /// \brief Return the number of elements it contains
+            ///
+            unsigned int size() const;
+
         protected:
             ///
             /// \brief Resources container.
@@ -137,6 +142,13 @@ namespace   Engine
     Library<Key, Resource>::get(const Key &key) const
     {
         return this->m_resources.at(key);
+    }
+
+    template<typename Key, typename Resource>
+    unsigned int
+    Library<Key, Resource>::size() const
+    {
+	return this->m_resources.size();
     }
 
 }

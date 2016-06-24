@@ -49,7 +49,7 @@ namespace   Engine
             ///
             /// \brief Construct an object from an assimp node.
             ///
-            Object(const aiNode *assimpNode, SceneGraphNode *node); // TODO GSL NOT NULL
+            Object(const aiNode *assimpNode, SceneGraphNode *node, unsigned int previousMeshNumber); // TODO GSL NOT NULL
 
             ///
             /// \brief Copy constructor.

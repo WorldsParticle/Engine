@@ -45,7 +45,7 @@ namespace   Engine
     SceneGraphNode::SceneGraphNode(const AssimpScene &assimpScene,
             const aiNode *assimpNode, SceneGraph *scenegraph,
             ShaderProgramLibrary &shaderprograms, SceneGraphNode *parent,
-            bool meshOnly) :
+            bool meshOnly, unsigned int previousMeshNumber) :
         m_name(assimpNode->mName.C_Str()),
         m_parent(parent),
         m_childrens(),
@@ -75,14 +75,15 @@ namespace   Engine
         {
             // if the name is empty and the meshes related to the node > 0
             // the node is an object.
-            this->m_entity = new Object(assimpNode, this);
+            this->m_entity = new Object(assimpNode, this, previousMeshNumber);
         }
 
         // we just need to create the others child.
         for (unsigned int i = 0 ; i < assimpNode->mNumChildren ; ++i)
         {
             SceneGraphNode  *child = new SceneGraphNode(assimpScene,
-                    assimpNode->mChildren[i], scenegraph, shaderprograms, this);
+                    assimpNode->mChildren[i], scenegraph, shaderprograms, this,
+		    meshOnly, previousMeshNumber);
             this->m_childrens.push_back(child);
         }
     }
