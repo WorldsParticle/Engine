@@ -71,12 +71,14 @@ namespace Engine
         this->m_textures.append(TextureLibrary(s));
         this->m_materials.append(MaterialLibrary(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures));
         this->m_animations.append(AnimationLibrary(s.getAnimations(), s.getAnimationsNumber()));
-	unsigned int prevSize = m_meshes.size();
+	unsigned int prevSize = m_meshes.getSize();
 //        this->m_meshes.append(MeshLibrary(this->m_materials, s.getMeshes(), s.getMeshesNumber()));
         this->m_meshes.appendMeshes(this->m_materials, s.getMeshes(), s.getMeshesNumber());
 
 
 	std::cout << "previousMeshNumber = " << prevSize << std::endl;
+	std::cout << "textureNumber = " << m_textures.getSize() << std::endl;
+	std::cout << "materialNumber = " << m_materials.getSize() << std::endl;
         SceneGraphNode * modelNode = new SceneGraphNode(s, s.getRootNode(),
                 &m_scenegraph, m_shaderprograms, m_scenegraph.getRootNode(), true, prevSize);
         this->m_scenegraph.getRootNode()->addChildren(modelNode);

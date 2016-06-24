@@ -82,7 +82,7 @@ namespace   Engine
     {
         Category    &root = Category::getRoot();
 
-        unsigned int previousSize = this->m_resources.size();
+        unsigned int previousSize = static_cast<unsigned int>(this->m_resources.size());
         root << Priority::DEBUG << "appendMeshes with size = " << size << " to previous size " << previousSize;
         
         for (unsigned int i = 0 ; i < size ; ++i)

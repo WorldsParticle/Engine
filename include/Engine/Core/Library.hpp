@@ -60,7 +60,7 @@ namespace   Engine
             ///
             /// \brief Append the content of another library to this one.
             ///
-            void     append(const Library &other);
+            virtual void     append(const Library &other);
 
             ///
             /// \brief Getter for a resource.
@@ -70,7 +70,7 @@ namespace   Engine
             ///
             /// \brief Return the number of elements it contains
             ///
-            unsigned int size() const;
+            unsigned int getSize() const;
 
         protected:
             ///
@@ -146,9 +146,9 @@ namespace   Engine
 
     template<typename Key, typename Resource>
     unsigned int
-    Library<Key, Resource>::size() const
+    Library<Key, Resource>::getSize() const
     {
-	return this->m_resources.size();
+	return static_cast<unsigned int>(this->m_resources.size());
     }
 
 }

@@ -55,13 +55,7 @@ namespace   Engine
         root << Priority::DEBUG << "Création object";
         for (unsigned int i = 0 ; i < assimpNode->mNumMeshes ; ++i)
         {
-            root << Priority::DEBUG << "Add mesh " << assimpNode->mName.C_Str();
-
             auto *mesh = this->m_scene->getMesh(assimpNode->mMeshes[i] + previousMeshNumber);
-	    if (previousMeshNumber > 0) {
-		std::cout << "________________________________" << std::endl << std::endl;
-	    }
-	    std::cout << mesh->getName() << " " << assimpNode->mName.C_Str() << " " << assimpNode->mMeshes[i] + previousMeshNumber << std::endl;
             mesh->m_name = std::string(assimpNode->mName.C_Str());
             this->m_meshes.push_back(mesh);
         }

@@ -78,4 +78,15 @@ namespace   Engine
         }
         return *this;
     }
+    template<>
+    void Library<unsigned int, Material*>::append(const Library<unsigned int, Material*> &other)
+    {
+        unsigned int previousSize = this->getSize();
+        for (const auto &key_value : other.m_resources)
+        {
+        	this->m_resources.insert(
+			std::make_pair(key_value.first + previousSize,
+			    new Material(*key_value.second)));
+        }
+    }
 }

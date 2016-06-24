@@ -42,6 +42,11 @@ namespace   Engine
         m_arrayObject(std::make_shared<ArrayObject>()),
         m_material(material)
     {
+	if (material == nullptr)
+	{
+	    Category& root = Category::getRoot();
+	    root << Priority::ERROR << "NULL material pointer";
+	}
         // nothing to do
     }
 
@@ -81,7 +86,7 @@ namespace   Engine
     void
     Mesh::update(void)
     {
-        Category& root = Category::getRoot();
+        //Category& root = Category::getRoot();
 
         std::vector<float>  vertices = this->m_positions;
 //        Category::getRoot() << Priority::DEBUG << this->m_name << " " << this->m_positions.size();
