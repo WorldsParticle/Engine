@@ -38,7 +38,7 @@ namespace   Engine
     }
 
     Texture::Texture(const aiTexture *assimpTexture) :
-        m_name(),
+        m_name("HEY"),
         m_id(0)
     {
         if (assimpTexture == assimpTexture)
@@ -107,6 +107,7 @@ namespace   Engine
 
     void Texture::bind(void)
     {
+        Category& root = Category::getRoot();
         glBindTexture(GL_TEXTURE_2D, this->m_id);
     }
 

@@ -15,10 +15,14 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include    <log4cpp/Category.hh>
+
 #include    "Engine/Core/Material.hpp"
 #include    "Engine/Core/ShaderProgram.hpp"
 #include    "Engine/Core/Texture.hpp"
 #include    "Engine/Core/TextureLibrary.hpp"
+
+using namespace     log4cpp;
 
 namespace   Engine
 {
@@ -38,6 +42,7 @@ namespace   Engine
         m_shaderprogram(shaderprogram),
         m_texture(nullptr)
     {
+        Category& root = Category::getRoot();
         aiString assimpName;
 
         assimpMaterial->Get(AI_MATKEY_NAME, assimpName);
@@ -47,8 +52,21 @@ namespace   Engine
         {
             aiString texture_path;
             assimpMaterial->GetTexture(aiTextureType_DIFFUSE, 0, &texture_path);
-            this->m_texture = texture_library.get(texture_path.data);
+	    try
+	    {
+		this->m_texture = texture_library.get(texture_path.data);
+		root << Priority::NOTICE << "material contains texture: " << texture_path.data;
+	    }
+	    catch (std::out_of_range &err)
+	    {
+		root << Priority::ERROR << "Texture " << texture_path.data << " has not been loaded";
+		m_texture = nullptr;
+		return;
+	    }
         }
+	if (m_texture != nullptr) {
+	    root << Priority::NOTICE << "material texture: " << m_texture->m_name << " " << m_texture->m_id;;
+	}
     }
 
     Material::~Material(void) noexcept
@@ -59,6 +77,8 @@ namespace   Engine
 
     void Material::setTexture(Texture *texture)
     {
+        Category& root = Category::getRoot();
+	root << Priority::NOTICE << "---------------------CHANGE TEXTURE------------";
 	m_texture = texture;
     }
 
@@ -88,6 +108,7 @@ namespace   Engine
         this->m_shaderprogram->bind();
         if (this->m_texture != nullptr)
         {
+        Category& root = Category::getRoot();
             this->m_texture->bind();
         }
     }

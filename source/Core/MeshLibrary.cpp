@@ -40,9 +40,16 @@ namespace   Engine
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const aiMesh *amesh = assimpMeshes[i];
-            Material *material = materials.get(amesh->mMaterialIndex);
-            this->m_resources.insert(std::make_pair(i,
-                        new Mesh(amesh, material)));
+	    try
+	    {
+		Material *material = materials.get(amesh->mMaterialIndex);
+		this->m_resources.insert(std::make_pair(i,
+            	            new Mesh(amesh, material)));
+	    }
+	    catch (std::out_of_range &err)
+	    {
+		root << Priority::ERROR << "Material " << amesh->mMaterialIndex << " does not exist";
+	    }
         }
     }
 
@@ -88,10 +95,17 @@ namespace   Engine
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const aiMesh *amesh = assimpMeshes[i];
-            Material *material = materials.get(amesh->mMaterialIndex);
-            root << Priority::DEBUG << "append key = " << i + previousSize << " and mesh " << new Mesh(amesh, material);
-            this->m_resources.insert(std::make_pair(i + previousSize,
-                        new Mesh(amesh, material)));
+	    try
+	    {
+		Material *material = materials.get(amesh->mMaterialIndex);
+		root << Priority::DEBUG << "append key = " << i + previousSize << " and mesh " << new Mesh(amesh, material);
+            	this->m_resources.insert(std::make_pair(i + previousSize,
+            	            new Mesh(amesh, material)));
+	    }
+	    catch (std::out_of_range &err)
+	    {
+		root << Priority::ERROR << "Material " << amesh->mMaterialIndex << " does not exist";
+	    }
         }
     }
 

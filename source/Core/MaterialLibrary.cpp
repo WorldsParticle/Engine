@@ -40,7 +40,6 @@ namespace   Engine
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const auto &shaderprogram = shaderprograms.get(TEXTURE_SHADER_PROGRAM);
-            root << Priority::DEBUG << "using texture shader";
             this->m_resources.insert(std::make_pair(i,
                         new Material(ai_materials[i], shaderprogram,
                             texture_library)));
