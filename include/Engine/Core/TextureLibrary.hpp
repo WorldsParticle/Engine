@@ -72,5 +72,10 @@ namespace   Engine
             ///
             TextureLibrary  &operator=(TextureLibrary &&other) noexcept = default;
 
+	public:
+            ///
+            /// \brief Construct the library from the assimp scene
+            ///
+            void loadTexturesFromScene(const AssimpScene &ai_scene);
     };
 }

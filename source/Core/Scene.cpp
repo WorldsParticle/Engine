@@ -68,7 +68,7 @@ namespace Engine
     void
     Scene::addModel(const AssimpScene &s)
     {
-        this->m_textures.append(TextureLibrary(s));
+        this->m_textures.loadTexturesFromScene(s);
 	unsigned int prevMatSize = m_materials.getSize();
         this->m_materials.append(MaterialLibrary(this->m_shaderprograms, s.getMaterials(), s.getMaterialsNumber(), m_textures));
         this->m_animations.append(AnimationLibrary(s.getAnimations(), s.getAnimationsNumber()));

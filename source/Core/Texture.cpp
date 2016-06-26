@@ -107,7 +107,6 @@ namespace   Engine
 
     void Texture::bind(void)
     {
-        Category& root = Category::getRoot();
         glBindTexture(GL_TEXTURE_2D, this->m_id);
     }
 

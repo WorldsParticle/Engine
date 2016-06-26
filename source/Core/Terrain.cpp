@@ -72,7 +72,7 @@ namespace   Engine
 		Terrain::update(void)
 	{
         //m_mesh->update();
-		Category    &root = Category::getRoot();
+		//Category    &root = Category::getRoot();
 
 //		root << Priority::DEBUG << "Terrain - update()";
 		// nothing to do actually.

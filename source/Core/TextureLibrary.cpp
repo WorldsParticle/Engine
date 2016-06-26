@@ -51,33 +51,7 @@ namespace   Engine
     TextureLibrary::TextureLibrary(const AssimpScene &ai_scene) :
         Library<std::string, Texture *>()
     {
-        aiMaterial **materials = ai_scene.getMaterials();
-        unsigned int materials_number = ai_scene.getMaterialsNumber();
-
-	Category& root = Category::getRoot();
-
-	if (ai_scene.getTexturesNumber() != 0)
-	    root << Priority::DEBUG << "Support for meshes with embedded textures is not implemented";
-        // iterate over each materials
-        for (unsigned int material_index = 0 ;
-                material_index < materials_number ; ++material_index)
-        {
-            const aiMaterial *material = materials[material_index];
-            int texture_index = 0;
-            aiString texture_name;
-
-            // get each diffuse textures used by the material and insert it.
-            while (material->GetTexture(aiTextureType_DIFFUSE, texture_index,
-                        &texture_name) == AI_SUCCESS)
-            {
-                // WARNING potential problem with material sharing the same texture.
-		if (m_resources.find(texture_name.data) == m_resources.end()) {
-		    this->m_resources.insert(std::make_pair(texture_name.data,
-			        new Texture(texture_name.data)));
-		}
-                ++texture_index;
-            }
-        }
+	loadTexturesFromScene(ai_scene);
     }
 
     TextureLibrary::TextureLibrary(const TextureLibrary &other) :
@@ -112,17 +86,37 @@ namespace   Engine
         return *this;
     }
 
-    template<>
-    void Library<std::string, Texture*>::append(const Library<std::string, Texture*> &other)
+
+
+    void
+	TextureLibrary::loadTexturesFromScene(const AssimpScene &ai_scene)
     {
-        for (const auto &key_value : other.m_resources)
+        aiMaterial **materials = ai_scene.getMaterials();
+        unsigned int materials_number = ai_scene.getMaterialsNumber();
+
+	Category& root = Category::getRoot();
+
+	if (ai_scene.getTexturesNumber() != 0)
+	    root << Priority::DEBUG << "Support for meshes with embedded textures is not implemented";
+        // iterate over each materials
+        for (unsigned int material_index = 0 ;
+                material_index < materials_number ; ++material_index)
         {
-	    if (this->m_resources.find(key_value.first) == this->m_resources.end())
-	    {
-        	this->m_resources.insert(
-			std::make_pair(key_value.first,
-			    new Texture(*key_value.second)));
-	    }
+            const aiMaterial *material = materials[material_index];
+            int texture_index = 0;
+            aiString texture_name;
+
+            // get each diffuse textures used by the material and insert it.
+            while (material->GetTexture(aiTextureType_DIFFUSE, texture_index,
+                        &texture_name) == AI_SUCCESS)
+            {
+                // WARNING potential problem with material sharing the same texture.
+		if (m_resources.find(texture_name.data) == m_resources.end()) {
+		    this->m_resources.insert(std::make_pair(texture_name.data,
+			        new Texture(texture_name.data)));
+		}
+                ++texture_index;
+            }
         }
     }
 }

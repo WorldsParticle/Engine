@@ -80,7 +80,7 @@ namespace   Engine
     void
 	Renderer::add(Object *object)
 	{
-	    Category &root = Category::getRoot();
+	    //Category &root = Category::getRoot();
 
 //	    root << Priority::DEBUG << "Renderer - add object()" << object->getName();
 	    this->m_objects.push_back(object);
@@ -89,7 +89,7 @@ namespace   Engine
     void
 	Renderer::add(Camera *camera)
 	{
-	    Category& root = Category::getRoot();
+	    //Category& root = Category::getRoot();
 //	    const glm::ivec2 &size = camera->size();
 
 //	    root << Priority::DEBUG << "Renderer - add camera()" << camera->getName();
@@ -99,7 +99,7 @@ namespace   Engine
 	void
 		Renderer::add(Light *light)
 	{
-		Category &root = Category::getRoot();
+		//Category &root = Category::getRoot();
 
 //		root << Priority::DEBUG << "Renderer - add light() : " << light->getName();
 		this->m_lights.push_back(light);
@@ -117,7 +117,7 @@ namespace   Engine
     void
 	Renderer::render(void)
 	{
-            Category &root = Category::getRoot();
+            //Category &root = Category::getRoot();
 //            root << Priority::DEBUG << "render " << this;
 	    for (Camera *camera : this->m_cameras)
 	    {

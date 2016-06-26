@@ -79,7 +79,7 @@ namespace   Engine
             ///
             void        unbind(void);
 
-        public:
+        private:
             ///
             /// \brief This attribute is the name of the texture
             /// (its path is relative to the file loaded)
