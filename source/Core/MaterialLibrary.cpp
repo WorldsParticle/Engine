@@ -35,8 +35,6 @@ namespace   Engine
             const TextureLibrary &texture_library) :
         Library<unsigned int, Material *>()
     {
-        Category& root = Category::getRoot();
-
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const auto &shaderprogram = shaderprograms.get(TEXTURE_SHADER_PROGRAM);

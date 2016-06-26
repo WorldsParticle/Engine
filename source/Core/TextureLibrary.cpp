@@ -115,7 +115,6 @@ namespace   Engine
     template<>
     void Library<std::string, Texture*>::append(const Library<std::string, Texture*> &other)
     {
-        unsigned int previousSize = this->getSize();
         for (const auto &key_value : other.m_resources)
         {
 	    if (this->m_resources.find(key_value.first) == this->m_resources.end())

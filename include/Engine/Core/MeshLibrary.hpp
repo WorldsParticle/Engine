@@ -77,6 +77,6 @@ namespace   Engine
             /// TODO GSL array_view
             ///
             void    appendMeshes(const MaterialLibrary &materials,
-                aiMesh **assimpMeshes, unsigned int size);
+                aiMesh **assimpMeshes, unsigned int size, unsigned int prevMatSize);
     };
 }

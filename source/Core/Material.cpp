@@ -55,7 +55,6 @@ namespace   Engine
 	    try
 	    {
 		this->m_texture = texture_library.get(texture_path.data);
-		root << Priority::NOTICE << "material contains texture: " << texture_path.data;
 	    }
 	    catch (std::out_of_range &err)
 	    {
@@ -64,9 +63,6 @@ namespace   Engine
 		return;
 	    }
         }
-	if (m_texture != nullptr) {
-	    root << Priority::NOTICE << "material texture: " << m_texture->m_name << " " << m_texture->m_id;;
-	}
     }
 
     Material::~Material(void) noexcept
@@ -77,8 +73,6 @@ namespace   Engine
 
     void Material::setTexture(Texture *texture)
     {
-        Category& root = Category::getRoot();
-	root << Priority::NOTICE << "---------------------CHANGE TEXTURE------------";
 	m_texture = texture;
     }
 
@@ -105,11 +99,12 @@ namespace   Engine
     void
     Material::bind(void) const
     {
+        //Category& root = Category::getRoot();
         this->m_shaderprogram->bind();
         if (this->m_texture != nullptr)
         {
-        Category& root = Category::getRoot();
             this->m_texture->bind();
+	    //root << Priority::ERROR << "Texture " << m_texture->m_name << " " << m_texture->m_id << " binded";
         }
     }
 
