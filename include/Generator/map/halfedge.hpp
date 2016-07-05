@@ -6,7 +6,7 @@
 namespace map
 {
 
-class Zone;
+struct Zone;
 class CrossedEdge;
 class Corner;
 

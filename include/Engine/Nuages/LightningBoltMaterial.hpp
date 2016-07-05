@@ -56,7 +56,7 @@ namespace   Engine
             ///
             /// \brief Bind the LightningBoltMaterial in the graphic pipeline.
             ///
-            virtual void        bind(void) const;
+            virtual void        bind(void) const override;
 
     private:
         ///

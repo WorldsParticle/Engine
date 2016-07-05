@@ -26,21 +26,21 @@ namespace gen
             ///
             /// \brief Runs the generation step.
             ///
-            virtual void run();
+            virtual void run() override;
 
-		    ///
-		    /// \brief Assign moisture to Voronoi polygon's corners.
-		    ///
-		    void    assignCornerMoisture();
+            ///
+            /// \brief Assign moisture to Voronoi polygon's corners.
+            ///
+            void    assignCornerMoisture();
 
-		    ///
-		    /// \brief Redistributes moisture following a linear curve.
-		    ///
+            ///
+            /// \brief Redistributes moisture following a linear curve.
+            ///
             void    redistributeMoisture();
 
-		    ///
-		    /// \brief Assign Voronoi polygon's moisture (= avg. of its corners).
-		    ///
+            ///
+            /// \brief Assign Voronoi polygon's moisture (= avg. of its corners).
+            ///
             void    assignPolygonMoisture();
 
 	    private:

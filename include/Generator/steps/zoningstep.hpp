@@ -27,7 +27,7 @@ public:
     /// \brief run
     /// carefull if run an already filled map
     ///
-    virtual void    run();
+    virtual void    run() override;
 
 private:
 

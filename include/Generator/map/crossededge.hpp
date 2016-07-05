@@ -10,7 +10,7 @@
 namespace map
 {
 
-class Zone;
+struct Zone;
 class Corner;
 
 ///

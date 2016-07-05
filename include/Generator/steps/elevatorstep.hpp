@@ -27,7 +27,7 @@ public:
     ///
     /// \brief Runs the generation step.
     ///
-    virtual void run();
+    virtual void run() override;
 
 private:
 

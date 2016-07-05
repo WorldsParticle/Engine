@@ -5,7 +5,7 @@
 
 namespace map
 {
-    class Zone;
+    struct Zone;
 }
 
 namespace vor

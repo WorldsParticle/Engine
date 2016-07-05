@@ -8,7 +8,7 @@
 namespace map {
 
 class MapGraph;
-class Zone;
+struct Zone;
 
 ///
 /// \brief a cloud of points used as the input of the kd-tree construction.
@@ -31,7 +31,7 @@ struct PointCloud
 /// \brief This class holds a kd-tree of the map's zones,
 /// thus allowing to detect the closest neighboor to a random point
 ///
-class ZoneLookUp
+struct ZoneLookUp
 {
 public:
 

@@ -41,7 +41,7 @@ enum Biome {
 /// Represent the Delaunay triangulation
 /// This is the zone as itself, the face of the polygon
 ///
-class Zone
+struct Zone
 {
 
 public:
@@ -57,8 +57,8 @@ public:
     { return os << "[" << s.index << "](" << s.point.x << ", " << s.point.y << ")"; }
 
     ///
-    /// \brief Checks if the zone zone has a neighbor.
-    /// \param The zone for which we need to check whether is has neighbors or not.
+    /// \brief Checks if the zone has a neighbor.
+    /// \param The zone for which we need to check whether it has neighbors or not.
     ///
     bool    haveNeighbor(Zone *zone);
 

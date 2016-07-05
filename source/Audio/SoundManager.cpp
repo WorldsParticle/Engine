@@ -52,7 +52,7 @@ void	SoundManager::createSources() {
 }
 
 void	SoundManager::fillBuffer(int position, const char *filename) {
-
+    std::cout << "Fill buffer " << position << " with " << filename << std::endl; 
 }
 
 void    SoundManager::attachBuffer(int sourcepos, int bufferpos) {
