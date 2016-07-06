@@ -3,7 +3,7 @@
 
 #include "param.hpp"
 
-#include "Engine/Configuration.hpp"
+//#include "Engine/Configuration.hpp"
 
 namespace gen
 {
@@ -17,7 +17,7 @@ public:
     /// \param name
     ///
     IntValue(const std::string &namee = "") :
-        Param(intvalue, namee),
+        Param(INTVALUE, namee),
         m_minValue(0),
         m_maxValue(100),
         m_value(0)

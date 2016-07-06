@@ -1,8 +1,6 @@
 #ifndef ZONINGSTEP_H
 #define ZONINGSTEP_H
 
-#include "Generator/generator.hpp"
-#include "Generator/map/map.hpp"
 #include "Generator/tools/voronoi/voronoi.hpp"
 #include "generationstep.hpp"
 #include "Generator/param/intvalue.hpp"

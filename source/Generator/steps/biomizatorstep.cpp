@@ -29,56 +29,57 @@ map::Biome        BiomizatorStep::getBiome(map::Zone *z)
         return map::OCEAN;
     else if (z->water)
     {
-        if (z->elevation < 0.1f)
-            return map::MARSH;
-        if (z->elevation > 0.8f)
-            return map::ICE;
+//        if (z->elevation < 0.1f)
+//            return map::MARSH;
+//        if (z->elevation > 0.8f)
+//            return map::ICE;
         return map::LAKE;
     }
     else if (z->coast)
         return map::BEACH;
     else if (z->elevation > 0.8f)
     {
-        if (z->moisture > 0.5f)
+//        if (z->moisture > 0.5f)
             return map::SNOW;
-        else if (z->moisture > 0.33f)
-            return map::TUNDRA;
-        else if (z->moisture > 0.16f)
-            return map::BARE;
-        else
-            return map::SCORCHED;
+//        else if (z->moisture > 0.33f)
+//            return map::TUNDRA;
+//        else if (z->moisture > 0.16f)
+//            return map::BARE;
+//        else
+//            return map::SCORCHED;
     }
     else if (z->elevation > 0.6f)
     {
-        if (z->moisture > 0.66f)
-                return map::TAIGA;
-        else if (z->moisture > 0.33f)
-                return map::SHRUBLAND;
-        else
+//        if (z->moisture > 0.66f)
+//                return map::TAIGA;
+//        else if (z->moisture > 0.33f)
+//                return map::SHRUBLAND;
+//        else
             return map::TEMPERATE_DESERT;
     }
     else if (z->elevation > 0.3f)
     {
         if (z->moisture > 0.83f)
             return map::TEMPERATE_RAIN_FOREST;
-        else if (z->moisture > 0.50f)
-            return map::TEMPERATE_DECIDUOUS_FOREST;
+//        else if (z->moisture > 0.50f)
+//            return map::TEMPERATE_DECIDUOUS_FOREST;
         else if (z->moisture > 0.16f)
             return map::GRASSLAND;
-        else
-            return map::TEMPERATE_DESERT;
+//        else
+//            return map::TEMPERATE_DESERT;
     }
     else
     {
-        if (z->moisture > 0.66f)
-            return map::TROPICAL_RAIN_FOREST;
-        else if (z->moisture > 0.33f)
-            return map::TROPICAL_SEASONAL_FOREST;
-        else if (z->moisture > 0.16f)
+//        if (z->moisture > 0.66f)
+//            return map::TROPICAL_RAIN_FOREST;
+//        else if (z->moisture > 0.33f)
+//            return map::TROPICAL_SEASONAL_FOREST;
+//        else if (z->moisture > 0.16f)
             return map::GRASSLAND;
-        else
-            return (map::SUBTROPICAL_DESERT);
+//        else
+//            return (map::SUBTROPICAL_DESERT);
     }
+    return map::GRASSLAND;
 }
 
 void        BiomizatorStep::assignBiomes()

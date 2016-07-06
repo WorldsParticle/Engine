@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <memory>
+#include "biome.hpp"
 #include "point.hpp"
 
 namespace map
@@ -11,31 +12,6 @@ namespace map
 class CrossedEdge;
 class Corner;
 
-
-///
-/// \brief Enumeration of all the possible zone biomes.
-///
-enum Biome {
-    OCEAN,
-    MARSH,
-    ICE,
-    LAKE,
-    BEACH,
-    SNOW,
-    TUNDRA,
-    BARE,
-    SCORCHED,
-    TAIGA,
-    SHRUBLAND,
-    TEMPERATE_DESERT,
-    TEMPERATE_RAIN_FOREST,
-    TEMPERATE_DECIDUOUS_FOREST,
-    GRASSLAND,
-    TROPICAL_SEASONAL_FOREST,
-    TROPICAL_RAIN_FOREST,
-    SUBTROPICAL_DESERT
-};
-
 ///
 /// \brief The Site class
 /// Represent the Delaunay triangulation
@@ -43,7 +19,6 @@ enum Biome {
 ///
 struct Zone
 {
-
 public:
 
     ///

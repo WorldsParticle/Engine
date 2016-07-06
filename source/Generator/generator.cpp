@@ -9,11 +9,14 @@
 #include "Generator/steps/biomizatorstep.hpp"
 #include "Generator/steps/heightmapingstep.hpp"
 
+using GenData::ZoneData;
+
 namespace gen
 {
 
-Generator::Generator() :
-    m_steps()
+Generator::Generator()
+    : m_steps(),
+      m_zoneDatas()
 {
     m_steps.push_back(new ZoningStep());
     m_steps.push_back(new ShaperStep());
@@ -22,6 +25,15 @@ Generator::Generator() :
     m_steps.push_back(new MoistorStep());
     m_steps.push_back(new BiomizatorStep());
     m_steps.push_back(new HeightMapingStep());
+    
+    for (int i = 0; i < map::BIOME_COUNT; i++)
+    {
+        m_zoneDatas.push_back(ZoneData(static_cast<map::Biome>(i)));
+        //TODO how to prevent all zone to be desactivated?
+        
+        //test compil
+        //std::cout << map::BiomeName::getBiomeName(map::OCEAN);
+    }
 }
 
 void    Generator::run(map::MapGraph *map)

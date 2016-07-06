@@ -2,12 +2,9 @@
 #define GENERATOR_MARIE_H
 
 #include "steps/generationstep.hpp"
+#include "data/zoneData.hpp"
 #include <map>
 #include <list>
-
-
-#include "map/map.hpp"
-#include "steps/generationstep.hpp"
 
 namespace map
 {
@@ -24,10 +21,6 @@ namespace gen
 class ENGINE_EXPORTS Generator
 {
 public:
-
-    ///
-    /// \brief Default constructor.
-    ///
     Generator();
 
     ///
@@ -35,25 +28,19 @@ public:
     ///
     void run(map::MapGraph *map);
 
-    ///
-    /// \brief steps getter
-    /// \return
-    ///
-    inline const std::list<GenerationStep *>  &steps()
+
+    inline const std::vector<GenerationStep *>  &steps()
     { return m_steps; }
 
-    ///
-    /// \brief stepFromName
-    /// \param name
-    /// \return step
-    ///
     GenerationStep  *stepFromName(const std::string &namee);
 
+    inline const std::vector<GenData::ZoneData>  &zoneDatas()
+    { return m_zoneDatas; }
+
 protected:
-    ///
-    /// \brief steps which are run (in order)
-    ///
-    std::list<GenerationStep *> m_steps;
+    std::vector<GenerationStep *> m_steps;
+    
+    std::vector<GenData::ZoneData>    m_zoneDatas;
 };
 
 }

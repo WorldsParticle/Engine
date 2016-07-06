@@ -1,7 +1,7 @@
 #ifndef VORONOIGENERATOR_H
 #define VORONOIGENERATOR_H
 
-#include "Generator/generator.hpp"
+//#include "Generator/generator.hpp"
 #include "Generator/map/point.hpp"
 #include "event.hpp"
 #include <list>
