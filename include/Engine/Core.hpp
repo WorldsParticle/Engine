@@ -92,6 +92,10 @@ namespace Engine
             ///
             void    load(const std::string &filename);
 
+            void    addModel(const std::string &filename);
+
+            void    forest();//tmp
+            
             inline std::list<Scene *> &scenes()
             { return m_scenes; }
 
@@ -105,10 +109,5 @@ namespace Engine
             /// \brief The importer used to import new scene.
             ///
             AssimpImporter          m_importer;
-
-            ///
-            /// \brief m_generator
-            ///
-            gen::Generator          m_generator;
     };
 }

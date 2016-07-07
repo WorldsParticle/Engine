@@ -36,8 +36,7 @@ namespace   Engine
 
     Core::Core(void) :
         m_scenes(),
-        m_importer(),
-        m_generator()
+        m_importer()
     {
 
         PropertyConfigurator::configure(RESOURCES_PATH "/log4cpp.conf");
@@ -71,8 +70,7 @@ namespace   Engine
 
     Core::Core(const Core &other) :
         m_scenes(),
-        m_importer(other.m_importer),
-        m_generator()
+        m_importer(other.m_importer)
     {
         for (Scene *scene : other.m_scenes)
         {
@@ -82,8 +80,7 @@ namespace   Engine
 
     Core::Core(Core &&other) noexcept :
         m_scenes(std::move(other.m_scenes)),
-        m_importer(std::move(other.m_importer)),
-        m_generator()
+        m_importer(std::move(other.m_importer))
     {
         // nothing to do.
     }
@@ -160,16 +157,6 @@ namespace   Engine
         Category& root = Category::getRoot();
         root << Priority::DEBUG << "Imported " << filename;
 
-        std::string modelFilename("../Engine/resources/models/tree.DAE");
-
-        for (int i = 0; i < 20; i++)
-        {
-            if (!this->m_importer.importModel(modelFilename, test))
-            {
-                root << Priority::WARN << "Could not import " << modelFilename;
-            }
-        }
-        root << Priority::INFO << "Imported " << modelFilename;
 
         this->m_scenes.push_back(test);
         root << Priority::DEBUG << "added scene.. " << filename;
@@ -177,4 +164,29 @@ namespace   Engine
         test->render();//debug
     }
 
+    
+    void
+    Core::addModel(const std::string &filename)
+    {
+        Category& root = Category::getRoot();
+//        std::string modelFilename("../Engine/resources/models/tree.DAE");
+        std::string modelFilename = filename;
+
+        //Get current scene
+        if (m_scenes.empty())
+        {
+            root << Priority::WARN << "No scene to add " << modelFilename;            
+            return;
+        }
+        Scene * currentScene = m_scenes.front();
+        
+//        for (int i = 0; i < 20; i++)
+//        {
+            if (!this->m_importer.importModel(modelFilename, currentScene))
+            {
+                root << Priority::WARN << "Could not import " << modelFilename;
+            }
+//        }
+        root << Priority::INFO << "Imported " << modelFilename;        
+    }
 }

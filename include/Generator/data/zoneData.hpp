@@ -26,7 +26,7 @@ public:
     //ctor
     ZoneData(map::Biome const& t, bool a = false)
     : ParamData(),
-    type(t), active("active"), density("density"), elements(), climate(new ClimateData())
+    type(t), active("active"), density("density"), _elements()//, climate(new ClimateData())
     {
         active.setValue(a);
 
@@ -37,6 +37,9 @@ public:
         _params.push_back(&active);
         _params.push_back(&density);
 
+        //TODO true list of elements
+        _elements.push_back(new ElementData("Apple tree", "../Engine/resources/models/tree.DAE"));
+        _elements.push_back(new ElementData("Suzanne", "../Engine/resources/models/monkey.dae"));
     }
 
 
@@ -51,13 +54,16 @@ public:
     gen::BoolValue   active;
     gen::IntValue   density;
 
-    std::vector<ElementData *>    elements;
+    inline std::vector<ElementData *>   &elements()
+    { return _elements; }
     
-    ClimateData *climate;
+    //ClimateData *climate;
     
 
 private:
     //std::vector<Zone>   voronoiZones;//useful?
+
+    std::vector<ElementData *>    _elements;
 };
 }
 

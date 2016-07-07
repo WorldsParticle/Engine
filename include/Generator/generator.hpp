@@ -4,11 +4,19 @@
 #include "steps/generationstep.hpp"
 #include "data/zoneData.hpp"
 #include <map>
-#include <list>
+#include <algorithm>
 
 namespace map
 {
 class MapGraph;
+}
+
+namespace Engine
+{
+class Core;
+class Terrain;
+class Object;
+class Light;
 }
 
 namespace gen
@@ -21,14 +29,14 @@ namespace gen
 class ENGINE_EXPORTS Generator
 {
 public:
-    Generator();
+    Generator(Engine::Core *engine);
+    ~Generator();
 
-    ///
-    /// \brief Executes the map generation steps.
-    ///
-    void run(map::MapGraph *map);
+    void    run(map::MapGraph *map);
+    void    addTerrain(map::HeightMap &);
+    void    runEntityGenerator();
 
-
+public:
     inline const std::vector<GenerationStep *>  &steps()
     { return m_steps; }
 
@@ -38,9 +46,19 @@ public:
     { return m_zoneDatas; }
 
 protected:
-    std::vector<GenerationStep *> m_steps;
-    
+    std::vector<GenerationStep *>       m_steps;
     std::vector<GenData::ZoneData *>    m_zoneDatas;
+    
+protected:
+    Engine::Terrain *                   m_terrain;//TODO multiple terrain ?
+    std::vector<Engine::Object *>       m_objects;
+    std::vector<Engine::Light *>        m_lights;
+    //m_particles;
+    //m_skybox;
+    
+private:
+//    std::vector<GenData::ZoneData *>    m_activeZoneDatas;    
+    Engine::Core *m_engine;
 };
 
 }
