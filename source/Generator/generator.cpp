@@ -28,7 +28,7 @@ Generator::Generator()
     
     for (int i = 0; i < map::BIOME_COUNT; i++)
     {
-        m_zoneDatas.push_back(ZoneData(static_cast<map::Biome>(i)));
+        m_zoneDatas.push_back(new ZoneData(static_cast<map::Biome>(i)));
         //TODO how to prevent all zone to be desactivated?
         
         //test compil

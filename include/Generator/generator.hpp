@@ -34,13 +34,13 @@ public:
 
     GenerationStep  *stepFromName(const std::string &namee);
 
-    inline const std::vector<GenData::ZoneData>  &zoneDatas()
+    inline const std::vector<GenData::ZoneData *>  &zoneDatas()
     { return m_zoneDatas; }
 
 protected:
     std::vector<GenerationStep *> m_steps;
     
-    std::vector<GenData::ZoneData>    m_zoneDatas;
+    std::vector<GenData::ZoneData *>    m_zoneDatas;
 };
 
 }

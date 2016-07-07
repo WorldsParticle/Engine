@@ -8,28 +8,35 @@
 #ifndef ZONEDATA_HPP
 #define ZONEDATA_HPP
 
+#include <vector>
+#include "paramData.hpp"
 #include "elementData.hpp"
 #include "climateData.hpp"
 //#include "../map/zone.hpp"
 #include "../param/boolvalue.hpp"
 #include "../param/intvalue.hpp"
+#include "climateData.hpp"
 
 namespace GenData
 {
 
-struct ZoneData
+class ZoneData : public ParamData
 {
+public:
     //ctor
     ZoneData(map::Biome const& t, bool a = false)
-    : type(t), active("active"), density("density"),
-    elements(), climate()
+    : ParamData(),
+    type(t), active("active"), density("density"), elements(), climate(new ClimateData())
     {
         active.setValue(a);
 
         density.setMinValue(1);
         density.setMaxValue(100);
         density.setValue(50);
-//        params().push_back(&density);
+
+        _params.push_back(&active);
+        _params.push_back(&density);
+
     }
 
 
@@ -44,15 +51,13 @@ struct ZoneData
     gen::BoolValue   active;
     gen::IntValue   density;
 
-    std::vector<ElementData>    elements;
+    std::vector<ElementData *>    elements;
     
-    ClimateData climate;
+    ClimateData *climate;
     
 
 private:
     //std::vector<Zone>   voronoiZones;//useful?
-    
-    //std::list<Param *>  m_params;
 };
 }
 
