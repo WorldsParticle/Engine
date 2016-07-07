@@ -52,17 +52,19 @@ namespace   Engine
         m_meshes()
     {
         Category &root = Category::getRoot();
-        root << Priority::DEBUG << "Création object";
+        std::cout << "Création object" << std::endl;
         for (unsigned int i = 0 ; i < assimpNode->mNumMeshes ; ++i)
         {
             auto *mesh = this->m_scene->getMesh(assimpNode->mMeshes[i] + previousMeshNumber);
-            mesh->m_name = std::string(assimpNode->mName.C_Str());
             this->m_meshes.push_back(mesh);
+
+            mesh->m_name = std::string(assimpNode->mName.C_Str());
+            std::cout << "mesh " << mesh->m_name << std::endl;
         }
         this->m_scene->add(this);
         Transform titi;
-        titi.translate(glm::vec3(rand() % 500, rand() % 500, 2));
-        titi.scale(glm::vec3(0.1, 0.1, 0.1));
+        titi.translate(glm::vec3(rand() % 50, rand() % 50, 2));
+        titi.scale(glm::vec3(0.5, 0.5, 0.5));
 
         node->setTransform(titi);
         node->getTransform().print();

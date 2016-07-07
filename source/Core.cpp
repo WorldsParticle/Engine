@@ -165,28 +165,27 @@ namespace   Engine
     }
 
     
-    void
-    Core::addModel(const std::string &filename)
+    SceneGraphNode  *
+    Core::loadModel(const std::string &filename)
     {
         Category& root = Category::getRoot();
-//        std::string modelFilename("../Engine/resources/models/tree.DAE");
-        std::string modelFilename = filename;
+        SceneGraphNode  * newModelNode;
 
         //Get current scene
         if (m_scenes.empty())
         {
-            root << Priority::WARN << "No scene to add " << modelFilename;            
-            return;
+            root << Priority::WARN << "No scene to add " << filename;            
+            return nullptr;
         }
         Scene * currentScene = m_scenes.front();
-        
-//        for (int i = 0; i < 20; i++)
-//        {
-            if (!this->m_importer.importModel(modelFilename, currentScene))
-            {
-                root << Priority::WARN << "Could not import " << modelFilename;
-            }
-//        }
-        root << Priority::INFO << "Imported " << modelFilename;        
+
+        //Load the model
+        if (!(newModelNode = this->m_importer.importModel(filename, currentScene)))
+        {
+            root << Priority::WARN << "Could not import " << filename;
+        }
+        root << Priority::INFO << "Imported " << filename;        
+
+        return newModelNode;
     }
 }

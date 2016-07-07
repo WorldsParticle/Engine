@@ -87,6 +87,38 @@ namespace   Engine
             this->m_childrens.push_back(child);
         }
     }
+    
+    SceneGraphNode::SceneGraphNode(const SceneGraphNode &other)
+    :   m_name(other.m_name),
+        m_parent(other.m_parent),
+        m_childrens(),
+        m_scenegraph(other.m_scenegraph),
+        m_entity(other.m_entity),//TODO cpy instead
+        m_transform(other.m_transform)
+
+    {
+        Object* obj = dynamic_cast<Object*>(other.m_entity);
+        if (obj)
+        {
+            m_entity = new Object(*obj);
+            m_entity->setNode(this);
+        }
+        //TODO copy children
+    }
+    
+    SceneGraphNode::SceneGraphNode(SceneGraphNode &&other) noexcept
+    :   m_name(other.m_name),
+        m_parent(other.m_parent),
+        m_childrens(),
+        m_scenegraph(other.m_scenegraph),
+        m_entity(other.m_entity),//TODO cpy instead
+        m_transform(other.m_transform)
+
+    {
+        //TODO copy children
+    }
+
+    
 
     SceneGraphNode::~SceneGraphNode(void)
     {
@@ -142,7 +174,11 @@ namespace   Engine
          return this->m_transform;
     }
 
-
+    Entity *
+    SceneGraphNode::getEntity(void) const
+    {
+        return this->m_entity;
+    }
 
     void
     SceneGraphNode::setName(const std::string &name)

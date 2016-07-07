@@ -65,8 +65,8 @@ namespace Engine
         // nothing to do.
     }
 
-    void
-    Scene::addModel(const AssimpScene &s)
+    SceneGraphNode *
+    Scene::loadModel(const AssimpScene &s)
     {
         this->m_textures.loadTexturesFromScene(s);
 	unsigned int prevMatSize = m_materials.getSize();
@@ -79,6 +79,7 @@ namespace Engine
         SceneGraphNode * modelNode = new SceneGraphNode(s, s.getRootNode(),
                 &m_scenegraph, m_shaderprograms, m_scenegraph.getRootNode(), true, prevSize);
         this->m_scenegraph.getRootNode()->addChildren(modelNode);
+
         Category::getRoot() << Priority::DEBUG << "Added model ";
 
         //TEST FOREST
@@ -89,6 +90,7 @@ namespace Engine
 ////            toto.translate(glm::vec3(500,10,10));
 ////            model2->setTransform(toto);
 //        }
+        return modelNode;
     }
 
     void

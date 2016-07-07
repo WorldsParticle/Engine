@@ -42,8 +42,8 @@ namespace   Engine
         PerspectiveCamera(node, shaderprograms),
         m_right(0.0f, 0.0f, 0.0f),
         m_look(0.0f, 1.0f, 0.0f),
-        m_speed(0.5f),
-        m_mouse_sensibility(0.001f)
+        m_speed(2.0f),
+        m_mouse_sensibility(0.0005f)
     {
         this->m_right = glm::normalize(glm::cross(glm::vec3(0.0f, 0.0f, 1.0f), this->m_look));
         this->m_up = glm::cross(this->m_look, this->m_right);

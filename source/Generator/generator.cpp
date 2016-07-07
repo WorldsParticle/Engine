@@ -8,6 +8,7 @@
 #include "Engine/Core/Terrain.hpp"
 #include "Engine/Core/Object.hpp"
 #include "Engine/Core/Light.hpp"
+#include "Engine/Core/SceneGraphNode.hpp"
 
 #include "Generator/data/elementData.hpp"
 
@@ -95,26 +96,37 @@ void    Generator::runEntityGenerator()
         //scenecourante
     //parcours les genentity pour faire les addobject, addlight etc...
 
-//   m_engine->addModel(element->filename());
+    Engine::SceneGraphNode  * node = m_engine->loadModel("../Engine/resources/models/tree.DAE");
+    std::cout << "Successfully loaded node " << node << std::endl;
     
-    std::for_each(zoneDatas().begin(), zoneDatas().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
-        std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
-           Category::getRoot() << Priority::INFO << "Create entity from element : " << element->name;
-           
-            //TODO don't call addModel here, just create the Entity and Node instead
-//            Engine::Scene   *scene = m_engine->scenes().front();
-//            if (!scene)
-//            {
-//                Category::getRoot() << Priority::WARN << "No scene to add element";
-//            }
-//            else
-//            {
-           m_engine->addModel(element->filename());
-//                scene->
-                        
-//            }
-        });
-    });
+    if (node)
+    {
+        Engine::Scene   *scene = m_engine->scenes().front();
+        Engine::SceneGraphNode  * duplicatedNode = new Engine::SceneGraphNode(*node);
+        scene->add(dynamic_cast<Engine::Object *>(duplicatedNode->getEntity()));
+        std::cout << "Successfully duplicated node" << std::endl;
+    }
+    
+    m_engine->loadModel("../Engine/resources/models/cube.obj");
+    
+//    std::for_each(zoneDatas().begin(), zoneDatas().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
+//        std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
+//           Category::getRoot() << Priority::INFO << "Create entity from element : " << element->name;
+//           
+//            //TODO don't call addModel here, just create the Entity and Node instead
+////            Engine::Scene   *scene = m_engine->scenes().front();
+////            if (!scene)
+////            {
+////                Category::getRoot() << Priority::WARN << "No scene to add element";
+////            }
+////            else
+////            {
+//           m_engine->loadModel                                                                                                                                                            (element->filename());
+////                scene->
+//                        
+////            }
+//        });
+//    });
 
     //TODO add everything to the scene
 }

@@ -48,87 +48,32 @@ namespace Engine
     class ENGINE_EXPORTS Scene final
     {
         public:
-            ///
-            /// \brief Default constructor. This constructor create an empty scene.
-            ///
             Scene(void);
-
-            ///
-            /// \brief Construct a scene form an assimp scene.
-            ///
             Scene(const AssimpScene &assimpScene);
-
-            ///
-            /// \brief Copy constructor.
-            ///
             Scene(const Scene &other) = default;
-
-            ///
-            /// \brief Move constructor.
-            ///
             Scene(Scene &&other) noexcept = default;
-
-            ///
-            /// \brief Destructor
-            ///
             virtual ~Scene(void) noexcept;
 
         public:
-            ///
-            /// \brief Copy assignement operator.
-            ///
             Scene       &operator=(const Scene &other) = default;
-
-            ///
-            /// \brief Move assignement operator.
-            ///
             Scene       &operator=(Scene &&other) noexcept = default;
 
         public:
             ///
             /// \brief This function is used to import a model with assimp.
             ///
-            void        addModel(const AssimpScene &s);
+            SceneGraphNode  *loadModel(const AssimpScene &s);
 
-            ///
-            /// \brief This function is used to update the scene.
-            ///
             void        update(void);
-
-            ///
-            /// \brief This function is used to draw the scene on the screen.
-            ///
             void        render(void);
-
-            ///
-            /// \brief This function is used to push a new event in the scene.
-            ///
             void        push_event(const Event::Event &event);
 
         public:
-            ///
-            /// \brief This method allow to retrieve a material from the animation material.
-            ///
             Material    *getMaterial(unsigned int id) const;
-
-            ///
-            /// \brief This method allow to retrieve an animation from the animation library.
-            ///
             Animation   *getAnimation(const std::string &name) const;
-
-            ///
-            /// \brief This method allow to retrieve a mesh from the mesh library.
-            ///
             Mesh        *getMesh(unsigned int id) const;
-
-            ///
-            /// \brief This method allow to retrieve a texture from the texture library.
-            ///
             Texture     *getTexture(const std::string &name) const;
 
-            ///
-            /// \brief Return the clock of the scene.
-            ///
             const Clock &clock(void) const;
 
             ShaderProgramLibrary const&     getShaderPrograms() const{
@@ -136,29 +81,15 @@ namespace Engine
             }
 
         public:
-
             ///
             /// \brief Add an object in the spatial graph.
             ///
             void        add(Object *object);
-
-            ///
-            /// \brief Add a light in the spatial graph.
-            ///
             void        add(Light *light);
-
-            ///
-            /// \brief add a camera in the spatial graph.
-            ///
             void        add(Camera *camera);
-
-            ///
-            /// \brief add a terrain in the spatial graph.
-            ///
             void        add(Terrain *terrain);
 
         public:
-
             ///
             /// \brief Temporary function to register a callback to an event.
             ///
@@ -168,48 +99,20 @@ namespace Engine
                     const std::function<void(const Event::Event &)> &callback);
 
         protected:
-
-            ///
-            /// \brief temporary, but something similar to what I want do.
-            ///
             Event::EventRegister    m_event_register;
 
-            ///
-            /// \brief The clock used in the scene.
-            ///
             Clock                   m_clock;
 
         protected:
-            ///
-            /// \brief Library of usable shader program.
-            ///
             ShaderProgramLibrary        m_shaderprograms;
-
-            ///
-            /// \brief Library of usable textures in the scene.
-            ///
             TextureLibrary              m_textures;
-
-            ///
-            /// \brief Library of usable materials.
-            ///
             MaterialLibrary             m_materials;
-
-            ///
-            /// \brief Library of usable animation in the scene.
-            ///
             AnimationLibrary            m_animations;
-
-            ///
-            /// \brief Library of usable mesh in the scene.
-            ///
             MeshLibrary                 m_meshes;
 
         protected:
             ///
             /// \brief The renderer is used to render the scene efficiently.
-            ///
-            /// For more informations, see Renderer.hpp
             ///
             Renderer                    m_renderer;
 
@@ -220,8 +123,6 @@ namespace Engine
 
             ///
             /// \brief The scene graph represent the architecture of the scene.
-            ///
-            /// For more informations see SceneGraph.hpp
             ///
             SceneGraph                  m_scenegraph;
 

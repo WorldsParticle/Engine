@@ -28,6 +28,7 @@ namespace   Engine
 {
 
     class   Scene;
+    class   SceneGraphNode;
 
     ///
     /// \brief This class is used to import a scene with the assimp library.
@@ -75,7 +76,7 @@ namespace   Engine
             ///
             /// \brief This method is used to load a model from a filename and add it to an existing scene
             ///
-            bool   importModel(const std::string &filename, Scene *scene);
+            SceneGraphNode  *importModel(const std::string &filename, Scene *scene);
 
         private:
             ///

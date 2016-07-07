@@ -61,20 +61,20 @@ namespace   Engine
         return scene;
     }
     
-    bool
+    SceneGraphNode  *
     AssimpImporter::importModel(const std::string &filename, Scene *scene)
     {
         const aiScene   *loadedScene = this->load(filename);
+        SceneGraphNode  *newModelNode = nullptr;
 
         if (loadedScene != nullptr)
         {
             AssimpScene     aiscene(loadedScene);
             Category::getRoot() << Priority::INFO << "Importing... " << filename;
 
-            scene->addModel(aiscene);
-            return true;
+            newModelNode = scene->loadModel(aiscene);
         }
-        return false;        
+        return newModelNode;
     }
 
 

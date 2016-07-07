@@ -57,12 +57,12 @@ namespace   Engine
             ///
             /// \brief Copy constructor.
             ///
-            SceneGraphNode(const SceneGraphNode &other) = default; // TODO TOTALEMENT FAUX
+            SceneGraphNode(const SceneGraphNode &other);
 
             ///
             /// \brief Move constructor.
             ///
-            SceneGraphNode(SceneGraphNode &&other) noexcept = default; // TODO TOTALEMENT FAUX
+            SceneGraphNode(SceneGraphNode &&other) noexcept;
 
             ///
             /// \brief Destructor.
@@ -101,6 +101,8 @@ namespace   Engine
             /// \brief Getter for the scene that contain the scene graph related to this node
             ///
             Scene               *getScene(void) const;
+
+            Entity              *getEntity(void) const;
 
             ///
             /// \brief Getter for the tranformation of the node.

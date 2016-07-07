@@ -40,6 +40,7 @@ public:
         //TODO true list of elements
         _elements.push_back(new ElementData("Apple tree", "../Engine/resources/models/tree.DAE"));
         _elements.push_back(new ElementData("Suzanne", "../Engine/resources/models/monkey.dae"));
+        _elements.push_back(new ElementData("Cube", "../Engine/resources/models/cube.obj"));
     }
 
 

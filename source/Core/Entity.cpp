@@ -93,4 +93,13 @@ namespace   Engine
             return m_transform_zero_test;
         return this->m_node->getTransform();
     }
+    
+    SceneGraphNode *    Entity::getNode() {
+        return m_node;
+    }
+
+    void     Entity::setNode(SceneGraphNode * node) {
+        m_node = node;
+    }
+
 }

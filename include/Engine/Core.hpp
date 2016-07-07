@@ -92,7 +92,7 @@ namespace Engine
             ///
             void    load(const std::string &filename);
 
-            void    addModel(const std::string &filename);
+            SceneGraphNode  *    loadModel(const std::string &filename);
 
             void    forest();//tmp
             

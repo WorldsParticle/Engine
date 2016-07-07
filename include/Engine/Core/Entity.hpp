@@ -95,6 +95,11 @@ namespace   Engine
             /// \brief Getter for the transformation matrix of the associated node.
             ///
             const Transform             &getTransform(void) const;
+            
+            SceneGraphNode *    getNode();
+
+        public:
+            void     setNode(SceneGraphNode * node);
 
         protected:
             ///

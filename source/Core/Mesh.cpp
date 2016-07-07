@@ -68,6 +68,8 @@ namespace   Engine
         m_material(material)
     {
         this->m_name = am->mName.C_Str();
+        std::cout << "Ctor mesh : " << this->m_name << std::endl;
+        
         this->setPositions(am->mVertices, am->mNumVertices);
         this->setNormals(am->mNormals, am->mNumVertices);
         if (am->HasTextureCoords(0))

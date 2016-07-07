@@ -90,15 +90,18 @@ namespace   Engine
         Category    &root = Category::getRoot();
 
         unsigned int previousSize = static_cast<unsigned int>(this->m_resources.size());
-        root << Priority::DEBUG << "appendMeshes with size = " << size << " to previous size " << previousSize;
+        //root << Priority::DEBUG << "appendMeshes with size = " << size << " to previous size " << previousSize;
 
+        std::cout << "Append meshes" << std::endl;
         for (unsigned int i = 0 ; i < size ; ++i)
         {
             const aiMesh *amesh = assimpMeshes[i];
+            std::cout << "Add mesh" << std::string(amesh->mName.C_Str()) << std::endl;
+
 	    try
 	    {
 		Material *material = materials.get(amesh->mMaterialIndex + prevMatSize);
-		root << Priority::DEBUG << "append key = " << i + previousSize << " and mesh " << new Mesh(amesh, material);
+		//root << Priority::DEBUG << "append key = " << i + previousSize << " and mesh " << new Mesh(amesh, material);
             	this->m_resources.insert(std::make_pair(i + previousSize,
             	            new Mesh(amesh, material)));
 	    }
