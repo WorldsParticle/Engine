@@ -5,8 +5,7 @@ namespace gen
 {
 
 HeightMapingStep::HeightMapingStep() :
-    GenerationStep("Construction de la heightmap"),
-    m_zoneLookUp()
+    GenerationStep("Construction de la heightmap")
 {
 
 }
@@ -21,8 +20,6 @@ void    HeightMapingStep::run()
     // seed pour le bruit
     //int seed = rand() % 1000000;
 
-    m_zoneLookUp.createCloud(m_map);
-
     for (unsigned int i = 0; i < m_map->xMax(); ++i)
     {
         for (unsigned int j = 0; j < m_map->yMax(); ++j)
@@ -33,7 +30,7 @@ void    HeightMapingStep::run()
 
             map::Zone *z;
             // trouve la zone à laquelle appartient le pixel en (j, i)
-            z = m_zoneLookUp.getNearestZone(static_cast<double>(j), static_cast<double>(i));
+            z = m_map->zoneLookUp().getNearestZone(static_cast<double>(j), static_cast<double>(i));
             p.zone = z;
 
             float elevation = 0.0;

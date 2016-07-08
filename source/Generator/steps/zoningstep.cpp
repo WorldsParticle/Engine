@@ -39,6 +39,9 @@ void    ZoningStep::run()
 
     std::cout << "Translating into dual graph .." << std::endl;
     computeMap(edges);
+    
+    std::cout << "Creating cloud to look up zone later .." << std::endl;
+    m_map->zoneLookUp().createCloud(m_map);
 }
 
 std::vector<Point *>    ZoningStep::generateRandomSites()

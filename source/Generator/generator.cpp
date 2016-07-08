@@ -21,6 +21,9 @@
 #include "Generator/steps/biomizatorstep.hpp"
 #include "Generator/steps/heightmapingstep.hpp"
 
+#include "Generator/contentGenerator.hpp"
+#include "Generator/contentSerializer.hpp"
+
 using namespace log4cpp;
 using GenData::ZoneData;
 using GenData::ElementData;
@@ -30,6 +33,9 @@ namespace gen
 
 Generator::Generator(Engine::Core *engine)
     :   m_steps(),
+        m_contentGenerator(),
+        m_contentSerializer(engine),
+        m_map(nullptr),
         m_datas(),
         m_terrain(nullptr),
         m_objects(),
@@ -57,6 +63,7 @@ Generator::~Generator()
 
 void    Generator::run(map::MapGraph *map)
 {
+    m_map = map;
     for (const auto &step: m_steps)
     {
         std::cout << step->name() << std::endl;
@@ -78,17 +85,13 @@ void    Generator::addTerrain(map::HeightMap &hm)
     m_terrain = new Engine::Terrain(hm, scene, scene->getShaderPrograms());
     scene->add(m_terrain);
     
-    launchContentsGeneration();//tmp call
+    generateContents();//tmp call
 }
 
-void    Generator::launchContentsGeneration()
+void    Generator::generateContents()
 {
-    //TODO call element generation
-
-        //core
-        //scenecourante
-    //parcours les genentity pour faire les addobject, addlight etc...
-
+    m_contentGenerator.launch(nullptr, &m_datas);
+    
 //    Engine::SceneGraphNode  * node = m_engine->loadModel("../Engine/resources/models/tree.DAE");
 //    std::cout << "Successfully loaded node " << node << std::endl;
 //    
@@ -100,7 +103,6 @@ void    Generator::launchContentsGeneration()
 //        std::cout << "Successfully duplicated node" << std::endl;
 //    }
 //    
-//    m_engine->loadModel("../Engine/resources/models/cube.obj");
     Engine::Transform elemPos;
 //    elemPos.translate(glm::vec3(rand() % 50, rand() % 50, 2));
     elemPos.translate(glm::vec3(0.0f, 0.0f, 2.0f));//Tmp, to be sure elements are above the floor
@@ -110,25 +112,17 @@ void    Generator::launchContentsGeneration()
         std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
            Category::getRoot() << Priority::INFO << "Create entity from element : " << element->name;
            
-            //TODO don't call addModel here, just create the Entity and Node instead
-//            Engine::Scene   *scene = m_engine->scenes().front();
-//            if (!scene)
-//            {
-//                Category::getRoot() << Priority::WARN << "No scene to add element";
-//            }
-//            else
-//            {
             Engine::SceneGraphNode  * node = m_engine->loadModel(element->filename());
 
             elemPos.translate(glm::vec3(rand() % 50, 10.0f, 0.0f));
             node->setTransform(elemPos);
-//            node->getTransform().print();
-//                scene->
-//            }
         });
     });
+}
 
-    //TODO add everything to the scene
+void    Generator::serializeContents()
+{
+    m_contentSerializer.launch(m_contentGenerator.contents());
 }
 
 GenerationStep  *Generator::stepFromName(const std::string &namee)

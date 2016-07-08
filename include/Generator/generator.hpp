@@ -4,6 +4,8 @@
 #include "steps/generationstep.hpp"
 //#include "data/zoneData.hpp"
 #include "data/sceneData.hpp"
+#include "contentGenerator.hpp"
+#include "contentSerializer.hpp"
 #include <map>
 #include <algorithm>
 
@@ -34,7 +36,7 @@ public:
     ~Generator();
 
     void    run(map::MapGraph *map);//rename in launchMapSteps
-    void    launchContentsGeneration();
+    void    generateContents();
     void    serializeContents();
 
     void    addTerrain(map::HeightMap &);
@@ -50,11 +52,16 @@ public:
 
 protected:
     std::vector<GenerationStep *>       m_steps;
+    ContentGenerator                    m_contentGenerator;
+    ContentSerializer                   m_contentSerializer;
+
+    map::MapGraph                       *m_map;
     GenData::SceneData                  m_datas;
 //    std::vector<GenData::ZoneData *>    m_zoneDatas;
     
 protected:
-    Engine::Terrain *                   m_terrain;//TODO multiple terrain ?
+    //TODO move the following in serializer                                                                                                                                                                                                                                                                                                                             
+    Engine::Terrain *                   m_terrain;
     std::vector<Engine::Object *>       m_objects;
     std::vector<Engine::Light *>        m_lights;
     //m_particles;

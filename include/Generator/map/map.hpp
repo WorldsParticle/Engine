@@ -9,6 +9,7 @@
 #include "heightmap.hpp"
 
 #include "Engine/Configuration.hpp"
+#include "zonelookup.hpp"
 
 namespace map
 {
@@ -66,6 +67,9 @@ public:
     inline HeightMap   &heightMap()
     { return m_heightMap; }
 
+    inline ZoneLookUp   &zoneLookUp()
+    { return m_zoneLookUp; }
+    
 private:
 
     ///
@@ -94,6 +98,12 @@ private:
     double    m_yMax;
 
     HeightMap m_heightMap;
+
+    ///
+    /// \brief Class holding the zone's center kd-tree.
+    /// should createCould at the end of zoningStep
+    ///
+    ZoneLookUp m_zoneLookUp;
 };
 
 }

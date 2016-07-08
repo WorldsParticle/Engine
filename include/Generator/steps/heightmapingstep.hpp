@@ -22,11 +22,6 @@ public:
     virtual void    run() override;
 
 private:
-    ///
-    /// \brief Class holding the zone's center kd-tree.
-    /// should move it inside MapGraph, and createCould at the end of zoningStep
-    ///
-    map::ZoneLookUp m_zoneLookUp;
 };
 
 }
