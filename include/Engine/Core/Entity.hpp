@@ -100,6 +100,8 @@ namespace   Engine
 
         public:
             void     setNode(SceneGraphNode * node);
+            
+            void    setTransform(Transform const& t);
 
         protected:
             ///

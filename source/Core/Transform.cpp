@@ -61,6 +61,11 @@ namespace Engine
     }
 
 
+    void
+    Transform::multiplyBy(Transform const& other)
+    {
+        m_matrix * other.getMatrix();
+    }
 
     const glm::mat4 &
     Transform::getMatrix(void) const
@@ -83,9 +88,9 @@ namespace Engine
     void
     Transform::rotate(const glm::vec3 &rotation)
     {
-         this->m_matrix = glm::rotate(this->m_matrix, rotation.x, glm::vec3(1.0, 0.0, 0.0));
-         this->m_matrix = glm::rotate(this->m_matrix, rotation.y, glm::vec3(0.0, 1.0, 0.0));
-         this->m_matrix = glm::rotate(this->m_matrix, rotation.z, glm::vec3(0.0, 0.0, 1.0));
+//         this->m_matrix = glm::rotate(this->m_matrix, rotation.x, glm::vec3(1.0, 0.0, 0.0));
+//         this->m_matrix = glm::rotate(this->m_matrix, rotation.y, glm::vec3(0.0, 1.0, 0.0));
+//         this->m_matrix = glm::rotate(this->m_matrix, rotation.z, glm::vec3(0.0, 0.0, 1.0));
     }
 
     void
@@ -95,7 +100,11 @@ namespace Engine
         root << Priority::DEBUG << "[" << m_matrix[0][0] << "][" << m_matrix[1][0] << "][" << m_matrix[2][0] << "][" << m_matrix[3][0] << "]";
         root << Priority::DEBUG << "[" << m_matrix[0][1] << "][" << m_matrix[1][1] << "][" << m_matrix[2][1] << "][" << m_matrix[3][1] << "]";
         root << Priority::DEBUG << "[" << m_matrix[0][2] << "][" << m_matrix[1][2] << "][" << m_matrix[2][2] << "][" << m_matrix[3][2] << "]";
-        root << Priority::DEBUG << "[" << m_matrix[0][3] << "][" << m_matrix[1][3] << "][" << m_matrix[2][3] << "][" << m_matrix[3][3] << "";        
+        root << Priority::DEBUG << "[" << m_matrix[0][3] << "][" << m_matrix[1][3] << "][" << m_matrix[2][3] << "][" << m_matrix[3][3] << "]";        
+//2016-07-08 17:44:37,425 [DEBUG] [1][0][0][500]
+//2016-07-08 17:44:37,425 [DEBUG] [0][1][0][100]
+//2016-07-08 17:44:37,425 [DEBUG] [0][0][1][2]
+//2016-07-08 17:44:37,425 [DEBUG] [0][0][0][1]
     }
 
 }

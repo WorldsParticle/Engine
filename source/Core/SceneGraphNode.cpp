@@ -15,6 +15,7 @@
 // Copyright (C) 2016 Martin-Pierrat Louis (louismartinpierrat@gmail.com)
 //
 
+#include    <algorithm>
 #include    <log4cpp/Category.hh>
 
 #include    "Engine/Core/SceneGraphNode.hpp"
@@ -37,7 +38,8 @@ namespace   Engine
         m_childrens(),
         m_scenegraph(scenegraph),
         m_entity(nullptr),
-        m_transform()
+        m_transform(),
+        m_worldTransform()
     {
 
     }
@@ -51,7 +53,8 @@ namespace   Engine
         m_childrens(),
         m_scenegraph(scenegraph),
         m_entity(nullptr),
-        m_transform(assimpNode->mTransformation)
+        m_transform(assimpNode->mTransformation),
+        m_worldTransform(assimpNode->mTransformation)
     {
         Category &root = Category::getRoot();
 //        root << Priority::DEBUG << "SceneGraphNode : " << this->m_name;
@@ -76,6 +79,7 @@ namespace   Engine
             // if the name is empty and the meshes related to the node > 0
             // the node is an object.
             this->m_entity = new Object(assimpNode, this, previousMeshNumber);
+            root << Priority::DEBUG << "SceneGraphNode have an entity : " << this->getEntity()->getName();
         }
 
         // we just need to create the others child.
@@ -94,8 +98,8 @@ namespace   Engine
         m_childrens(),
         m_scenegraph(other.m_scenegraph),
         m_entity(other.m_entity),//TODO cpy instead
-        m_transform(other.m_transform)
-
+        m_transform(other.m_transform),
+        m_worldTransform(other.m_worldTransform)
     {
         Object* obj = dynamic_cast<Object*>(other.m_entity);
         if (obj)
@@ -112,8 +116,8 @@ namespace   Engine
         m_childrens(),
         m_scenegraph(other.m_scenegraph),
         m_entity(other.m_entity),//TODO cpy instead
-        m_transform(other.m_transform)
-
+        m_transform(other.m_transform),
+        m_worldTransform(other.m_worldTransform)
     {
         //TODO copy children
     }
@@ -168,10 +172,16 @@ namespace   Engine
          return this->m_scenegraph->getScene();
     }
 
-    const Transform &
-    SceneGraphNode::getTransform(void) const
+    Transform &
+    SceneGraphNode::getTransform(void)
     {
-         return this->m_transform;
+        if (m_parent)
+        {
+            m_worldTransform = this->m_transform;
+            m_worldTransform.multiplyBy(this->m_parent->getTransform());
+            return m_worldTransform;
+        }
+        return this->m_transform;
     }
 
     Entity *
@@ -199,8 +209,12 @@ namespace   Engine
     }
 
     void
-    SceneGraphNode::setTransform(Transform& transform)
+    SceneGraphNode::setTransform(Transform const& transform)
     {
+        //TMP, fix getTransform instead !
+        std::for_each(m_childrens.begin(), m_childrens.end(), [&](SceneGraphNode * child){
+            child->setTransform(transform);
+        });
          this->m_transform = transform;
     }
 

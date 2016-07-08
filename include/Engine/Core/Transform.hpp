@@ -70,6 +70,13 @@ namespace   Engine
             Transform   &operator=(Transform &&other) noexcept = default;
 
         public:
+        
+            ///
+            /// \brief Matrix multiplication
+            ///
+            void    multiplyBy(Transform const& other);//TODO operator*
+
+        public:
             ///
             /// \brief Get the matrix of the transform.
             ///

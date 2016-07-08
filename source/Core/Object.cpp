@@ -62,13 +62,6 @@ namespace   Engine
             std::cout << "mesh " << mesh->m_name << std::endl;
         }
         this->m_scene->add(this);
-        Transform titi;
-        titi.translate(glm::vec3(rand() % 50, rand() % 50, 2));
-        titi.scale(glm::vec3(0.5, 0.5, 0.5));
-
-        node->setTransform(titi);
-        node->getTransform().print();
-
     }
 
     Object::~Object(void)

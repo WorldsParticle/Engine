@@ -107,7 +107,7 @@ namespace   Engine
             ///
             /// \brief Getter for the tranformation of the node.
             ///
-            const Transform     &getTransform(void) const;
+            Transform            &getTransform(void);
 
         public:
             ///
@@ -125,7 +125,7 @@ namespace   Engine
             ///
             void    setEntity(Entity *entity);
 
-            void    setTransform(Transform& transform);
+            void    setTransform(Transform const& transform);
 
 //#warning Temporary function
             ///
@@ -164,8 +164,14 @@ namespace   Engine
             Entity  *m_entity; // TODO OWNER
 
             ///
-            /// \brief The transformation affecting the node.
+            /// \brief The local transformation affecting the node.
             ///
             Transform   m_transform;
+
+            ///
+            /// \brief The real transformation affecting the node
+            /// (taking its parents into account).
+            ///
+            Transform   m_worldTransform;
     };
 }

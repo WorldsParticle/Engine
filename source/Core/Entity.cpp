@@ -102,4 +102,12 @@ namespace   Engine
         m_node = node;
     }
 
+    void    Entity::setTransform(Transform const& t)
+    {
+        if (m_node)
+            m_node->setTransform(t);
+        else
+            m_transform_zero_test = t;
+    }
+
 }

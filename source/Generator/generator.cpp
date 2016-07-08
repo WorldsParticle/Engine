@@ -96,35 +96,41 @@ void    Generator::runEntityGenerator()
         //scenecourante
     //parcours les genentity pour faire les addobject, addlight etc...
 
-    Engine::SceneGraphNode  * node = m_engine->loadModel("../Engine/resources/models/tree.DAE");
-    std::cout << "Successfully loaded node " << node << std::endl;
-    
-    if (node)
-    {
-        Engine::Scene   *scene = m_engine->scenes().front();
-        Engine::SceneGraphNode  * duplicatedNode = new Engine::SceneGraphNode(*node);
-        scene->add(dynamic_cast<Engine::Object *>(duplicatedNode->getEntity()));
-        std::cout << "Successfully duplicated node" << std::endl;
-    }
-    
-    m_engine->loadModel("../Engine/resources/models/cube.obj");
+//    Engine::SceneGraphNode  * node = m_engine->loadModel("../Engine/resources/models/tree.DAE");
+//    std::cout << "Successfully loaded node " << node << std::endl;
+//    
+//    if (node)
+//    {
+//        Engine::Scene   *scene = m_engine->scenes().front();
+//        Engine::SceneGraphNode  * duplicatedNode = new Engine::SceneGraphNode(*node);
+//        scene->add(dynamic_cast<Engine::Object *>(duplicatedNode->getEntity()));
+//        std::cout << "Successfully duplicated node" << std::endl;
+//    }
+//    
+//    m_engine->loadModel("../Engine/resources/models/cube.obj");
+    Engine::Transform titi;
+//    titi.translate(glm::vec3(rand() % 50, rand() % 50, 2));
+    titi.translate(glm::vec3(500.0f, 100.0f, 2.0f));
+    //titi.scale(glm::vec3(0.5, 0.5, 0.5));
     
 //    std::for_each(zoneDatas().begin(), zoneDatas().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
 //        std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
 //           Category::getRoot() << Priority::INFO << "Create entity from element : " << element->name;
-//           
-//            //TODO don't call addModel here, just create the Entity and Node instead
-////            Engine::Scene   *scene = m_engine->scenes().front();
-////            if (!scene)
-////            {
-////                Category::getRoot() << Priority::WARN << "No scene to add element";
-////            }
-////            else
-////            {
-//           m_engine->loadModel                                                                                                                                                            (element->filename());
-////                scene->
-//                        
-////            }
+           
+            //TODO don't call addModel here, just create the Entity and Node instead
+//            Engine::Scene   *scene = m_engine->scenes().front();
+//            if (!scene)
+//            {
+//                Category::getRoot() << Priority::WARN << "No scene to add element";
+//            }
+//            else
+//            {
+            Engine::SceneGraphNode  * node = m_engine->loadModel("../Engine/resources/models/tree.DAE");//element->filename());
+
+            node->setTransform(titi);
+            node->getTransform().print();
+//                scene->
+//            }
 //        });
 //    });
 
