@@ -43,6 +43,10 @@ public:
         _elements.push_back(new ElementData("Cube", "../Engine/resources/models/cube.obj"));
     }
 
+    ~ZoneData()
+    {
+        _elements.clear();
+    }
 
     //type
     map::Biome    type;

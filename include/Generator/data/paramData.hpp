@@ -21,6 +21,11 @@ protected:
     ParamData()
     : _params()
     {}
+    
+    ~ParamData()
+    {
+        _params.clear();
+    }
 
 public:
 

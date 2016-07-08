@@ -30,8 +30,7 @@ namespace gen
 
 Generator::Generator(Engine::Core *engine)
     :   m_steps(),
-        m_zoneDatas(),
-        //m_activeZoneDatas()
+        m_datas(),
         m_terrain(nullptr),
         m_objects(),
         m_lights(),
@@ -44,17 +43,11 @@ Generator::Generator(Engine::Core *engine)
     m_steps.push_back(new MoistorStep());
     m_steps.push_back(new BiomizatorStep());
     m_steps.push_back(new HeightMapingStep());
-    
-    for (int i = 0; i < map::BIOME_COUNT; i++)
-    {
-        m_zoneDatas.push_back(new ZoneData(static_cast<map::Biome>(i)));//TODO how to prevent all zone to be desactivated?
-    }
 }
 
 Generator::~Generator()
 {
     m_steps.clear();
-    m_zoneDatas.clear();
 
     if (m_terrain)
         delete m_terrain;
@@ -85,10 +78,10 @@ void    Generator::addTerrain(map::HeightMap &hm)
     m_terrain = new Engine::Terrain(hm, scene, scene->getShaderPrograms());
     scene->add(m_terrain);
     
-    runEntityGenerator();
+    launchContentsGeneration();//tmp call
 }
 
-void    Generator::runEntityGenerator()
+void    Generator::launchContentsGeneration()
 {
     //TODO call element generation
 
@@ -108,14 +101,14 @@ void    Generator::runEntityGenerator()
 //    }
 //    
 //    m_engine->loadModel("../Engine/resources/models/cube.obj");
-    Engine::Transform titi;
-//    titi.translate(glm::vec3(rand() % 50, rand() % 50, 2));
-    titi.translate(glm::vec3(500.0f, 100.0f, 2.0f));
-    //titi.scale(glm::vec3(0.5, 0.5, 0.5));
+    Engine::Transform elemPos;
+//    elemPos.translate(glm::vec3(rand() % 50, rand() % 50, 2));
+    elemPos.translate(glm::vec3(0.0f, 0.0f, 2.0f));//Tmp, to be sure elements are above the floor
+    //elemPos.scale(glm::vec3(0.5, 0.5, 0.5));
     
-//    std::for_each(zoneDatas().begin(), zoneDatas().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
-//        std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
-//           Category::getRoot() << Priority::INFO << "Create entity from element : " << element->name;
+    std::for_each(m_datas.zones().begin(), m_datas.zones().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
+        std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
+           Category::getRoot() << Priority::INFO << "Create entity from element : " << element->name;
            
             //TODO don't call addModel here, just create the Entity and Node instead
 //            Engine::Scene   *scene = m_engine->scenes().front();
@@ -125,14 +118,15 @@ void    Generator::runEntityGenerator()
 //            }
 //            else
 //            {
-            Engine::SceneGraphNode  * node = m_engine->loadModel("../Engine/resources/models/tree.DAE");//element->filename());
+            Engine::SceneGraphNode  * node = m_engine->loadModel(element->filename());
 
-            node->setTransform(titi);
-            node->getTransform().print();
+            elemPos.translate(glm::vec3(rand() % 50, 10.0f, 0.0f));
+            node->setTransform(elemPos);
+//            node->getTransform().print();
 //                scene->
 //            }
-//        });
-//    });
+        });
+    });
 
     //TODO add everything to the scene
 }

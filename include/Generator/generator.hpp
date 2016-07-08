@@ -2,7 +2,8 @@
 #define GENERATOR_MARIE_H
 
 #include "steps/generationstep.hpp"
-#include "data/zoneData.hpp"
+//#include "data/zoneData.hpp"
+#include "data/sceneData.hpp"
 #include <map>
 #include <algorithm>
 
@@ -32,9 +33,11 @@ public:
     Generator(Engine::Core *engine);
     ~Generator();
 
-    void    run(map::MapGraph *map);
+    void    run(map::MapGraph *map);//rename in launchMapSteps
+    void    launchContentsGeneration();
+    void    serializeContents();
+
     void    addTerrain(map::HeightMap &);
-    void    runEntityGenerator();
 
 public:
     inline const std::vector<GenerationStep *>  &steps()
@@ -43,11 +46,12 @@ public:
     GenerationStep  *stepFromName(const std::string &namee);
 
     inline const std::vector<GenData::ZoneData *>  &zoneDatas()
-    { return m_zoneDatas; }
+    { return m_datas.zones(); }
 
 protected:
     std::vector<GenerationStep *>       m_steps;
-    std::vector<GenData::ZoneData *>    m_zoneDatas;
+    GenData::SceneData                  m_datas;
+//    std::vector<GenData::ZoneData *>    m_zoneDatas;
     
 protected:
     Engine::Terrain *                   m_terrain;//TODO multiple terrain ?
