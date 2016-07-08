@@ -9,21 +9,13 @@
 #define CONTENTGENERATOR_HPP
 
 #include "Engine/Configuration.hpp"
-//#include "data/sceneData.hpp"
+
+#include "Generator/data/sceneData.hpp"
+#include "Generator/content/sceneContent.hpp"
 
 namespace map
 {
 class MapGraph;
-}
-
-namespace GenData
-{
-class SceneData;
-}
-
-namespace GenContent
-{
-class SceneContent;
 }
 
 namespace gen
@@ -39,16 +31,16 @@ public:
     ContentGenerator();
     ~ContentGenerator();
     
-    void launch(map::MapGraph *map, GenData::SceneData *datas);
+    void launch(map::MapGraph *map, GenData::SceneData const& datas);
     
-    inline GenContent::SceneContent  *contents() {
+    inline GenContent::SceneContent  &getContents() {
         return _contents;
     }
     
 private:
     map::MapGraph       *_map;
-    GenData::SceneData  *_datas;
-    GenContent::SceneContent  *_contents;
+    GenData::SceneData  _datas;//ref ?
+    GenContent::SceneContent    _contents;
 };
 }
 

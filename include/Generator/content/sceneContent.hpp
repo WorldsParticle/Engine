@@ -10,9 +10,25 @@
 
 namespace GenContent
 {
+    class ElementContent;
+    
     class SceneContent
     {
-        //TODO
+    public:
+        SceneContent()
+        : _elements()
+        {}
+        ~SceneContent()
+        {
+            _elements.clear();
+        }
+        
+        inline std::vector<ElementContent *>&   elements() {
+            return _elements;
+        }
+
+    private:
+        std::vector<ElementContent *>   _elements;
     };
 }
 

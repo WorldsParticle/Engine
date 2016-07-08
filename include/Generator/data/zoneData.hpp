@@ -9,13 +9,14 @@
 #define ZONEDATA_HPP
 
 #include <vector>
+#include "Generator/map/biome.hpp"
+
 #include "paramData.hpp"
 #include "elementData.hpp"
-#include "climateData.hpp"
-//#include "../map/zone.hpp"
-#include "../param/boolvalue.hpp"
-#include "../param/intvalue.hpp"
-#include "climateData.hpp"
+//#include "climateData.hpp"
+#include "Generator/param/boolvalue.hpp"
+#include "Generator/param/intvalue.hpp"
+
 
 namespace GenData
 {
@@ -23,30 +24,8 @@ namespace GenData
 class ZoneData : public ParamData
 {
 public:
-    //ctor
-    ZoneData(map::Biome const& t, bool a = false)
-    : ParamData(),
-    type(t), active("active"), density("density"), _elements()//, climate(new ClimateData())
-    {
-        active.setValue(a);
-
-        density.setMinValue(1);
-        density.setMaxValue(100);
-        density.setValue(50);
-
-        _params.push_back(&active);
-        _params.push_back(&density);
-
-        //TODO true list of elements
-        _elements.push_back(new ElementData("Apple tree", "../Engine/resources/models/tree.DAE"));
-        _elements.push_back(new ElementData("Suzanne", "../Engine/resources/models/monkey.dae"));
-        _elements.push_back(new ElementData("Cube", "../Engine/resources/models/cube.obj"));
-    }
-
-    ~ZoneData()
-    {
-        _elements.clear();
-    }
+    ZoneData(map::Biome const& t, bool a = false);
+    ~ZoneData();
 
     //type
     map::Biome    type;

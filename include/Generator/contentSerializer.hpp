@@ -10,10 +10,7 @@
 
 #include "Engine/Configuration.hpp"
 
-namespace GenContent
-{
-class SceneContent;
-}
+#include "Generator/content/sceneContent.hpp"
 
 namespace Engine
 {
@@ -33,10 +30,10 @@ public:
     ContentSerializer(Engine::Core *engine);
     ~ContentSerializer();
     
-    void launch(GenContent::SceneContent *contents);
+    void launch(GenContent::SceneContent const& contents);
 
 private:
-    GenContent::SceneContent  *_contents;
+    GenContent::SceneContent  _contents;
     
     Engine::Core *_engine;
 };
