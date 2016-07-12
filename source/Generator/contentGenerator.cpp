@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <math.h>
 #include <log4cpp/Category.hh>
 
 #include "Generator/contentGenerator.hpp"
@@ -10,6 +11,8 @@
 using namespace log4cpp;
 using GenData::ZoneData;
 using GenData::ElementData;
+
+#define GEN_ELEM_POS(i, size, elemCount) (static_cast<float>(i) * static_cast<float>(size) / static_cast<float>(elemCount))// + (rand() % (size / elemCount)))
 
 namespace gen
 {
@@ -31,28 +34,43 @@ void ContentGenerator::launch(map::MapGraph *map, GenData::SceneData const& data
     _map = map;
     _datas = datas;
     
-
-    Engine::Transform elemPos;
-//    elemPos.translate(glm::vec3(rand() % 50, rand() % 50, 2));
-    elemPos.translate(glm::vec3(0.0f, 0.0f, 2.0f));//Tmp, to be sure elements are above the floor
-    //elemPos.scale(glm::vec3(0.5, 0.5, 0.5));
+//    Engine::Transform contentPos;
+//    contentPos.translate(glm::vec3(0.0f, 0.0f, 2.0f));//Tmp, to be sure elements are above the floor
+//    contentPos.scale(glm::vec3(0.1f, 0.1f, 0.1f));//To fit big trees
     
-    //int i = 0;
-    std::for_each(_datas.zones().begin(), _datas.zones().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
-        std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
-           Category::getRoot() << Priority::INFO << "Create content from data : " << element->name;
-           
-           GenContent::ElementContent * content = new GenContent::ElementContent(element->name, element->filename());
-           
-//            Engine::SceneGraphNode  * node = _engine->loadModel(element->filename());
+//    std::for_each(_datas.zones().begin(), _datas.zones().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
+        ZoneData * zone = _datas.zones().at(0);
+        int totalElementInZone = 50;//TODO put this in ZoneData
+        int width = static_cast<int>(_map->xMax());
+        int height = static_cast<int>(_map->yMax());//TODO put this in ZoneData
+        
+//        std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
+            ElementData* element = zone->elements().at(0);
 
-            elemPos.translate(glm::vec3(rand() % (50), rand() % (50), 0.0f));
-            content->setTransform(elemPos);
+            Category::getRoot() << Priority::INFO << "Create content from data : " << element->name;
+            int elemCount = element->density.value() * totalElementInZone / 100;
+            int elemCountSide = static_cast<int>(std::sqrt(elemCount));
+            for (int i = 0; i < elemCountSide; i++)
+            {
+                float x = GEN_ELEM_POS(i, width, elemCountSide);
 
-            _contents.elements().push_back(content);
-        });
-        //i++;
-    });
+                for (int j = 0; j < elemCountSide; j++)
+                {
+                    float y = GEN_ELEM_POS(j, height, elemCountSide);
+
+                    GenContent::ElementContent * content = new GenContent::ElementContent(element->name, element->filename());
+
+                    Engine::Transform contentPos;
+                    contentPos.translate(glm::vec3(0.0f, 0.0f, 2.0f));//Tmp, to be sure elements are above the floor
+                    contentPos.scale(glm::vec3(0.1f, 0.1f, 0.1f));//To fit big trees
+
+                    contentPos.translate(glm::vec3(x, y, 0.0f));
+                    content->setTransform(contentPos);
+                    _contents.elements().push_back(content);
+                }
+            }
+//        });
+//    });
 }
 
 }

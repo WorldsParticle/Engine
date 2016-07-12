@@ -90,7 +90,7 @@ void    Generator::addTerrain(map::HeightMap &hm)//TODO move in serializer
 
 void    Generator::generateContents()
 {
-    m_contentGenerator.launch(nullptr, m_datas);
+    m_contentGenerator.launch(m_map, m_datas);
 }
 
 void    Generator::serializeContents()
