@@ -37,7 +37,7 @@ void ContentGenerator::launch(map::MapGraph *map, GenData::SceneData const& data
     elemPos.translate(glm::vec3(0.0f, 0.0f, 2.0f));//Tmp, to be sure elements are above the floor
     //elemPos.scale(glm::vec3(0.5, 0.5, 0.5));
     
-    int i = 0;
+    //int i = 0;
     std::for_each(_datas.zones().begin(), _datas.zones().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
         std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
            Category::getRoot() << Priority::INFO << "Create content from data : " << element->name;
@@ -46,12 +46,12 @@ void ContentGenerator::launch(map::MapGraph *map, GenData::SceneData const& data
            
 //            Engine::SceneGraphNode  * node = _engine->loadModel(element->filename());
 
-            elemPos.translate(glm::vec3(rand() % (10 * i), rand() % (10 * i), 0.0f));
+            elemPos.translate(glm::vec3(rand() % (50), rand() % (50), 0.0f));
             content->setTransform(elemPos);
 
             _contents.elements().push_back(content);
         });
-        i++;
+        //i++;
     });
 }
 
