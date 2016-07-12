@@ -67,9 +67,9 @@ void    Generator::run(map::MapGraph *map)
         step->launch(map);
     }
     
-    addTerrain(map->heightMap());
-    generateContents();
-    serializeContents();
+//    addTerrain(map->heightMap());
+//    generateContents();
+//    serializeContents();
 }
 
 void    Generator::addTerrain(map::HeightMap &hm)//TODO move in serializer
