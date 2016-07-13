@@ -42,9 +42,9 @@ void ContentGenerator::launch(map::MapGraph *map, GenData::SceneData const& data
 //    std::for_each(_datas.zones().begin(), _datas.zones().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
         ZoneData * zone = _datas.zones().at(0);
         
-        int totalElementInZone = 50;//TODO put this in ZoneData
-        int width = static_cast<int>(_map->xMax());
-        int height = static_cast<int>(_map->yMax());//TODO put this in ZoneData
+        int totalElementInZone = zone->elementCountTotal.value();
+        int width = zone->width.value();//static_cast<int>(_map->xMax());
+        int height = zone->height.value();//static_cast<int>(_map->yMax());//TODO put this in ZoneData
         
         std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
 //            ElementData* element = zone->elements().at(0);

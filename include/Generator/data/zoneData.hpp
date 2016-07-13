@@ -38,6 +38,10 @@ public:
     gen::BoolValue   active;
     gen::IntValue   density;
 
+    gen::IntValue   width;
+    gen::IntValue   height;
+    gen::IntValue   elementCountTotal;
+
     inline std::vector<ElementData *>   &elements()
     { return _elements; }
     
