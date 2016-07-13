@@ -78,6 +78,7 @@ namespace   Engine
             void            render(void);
 
 	    void setFramebufferActivation(bool state);
+	    void setSkyColor(glm::vec4 const &newColor);
 
         public:
             ///
@@ -135,5 +136,6 @@ namespace   Engine
 			std::list<Terrain *>      m_terrains;
 
 			bool m_activateFramebuffer;
+			glm::vec4 m_color;
     };
 }

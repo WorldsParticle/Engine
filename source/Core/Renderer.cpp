@@ -38,7 +38,8 @@ namespace   Engine
         m_cameras(),
         m_lights(),
         m_terrains(),
-	m_activateFramebuffer(false)
+	m_activateFramebuffer(false),
+	m_color(155.0f / 255.0f, 155.0f / 255.0f, 155.0f / 255.0f, 1.0f)
     {
     }
 
@@ -48,7 +49,8 @@ namespace   Engine
         m_cameras(),
         m_lights(),
         m_terrains(),
-	m_activateFramebuffer(false)
+	m_activateFramebuffer(false),
+	m_color(155.0f / 255.0f, 155.0f / 255.0f, 155.0f / 255.0f, 1.0f)
 	{
 	}
 
@@ -58,7 +60,8 @@ namespace   Engine
         m_cameras(),
         m_lights(),
         m_terrains(),
-	m_activateFramebuffer(false)
+	m_activateFramebuffer(false),
+	m_color(155.0f / 255.0f, 155.0f / 255.0f, 155.0f / 255.0f, 1.0f)
 	{
 	}
 
@@ -84,6 +87,12 @@ namespace   Engine
 	Renderer::setFramebufferActivation(bool state)
 	{
 	    m_activateFramebuffer = state;
+	}
+
+    void
+	Renderer::setSkyColor(glm::vec4 const &newColor)
+	{
+	    m_color = newColor;
 	}
 
     void
@@ -137,7 +146,7 @@ namespace   Engine
 		if (m_activateFramebuffer) {
 		    camera->bindFramebuffer();
 		}
-		glClearColor(155.0f / 255.0f , 155.0f / 255.0f, 155.0f / 255.0f, 1.0);
+		glClearColor(m_color.r, m_color.g, m_color.b, m_color.a);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
 

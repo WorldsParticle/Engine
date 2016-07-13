@@ -143,6 +143,15 @@ namespace   Engine
 	}
 
     void
+	Core::setSkyColor(glm::vec4 const &newColor)
+	{
+	    for (Scene *scene : this->m_scenes)
+	    {
+		scene->setSkyColorInRenderer(newColor);
+	    }
+	}
+
+    void
     Core::push_event(const Event::Event &event)
     {
         for (Scene *scene : this->m_scenes)

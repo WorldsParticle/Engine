@@ -80,6 +80,7 @@ namespace Engine
             void    render(void);
 
 	    void setFramebufferActivation(bool state);
+	    void setSkyColor(glm::vec4 const &newColor);
 
             ///
             /// \brief This function is used to produce an event on the engine.

@@ -100,6 +100,12 @@ namespace Engine
 	}
 
     void
+	Scene::setSkyColorInRenderer(glm::vec4 const &newColor)
+	{
+	    m_renderer.setSkyColor(newColor);
+	}
+
+    void
     Scene::update(void)
     {
         this->m_clock.restart();
