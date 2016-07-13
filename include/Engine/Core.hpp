@@ -79,6 +79,8 @@ namespace Engine
             ///
             void    render(void);
 
+	    void setFramebufferActivation(bool state);
+
             ///
             /// \brief This function is used to produce an event on the engine.
             ///

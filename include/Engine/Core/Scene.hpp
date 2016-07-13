@@ -63,6 +63,7 @@ namespace Engine
             /// \brief This function is used to import a model with assimp.
             ///
             SceneGraphNode  *loadModel(const AssimpScene &s);
+	    void setFramebufferActivationInRenderer(bool state);
 
             void        update(void);
             void        render(void);

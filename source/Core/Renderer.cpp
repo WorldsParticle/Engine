@@ -37,7 +37,8 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-        m_terrains()
+        m_terrains(),
+	m_activateFramebuffer(false)
     {
     }
 
@@ -46,7 +47,8 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-        m_terrains()
+        m_terrains(),
+	m_activateFramebuffer(false)
 	{
 	}
 
@@ -55,7 +57,8 @@ namespace   Engine
         m_objects(),
         m_cameras(),
         m_lights(),
-        m_terrains()
+        m_terrains(),
+	m_activateFramebuffer(false)
 	{
 	}
 
@@ -75,6 +78,12 @@ namespace   Engine
 	{
 	    this->m_scene = std::move(other.m_scene);
 	    return *this;
+	}
+
+    void
+	Renderer::setFramebufferActivation(bool state)
+	{
+	    m_activateFramebuffer = state;
 	}
 
     void
@@ -125,7 +134,9 @@ namespace   Engine
 		const glm::mat4 &projection = camera->getProjection();
 		const glm::mat4 &view = camera->getView();
 		// Bind to framebuffer and draw to color texture as we normally would.
-//		camera->bindFramebuffer();
+		if (m_activateFramebuffer) {
+		    camera->bindFramebuffer();
+		}
 		glClearColor(155.0f / 255.0f , 155.0f / 255.0f, 155.0f / 255.0f, 1.0);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glEnable(GL_DEPTH_TEST);
@@ -149,8 +160,10 @@ namespace   Engine
 			part->draw(model, view, projection);
 		    }
 		}
-//		camera->unbindFramebuffer();
-//		camera->drawFramebuffer();
+		if (m_activateFramebuffer) {
+		    camera->unbindFramebuffer();
+		    camera->drawFramebuffer();
+		}
                 for (Terrain *terrain : this->m_terrains)
                 {
                     const glm::mat4 &model = terrain->getTransform().getMatrix();

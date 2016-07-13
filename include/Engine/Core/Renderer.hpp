@@ -77,6 +77,8 @@ namespace   Engine
             ///
             void            render(void);
 
+	    void setFramebufferActivation(bool state);
+
         public:
             ///
             /// \brief This method is used to add an object for the next rendering.
@@ -132,5 +134,6 @@ namespace   Engine
 			///
 			std::list<Terrain *>      m_terrains;
 
+			bool m_activateFramebuffer;
     };
 }

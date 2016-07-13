@@ -94,6 +94,12 @@ namespace Engine
     }
 
     void
+	Scene::setFramebufferActivationInRenderer(bool state)
+	{
+	    m_renderer.setFramebufferActivation(state);
+	}
+
+    void
     Scene::update(void)
     {
         this->m_clock.restart();

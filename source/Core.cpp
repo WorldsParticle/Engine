@@ -134,6 +134,15 @@ namespace   Engine
     }
 
     void
+	Core::setFramebufferActivation(bool state)
+	{
+	    for (Scene *scene : this->m_scenes)
+	    {
+		scene->setFramebufferActivationInRenderer(state);
+	    }
+	}
+
+    void
     Core::push_event(const Event::Event &event)
     {
         for (Scene *scene : this->m_scenes)
