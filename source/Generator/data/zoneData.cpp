@@ -36,12 +36,12 @@ ZoneData::ZoneData(map::Biome const& t, bool a)
     _params.push_back(&elementCountTotal);
 
     //TODO true list of elements
-    _elements.push_back(new ElementData("Apple tree", "../Engine/resources/models/tree.DAE"));
+    //_elements.push_back(new ElementData("Apple tree", "../Engine/resources/models/tree.DAE"));
     _elements.push_back(new ElementData("Cherry tree", "../Engine/resources/models/Tree1.obj"));
     _elements.push_back(new ElementData("Other tree", "../Engine/resources/models/Tree2.obj"));
     _elements.push_back(new ElementData("Rock", "../Engine/resources/models/Rock1.obj"));
-    _elements.push_back(new ElementData("Little rock", "../Engine/resources/models/Rock2.obj"));
-    _elements.push_back(new ElementData("Other rock", "../Engine/resources/models/Rock3.obj"));
+//    _elements.push_back(new ElementData("Little rock", "../Engine/resources/models/Rock2.obj"));
+//    _elements.push_back(new ElementData("Other rock", "../Engine/resources/models/Rock3.obj"));
     //_elements.push_back(new ElementData("Suzanne", "../Engine/resources/models/monkey.dae"));
     //_elements.push_back(new ElementData("Cube", "../Engine/resources/models/cube.obj"));
 }
