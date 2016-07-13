@@ -81,6 +81,7 @@ namespace Engine
 
 	    void setFramebufferActivation(bool state);
 	    void setSkyColor(glm::vec4 const &newColor);
+	    void clearScenes();
 
             ///
             /// \brief This function is used to produce an event on the engine.
