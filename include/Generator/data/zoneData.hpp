@@ -13,7 +13,7 @@
 
 #include "paramData.hpp"
 #include "elementData.hpp"
-//#include "climateData.hpp"
+#include "climateData.hpp"
 #include "Generator/param/boolvalue.hpp"
 #include "Generator/param/intvalue.hpp"
 
@@ -41,13 +41,15 @@ public:
     inline std::vector<ElementData *>   &elements()
     { return _elements; }
     
-    //ClimateData *climate;
-    
+    inline ClimateData *    climate()
+    { return _climate; }
 
 private:
     //std::vector<Zone>   voronoiZones;//useful?
 
     std::vector<ElementData *>    _elements;
+
+    ClimateData *                 _climate;
 };
 }
 

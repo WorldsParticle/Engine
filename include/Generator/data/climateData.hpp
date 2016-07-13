@@ -8,19 +8,35 @@
 #ifndef CLIMATEDATA_HPP
 #define CLIMATEDATA_HPP
 
-#include "particleData.hpp"
+#include "paramData.hpp"
+//#include "particleData.hpp"
+
+#include "Generator/param/intvalue.hpp"
+#include "Generator/param/boolvalue.hpp"
 
 namespace GenData
 {
-    struct ClimateData
+    class ClimateData : public ParamData
     {
+    public:
         ClimateData()
-        : exploHour(12), particles()
-        {}
+        : ParamData(),
+            exploHour("exploration hour"), frameBuffer("post effect")//, particles()
+        {
+            exploHour.setMinValue(0);
+            exploHour.setMaxValue(23);
+            exploHour.setValue(12);
+
+            frameBuffer.setValue(false);
+
+            _params.push_back(&exploHour);
+            _params.push_back(&frameBuffer);
+        }
         
-        int exploHour;//on 24h
+        gen::IntValue    exploHour;//on 24h
+        gen::BoolValue   frameBuffer;
         
-        std::vector<ParticleData>   particles;
+        //std::vector<ParticleData>   particles;
         
     private:
         //skybox infos

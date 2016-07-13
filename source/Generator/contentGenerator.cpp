@@ -44,8 +44,8 @@ void ContentGenerator::launch(map::MapGraph *map, GenData::SceneData const& data
         int width = static_cast<int>(_map->xMax());
         int height = static_cast<int>(_map->yMax());//TODO put this in ZoneData
         
-//        std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
-            ElementData* element = zone->elements().at(0);
+        std::for_each(zone->elements().begin(), zone->elements().end(), [&](ElementData* element){
+//            ElementData* element = zone->elements().at(0);
 
             Category::getRoot() << Priority::INFO << "Create content from data : " << element->name;
             int elemCount = element->density.value() * totalElementInZone / 100;
@@ -69,7 +69,7 @@ void ContentGenerator::launch(map::MapGraph *map, GenData::SceneData const& data
                     _contents.elements().push_back(content);
                 }
             }
-//        });
+        });
 //    });
 }
 
