@@ -49,6 +49,10 @@ void ContentSerializer::launch(GenContent::SceneContent const& contents)
         Engine::SceneGraphNode  * node = _engine->loadModel(element->filename);
         node->setTransform(element->getTransform());
     });
+    
+    _engine->setFramebufferActivation(_contents.framebuffer);
+    float sky = static_cast<float>(_contents.exploHour) / 24.0f;
+    _engine->setSkyColor(glm::vec4(sky, sky, sky, 1.0f));
 }
 
 }

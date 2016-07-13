@@ -11,6 +11,7 @@
 using namespace log4cpp;
 using GenData::ZoneData;
 using GenData::ElementData;
+using GenData::ClimateData;
 
 #define GEN_ELEM_POS(i, size, elemCount) (static_cast<float>(i) * static_cast<float>(size) / static_cast<float>(elemCount))// + (rand() % (size / elemCount)))
 
@@ -40,6 +41,7 @@ void ContentGenerator::launch(map::MapGraph *map, GenData::SceneData const& data
     
 //    std::for_each(_datas.zones().begin(), _datas.zones().end(), [&](ZoneData* zone){//TODO change to activeZoneDatas
         ZoneData * zone = _datas.zones().at(0);
+        
         int totalElementInZone = 50;//TODO put this in ZoneData
         int width = static_cast<int>(_map->xMax());
         int height = static_cast<int>(_map->yMax());//TODO put this in ZoneData
@@ -70,6 +72,12 @@ void ContentGenerator::launch(map::MapGraph *map, GenData::SceneData const& data
                 }
             }
         });
+        
+        ClimateData * climate = zone->climate();
+        
+        _contents.exploHour = climate->exploHour.value();
+        _contents.framebuffer = climate->frameBuffer.value();//TODO skybox content !
+
 //    });
 }
 

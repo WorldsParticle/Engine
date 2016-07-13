@@ -16,16 +16,20 @@ namespace GenContent
     {
     public:
         SceneContent()
-        : _elements()
+        : exploHour(12), framebuffer(false), _elements()
         {}
         ~SceneContent()
         {
             _elements.clear();
         }
-        
+
         inline std::vector<ElementContent *>&   elements() {
             return _elements;
         }
+        
+        //TODO put these in ClimateElement
+        int exploHour;
+        bool framebuffer;
 
     private:
         std::vector<ElementContent *>   _elements;
