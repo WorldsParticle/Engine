@@ -94,4 +94,11 @@ void ContentGenerator::launch(map::MapGraph *map, GenData::SceneData const& data
 //    });
 }
 
+void ContentGenerator::clearContents()
+{
+    _contents.elements().clear();
+    //TODO reset explo et framebuffer to default values ?
+}
+
+
 }

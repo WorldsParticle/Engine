@@ -32,6 +32,7 @@ public:
     ~ContentGenerator();
     
     void launch(map::MapGraph *map, GenData::SceneData const& datas);
+    void clearContents();
     
     inline GenContent::SceneContent  &getContents() {
         return _contents;
