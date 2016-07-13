@@ -12,5 +12,5 @@ newmtl Walnut_L
 	Kd 0.5725 0.2392 0.0392
 	Ks 0.4700 0.4700 0.4700
 	Ke 0.0000 0.0000 0.0000
-	map_Ka D:\Downloads\trees9\Walnut_L.jpg
-	map_Kd D:\Downloads\trees9\Walnut_L.jpg
+	map_Ka Walnut_L.jpg
+	map_Kd Walnut_L.jpg

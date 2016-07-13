@@ -12,5 +12,5 @@ newmtl Sonnerat
 	Kd 0.0745 0.0863 0.0235
 	Ks 0.4700 0.4700 0.4700
 	Ke 0.0000 0.0000 0.0000
-	map_Ka D:\Downloads\trees9\Sonnerat.jpg
-	map_Kd D:\Downloads\trees9\Sonnerat.jpg
+	map_Ka Sonnerat.jpg
+	map_Kd Sonnerat.jpg

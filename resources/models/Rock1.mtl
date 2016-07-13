@@ -12,5 +12,5 @@ newmtl Material__35
 	Kd 0.5880 0.5880 0.5880
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka ..\textures\Rock (1).jpg
-	map_Kd ..\textures\\Rock (1).jpg
+	map_Ka Rock_1.jpg
+	map_Kd Rock_1.jpg
