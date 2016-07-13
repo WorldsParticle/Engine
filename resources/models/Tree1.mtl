@@ -12,5 +12,5 @@ newmtl Bark___0
 	Kd 0.2667 0.1216 0.0824
 	Ks 0.7044 0.6515 0.4984
 	Ke 0.0000 0.0000 0.0000
-	map_Ka ..\textures\Bark___0.jpg
-	map_Kd ..\textures\Bark___0.jpg
+	map_Ka Bark___0.jpg
+	map_Kd Bark___0.jpg
