@@ -29,6 +29,7 @@
 #include    "Engine/Core/Scene.hpp"
 #include    "Engine/Core/Terrain.hpp"
 
+#include    <iostream>
 using namespace     log4cpp;
 
 namespace   Engine
@@ -94,6 +95,13 @@ namespace   Engine
     }
 
 
+    void Core::clearScenes()
+    {
+        for (Scene *scene : this->m_scenes)
+        {
+            scene->clear();
+        }
+    }
 
     Core &
     Core::operator=(const Core &other)
@@ -127,8 +135,11 @@ namespace   Engine
     void
     Core::render(void)
     {
+	int i = 0;
         for (Scene *scene : this->m_scenes)
         {
+	    //std::cout << "render scene " << i << std::endl;
+	    i++;
             scene->render();
         }
     }
@@ -176,6 +187,13 @@ namespace   Engine
         root << Priority::DEBUG << "Imported " << filename;
 
 
+	if (m_scenes.size() > 0) {
+	    for (Scene *scene : this->m_scenes)
+            {
+                delete scene;
+            }
+	    m_scenes.clear();
+	}
         this->m_scenes.push_back(test);
         root << Priority::DEBUG << "added scene.. " << filename;
 

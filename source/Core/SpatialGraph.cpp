@@ -44,6 +44,30 @@ namespace   Engine
     }
 
 
+    void
+	SpatialGraph::clear()
+	{
+	    for (Object *obj : this->m_objects)
+	    {
+		delete obj;
+	    }
+	    for (Light *l : this->m_lights)
+	    {
+		delete l;
+	    }
+	    /*for (Camera *c : this->m_cameras)
+	    {
+		delete c;
+	    }*/
+	    for (Terrain *t : this->m_terrains)
+	    {
+		delete t;
+	    }
+	    m_objects.clear();
+	    m_lights.clear();
+	    //m_cameras.clear();
+	    m_terrains.clear();
+	}
 
     void
     SpatialGraph::add(Object *object)

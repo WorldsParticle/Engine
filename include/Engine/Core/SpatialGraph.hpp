@@ -71,6 +71,7 @@ namespace   Engine
             SpatialGraph    &operator=(SpatialGraph &&other) noexcept = default;
 
         public:
+	    void clear();
             ///
             /// \brief This method is used to do the culling process and
             /// prepare the renderer for rendering process.

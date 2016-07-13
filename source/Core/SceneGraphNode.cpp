@@ -132,6 +132,15 @@ namespace   Engine
         }
     }
 
+    void SceneGraphNode::clear(void)
+    {
+        for (SceneGraphNode *node : this->m_childrens)
+        {
+            delete node;
+        }
+	m_childrens.clear();
+	m_entity = nullptr;
+    }
 
 
     void

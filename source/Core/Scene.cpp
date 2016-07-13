@@ -106,6 +106,13 @@ namespace Engine
 	}
 
     void
+	Scene::clear()
+	{
+	    m_spatialgraph.clear();
+	    m_scenegraph.clear();
+	}
+
+    void
     Scene::update(void)
     {
         this->m_clock.restart();

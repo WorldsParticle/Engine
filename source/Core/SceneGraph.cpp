@@ -107,6 +107,11 @@ namespace   Engine
         }
     }
 
+    void
+	SceneGraph::clear()
+	{
+	    m_rootNode->clear();
+	}
 
 
     Scene *

@@ -136,6 +136,7 @@ namespace   Engine
             /// TODO GSL NOT NULL && OWNER
             ///
             void    addChildren(SceneGraphNode *child);
+	    void clear();
 
         private:
             ///

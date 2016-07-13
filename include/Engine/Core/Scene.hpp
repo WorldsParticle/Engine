@@ -65,6 +65,7 @@ namespace Engine
             SceneGraphNode  *loadModel(const AssimpScene &s);
 	    void setFramebufferActivationInRenderer(bool state);
 	    void setSkyColorInRenderer(glm::vec4 const &newColor);
+	    void clear();
 
             void        update(void);
             void        render(void);

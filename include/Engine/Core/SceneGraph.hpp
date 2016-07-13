@@ -76,6 +76,7 @@ namespace   Engine
             /// \brief This method is used to recursively update the node in the scene graph.
             ///
             void    update(void);
+	    void clear();
 
         public:
             ///

@@ -67,6 +67,9 @@ namespace   Engine
 
     Renderer::~Renderer(void) noexcept
 	{
+	    Category &root = Category::getRoot();
+	    //glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
 
     Renderer &
@@ -169,15 +172,15 @@ namespace   Engine
 			part->draw(model, view, projection);
 		    }
 		}
-		if (m_activateFramebuffer) {
-		    camera->unbindFramebuffer();
-		    camera->drawFramebuffer();
-		}
                 for (Terrain *terrain : this->m_terrains)
                 {
                     const glm::mat4 &model = terrain->getTransform().getMatrix();
                     terrain->mesh()->draw(model, view, projection);
                 }
+		if (m_activateFramebuffer) {
+		    camera->unbindFramebuffer();
+		    camera->drawFramebuffer();
+		}
 	    }
 	    this->m_cameras.clear();
 	    this->m_objects.clear();
